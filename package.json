@@ -20,6 +20,7 @@
     "data:sync": "node scripts/sync-civic-data.mjs",
     "data:validate": "node scripts/validate-civic-data.mjs",
     "data:smoke": "node --experimental-strip-types scripts/smoke-civic-data-layer.ts",
+    "project-map:smoke": "node --experimental-strip-types scripts/smoke-project-map.ts",
     "nav:smoke": "node --experimental-strip-types scripts/smoke-navigation.ts",
     "check:public-data-boundary": "node scripts/check-no-private-data.mjs",
     "test:public-data-boundary": "node --test scripts/check-no-private-data.test.mjs"
@@ -43,6 +44,7 @@
     "i18next-http-backend": "^4.0.1",
     "js-yaml": "^5.2.2",
     "lucide-react": "^0.575.0",
+    "maplibre-gl": "^6.6.0",
     "meilisearch": "^0.60.0",
     "nuqs": "^2.6.0",
     "react": "^19.1.1",

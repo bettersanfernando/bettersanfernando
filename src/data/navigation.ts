@@ -214,7 +214,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.projectMap',
             href: '/projects/map',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.projectDashboard',

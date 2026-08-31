@@ -79,6 +79,7 @@ const activeRouteCases = [
   ['/', 'home'],
   ['/services/business', 'services'],
   ['/projects/example-project', 'projects'],
+  ['/projects/map', 'projects'],
   ['/procurement/contracts', 'projects'],
   ['/government/offices', 'government'],
   ['/legislation/ordinances', 'government'],
@@ -103,7 +104,6 @@ const approvedPlannedPaths = [
   '/services/assistance-programs',
   '/services/senior-citizens',
   '/services/pwd-services',
-  '/projects/map',
   '/projects/dashboard',
   '/procurement',
   '/procurement/bid-results',
@@ -167,6 +167,7 @@ const knownRealDestinations = new Set([
   '/services/environment',
   '/services/disaster-preparedness',
   '/projects',
+  '/projects/map',
   '/government',
   '/government/offices',
 ]);

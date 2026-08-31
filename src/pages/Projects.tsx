@@ -49,7 +49,13 @@ export default function Projects() {
     return allProjects.filter(p => {
       if (q.trim() && !matchesQuery(p, q.trim())) return false;
       if (lifecycle && p.lifecycle_status !== lifecycle) return false;
-      if (barangayPsgc && p.barangay_psgc !== barangayPsgc) return false;
+      if (
+        barangayPsgc &&
+        (barangayPsgc === 'unattributed'
+          ? p.barangay_psgc !== null
+          : p.barangay_psgc !== barangayPsgc)
+      )
+        return false;
       if (category && p.project_category !== category) return false;
       return true;
     });
@@ -110,6 +116,7 @@ export default function Projects() {
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value="">All barangays</option>
+            <option value="unattributed">Barangay not attributed</option>
             {barangays.map(b => (
               <option key={b.psgc_code} value={b.psgc_code}>
                 {b.name}

@@ -17,6 +17,7 @@ const Document = lazy(() => import('./pages/Document'));
 const Government = lazy(() => import('./pages/Government'));
 const GovernmentOffices = lazy(() => import('./pages/GovernmentOffices'));
 const Projects = lazy(() => import('./pages/Projects'));
+const ProjectMap = lazy(() => import('./pages/ProjectMap'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
 const Search = lazy(() => import('./pages/Search'));
@@ -63,6 +64,7 @@ function App() {
                   />
                   <Route path="/search" element={<Search />} />
                   <Route path="/projects" element={<Projects />} />
+                  <Route path="/projects/map" element={<ProjectMap />} />
                   <Route
                     path="/projects/:projectId"
                     element={<ProjectDetail />}

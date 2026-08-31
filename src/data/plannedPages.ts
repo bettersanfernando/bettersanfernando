@@ -4,7 +4,6 @@ const plannedPageRoutes = [
   { id: 'assistancePrograms', path: '/services/assistance-programs' },
   { id: 'seniorCitizens', path: '/services/senior-citizens' },
   { id: 'pwdServices', path: '/services/pwd-services' },
-  { id: 'projectMap', path: '/projects/map' },
   { id: 'projectDashboard', path: '/projects/dashboard' },
   { id: 'procurementOverview', path: '/procurement' },
   { id: 'bidResults', path: '/procurement/bid-results' },
