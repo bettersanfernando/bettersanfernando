@@ -1,52 +1,22 @@
-import { z } from 'zod';
-import { PsgcCode } from './schemas.ts';
-import cityGeojson from '../generated/civic/geography/city.geojson' with { type: 'json' };
-import barangaysGeojson from '../generated/civic/geography/barangays.geojson' with { type: 'json' };
+import {
+  CityGeojsonSchema,
+  BarangaysGeojsonSchema,
+  type CityFeature,
+  type BarangayFeature,
+} from './geography.schemas.ts';
+// Vite/Rolldown can't parse .geojson as JSON by default (unlike .json, it has
+// no built-in JSON transform and gets treated as a JS module, which fails to
+// parse). `?raw` is Vite's native raw-text-import convention — no plugin, no
+// dependency — so we load the text ourselves and parse it explicitly.
+import cityGeojsonRaw from '../generated/civic/geography/city.geojson?raw';
+import barangaysGeojsonRaw from '../generated/civic/geography/barangays.geojson?raw';
 
-// Minimal Polygon-only GeoJSON modeling — sufficient for this dataset,
-// avoids pulling in a full @types/geojson-style dependency.
-const LngLat = z.tuple([z.number(), z.number()]);
-const PolygonGeometry = z.object({
-  type: z.literal('Polygon'),
-  coordinates: z.array(z.array(LngLat)),
-});
+export type { CityFeature, BarangayFeature };
 
-const CityFeatureSchema = z.object({
-  type: z.literal('Feature'),
-  properties: z.object({
-    name: z.string(),
-    psgc_code: PsgcCode,
-    geographic_level: z.literal('City'),
-  }),
-  geometry: PolygonGeometry,
-});
-
-const BarangayFeatureSchema = z.object({
-  type: z.literal('Feature'),
-  properties: z.object({
-    name: z.string(),
-    psgc_code: PsgcCode,
-    city_psgc_code: PsgcCode,
-    geographic_level: z.literal('Barangay'),
-  }),
-  geometry: PolygonGeometry,
-});
-
-const CityGeojsonSchema = z.object({
-  type: z.literal('FeatureCollection'),
-  features: z.array(CityFeatureSchema),
-});
-
-const BarangaysGeojsonSchema = z.object({
-  type: z.literal('FeatureCollection'),
-  features: z.array(BarangayFeatureSchema),
-});
-
-export type CityFeature = z.infer<typeof CityFeatureSchema>;
-export type BarangayFeature = z.infer<typeof BarangayFeatureSchema>;
-
-const cityBoundary = CityGeojsonSchema.parse(cityGeojson);
-const barangayBoundaries = BarangaysGeojsonSchema.parse(barangaysGeojson);
+const cityBoundary = CityGeojsonSchema.parse(JSON.parse(cityGeojsonRaw));
+const barangayBoundaries = BarangaysGeojsonSchema.parse(
+  JSON.parse(barangaysGeojsonRaw)
+);
 
 export function getCityBoundary(): CityFeature {
   return cityBoundary.features[0];

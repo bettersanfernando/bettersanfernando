@@ -8,9 +8,14 @@
  *
  * Usage: node --experimental-strip-types scripts/smoke-civic-data-layer.ts
  */
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 // Import directly from the domain modules needed (not the index.ts barrel):
-// the barrel also re-exports geography.ts, whose .geojson imports Node's
-// native loader can't resolve outside a bundler. Not needed for these checks.
+// the barrel also re-exports geography.ts, which loads .geojson files via
+// Vite's `?raw` import convention — a Vite-only specifier Node's native
+// loader can't resolve outside a bundler. geography.schemas.ts has the same
+// Zod schemas with no Vite-specific import, so it's reused here directly
+// against the files on disk instead of duplicating the validation logic.
 import {
   getProjects,
   getAllProjectEvidence,
@@ -19,6 +24,10 @@ import {
   getBarangays,
   getCityTotalPopulation,
 } from '../src/data/civic/demographics.ts';
+import {
+  CityGeojsonSchema,
+  BarangaysGeojsonSchema,
+} from '../src/data/civic/geography.schemas.ts';
 
 function assert(condition: boolean, message: string): void {
   if (!condition) {
@@ -79,6 +88,42 @@ assert(
   `barangay population sum (${summedPopulation}) does not match total_population (${population})`
 );
 
+const genDir = fileURLToPath(
+  new URL('../src/data/generated/civic/geography/', import.meta.url)
+);
+const cityGeojson = CityGeojsonSchema.parse(
+  JSON.parse(readFileSync(genDir + 'city.geojson', 'utf8'))
+);
+const barangaysGeojson = BarangaysGeojsonSchema.parse(
+  JSON.parse(readFileSync(genDir + 'barangays.geojson', 'utf8'))
+);
+assert(
+  cityGeojson.features.length === 1,
+  `expected 1 city feature, got ${cityGeojson.features.length}`
+);
+assert(
+  barangaysGeojson.features.length === 35,
+  `expected 35 barangay features, got ${barangaysGeojson.features.length}`
+);
+const samplePsgc = barangaysGeojson.features[0].properties.psgc_code;
+const sampleFeature = barangaysGeojson.features.find(
+  f => f.properties.psgc_code === samplePsgc
+);
+assert(
+  sampleFeature !== undefined,
+  `expected to find barangay boundary for PSGC ${samplePsgc}`
+);
+let rejectedMalformed = false;
+try {
+  CityGeojsonSchema.parse({
+    type: 'FeatureCollection',
+    features: [{ type: 'Feature' }],
+  });
+} catch {
+  rejectedMalformed = true;
+}
+assert(rejectedMalformed, 'expected schema to reject a malformed feature');
+
 console.log('[smoke-civic-data-layer] OK');
 console.log(`  projects: ${projects.length} (unique IDs: ${projectIds.size})`);
 console.log(
@@ -89,4 +134,7 @@ console.log(
 );
 console.log(
   `  barangays: ${barangays.length}, total population: ${population}`
+);
+console.log(
+  `  geography: city features ${cityGeojson.features.length}, barangay features ${barangaysGeojson.features.length}, malformed shape rejected: ${rejectedMalformed}`
 );
