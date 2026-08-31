@@ -1,0 +1,15 @@
+{
+  "languages": {
+    "en": { "short": "EN", "name": "English" },
+    "fil": { "short": "FIL", "name": "Filipino" },
+    "pam": { "short": "PAM", "name": "Kapampangan" }
+  },
+  "navigation": {
+    "topLevel": {
+      "home": "Tahanan",
+      "services": "Mga Serbisyo",
+      "about": "Tungkol",
+      "contact": "Makipag-ugnayan"
+    }
+  }
+}

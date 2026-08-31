@@ -22,3 +22,12 @@ export const LANGUAGES: Record<LanguageType, LanguageInfo> = {
 };
 
 export const DEFAULT_LANGUAGE: LanguageType = 'en';
+
+export const SUPPORTED_LANGUAGES = [
+  { code: 'en', labelKey: 'languages.en.short' },
+  { code: 'fil', labelKey: 'languages.fil.short' },
+  { code: 'pam', labelKey: 'languages.pam.short' },
+] as const satisfies ReadonlyArray<{
+  code: LanguageType;
+  labelKey: string;
+}>;

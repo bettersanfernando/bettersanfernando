@@ -1,9 +1,9 @@
 {
-  "site_name": "Lapu Lapu City Portal",
-  "site_description": "A community-run portal for the Lapu Lapu City",
+  "site_name": "BetterSanFernando",
+  "site_description": "Independent civic information for the City of San Fernando, Pampanga",
   "hero": {
-    "title": "Welcome to BetterGov.ph",
-    "subtitle": "A community-run portal to find information of the Lapu Lapu City Government",
+    "title": "Welcome to BetterSanFernando",
+    "subtitle": "Explore independent, source-based civic information about the City of San Fernando, Pampanga.",
     "nationalId": "National ID",
     "birthCertificate": "Birth Certificate",
     "businessRegistration": "Business Registration"
@@ -11,44 +11,388 @@
   "services": {
     "title": "Services & Information",
     "governmentServices": "Government Services",
-    "description": "Access official government services quickly and easily. Find what you need for citizenship, business, education, and more.",
+    "description": "Find available guides to public services and local government processes.",
     "viewAll": "View All Services",
     "viewAllCategory": "View All"
   },
   "governmentActivity": {
     "title": "Government Activity",
-    "description": "Stay updated with the latest government activities and announcements."
-  },
-  "weather": {
-    "title": "Weather Updates"
-  },
-  "forex": {
-    "title": "Foreign Exchange Rates"
-  },
-  "news": {
-    "title": "Latest News & Updates"
+    "description": "Explore available government information, documents, and public resources."
   },
   "footer": {
-    "copyright": "© 2025 BetterGov. All content is public domain unless otherwise specified."
+    "copyright": "© 2026 BetterSanFernando. Independent and community-run."
   },
-  "navbar": {
-    "government": "Government",
-    "services": "Services",
-    "projects": "Projects",
-    "hotlines": "Hotlines",
-    "holidays": "Holidays"
+  "languages": {
+    "en": { "short": "EN", "name": "English" },
+    "fil": { "short": "FIL", "name": "Filipino" },
+    "pam": { "short": "PAM", "name": "Kapampangan" }
   },
-  "joinUs": {
-    "stripTitle": "🚀 Join the #CivicTech Revolution",
-    "stripSubtitle": "Help build the future of the Philippines and governance through technology",
-    "joinNow": "Join Now",
-    "discord": "Discord",
-    "bannerTitle": "Join the #CivicTech Revolution",
-    "bannerSubtitle": "Help build the future of the Philippines and governance through technology.",
-    "bannerHighlight": "Volunteer-led. Open source. Community-driven.",
-    "joinMovement": "Join Our Movement",
-    "or": "or",
-    "joinDiscord": "Join Discord",
-    "features": "🚀 Infrastructure • 💡 Mentorship • 🤝 Community • 🏢 Office Space"
+  "navigation": {
+    "topLevel": {
+      "home": "Home",
+      "services": "Services",
+      "projects": "Projects",
+      "government": "Government",
+      "transparency": "Transparency",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "sections": {
+      "businessLivelihood": "Business & Livelihood",
+      "healthEducation": "Health & Education",
+      "communitySupport": "Community Support",
+      "publicServices": "Public Services",
+      "cityProjects": "City Projects",
+      "procurement": "Procurement",
+      "projectTransparency": "Project Transparency",
+      "reportsStatistics": "Reports & Statistics",
+      "cityGovernment": "City Government",
+      "officesDepartments": "Offices & Departments",
+      "legislation": "Legislation",
+      "publicInformation": "Public Information",
+      "fullDisclosure": "Full Disclosure",
+      "procurementSpending": "Procurement & Spending",
+      "dataVerification": "Data & Verification",
+      "statisticsInsights": "Statistics & Insights"
+    },
+    "items": {
+      "businessServices": "Business Services",
+      "permitsLicenses": "Permits & Licenses",
+      "employment": "Employment",
+      "livelihood": "Livelihood",
+      "healthServices": "Health Services",
+      "educationServices": "Education Services",
+      "assistancePrograms": "Assistance Programs",
+      "socialWelfare": "Social Welfare",
+      "seniorCitizens": "Senior Citizens",
+      "pwdServices": "PWD Services",
+      "hotlines": "Hotlines",
+      "infrastructurePublicWorks": "Infrastructure & Public Works",
+      "agriculture": "Agriculture",
+      "environment": "Environment",
+      "emergencyInformation": "Emergency Information",
+      "allCityProjects": "All City Projects",
+      "projectMap": "Project Map",
+      "projectDashboard": "Project Dashboard",
+      "procurementOverview": "Procurement Overview",
+      "bidResults": "Bid Results",
+      "contractsAwards": "Contracts & Awards",
+      "evidenceSources": "Evidence & Sources",
+      "projectDataSources": "Project Data Sources",
+      "projectMethodology": "Project Methodology",
+      "projectStatistics": "Project Statistics",
+      "spendingStatistics": "Spending Statistics",
+      "procurementStatistics": "Procurement Statistics",
+      "governmentOverview": "Government Overview",
+      "cityStructure": "City Structure",
+      "contactCity": "Contact the City",
+      "cityOffices": "City Offices",
+      "officeDirectory": "Office Directory",
+      "officeContacts": "Office Contacts",
+      "executiveOrders": "Executive Orders",
+      "ordinances": "Ordinances",
+      "resolutions": "Resolutions",
+      "officialDocuments": "Official Documents",
+      "hotlinesContacts": "Hotlines & Contacts",
+      "officialGovernmentLinks": "Official Government Links",
+      "fullDisclosureReports": "Full Disclosure Reports",
+      "disclosureArchive": "Disclosure Archive",
+      "cityProjects": "City Projects",
+      "procurementRecords": "Procurement Records",
+      "financialTransparency": "Financial Transparency",
+      "dataSources": "Data Sources",
+      "methodology": "Methodology",
+      "howWeVerify": "How We Verify",
+      "dataLimitations": "Data Limitations",
+      "cityProfile": "City Profile",
+      "populationDemographics": "Population & Demographics",
+      "publicRecordsStatistics": "Public Records Statistics"
+    },
+    "descriptions": {
+      "businessServices": "Find permits, registration guidance and business information.",
+      "permitsLicenses": "Access available permit and licensing guidance.",
+      "employment": "Explore public employment resources and opportunities.",
+      "livelihood": "Find livelihood programs and community support resources.",
+      "healthServices": "Find available public health services and guidance.",
+      "educationServices": "Explore education services and learning support.",
+      "assistancePrograms": "Find public assistance programs and eligibility guidance.",
+      "socialWelfare": "Explore social welfare services and support programs.",
+      "seniorCitizens": "Find services and assistance for senior citizens.",
+      "pwdServices": "Find services and support for persons with disabilities.",
+      "hotlines": "Access verified public-service and emergency hotlines.",
+      "infrastructurePublicWorks": "Explore public works services and infrastructure information.",
+      "agriculture": "Find agriculture and fisheries services and guidance.",
+      "environment": "Explore environmental services and public information.",
+      "emergencyInformation": "Find preparedness guidance and emergency information.",
+      "allCityProjects": "Browse verified city projects and procurement records.",
+      "projectMap": "View city projects geographically across San Fernando.",
+      "projectDashboard": "Explore project information through a focused overview.",
+      "procurementOverview": "See how procurement records connect to city projects.",
+      "bidResults": "Review published procurement bid-result records.",
+      "contractsAwards": "Explore available contract and award records.",
+      "evidenceSources": "Review the records and evidence supporting project information.",
+      "projectDataSources": "See which public records contribute to project data.",
+      "projectMethodology": "Learn how project records are structured and checked.",
+      "projectStatistics": "Explore patterns in verified city project data.",
+      "spendingStatistics": "Review project spending patterns with source context.",
+      "procurementStatistics": "Explore patterns in procurement and award records.",
+      "governmentOverview": "Understand the City Government information available here.",
+      "cityStructure": "See how documented City Government units relate.",
+      "contactCity": "Find verified official City Government contact channels.",
+      "cityOffices": "Find city departments, offices and available information.",
+      "officeDirectory": "Browse a structured directory of City Government offices.",
+      "officeContacts": "Find verified contact channels for City Government offices.",
+      "executiveOrders": "Browse verified executive-order records.",
+      "ordinances": "Browse verified city ordinance records.",
+      "resolutions": "Browse verified city resolution records.",
+      "officialDocuments": "Find public documents from verified official sources.",
+      "hotlinesContacts": "Access verified official hotlines and public contacts.",
+      "officialGovernmentLinks": "Visit verified official government websites and resources.",
+      "fullDisclosureReports": "Access public financial and disclosure records.",
+      "disclosureArchive": "Browse disclosure records organized for public reference.",
+      "cityProjects": "Browse verified city projects and their supporting records.",
+      "procurementRecords": "Review procurement records with project and spending context.",
+      "financialTransparency": "Explore public financial records and their sources.",
+      "dataSources": "See where BetterSanFernando's published information comes from.",
+      "methodology": "Learn how civic records are collected and presented.",
+      "howWeVerify": "Understand the checks applied before information is published.",
+      "dataLimitations": "Review known gaps and cautions in available records.",
+      "cityProfile": "Explore population, barangay and city-level statistics.",
+      "populationDemographics": "Explore verified population and demographic information.",
+      "publicRecordsStatistics": "Understand the coverage of published public records."
+    },
+    "search": "Search",
+    "searchPlaceholder": "Search BetterSanFernando",
+    "searchSubmit": "Submit search",
+    "language": "Language",
+    "emergencyStrip": {
+      "title": "Emergency Hotlines",
+      "cta": "View verified hotlines"
+    },
+    "civicUtility": {
+      "portalStatus": "BetterSanFernando civic portal active",
+      "betterGovLink": "BetterGov Philippines",
+      "currencyLabel": "USD/PHP —",
+      "weatherLabel": "Weather —"
+    },
+    "accessibility": {
+      "primary": "Primary navigation",
+      "openMenu": "Open main menu",
+      "closeMenu": "Close main menu",
+      "openSection": "Open {{section}} menu",
+      "closeSection": "Close {{section}} menu"
+    }
+  },
+  "search": {
+    "unavailableTitle": "Search",
+    "unavailableDescription": "Search is not connected in this environment yet. The rest of BetterSanFernando remains available through the navigation and destination pages.",
+    "unavailableStatus": "Search integration in progress",
+    "unavailableGuidance": "Browse Services, Projects, Government and Transparency while search infrastructure is being configured."
+  },
+  "plannedPages": {
+    "status": "Data integration in progress",
+    "statusDescription": "This destination is part of the approved portal structure. Information will be published after its sources and context are ready.",
+    "pages": {
+      "employment": {
+        "title": "Employment",
+        "description": "Find verified information about local employment services, opportunities, and workforce support."
+      },
+      "livelihood": {
+        "title": "Livelihood",
+        "description": "Find verified information about livelihood assistance, skills development, and related local programs."
+      },
+      "assistancePrograms": {
+        "title": "Assistance Programs",
+        "description": "Understand available public assistance programs, their purpose, and how verified eligibility guidance can be accessed."
+      },
+      "seniorCitizens": {
+        "title": "Senior Citizens",
+        "description": "Find verified guidance about services and assistance intended for senior citizens."
+      },
+      "pwdServices": {
+        "title": "PWD Services",
+        "description": "Find verified guidance about services and assistance for persons with disabilities."
+      },
+      "projectMap": {
+        "title": "Project Map",
+        "description": "Explore verified city projects geographically across San Fernando."
+      },
+      "projectDashboard": {
+        "title": "Project Dashboard",
+        "description": "Review verified project information through a focused citywide overview."
+      },
+      "procurementOverview": {
+        "title": "Procurement Overview",
+        "description": "Understand how verified procurement records connect to city projects, bids, contracts, and awards."
+      },
+      "bidResults": {
+        "title": "Bid Results",
+        "description": "Review published bid outcomes with links to their supporting public records."
+      },
+      "procurementContracts": {
+        "title": "Contracts & Awards",
+        "description": "Explore verified contract and award records connected to city procurement."
+      },
+      "projectSources": {
+        "title": "Evidence & Sources",
+        "description": "See the evidence standards and source records used to support project information."
+      },
+      "projectDataSources": {
+        "title": "Project Data Sources",
+        "description": "Understand which public records contribute to the project dataset and how they are represented."
+      },
+      "projectMethodology": {
+        "title": "Project Methodology",
+        "description": "Learn how project records are collected, normalized, checked, and presented."
+      },
+      "governmentStructure": {
+        "title": "City Structure",
+        "description": "Understand the documented structure of the City Government and how its units relate."
+      },
+      "governmentContact": {
+        "title": "Contact the City",
+        "description": "Locate verified official City Government contact channels without confusing them with BetterSanFernando contacts."
+      },
+      "governmentOffices": {
+        "title": "City Offices",
+        "description": "Explore verified information about City Government offices and their public responsibilities."
+      },
+      "governmentDirectory": {
+        "title": "Office Directory",
+        "description": "Find a structured directory of verified City Government offices."
+      },
+      "governmentContacts": {
+        "title": "Office Contacts",
+        "description": "Locate verified contact channels published for City Government offices."
+      },
+      "legislation": {
+        "title": "Legislation",
+        "description": "Explore verified local legislative records and their source documents."
+      },
+      "executiveOrders": {
+        "title": "Executive Orders",
+        "description": "Browse verified executive orders with links to available source records."
+      },
+      "ordinances": {
+        "title": "Ordinances",
+        "description": "Browse verified city ordinances with links to available source records."
+      },
+      "resolutions": {
+        "title": "Resolutions",
+        "description": "Browse verified city resolutions with links to available source records."
+      },
+      "governmentDocuments": {
+        "title": "Official Documents",
+        "description": "Find verified public documents issued or published by official government sources."
+      },
+      "governmentHotlines": {
+        "title": "Hotlines & Contacts",
+        "description": "Find verified official hotline and public contact information when it is available."
+      },
+      "governmentLinks": {
+        "title": "Official Government Links",
+        "description": "Find verified links to official City Government and related public-service websites."
+      },
+      "transparency": {
+        "title": "Transparency",
+        "description": "Explore what happened, what was spent, which public records exist, and where the evidence comes from."
+      },
+      "fullDisclosure": {
+        "title": "Full Disclosure Reports",
+        "description": "Access verified full-disclosure records and their official source documents."
+      },
+      "disclosureArchive": {
+        "title": "Disclosure Archive",
+        "description": "Browse verified disclosure records organized for long-term public reference."
+      },
+      "transparencyDocuments": {
+        "title": "Official Documents",
+        "description": "Explore official public documents used to support transparency information."
+      },
+      "transparencyProcurement": {
+        "title": "Procurement Records",
+        "description": "Review verified procurement records and their relationship to projects and spending."
+      },
+      "transparencyContracts": {
+        "title": "Contracts & Awards",
+        "description": "Review verified contract and award records with supporting evidence."
+      },
+      "financialTransparency": {
+        "title": "Financial Transparency",
+        "description": "Explore verified public financial records with clear source context and limitations."
+      },
+      "transparencySources": {
+        "title": "Data Sources",
+        "description": "See which official and public records support information published by BetterSanFernando."
+      },
+      "transparencyMethodology": {
+        "title": "Methodology",
+        "description": "Learn how civic records are collected, structured, checked, and presented."
+      },
+      "verification": {
+        "title": "How We Verify",
+        "description": "Understand the checks used before civic information is published on BetterSanFernando."
+      },
+      "limitations": {
+        "title": "Data Limitations",
+        "description": "Understand known gaps, constraints, and cautions in the available public records."
+      },
+      "statistics": {
+        "title": "Statistics",
+        "description": "Explore what verified civic data can tell us about San Fernando."
+      },
+      "cityProfile": {
+        "title": "City Profile",
+        "description": "Explore verified geographic, administrative, and demographic context about the city."
+      },
+      "population": {
+        "title": "Population & Demographics",
+        "description": "Explore verified population and demographic information with clear sources and definitions."
+      },
+      "barangayPopulation": {
+        "title": "Barangay Population",
+        "description": "Compare verified population information across barangays when the full experience is ready."
+      },
+      "demographics": {
+        "title": "Demographics",
+        "description": "Explore verified demographic measures with source notes and clear definitions."
+      },
+      "projectStatistics": {
+        "title": "Project Statistics",
+        "description": "Understand patterns in the verified city projects dataset."
+      },
+      "projectSpending": {
+        "title": "Spending Statistics",
+        "description": "Explore verified project spending patterns with source context and limitations."
+      },
+      "procurementStatistics": {
+        "title": "Procurement Statistics",
+        "description": "Explore patterns in verified procurement, bid, contract, and award records."
+      },
+      "governmentStatistics": {
+        "title": "Government Statistics",
+        "description": "Explore verified summary information derived from public government records."
+      },
+      "legislationStatistics": {
+        "title": "Legislation Statistics",
+        "description": "Explore patterns in verified executive order, ordinance, and resolution records."
+      },
+      "publicRecordsStatistics": {
+        "title": "Public Records Statistics",
+        "description": "Understand the coverage and composition of verified public records in the portal."
+      },
+      "barangays": {
+        "title": "Barangay Directory",
+        "description": "Explore verified barangay profiles, population context, classifications, and geographic boundaries when the directory is ready."
+      },
+      "about": {
+        "title": "About BetterSanFernando",
+        "description": "Learn why this independent, community-run civic information portal exists, how it approaches public data, and how to contribute. BetterSanFernando is not an official City Government website."
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Find ways to contact the independent BetterSanFernando project and locate verified official City Government contact channels. BetterSanFernando is not the City Government, and no unverified contact details are published here."
+      }
+    }
   }
 }

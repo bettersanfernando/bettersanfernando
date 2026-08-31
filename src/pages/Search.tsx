@@ -2,10 +2,73 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { useQueryState } from 'nuqs';
 import { Search as SearchIcon } from 'lucide-react';
-import { searchClient, SEARCH_INDEX } from '../lib/meilisearch';
+import { useTranslation } from 'react-i18next';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
+import { Heading } from '../components/ui/Heading';
+import Section from '../components/ui/Section';
+import { Text } from '../components/ui/Text';
+import SEO from '../components/SEO';
+import {
+  isMeilisearchEnabled,
+  searchClient,
+  SEARCH_INDEX,
+} from '../lib/meilisearch';
 import type { SearchHit } from '../lib/meilisearch';
 
 export default function Search() {
+  if (!isMeilisearchEnabled || !searchClient) return <UnavailableSearch />;
+
+  return <ConfiguredSearch client={searchClient} />;
+}
+
+function UnavailableSearch() {
+  const { t } = useTranslation('common');
+  const title = t('search.unavailableTitle');
+  const description = t('search.unavailableDescription');
+
+  return (
+    <>
+      <SEO title={title} description={description} />
+      <main className="flex-grow">
+        <Section className="p-3 mb-12">
+          <Breadcrumbs
+            className="mb-8"
+            items={[
+              { label: t('navigation.topLevel.home'), href: '/' },
+              { label: t('navigation.search') },
+            ]}
+          />
+          <div className="max-w-3xl">
+            <Heading>{title}</Heading>
+            <Text className="max-w-2xl text-gray-700 mb-8">{description}</Text>
+            <div className="rounded-xl bg-primary-50 p-6 text-primary-900">
+              <div className="flex items-start gap-3">
+                <SearchIcon
+                  className="mt-0.5 h-5 w-5 shrink-0 text-primary-700"
+                  aria-hidden="true"
+                />
+                <div>
+                  <Heading level={2} className="text-lg mb-2 leading-snug">
+                    {t('search.unavailableStatus')}
+                  </Heading>
+                  <Text className="max-w-2xl mb-0 text-primary-900">
+                    {t('search.unavailableGuidance')}
+                  </Text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+      </main>
+    </>
+  );
+}
+
+function ConfiguredSearch({
+  client,
+}: {
+  client: NonNullable<typeof searchClient>;
+}) {
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [results, setResults] = useState<SearchHit[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +87,7 @@ export default function Search() {
       setIsLoading(true);
       setError(null);
       try {
-        const index = searchClient!.index(SEARCH_INDEX);
+        const index = client.index(SEARCH_INDEX);
         const res = await index.search<SearchHit>(query, { limit: 20 });
         setResults(res.hits);
         setHasSearched(true);
@@ -37,7 +100,7 @@ export default function Search() {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [client, query]);
 
   return (
     <main className="container mx-auto px-4 py-8 max-w-3xl">
