@@ -95,7 +95,10 @@
       "url": "https://psa.gov.ph/classification/psgc/barangays/0305416000"
     },
     {
-      "applies_to": ["geography/city.geojson", "geography/barangays.geojson"],
+      "applies_to": [
+        "geography/city.geojson",
+        "geography/barangays.geojson"
+      ],
       "id": "psgc-shapefiles-community",
       "name": "altcoder/philippines-psgc-shapefiles",
       "publisher": "Community-maintained GitHub repository (not an official PSA shapefile)",
@@ -103,7 +106,9 @@
       "url": "https://github.com/altcoder/philippines-psgc-shapefiles"
     },
     {
-      "applies_to": ["projects/project-evidence.json#stage=BID_RESULTS"],
+      "applies_to": [
+        "projects/project-evidence.json#stage=BID_RESULTS"
+      ],
       "id": "bid_results_archive",
       "name": "Full Disclosure Report",
       "publisher": "City Government of San Fernando, Pampanga",

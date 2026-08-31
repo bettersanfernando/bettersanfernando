@@ -18,7 +18,8 @@
     "setup": "node scripts/setup-starter-kit.js",
     "index-content": "node scripts/index-content.mjs",
     "data:sync": "node scripts/sync-civic-data.mjs",
-    "data:validate": "node scripts/validate-civic-data.mjs"
+    "data:validate": "node scripts/validate-civic-data.mjs",
+    "data:smoke": "node --experimental-strip-types scripts/smoke-civic-data-layer.ts"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -48,7 +49,8 @@
     "react-markdown": "^10.1.0",
     "react-router": "^8.3.0",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

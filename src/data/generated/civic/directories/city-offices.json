@@ -31,7 +31,9 @@
       "office_id": "city-mayors-office",
       "office_name": "City Mayor's Office",
       "parent_facility": null,
-      "phone_extensions": ["106"],
+      "phone_extensions": [
+        "106"
+      ],
       "physical_address": "Heroes Hall / Executive Building",
       "primary_phone": "(045) 649-8080",
       "social_accounts": [],
@@ -44,14 +46,19 @@
     },
     {
       "acronym": "SP",
-      "additional_emails": ["osp@cityofsanfernando.gov.ph"],
+      "additional_emails": [
+        "osp@cityofsanfernando.gov.ph"
+      ],
       "institutional_email": "sanggunian@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "vice-mayor-sangguniang-panlungsod",
       "office_name": "Vice Mayor & Sangguniang Panlungsod",
       "parent_facility": null,
-      "phone_extensions": ["102", "114"],
+      "phone_extensions": [
+        "102",
+        "114"
+      ],
       "physical_address": "Heroes Hall, Brgy. San Juan",
       "primary_phone": "(045) 649-8080",
       "social_accounts": [],
@@ -221,7 +228,9 @@
       "office_name": "City Investment and Public Employment Service Office",
       "operational_email": "pesojobs.csf@gmail.com",
       "parent_facility": null,
-      "phone_extensions": ["101"],
+      "phone_extensions": [
+        "101"
+      ],
       "physical_address": "Heroes Hall, Brgy. San Juan",
       "primary_phone": "(045) 649-8080",
       "social_accounts": [],
@@ -238,7 +247,10 @@
       "office_id": "business-license-permit-division",
       "office_name": "Business License & Permit Division",
       "parent_facility": "City Treasurer's Office (CTO)",
-      "phone_extensions": ["154", "162"],
+      "phone_extensions": [
+        "154",
+        "162"
+      ],
       "physical_address": "City Hall Ground Floor, Sto. Rosario",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
@@ -342,7 +354,9 @@
       "office_name": "City Legal Office",
       "operational_email": "info.csfp@gmail.com",
       "parent_facility": null,
-      "phone_extensions": ["103"],
+      "phone_extensions": [
+        "103"
+      ],
       "physical_address": "Heroes Hall, Brgy. San Juan",
       "primary_phone": "(045) 649-8080",
       "social_accounts": [],
@@ -370,7 +384,9 @@
     },
     {
       "acronym": "CPOSCO",
-      "emergency_hotlines": ["0967-889-4569"],
+      "emergency_hotlines": [
+        "0967-889-4569"
+      ],
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-public-order-safety-coordinating-office",

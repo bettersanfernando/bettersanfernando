@@ -3,7 +3,10 @@
     {
       "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/04/ITB-2025-01-00702.pdf",
       "document_date": null,
-      "fields_established": ["project_name", "primary_procurement_id"],
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id"
+      ],
       "id": "ev-san-nicolas-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-three-3-storey-six-6-classroom-building-at-san-nicolas-integrated-school-brgy-san-nicolas-city-of-san-fernando-pampanga/",
       "project_id": "proj-2025-san-nicolas-school",
@@ -51,7 +54,10 @@
     {
       "attachment_url": null,
       "document_date": null,
-      "fields_established": ["project_name", "primary_procurement_id"],
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id"
+      ],
       "id": "ev-cmrf-lara-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-lined-canal-at-cmrf-brgy-lara-city-of-san-fernando-pampanga/",
       "project_id": "proj-2024-cmrf-lara-canal",
@@ -63,7 +69,9 @@
     {
       "attachment_url": null,
       "document_date": null,
-      "fields_established": ["primary_procurement_id"],
+      "fields_established": [
+        "primary_procurement_id"
+      ],
       "id": "ev-cmrf-lara-award",
       "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-construction-of-lined-canal-at-cmrf-brgy-lara-city-of-san-fernando-pampanga/",
       "project_id": "proj-2024-cmrf-lara-canal",
@@ -368,7 +376,9 @@
     {
       "attachment_url": null,
       "document_date": null,
-      "fields_established": ["primary_procurement_id"],
+      "fields_established": [
+        "primary_procurement_id"
+      ],
       "id": "ev-san-agustin-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-clearing-desilting-and-declogging-of-waterways-at-san-agustin-cuidad-de-hizon-villa-del-sol-city-of-san-fernando-pampanga/",
       "project_id": "proj-2026-san-agustin-waterways",
@@ -380,7 +390,9 @@
     {
       "attachment_url": null,
       "document_date": null,
-      "fields_established": ["primary_procurement_id"],
+      "fields_established": [
+        "primary_procurement_id"
+      ],
       "id": "ev-san-agustin-award",
       "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-clearing-desilting-and-declogging-of-waterways-at-san-agustin-cuidad-dehizon-villa-del-sol-city-of-san-fernando-pampanga/",
       "project_id": "proj-2026-san-agustin-waterways",
@@ -422,7 +434,9 @@
     {
       "attachment_url": null,
       "document_date": null,
-      "fields_established": ["primary_procurement_id"],
+      "fields_established": [
+        "primary_procurement_id"
+      ],
       "id": "ev-panipuan-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-lined-canal-at-purok-6-panipuan-city-of-san-fernando-pampanga/",
       "project_id": "proj-2026-panipuan-canal",
@@ -656,7 +670,10 @@
         "report_year": 2024,
         "winning_bidder": "Nulas Builders"
       },
-      "fields_established": ["contractor", "winning_bid_amount"],
+      "fields_established": [
+        "contractor",
+        "winning_bid_amount"
+      ],
       "id": "ev-proj-2024-alasas-road-bidresults",
       "page_url": "https://cityofsanfernando.gov.ph/2024-1st-quarter-bid-results-on-civil-works-good-and-services-and-consulting-services/",
       "project_id": "proj-2024-alasas-road",
@@ -8677,7 +8694,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-v-tiomico-st-02092-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-v-tiomico-st-02092",
@@ -8719,7 +8739,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-san-nicolas-02097-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-san-nicolas-02097",
@@ -8761,7 +8784,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-san-fernando-river-02098-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-san-fernando-river-02098",
@@ -8803,7 +8829,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-dolores-02099-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-dolores-02099",
@@ -8845,7 +8874,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-bulaon-02102-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-bulaon-02102",
@@ -8887,7 +8919,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-canal-calulut-02104-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-canal-calulut-02104",
@@ -8929,7 +8964,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-canal-san-jose-02106-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-canal-san-jose-02106",
@@ -9013,7 +9051,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-canal-santa-lucia-02112-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-canal-santa-lucia-02112",
@@ -9055,7 +9096,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-canal-malpitic-02113-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-canal-malpitic-02113",
@@ -9097,7 +9141,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-dela-paz-norte-02115-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-dela-paz-norte-02115",
@@ -9139,7 +9186,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-waterway-san-pedro-02160-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-waterway-san-pedro-02160",
@@ -9181,7 +9231,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-road-san-isidro-02161-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-road-san-isidro-02161",
@@ -9223,7 +9276,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-canal-del-rosario-02178-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-canal-del-rosario-02178",
@@ -9265,7 +9321,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2022-canal-san-nicolas-02179-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2022-canal-san-nicolas-02179",
@@ -9307,7 +9366,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-slope-del-carmen-00055-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-slope-del-carmen-00055",
@@ -9349,7 +9411,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-bldg-san-juan-00075-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-bldg-san-juan-00075",
@@ -9391,7 +9456,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-utility-alasas-00077-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-utility-alasas-00077",
@@ -9433,7 +9501,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-cemetery-lara-00122-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-cemetery-lara-00122",
@@ -9475,7 +9546,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-road-del-pilar-00267-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-road-del-pilar-00267",
@@ -9517,7 +9591,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-canal-del-pilar-00331-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-canal-del-pilar-00331",
@@ -9559,7 +9636,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-canal-calulut-00332-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-canal-calulut-00332",
@@ -9601,7 +9681,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-canal-del-pilar-00335-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-canal-del-pilar-00335",
@@ -9643,7 +9726,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-infra-santo-rosario-00513-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-infra-santo-rosario-00513",
@@ -9685,7 +9771,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-slope-saguin-00965-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-slope-saguin-00965",
@@ -9727,7 +9816,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-bldg-san-isidro-00980-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-bldg-san-isidro-00980",
@@ -9769,7 +9861,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-slope-panipuan-00998-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-slope-panipuan-00998",
@@ -9811,7 +9906,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-waterway-san-jose-01314-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-waterway-san-jose-01314",
@@ -9853,7 +9951,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-waterway-san-felipe-01327-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-waterway-san-felipe-01327",
@@ -9895,7 +9996,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-road-calulut-01365-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-road-calulut-01365",
@@ -9937,7 +10041,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-bridge-pandaras-01366-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-bridge-pandaras-01366",
@@ -9979,7 +10086,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-canal-san-pedro-and-sta-lu-01367-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-canal-san-pedro-and-sta-lu-01367",
@@ -10021,7 +10131,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-park-san-juan-01433-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-park-san-juan-01433",
@@ -10063,7 +10176,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-road-markings-manila-north-road-01475-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-road-markings-manila-north-road-01475",
@@ -10105,7 +10221,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-canal-dolores-01476-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-canal-dolores-01476",
@@ -10147,7 +10266,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-canal-dela-paz-norte-01570-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-canal-dela-paz-norte-01570",
@@ -10189,7 +10311,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-bldg-santo-rosario-01594-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-bldg-santo-rosario-01594",
@@ -10231,7 +10356,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-infra-lara-01722-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-infra-lara-01722",
@@ -10273,7 +10401,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-road-baliti-01755-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-road-baliti-01755",
@@ -10315,7 +10446,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "TF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-road-baliti-01756-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-road-baliti-01756",
@@ -10357,7 +10491,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-road-quebiauan-01872-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-road-quebiauan-01872",
@@ -10399,7 +10536,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-utility-quebiauan-01876-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-utility-quebiauan-01876",
@@ -10441,7 +10581,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-utility-lara-01917-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-utility-lara-01917",
@@ -10483,7 +10626,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "GF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-bldg-lara-02217-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-bldg-lara-02217",
@@ -10525,7 +10671,10 @@
         "same_day_milestone_pattern": "NOT_APPLICABLE",
         "source_of_funds": "SEF 2023"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2023-bldg-san-isidro-02375-pmr2023",
       "page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
       "project_id": "proj-2023-bldg-san-isidro-02375",
@@ -10542,7 +10691,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2024-11-27", "2024-12-17"],
+        "ads_post_ib_normalized": [
+          "2024-11-27",
+          "2024-12-17"
+        ],
         "ads_post_ib_raw": "11/27/2024 -\n12/17/2024",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-20",
@@ -10589,7 +10741,10 @@
         "sub_open_bids_raw": "12/17/2024",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-road-dolores-02298-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-road-dolores-02298",
@@ -10606,7 +10761,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "30,000,000.00",
         "abc_total_right_block": "30,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-04", "2024-12-26"],
+        "ads_post_ib_normalized": [
+          "2024-12-04",
+          "2024-12-26"
+        ],
         "ads_post_ib_raw": "12/4/2024 -\n12/26/2024",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-21",
@@ -10653,7 +10811,10 @@
         "sub_open_bids_raw": "12/26/2024",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-bridge-del-pilar-02355-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-bridge-del-pilar-02355",
@@ -10670,7 +10831,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "2,000,000.00",
         "abc_total_right_block": "2,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-17", "2025-01-07"],
+        "ads_post_ib_normalized": [
+          "2024-12-17",
+          "2025-01-07"
+        ],
         "ads_post_ib_raw": "12/17/2024 -\n1/7/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-23",
@@ -10717,7 +10881,10 @@
         "sub_open_bids_raw": "1/7/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-canal-san-juan-02432-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-canal-san-juan-02432",
@@ -10734,7 +10901,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-18", "2025-01-07"],
+        "ads_post_ib_normalized": [
+          "2024-12-18",
+          "2025-01-07"
+        ],
         "ads_post_ib_raw": "12/18/2024 -\n1/7/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-30",
@@ -10781,7 +10951,10 @@
         "sub_open_bids_raw": "1/7/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-canal-calulut-02457-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-canal-calulut-02457",
@@ -10798,7 +10971,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "5,000,000.00",
         "abc_total_right_block": "5,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-18", "2025-01-07"],
+        "ads_post_ib_normalized": [
+          "2024-12-18",
+          "2025-01-07"
+        ],
         "ads_post_ib_raw": "12/18/2024 -\n1/7/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-23",
@@ -10845,7 +11021,10 @@
         "sub_open_bids_raw": "1/7/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-slope-del-rosario-02464-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-slope-del-rosario-02464",
@@ -10862,7 +11041,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "10,000,000.00",
         "abc_total_right_block": "10,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-18", "2025-01-07"],
+        "ads_post_ib_normalized": [
+          "2024-12-18",
+          "2025-01-07"
+        ],
         "ads_post_ib_raw": "12/18/2024 -\n1/7/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-23",
@@ -10909,7 +11091,10 @@
         "sub_open_bids_raw": "1/7/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-canal-dolores-02473-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-canal-dolores-02473",
@@ -10926,7 +11111,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2025-01-06", "2025-01-28"],
+        "ads_post_ib_normalized": [
+          "2025-01-06",
+          "2025-01-28"
+        ],
         "ads_post_ib_raw": "1/6/2025 -\n1/28/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-02-11",
@@ -10973,7 +11161,10 @@
         "sub_open_bids_raw": "1/28/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-bldg-lara-02516-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-bldg-lara-02516",
@@ -10990,7 +11181,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "2,000,000.00",
         "abc_total_right_block": "2,000,000.00",
-        "ads_post_ib_normalized": ["2025-01-06", "2025-01-28"],
+        "ads_post_ib_normalized": [
+          "2025-01-06",
+          "2025-01-28"
+        ],
         "ads_post_ib_raw": "1/6/2025 -\n1/28/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-02-13",
@@ -11037,7 +11231,10 @@
         "sub_open_bids_raw": "1/28/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-waterway-santo-rosario-02517-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-waterway-santo-rosario-02517",
@@ -11054,7 +11251,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "5,000,000.00",
         "abc_total_right_block": "5,000,000.00",
-        "ads_post_ib_normalized": ["2025-01-06", "2025-01-28"],
+        "ads_post_ib_normalized": [
+          "2025-01-06",
+          "2025-01-28"
+        ],
         "ads_post_ib_raw": "1/6/2025 -\n1/28/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-02-11",
@@ -11101,7 +11301,10 @@
         "sub_open_bids_raw": "1/28/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-infra-alasas-02518-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-infra-alasas-02518",
@@ -11118,7 +11321,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "4,000,000.00",
         "abc_total_right_block": "4,000,000.00",
-        "ads_post_ib_normalized": ["2025-01-09", "2025-02-06"],
+        "ads_post_ib_normalized": [
+          "2025-01-09",
+          "2025-02-06"
+        ],
         "ads_post_ib_raw": "1/9/2025 - 2/6/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-03-04",
@@ -11165,7 +11371,10 @@
         "sub_open_bids_raw": "2/6/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-waterway-solana-to-villa-del--02537-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-waterway-solana-to-villa-del--02537",
@@ -11182,7 +11391,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "5,000,000.00",
         "abc_total_right_block": "5,000,000.00",
-        "ads_post_ib_normalized": ["2025-03-12", "2025-04-03"],
+        "ads_post_ib_normalized": [
+          "2025-03-12",
+          "2025-04-03"
+        ],
         "ads_post_ib_raw": "3/12/2025 -\n4/3/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-14",
@@ -11229,7 +11441,10 @@
         "sub_open_bids_raw": "4/3/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-bldg-alasas-02594-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-bldg-alasas-02594",
@@ -11246,7 +11461,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-10", "2025-01-02"],
+        "ads_post_ib_normalized": [
+          "2024-12-10",
+          "2025-01-02"
+        ],
         "ads_post_ib_raw": "12/10/2024 -\n1/2/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-22",
@@ -11293,7 +11511,10 @@
         "sub_open_bids_raw": "1/2/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-road-pulung-bulu-02288-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-road-pulung-bulu-02288",
@@ -11310,7 +11531,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-10", "2025-01-02"],
+        "ads_post_ib_normalized": [
+          "2024-12-10",
+          "2025-01-02"
+        ],
         "ads_post_ib_raw": "12/10/2024 -\n1/2/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-22",
@@ -11357,7 +11581,10 @@
         "sub_open_bids_raw": "1/2/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-road-telabastagan-02290-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-road-telabastagan-02290",
@@ -11374,7 +11601,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "5,000,000.00",
         "abc_total_right_block": "5,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-04", "2024-12-26"],
+        "ads_post_ib_normalized": [
+          "2024-12-04",
+          "2024-12-26"
+        ],
         "ads_post_ib_raw": "12/4/2024 -\n12/26/2024",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-01-28",
@@ -11421,7 +11651,10 @@
         "sub_open_bids_raw": "12/26/2024",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-road-calulut-02354-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-road-calulut-02354",
@@ -11438,7 +11671,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2024-12-10", "2025-01-02"],
+        "ads_post_ib_normalized": [
+          "2024-12-10",
+          "2025-01-02"
+        ],
         "ads_post_ib_raw": "12/10/2024 -\n1/2/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-22",
@@ -11485,7 +11721,10 @@
         "sub_open_bids_raw": "01/02/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2024-canal-santa-lucia-02361-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2024-canal-santa-lucia-02361",
@@ -11502,7 +11741,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "24,750,000.00",
         "abc_total_right_block": "24,750,000.00",
-        "ads_post_ib_normalized": ["2025-03-26", "2025-04-22"],
+        "ads_post_ib_normalized": [
+          "2025-03-26",
+          "2025-04-22"
+        ],
         "ads_post_ib_raw": "3/26/2025 -\n4/22/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-21",
@@ -11566,7 +11808,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "400,000.00",
         "abc_total_right_block": "400,000.00",
-        "ads_post_ib_normalized": ["2025-03-12", "2025-03-25"],
+        "ads_post_ib_normalized": [
+          "2025-03-12",
+          "2025-03-25"
+        ],
         "ads_post_ib_raw": "3/12/2025 -\n3/25/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-14",
@@ -11613,7 +11858,10 @@
         "sub_open_bids_raw": "3/25/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-alasas-00556-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-alasas-00556",
@@ -11630,7 +11878,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "1,750,000.00",
         "abc_total_right_block": "1,750,000.00",
-        "ads_post_ib_normalized": ["2025-03-12", "2025-04-03"],
+        "ads_post_ib_normalized": [
+          "2025-03-12",
+          "2025-04-03"
+        ],
         "ads_post_ib_raw": "3/12/2025 -\n4/3/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-14",
@@ -11677,7 +11928,10 @@
         "sub_open_bids_raw": "4/3/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-dolores-00561-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-dolores-00561",
@@ -11694,7 +11948,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "750,000.00",
         "abc_total_right_block": "750,000.00",
-        "ads_post_ib_normalized": ["2025-03-13", "2025-03-25"],
+        "ads_post_ib_normalized": [
+          "2025-03-13",
+          "2025-03-25"
+        ],
         "ads_post_ib_raw": "3/13/2025 -\n3/25/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-14",
@@ -11741,7 +11998,10 @@
         "sub_open_bids_raw": "3/25/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-san-isidro-00571-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-san-isidro-00571",
@@ -11758,7 +12018,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "9,500,000.00",
         "abc_total_right_block": "9,500,000.00",
-        "ads_post_ib_normalized": ["2025-03-18", "2025-04-08"],
+        "ads_post_ib_normalized": [
+          "2025-03-18",
+          "2025-04-08"
+        ],
         "ads_post_ib_raw": "3/18/2025 -\n4/8/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-05-20",
@@ -11805,7 +12068,10 @@
         "sub_open_bids_raw": "4/8/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-park-san-isidro-00572-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-park-san-isidro-00572",
@@ -11822,7 +12088,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "1,500,000.00",
         "abc_total_right_block": "1,500,000.00",
-        "ads_post_ib_normalized": ["2025-04-23", "2025-05-29"],
+        "ads_post_ib_normalized": [
+          "2025-04-23",
+          "2025-05-29"
+        ],
         "ads_post_ib_raw": "4/23/2025 -\n5/29/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-07-08",
@@ -11869,7 +12138,10 @@
         "sub_open_bids_raw": "5/29/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-santo-rosario-00770-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-santo-rosario-00770",
@@ -11933,7 +12205,10 @@
         "sub_open_bids_raw": "5/8/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-san-isidro-00799-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-san-isidro-00799",
@@ -11950,7 +12225,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "500,000.00",
         "abc_total_right_block": "500,000.00",
-        "ads_post_ib_normalized": ["2025-05-19", "2025-06-03"],
+        "ads_post_ib_normalized": [
+          "2025-05-19",
+          "2025-06-03"
+        ],
         "ads_post_ib_raw": "5/19/2025 -\n6/3/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-07-07",
@@ -11997,7 +12275,10 @@
         "sub_open_bids_raw": "6/3/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-san-isidro-00894-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-san-isidro-00894",
@@ -12014,7 +12295,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "896,256.84",
         "abc_total_right_block": "896,256.84",
-        "ads_post_ib_normalized": ["2025-06-04", "2025-06-17"],
+        "ads_post_ib_normalized": [
+          "2025-06-04",
+          "2025-06-17"
+        ],
         "ads_post_ib_raw": "6/4/2025 -\n6/17/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-07-29",
@@ -12061,7 +12345,10 @@
         "sub_open_bids_raw": "6/17/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-santo-rosario-00992-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-santo-rosario-00992",
@@ -12078,7 +12365,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "470,000.00",
         "abc_total_right_block": "470,000.00",
-        "ads_post_ib_normalized": ["2025-06-04", "2025-06-17"],
+        "ads_post_ib_normalized": [
+          "2025-06-04",
+          "2025-06-17"
+        ],
         "ads_post_ib_raw": "6/4/2025 -\n6/17/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-07-07",
@@ -12125,7 +12415,10 @@
         "sub_open_bids_raw": "6/17/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-santo-rosario-01019-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-santo-rosario-01019",
@@ -12142,7 +12435,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "20,000,000.00",
         "abc_total_right_block": "20,000,000.00",
-        "ads_post_ib_normalized": ["2025-08-07", "2025-09-02"],
+        "ads_post_ib_normalized": [
+          "2025-08-07",
+          "2025-09-02"
+        ],
         "ads_post_ib_raw": "8/7/2025 - 9/2/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-09-15",
@@ -12189,7 +12485,10 @@
         "sub_open_bids_raw": "9/2/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-san-isidro-01263-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-san-isidro-01263",
@@ -12206,7 +12505,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "1,200,000.00",
         "abc_total_right_block": "1,200,000.00",
-        "ads_post_ib_normalized": ["2025-08-27", "2025-09-16"],
+        "ads_post_ib_normalized": [
+          "2025-08-27",
+          "2025-09-16"
+        ],
         "ads_post_ib_raw": "8/27/2025 -\n9/16/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-11-04",
@@ -12253,7 +12555,10 @@
         "sub_open_bids_raw": "9/16/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-bldg-santo-rosario-01337-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-bldg-santo-rosario-01337",
@@ -12270,7 +12575,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "2,500,000.00",
         "abc_total_right_block": "2,500,000.00",
-        "ads_post_ib_normalized": ["2025-08-28", "2025-09-16"],
+        "ads_post_ib_normalized": [
+          "2025-08-28",
+          "2025-09-16"
+        ],
         "ads_post_ib_raw": "8/28/2025 -\n9/16/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-11-06",
@@ -12317,7 +12625,10 @@
         "sub_open_bids_raw": "9/16/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-canal-pandaras-01381-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-canal-pandaras-01381",
@@ -12334,7 +12645,10 @@
         "abc_cross_check_match": true,
         "abc_total_left_block": "3,000,000.00",
         "abc_total_right_block": "3,000,000.00",
-        "ads_post_ib_normalized": ["2025-08-27", "2025-09-16"],
+        "ads_post_ib_normalized": [
+          "2025-08-27",
+          "2025-09-16"
+        ],
         "ads_post_ib_raw": "8/27/2025 -\n9/16/2025",
         "ads_post_ib_status": "DATE_RANGE",
         "bac_resolution_award_normalized": "2025-10-15",
@@ -12381,7 +12695,10 @@
         "sub_open_bids_raw": "9/16/2025",
         "sub_open_bids_status": "DATE"
       },
-      "fields_established": ["funding_source", "procurement_mode"],
+      "fields_established": [
+        "funding_source",
+        "procurement_mode"
+      ],
       "id": "ev-proj-2025-canal-lara-01382-pmr2025",
       "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
       "project_id": "proj-2025-canal-lara-01382",
