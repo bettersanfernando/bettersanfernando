@@ -16,6 +16,10 @@ npm run setup        # Interactive setup script for new installations
 
 Pre-commit hook runs `lint-staged` automatically (ESLint + Prettier on staged files).
 
+## Repository Boundary
+
+This repo (`bettersanfernando`) is the **public frontend only**. Canonical/raw civic research data, source PDFs/XLSX, and research docs live only in the private `../bettersanfernando-data` repo — never copy root `data/`, `pdf/`, or `xlsx/` here. This repo consumes only the public-safe generated export via `pnpm data:sync`; `src/data/generated/civic/` is the expected, allowed vendored copy.
+
 ## Architecture
 
 This is a React 19 + TypeScript + Vite app for Philippine Local Government Units (LGUs). It uses React Router, Tailwind CSS, i18next for multilingual support, and a YAML-based content system.
