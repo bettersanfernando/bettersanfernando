@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.3.0",
   "type": "module",
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -13,7 +14,7 @@
     "preview": "vite preview",
     "prepare": "husky",
     "convert-yaml": "node scripts/yaml-to-json.js",
-    "dev:yaml": "npm run convert-yaml && npm run dev",
+    "dev:yaml": "pnpm run convert-yaml && pnpm run dev",
     "setup": "node scripts/setup-starter-kit.js",
     "index-content": "node scripts/index-content.mjs"
   },
