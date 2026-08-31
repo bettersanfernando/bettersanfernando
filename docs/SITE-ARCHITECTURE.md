@@ -11,8 +11,8 @@ The current application still contains a mixture of implemented pages,
 generic planned-page placeholders, and older starter-kit content routes.
 `src/App.tsx`, `src/data/navigation.ts`, and `src/data/plannedPages.ts` must be
 brought into alignment with this document through separate implementation
-work. Redirects described below are architecture decisions, not redirects
-that have already been added to the application.
+work. Redirects described below are architecture decisions; their
+implementation state is tracked in `IMPLEMENTATION-ROADMAP.md`.
 
 ## Product purpose and position
 
