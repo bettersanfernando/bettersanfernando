@@ -46,10 +46,28 @@ const cityOfficesFile = CityOfficesFileSchema.parse(cityOfficesJson);
 const offices: readonly CityOffice[] = Object.freeze(cityOfficesFile.offices);
 const officeById = new Map(offices.map(o => [o.office_id, o]));
 
+export type CityOfficesMetadata = Readonly<{
+  cityName: string;
+  province: string;
+  officeCount: number;
+  lastVerified: string;
+}>;
+
+const metadata: CityOfficesMetadata = Object.freeze({
+  cityName: cityOfficesFile.city_name,
+  province: cityOfficesFile.province,
+  officeCount: cityOfficesFile.office_count,
+  lastVerified: cityOfficesFile.last_verified,
+});
+
 export function getCityOffices(): readonly CityOffice[] {
   return offices;
 }
 
 export function getCityOfficeById(officeId: string): CityOffice | undefined {
   return officeById.get(officeId);
+}
+
+export function getCityOfficesMetadata(): CityOfficesMetadata {
+  return metadata;
 }

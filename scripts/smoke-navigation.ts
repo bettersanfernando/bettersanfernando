@@ -66,6 +66,15 @@ assert.equal(
   'distinct Services labels must not share generic destinations'
 );
 
+const navigationDestinations = new Set(
+  megaMenus.flatMap(menu =>
+    menu.sections!.flatMap(section => section.items.map(item => item.href))
+  )
+);
+assert.ok(navigationDestinations.has('/government/offices'));
+assert.ok(!navigationDestinations.has('/government/directory'));
+assert.ok(!navigationDestinations.has('/government/contacts'));
+
 const activeRouteCases = [
   ['/', 'home'],
   ['/services/business', 'services'],
@@ -104,9 +113,6 @@ const approvedPlannedPaths = [
   '/projects/methodology',
   '/government/structure',
   '/government/contact',
-  '/government/offices',
-  '/government/directory',
-  '/government/contacts',
   '/legislation',
   '/legislation/executive-orders',
   '/legislation/ordinances',
@@ -162,6 +168,7 @@ const knownRealDestinations = new Set([
   '/services/disaster-preparedness',
   '/projects',
   '/government',
+  '/government/offices',
 ]);
 
 for (const destination of megaMenus.flatMap(menu =>

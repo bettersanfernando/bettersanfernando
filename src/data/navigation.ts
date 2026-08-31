@@ -37,8 +37,6 @@ const destinationPresentation = {
   cityStructure: ['network', 'cityStructure'],
   contactCity: ['phone', 'contactCity'],
   cityOffices: ['building', 'cityOffices'],
-  officeDirectory: ['users', 'officeDirectory'],
-  officeContacts: ['phone', 'officeContacts'],
   executiveOrders: ['file-text', 'executiveOrders'],
   ordinances: ['file-text', 'ordinances'],
   resolutions: ['file-check', 'resolutions'],
@@ -319,17 +317,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.cityOffices',
             href: '/government/offices',
-            kind: 'planned',
-          },
-          {
-            labelKey: 'navigation.items.officeDirectory',
-            href: '/government/directory',
-            kind: 'planned',
-          },
-          {
-            labelKey: 'navigation.items.officeContacts',
-            href: '/government/contacts',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

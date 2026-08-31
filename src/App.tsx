@@ -6,7 +6,7 @@ import Footer from './components/layout/Footer';
 import ScrollToTop from './components/ui/ScrollToTop';
 import PageLoading from './components/ui/PageLoading';
 import { plannedPages } from './data/plannedPages';
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router';
 
 // Route-level code splitting: each page ships as its own lazy chunk instead
 // of the initial bundle, so e.g. Projects' 239 records only load for
@@ -15,6 +15,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
 const Document = lazy(() => import('./pages/Document'));
 const Government = lazy(() => import('./pages/Government'));
+const GovernmentOffices = lazy(() => import('./pages/GovernmentOffices'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Search = lazy(() => import('./pages/Search'));
@@ -37,6 +38,18 @@ function App() {
                   <Route
                     path="/services/:category/:documentSlug"
                     element={<Document categoryType="service" />}
+                  />
+                  <Route
+                    path="/government/offices"
+                    element={<GovernmentOffices />}
+                  />
+                  <Route
+                    path="/government/directory"
+                    element={<Navigate to="/government/offices" replace />}
+                  />
+                  <Route
+                    path="/government/contacts"
+                    element={<Navigate to="/government/offices" replace />}
                   />
                   <Route
                     path="/government/:category"
