@@ -7,6 +7,8 @@ import ScrollToTop from './components/ui/ScrollToTop';
 import Services from './pages/Services';
 import Document from './pages/Document';
 import Government from './pages/Government';
+import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
 import Search from './pages/Search';
 import { isMeilisearchEnabled } from './lib/meilisearch';
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
@@ -36,6 +38,8 @@ function App() {
               {isMeilisearchEnabled && (
                 <Route path="/search" element={<Search />} />
               )}
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:projectId" element={<ProjectDetail />} />
               <Route path="/:lang/:documentSlug" element={<Document />} />
               <Route path="/:documentSlug" element={<Document />} />
             </Routes>
