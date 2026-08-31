@@ -40,7 +40,8 @@ separately below.
 
 Batch 1 was implemented, validated, visually reviewed, merged to `main`, and
 pushed. Batch 2 was implemented, validated, and visually reviewed on its
-feature branch.
+feature branch. Batch 3 was implemented, validated, and visually reviewed on
+its feature branch.
 
 | Batch | Canonical page                  | Completed prerequisite redirects                |
 | ----: | ------------------------------- | ----------------------------------------------- |
@@ -48,6 +49,7 @@ feature branch.
 |     1 | `/legislation/executive-orders` | None                                            |
 |     1 | `/projects/map`                 | None                                            |
 |     2 | `/statistics/projects`          | `/projects/dashboard`                           |
+|     3 | `/statistics/population`        | `/statistics/population/barangays`              |
 
 `/government/directory` and `/government/contacts` now redirect to
 `/government/offices`. `/government/departments` remains in the redirect
@@ -55,14 +57,13 @@ registry and is not recorded as completed by this batch.
 
 ### Remaining READY implementation sequence
 
-The next two items are numbered by immediate execution order. The remaining
-items then continue in their finalized roadmap order, retaining their original
-ranks for traceability.
+The next item is numbered by immediate execution order. The remaining items
+then continue in their finalized roadmap order, retaining their original ranks
+for traceability.
 
 | Next / finalized rank | Canonical page              | Dependencies                                                                         | Reusable pattern established                                              | Important scope caveat                                                                | Prerequisite redirects                                    |
 | --------------------: | --------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-|                     1 | `/statistics/population`    | PSA 2024 POPCEN export and 35 barangay records                                       | Sourced totals, comparisons, charts, polygon/table coordination           | Use the single 2024 baseline and total of 377,534; do not silently mix periods        | `/statistics/population/barangays`                        |
-|                     2 | `/barangays`                | Demographics export, PSGC identity, and barangay GeoJSON                             | Barangay directory, classification filters, boundary-linked summaries     | No named secretaries, BHERT contacts, or project points are publication-approved      | None                                                      |
+|                     1 | `/barangays`                | Demographics export, PSGC identity, and barangay GeoJSON                             | Barangay directory, classification filters, boundary-linked summaries     | No named secretaries, BHERT contacts, or project points are publication-approved      | None                                                      |
 |                     7 | `/statistics/city-profile`  | City polygon, PSA population, barangays, and selected office facts                   | Compact sourced profile facts with per-measure dates                      | Core profile only, not a comprehensive socioeconomic profile                          | None                                                      |
 |                     8 | `/projects/sources`         | 334 sanitized evidence records and typed evidence APIs                               | Evidence browser, authority/stage filters, established-field explanations | Evidence verifies only named fields; coverage is limited to the 239-project subset    | `/projects/data-sources`                                  |
 |                     9 | `/projects/methodology`     | Public schemas, manifest, lifecycle and matching policies                            | Domain methodology layout and semantic callouts                           | `AWARDED != CONTRACTED`; NTP and `COMPLETED` require their own evidence               | None                                                      |

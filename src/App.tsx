@@ -19,6 +19,7 @@ const GovernmentOffices = lazy(() => import('./pages/GovernmentOffices'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectMap = lazy(() => import('./pages/ProjectMap'));
 const ProjectStatistics = lazy(() => import('./pages/ProjectStatistics'));
+const PopulationStatistics = lazy(() => import('./pages/PopulationStatistics'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
 const Search = lazy(() => import('./pages/Search'));
@@ -73,6 +74,16 @@ function App() {
                   <Route
                     path="/statistics/projects"
                     element={<ProjectStatistics />}
+                  />
+                  <Route
+                    path="/statistics/population/barangays"
+                    element={
+                      <Navigate to="/statistics/population#barangays" replace />
+                    }
+                  />
+                  <Route
+                    path="/statistics/population"
+                    element={<PopulationStatistics />}
                   />
                   <Route
                     path="/projects/:projectId"

@@ -31,8 +31,6 @@ const plannedPageRoutes = [
   { id: 'limitations', path: '/transparency/limitations' },
   { id: 'statistics', path: '/statistics' },
   { id: 'cityProfile', path: '/statistics/city-profile' },
-  { id: 'population', path: '/statistics/population' },
-  { id: 'barangayPopulation', path: '/statistics/population/barangays' },
   { id: 'demographics', path: '/statistics/demographics' },
   { id: 'projectSpending', path: '/statistics/project-spending' },
   { id: 'procurementStatistics', path: '/statistics/procurement' },

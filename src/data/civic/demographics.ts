@@ -21,6 +21,7 @@ const BarangaysFileSchema = z.object({
   psgc_release: z.string(),
   source_publisher: z.string(),
   source_url: z.url(),
+  census: z.string(),
   last_verified: z.string(),
   barangay_count: z.number().int(),
   total_population: z.number().int().nonnegative(),
@@ -53,10 +54,14 @@ export function getCityDemographicsSource(): {
   publisher: string;
   url: string;
   referenceYear: number;
+  census: string;
+  lastVerified: string;
 } {
   return {
     publisher: barangaysFile.source_publisher,
     url: barangaysFile.source_url,
     referenceYear: barangaysFile.reference_year,
+    census: barangaysFile.census,
+    lastVerified: barangaysFile.last_verified,
   };
 }

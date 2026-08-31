@@ -449,7 +449,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.populationDemographics',
             href: '/statistics/population',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.projectStatistics',
