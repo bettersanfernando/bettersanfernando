@@ -114,7 +114,6 @@ const approvedPlannedPaths = [
   '/government/structure',
   '/government/contact',
   '/legislation',
-  '/legislation/executive-orders',
   '/legislation/ordinances',
   '/legislation/resolutions',
   '/government/documents',
@@ -170,6 +169,7 @@ const knownRealDestinations = new Set([
   '/projects/map',
   '/government',
   '/government/offices',
+  '/legislation/executive-orders',
 ]);
 
 for (const destination of megaMenus.flatMap(menu =>
