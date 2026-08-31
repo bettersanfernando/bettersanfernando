@@ -1,0 +1,10 @@
+{
+  "description": "No individual CSFP Sangguniang Panlungsod Resolution currently meets the project's verified-record threshold. This is an intentionally empty verified dataset, not proof that CSFP has no resolutions: it means no individual numbered SP Resolution legal record was successfully recovered and independently verified from an authoritative CSFP source in the current public-source research pass. Candidates, probable non-SP local issuances, unverified range/period claims, source-recovery leads, and rejected external/wrong-issuing-body examples are tracked separately in data/legislation/resolution-recovery-queue.json and must never be promoted here without primary-source evidence (an official signed Resolution, official SP journal/minutes, an official Resolution registry/index, or an official CSFP page citing the exact number and issuing body).",
+  "document_type": "Resolution",
+  "jurisdiction_name": "City of San Fernando",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-08-30",
+  "province": "Pampanga",
+  "record_count": 0,
+  "resolutions": []
+}

@@ -16,7 +16,9 @@
     "convert-yaml": "node scripts/yaml-to-json.js",
     "dev:yaml": "pnpm run convert-yaml && pnpm run dev",
     "setup": "node scripts/setup-starter-kit.js",
-    "index-content": "node scripts/index-content.mjs"
+    "index-content": "node scripts/index-content.mjs",
+    "data:sync": "node scripts/sync-civic-data.mjs",
+    "data:validate": "node scripts/validate-civic-data.mjs"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

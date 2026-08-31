@@ -1,0 +1,92 @@
+{
+  "description": "Currently verified CSFP ordinance subset: full legal text for 2 ordinances, and 4 ordinances confirmed to exist by official or secondary-official evidence but whose full text has not yet been located. This is not a claim of a complete historical CSFP ordinance register. Candidates without a primary official source, and claimed ordinance-number ranges awaiting attachment verification, are tracked separately in data/legislation/ordinance-recovery-queue.json and are not included here.",
+  "document_type": "Ordinance",
+  "jurisdiction_name": "City of San Fernando",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-08-30",
+  "ordinances": [
+    {
+      "date_adopted": "2008-01-16",
+      "date_approved": null,
+      "document_number": "SP-2008-001",
+      "document_type": "Ordinance",
+      "full_text_available": true,
+      "id": "ord-sp-2008-001",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_page_url": "https://cityofsanfernando.gov.ph/services/",
+      "official_pdf_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/06/schedule-of-market-values.pdf",
+      "official_title": "AN ORDINANCE PRESCRIBING THE SCHEDULE OF FAIR MARKET VALUES AND ASSESSMENT LEVELS ON REAL PROPERTIES IN THE CITY OF SAN FERNANDO, PAMPANGA EFFECTIVE JANUARY 1, 2009 AND FOR OTHER PURPOSES",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "year": 2008
+    },
+    {
+      "date_adopted": "2017-12-12",
+      "date_approved": null,
+      "document_number": "2017-033",
+      "document_type": "Ordinance",
+      "full_text_available": true,
+      "id": "ord-2017-033",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_page_url": "https://cityofsanfernando.gov.ph/services/",
+      "official_pdf_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/06/2017-Revised-Revenue-Code-and-Market-Code_Ord.-No.2017-033.pdf",
+      "official_title": "AN ORDINANCE ENACTING THE 2017 REVISED REVENUE CODE AND MARKET CODE OF THE CITY OF SAN FERNANDO, PAMPANGA",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "year": 2017
+    },
+    {
+      "document_number": "2017-025",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2017-025",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_pdf_url": null,
+      "official_title": "AN ORDINANCE PRESCRIBING THE SCHEDULE OF FAIR MARKET VALUES AND ASSESSMENT LEVELS ON REAL PROPERTIES IN THE CITY OF SAN FERNANDO, PAMPANGA EFFECTIVE JANUARY 1, 2018 AND FOR OTHER PURPOSES",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/06/2017-Revised-Revenue-Code-and-Market-Code_Ord.-No.2017-033.pdf",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "year": 2017
+    },
+    {
+      "described_context": "Creation of the Investment Incentive Board of the City of San Fernando, Pampanga",
+      "document_number": "2023-014",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2023-014",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_pdf_url": null,
+      "official_title": "AN ORDINANCE ENACTING THE LOCAL INVESTMENT INCENTIVES CODE OF THE CITY OF SAN FERNANDO, PAMPANGA",
+      "reference_url": "https://cityofsanfernando.gov.ph/cippeso/programs/",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "year": 2023
+    },
+    {
+      "described_subject": "Regulation of plastic shopping bags and related plastic/Styro restrictions",
+      "document_number": "2014-008",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2014-008",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_alias": "Plastic-free ordinance of the City of San Fernando, Pampanga",
+      "official_pdf_url": null,
+      "official_title": null,
+      "reference_url": "https://region3.dilg.gov.ph/tarlac/index.php/pampanga-latest-news/714-csf-celebrates-zero-waste-month",
+      "source_authority": "SECONDARY_OFFICIAL",
+      "year": 2014
+    },
+    {
+      "described_subject": "CCTV compliance requirements affecting business establishments",
+      "document_number": "2018-029",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2018-029",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_alias": "2018 CCTV System Ordinance of the City of San Fernando, Pampanga",
+      "official_pdf_url": null,
+      "official_title": null,
+      "reference_url": "https://cityofsanfernando.gov.ph/828-2/",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "year": 2018
+    }
+  ],
+  "province": "Pampanga",
+  "record_count": 6
+}

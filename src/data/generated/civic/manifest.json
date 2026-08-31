@@ -1,0 +1,114 @@
+{
+  "completeness_note": "This export set is a bounded, verified subset of what is described in the canonical repository's docs/DATA-AUDIT.md and DATA-POLICY.md. It is not a claim of complete historical government records, and its scope is narrower than the canonical data/ tree — see not_exported_in_this_release.",
+  "datasets": {
+    "demographics/barangays.json": {
+      "record_count": 35,
+      "schema_version": 1,
+      "sha256": "a76ad6b50e9e463a1c642045f79e346f080751ee80f822faa41c4f7df354792d"
+    },
+    "directories/city-offices.json": {
+      "record_count": 22,
+      "schema_version": 1,
+      "sha256": "c487315fb23ceae2774c468e4b2ef3e3a3911425a1dfccbb6795f2b03d67fec7"
+    },
+    "geography/barangays.geojson": {
+      "record_count": 35,
+      "schema_version": 1,
+      "sha256": "b2a6a913054440c526f2d4588676b7104136f26a7c418307371b0a6ac9b81b30"
+    },
+    "geography/city.geojson": {
+      "record_count": 1,
+      "schema_version": 1,
+      "sha256": "651d9ca8f85dc92fedc5984450a186815a99d42dcf6920d08d578838f140fbf4"
+    },
+    "legislation/executive-orders.json": {
+      "record_count": 11,
+      "schema_version": 1,
+      "sha256": "ad913551a07bd7dc36232bed81758aec5eed97f8e4d2b9720e36107780ca344a"
+    },
+    "legislation/ordinances.json": {
+      "record_count": 6,
+      "schema_version": 1,
+      "sha256": "d817903668b91c03908a5cc93e5c74fc330efe48e4be39e3fd01fa89681af132"
+    },
+    "legislation/resolutions.json": {
+      "record_count": 0,
+      "schema_version": 1,
+      "sha256": "6d78716bea652fb99e09814b3ac69b52570717ecff31995593f57cf984da8cdf"
+    },
+    "projects/city-projects.json": {
+      "record_count": 239,
+      "schema_version": 1,
+      "sha256": "1ea791665437cebabf7311d13d4b4c1578f503a33e7cac30ded15a063881625b"
+    },
+    "projects/project-evidence.json": {
+      "record_count": 334,
+      "schema_version": 1,
+      "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
+    }
+  },
+  "export_version": "v0.1.0",
+  "generated_from": [
+    "data/geography/san-fernando-city.geojson",
+    "data/geography/san-fernando-barangays.geojson",
+    "data/demographics/san-fernando-barangays.json",
+    "data/directories/city-offices.json",
+    "data/legislation/executive-orders.json",
+    "data/legislation/ordinances.json",
+    "data/legislation/resolutions.json",
+    "data/projects/city-projects.json",
+    "data/projects/project-evidence.json"
+  ],
+  "jurisdiction": {
+    "name": "City of San Fernando",
+    "province": "Pampanga",
+    "psgc_code": "0305416000"
+  },
+  "not_exported_in_this_release": [
+    "data/directories/barangay-secretaries.json",
+    "data/directories/bhert-contacts.json",
+    "data/finance/*",
+    "data/projects/project-conflict-triage.json",
+    "data/projects/project-recovery-queue.json",
+    "data/projects/*-candidates.json",
+    "data/projects/*-audit.json",
+    "data/projects/*-schema-analysis.json",
+    "data/projects/*-source-manifest.json",
+    "data/legislation/*-recovery-queue.json",
+    "data/finance/financial-privacy-analysis.json",
+    "pdf/**",
+    "xlsx/**"
+  ],
+  "source_commit": "bac29e238207d3c3640b7703fb369e8f36b00f90",
+  "source_data_version": "v0.1.1",
+  "sources": [
+    {
+      "applies_to": [
+        "geography/city.geojson",
+        "geography/barangays.geojson",
+        "demographics/barangays.json"
+      ],
+      "id": "psa-psgc",
+      "name": "Philippine Standard Geographic Code — City of San Fernando",
+      "publisher": "Philippine Statistics Authority",
+      "reference_note": "Official source for PSGC codes, names, administrative classification, and 2024 POPCEN population.",
+      "url": "https://psa.gov.ph/classification/psgc/barangays/0305416000"
+    },
+    {
+      "applies_to": ["geography/city.geojson", "geography/barangays.geojson"],
+      "id": "psgc-shapefiles-community",
+      "name": "altcoder/philippines-psgc-shapefiles",
+      "publisher": "Community-maintained GitHub repository (not an official PSA shapefile)",
+      "reference_note": "Source of polygon geometry only, as of 31 December 2023, matched/updated against PSA PSGC changes. PSGC codes/names on these same features come from the official psa-psgc source above, not from this repository.",
+      "url": "https://github.com/altcoder/philippines-psgc-shapefiles"
+    },
+    {
+      "applies_to": ["projects/project-evidence.json#stage=BID_RESULTS"],
+      "id": "bid_results_archive",
+      "name": "Full Disclosure Report",
+      "publisher": "City Government of San Fernando, Pampanga",
+      "reference_note": "Fallback for BID_RESULTS sources without an exact verified landing page; currently unused. Bid Results evidence records resolve directly to their workbook's own confirmed official_page_url/official_attachment_url in bid-results-source-manifest.json / cy2022-source-manifest.json whenever one has been verified; this entry only applies if a future workbook lacks one.",
+      "url": "https://cityofsanfernando.gov.ph/full-disclosure-report/"
+    }
+  ]
+}

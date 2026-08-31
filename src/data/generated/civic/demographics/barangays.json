@@ -1,0 +1,226 @@
+{
+  "barangay_count": 35,
+  "barangays": [
+    {
+      "classification": "Urban",
+      "name": "Alasas",
+      "population": 5105,
+      "psgc_code": "0305416001"
+    },
+    {
+      "classification": "Urban",
+      "name": "Baliti",
+      "population": 7117,
+      "psgc_code": "0305416002"
+    },
+    {
+      "classification": "Urban",
+      "name": "Bulaon",
+      "population": 28617,
+      "psgc_code": "0305416003"
+    },
+    {
+      "classification": "Urban",
+      "name": "Calulut",
+      "population": 44659,
+      "psgc_code": "0305416004"
+    },
+    {
+      "classification": "Urban",
+      "name": "Dela Paz Norte",
+      "population": 6394,
+      "psgc_code": "0305416005"
+    },
+    {
+      "classification": "Urban",
+      "name": "Dela Paz Sur",
+      "population": 3277,
+      "psgc_code": "0305416006"
+    },
+    {
+      "classification": "Urban",
+      "name": "Del Carmen",
+      "population": 7042,
+      "psgc_code": "0305416007"
+    },
+    {
+      "classification": "Urban",
+      "name": "Del Pilar",
+      "population": 11023,
+      "psgc_code": "0305416008"
+    },
+    {
+      "classification": "Urban",
+      "name": "Del Rosario",
+      "population": 8921,
+      "psgc_code": "0305416009"
+    },
+    {
+      "classification": "Urban",
+      "name": "Dolores",
+      "population": 21482,
+      "psgc_code": "0305416010"
+    },
+    {
+      "classification": "Urban",
+      "name": "Juliana",
+      "population": 4214,
+      "psgc_code": "0305416011"
+    },
+    {
+      "classification": "Urban",
+      "name": "Lara",
+      "population": 4058,
+      "psgc_code": "0305416012"
+    },
+    {
+      "classification": "Rural",
+      "name": "Lourdes",
+      "population": 4735,
+      "psgc_code": "0305416013"
+    },
+    {
+      "classification": "Urban",
+      "name": "Magliman",
+      "population": 7136,
+      "psgc_code": "0305416014"
+    },
+    {
+      "classification": "Urban",
+      "name": "Maimpis",
+      "population": 18580,
+      "psgc_code": "0305416015"
+    },
+    {
+      "classification": "Urban",
+      "name": "Malino",
+      "population": 5649,
+      "psgc_code": "0305416016"
+    },
+    {
+      "classification": "Urban",
+      "name": "Malpitic",
+      "population": 7286,
+      "psgc_code": "0305416017"
+    },
+    {
+      "classification": "Urban",
+      "name": "Pandaras",
+      "population": 1862,
+      "psgc_code": "0305416019"
+    },
+    {
+      "classification": "Urban",
+      "name": "Panipuan",
+      "population": 9323,
+      "psgc_code": "0305416020"
+    },
+    {
+      "classification": "Urban",
+      "name": "Santo Rosario",
+      "population": 822,
+      "psgc_code": "0305416021"
+    },
+    {
+      "classification": "Urban",
+      "name": "Quebiauan",
+      "population": 11256,
+      "psgc_code": "0305416022"
+    },
+    {
+      "classification": "Urban",
+      "name": "Saguin",
+      "population": 8546,
+      "psgc_code": "0305416023"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Agustin",
+      "population": 23814,
+      "psgc_code": "0305416024"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Felipe",
+      "population": 6416,
+      "psgc_code": "0305416025"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Isidro",
+      "population": 10796,
+      "psgc_code": "0305416026"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Jose",
+      "population": 16543,
+      "psgc_code": "0305416027"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Juan",
+      "population": 6616,
+      "psgc_code": "0305416029"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Nicolas",
+      "population": 10046,
+      "psgc_code": "0305416030"
+    },
+    {
+      "classification": "Urban",
+      "name": "San Pedro",
+      "population": 12343,
+      "psgc_code": "0305416031"
+    },
+    {
+      "classification": "Urban",
+      "name": "Santa Lucia",
+      "population": 10214,
+      "psgc_code": "0305416032"
+    },
+    {
+      "classification": "Urban",
+      "name": "Santa Teresita",
+      "population": 1436,
+      "psgc_code": "0305416033"
+    },
+    {
+      "classification": "Urban",
+      "name": "Santo Niño",
+      "population": 11440,
+      "psgc_code": "0305416034"
+    },
+    {
+      "classification": "Urban",
+      "name": "Sindalan",
+      "population": 16305,
+      "psgc_code": "0305416036"
+    },
+    {
+      "classification": "Urban",
+      "name": "Telabastagan",
+      "population": 13173,
+      "psgc_code": "0305416037"
+    },
+    {
+      "classification": "Urban",
+      "name": "Pulung Bulu",
+      "population": 11288,
+      "psgc_code": "0305416038"
+    }
+  ],
+  "census": "2024 POPCEN",
+  "city_name": "City of San Fernando",
+  "city_psgc_code": "0305416000",
+  "last_verified": "2026-08-30",
+  "province": "Pampanga",
+  "psgc_release": "PSGC as of 30 June 2026",
+  "reference_year": 2024,
+  "region": "Region III (Central Luzon)",
+  "source_publisher": "Philippine Statistics Authority",
+  "source_url": "https://psa.gov.ph/classification/psgc/barangays/0305416000",
+  "total_population": 377534
+}

@@ -1,0 +1,8 @@
+{
+  "canonical_data_release": "v0.1.1",
+  "export_contract_version": "v0.1.0",
+  "export_dir": "exports/v0.1.0",
+  "expected_source_data_version": "v0.1.1",
+  "expected_export_version": "v0.1.0",
+  "generated_target": "src/data/generated/civic"
+}
