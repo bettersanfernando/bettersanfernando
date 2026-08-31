@@ -1,2 +1,2 @@
-node scripts/check-no-private-data.mjs --staged
-npx lint-staged
+node scripts/check-no-private-data.mjs --staged &&
+  npx lint-staged

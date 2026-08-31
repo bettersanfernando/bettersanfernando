@@ -21,7 +21,8 @@
     "data:validate": "node scripts/validate-civic-data.mjs",
     "data:smoke": "node --experimental-strip-types scripts/smoke-civic-data-layer.ts",
     "nav:smoke": "node --experimental-strip-types scripts/smoke-navigation.ts",
-    "check:public-data-boundary": "node scripts/check-no-private-data.mjs"
+    "check:public-data-boundary": "node scripts/check-no-private-data.mjs",
+    "test:public-data-boundary": "node --test scripts/check-no-private-data.test.mjs"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
