@@ -5,10 +5,12 @@ import {
   Map as MapLibreMap,
   NavigationControl,
   ScaleControl,
+  setWorkerUrl,
   type LngLatBoundsLike,
   type MapLayerMouseEvent,
 } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import mapLibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
 import type { BarangayProjectSummary } from '../../data/civic/projectMap';
 
@@ -16,6 +18,8 @@ const SOURCE_ID = 'barangay-project-distribution';
 const FILL_LAYER_ID = 'barangay-project-fill';
 const OUTLINE_LAYER_ID = 'barangay-project-outline';
 const SELECTED_LAYER_ID = 'barangay-project-selected';
+
+setWorkerUrl(mapLibreWorkerUrl);
 
 interface BarangayProjectMapProps {
   boundaries: readonly BarangayFeature[];
