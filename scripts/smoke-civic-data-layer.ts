@@ -28,6 +28,7 @@ import {
   CityGeojsonSchema,
   BarangaysGeojsonSchema,
 } from '../src/data/civic/geography.schemas.ts';
+import { getExecutiveOrders } from '../src/data/civic/legislation.ts';
 
 function assert(condition: boolean, message: string): void {
   if (!condition) {
@@ -124,6 +125,22 @@ try {
 }
 assert(rejectedMalformed, 'expected schema to reject a malformed feature');
 
+const executiveOrders = getExecutiveOrders();
+assert(
+  executiveOrders.length === 11,
+  `expected 11 Executive Orders, got ${executiveOrders.length}`
+);
+assert(
+  executiveOrders.every(order => order.document_type === 'Executive Order'),
+  'Executive Orders collection contains another document type'
+);
+assert(
+  executiveOrders.every(order =>
+    order.full_text_available ? Boolean(order.official_pdf_url) : true
+  ),
+  'an Executive Order marked as full-text available has no official PDF URL'
+);
+
 console.log('[smoke-civic-data-layer] OK');
 console.log(`  projects: ${projects.length} (unique IDs: ${projectIds.size})`);
 console.log(
@@ -138,3 +155,4 @@ console.log(
 console.log(
   `  geography: city features ${cityGeojson.features.length}, barangay features ${barangaysGeojson.features.length}, malformed shape rejected: ${rejectedMalformed}`
 );
+console.log(`  Executive Orders: ${executiveOrders.length}`);

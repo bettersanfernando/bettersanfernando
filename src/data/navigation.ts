@@ -327,7 +327,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.executiveOrders',
             href: '/legislation/executive-orders',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.ordinances',
