@@ -23,7 +23,6 @@ const destinationPresentation = {
   emergencyInformation: ['triangle-alert', 'emergencyInformation'],
   allCityProjects: ['list-checks', 'allCityProjects'],
   projectMap: ['map', 'projectMap'],
-  projectDashboard: ['chart', 'projectDashboard'],
   procurementOverview: ['shopping-cart', 'procurementOverview'],
   bidResults: ['scale', 'bidResults'],
   contractsAwards: ['file-check', 'contractsAwards'],
@@ -217,9 +216,9 @@ const navigationStructure = [
             kind: 'real',
           },
           {
-            labelKey: 'navigation.items.projectDashboard',
-            href: '/projects/dashboard',
-            kind: 'planned',
+            labelKey: 'navigation.items.projectStatistics',
+            href: '/statistics/projects',
+            kind: 'real',
           },
         ],
       },
@@ -269,7 +268,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.projectStatistics',
             href: '/statistics/projects',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.spendingStatistics',
@@ -455,7 +454,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.projectStatistics',
             href: '/statistics/projects',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.publicRecordsStatistics',
