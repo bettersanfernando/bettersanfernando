@@ -35,6 +35,7 @@ const Contracts = lazy(() => import('./pages/Contracts'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
 const Ordinances = lazy(() => import('./pages/Ordinances'));
 const Legislation = lazy(() => import('./pages/Legislation'));
+const Transparency = lazy(() => import('./pages/Transparency'));
 const TransparencySources = lazy(() => import('./pages/TransparencySources'));
 const TransparencyMethodology = lazy(
   () => import('./pages/TransparencyMethodology')
@@ -161,6 +162,7 @@ function App() {
                     path="/transparency/sources"
                     element={<TransparencySources />}
                   />
+                  <Route path="/transparency" element={<Transparency />} />
                   <Route
                     path="/transparency/methodology"
                     element={<TransparencyMethodology />}

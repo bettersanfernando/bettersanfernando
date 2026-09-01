@@ -9,7 +9,6 @@ const plannedPageRoutes = [
   { id: 'governmentDocuments', path: '/government/documents' },
   { id: 'governmentHotlines', path: '/government/hotlines' },
   { id: 'governmentLinks', path: '/government/links' },
-  { id: 'transparency', path: '/transparency' },
   { id: 'fullDisclosure', path: '/transparency/full-disclosure' },
   { id: 'disclosureArchive', path: '/transparency/archive' },
   { id: 'transparencyDocuments', path: '/transparency/documents' },
