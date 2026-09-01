@@ -35,6 +35,7 @@
     "procurement-statistics:smoke": "node --experimental-strip-types scripts/smoke-procurement-statistics.ts",
     "government-contact:smoke": "node --experimental-strip-types scripts/smoke-government-contact.ts",
     "government:smoke": "node --experimental-strip-types scripts/smoke-government.ts",
+    "services:smoke": "node --experimental-strip-types scripts/smoke-services.ts",
     "about:smoke": "node --experimental-strip-types scripts/smoke-about.ts",
     "search:smoke": "node --experimental-strip-types scripts/smoke-search.ts",
     "home:smoke": "node --experimental-strip-types scripts/smoke-home.ts",

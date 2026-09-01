@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Document = lazy(() => import('./pages/Document'));
 const Government = lazy(() => import('./pages/Government'));
 const GovernmentOffices = lazy(() => import('./pages/GovernmentOffices'));
@@ -58,12 +59,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
-                  <Route path="/services/:category" element={<Services />} />
                   <Route path="/services" element={<Services />} />
-                  <Route
-                    path="/services/:category/:documentSlug"
-                    element={<Document categoryType="service" />}
-                  />
+                  <Route path="/services/:slug" element={<ServiceDetail />} />
                   <Route
                     path="/government/offices"
                     element={<GovernmentOffices />}

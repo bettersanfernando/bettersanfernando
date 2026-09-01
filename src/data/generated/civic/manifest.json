@@ -45,6 +45,11 @@
       "record_count": 334,
       "schema_version": 1,
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
+    },
+    "services/services.json": {
+      "record_count": 8,
+      "schema_version": 1,
+      "sha256": "320feeb75f18274ed53176b22b0fbce9b01209395df5f4faebd21ede3263e37e"
     }
   },
   "export_version": "v0.1.0",

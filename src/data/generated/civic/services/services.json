@@ -1,0 +1,1213 @@
+{
+  "dataset": "services",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-09-01",
+  "office_scope": [
+    "Business License and Permit Division"
+  ],
+  "publication_status": "INITIAL_PILOT",
+  "record_count": 8,
+  "schema_version": 1,
+  "services": [
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the Mayor's Permit at the Business License and Permit Division, Windows 61 or 62.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 5-10, and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Give the Official Receipt to BLPD, Windows 61 or 62, and wait while staff certify the permit.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Drop the Feedback Form (CSM) at the Suggestion Box.",
+          "sequence": "3.1"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the Certified True Copy to affirm the authenticity of the business record/information of an individual.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "P 50.00 per document"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-01",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Mayor's Permit (original for presentation; 1 photocopy)",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "certified-true-copy",
+      "title": "CERTIFIED TRUE COPY",
+      "who_may_avail": "All"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2B"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Accomplish the application form and submit all necessary documents at the Business License and Permit Division, Windows 11-16. Wait while staff prepare the Inspection Stub, then return on the date indicated in the stub.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Give the Inspection Stub to BLPD staff at the Business License and Permit Division, Windows 61 or 62.",
+          "sequence": "1.1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 5-10, and receive the Official Receipt and Feedback Form.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Give the Official Receipt at the Business License and Permit Division, Windows 61 or 62, and wait while BLPD staff prepare the certification.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Receive the Business Retirement Certificate at the Business License and Permit Division, Windows 61 or 62, and drop the Feedback Form at the Suggestion Box.",
+          "sequence": "3.1"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of a Business Retirement Certificate to those who ceased operations within the territorial jurisdiction of the City of San Fernando, Pampanga.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to Annex BLPD-1 of the Citizen's Charter."
+      },
+      "forms": [
+        {
+          "label": "BLPD Request Form",
+          "scope": "reprinting_only",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/REQUEST-FORM-FOR-DOCUMENTS.pdf"
+        }
+      ],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-02",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "2 days"
+      },
+      "public_notes": [
+        "The fee depends on the official Charter schedule. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application Form for Business Retirement (2 originals)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Latest Mayor's Permit, or Affidavit of Loss if the permit was lost (1 original)",
+          "where_to_secure": "Business owner; Notarial Services"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Location/sketch (1 original)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16"
+        },
+        {
+          "condition": "If the applicant is a representative of a single proprietorship",
+          "ordinal": "A.1",
+          "text": "Authorization Letter and photocopies of any government-issued ID of the owner and representative, with specimen signatures",
+          "where_to_secure": "Owner; issuing government agency, school, or company"
+        },
+        {
+          "condition": "If the applicant represents a corporation, partnership, cooperative, or association",
+          "ordinal": "A.2",
+          "text": "Secretary's Certificate or Board Resolution and photocopy of any government-issued ID of the representative, with specimen signature",
+          "where_to_secure": "Corporation, partnership, cooperative, or association; Notarial Services"
+        },
+        {
+          "condition": "For representative identification",
+          "ordinal": "A.3",
+          "text": "Government-issued identification may include UMID, Driver's License, PRC ID, Passport, Senior Citizen ID, SSS ID, TIN ID, PWD ID, Solo Parent ID, Postal ID, School ID, Company ID, or Government Agency ID if no other government-issued ID is available",
+          "where_to_secure": "Issuing government agency, school, or company"
+        },
+        {
+          "condition": "For a partnership",
+          "ordinal": "B",
+          "text": "Affidavit of Business Retirement signed by both partners (1 original)",
+          "where_to_secure": "Notarial Services"
+        },
+        {
+          "condition": "For a corporation",
+          "ordinal": "B.1",
+          "text": "Board Resolution or Secretary's Certificate for Business Retirement (1 original)",
+          "where_to_secure": "Corporation; Notarial Services"
+        },
+        {
+          "condition": "For declaration of gross sales by a non-BIR-registered taxpayer",
+          "ordinal": "C.1",
+          "text": "Affidavit of Gross Sales/Receipts for the latest taxable period(s) (1 original)",
+          "where_to_secure": "Notarial Services; Business owner"
+        },
+        {
+          "condition": "For declaration of gross sales by a BIR-registered taxpayer; submit any applicable listed evidence",
+          "ordinal": "C.2.1",
+          "text": "Income Tax Returns for the preceding year and/or current year (1 photocopy)",
+          "where_to_secure": "Bureau of Internal Revenue"
+        },
+        {
+          "condition": "For declaration of gross sales by a BIR-registered taxpayer; submit any applicable listed evidence",
+          "ordinal": "C.2.2",
+          "text": "VAT or Percentage Tax Returns for the preceding year and/or current year (1 photocopy)",
+          "where_to_secure": "Bureau of Internal Revenue"
+        },
+        {
+          "condition": "For declaration of gross sales by a BIR-registered taxpayer; submit any applicable listed evidence",
+          "ordinal": "C.2.3",
+          "text": "Affidavit of Gross Sales/Receipts or notarized certification of the breakdown of sales of each branch if the ITR is consolidated (1 original)",
+          "where_to_secure": "Company accountant or manager; Notarial Services"
+        },
+        {
+          "condition": "For non-operation of business",
+          "ordinal": "C.3",
+          "text": "Affidavit of Non-Operation for the latest taxable period(s) (1 original)",
+          "where_to_secure": "Notarial Services; Business owner"
+        }
+      ],
+      "slug": "issuance-of-business-retirement-certificate",
+      "title": "ISSUANCE OF BUSINESS RETIREMENT CERTIFICATE",
+      "who_may_avail": "Business Entity"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the Certificate of No Business and completed Request Form at the Business License and Permit Division, Windows 61 or 62.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 5-10, and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Give the Official Receipt to BLPD staff at Windows 61 or 62 and wait while staff prepare the certification.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Claim the Certificate of No Business at the Business License and Permit Division, Windows 61 or 62, and drop the Feedback Form (CSM) at the Suggestion Box.",
+          "sequence": "3.1"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of a Certificate of No Business to affirm the validity of business record/information of an individual.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "P100.00"
+      },
+      "forms": [
+        {
+          "label": "BLPD Request Form",
+          "scope": "certification_of_no_business",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/REQUEST-FORM-FOR-DOCUMENTS.pdf"
+        }
+      ],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-03",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "refer_to_charter",
+        "text": "Refer to the Citizen's Charter; the published total processing-time row is incomplete."
+      },
+      "public_notes": [
+        "The extracted processing-time total is incomplete. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of No Business from the Barangay Hall (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Request Form (1 original)",
+          "where_to_secure": "Business License and Permit Division"
+        },
+        {
+          "condition": "For an authorized representative",
+          "ordinal": "3.1",
+          "text": "Authorization Letter from the owner of the certificate",
+          "where_to_secure": "Owner of the certification"
+        },
+        {
+          "condition": "For an authorized representative",
+          "ordinal": "3.2",
+          "text": "Photocopies of the owner's and representative's IDs. Accepted identification includes UMID, Driver's License, PRC ID, Passport, Senior Citizen ID, SSS ID, TIN ID, PWD ID, Solo Parent ID, Postal ID, School ID, Company ID, or Government Agency ID if no other government-issued ID is available",
+          "where_to_secure": "Owner or representative; issuing government agency, school, or company"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-no-business",
+      "title": "ISSUANCE OF CERTIFICATE OF NO BUSINESS",
+      "who_may_avail": "CSFP Residents"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the request at the Business License and Permit Division, Windows 61 or 62.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 5-10, and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Give the Official Receipt to BLPD, Windows 61 or 62, and wait while staff prepare the certification or request. Drop the Feedback Form (CSM) at the Suggestion Box.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of certifications to affirm the validity of business record/information of an individual.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to Annex BLPD-1 of the Citizen's Charter."
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-04",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes"
+      },
+      "public_notes": [
+        "The fee depends on the official Charter schedule. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request Letter (1 original or 1 photocopy)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "If the request is submitted by a representative",
+          "ordinal": "2.1",
+          "text": "Authorization Letter from the owner or company, or Board Resolution/Secretary's Certificate for a corporation",
+          "where_to_secure": "Owner, company, or corporation"
+        },
+        {
+          "condition": "If the request is submitted by a representative",
+          "ordinal": "2.2",
+          "text": "Photocopy of the owner's and representative's IDs. Accepted identification includes UMID, Driver's License, PRC ID, Passport, Senior Citizen ID, SSS ID, TIN ID, PWD ID, Solo Parent ID, Postal ID, School ID, Company ID, or Government Agency ID if no other government-issued ID is available",
+          "where_to_secure": "Owner or representative; issuing government agency, school, or company"
+        }
+      ],
+      "slug": "issuance-of-other-business-related-certifications",
+      "title": "ISSUANCE OF OTHER BUSINESS-RELATED CERTIFICATIONS",
+      "who_may_avail": "All"
+    },
+    {
+      "appointment": {
+        "note": "The City offers a Business Permit Appointment entry, but coverage for this service has not been confirmed.",
+        "status": "service_coverage_not_confirmed",
+        "url": "https://citizensportal.csfp.io/"
+      },
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2B"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Accomplish the application form and submit all necessary documents at the Business License and Permit Division, Windows 11-16.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 6 or 10.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the Official Receipt, Community Tax Certificate, and Claim Stub. Return on the date indicated in the stub.",
+          "sequence": "2.1"
+        },
+        {
+          "instruction": "Claim the Mayor's Permit at the Business License and Permit Division, Windows 61 or 62, complete the Claim Stub, and drop it in the Suggestion Box.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of a Mayor's/Business Permit for regulating the operation of businesses within the territorial jurisdiction of the City of San Fernando, Pampanga. Any person doing business in the City of San Fernando, Pampanga can avail of this service.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to Annex BLPD-1 of the Citizen's Charter."
+      },
+      "forms": [
+        {
+          "label": "Application Form for Business",
+          "scope": "new_business",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/01/REVISED-APPLICATION-FORM-DEC.-2025.pdf",
+          "version": "FM-CSFP-QMS-20; Revision No. 05"
+        }
+      ],
+      "freshness_status": "verify_with_office",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-05",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [
+        {
+          "availability_note": "Portal explicitly lists Business Application.",
+          "label": "Business Application",
+          "url": "https://citizensportal.csfp.io/"
+        }
+      ],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "4 hours"
+      },
+      "public_notes": [
+        "Current City information differs from the 2026 Citizen's Charter. Verify with the office before applying.",
+        "The fee depends on the official Charter schedule. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Business Application Form (1 original)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Location/sketch and pictures of the inside and outside of the business establishment (1 original)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16; Business owner"
+        },
+        {
+          "condition": "Submit the registration applicable to the business entity",
+          "ordinal": "3",
+          "text": "DTI, SEC, CDA, or DHSUD registration for the business name (1 original for presentation; 1 photocopy for BLPD)",
+          "where_to_secure": "Department of Trade and Industry; Securities and Exchange Commission; Cooperative Development Authority; Department of Human Settlements and Urban Development"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Community Tax Certificate",
+          "where_to_secure": "Business License and Permit Division"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Tax Declaration (1 photocopy)",
+          "where_to_secure": "Property owner or City Assessor's Office, Window 18"
+        },
+        {
+          "condition": "Submit the applicable document for the property or lease situation",
+          "ordinal": "6",
+          "text": "Applicable proof of ownership or right to use the lot (1 photocopy): Owner's Duplicate Copy/TCT; lease proposal; notarized Contract of Lease; notarized Certificate of Lease; notarized Deed of Absolute Sale; notarized Authorization Letter and/or Notice of Award; LHSD Certification for Northville Subdivision; NHA Certification for San Fernando Heights, Bulaon Resettlement, or San Fernando Ville; notarized Deed of Donation and/or Special Power of Attorney; notarized Contract to Sell; or notarized Sworn Statement as heir of the property",
+          "where_to_secure": "Property owner or lessor; Notarial Services; Local Housing Settlement Division; National Housing Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Certificate of Occupancy/Use (1 original for presentation; 1 photocopy), except for kiosks, carts, ambulant vendors, public market stalls, security and janitorial services deployed in commercial establishments or malls, and construction with a total cost of PHP 15,000 or below",
+          "where_to_secure": "Business owner or Office of the City Building Official"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Fire Safety Inspection Certificate or Fire Safety Inspection Certificate for Occupancy valid within the last nine months",
+          "where_to_secure": "Bureau of Fire Protection"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Sanitary Permit, Environmental Management Permit, Zoning Certificate, and clearances from OCBO and the Barangay",
+          "where_to_secure": "Facilitated by the Business License and Permit Division"
+        },
+        {
+          "condition": "If the applicant is a representative of a single proprietorship",
+          "ordinal": "A.1",
+          "text": "Authorization Letter and photocopies of any government-issued ID of the owner and representative, with specimen signatures",
+          "where_to_secure": "Owner"
+        },
+        {
+          "condition": "If the applicant represents a corporation, partnership, cooperative, or association",
+          "ordinal": "A.2",
+          "text": "Secretary's Certificate or Board Resolution and photocopy of any government-issued ID of the representative, with specimen signature",
+          "where_to_secure": "Corporation, partnership, cooperative, or association"
+        },
+        {
+          "condition": "For contractors",
+          "ordinal": "B",
+          "text": "Contractor's License (PCAB for general, specialty, and engineering contractors)",
+          "where_to_secure": "Department of Trade and Industry"
+        },
+        {
+          "condition": "For internet businesses",
+          "ordinal": "C",
+          "text": "Affidavit/Undertaking on Non-Operations of Games (1 original)",
+          "where_to_secure": "Notarial Services"
+        },
+        {
+          "condition": "For amusement entities",
+          "ordinal": "D",
+          "text": "Grant of authority or franchise from Congress, PAGCOR, or the Sangguniang Panlungsod (1 photocopy)",
+          "where_to_secure": "Congress, PAGCOR, or Sangguniang Panlungsod"
+        },
+        {
+          "condition": "When covered by the CCTV ordinance",
+          "ordinal": "E",
+          "text": "CCTV System Certification and Letter of Undertaking to comply with Ordinance No. 2018-029, the 2018 CCTV System Ordinance of the City of San Fernando, Pampanga",
+          "where_to_secure": "CCTV system installer or Business owner; Business License and Permit Division"
+        },
+        {
+          "condition": "For rent-a-car and transportation services",
+          "ordinal": "F",
+          "text": "Franchise or Certificate of Public Conveyance",
+          "where_to_secure": "Land Transportation Franchising and Regulatory Board"
+        },
+        {
+          "condition": "For businesses in applicable residential or newly developed subdivisions",
+          "ordinal": "G",
+          "text": "Homeowner's Clearance/Certification if within an approved residential subdivision; otherwise consent from at least four nearby peripheral neighbors if there is no homeowners' association; or developer's consent for a newly developed subdivision (1 photocopy; original for presentation)",
+          "where_to_secure": "Homeowners' Association; nearby neighbors; developer"
+        },
+        {
+          "condition": "If located within a new or old public market",
+          "ordinal": "H",
+          "text": "CMOD-stamped clearance",
+          "where_to_secure": "City Market Operations Division"
+        },
+        {
+          "condition": "For night clubs and entertainment establishments",
+          "ordinal": "I",
+          "text": "License to work for entertainers/models and Cervical Urethral Smear results from the Social Hygiene Clinic for GROs (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Entertainment Establishment Section, Social Hygiene Clinic; City Mayor's Office"
+        },
+        {
+          "condition": "For water refilling stations, water works systems, bulk water, water vending machines, and ice manufacturers",
+          "ordinal": "J",
+          "text": "Certificate of Certified Water Operator Course or commitment to attend training, Sanitary Plan, Sanitary Engineer's Report, applicable physical/chemical test results, Certificate of Potability, and applicable microbiological test results for Total Coliform, E. coli, and Heterotrophic Plate Count. Testing frequency and raw/product water requirements depend on whether the source is a deep well or Water District; course, plan, and engineer-report exceptions apply to water vending machines and ice manufacturers",
+          "where_to_secure": "Water Operator Training Course; licensed Sanitary Engineer; DOH-accredited Water Laboratory; City Health Office"
+        },
+        {
+          "condition": "For memorial parks, cemeteries, private burial grounds, and crematoriums (1 original for presentation; 1 photocopy)",
+          "ordinal": "K",
+          "text": "Initial or Operational Permit/Clearance from DOH CHD-3 and, for crematoriums, a licensed undertaker or letter of commitment",
+          "where_to_secure": "Department of Health Region III"
+        },
+        {
+          "condition": "For funeral parlors",
+          "ordinal": "L",
+          "text": "Licensed undertaker or commitment to attend undertaker training, and a licensed embalmer when the funeral parlor has an embalming facility",
+          "where_to_secure": "Department of Health"
+        },
+        {
+          "condition": "For industrial establishments",
+          "ordinal": "M",
+          "text": "Design of Waste Water Treatment Plant facilities",
+          "where_to_secure": "Business owner's engineering department"
+        },
+        {
+          "condition": "For poultry and piggery businesses",
+          "ordinal": "N",
+          "text": "Barangay Resolution of No Objection (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": "For hospitals, medical and diagnostic clinics, and dental prosthesis laboratories",
+          "ordinal": "O",
+          "text": "License to Operate from DOH CHD-3",
+          "where_to_secure": "Department of Health"
+        },
+        {
+          "condition": "For food establishments, restaurants, fast-food businesses, canteens, eateries, and caterers",
+          "ordinal": "P",
+          "text": "Letter designating a Food Safety Compliance Officer with proof of prescribed FSCO training, or a commitment to attend FSCO training",
+          "where_to_secure": "Department of Health or City Health Office, ground floor"
+        },
+        {
+          "condition": "For water laboratories",
+          "ordinal": "Q",
+          "text": "Current NRL Certificate of Proficiency covering the last five years; picture of the laboratory's physical location; PRC License to Operate for a water laboratory with physio-chemical services; valid DOH Certificate of Accreditation; NRL license certificate for the water sampler; and DENR environmental clearance (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "National Reference Laboratory; Professional Regulation Commission; Department of Health; Department of Environment and Natural Resources"
+        },
+        {
+          "condition": "For PTTIs",
+          "ordinal": "Note",
+          "text": "Only the completed Business Application Form is required for Shared Passive Telecommunication Tower Infrastructure (PTTIs)",
+          "where_to_secure": "Business License and Permit Division"
+        }
+      ],
+      "slug": "mayors-permit-for-business-new-business",
+      "title": "MAYOR’S PERMIT FOR BUSINESS (NEW BUSINESS)",
+      "who_may_avail": "Business Entity"
+    },
+    {
+      "appointment": {
+        "note": "The City offers a Business Permit Appointment entry, but coverage for this service has not been confirmed.",
+        "status": "service_coverage_not_confirmed",
+        "url": "https://citizensportal.csfp.io/"
+      },
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2B"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Accomplish the application form and submit all necessary documents at the Business License and Permit Division, Windows 12-16. If the application is on the negative list, comply first with the concerned regulatory office or offices before assessment.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 6 or 10. Receive the Official Receipt, Community Tax Certificate, and Claim Stub, then return on the date indicated in the stub.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Claim the Mayor's Permit at the Business License and Permit Division, Windows 61 or 62, complete the Claim Stub, and drop it in the Suggestion Box.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of a Mayor's/Business Permit for regulating the operation of businesses within the territorial jurisdiction of the City of San Fernando, Pampanga. Any person doing business in the City of San Fernando, Pampanga can avail of this service.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to Annex BLPD-1 of the Citizen's Charter."
+      },
+      "forms": [
+        {
+          "label": "Business Permit Renewal Form",
+          "scope": "business_renewal",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/06/APPLICATION-FORM-RENEWAL-SEPT.-2022.pdf",
+          "version": "FM-CSFP-BLPD-17; Revision No. 02"
+        }
+      ],
+      "freshness_status": "verify_with_office",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-06",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [
+        {
+          "availability_note": "Citizens Portal business functionality is official; renewal-specific workflow details were not independently reconfirmed.",
+          "label": "Business Application",
+          "url": "https://citizensportal.csfp.io/"
+        }
+      ],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "2 hours and 20 minutes"
+      },
+      "public_notes": [
+        "Current City information differs from the 2026 Citizen's Charter. Verify with the office before applying.",
+        "The fee depends on the official Charter schedule. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Business Application Form (2 originals)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16"
+        },
+        {
+          "condition": "For declaration of gross sales",
+          "ordinal": "2.1",
+          "text": "Proof of annual gross receipts (original for presentation; 1 photocopy), which may be audited financial statements, unaudited financial statements for those not required to file AFS with the BIR, a sworn declaration of gross sales or receipts, or Income Tax Returns",
+          "where_to_secure": "Bureau of Internal Revenue; Business owner; Notarial Services; Company accountant"
+        },
+        {
+          "condition": "For banks",
+          "ordinal": "2.2",
+          "text": "Notarized Joint Statement of Annual Income signed by a designated officer of the head office and by the branch manager (1 original)",
+          "where_to_secure": "Company head office and branch manager; Notarial Services"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Fire Safety Inspection Certificate",
+          "where_to_secure": "Bureau of Fire Protection"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Sanitary Permit, Environmental Management Permit, clearances from OCBO and the Barangay, and Community Tax Certificate",
+          "where_to_secure": "Facilitated by the Business License and Permit Division"
+        },
+        {
+          "condition": "If the applicant is a representative of a single proprietorship",
+          "ordinal": "A.1",
+          "text": "Authorization Letter and photocopies of any government-issued ID of the owner and representative, with specimen signatures",
+          "where_to_secure": "Owner"
+        },
+        {
+          "condition": "If the applicant represents a corporation, partnership, cooperative, or association",
+          "ordinal": "A.2",
+          "text": "Secretary's Certificate or Board Resolution and photocopy of any government-issued ID of the representative, with specimen signature",
+          "where_to_secure": "Corporation, partnership, cooperative, or association"
+        },
+        {
+          "condition": "For amusement entities",
+          "ordinal": "B",
+          "text": "Grant of authority or franchise from Congress, PAGCOR, or the Sangguniang Panlungsod (1 photocopy; original for presentation)",
+          "where_to_secure": "Congress, PAGCOR, or Sangguniang Panlungsod"
+        },
+        {
+          "condition": "For pawnshops, foreign exchange dealers, money changers, and remittance agents that were new businesses in the previous year",
+          "ordinal": "C",
+          "text": "BSP proof of registration, either a received application form or Certificate of Registration (1 photocopy)",
+          "where_to_secure": "Bangko Sentral ng Pilipinas"
+        },
+        {
+          "condition": "For night clubs and entertainment establishments",
+          "ordinal": "D",
+          "text": "License to work for entertainers/models and Cervical Urethral Smear results from the Social Hygiene Clinic for GROs (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Rural Health Unit II, Barangay Health Center-Sindalan"
+        },
+        {
+          "condition": "For water refilling stations, water works systems, bulk water, water vending machines, and ice manufacturers",
+          "ordinal": "E",
+          "text": "Applicable microbiological test results for Total Coliform, E. coli, and Heterotrophic Plate Count; Certificate of Potability; and applicable physical/chemical test results following the mandatory parameters of PNSDW 2017. Testing frequency and raw/product water requirements depend on whether the source is a deep well or Water District",
+          "where_to_secure": "Water Laboratory"
+        },
+        {
+          "condition": "For food establishments, restaurants, fast-food businesses, canteens, eateries, and caterers",
+          "ordinal": "F",
+          "text": "Letter designating a Food Safety Compliance Officer with proof of prescribed FSCO training, or a commitment to attend FSCO training",
+          "where_to_secure": "Department of Health or City Health Office, ground floor"
+        },
+        {
+          "condition": "For water laboratories",
+          "ordinal": "G",
+          "text": "Valid DOH Certificate of Accreditation, current NRL Certificate of Proficiency, and NRL License Certificate for the water sampler",
+          "where_to_secure": "Department of Health; National Reference Laboratory"
+        }
+      ],
+      "slug": "mayors-permit-for-business-renewal",
+      "title": "MAYOR’S PERMIT FOR BUSINESS (RENEWAL)",
+      "who_may_avail": "Business Entity"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the request letter or Request for Special Permit at the Business License and Permit Division, Windows 11-16, and wait while staff prepare the Order of Payment.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Window 4, and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Give the Official Receipt to BLPD, Windows 11-16, and wait while staff prepare the permit.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Claim the Special Permit at the Business License and Permit Division, Windows 11-16, and drop the Feedback Form (CSM) at the Suggestion Box.",
+          "sequence": "3.1"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of Special Permits to those who promote or advertise their business within the territorial jurisdiction of the City of San Fernando, Pampanga.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to Annex BLPD-1 of the Citizen's Charter."
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-07",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "35 minutes"
+      },
+      "public_notes": [
+        "The fee depends on the official Charter schedule. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request Letter or Request for Special Permit (1 original)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "2",
+          "text": "Streamers or tarpaulins",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "mayors-permit-for-business-special-permit",
+      "title": "MAYOR’S PERMIT FOR BUSINESS (SPECIAL PERMIT)",
+      "who_may_avail": "All"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2B"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Accomplish the application form and submit all necessary documents at the Business License and Permit Division, Windows 11-16. Wait while BLPD staff prepare the Inspection Stub, then return on the date indicated in the stub.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the corresponding taxes and fees at the City Treasurer's Office, Windows 6 or 10, and receive the Official Receipt and Community Tax Certificate.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Give the Official Receipt to BLPD, Windows 61 or 62, and wait while staff prepare the Permit to Operate.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Claim the Permit to Operate at the Business License and Permit Division, Windows 61 or 62, and drop the Feedback Form (CSM) at the Suggestion Box.",
+          "sequence": "*"
+        }
+      ],
+      "description": "The Business License and Permit Division under the City Administrator's Office is directly responsible for the issuance of a Permit to Operate (Temporary Permit) to ambulant vendors, seasonal businesses, and short-term businesses such as contractors and mall exhibitors in the City of San Fernando, Pampanga.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to Annex BLPD-1 of the Citizen's Charter."
+      },
+      "forms": [
+        {
+          "label": "BLPD Request Form",
+          "scope": "reprinting_only",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/REQUEST-FORM-FOR-DOCUMENTS.pdf"
+        }
+      ],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-business-license-and-permit-division-external-08",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "BLPD",
+        "division": "Business License and Permit Division",
+        "name": "Business License and Permit Division"
+      },
+      "office_contact": {
+        "emails": [
+          "blpd@cityofsanfernando.gov.ph",
+          "blpd.cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extension_office_extension": "125",
+        "extensions": [
+          "162",
+          "167"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Business License and Permit Division office hours"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 day, 1 hour and 40 minutes"
+      },
+      "public_notes": [
+        "The fee depends on the official Charter schedule. Check the Charter or verify with the office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Business Application Form (1 original)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Location/sketch and pictures of the business establishment (1 original)",
+          "where_to_secure": "Business License and Permit Division, Windows 11-16; Business owner"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Business Clearance",
+          "where_to_secure": "Business License and Permit Division"
+        },
+        {
+          "condition": "Submit the registration applicable to the business entity",
+          "ordinal": "4",
+          "text": "DTI, SEC, CDA, or DHSUD registration for the business name (1 original for presentation; 1 photocopy for BLPD)",
+          "where_to_secure": "Department of Trade and Industry; Securities and Exchange Commission; Cooperative Development Authority; Department of Human Settlements and Urban Development"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Community Tax Certificate",
+          "where_to_secure": "City Treasurer's Office, Windows 5-10"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Certificate of Occupancy/Use (1 original for presentation; 1 photocopy), except for kiosks, carts, ambulant vendors, public market stalls, security and janitorial services deployed in commercial establishments or malls, and construction with a total cost of P15,000 or below",
+          "where_to_secure": "Office of the City Building Official, Windows 27-29"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Fire Safety Inspection Certificate or Fire Safety Inspection Certificate for Occupancy valid within the last nine months",
+          "where_to_secure": "Bureau of Fire Protection"
+        },
+        {
+          "condition": "If the applicant is a representative of a single proprietorship",
+          "ordinal": "A.1",
+          "text": "Authorization Letter and photocopies of any government-issued ID of the owner and representative, with specimen signatures",
+          "where_to_secure": "Owner"
+        },
+        {
+          "condition": "If the applicant represents a corporation, partnership, cooperative, or association",
+          "ordinal": "A.2",
+          "text": "Secretary's Certificate or Board Resolution and photocopy of any government-issued ID of the representative, with specimen signature",
+          "where_to_secure": "Corporation, partnership, cooperative, or association"
+        },
+        {
+          "condition": "For internet businesses",
+          "ordinal": "B",
+          "text": "Affidavit/Undertaking on Non-Operations of Games (1 original)",
+          "where_to_secure": "Notarial Services"
+        },
+        {
+          "condition": "For amusement entities",
+          "ordinal": "C",
+          "text": "Grant of authority or franchise from Congress, PAGCOR, or the Sangguniang Panlungsod (1 photocopy)",
+          "where_to_secure": "Congress, PAGCOR, or Sangguniang Panlungsod"
+        },
+        {
+          "condition": "When covered by the CCTV ordinance",
+          "ordinal": "D",
+          "text": "CCTV System Certification and Letter of Undertaking to comply with Ordinance No. 2018-029, the 2018 CCTV System Ordinance of the City of San Fernando, Pampanga",
+          "where_to_secure": "CCTV system installer or Business owner; Business License and Permit Division"
+        },
+        {
+          "condition": "For businesses in applicable residential or newly developed subdivisions",
+          "ordinal": "E",
+          "text": "Homeowner's Clearance/Certification if within an approved residential subdivision; otherwise consent from at least four nearby peripheral neighbors if there is no homeowners' association; or developer's consent for a newly developed subdivision (1 photocopy; original for presentation)",
+          "where_to_secure": "Homeowners' Association; nearby neighbors; developer"
+        },
+        {
+          "condition": "If located within a new or old public market",
+          "ordinal": "F",
+          "text": "CMOD-stamped clearance",
+          "where_to_secure": "City Market Operations Division"
+        },
+        {
+          "condition": "For night clubs and entertainment establishments",
+          "ordinal": "G",
+          "text": "License to work for entertainers/models and Cervical Urethral Smear results from the Social Hygiene Clinic for GROs (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Rural Health Unit II, Barangay Health Center-Sindalan"
+        },
+        {
+          "condition": "For applicable water businesses",
+          "ordinal": "H",
+          "text": "Certificate of Certified Water Operator Course or Letter of Commitment, Sanitary Plan, physical/chemical test results, Sanitary Engineer's Report, and microbiological test results for Total Coliform, E. coli, and Heterotrophic Plate Count, with product water tested monthly and raw water every six months",
+          "where_to_secure": "Sanitary Engineer; Water Laboratory"
+        },
+        {
+          "condition": "For memorial parks, cemeteries, or private burial grounds",
+          "ordinal": "I",
+          "text": "Initial or Operational Permit/Clearance from DOH CHD-3 and Barangay Resolution of No Objection (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Department of Health"
+        },
+        {
+          "condition": "For crematoriums",
+          "ordinal": "J",
+          "text": "Feasibility study reviewed and approved by the Secretary of Health or an authorized representative (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Department of Health"
+        },
+        {
+          "condition": "For industrial establishments",
+          "ordinal": "K",
+          "text": "Design of Water Treatment Plant facilities",
+          "where_to_secure": "Business owner's engineering department"
+        },
+        {
+          "condition": "For poultry and piggery businesses",
+          "ordinal": "L",
+          "text": "Barangay Resolution of No Objection (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": "For water laboratories",
+          "ordinal": "M",
+          "text": "NRL Certificate of Proficiency covering the last five years; picture of the laboratory's physical location; PRC License to Operate; DOH Certificate of Accreditation; NRL licensure for the water sampler; and DENR environmental clearance (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "Department of Health; Professional Regulation Commission; Department of Environment and Natural Resources"
+        },
+        {
+          "condition": "For food establishments",
+          "ordinal": "N",
+          "text": "Health Card ID (1 original for presentation; 1 photocopy)",
+          "where_to_secure": "City Health Office, first floor (Main)"
+        },
+        {
+          "condition": "For contractors",
+          "ordinal": "O",
+          "text": "Contract Agreement (1 photocopy)",
+          "where_to_secure": "Contractor"
+        }
+      ],
+      "slug": "permit-to-operate-temporary-permit",
+      "title": "PERMIT TO OPERATE (TEMPORARY PERMIT)",
+      "who_may_avail": "Business Entity"
+    }
+  ]
+}

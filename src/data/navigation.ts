@@ -106,12 +106,7 @@ const navigationStructure = [
         items: [
           {
             labelKey: 'navigation.items.businessServices',
-            href: '/services/business',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.permitsLicenses',
-            href: '/services/business/apply-for-barangay-clearance-and-mayors-business-permits',
+            href: '/services',
             kind: 'real',
           },
           {
@@ -130,16 +125,6 @@ const navigationStructure = [
         labelKey: 'navigation.sections.healthEducation',
         items: [
           {
-            labelKey: 'navigation.items.healthServices',
-            href: '/services/health-services',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.educationServices',
-            href: '/services/education',
-            kind: 'real',
-          },
-          {
             labelKey: 'navigation.items.assistancePrograms',
             href: '/services/assistance-programs',
             kind: 'planned',
@@ -149,11 +134,6 @@ const navigationStructure = [
       {
         labelKey: 'navigation.sections.communitySupport',
         items: [
-          {
-            labelKey: 'navigation.items.socialWelfare',
-            href: '/services/social-welfare',
-            kind: 'real',
-          },
           {
             labelKey: 'navigation.items.seniorCitizens',
             href: '/services/senior-citizens',
@@ -168,31 +148,6 @@ const navigationStructure = [
             labelKey: 'navigation.items.hotlines',
             href: '/government/hotlines',
             kind: 'planned',
-          },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.publicServices',
-        items: [
-          {
-            labelKey: 'navigation.items.infrastructurePublicWorks',
-            href: '/services/infrastructure-public-works',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.agriculture',
-            href: '/services/agriculture-fisheries',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.environment',
-            href: '/services/environment',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.emergencyInformation',
-            href: '/services/disaster-preparedness',
-            kind: 'real',
           },
         ],
       },
@@ -538,18 +493,6 @@ export const footerNavigation = {
       title: 'Services',
       links: [
         { label: 'All Services', href: '/services' },
-        { label: 'Health Services', href: '/services/health-services' },
-        { label: 'Education', href: '/services/education' },
-        { label: 'Business and Livelihood', href: '/services/business' },
-        { label: 'Social Welfare', href: '/services/social-welfare' },
-        {
-          label: 'Agriculture & Fisheries',
-          href: '/services/agriculture-fisheries',
-        },
-        {
-          label: 'Infrastructure & Public Works',
-          href: '/services/infrastructure-public-works',
-        },
         { label: 'Hotlines', href: '/philippines/hotlines' },
         { label: 'Holidays', href: '/philippines/holidays' },
       ],
