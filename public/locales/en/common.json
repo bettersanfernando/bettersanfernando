@@ -106,6 +106,7 @@
       "dataLimitations": "Data Limitations",
       "cityProfile": "City Profile",
       "populationDemographics": "Population & Demographics",
+      "barangayDirectory": "Barangay Directory",
       "publicRecordsStatistics": "Public Records Statistics"
     },
     "descriptions": {
@@ -159,6 +160,7 @@
       "dataLimitations": "Review known gaps and cautions in available records.",
       "cityProfile": "Explore population, barangay and city-level statistics.",
       "populationDemographics": "Explore verified population and demographic information.",
+      "barangayDirectory": "Browse all 35 barangays and their verified public facts.",
       "publicRecordsStatistics": "Understand the coverage of published public records."
     },
     "search": "Search",

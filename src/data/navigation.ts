@@ -53,6 +53,7 @@ const destinationPresentation = {
   dataLimitations: ['triangle-alert', 'dataLimitations'],
   cityProfile: ['landmark', 'cityProfile'],
   populationDemographics: ['users', 'populationDemographics'],
+  barangayDirectory: ['map', 'barangayDirectory'],
   publicRecordsStatistics: ['library', 'publicRecordsStatistics'],
 } as const satisfies Record<string, readonly [NavigationIcon, string]>;
 
@@ -449,6 +450,11 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.populationDemographics',
             href: '/statistics/population',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.barangayDirectory',
+            href: '/barangays',
             kind: 'real',
           },
           {

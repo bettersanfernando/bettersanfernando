@@ -138,7 +138,6 @@ const approvedPlannedPaths = [
   '/statistics/government',
   '/statistics/legislation',
   '/statistics/public-records',
-  '/barangays',
   '/about',
   '/contact',
 ];
@@ -166,6 +165,7 @@ const knownRealDestinations = new Set([
   '/projects/map',
   '/statistics/projects',
   '/statistics/population',
+  '/barangays',
   '/government',
   '/government/offices',
   '/legislation/executive-orders',
