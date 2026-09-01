@@ -30,6 +30,7 @@ const CityProfile = lazy(() => import('./pages/CityProfile'));
 const Barangays = lazy(() => import('./pages/Barangays'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const BidResults = lazy(() => import('./pages/BidResults'));
+const Procurement = lazy(() => import('./pages/Procurement'));
 const Contracts = lazy(() => import('./pages/Contracts'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
 const Ordinances = lazy(() => import('./pages/Ordinances'));
@@ -86,6 +87,11 @@ function App() {
                   />
                   <Route path="/search" element={<Search />} />
                   <Route path="/projects" element={<Projects />} />
+                  <Route path="/procurement" element={<Procurement />} />
+                  <Route
+                    path="/transparency/procurement"
+                    element={<Navigate to="/procurement" replace />}
+                  />
                   <Route
                     path="/procurement/bid-results"
                     element={<BidResults />}

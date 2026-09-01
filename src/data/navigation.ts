@@ -229,7 +229,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.procurementOverview',
             href: '/procurement',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.bidResults',
@@ -394,8 +394,8 @@ const navigationStructure = [
           },
           {
             labelKey: 'navigation.items.procurementRecords',
-            href: '/transparency/procurement',
-            kind: 'planned',
+            href: '/procurement',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.contractsAwards',
