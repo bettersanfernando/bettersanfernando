@@ -274,7 +274,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.procurementStatistics',
             href: '/statistics/procurement',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

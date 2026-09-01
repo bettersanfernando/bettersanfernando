@@ -21,6 +21,9 @@ const ProjectSources = lazy(() => import('./pages/ProjectSources'));
 const ProjectMethodology = lazy(() => import('./pages/ProjectMethodology'));
 const ProjectMap = lazy(() => import('./pages/ProjectMap'));
 const ProjectStatistics = lazy(() => import('./pages/ProjectStatistics'));
+const ProcurementStatistics = lazy(
+  () => import('./pages/ProcurementStatistics')
+);
 const PopulationStatistics = lazy(() => import('./pages/PopulationStatistics'));
 const CityProfile = lazy(() => import('./pages/CityProfile'));
 const Barangays = lazy(() => import('./pages/Barangays'));
@@ -109,6 +112,10 @@ function App() {
                   <Route
                     path="/statistics/projects"
                     element={<ProjectStatistics />}
+                  />
+                  <Route
+                    path="/statistics/procurement"
+                    element={<ProcurementStatistics />}
                   />
                   <Route
                     path="/statistics/population/barangays"

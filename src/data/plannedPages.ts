@@ -21,7 +21,6 @@ const plannedPageRoutes = [
   { id: 'statistics', path: '/statistics' },
   { id: 'demographics', path: '/statistics/demographics' },
   { id: 'projectSpending', path: '/statistics/project-spending' },
-  { id: 'procurementStatistics', path: '/statistics/procurement' },
   { id: 'governmentStatistics', path: '/statistics/government' },
   { id: 'legislationStatistics', path: '/statistics/legislation' },
   { id: 'publicRecordsStatistics', path: '/statistics/public-records' },
