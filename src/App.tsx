@@ -26,6 +26,7 @@ const CityProfile = lazy(() => import('./pages/CityProfile'));
 const Barangays = lazy(() => import('./pages/Barangays'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
+const TransparencySources = lazy(() => import('./pages/TransparencySources'));
 const Search = lazy(() => import('./pages/Search'));
 const PlannedPage = lazy(() => import('./pages/PlannedPage'));
 
@@ -113,6 +114,10 @@ function App() {
                   <Route
                     path="/legislation/executive-orders"
                     element={<ExecutiveOrders />}
+                  />
+                  <Route
+                    path="/transparency/sources"
+                    element={<TransparencySources />}
                   />
                   {plannedPages.map(page => (
                     <Route

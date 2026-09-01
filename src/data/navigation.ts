@@ -415,7 +415,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.dataSources',
             href: '/transparency/sources',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.methodology',

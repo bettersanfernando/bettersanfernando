@@ -22,7 +22,6 @@ const plannedPageRoutes = [
   { id: 'transparencyProcurement', path: '/transparency/procurement' },
   { id: 'transparencyContracts', path: '/transparency/contracts' },
   { id: 'financialTransparency', path: '/transparency/finance' },
-  { id: 'transparencySources', path: '/transparency/sources' },
   { id: 'transparencyMethodology', path: '/transparency/methodology' },
   { id: 'verification', path: '/transparency/verification' },
   { id: 'limitations', path: '/transparency/limitations' },
