@@ -126,13 +126,15 @@ function composeSearchDocuments(): CivicSearchDocument[] {
       domain: 'government',
       kind: 'Government office',
       title: office.office_name,
-      description: office.physical_address,
-      href: `/government/offices#${office.office_id}`,
+      description: office.physical_address ?? 'Published office record.',
+      href: `/government/offices/${office.office_id}`,
       metadata: office.acronym ?? 'Published office record',
-      titleText: office.office_name,
+      titleText: [office.office_name, ...(office.alternate_names ?? [])].join(
+        ' '
+      ),
       identifiers: [office.office_id, office.acronym].filter(Boolean).join(' '),
       descriptionText: 'government city office institutional directory',
-      location: office.physical_address,
+      location: office.physical_address ?? '',
     })
   );
 

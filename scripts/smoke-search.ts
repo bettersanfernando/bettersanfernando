@@ -56,6 +56,10 @@ assert.equal(
   `office:${office.office_id}`,
   'an exact office acronym must rank its office first'
 );
+assert.equal(
+  searchCivicRecords(office.acronym)[0]?.href,
+  `/government/offices/${office.office_id}`
+);
 
 const executiveOrder = getExecutiveOrders()[0];
 assert.ok(
@@ -99,11 +103,11 @@ assert.deepEqual(searchCivicRecords('no-matching-published-record-zzzz'), []);
 const plannedPaths = new Set(plannedPages.map(page => page.path));
 for (const document of documents) {
   assert.ok(!plannedPaths.has(document.href));
-  assert.doesNotMatch(document.id, /service|citizen|charter/i);
+  assert.ok(!document.id.startsWith('service:'));
   assert.doesNotMatch(document.searchableText, /citizen.?s charter/i);
   assert.match(
     document.href,
-    /^\/projects\/[^/?#]+$|^\/barangays\?q=|^\/government\/offices#|^\/legislation\/(?:executive-orders|ordinances)\?q=|^\/projects\/sources\?project=/
+    /^\/projects\/[^/?#]+$|^\/barangays\?q=|^\/government\/offices\/[^/?#]+$|^\/legislation\/(?:executive-orders|ordinances)\?q=|^\/projects\/sources\?project=/
   );
 }
 

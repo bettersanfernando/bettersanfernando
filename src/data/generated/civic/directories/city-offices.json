@@ -1,18 +1,17 @@
 {
   "city_name": "City of San Fernando",
   "city_psgc_code": "0305416000",
-  "last_verified": "2026-08-30",
-  "office_count": 22,
+  "last_verified": "2026-09-01",
+  "office_count": 44,
   "offices": [
     {
       "acronym": "CSFP",
-      "head_of_office": "Hon. Vilma Balle Caluag, City Mayor",
+      "child_office_ids": [],
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-government-main",
       "office_name": "City Government of San Fernando, Pampanga (Main)",
-      "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
+      "parent_office_id": null,
       "physical_address": "City Hall, Brgy. Sto. Rosario",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
@@ -24,13 +23,18 @@
     },
     {
       "acronym": "CMO",
-      "head_of_office": "Hon. Vilma Balle Caluag",
+      "child_office_ids": [
+        "community-affairs-division",
+        "peoples-law-enforcement-board",
+        "office-for-senior-citizens-affairs"
+      ],
       "institutional_email": "cmo@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-mayors-office",
       "office_name": "City Mayor's Office",
-      "parent_facility": null,
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-mayors-office/",
+      "parent_office_id": null,
       "phone_extensions": [
         "106"
       ],
@@ -45,50 +49,33 @@
       "verification_status": "verified"
     },
     {
-      "acronym": "SP",
-      "additional_emails": [
-        "osp@cityofsanfernando.gov.ph"
-      ],
-      "institutional_email": "sanggunian@cityofsanfernando.gov.ph",
-      "jurisdiction_psgc": "0305416000",
-      "last_verified_at": "2026-08-30",
-      "office_id": "vice-mayor-sangguniang-panlungsod",
-      "office_name": "Vice Mayor & Sangguniang Panlungsod",
-      "parent_facility": null,
-      "phone_extensions": [
-        "102",
-        "114"
-      ],
-      "physical_address": "Heroes Hall, Brgy. San Juan",
-      "primary_phone": "(045) 649-8080",
-      "social_accounts": [],
-      "source_urls": [
-        "https://cityofsanfernando.gov.ph/city-council/",
-        "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
-      ],
-      "verification_status": "verified"
-    },
-    {
-      "acronym": "CIO / PIO",
-      "head_of_office": "Mr. Harvey A. Quiwa",
+      "acronym": "CIO",
+      "child_office_ids": [],
+      "institutional_email": "cio@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-information-office",
       "office_name": "City Information Office",
-      "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
+      "official_page_url": "https://cityofsanfernando.gov.ph/csfp-city-information-office/",
+      "parent_office_id": null,
       "physical_address": "City Hall, Brgy. Sto. Rosario",
       "primary_phone": "(045) 649-8540",
-      "social_accounts": [],
+      "social_accounts": [
+        {
+          "platform": "Facebook",
+          "url": "https://www.facebook.com/CIO.CSFP"
+        }
+      ],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/csfp-city-information-office/"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "CDRRMO",
+      "child_office_ids": [],
       "emergency_hotlines": [
         "(045) 649-6076",
         "(045) 961-4357",
@@ -100,48 +87,52 @@
       "last_verified_at": "2026-08-30",
       "office_id": "cdrrmo",
       "office_name": "City Disaster Risk Reduction and Management Office",
-      "parent_facility": null,
-      "physical_address": "C3, Civic Center, Brgy. San Isidro",
-      "social_accounts": [
-        {
-          "account_name": "CSFP CDRRMO / Rescue",
-          "platform": "Facebook",
-          "role": "Weather, disaster, and emergency alerts",
-          "url": "https://www.facebook.com/cdrrmo.csfp.official"
-        }
-      ],
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-disaster-risk-reduction-and-management-office/",
+      "parent_office_id": null,
+      "physical_address": "City Civic Center Extension, Alasas, City of San Fernando, Pampanga",
+      "primary_phone": "649-6076",
+      "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-disaster-risk-reduction-and-management-office/"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "CHO",
-      "head_of_office": "Dr. Rowena L. Salas",
+      "child_office_ids": [],
       "institutional_email": "cho@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-health-office",
       "office_name": "City Health Office",
-      "parent_facility": null,
-      "physical_address": "City Hall / Civic Center",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-health-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "110",
+        "152",
+        "158"
+      ],
+      "physical_address": "City Hall, A. Consunji St., Sto. Rosario, City of San Fernando, Pampanga",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-health-office/"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "RHU I",
+      "child_office_ids": [],
       "institutional_email": "cho@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "rhu-i-dolores",
       "office_name": "Rural Health Unit I - Dolores",
-      "parent_facility": "City Health Office (CHO)",
+      "parent_office_id": null,
       "physical_address": "Brgy. Dolores",
       "primary_phone": "(045) 281-5563",
       "social_accounts": [],
@@ -153,12 +144,13 @@
     },
     {
       "acronym": "RHU II",
+      "child_office_ids": [],
       "institutional_email": "cho@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "rhu-ii-sindalan",
       "office_name": "Rural Health Unit II - Sindalan",
-      "parent_facility": "City Health Office (CHO)",
+      "parent_office_id": null,
       "physical_address": "Brgy. Sindalan",
       "primary_phone": "(045) 281-1562",
       "social_accounts": [],
@@ -170,12 +162,13 @@
     },
     {
       "acronym": "RHU III",
+      "child_office_ids": [],
       "institutional_email": "cho@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "rhu-iii-san-nicolas",
       "office_name": "Rural Health Unit III - San Nicolas",
-      "parent_facility": "City Health Office (CHO)",
+      "parent_office_id": null,
       "physical_address": "Brgy. San Nicolas",
       "primary_phone": "(045) 281-4675",
       "social_accounts": [],
@@ -187,12 +180,13 @@
     },
     {
       "acronym": "RHU IV",
+      "child_office_ids": [],
       "institutional_email": "cho@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "rhu-iv-san-agustin",
       "office_name": "Rural Health Unit IV - San Agustin",
-      "parent_facility": "City Health Office (CHO)",
+      "parent_office_id": null,
       "physical_address": "Brgy. San Agustin",
       "primary_phone": "(045) 281-6563",
       "social_accounts": [],
@@ -203,12 +197,16 @@
       "verification_status": "verified"
     },
     {
+      "alternate_names": [
+        "San Fernando Super Health Center"
+      ],
+      "child_office_ids": [],
       "institutional_email": "cho@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "san-fernando-super-health-center",
-      "office_name": "San Fernando Super Health Center",
-      "parent_facility": "City Health Office (CHO)",
+      "office_name": "RHU VI – Super Health Center",
+      "parent_office_id": null,
       "physical_address": "City Civic Center, Brgy. San Isidro",
       "primary_phone": "(045) 281-0646",
       "social_accounts": [],
@@ -220,14 +218,16 @@
     },
     {
       "acronym": "CIPPESO / CPESO",
-      "head_of_office": "Dr. Mary Ann C. Biliwang",
+      "child_office_ids": [],
       "institutional_email": "cpeso@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
+      "name_status": "alternate_current_usage",
       "office_id": "cippeso-cpeso",
-      "office_name": "City Investment and Public Employment Service Office",
+      "office_name": "City Investment Promotions and Public Employment Services Office / City Public Employment Services Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/cippeso/",
       "operational_email": "pesojobs.csf@gmail.com",
-      "parent_facility": null,
+      "parent_office_id": null,
       "phone_extensions": [
         "101"
       ],
@@ -236,124 +236,156 @@
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/cippeso/"
       ],
       "verification_status": "verified"
     },
     {
-      "institutional_email": "cto@cityofsanfernando.gov.ph",
+      "additional_emails": [
+        "blpd.cadmino@cityofsanfernando.gov.ph"
+      ],
+      "child_office_ids": [],
+      "institutional_email": "blpd@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "business-license-permit-division",
-      "office_name": "Business License & Permit Division",
-      "parent_facility": "City Treasurer's Office (CTO)",
+      "office_name": "Business License and Permit Division",
+      "parent_office_id": "city-administrators-office",
       "phone_extensions": [
-        "154",
-        "162"
+        "162",
+        "167"
       ],
       "physical_address": "City Hall Ground Floor, Sto. Rosario",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "CTO",
+      "child_office_ids": [],
       "institutional_email": "cto@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-treasurers-office",
       "office_name": "City Treasurer's Office",
-      "parent_facility": null,
-      "physical_address": "City Hall, Brgy. Sto. Rosario",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-treasurers-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "149"
+      ],
+      "physical_address": "City Hall",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-treasurers-office/"
       ],
       "verification_status": "verified"
     },
     {
+      "acronym": "CASSO",
+      "child_office_ids": [],
       "institutional_email": "casso@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-assessors-office",
       "office_name": "City Assessor's Office",
-      "parent_facility": null,
-      "physical_address": "City Hall, Brgy. Sto. Rosario",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-assessors-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "142"
+      ],
+      "physical_address": "City Hall",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-assessors-office/"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "OCBO",
-      "head_of_office": "Engr. Eldi Jun H. Dizon (Acting)",
+      "child_office_ids": [],
       "institutional_email": "ocbo@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "office-of-the-city-building-official",
       "office_name": "Office of the City Building Official",
-      "parent_facility": null,
+      "official_page_url": "https://cityofsanfernando.gov.ph/office-of-the-city-building-official/",
+      "parent_office_id": null,
       "physical_address": "City Hall, Brgy. Sto. Rosario",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/office-of-the-city-building-official/"
       ],
       "verification_status": "verified"
     },
     {
+      "acronym": "CTO / CTIPO",
+      "child_office_ids": [],
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-tourism-investment-promotion",
-      "office_name": "City Tourism / Tourism and Investment Promotion",
-      "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
+      "office_name": "City Tourism Office / City Tourism and Investment Promotion Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-tourism-and-investment-promotion-office/",
+      "organization_status": "possible_reorganization",
+      "parent_office_id": null,
       "physical_address": "Giant Lantern & Tourism Information Center / JASA Road",
       "primary_phone": "(045) 649-8540",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-tourism-and-investment-promotion-office/"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "CSWDO",
       "additional_emails": [
-        "cswd@cityofsanfernando.gov.ph",
         "cswdo@cityofsanfernando.gov.ph"
       ],
+      "child_office_ids": [],
+      "institutional_email": "cswd@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-social-welfare-development-office",
       "office_name": "City Social Welfare and Development Office",
-      "parent_facility": null,
-      "physical_address": "Northville #14, Brgy. Calulut",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-social-welfare-and-development-office/",
+      "parent_office_id": null,
+      "physical_address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
       "primary_phone": "(045) 649-8080",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-social-welfare-and-development-office/"
       ],
       "verification_status": "verified"
     },
     {
+      "acronym": "CLO",
+      "child_office_ids": [],
+      "institutional_email": "clo@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-legal-office",
       "office_name": "City Legal Office",
-      "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-legal-office/",
+      "parent_office_id": null,
       "phone_extensions": [
         "103"
       ],
@@ -362,62 +394,446 @@
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-legal-office/"
       ],
       "verification_status": "verified"
     },
     {
+      "acronym": "CAVO",
+      "child_office_ids": [],
+      "institutional_email": "cavo@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-agriculture-veterinary",
-      "office_name": "City Agriculture & Veterinary",
-      "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
+      "office_name": "City Agriculture and Veterinary Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-agriculture-and-veterinary-office/",
+      "parent_office_id": null,
       "physical_address": "Administrative Facility",
       "primary_phone": "(045) 281-1025",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-agriculture-and-veterinary-office/"
       ],
       "verification_status": "verified"
     },
     {
       "acronym": "CPOSCO",
+      "child_office_ids": [],
       "emergency_hotlines": [
         "0967-889-4569"
       ],
+      "institutional_email": "cposco@cityofsanfernando.gov.ph",
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-public-order-safety-coordinating-office",
       "office_name": "City Public Order and Safety Coordinating Office",
-      "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
-      "physical_address": "Administrative Facility",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-public-order-and-safety-coordinating-office/",
+      "parent_office_id": null,
+      "physical_address": "Tourism Road, Calulut",
       "primary_phone": "(045) 626-5065",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/city-public-order-and-safety-coordinating-office/"
       ],
       "verification_status": "verified"
     },
     {
+      "child_office_ids": [],
       "jurisdiction_psgc": "0305416000",
       "last_verified_at": "2026-08-30",
       "office_id": "city-market-operations-division",
       "office_name": "City Market Operations Division",
       "operational_email": "info.csfp@gmail.com",
-      "parent_facility": null,
+      "parent_office_id": "city-administrators-office",
       "physical_address": "Public Market Compound",
       "primary_phone": "(045) 281-3291",
       "social_accounts": [],
       "source_urls": [
         "https://cityofsanfernando.gov.ph/contact-us/",
-        "https://cityofsanfernando.gov.ph/citizens-charter/"
+        "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CAdminO",
+      "child_office_ids": [
+        "business-license-permit-division",
+        "city-market-operations-division",
+        "internal-control-division",
+        "local-housing-settlement-division"
+      ],
+      "institutional_email": "cadmino@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-administrators-office",
+      "office_name": "City Administrator's Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-administrators-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "103",
+        "128",
+        "133"
+      ],
+      "physical_address": "City Hall",
+      "primary_phone": "(045) 649-8540",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-administrators-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "OCVM",
+      "child_office_ids": [],
+      "institutional_email": "ocvm@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "office-of-the-city-vice-mayor",
+      "office_name": "Office of the City Vice-Mayor",
+      "official_page_url": "https://cityofsanfernando.gov.ph/office-of-the-city-vice-mayor/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "117"
+      ],
+      "physical_address": "Heroes Hall",
+      "primary_phone": "(045) 649-8080",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/office-of-the-city-vice-mayor/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "OSP",
+      "additional_emails": [
+        "osp@cityofsanfernando.gov.ph"
+      ],
+      "child_office_ids": [],
+      "institutional_email": "sanggunian@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "office-of-the-sangguniang-panlungsod",
+      "office_name": "Office of the Sangguniang Panlungsod",
+      "official_page_url": "https://cityofsanfernando.gov.ph/office-of-the-sangguniang-panlungsod/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "102",
+        "114"
+      ],
+      "physical_address": "Heroes Hall",
+      "primary_phone": "(045) 649-8080",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/office-of-the-sangguniang-panlungsod/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CCSFP",
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-college-san-fernando-pampanga",
+      "office_name": "City College of San Fernando Pampanga",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-college/",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-college/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CPDCO",
+      "child_office_ids": [],
+      "institutional_email": "cpdco@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "cpdco",
+      "office_name": "City Planning and Development Coordinator's Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-planning-and-development-coordinators-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "135"
+      ],
+      "physical_address": "City Hall",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-planning-and-development-coordinators-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CHRMO",
+      "child_office_ids": [],
+      "institutional_email": "chrmo@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "chrmo",
+      "office_name": "City Human Resource Management Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-human-resource-management-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "178"
+      ],
+      "physical_address": "City Hall",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-human-resource-management-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CBO",
+      "child_office_ids": [],
+      "institutional_email": "cbo@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-budget-office",
+      "office_name": "City Budget Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-budget-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "155"
+      ],
+      "physical_address": "City Hall",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-budget-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CAccO",
+      "child_office_ids": [],
+      "institutional_email": "cacco@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-accountants-office",
+      "office_name": "City Accountant's Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-accountants-office/",
+      "parent_office_id": null,
+      "phone_extensions": [
+        "117",
+        "166",
+        "129"
+      ],
+      "physical_address": "City Hall",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-accountants-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CEO",
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-engineers-office",
+      "office_name": "City Engineer's Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-engineers-office/",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-engineers-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CGSO",
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-general-services-office",
+      "office_name": "City General Services Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-general-services-office/",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-general-services-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CCRO",
+      "child_office_ids": [],
+      "institutional_email": "ccro@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "city-civil-registry-office",
+      "office_name": "City Civil Registry Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-civil-registry-office/",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-civil-registry-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CENRO",
+      "child_office_ids": [],
+      "institutional_email": "cenro@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "cenro",
+      "office_name": "City Environment and Natural Resources Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-environment-and-natural-resources-office/",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-environment-and-natural-resources-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CICTO",
+      "child_office_ids": [],
+      "institutional_email": "cicto@cityofsanfernando.gov.ph",
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "cicto",
+      "office_name": "City Information and Communications Technology Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-information-and-communications-technology-office/",
+      "parent_office_id": null,
+      "social_accounts": [
+        {
+          "platform": "Facebook",
+          "url": "https://www.facebook.com/csfpictoffice"
+        }
+      ],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-information-and-communications-technology-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "acronym": "CYDO",
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "cydo",
+      "office_name": "City Youth Development Office",
+      "official_page_url": "https://cityofsanfernando.gov.ph/city-youth-development-office/",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/city-youth-development-office/"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "community-affairs-division",
+      "office_name": "Community Affairs Division",
+      "parent_office_id": "city-mayors-office",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "peoples-law-enforcement-board",
+      "office_name": "People's Law Enforcement Board",
+      "parent_office_id": "city-mayors-office",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "office-for-senior-citizens-affairs",
+      "office_name": "Office for Senior Citizens Affairs",
+      "parent_office_id": "city-mayors-office",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "internal-control-division",
+      "office_name": "Internal Control Division",
+      "parent_office_id": "city-administrators-office",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "local-housing-settlement-division",
+      "office_name": "Local Housing Settlement Division",
+      "parent_office_id": "city-administrators-office",
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "safru",
+      "office_name": "SAFRU",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "hems",
+      "office_name": "Health Emergency Management Staff / HEMS",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "rhu-v-northville-calulut",
+      "office_name": "RHU V – Northville / Calulut",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "child_office_ids": [],
+      "jurisdiction_psgc": "0305416000",
+      "office_id": "persons-with-disabilities-affairs-office",
+      "office_name": "Persons with Disabilities Affairs Office",
+      "parent_office_id": null,
+      "social_accounts": [],
+      "source_urls": [
+        "https://cityofsanfernando.gov.ph/departments/",
+        "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
       ],
       "verification_status": "verified"
     }
   ],
-  "province": "Pampanga"
+  "province": "Pampanga",
+  "structure_status": "partial_verified_relationships"
 }

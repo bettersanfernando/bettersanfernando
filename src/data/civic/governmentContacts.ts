@@ -1,4 +1,4 @@
-import { getCityOffices } from './government.ts';
+import { getCityOffices, getCityOfficesMetadata } from './government.ts';
 
 export type GovernmentContactAvailability = 'all' | 'phone' | 'email' | 'both';
 export type GovernmentContactSort = 'name-asc' | 'name-desc';
@@ -10,7 +10,7 @@ export type GovernmentContactRecord = Readonly<{
   phone: string | null;
   phoneExtensions: readonly string[];
   emails: readonly string[];
-  address: string;
+  address: string | null;
   sourceUrls: readonly string[];
   lastVerifiedAt: string;
 }>;
@@ -21,6 +21,7 @@ function uniqueValues(values: Array<string | undefined>) {
   );
 }
 
+const lastVerified = getCityOfficesMetadata().lastVerified;
 const contacts: readonly GovernmentContactRecord[] = Object.freeze(
   getCityOffices().map(office =>
     Object.freeze({
@@ -36,9 +37,9 @@ const contacts: readonly GovernmentContactRecord[] = Object.freeze(
           ...(office.additional_emails ?? []),
         ])
       ),
-      address: office.physical_address,
+      address: office.physical_address ?? null,
       sourceUrls: Object.freeze([...office.source_urls]),
-      lastVerifiedAt: office.last_verified_at,
+      lastVerifiedAt: office.last_verified_at ?? lastVerified,
     })
   )
 );

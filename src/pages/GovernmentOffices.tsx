@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router';
 import {
+  ArrowRight,
   Building2,
   CalendarCheck2,
   ExternalLink,
@@ -16,6 +18,7 @@ import SEO from '../components/SEO';
 import {
   getCityOffices,
   getCityOfficesMetadata,
+  getParentOffice,
   type CityOffice,
 } from '../data/civic/government';
 
@@ -60,6 +63,7 @@ function matchesContactFilter(office: CityOffice, filter: ContactFilter) {
 
 function OfficeRecord({ office }: { office: CityOffice }) {
   const emails = getEmails(office);
+  const parent = getParentOffice(office);
 
   return (
     <article
@@ -69,8 +73,13 @@ function OfficeRecord({ office }: { office: CityOffice }) {
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:gap-10">
         <div>
           <div className="flex flex-wrap items-start gap-3">
-            <h2 className="text-xl font-bold leading-snug text-gray-900 md:text-2xl">
-              {office.office_name}
+            <h2 className="text-xl font-bold leading-snug md:text-2xl">
+              <Link
+                className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-800"
+                to={`/government/offices/${office.office_id}`}
+              >
+                {office.office_name}
+              </Link>
             </h2>
             {office.acronym && (
               <span className="mt-0.5 rounded-full bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-800">
@@ -78,16 +87,29 @@ function OfficeRecord({ office }: { office: CityOffice }) {
               </span>
             )}
           </div>
-          <div className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-gray-700">
-            <MapPin
-              className="mt-0.5 h-5 w-5 shrink-0 text-primary-700"
-              aria-hidden="true"
-            />
-            <div>
-              <span className="font-semibold text-gray-900">Location</span>
-              <p>{office.physical_address}</p>
+          {parent && (
+            <p className="mt-3 text-sm leading-6 text-gray-700">
+              Verified subunit of{' '}
+              <Link
+                className="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+                to={`/government/offices/${parent.office_id}`}
+              >
+                {parent.office_name}
+              </Link>
+            </p>
+          )}
+          {office.physical_address && (
+            <div className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-gray-700">
+              <MapPin
+                className="mt-0.5 h-5 w-5 shrink-0 text-primary-700"
+                aria-hidden="true"
+              />
+              <div>
+                <span className="font-semibold text-gray-900">Location</span>
+                <p>{office.physical_address}</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="space-y-4 text-sm">
@@ -185,8 +207,15 @@ function OfficeRecord({ office }: { office: CityOffice }) {
         </span>
         <span className="inline-flex items-center gap-1.5">
           <CalendarCheck2 className="h-4 w-4" aria-hidden="true" />
-          Checked {formatDate(office.last_verified_at)}
+          Checked {formatDate(office.last_verified_at ?? metadata.lastVerified)}
         </span>
+        <Link
+          className="inline-flex items-center gap-1.5 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+          to={`/government/offices/${office.office_id}`}
+        >
+          View office details
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+        </Link>
         {office.source_urls.map((url, index) => (
           <a
             key={url}
@@ -216,7 +245,12 @@ export default function GovernmentOffices() {
     return offices.filter(office => {
       const matchesQuery =
         !normalizedQuery ||
-        [office.office_name, office.acronym, office.physical_address]
+        [
+          office.office_name,
+          office.acronym,
+          office.physical_address,
+          ...(office.alternate_names ?? []),
+        ]
           .filter(Boolean)
           .some(value =>
             value!.toLocaleLowerCase('en-PH').includes(normalizedQuery)

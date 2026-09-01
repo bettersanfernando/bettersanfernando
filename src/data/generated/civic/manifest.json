@@ -7,9 +7,9 @@
       "sha256": "a76ad6b50e9e463a1c642045f79e346f080751ee80f822faa41c4f7df354792d"
     },
     "directories/city-offices.json": {
-      "record_count": 22,
-      "schema_version": 1,
-      "sha256": "c487315fb23ceae2774c468e4b2ef3e3a3911425a1dfccbb6795f2b03d67fec7"
+      "record_count": 44,
+      "schema_version": 2,
+      "sha256": "9116dd7cb93af50c1019266745af0d1fbf0d151bb16116fc230225ec7943342b"
     },
     "geography/barangays.geojson": {
       "record_count": 35,

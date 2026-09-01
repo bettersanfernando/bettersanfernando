@@ -39,7 +39,7 @@ for (const contact of contacts) {
   );
   assert.equal(contact.officeName, office.office_name);
   assert.equal(contact.phone, office.primary_phone ?? null);
-  assert.equal(contact.address, office.physical_address);
+  assert.equal(contact.address, office.physical_address ?? null);
   assert.ok(contact.sourceUrls.length > 0);
   contact.sourceUrls.forEach(url => assert.doesNotThrow(() => new URL(url)));
 
@@ -82,12 +82,14 @@ assert.equal(
   }).length,
   summary.withBoth
 );
+const contactWithEmail = contacts.find(contact => contact.emails.length > 0);
+assert.ok(contactWithEmail);
 assert.ok(
   filterAndSortGovernmentContacts(contacts, {
-    query: contacts[0].emails[0],
+    query: contactWithEmail.emails[0],
     availability: 'all',
     sort: 'name-asc',
-  }).some(record => record.officeId === contacts[0].officeId)
+  }).some(record => record.officeId === contactWithEmail.officeId)
 );
 
 assert.equal(mainNavigation.length, 7);
