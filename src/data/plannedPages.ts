@@ -6,7 +6,6 @@ const plannedPageRoutes = [
   { id: 'pwdServices', path: '/services/pwd-services' },
   { id: 'procurementOverview', path: '/procurement' },
   { id: 'governmentStructure', path: '/government/structure' },
-  { id: 'legislation', path: '/legislation' },
   { id: 'resolutions', path: '/legislation/resolutions' },
   { id: 'governmentDocuments', path: '/government/documents' },
   { id: 'governmentHotlines', path: '/government/hotlines' },

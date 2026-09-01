@@ -40,7 +40,7 @@ separately below.
 
 Batch 1 was implemented, validated, visually reviewed, merged to `main`, and
 pushed. Batches 2 through 9 were implemented, validated, and visually reviewed
-on their feature branches. Batches 10 through 14 were implemented and
+on their feature branches. Batches 10 through 15 were implemented and
 validated on their feature branches, with final visual review and commit left
 to the human maintainer.
 
@@ -62,6 +62,7 @@ to the human maintainer.
 |    12 | `/procurement/contracts`        | `/transparency/contracts`                                 |
 |    13 | `/statistics/procurement`       | None                                                      |
 |    14 | `/government/contact`           | None                                                      |
+|    15 | `/legislation`                  | None                                                      |
 
 `/government/directory` and `/government/contacts` now redirect to
 `/government/offices`. `/government/departments` remains in the redirect
@@ -77,7 +78,6 @@ for traceability.
 | --------------------: | --------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ |
 |                    12 | `/about`        | Reviewed project-owned editorial copy and methodology links                          | Independence, governance, contribution, and sourcing narrative | BetterSanFernando is independent and not an official City Government site            | None                                 |
 |                    14 | `/government`   | Office, contact, and legislation destinations                                        | Section hub and cross-domain directory cards                   | Do not add an unsupported organization chart or current-official roster              | None                                 |
-|                    15 | `/legislation`  | Published EO and ordinance collections plus the empty resolution state               | Multi-collection landing page with exact denominators          | Uneven coverage: 11 EOs, 6 ordinances, and 0 publishable resolutions                 | None                                 |
 |                    19 | `/procurement`  | Published project-linked procurement evidence and terminology                        | Procurement-stage explainer and bounded collection navigation  | Covers the infrastructure/public-works subset, not all city procurement              | `/transparency/procurement`          |
 |                    21 | `/transparency` | Public manifest and currently published domain summaries                             | Availability/gap hub with accountable cross-links              | Finance and disclosure material are not publicly available until exported            | None                                 |
 |                    22 | `/statistics`   | Published population, project, procurement, geography, office, and legislation views | Statistics index with source periods and coverage labels       | Index only supported measures; Statistics remains under Transparency                 | `/government/reports-and-statistics` |
