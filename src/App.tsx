@@ -25,6 +25,7 @@ const PopulationStatistics = lazy(() => import('./pages/PopulationStatistics'));
 const CityProfile = lazy(() => import('./pages/CityProfile'));
 const Barangays = lazy(() => import('./pages/Barangays'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const BidResults = lazy(() => import('./pages/BidResults'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
 const Ordinances = lazy(() => import('./pages/Ordinances'));
 const TransparencySources = lazy(() => import('./pages/TransparencySources'));
@@ -75,6 +76,10 @@ function App() {
                   />
                   <Route path="/search" element={<Search />} />
                   <Route path="/projects" element={<Projects />} />
+                  <Route
+                    path="/procurement/bid-results"
+                    element={<BidResults />}
+                  />
                   <Route
                     path="/projects/sources"
                     element={<ProjectSources />}

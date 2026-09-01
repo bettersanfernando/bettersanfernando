@@ -234,7 +234,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.bidResults',
             href: '/procurement/bid-results',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.contractsAwards',
