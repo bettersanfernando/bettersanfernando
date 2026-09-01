@@ -30,7 +30,6 @@ const plannedPageRoutes = [
   { id: 'verification', path: '/transparency/verification' },
   { id: 'limitations', path: '/transparency/limitations' },
   { id: 'statistics', path: '/statistics' },
-  { id: 'cityProfile', path: '/statistics/city-profile' },
   { id: 'demographics', path: '/statistics/demographics' },
   { id: 'projectSpending', path: '/statistics/project-spending' },
   { id: 'procurementStatistics', path: '/statistics/procurement' },

@@ -14,6 +14,7 @@
 export * from './projects.ts';
 export * from './demographics.ts';
 export * from './geography.ts';
+export * from './geographyMetadata.ts';
 export * from './government.ts';
 export * from './legislation.ts';
 export * from './sources.ts';

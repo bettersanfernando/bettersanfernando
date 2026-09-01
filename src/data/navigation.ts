@@ -445,7 +445,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.cityProfile',
             href: '/statistics/city-profile',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.populationDemographics',
