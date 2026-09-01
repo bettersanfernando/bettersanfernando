@@ -239,7 +239,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.contractsAwards',
             href: '/procurement/contracts',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },
@@ -399,8 +399,8 @@ const navigationStructure = [
           },
           {
             labelKey: 'navigation.items.contractsAwards',
-            href: '/transparency/contracts',
-            kind: 'planned',
+            href: '/procurement/contracts',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.financialTransparency',

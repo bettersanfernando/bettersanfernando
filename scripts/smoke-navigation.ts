@@ -74,6 +74,7 @@ const navigationDestinations = new Set(
 assert.ok(navigationDestinations.has('/government/offices'));
 assert.ok(!navigationDestinations.has('/government/directory'));
 assert.ok(!navigationDestinations.has('/government/contacts'));
+assert.ok(!navigationDestinations.has('/transparency/contracts'));
 
 const activeRouteCases = [
   ['/', 'home'],
@@ -107,7 +108,6 @@ const approvedPlannedPaths = [
   '/services/senior-citizens',
   '/services/pwd-services',
   '/procurement',
-  '/procurement/contracts',
   '/government/structure',
   '/government/contact',
   '/legislation',
@@ -120,7 +120,6 @@ const approvedPlannedPaths = [
   '/transparency/archive',
   '/transparency/documents',
   '/transparency/procurement',
-  '/transparency/contracts',
   '/transparency/finance',
   '/statistics',
   '/statistics/demographics',
@@ -157,6 +156,7 @@ const knownRealDestinations = new Set([
   '/projects/sources',
   '/projects/methodology',
   '/procurement/bid-results',
+  '/procurement/contracts',
   '/statistics/projects',
   '/statistics/population',
   '/statistics/city-profile',
