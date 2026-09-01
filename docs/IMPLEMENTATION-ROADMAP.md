@@ -40,7 +40,7 @@ separately below.
 
 Batch 1 was implemented, validated, visually reviewed, merged to `main`, and
 pushed. Batches 2 through 9 were implemented, validated, and visually reviewed
-on their feature branches. Batches 10 through 17 were implemented and
+on their feature branches. Batches 10 through 18 were implemented and
 validated on their feature branches, with final visual review and commit left
 to the human maintainer.
 
@@ -65,6 +65,7 @@ to the human maintainer.
 |    15 | `/legislation`                  | None                                                      |
 |    16 | `/procurement`                  | `/transparency/procurement`                               |
 |    17 | `/transparency`                 | None                                                      |
+|    18 | `/statistics`                   | `/government/reports-and-statistics`                      |
 
 `/government/directory` and `/government/contacts` now redirect to
 `/government/offices`. `/government/departments` remains in the redirect
@@ -76,13 +77,12 @@ The next item is numbered by immediate execution order. The remaining items
 then continue in their finalized roadmap order, retaining their original ranks
 for traceability.
 
-| Next / finalized rank | Canonical page | Dependencies                                                                         | Reusable pattern established                                   | Important scope caveat                                                               | Prerequisite redirects               |
-| --------------------: | -------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ |
-|                    12 | `/about`       | Reviewed project-owned editorial copy and methodology links                          | Independence, governance, contribution, and sourcing narrative | BetterSanFernando is independent and not an official City Government site            | None                                 |
-|                    14 | `/government`  | Office, contact, and legislation destinations                                        | Section hub and cross-domain directory cards                   | Do not add an unsupported organization chart or current-official roster              | None                                 |
-|                    22 | `/statistics`  | Published population, project, procurement, geography, office, and legislation views | Statistics index with source periods and coverage labels       | Index only supported measures; Statistics remains under Transparency                 | `/government/reports-and-statistics` |
-|                    23 | `/search`      | Canonical published-route inventory and approved public content/data index           | Canonical result model, coverage notice, and alias suppression | Index only published verified content; exclude private data and planned placeholders | All Phase 0 redirects                |
-|                    24 | `/`            | Shipped canonical destinations and a small reviewed fact set                         | Cross-domain summary cards and visible independence language   | Every metric needs a date and bounded-coverage label; no completeness claim          | None                                 |
+| Next / finalized rank | Canonical page | Dependencies                                                               | Reusable pattern established                                   | Important scope caveat                                                               | Prerequisite redirects |
+| --------------------: | -------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------- |
+|                    12 | `/about`       | Reviewed project-owned editorial copy and methodology links                | Independence, governance, contribution, and sourcing narrative | BetterSanFernando is independent and not an official City Government site            | None                   |
+|                    14 | `/government`  | Office, contact, and legislation destinations                              | Section hub and cross-domain directory cards                   | Do not add an unsupported organization chart or current-official roster              | None                   |
+|                    23 | `/search`      | Canonical published-route inventory and approved public content/data index | Canonical result model, coverage notice, and alias suppression | Index only published verified content; exclude private data and planned placeholders | All Phase 0 redirects  |
+|                    24 | `/`            | Shipped canonical destinations and a small reviewed fact set               | Cross-domain summary cards and visible independence language   | Every metric needs a date and bounded-coverage label; no completeness claim          | None                   |
 
 ## Phase 2 — PARTIAL pages
 

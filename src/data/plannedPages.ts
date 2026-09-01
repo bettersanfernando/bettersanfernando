@@ -13,7 +13,6 @@ const plannedPageRoutes = [
   { id: 'disclosureArchive', path: '/transparency/archive' },
   { id: 'transparencyDocuments', path: '/transparency/documents' },
   { id: 'financialTransparency', path: '/transparency/finance' },
-  { id: 'statistics', path: '/statistics' },
   { id: 'demographics', path: '/statistics/demographics' },
   { id: 'projectSpending', path: '/statistics/project-spending' },
   { id: 'governmentStatistics', path: '/statistics/government' },

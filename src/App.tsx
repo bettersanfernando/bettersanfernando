@@ -26,6 +26,7 @@ const ProcurementStatistics = lazy(
   () => import('./pages/ProcurementStatistics')
 );
 const PopulationStatistics = lazy(() => import('./pages/PopulationStatistics'));
+const Statistics = lazy(() => import('./pages/Statistics'));
 const CityProfile = lazy(() => import('./pages/CityProfile'));
 const Barangays = lazy(() => import('./pages/Barangays'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
@@ -76,6 +77,10 @@ function App() {
                   <Route
                     path="/government/contacts"
                     element={<Navigate to="/government/offices" replace />}
+                  />
+                  <Route
+                    path="/government/reports-and-statistics"
+                    element={<Navigate to="/statistics" replace />}
                   />
                   <Route
                     path="/government/:category"
@@ -140,6 +145,7 @@ function App() {
                     path="/statistics/population"
                     element={<PopulationStatistics />}
                   />
+                  <Route path="/statistics" element={<Statistics />} />
                   <Route
                     path="/statistics/city-profile"
                     element={<CityProfile />}

@@ -51,6 +51,7 @@ const destinationPresentation = {
   methodology: ['file-text', 'methodology'],
   howWeVerify: ['shield-check', 'howWeVerify'],
   dataLimitations: ['triangle-alert', 'dataLimitations'],
+  statisticsOverview: ['chart', 'statisticsOverview'],
   cityProfile: ['landmark', 'cityProfile'],
   populationDemographics: ['users', 'populationDemographics'],
   barangayDirectory: ['map', 'barangayDirectory'],
@@ -437,6 +438,11 @@ const navigationStructure = [
       {
         labelKey: 'navigation.sections.statisticsInsights',
         items: [
+          {
+            labelKey: 'navigation.items.statisticsOverview',
+            href: '/statistics',
+            kind: 'real',
+          },
           {
             labelKey: 'navigation.items.cityProfile',
             href: '/statistics/city-profile',

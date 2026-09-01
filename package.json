@@ -37,6 +37,7 @@
     "legislation:smoke": "node --experimental-strip-types scripts/smoke-legislation.ts",
     "procurement:smoke": "node --experimental-strip-types scripts/smoke-procurement.ts",
     "transparency:smoke": "node --experimental-strip-types scripts/smoke-transparency.ts",
+    "statistics:smoke": "node --experimental-strip-types scripts/smoke-statistics.ts",
     "nav:smoke": "node --experimental-strip-types scripts/smoke-navigation.ts",
     "check:public-data-boundary": "node scripts/check-no-private-data.mjs",
     "test:public-data-boundary": "node --test scripts/check-no-private-data.test.mjs"
