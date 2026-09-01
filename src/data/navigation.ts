@@ -302,7 +302,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.contactCity',
             href: '/government/contact',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

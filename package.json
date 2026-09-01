@@ -33,6 +33,7 @@
     "bid-results:smoke": "node --experimental-strip-types scripts/smoke-bid-results.ts",
     "contracts:smoke": "node --experimental-strip-types scripts/smoke-contracts.ts",
     "procurement-statistics:smoke": "node --experimental-strip-types scripts/smoke-procurement-statistics.ts",
+    "government-contact:smoke": "node --experimental-strip-types scripts/smoke-government-contact.ts",
     "nav:smoke": "node --experimental-strip-types scripts/smoke-navigation.ts",
     "check:public-data-boundary": "node scripts/check-no-private-data.mjs",
     "test:public-data-boundary": "node --test scripts/check-no-private-data.test.mjs"
