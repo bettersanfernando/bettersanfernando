@@ -86,6 +86,16 @@ export function getOrdinances(): readonly LegislationRecord[] {
   return ordinances;
 }
 
+export function getLegislationSourceUrl(
+  record: LegislationRecord
+): string | null {
+  return record.official_page_url ?? record.reference_url ?? null;
+}
+
+export function hasLegislationFullText(record: LegislationRecord): boolean {
+  return record.full_text_available && Boolean(record.official_pdf_url);
+}
+
 export function getResolutions(): readonly LegislationRecord[] {
   return resolutions;
 }

@@ -327,7 +327,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.ordinances',
             href: '/legislation/ordinances',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.resolutions',

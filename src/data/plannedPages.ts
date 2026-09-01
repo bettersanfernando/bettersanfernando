@@ -10,7 +10,6 @@ const plannedPageRoutes = [
   { id: 'governmentStructure', path: '/government/structure' },
   { id: 'governmentContact', path: '/government/contact' },
   { id: 'legislation', path: '/legislation' },
-  { id: 'ordinances', path: '/legislation/ordinances' },
   { id: 'resolutions', path: '/legislation/resolutions' },
   { id: 'governmentDocuments', path: '/government/documents' },
   { id: 'governmentHotlines', path: '/government/hotlines' },

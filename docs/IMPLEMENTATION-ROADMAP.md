@@ -55,6 +55,7 @@ on their feature branches.
 |     7 | `/projects/methodology`         | None                                                      |
 |     8 | `/transparency/sources`         | None                                                      |
 |     9 | `/transparency/methodology`     | `/transparency/verification`, `/transparency/limitations` |
+|    10 | `/legislation/ordinances`       | None                                                      |
 
 `/government/directory` and `/government/contacts` now redirect to
 `/government/offices`. `/government/departments` remains in the redirect
@@ -72,7 +73,6 @@ for traceability.
 |                    13 | `/government/contact`      | Verified institutional fields from the 22-office export                              | Official-contact finder and discrepancy presentation                 | This is City Government source information, not the BetterSanFernando contact channel | None                                 |
 |                    14 | `/government`              | Office, contact, and legislation destinations                                        | Section hub and cross-domain directory cards                         | Do not add an unsupported organization chart or current-official roster               | None                                 |
 |                    15 | `/legislation`             | Published EO and ordinance collections plus the empty resolution state               | Multi-collection landing page with exact denominators                | Uneven coverage: 11 EOs, 6 ordinances, and 0 publishable resolutions                  | None                                 |
-|                    16 | `/legislation/ordinances`  | Six public ordinance records and two recovered full texts                            | Metadata-first archive with explicit file-availability state         | Bounded capture; missing full text and history must remain visible                    | None                                 |
 |                    17 | `/procurement/contracts`   | Project/evidence exports with 228 awarded and 6 contracted records                   | Lifecycle-separated record views and evidence-specific amount labels | An award is not an executed contract; sparse contracts must not be inferred           | `/transparency/contracts`            |
 |                    18 | `/procurement/bid-results` | Sanitized project-linked `BID_RESULTS` evidence                                      | Procurement result table and identifier namespaces                   | Winning bid is not ABC, contract amount, or expenditure; not citywide coverage        | None                                 |
 |                    19 | `/procurement`             | Published project-linked procurement evidence and terminology                        | Procurement-stage explainer and bounded collection navigation        | Covers the infrastructure/public-works subset, not all city procurement               | `/transparency/procurement`          |
