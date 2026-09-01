@@ -62,7 +62,10 @@ function OfficeRecord({ office }: { office: CityOffice }) {
   const emails = getEmails(office);
 
   return (
-    <article className="border-b border-gray-200 py-7 first:pt-0 last:border-b-0 last:pb-0">
+    <article
+      id={office.office_id}
+      className="scroll-mt-28 border-b border-gray-200 py-7 first:pt-0 last:border-b-0 last:pb-0"
+    >
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:gap-10">
         <div>
           <div className="flex flex-wrap items-start gap-3">
