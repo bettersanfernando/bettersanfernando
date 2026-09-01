@@ -1,10 +1,10 @@
 import { useParams, Link } from 'react-router';
-import { ExternalLink } from 'lucide-react';
 import Section from '../components/ui/Section';
 import { Heading } from '../components/ui/Heading';
 import { Text } from '../components/ui/Text';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import SEO from '../components/SEO';
+import EvidenceSourceLinks from '../components/projects/EvidenceSourceLinks';
 import { Banner } from '@bettergov/kapwa/banner';
 import { Card, CardContent } from '@bettergov/kapwa/card';
 import {
@@ -63,33 +63,7 @@ function EvidenceCard({ evidence }: { evidence: ProjectEvidence }) {
           </p>
         )}
 
-        <div className="flex flex-wrap gap-4 text-sm">
-          {evidence.page_url && (
-            <a
-              href={evidence.page_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium"
-            >
-              View source page <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          )}
-          {evidence.attachment_url && (
-            <a
-              href={evidence.attachment_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium"
-            >
-              View document <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          )}
-          {!evidence.page_url && !evidence.attachment_url && (
-            <span className="text-gray-400">
-              No public link recorded for this record
-            </span>
-          )}
-        </div>
+        <EvidenceSourceLinks evidence={evidence} />
       </CardContent>
     </Card>
   );

@@ -7,8 +7,6 @@ const plannedPageRoutes = [
   { id: 'procurementOverview', path: '/procurement' },
   { id: 'bidResults', path: '/procurement/bid-results' },
   { id: 'procurementContracts', path: '/procurement/contracts' },
-  { id: 'projectSources', path: '/projects/sources' },
-  { id: 'projectDataSources', path: '/projects/data-sources' },
   { id: 'projectMethodology', path: '/projects/methodology' },
   { id: 'governmentStructure', path: '/government/structure' },
   { id: 'governmentContact', path: '/government/contact' },

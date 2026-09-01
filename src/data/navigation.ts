@@ -249,12 +249,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.evidenceSources',
             href: '/projects/sources',
-            kind: 'planned',
-          },
-          {
-            labelKey: 'navigation.items.projectDataSources',
-            href: '/projects/data-sources',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.projectMethodology',
