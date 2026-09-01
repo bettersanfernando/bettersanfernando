@@ -296,11 +296,6 @@ const navigationStructure = [
             kind: 'real',
           },
           {
-            labelKey: 'navigation.items.cityStructure',
-            href: '/government/structure',
-            kind: 'planned',
-          },
-          {
             labelKey: 'navigation.items.contactCity',
             href: '/government/contact',
             kind: 'real',

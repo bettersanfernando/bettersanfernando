@@ -4,7 +4,6 @@ const plannedPageRoutes = [
   { id: 'assistancePrograms', path: '/services/assistance-programs' },
   { id: 'seniorCitizens', path: '/services/senior-citizens' },
   { id: 'pwdServices', path: '/services/pwd-services' },
-  { id: 'governmentStructure', path: '/government/structure' },
   { id: 'resolutions', path: '/legislation/resolutions' },
   { id: 'governmentDocuments', path: '/government/documents' },
   { id: 'governmentHotlines', path: '/government/hotlines' },

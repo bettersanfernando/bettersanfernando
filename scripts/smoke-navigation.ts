@@ -111,7 +111,6 @@ const approvedPlannedPaths = [
   '/services/assistance-programs',
   '/services/senior-citizens',
   '/services/pwd-services',
-  '/government/structure',
   '/legislation/resolutions',
   '/government/documents',
   '/government/hotlines',
