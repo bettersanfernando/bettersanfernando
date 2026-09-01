@@ -52,6 +52,7 @@ on their feature branches.
 |     4 | `/barangays`                    | None                                            |
 |     5 | `/statistics/city-profile`      | None                                            |
 |     6 | `/projects/sources`             | `/projects/data-sources`                        |
+|     7 | `/projects/methodology`         | None                                            |
 
 `/government/directory` and `/government/contacts` now redirect to
 `/government/offices`. `/government/departments` remains in the redirect
@@ -65,7 +66,6 @@ for traceability.
 
 | Next / finalized rank | Canonical page              | Dependencies                                                                         | Reusable pattern established                                             | Important scope caveat                                                                | Prerequisite redirects                                    |
 | --------------------: | --------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-|                     9 | `/projects/methodology`     | Public schemas, manifest, lifecycle and matching policies                            | Domain methodology layout and semantic callouts                          | `AWARDED != CONTRACTED`; NTP and `COMPLETED` require their own evidence               | None                                                      |
 |                    10 | `/transparency/sources`     | Public generated manifest and `civic/sources.ts`                                     | Cross-domain dataset inventory, version, publisher, coverage, exclusions | List only public release contents and explicitly identify non-exported domains        | None                                                      |
 |                    11 | `/transparency/methodology` | Public manifest, schemas, evidence rules, and publication policy                     | Site-wide trust model, anchorable verification/limitations sections      | ABC, winning bid, contract amount, and actual expenditure remain distinct             | `/transparency/verification`, `/transparency/limitations` |
 |                    12 | `/about`                    | Reviewed project-owned editorial copy and methodology links                          | Independence, governance, contribution, and sourcing narrative           | BetterSanFernando is independent and not an official City Government site             | None                                                      |

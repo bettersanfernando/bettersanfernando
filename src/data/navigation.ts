@@ -254,7 +254,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.projectMethodology',
             href: '/projects/methodology',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

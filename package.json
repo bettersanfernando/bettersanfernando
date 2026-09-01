@@ -23,6 +23,7 @@
     "project-map:smoke": "node --experimental-strip-types scripts/smoke-project-map.ts",
     "project-statistics:smoke": "node --experimental-strip-types scripts/smoke-project-statistics.ts",
     "project-sources:smoke": "node --experimental-strip-types scripts/smoke-project-sources.ts",
+    "project-methodology:smoke": "node --experimental-strip-types scripts/smoke-project-methodology.ts",
     "population-statistics:smoke": "node --experimental-strip-types scripts/smoke-population-statistics.ts",
     "barangays:smoke": "node --experimental-strip-types scripts/smoke-barangays.ts",
     "city-profile:smoke": "node --experimental-strip-types scripts/smoke-city-profile.ts",
