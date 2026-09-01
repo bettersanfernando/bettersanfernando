@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router';
 // of the initial bundle, so e.g. Projects' 239 records only load for
 // visitors who actually go to /projects.
 const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const Document = lazy(() => import('./pages/Document'));
 const Government = lazy(() => import('./pages/Government'));
@@ -56,6 +57,7 @@ function App() {
               <Suspense fallback={<PageLoading />}>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
                   <Route path="/services/:category" element={<Services />} />
                   <Route path="/services" element={<Services />} />
                   <Route

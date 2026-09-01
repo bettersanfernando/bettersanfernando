@@ -17,7 +17,6 @@ const plannedPageRoutes = [
   { id: 'governmentStatistics', path: '/statistics/government' },
   { id: 'legislationStatistics', path: '/statistics/legislation' },
   { id: 'publicRecordsStatistics', path: '/statistics/public-records' },
-  { id: 'about', path: '/about' },
   { id: 'contact', path: '/contact' },
 ] as const;
 

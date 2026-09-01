@@ -124,7 +124,6 @@ const approvedPlannedPaths = [
   '/statistics/government',
   '/statistics/legislation',
   '/statistics/public-records',
-  '/about',
   '/contact',
 ];
 
