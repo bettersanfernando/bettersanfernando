@@ -420,17 +420,17 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.methodology',
             href: '/transparency/methodology',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.howWeVerify',
             href: '/transparency/verification',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.dataLimitations',
             href: '/transparency/limitations',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

@@ -124,9 +124,6 @@ const approvedPlannedPaths = [
   '/transparency/procurement',
   '/transparency/contracts',
   '/transparency/finance',
-  '/transparency/methodology',
-  '/transparency/verification',
-  '/transparency/limitations',
   '/statistics',
   '/statistics/demographics',
   '/statistics/project-spending',
@@ -169,6 +166,9 @@ const knownRealDestinations = new Set([
   '/government/offices',
   '/legislation/executive-orders',
   '/transparency/sources',
+  '/transparency/methodology',
+  '/transparency/verification',
+  '/transparency/limitations',
 ]);
 
 for (const destination of megaMenus.flatMap(menu =>

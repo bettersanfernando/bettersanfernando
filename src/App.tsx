@@ -27,6 +27,9 @@ const Barangays = lazy(() => import('./pages/Barangays'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const ExecutiveOrders = lazy(() => import('./pages/ExecutiveOrders'));
 const TransparencySources = lazy(() => import('./pages/TransparencySources'));
+const TransparencyMethodology = lazy(
+  () => import('./pages/TransparencyMethodology')
+);
 const Search = lazy(() => import('./pages/Search'));
 const PlannedPage = lazy(() => import('./pages/PlannedPage'));
 
@@ -118,6 +121,28 @@ function App() {
                   <Route
                     path="/transparency/sources"
                     element={<TransparencySources />}
+                  />
+                  <Route
+                    path="/transparency/methodology"
+                    element={<TransparencyMethodology />}
+                  />
+                  <Route
+                    path="/transparency/verification"
+                    element={
+                      <Navigate
+                        to="/transparency/methodology#verification"
+                        replace
+                      />
+                    }
+                  />
+                  <Route
+                    path="/transparency/limitations"
+                    element={
+                      <Navigate
+                        to="/transparency/methodology#limitations"
+                        replace
+                      />
+                    }
                   />
                   {plannedPages.map(page => (
                     <Route
