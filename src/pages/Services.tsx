@@ -3,37 +3,102 @@ import { Clock3, FileText, Search } from 'lucide-react';
 import { Link } from 'react-router';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import SEO from '../components/SEO';
-import { getServices } from '../data/civic/services';
+import {
+  getServiceCategory,
+  getServiceHref,
+  getServices,
+  type PublishedServiceCategory,
+} from '../data/civic/services';
 
 const services = getServices();
-const offices = [
-  'Business License and Permit Division',
-  'City Disaster Risk Reduction Management Office',
+const categories = [
+  [
+    'Business Services',
+    'business',
+    'Permits, registration guidance, and business information.',
+    'published',
+  ],
+  [
+    'Employment',
+    'employment',
+    'Employment services, opportunities, and workforce support.',
+    'planned',
+  ],
+  [
+    'Livelihood',
+    'livelihood',
+    'Livelihood assistance, skills development, and local programs.',
+    'planned',
+  ],
+  [
+    'Health Services',
+    'health-services',
+    'Local health services and access guidance.',
+    'planned',
+  ],
+  [
+    'Education Services',
+    'education',
+    'Local education services and support programs.',
+    'planned',
+  ],
+  [
+    'Assistance Programs',
+    'assistance-programs',
+    'Public assistance programs and eligibility guidance.',
+    'planned',
+  ],
+  [
+    'Social Welfare',
+    'social-welfare',
+    'Local social-welfare services and referral routes.',
+    'planned',
+  ],
+  [
+    'Senior Citizens',
+    'senior-citizens',
+    'Services and assistance intended for senior citizens.',
+    'planned',
+  ],
+  [
+    'PWD Services',
+    'pwd-services',
+    'Services and support for persons with disabilities.',
+    'planned',
+  ],
+  [
+    'Infrastructure & Public Works',
+    'infrastructure-public-works',
+    'Resident-facing public-works requests and reporting.',
+    'planned',
+  ],
+  [
+    'Agriculture & Fisheries',
+    'agriculture-fisheries',
+    'Local agriculture, fisheries, and veterinary services.',
+    'planned',
+  ],
+  [
+    'Environment',
+    'environment',
+    'Local environmental programs, permits, and reporting.',
+    'planned',
+  ],
+  [
+    'Disaster Preparedness',
+    'disaster-preparedness',
+    'Preparedness guidance and reviewed response services.',
+    'published',
+  ],
 ] as const;
 
-export default function Services() {
-  const [query, setQuery] = useState('');
-  const filteredServices = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    if (!normalizedQuery) return services;
-
-    return services.filter(service =>
-      [
-        service.title,
-        service.description,
-        service.who_may_avail,
-        service.office.name,
-        service.office.acronym,
-      ].some(value => value.toLowerCase().includes(normalizedQuery))
-    );
-  }, [query]);
-
+function ServicesHub() {
   return (
     <>
       <SEO
         title="Services"
-        description="Reviewed services from selected City of San Fernando offices, including BLPD and CDRRMO."
-        keywords="San Fernando Pampanga services, BLPD, CDRRMO, business permits, disaster response"
+        description="Browse BetterSanFernando's progressively published City service guidance by need."
+        keywords="San Fernando Pampanga services, city services, resident services"
       />
       <main className="flex-grow bg-gray-50">
         <section className="border-b border-primary-100 bg-white">
@@ -42,38 +107,121 @@ export default function Services() {
               className="mb-8"
               items={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
             />
-            <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
-              <div className="max-w-3xl">
-                <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
-                  Services
-                </h1>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
-                  Find requirements, fees, processing times, and application
-                  steps for currently available reviewed services from selected
-                  City offices.
-                </p>
-              </div>
-              <aside className="rounded-xl bg-primary-50 p-5 text-sm leading-6 text-primary-900">
-                <p className="font-semibold">Current coverage</p>
-                <p className="mt-1">
-                  Currently available: selected services from the Business
-                  License and Permit Division and City Disaster Risk Reduction
-                  Management Office. This is not a complete directory of all
-                  City Government services.
-                </p>
-              </aside>
+            <div className="max-w-3xl">
+              <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
+                Services
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
+                Browse City service guidance by need. BetterSanFernando is
+                progressively publishing reviewed information, so these
+                categories are not complete service inventories.
+              </p>
             </div>
-            <dl className="mt-9 border-y border-gray-200 py-5">
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <dt className="text-sm text-gray-600">Published services</dt>
-                <dd className="text-3xl font-bold tabular-nums text-gray-900">
-                  {services.length}
-                </dd>
-                <dd className="text-sm font-semibold text-gray-700">
-                  from 2 selected City offices
-                </dd>
-              </div>
-            </dl>
+          </div>
+        </section>
+
+        <section
+          className="container mx-auto px-4 py-8 md:py-12"
+          aria-labelledby="service-categories-heading"
+        >
+          <h2
+            id="service-categories-heading"
+            className="text-2xl font-bold text-gray-900 md:text-3xl"
+          >
+            Browse by need
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-700">
+            Published categories contain reviewed service records. Planned
+            categories remain visible while their local sources are prepared.
+          </p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {categories.map(([name, slug, description, status]) => (
+              <article
+                key={slug}
+                className="flex flex-col border border-gray-200 bg-white p-5"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="text-lg font-bold text-gray-900">
+                    <Link
+                      to={`/services/${slug}`}
+                      className="hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600"
+                    >
+                      {name}
+                    </Link>
+                  </h3>
+                  <span className="shrink-0 rounded-full bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-800">
+                    {status === 'published' ? 'Published' : 'Planned'}
+                  </span>
+                </div>
+                <p className="mt-3 flex-grow text-sm leading-6 text-gray-700">
+                  {description}
+                </p>
+                <Link
+                  to={`/services/${slug}`}
+                  className="mt-5 inline-flex self-start font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+                >
+                  {status === 'published'
+                    ? 'Browse reviewed services'
+                    : 'View planned section'}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
+    </>
+  );
+}
+
+function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
+  const [query, setQuery] = useState('');
+  const [name] = categories.find(item => item[1] === category)!;
+  const categoryServices = useMemo(
+    () => services.filter(service => getServiceCategory(service) === category),
+    [category]
+  );
+  const filteredServices = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return categoryServices;
+
+    return categoryServices.filter(service =>
+      [service.title, service.description, service.who_may_avail].some(value =>
+        value.toLowerCase().includes(normalizedQuery)
+      )
+    );
+  }, [categoryServices, query]);
+
+  return (
+    <>
+      <SEO
+        title={name}
+        description={`Browse ${categoryServices.length} reviewed ${name.toLowerCase()} records published by BetterSanFernando.`}
+      />
+      <main className="flex-grow bg-gray-50">
+        <section className="border-b border-primary-100 bg-white">
+          <div className="container mx-auto px-4 py-10 md:py-14">
+            <Breadcrumbs
+              className="mb-8"
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Services', href: '/services' },
+                { label: name },
+              ]}
+            />
+            <div className="max-w-3xl">
+              <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
+                {name}
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
+                {category === 'business'
+                  ? 'Reviewed services currently published from the Business License and Permit Division.'
+                  : 'Reviewed services currently published from the City Disaster Risk Reduction Management Office.'}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-gray-700">
+                This is a bounded collection, not a complete inventory of City
+                Government services.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -87,7 +235,7 @@ export default function Services() {
                 id="services-list-heading"
                 className="text-2xl font-bold text-gray-900 md:text-3xl"
               >
-                Browse reviewed services
+                Reviewed services
               </h2>
               <p className="mt-2 text-sm leading-6 text-gray-700">
                 Search by service, description, or who may avail.
@@ -126,96 +274,67 @@ export default function Services() {
           </div>
 
           {filteredServices.length ? (
-            <div className="space-y-10">
-              {offices.map(officeName => {
-                const officeServices = filteredServices.filter(
-                  service => service.office.name === officeName
-                );
-                if (!officeServices.length) return null;
-
-                return (
-                  <section
-                    key={officeName}
-                    aria-labelledby={`${officeServices[0].office.acronym.toLowerCase()}-services-heading`}
-                  >
-                    <h3
-                      id={`${officeServices[0].office.acronym.toLowerCase()}-services-heading`}
-                      className="mb-4 text-xl font-bold text-gray-900"
-                    >
-                      {officeName} ({officeServices[0].office.acronym})
-                    </h3>
-                    <div className="divide-y divide-gray-200 border-y border-gray-200 bg-white px-5 md:px-7">
-                      {officeServices.map(service => (
-                        <article key={service.id} className="py-7">
-                          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
-                            <div className="min-w-0">
-                              <h4 className="text-xl font-bold leading-snug text-gray-900 md:text-2xl">
-                                <Link
-                                  to={`/services/${service.slug}`}
-                                  className="hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600"
-                                >
-                                  {service.title}
-                                </Link>
-                              </h4>
-                              <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
-                                {service.description}
-                              </p>
-                              <p className="mt-3 text-sm text-gray-700">
-                                <span className="font-semibold text-gray-900">
-                                  Who may avail:
-                                </span>{' '}
-                                {service.who_may_avail}
-                              </p>
-                            </div>
-                            <div className="space-y-3 text-sm text-gray-700">
-                              <p className="flex items-start gap-2">
-                                <Clock3
-                                  className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                                  aria-hidden="true"
-                                />
-                                <span>
-                                  <span className="font-semibold text-gray-900">
-                                    Processing time:
-                                  </span>{' '}
-                                  {service.processing_time.text ??
-                                    "Not stated in the Citizen's Charter"}
-                                </span>
-                              </p>
-                              <p className="flex items-start gap-2">
-                                <FileText
-                                  className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                                  aria-hidden="true"
-                                />
-                                <span>
-                                  <span className="font-semibold text-gray-900">
-                                    Fee:
-                                  </span>{' '}
-                                  {service.fee.text ??
-                                    "Not stated in the Citizen's Charter"}
-                                </span>
-                              </p>
-                              <p>
-                                {service.forms.length > 0
-                                  ? `${service.forms.length} published form${service.forms.length === 1 ? '' : 's'}`
-                                  : 'No published form link in this record'}
-                                {service.online_channels.length > 0 &&
-                                  ` · ${service.online_channels.length} reviewed online channel`}
-                              </p>
-                              <Link
-                                to={`/services/${service.slug}`}
-                                className="inline-flex font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
-                                aria-label={`View details for ${service.title}`}
-                              >
-                                View service details
-                              </Link>
-                            </div>
-                          </div>
-                        </article>
-                      ))}
+            <div className="divide-y divide-gray-200 border-y border-gray-200 bg-white px-5 md:px-7">
+              {filteredServices.map(service => (
+                <article key={service.id} className="py-7">
+                  <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
+                    <div className="min-w-0">
+                      <h3 className="text-xl font-bold leading-snug text-gray-900 md:text-2xl">
+                        <Link
+                          to={getServiceHref(service)}
+                          className="hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600"
+                        >
+                          {service.title}
+                        </Link>
+                      </h3>
+                      <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
+                        {service.description}
+                      </p>
+                      <p className="mt-3 text-sm text-gray-700">
+                        <span className="font-semibold text-gray-900">
+                          Who may avail:
+                        </span>{' '}
+                        {service.who_may_avail}
+                      </p>
                     </div>
-                  </section>
-                );
-              })}
+                    <div className="space-y-3 text-sm text-gray-700">
+                      <p className="flex items-start gap-2">
+                        <Clock3
+                          className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+                          aria-hidden="true"
+                        />
+                        <span>
+                          <span className="font-semibold text-gray-900">
+                            Processing time:
+                          </span>{' '}
+                          {service.processing_time.text ??
+                            "Not stated in the Citizen's Charter"}
+                        </span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <FileText
+                          className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+                          aria-hidden="true"
+                        />
+                        <span>
+                          <span className="font-semibold text-gray-900">
+                            Fee:
+                          </span>{' '}
+                          {service.fee.text ??
+                            "Not stated in the Citizen's Charter"}
+                        </span>
+                      </p>
+                      <Link
+                        to={getServiceHref(service)}
+                        className="inline-flex font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+                        aria-label={`View details for ${service.title}`}
+                      >
+                        View service details
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
           ) : (
             <div className="rounded-xl bg-white px-5 py-10 text-center">
@@ -234,17 +353,16 @@ export default function Services() {
               </button>
             </div>
           )}
-
-          <div className="mt-10 border-t border-gray-200 pt-6 text-sm leading-6 text-gray-700">
-            <p>
-              Service information was last reviewed on 1 September 2026 from the
-              official City of San Fernando Citizen&apos;s Charter and reviewed
-              official City sources. BetterSanFernando is independent and is not
-              the official City Government website.
-            </p>
-          </div>
         </section>
       </main>
     </>
   );
+}
+
+export default function Services({
+  category,
+}: {
+  category?: PublishedServiceCategory;
+}) {
+  return category ? <ServiceCategory category={category} /> : <ServicesHub />;
 }

@@ -106,7 +106,7 @@ const navigationStructure = [
         items: [
           {
             labelKey: 'navigation.items.businessServices',
-            href: '/services',
+            href: '/services/business',
             kind: 'real',
           },
           {
@@ -125,8 +125,13 @@ const navigationStructure = [
         labelKey: 'navigation.sections.healthEducation',
         items: [
           {
-            labelKey: 'navigation.items.assistancePrograms',
-            href: '/services/assistance-programs',
+            labelKey: 'navigation.items.healthServices',
+            href: '/services/health-services',
+            kind: 'planned',
+          },
+          {
+            labelKey: 'navigation.items.educationServices',
+            href: '/services/education',
             kind: 'planned',
           },
         ],
@@ -134,6 +139,16 @@ const navigationStructure = [
       {
         labelKey: 'navigation.sections.communitySupport',
         items: [
+          {
+            labelKey: 'navigation.items.assistancePrograms',
+            href: '/services/assistance-programs',
+            kind: 'planned',
+          },
+          {
+            labelKey: 'navigation.items.socialWelfare',
+            href: '/services/social-welfare',
+            kind: 'planned',
+          },
           {
             labelKey: 'navigation.items.seniorCitizens',
             href: '/services/senior-citizens',
@@ -144,10 +159,30 @@ const navigationStructure = [
             href: '/services/pwd-services',
             kind: 'planned',
           },
+        ],
+      },
+      {
+        labelKey: 'navigation.sections.publicServices',
+        items: [
           {
-            labelKey: 'navigation.items.hotlines',
-            href: '/government/hotlines',
+            labelKey: 'navigation.items.infrastructurePublicWorks',
+            href: '/services/infrastructure-public-works',
             kind: 'planned',
+          },
+          {
+            labelKey: 'navigation.items.agriculture',
+            href: '/services/agriculture-fisheries',
+            kind: 'planned',
+          },
+          {
+            labelKey: 'navigation.items.environment',
+            href: '/services/environment',
+            kind: 'planned',
+          },
+          {
+            labelKey: 'navigation.items.emergencyInformation',
+            href: '/services/disaster-preparedness',
+            kind: 'real',
           },
         ],
       },

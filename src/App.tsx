@@ -63,6 +63,18 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/services" element={<Services />} />
+                  <Route
+                    path="/services/business"
+                    element={<Services category="business" />}
+                  />
+                  <Route
+                    path="/services/disaster-preparedness"
+                    element={<Services category="disaster-preparedness" />}
+                  />
+                  <Route
+                    path="/services/:category/:serviceSlug"
+                    element={<ServiceDetail />}
+                  />
                   <Route path="/services/:slug" element={<ServiceDetail />} />
                   <Route
                     path="/government/offices"

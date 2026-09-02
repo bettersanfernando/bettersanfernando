@@ -68,9 +68,9 @@
       "pwdServices": "PWD Services",
       "hotlines": "Hotlines",
       "infrastructurePublicWorks": "Infrastructure & Public Works",
-      "agriculture": "Agriculture",
+      "agriculture": "Agriculture & Fisheries",
       "environment": "Environment",
-      "emergencyInformation": "Emergency Information",
+      "emergencyInformation": "Disaster Preparedness",
       "allCityProjects": "All City Projects",
       "projectMap": "Project Map",
       "projectDashboard": "Project Dashboard",
@@ -205,9 +205,21 @@
         "title": "Livelihood",
         "description": "Find verified information about livelihood assistance, skills development, and related local programs."
       },
+      "healthServices": {
+        "title": "Health Services",
+        "description": "Find verified information about local health services and access guidance."
+      },
+      "educationServices": {
+        "title": "Education Services",
+        "description": "Find verified information about local education services and support programs."
+      },
       "assistancePrograms": {
         "title": "Assistance Programs",
         "description": "Understand available public assistance programs, their purpose, and how verified eligibility guidance can be accessed."
+      },
+      "socialWelfare": {
+        "title": "Social Welfare",
+        "description": "Find verified information about local social-welfare services and referral routes."
       },
       "seniorCitizens": {
         "title": "Senior Citizens",
@@ -216,6 +228,18 @@
       "pwdServices": {
         "title": "PWD Services",
         "description": "Find verified guidance about services and assistance for persons with disabilities."
+      },
+      "infrastructurePublicWorks": {
+        "title": "Infrastructure & Public Works",
+        "description": "Find verified guidance about resident-facing public-works requests and reporting."
+      },
+      "agricultureFisheries": {
+        "title": "Agriculture & Fisheries",
+        "description": "Find verified information about local agriculture, fisheries, and veterinary services."
+      },
+      "environment": {
+        "title": "Environment",
+        "description": "Find verified information about local environmental programs, permits, and reporting."
       },
       "projectMap": {
         "title": "Project Map",

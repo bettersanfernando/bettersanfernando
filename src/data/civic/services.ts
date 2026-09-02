@@ -202,6 +202,7 @@ const ServicesFileSchema = z
   });
 
 export type Service = z.infer<typeof ServiceSchema>;
+export type PublishedServiceCategory = 'business' | 'disaster-preparedness';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -215,4 +216,14 @@ export function getServices(): readonly Service[] {
 
 export function getServiceBySlug(slug: string): Service | undefined {
   return servicesBySlug.get(slug);
+}
+
+export function getServiceCategory(service: Service): PublishedServiceCategory {
+  return service.office.acronym === 'BLPD'
+    ? 'business'
+    : 'disaster-preparedness';
+}
+
+export function getServiceHref(service: Service): string {
+  return `/services/${getServiceCategory(service)}/${service.slug}`;
 }

@@ -1,11 +1,74 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { getServiceBySlug, getServices } from '../src/data/civic/services.ts';
+import { readFileSync } from 'node:fs';
+import { mainNavigation } from '../src/data/navigation.ts';
+import { plannedPages } from '../src/data/plannedPages.ts';
+import {
+  getServiceBySlug,
+  getServiceHref,
+  getServices,
+} from '../src/data/civic/services.ts';
 
 const services = getServices();
 const blpd = services.filter(service => service.office.acronym === 'BLPD');
 const cdrrmo = services.filter(service => service.office.acronym === 'CDRRMO');
+const appSource = readFileSync('src/App.tsx', 'utf8');
+const servicesPageSource = readFileSync('src/pages/Services.tsx', 'utf8');
+const detailPageSource = readFileSync('src/pages/ServiceDetail.tsx', 'utf8');
+
+const canonicalCategories = [
+  'business',
+  'employment',
+  'livelihood',
+  'health-services',
+  'education',
+  'assistance-programs',
+  'social-welfare',
+  'senior-citizens',
+  'pwd-services',
+  'infrastructure-public-works',
+  'agriculture-fisheries',
+  'environment',
+  'disaster-preparedness',
+] as const;
+const plannedCategorySlugs = canonicalCategories.filter(
+  slug => slug !== 'business' && slug !== 'disaster-preparedness'
+);
+
+const servicesNavigation = mainNavigation.find(item => item.id === 'services');
+assert.deepEqual(
+  servicesNavigation?.sections?.flatMap(section =>
+    section.items.map(item => item.href.replace('/services/', ''))
+  ),
+  canonicalCategories
+);
+assert.deepEqual(
+  servicesNavigation?.sections?.flatMap(section =>
+    section.items.map(item => item.kind)
+  ),
+  canonicalCategories.map(slug =>
+    slug === 'business' || slug === 'disaster-preparedness' ? 'real' : 'planned'
+  )
+);
+assert.deepEqual(
+  plannedPages
+    .filter(page => page.path.startsWith('/services/'))
+    .map(page => page.path.replace('/services/', '')),
+  plannedCategorySlugs
+);
+assert.match(appSource, /path="\/services\/:category\/:serviceSlug"/);
+assert.match(appSource, /path="\/services\/:slug"/);
+assert.match(
+  detailPageSource,
+  /<Navigate to={getServiceHref\(service\)} replace/
+);
+for (const slug of canonicalCategories) {
+  assert.ok(
+    servicesPageSource.includes(`'${slug}'`),
+    `${slug} must appear on the Services category hub`
+  );
+}
 
 assert.equal(services.length, 15);
 assert.equal(blpd.length, 8);
@@ -24,6 +87,20 @@ assert.ok(
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
   'all 15 service detail routes must resolve through the adapter'
+);
+assert.ok(
+  blpd.every(
+    service => getServiceHref(service) === `/services/business/${service.slug}`
+  ),
+  'all eight BLPD records must use canonical Business Services routes'
+);
+assert.ok(
+  cdrrmo.every(
+    service =>
+      getServiceHref(service) ===
+      `/services/disaster-preparedness/${service.slug}`
+  ),
+  'all seven CDRRMO records must use canonical Disaster Preparedness routes'
 );
 
 assert.deepEqual(

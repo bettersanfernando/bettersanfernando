@@ -8,11 +8,16 @@ import {
   ShieldCheck,
   Siren,
 } from 'lucide-react';
-import { Link, useParams } from 'react-router';
+import { Link, Navigate, useParams } from 'react-router';
 import { Banner } from '@bettergov/kapwa/banner';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import SEO from '../components/SEO';
-import { getServiceBySlug, type Service } from '../data/civic/services';
+import {
+  getServiceBySlug,
+  getServiceCategory,
+  getServiceHref,
+  type Service,
+} from '../data/civic/services';
 
 const externalLinkClass =
   'inline-flex items-center gap-1.5 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
@@ -117,8 +122,16 @@ function ClientSteps({ service }: { service: Service }) {
 }
 
 export default function ServiceDetail() {
-  const { slug = '' } = useParams();
-  const service = getServiceBySlug(slug);
+  const { category, serviceSlug, slug } = useParams();
+  const service = getServiceBySlug(serviceSlug ?? slug ?? '');
+
+  if (service && slug) {
+    return <Navigate to={getServiceHref(service)} replace />;
+  }
+
+  if (service && category !== getServiceCategory(service)) {
+    return <Navigate to={getServiceHref(service)} replace />;
+  }
 
   if (!service) {
     return (
@@ -147,6 +160,9 @@ export default function ServiceDetail() {
     );
   }
 
+  const categoryName =
+    category === 'business' ? 'Business Services' : 'Disaster Preparedness';
+
   return (
     <>
       <SEO
@@ -162,6 +178,10 @@ export default function ServiceDetail() {
               items={[
                 { label: 'Home', href: '/' },
                 { label: 'Services', href: '/services' },
+                {
+                  label: categoryName,
+                  href: `/services/${category}`,
+                },
                 { label: service.title },
               ]}
             />
