@@ -100,14 +100,14 @@ versioned allowlisted export are complete.
 
 ### RESEARCH queue
 
-| Priority | Work                                                                                                                                                                                  | Public page(s) unblocked                                          |
-| -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-|        1 | Verify the CSFP Citizen's Charter and current city sources for exact service eligibility, requirements, fees, processing times, schedules, locations, forms, and responsible contacts | `/services` and all 14 canonical service page concepts beneath it |
-|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                         | `/government/structure`; later enriches `/government`             |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                  | `/legislation/resolutions`                                        |
-|        4 | Verify exact official CSFP web and social destinations and their owning entities                                                                                                      | `/government/links`                                               |
-|        5 | Verify hotline purpose, operating scope/hours, update cadence, and the disputed CDRRMO number                                                                                         | Moves `/government/hotlines` from `PARTIAL` to `READY`            |
-|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                       | Moves `/statistics/demographics` from `PARTIAL` to `READY`        |
+| Priority | Work                                                                                                                          | Public page(s) unblocked                                                                  |
+| -------: | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the published 8 BLPD and 7 CDRRMO External services | The 11 planned Services categories and broader coverage within the 2 published categories |
+|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates | `/government/structure`; later enriches `/government`                                     |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions          | `/legislation/resolutions`                                                                |
+|        4 | Verify exact official CSFP web and social destinations and their owning entities                                              | `/government/links`                                                                       |
+|        5 | Verify hotline purpose, operating scope/hours, update cadence, and the disputed CDRRMO number                                 | Moves `/government/hotlines` from `PARTIAL` to `READY`                                    |
+|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                |
 
 Research must not be mixed with a decision to publish sensitive fields or
 with the mechanical creation of an export.
