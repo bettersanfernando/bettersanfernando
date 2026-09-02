@@ -3,10 +3,11 @@
   "jurisdiction_psgc": "0305416000",
   "last_verified": "2026-09-01",
   "office_scope": [
-    "Business License and Permit Division"
+    "Business License and Permit Division",
+    "City Disaster Risk Reduction Management Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 8,
+  "record_count": 15,
   "schema_version": 1,
   "services": [
     {
@@ -1208,6 +1209,550 @@
       "slug": "permit-to-operate-temporary-permit",
       "title": "PERMIT TO OPERATE (TEMPORARY PERMIT)",
       "who_may_avail": "Business Entity"
+    },
+    {
+      "appointment": null,
+      "availability": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the applicable requirements to the CDRRMO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait for notification if additional documents, corrections, or validation are needed.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The CDRRMO issues certifications and documents for affected individuals seeking financial assistance, susceptibility assessments, and other disaster-related compliance needs.",
+      "emergency_contacts": [],
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-01",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "not_stated",
+        "text": null
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": "For fire incidents",
+          "ordinal": "1",
+          "text": "Copy of a valid ID and BFP Report for a fire incident report",
+          "where_to_secure": "Requesting client and Bureau of Fire Protection"
+        },
+        {
+          "condition": "For tornado, thunderstorm, or typhoon incidents",
+          "ordinal": "2",
+          "text": "Copy of a valid ID and CSWDO Report (Intake Sheet)",
+          "where_to_secure": "Requesting client and City Social Welfare and Development Office"
+        },
+        {
+          "condition": "For crop or drought incidents",
+          "ordinal": "3",
+          "text": "Copy of a valid ID and CAVO Report",
+          "where_to_secure": "Requesting client and City Agriculture and Veterinary Office"
+        }
+      ],
+      "slug": "issuance-of-disaster-related-certification-incident-monitoring-report-documents",
+      "title": "Issuance of Disaster-Related Certification (Incident Monitoring Report & Documents)",
+      "who_may_avail": "Citizens within the City of San Fernando, Pampanga area of responsibility"
+    },
+    {
+      "appointment": null,
+      "availability": {
+        "scope": "Emergency call reception and dispatch only",
+        "status": "24/7"
+      },
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Call the emergency hotline and request assistance.",
+          "sequence": "1.1"
+        },
+        {
+          "instruction": "If conscious, coordinate with and follow the instructions of the responder or medical officer.",
+          "sequence": "2.1"
+        }
+      ],
+      "description": "The CDRRMO Command and Control Center receives emergency calls and dispatches the appropriate public-safety responders.",
+      "emergency_contacts": [
+        {
+          "label": "HELP",
+          "phone": "961-4357",
+          "scope": "Rescue and disaster response"
+        }
+      ],
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-02",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "refer_to_charter",
+        "text": "The Charter lists 6 minutes for call intake and dispatch; this is not a responder-arrival guarantee."
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "No documentary requirement",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "receiving-of-emergency-call",
+      "title": "Receiving of Emergency Call",
+      "who_may_avail": "Citizens within the City of San Fernando, Pampanga area of responsibility"
+    },
+    {
+      "appointment": null,
+      "availability": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the request letter to the CDRRMO Records Section.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait for notification if additional documents, corrections, or validation are needed.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Coordinate with the CDRRMO for release of the requested document.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CDRRMO provides requested data to agencies, organizations, and schools for thesis purposes and office requirements.",
+      "emergency_contacts": [],
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-03",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "4 days and 5 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request letter indicating the requested data and details",
+          "where_to_secure": "Requesting agency, organization, or school"
+        }
+      ],
+      "slug": "request-data-for-thesis-purposes",
+      "title": "Request Data (for Thesis Purposes)",
+      "who_may_avail": "All citizens"
+    },
+    {
+      "appointment": null,
+      "availability": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit a formal request letter with the event or activity details to the CDRRMO.",
+          "sequence": "*"
+        }
+      ],
+      "description": "The CDRRMO provides planned medical assistance or standby support for approved events and activities in the City of San Fernando, Pampanga and nearby areas.",
+      "emergency_contacts": [],
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-04",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days, 1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "This is planned event medical assistance or standby support, not 24/7 emergency ambulance response."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request letter indicating the preferred date, location, event or activity details, and participants",
+          "where_to_secure": "Requesting agency or organization"
+        }
+      ],
+      "slug": "request-for-medical-assistance",
+      "title": "Request for Medical Assistance",
+      "who_may_avail": "Citizens within the City of San Fernando, Pampanga area of responsibility and nearby areas"
+    },
+    {
+      "appointment": null,
+      "availability": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit a formal request letter with the requested seminar, training, drill, or technical-assistance details.",
+          "sequence": "*"
+        },
+        {
+          "instruction": "Coordinate with the CDRRMO regarding approval and logistical requirements.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Participate in the approved activity.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The CDRRMO provides seminars, training, drills, and technical assistance related to disaster risk reduction and management upon an approved formal request.",
+      "emergency_contacts": [],
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-05",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "refer_to_charter",
+        "text": "Refer to the Citizen's Charter; the published total processing-time row is incomplete."
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request letter indicating the preferred date, location, event or activity details, and participants",
+          "where_to_secure": "Requesting agency or organization"
+        }
+      ],
+      "slug": "request-for-seminars-training-and-drills-and-other-technical",
+      "title": "Request for Seminars/Training and Drills and Other Technical Assistance",
+      "who_may_avail": "Citizens within the City of San Fernando, Pampanga area of responsibility"
+    },
+    {
+      "appointment": null,
+      "availability": {
+        "scope": "SAFRU emergency response only",
+        "status": "24/7"
+      },
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Wait for the appropriate responders to arrive at the scene.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "If conscious, coordinate with and follow the instructions of the responder or medical officer.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Follow the responder or medical officer's instructions during assessment, care, or transport.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The San Fernando Rescue Unit, the CDRRMO response arm, provides emergency medical response, rescue, evacuation, and transport of critical or injured patients.",
+      "emergency_contacts": [
+        {
+          "label": "HELP",
+          "phone": "961-4357",
+          "scope": "Rescue and disaster response"
+        }
+      ],
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-06",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "refer_to_charter",
+        "text": "Refer to the Citizen's Charter; operational steps do not establish a guaranteed responder-arrival time."
+      },
+      "public_notes": [
+        "This service covers emergency response; scheduled patient transport, routine hospital transfer, and other non-emergency ambulance service are outside its reviewed scope."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "No documentary requirement",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "response-for-emergency-call",
+      "title": "Response for Emergency Call",
+      "who_may_avail": "Citizens within the City of San Fernando, Pampanga area of responsibility"
+    },
+    {
+      "appointment": null,
+      "availability": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Present the requirements to CDRRMO CCTV personnel.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Accomplish the CCTV Request Slip and attach the required documents.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The CDRRMO provides viewing or copying of available CCTV footage upon an eligible request.",
+      "emergency_contacts": [],
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-disaster-risk-reduction-management-office-external-07",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CDRRMO",
+        "division": null,
+        "name": "City Disaster Risk Reduction Management Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cdrrmo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "649-6076"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Regular CDRRMO office operations only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "refer_to_charter",
+        "text": "Refer to the Citizen's Charter; processing time may vary depending on the length of footage."
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request letter signed by the police officer in charge or a private requester with reasonable grounds for viewing or copying CCTV footage",
+          "where_to_secure": "Community Police Assistance Center (COMPAC) or requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Request letter or barangay report signed by the barangay chairperson",
+          "where_to_secure": "Barangay Hall with jurisdiction"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Any valid ID with complete address",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "viewing-copying-of-cctv-footage",
+      "title": "Viewing /Copying of CCTV Footage",
+      "who_may_avail": "Not stated in the Charter"
     }
   ]
 }

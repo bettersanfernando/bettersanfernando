@@ -6,6 +6,7 @@ import {
   Mail,
   Phone,
   ShieldCheck,
+  Siren,
 } from 'lucide-react';
 import { Link, useParams } from 'react-router';
 import { Banner } from '@bettergov/kapwa/banner';
@@ -22,14 +23,14 @@ function StatusValue({
   isReference,
 }: {
   label: string;
-  value: string;
+  value: string | null;
   isReference: boolean;
 }) {
   return (
     <div>
       <dt className="text-sm font-semibold text-gray-900">{label}</dt>
       <dd className="mt-1 text-sm leading-6 text-gray-700">
-        {value}
+        {value ?? "Not stated in the Citizen's Charter"}
         {isReference && (
           <span className="mt-1 block text-xs font-medium text-amber-800">
             Confirm the current details in the Citizen&apos;s Charter or with
@@ -56,9 +57,13 @@ function Requirements({ service }: { service: Service }) {
             key={`${requirement.ordinal}-${requirement.text}`}
             className="grid gap-3 py-5 sm:grid-cols-[4rem_minmax(0,1fr)]"
           >
-            <span className="text-sm font-bold text-primary-800">
-              {requirement.ordinal}
-            </span>
+            {requirement.ordinal ? (
+              <span className="text-sm font-bold text-primary-800">
+                {requirement.ordinal}
+              </span>
+            ) : (
+              <span className="hidden sm:block" aria-hidden="true" />
+            )}
             <div className="min-w-0">
               {requirement.condition && (
                 <p className="mb-2 inline-block rounded-md bg-amber-50 px-2.5 py-1 text-xs font-semibold leading-5 text-amber-900">
@@ -68,12 +73,14 @@ function Requirements({ service }: { service: Service }) {
               <p className="text-sm leading-6 text-gray-900">
                 {requirement.text}
               </p>
-              <p className="mt-2 text-sm leading-6 text-gray-700">
-                <span className="font-semibold text-gray-900">
-                  Where to secure:
-                </span>{' '}
-                {requirement.where_to_secure}
-              </p>
+              {requirement.where_to_secure && (
+                <p className="mt-2 text-sm leading-6 text-gray-700">
+                  <span className="font-semibold text-gray-900">
+                    Where to secure:
+                  </span>{' '}
+                  {requirement.where_to_secure}
+                </p>
+              )}
             </div>
           </li>
         ))}
@@ -127,7 +134,7 @@ export default function ServiceDetail() {
         <Banner
           type="error"
           title="Service not found"
-          description="The requested service is not in the currently published BLPD collection."
+          description="The requested service is not in the currently published reviewed collection."
           icon
         />
         <Link
@@ -145,7 +152,7 @@ export default function ServiceDetail() {
       <SEO
         title={service.title}
         description={service.description}
-        keywords={`${service.title}, BLPD, San Fernando Pampanga business service`}
+        keywords={`${service.title}, ${service.office.acronym}, San Fernando Pampanga service`}
       />
       <main className="flex-grow bg-gray-50">
         <section className="border-b border-primary-100 bg-white">
@@ -169,6 +176,18 @@ export default function ServiceDetail() {
               <p className="mt-5 max-w-3xl text-base leading-7 text-gray-700 md:text-lg">
                 {service.description}
               </p>
+              {'availability' in service && service.availability && (
+                <div className="mt-5 inline-flex items-start gap-2 rounded-xl bg-error-50 px-4 py-3 text-sm text-error-900">
+                  <Siren
+                    className="mt-0.5 h-4 w-4 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    <strong>{service.availability.status}</strong> —{' '}
+                    {service.availability.scope}
+                  </span>
+                </div>
+              )}
             </div>
             <dl className="mt-9 grid gap-5 border-y border-gray-200 py-6 sm:grid-cols-3">
               <div>
@@ -348,13 +367,39 @@ export default function ServiceDetail() {
                 >
                   {service.office_contact.phone}
                 </a>
-                <p className="mt-1 text-gray-700">
-                  Extensions {service.office_contact.extensions.join(', ')};
-                  Extension Office{' '}
-                  {service.office_contact.extension_office_extension}
-                </p>
+                {'extensions' in service.office_contact && (
+                  <p className="mt-1 text-gray-700">
+                    Extensions {service.office_contact.extensions.join(', ')};
+                    Extension Office{' '}
+                    {service.office_contact.extension_office_extension}
+                  </p>
+                )}
               </div>
             </div>
+            {'emergency_contacts' in service &&
+              service.emergency_contacts.map(contact => (
+                <div
+                  key={`${contact.label}-${contact.phone}`}
+                  className="flex items-start gap-3 text-sm leading-6"
+                >
+                  <Siren
+                    className="mt-0.5 h-4 w-4 shrink-0 text-error-700"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      {contact.label} emergency contact
+                    </p>
+                    <a
+                      className={externalLinkClass}
+                      href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`}
+                    >
+                      {contact.phone}
+                    </a>
+                    <p className="mt-1 text-gray-700">{contact.scope}</p>
+                  </div>
+                </div>
+              ))}
             <div className="flex items-start gap-3 text-sm leading-6">
               <Mail
                 className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
@@ -381,6 +426,7 @@ export default function ServiceDetail() {
               <div>
                 <p className="font-semibold text-gray-900">Office hours</p>
                 <p>{service.office_hours.schedule}</p>
+                <p className="mt-1 text-xs">{service.office_hours.scope}</p>
               </div>
             </div>
           </aside>

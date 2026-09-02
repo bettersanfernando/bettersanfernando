@@ -47,9 +47,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 8,
+      "record_count": 15,
       "schema_version": 1,
-      "sha256": "320feeb75f18274ed53176b22b0fbce9b01209395df5f4faebd21ede3263e37e"
+      "sha256": "7ecbbbd03586ec0b56924a179b73c27d48aa128c3548995da4422f6a10b0e4cc"
     }
   },
   "export_version": "v0.1.0",
