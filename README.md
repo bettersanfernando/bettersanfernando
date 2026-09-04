@@ -1,331 +1,201 @@
-# 🏛️ Local Government Website Starter Kit
+# BetterSanFernando
+
+BetterSanFernando is an independent civic-information and transparency portal
+for the City of San Fernando, Pampanga, Philippines. It organizes verified
+local government information — services, projects, government structure,
+legislation, and transparency records — around resident needs, with a clear
+link from every published fact back to its source.
+
+**BetterSanFernando is not the official website of the City Government of San
+Fernando.** It is an independent project, not affiliated with, endorsed by, or
+authorized to speak on behalf of the City Government. Official City Government
+contact information is presented as sourced official information, not as a
+BetterSanFernando channel.
+
+## Current public scope
+
+The site has exactly seven top-level navigation areas:
+
+- **Home** — introduces the portal and surfaces high-value civic facts.
+- **Services** — resident-facing guidance on city services, organized by need.
+- **Projects** — a bounded, verified subset of city infrastructure/public-works
+  projects and their evidence.
+- **Government** — offices, official contacts, and legislation.
+- **Transparency** — published-record inventory, sources, and methodology.
+  Statistics is a content area under Transparency, not a separate top-level
+  item.
+- **About** — the project's purpose, independence, and methodology.
+- **Contact** — a channel for BetterSanFernando itself, kept separate from
+  official City Government contacts.
+
+Full route ownership and publication rules are defined in
+[`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md).
+
+## Current bounded data snapshot
+
+These are BetterSanFernando's current published holdings, not complete City
+Government inventories. Coverage is progressive: absence from the portal does
+not mean a City service or record does not exist, only that it has not yet
+been verified and reviewed for publication.
+
+| Domain                            | Published count |
+| --------------------------------- | --------------- |
+| Reviewed External service records | 54              |
+| Published service categories      | 5 of 13         |
+| Planned service categories        | 8 of 13         |
+| Project records                   | 239             |
+| Project-evidence records          | 334             |
+| Barangays                         | 35              |
+| City-office directory records     | 44              |
+| Executive orders                  | 11              |
+| Ordinances                        | 6               |
+| Resolutions                       | 0               |
+
+Published service categories:
+
+| Category              | Records | Route                             |
+| --------------------- | ------: | --------------------------------- |
+| Business Services     |       8 | `/services/business`              |
+| Disaster Preparedness |       7 | `/services/disaster-preparedness` |
+| Assistance Programs   |      19 | `/services/assistance-programs`   |
+| Social Welfare        |      14 | `/services/social-welfare`        |
+| PWD Services          |       6 | `/services/pwd-services`          |
+
+The remaining 8 service categories (Employment, Livelihood, Health Services,
+Education Services, Senior Citizens, Infrastructure & Public Works,
+Agriculture & Fisheries, Environment) are visible in navigation as planned
+sections; they do not yet contain published service records. See
+[`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
+page-by-page readiness assessment and
+[`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is
+planned next.
+
+## Data and publication model
+
+Private research and canonical civic data are maintained in a separate,
+private repository. This repository (`bettersanfernando`) is the **public
+frontend only**:
+
+- Canonical/raw research data, source PDFs/XLSX, recovery queues, and internal
+  analysis files are never copied into this repository.
+- The frontend consumes only a versioned, reviewed, frontend-safe export,
+  vendored into `src/data/generated/civic/`.
+- Application code reads that data exclusively through the typed access layer
+  in `src/data/civic/` — never by importing generated JSON/GeoJSON directly,
+  and never by reading the private repository at build or run time.
+- Generated frontend data is refreshed only through the established sync
+  workflow (`pnpm data:sync`); it is never hand-edited.
+- Private research files, sensitive or person-level data, recovery queues, and
+  source workbooks existing privately does not make them publication-safe —
+  publishing a dataset requires a deliberate, allowlisted export and
+  publication review.
+
+See the **Repository Boundary** section of [`CLAUDE.md`](CLAUDE.md) for the
+exact rules agents and contributors must follow.
+
+## Technology
+
+- React 19, TypeScript, Vite
+- React Router, Tailwind CSS
+- i18next for multilingual support
+- Zod-validated typed data access layer
+- pnpm as the package manager (`packageManager: pnpm@11.9.0`)
 
-A modern, multilingual, and accessible website template designed specifically for local government units (LGUs) in the Philippines. Built with React, TypeScript, and Tailwind CSS.
-
-## ✨ Features
-
-- **🌐 Multilingual Support**: English, Filipino, Cebuano, and other Philippine languages
-- **📱 Responsive Design**: Mobile-first approach with modern UI/UX
-- **♿ Accessibility**: WCAG 2.1 compliant design
-- **📝 Content Management**: YAML-based content system for easy updates
-- **🎨 Customizable**: Easy theming and branding customization
-- **⚡ Fast Performance**: Built with Vite for optimal loading speeds
-- **🔍 SEO Optimized**: Built-in SEO with react-helmet, meta tags, and Open Graph support
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- Git
-
-### Installation
-
-1. **Fork the repository**
-   - Visit https://github.com/iyanski/betterlocalgov
-   - Click the "Fork" button in the top right
-   - This creates your own copy of the repository
-
-2. **Clone your forked repository**
-
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/betterlocalgov.git
-   cd betterlocalgov
-   ```
-
-   Replace `YOUR-USERNAME` with your GitHub username.
-
-3. **Add upstream remote** (to get updates from the original repo)
-
-   ```bash
-   git remote add upstream https://github.com/iyanski/betterlocalgov.git
-   ```
-
-4. **Install dependencies**
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-5. **Run the setup script**
-
-   ```bash
-   npm run setup
-   ```
-
-   This will guide you through configuring your government's information.
-
-6. **Start development server**
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-7. **Open your browser**
-   Navigate to `http://localhost:5173`
-
-## 📚 Documentation
-
-- **[STARTER-KIT-README.md](STARTER-KIT-README.md)** - Complete setup and customization guide
-- **[CONTENT-GUIDE.md](CONTENT-GUIDE.md)** - Content writing and contribution guidelines
-- **[CONTENT-MANAGEMENT.md](CONTENT-MANAGEMENT.md)** - Guide for non-technical users to edit and manage website content
-- **[DEPLOYMENT-GUIDE.md](DEPLOYMENT-GUIDE.md)** - Deployment instructions for Vercel and other platforms
-- **[STARTER-KIT-SUMMARY.md](STARTER-KIT-SUMMARY.md)** - Audit results and implementation summary
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and release notes
-- **[docs/meilisearch.md](docs/meilisearch.md)** - Meilisearch search setup and integration guide
-
-## 🎯 Perfect For
-
-- **Local Government Units** (Cities, Municipalities, Provinces)
-- **Government IT Departments** looking for modern web solutions
-- **Web Development Agencies** serving government clients
-- **Civic Technology Organizations** building government tools
-- **Government Officials** wanting professional online presence
-
-## ⚡ Quick Setup (3-5 hours to live website)
-
-1. **Fork & Clone** (5 minutes)
-   - Fork the repository on GitHub (click "Fork" at https://github.com/iyanski/betterlocalgov)
-   - Clone your fork:
-
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/betterlocalgov.git
-   cd betterlocalgov
-   git remote add upstream https://github.com/iyanski/betterlocalgov.git
-   npm install
-   ```
-
-   Replace `YOUR-USERNAME` with your GitHub username.
-
-2. **Configure Your Government** (15 minutes)
-
-   ```bash
-   npm run setup
-   # Interactive setup guides you through configuration
-   ```
-
-3. **Customize Content** (2-4 hours)
-   - Edit service information in `content/services/`
-   - Add government department info in `content/government/`
-   - Update contact information and branding
-
-4. **Deploy to Production** (15 minutes)
-   - Connect to Vercel for free hosting
-   - Set up custom domain (optional)
-   - Your website is live!
-
-## 🌟 What Makes This Different
-
-### **Built for Philippine LGUs**
-
-- **Multilingual**: English, Filipino, Cebuano, and other local languages
-- **Local Context**: Designed for Philippine government structure
-- **Cultural Sensitivity**: Respects local customs and practices
-- **Accessibility**: WCAG 2.1 compliant for all citizens
-
-### **Non-Technical Friendly**
-
-- **YAML Content Management**: Easy content updates without coding
-- **Visual Setup**: Interactive configuration process
-- **Clear Documentation**: Step-by-step guides for everything
-- **Template System**: Pre-built content templates
-
-### **Modern & Professional**
-
-- **Mobile-First**: Works perfectly on all devices
-- **Fast Loading**: Optimized for performance
-- **SEO Ready**: Built-in search engine optimization
-- **Secure**: Modern security best practices
-
-## 🛠️ Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint issues
-- `npm run format` - Format code with Prettier
-- `npm run setup` - Run setup script for new installations
-- `npm run convert-yaml` - Convert YAML to JSON
-- `npm run dev:yaml` - Convert YAML and start dev server
-
-### Project Structure
-
-```
-content/
-├── government/         # Government section markdown & YAML
-│   └── departments/    # Department pages (executive, legislative, etc.)
-└── services/           # Services section markdown & YAML
-
-src/
-├── components/         # Reusable UI components
-│   ├── home/           # Home page components
-│   ├── layout/         # Layout components (Navbar, Footer)
-│   └── ui/             # Basic UI components
-├── data/               # YAML configuration (services.yaml, government.yaml)
-├── i18n/               # Internationalization
-├── lib/                # Utility functions (markdownLoader, yamlLoader)
-├── pages/              # Page components (Home, Services, Government, Document)
-└── types/              # TypeScript type definitions
-```
-
-## 👥 Contributors
-
-- **[iyanski](https://github.com/iyanski)** — Project creator and maintainer
-- **[Nicu Listana](https://github.com/niculistana)** — Contributor
-
-## 🤝 Contributing
-
-We welcome contributions from everyone! Whether you're a developer, government official, or community member, there are many ways to help improve this project.
-
-### 🌟 For Non-Technical Contributors
-
-**No coding experience required!** You can contribute valuable content and improvements using GitHub's web interface.
-
-#### Quick Start for Non-Technical Users
-
-1. **Create a GitHub account** (free at github.com)
-2. **Navigate to the repository** in your web browser
-3. **Use our detailed guide**: [CONTENT-MANAGEMENT.md](CONTENT-MANAGEMENT.md) - Complete step-by-step instructions for editing content without any technical knowledge
-
-#### What You Can Contribute
-
-- **📝 Content Updates**: Fix outdated information, add new services, improve descriptions
-- **🌐 Translations**: Help translate content to Filipino, Cebuano, or other local languages
-- **📋 Service Information**: Add details about government services, requirements, and processes
-- **🔍 Content Review**: Check for accuracy, clarity, and completeness
-- **💡 Suggestions**: Propose new features or improvements
-
-#### How to Contribute (No Git Required)
-
-1. **Find content to edit**:
-   - Go to `content/services/` for service pages or `content/government/` for department pages
-   - Choose a category (health, education, business, departments, etc.)
-   - Click on any `.md` file to edit
-
-2. **Make your changes**:
-   - Click the pencil icon (✏️) to edit
-   - Update the content using simple text formatting
-   - Add new information, fix errors, or improve clarity
-
-3. **Save your changes**:
-   - Write a brief description of what you changed
-   - Click "Commit changes"
-   - Your changes will be reviewed and merged
-
-#### Content Types You Can Edit
-
-- **Service Descriptions**: How to apply for permits, scholarships, health services
-- **Requirements**: Documents needed, eligibility criteria, deadlines
-- **Contact Information**: Office locations, phone numbers, hours
-- **Process Steps**: Step-by-step instructions for government services
-- **Translations**: Help make content available in local languages
-
-### 👨‍💻 For Technical Contributors
-
-#### Content Contributors (Basic Technical)
-
-1. **Fork the repository** on GitHub (click "Fork" at https://github.com/iyanski/betterlocalgov)
-2. **Clone your fork**: `git clone https://github.com/YOUR-USERNAME/betterlocalgov.git`
-3. **Add upstream remote**: `git remote add upstream https://github.com/iyanski/betterlocalgov.git`
-4. **Create a content branch**: `git checkout -b content/update-health-services`
-5. **Edit content files** in `content/`
-6. **Test your changes**: `npm run dev`
-7. **Submit a pull request** to the original repository
-
-#### Developers
-
-1. **Fork the repository** on GitHub (click "Fork" at https://github.com/iyanski/betterlocalgov)
-2. **Clone your fork**: `git clone https://github.com/YOUR-USERNAME/betterlocalgov.git`
-3. **Add upstream remote**: `git remote add upstream https://github.com/iyanski/betterlocalgov.git`
-4. **Create a feature branch**: `git checkout -b feature/new-component`
-5. **Make your changes**
-6. **Run tests**: `npm run lint && npm run build`
-7. **Submit a pull request** to the original repository
-
-#### Keeping Your Fork Updated
-
-To get the latest changes from the original repository:
+## Local development
 
 ```bash
-# Fetch the latest changes from upstream
-git fetch upstream
-
-# Switch to your main branch
-git checkout main
-
-# Merge upstream changes into your main branch
-git merge upstream/main
-
-# Push updates to your fork on GitHub
-git push origin main
+pnpm install       # Install dependencies
+pnpm dev           # Start the development server (localhost:5173)
+pnpm build         # TypeScript check + production build
+pnpm lint          # Run ESLint
 ```
 
-**Best Practice**: Always sync your fork before creating a new branch for contributions.
+### Data validation and smoke tests
 
-### 📋 Contribution Guidelines
+These checks run against the already-vendored, public-safe data in
+`src/data/generated/civic/` and require no private-repository access:
 
-#### Content Guidelines
+```bash
+pnpm data:validate            # Validate the vendored civic-data export
+pnpm data:smoke                # Civic data layer smoke checks
+pnpm services:smoke            # Services dataset and route smoke checks
+pnpm nav:smoke                  # Navigation and planned-page smoke checks
+pnpm check:public-data-boundary # Guard against private data re-entering this repo
+```
 
-- **Accuracy First**: Ensure all information is current and correct
-- **Clear Language**: Write for the general public, avoid jargon
-- **Complete Information**: Include all necessary details (requirements, steps, contacts)
-- **Local Context**: Consider the specific needs of your community
-- **Accessibility**: Use clear headings, simple language, and logical structure
+Additional domain-specific smoke tests (projects, barangays, legislation,
+transparency, statistics, government, search, and more) are listed in
+`package.json`.
 
-#### Technical Guidelines
+## Repository structure
 
-- Follow existing code style and patterns
-- Test your changes thoroughly
-- Update documentation when needed
-- Ensure mobile responsiveness
-- Maintain accessibility standards
+```
+src/
+├── pages/                    # Route-level page components
+├── components/                # Reusable UI and layout components
+├── data/
+│   ├── civic/                 # Typed, validated access layer for civic data
+│   │                            (the only sanctioned way to read civic data)
+│   └── generated/civic/       # Vendored frontend-safe export (never hand-edited)
+├── lib/                       # Utility functions (markdown/YAML loaders, etc.)
+└── i18n/                      # Internationalization setup
 
-### 🎯 Priority Areas for Contribution
+scripts/                      # Data sync, validation, and smoke-test scripts
+docs/                         # Architecture, data-readiness, and roadmap docs
+content/                      # YAML/Markdown content for Services and Government
+```
 
-1. **Content Accuracy**: Update outdated information, fix errors
-2. **Localization**: Translate content to Filipino, Cebuano, and other Philippine languages
-3. **Service Coverage**: Add missing government services and programs
-4. **User Experience**: Improve clarity and ease of use
-5. **Accessibility**: Ensure content is accessible to all citizens
+## Data synchronization
 
-### 🆘 Need Help?
+Maintainers with local access to the private `bettersanfernando-data`
+repository can refresh the vendored export:
 
-- **For Content Questions**: Check [CONTENT-MANAGEMENT.md](CONTENT-MANAGEMENT.md)
-- **For Technical Issues**: Open an issue on GitHub
-- **For General Questions**: Contact the project maintainers
+```bash
+pnpm data:sync
+# or: pnpm data:sync -- --source=/path/to/bettersanfernando-data
+```
 
-### 🏆 Recognition
+This copies only the files declared in that repository's versioned, checksummed
+export manifest into `src/data/generated/civic/`, verifying every checksum
+before copying. It is a local maintainer step, never a production or CI
+dependency — the private repository is never a runtime or production data
+source for this application.
 
-All contributors are recognized in our project documentation. Your contributions help make government services more accessible to all citizens!
+## Methodology and limitations
 
-## 📄 License
+- [`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md) — canonical routes,
+  section ownership, and publication rules.
+- [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) — per-page data
+  readiness and publication status.
+- [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) — what has
+  shipped and what is planned next.
+- In the running application, `/transparency/methodology` and
+  `/projects/methodology` explain verification, lifecycle, and data-quality
+  rules for the published domains, and `/transparency/sources` inventories the
+  sources behind them.
 
-This project is licensed under the Creative Commons Zero (CC0) License - see the [LICENSE](LICENSE) file for details.
+Coverage is progressive and intentionally bounded. Verification status and
+provenance matter more than apparent completeness: the portal does not infer
+or fill in missing government facts, and an empty or partial dataset is
+reported as such rather than backfilled with assumptions.
 
-**CC0 License Benefits:**
+## Contributing
 
-- **Public Domain**: No restrictions on use, modification, or distribution
-- **Government Friendly**: Perfect for public sector projects
-- **Maximum Reusability**: Anyone can use, modify, and distribute freely
-- **No Attribution Required**: Though attribution is appreciated
+1. Fork or branch, install dependencies with `pnpm install`, and run `pnpm dev`
+   to work locally.
+2. Follow the conventions and repository boundary documented in
+   [`CLAUDE.md`](CLAUDE.md).
+3. Run `pnpm lint` and `pnpm build` before opening a pull request; run the
+   relevant smoke tests for any area you changed.
+4. A pre-commit hook runs `lint-staged` (ESLint + Prettier) automatically on
+   staged files.
+5. Any change that affects routes, published dataset counts, category
+   publication status, or coverage statements must complete the
+   documentation-impact checkpoint described in `CLAUDE.md` — either update the
+   affected planning documents in the same change, or state
+   `Documentation impact: none` with a specific reason.
 
-## 🙏 Acknowledgments
+## License
 
-- Built with [React](https://reactjs.org/)
-- Styled with [Tailwind CSS v4](https://tailwindcss.com/)
-- UI components by [@bettergov/kapwa](https://github.com/bettergov/kapwa)
-- Icons by [Lucide React](https://lucide.dev/)
-- Content management with [YAML](https://yaml.org/)
-- Internationalization with [i18next](https://www.i18next.com/)
-
----
-
-**Made with ❤️ for Philippine Local Government Units**
+This project is licensed under [CC0 1.0 Universal](LICENSE) (Creative Commons
+Zero) — see the [`LICENSE`](LICENSE) file for the full text.
