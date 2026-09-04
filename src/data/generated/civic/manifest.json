@@ -47,9 +47,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 15,
+      "record_count": 34,
       "schema_version": 1,
-      "sha256": "7ecbbbd03586ec0b56924a179b73c27d48aa128c3548995da4422f6a10b0e4cc"
+      "sha256": "aa6becfd87329f4ccf8f4bcd0615fb636bce8db081f738713613f3a46ced135f"
     }
   },
   "export_version": "v0.1.0",
@@ -58,11 +58,19 @@
     "data/geography/san-fernando-barangays.geojson",
     "data/demographics/san-fernando-barangays.json",
     "data/directories/city-offices.json",
+    "data/government/government-structure-institutional-links.json",
     "data/legislation/executive-orders.json",
     "data/legislation/ordinances.json",
     "data/legislation/resolutions.json",
     "data/projects/city-projects.json",
-    "data/projects/project-evidence.json"
+    "data/projects/project-evidence.json",
+    "data/services/citizens-charter-services.json",
+    "data/services/blpd-service-freshness-enrichment.json",
+    "data/services/blpd-service-publication-review.json",
+    "data/services/cdrrmo-emergency-freshness-enrichment.json",
+    "data/services/cdrrmo-service-publication-review.json",
+    "data/services/cswdo-social-assistance-freshness-enrichment.json",
+    "data/services/cswdo-social-assistance-publication-review.json"
   ],
   "jurisdiction": {
     "name": "City of San Fernando",
@@ -80,11 +88,14 @@
     "data/projects/*-schema-analysis.json",
     "data/projects/*-source-manifest.json",
     "data/legislation/*-recovery-queue.json",
+    "data/services/citizens-charter-extraction-analysis.json",
+    "data/services/citizens-charter-extraction-review-queue.json",
+    "data/services/*-freshness-enrichment.json",
     "data/finance/financial-privacy-analysis.json",
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "bac29e238207d3c3640b7703fb369e8f36b00f90",
+  "source_commit": "3507e16ff3ec17778332b666b2526db05c81b9a9",
   "source_data_version": "v0.1.1",
   "sources": [
     {

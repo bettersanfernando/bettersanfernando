@@ -159,7 +159,53 @@ const CdrrmoServiceSchema = z.strictObject({
   requirements: z.array(CdrrmoRequirementSchema).min(1),
 });
 
-const ServiceSchema = z.union([BlpdServiceSchema, CdrrmoServiceSchema]);
+const CswdoRequirementSchema = z.strictObject({
+  condition: NonEmptyString.nullable(),
+  ordinal: NonEmptyString,
+  text: NonEmptyString,
+  where_to_secure: NonEmptyString,
+});
+
+const CswdoServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  classification: z.strictObject({
+    complexity: z.enum(['Simple', 'Complex']),
+    service_scope: z.literal('External'),
+    transaction_types: z.tuple([z.literal('G2C')]),
+  }),
+  fee: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'not_stated', 'refer_to_charter']),
+    text: NonEmptyString.nullable(),
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CSWDO'),
+    division: z.null(),
+    name: z.literal('City Social Welfare and Development Office'),
+  }),
+  office_contact: z.strictObject({
+    address: NonEmptyString,
+    emails: z.array(z.email()).min(1),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.strictObject({
+    schedule: NonEmptyString,
+    scope: z.literal('Published CSWDO office hours only'),
+  }),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'not_stated', 'refer_to_charter']),
+    text: NonEmptyString.nullable(),
+  }),
+  requirements: z.array(CswdoRequirementSchema).min(1),
+});
+
+const ServiceSchema = z.union([
+  BlpdServiceSchema,
+  CdrrmoServiceSchema,
+  CswdoServiceSchema,
+]);
 
 const ServicesFileSchema = z
   .strictObject({
@@ -169,15 +215,16 @@ const ServicesFileSchema = z
     office_scope: z.tuple([
       z.literal('Business License and Permit Division'),
       z.literal('City Disaster Risk Reduction Management Office'),
+      z.literal('City Social Welfare and Development Office'),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(15),
+    record_count: z.literal(34),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(15),
+    services: z.array(ServiceSchema).length(34),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 15) {
+      if (new Set(file.services.map(service => service[key])).size !== 34) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -192,17 +239,22 @@ const ServicesFileSchema = z
     const cdrrmoCount = file.services.filter(
       service => service.office.acronym === 'CDRRMO'
     ).length;
-    if (blpdCount !== 8 || cdrrmoCount !== 7) {
+    const cswdoCount = file.services.filter(
+      service => service.office.acronym === 'CSWDO'
+    ).length;
+    if (blpdCount !== 8 || cdrrmoCount !== 7 || cswdoCount !== 19) {
       context.addIssue({
         code: 'custom',
-        message: 'Services must contain exactly 8 BLPD and 7 CDRRMO records',
+        message:
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, and 19 CSWDO records',
         path: ['services'],
       });
     }
   });
 
 export type Service = z.infer<typeof ServiceSchema>;
-export type PublishedServiceCategory = 'business' | 'disaster-preparedness';
+export type PublishedServiceCategory =
+  'business' | 'disaster-preparedness' | 'assistance-programs';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -218,10 +270,17 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return servicesBySlug.get(slug);
 }
 
+const categoryByAcronym: Record<
+  Service['office']['acronym'],
+  PublishedServiceCategory
+> = {
+  BLPD: 'business',
+  CDRRMO: 'disaster-preparedness',
+  CSWDO: 'assistance-programs',
+};
+
 export function getServiceCategory(service: Service): PublishedServiceCategory {
-  return service.office.acronym === 'BLPD'
-    ? 'business'
-    : 'disaster-preparedness';
+  return categoryByAcronym[service.office.acronym];
 }
 
 export function getServiceHref(service: Service): string {

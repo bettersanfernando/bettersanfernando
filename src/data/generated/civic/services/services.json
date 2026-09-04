@@ -4,10 +4,11 @@
   "last_verified": "2026-09-01",
   "office_scope": [
     "Business License and Permit Division",
-    "City Disaster Risk Reduction Management Office"
+    "City Disaster Risk Reduction Management Office",
+    "City Social Welfare and Development Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 15,
+  "record_count": 34,
   "schema_version": 1,
   "services": [
     {
@@ -1753,6 +1754,1805 @@
       "slug": "viewing-copying-of-cctv-footage",
       "title": "Viewing /Copying of CCTV Footage",
       "who_may_avail": "Not stated in the Charter"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Certificate of Indigency and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO issues a Certificate of Indigency for correction of a birth certificate after assessing the applicant's circumstances.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-01",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Indigency of the client (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "2",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": "If unemployed",
+          "ordinal": "3",
+          "text": "Cedula or Community Tax Certificate of the client (1 original and 1 photocopy)",
+          "where_to_secure": "Barangay Hall or City Treasurer's Office"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-indigency-correction-of-birth-certificate",
+      "title": "Issuance of Certificate of Indigency (Correction of Birth Certificate)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Certificate of Indigency and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO issues a Certificate of Indigency for legal assistance after assessing the applicant's circumstances.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-02",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Indigency of the client stating the purpose as PAO or IBP assistance (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "2",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": "Submit one applicable proof of income",
+          "ordinal": "3",
+          "text": "Proof of income, such as a payslip, Income Tax Return, Certificate of Tax Exemption, bank statement, or affidavit of no or low income (original for presentation and 1 photocopy)",
+          "where_to_secure": "Employer, Bureau of Internal Revenue, respective bank, or notarial firm"
+        },
+        {
+          "condition": "For court cases",
+          "ordinal": "4",
+          "text": "Court Order or Resolution (original for presentation and 1 photocopy)",
+          "where_to_secure": "Trial Court"
+        },
+        {
+          "condition": "For property concerns",
+          "ordinal": "5",
+          "text": "Land contract, title, or resolution (original for presentation and 1 photocopy)",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": "Additional requirement for IBP assistance",
+          "ordinal": "6",
+          "text": "Denial Letter",
+          "where_to_secure": "Public Attorney's Office"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-indigency-legal-assistance",
+      "title": "Issuance of Certificate of Indigency (Legal Assistance)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Certificate of Indigency and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO issues a Certificate of Indigency for Point of Service financially incapable applicants after assessment.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-03",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Medical Certificate or Clinical Abstract of the client (1 original)",
+          "where_to_secure": "Hospital where the client was admitted"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Duly accomplished PhilHealth Member Registration Form of the client (1 original)",
+          "where_to_secure": "PhilHealth"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Indigency of the client, parent, or guardian (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Barangay Certificate of Residency of the client (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "5",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-indigency-point-of-service-financially-incapable",
+      "title": "Issuance of Certificate of Indigency (Point of Service-Financially Incapable)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Certificate of Indigency and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO issues a Certificate of Indigency for scholarship grants or educational assistance after assessment.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-04",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Indigency of the student and parent or guardian (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Barangay Certificate of Residency of the student and parent (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "3",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": "For guardians",
+          "ordinal": "4",
+          "text": "Certificate or Affidavit of Guardianship (1 original)",
+          "where_to_secure": "Respective Barangay or Legal Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Registration or Admission Confirmation or Certificate of Enrollment of the student",
+          "where_to_secure": "School, university, or college"
+        },
+        {
+          "condition": "Submit one applicable proof of income",
+          "ordinal": "6",
+          "text": "Proof of income, such as a payslip, Income Tax Return, Certificate of Tax Exemption, bank statement, or affidavit of no or low income (original for presentation and 1 photocopy)",
+          "where_to_secure": "Employer, Bureau of Internal Revenue, respective bank, or notarial firm"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Proof of billing, such as an electric or water bill",
+          "where_to_secure": "Respective billing company"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-indigency-scholarship-grants-educational-assistance",
+      "title": "Issuance of Certificate of Indigency (Scholarship Grants/Educational Assistance)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for burial assistance needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-05",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of an intake sheet do not guarantee assistance or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Death Certificate (original or certified true copy for presentation, with 1 photocopy of front and back)",
+          "where_to_secure": "City Civil Registry Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Funeral Contract (original for presentation and 1 photocopy)",
+          "where_to_secure": "Funeral service provider"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the client",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-burial-assistance",
+      "title": "Issuance of General Intake Sheet (Burial Assistance)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses eligible residents seeking educational assistance under E-AICS and issues a Social Case Study when approved.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-06",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "2 hours and 20 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of a Social Case Study do not guarantee assistance, funding, or a benefit amount.",
+        "No active online application channel is published for this service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "For guardians",
+          "ordinal": "2",
+          "text": "Certificate or Affidavit of Guardianship (1 original)",
+          "where_to_secure": "Respective Barangay or Legal Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "School ID of the client (original for presentation and 1 photocopy)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Registration or Admission Confirmation or Certificate of Enrollment",
+          "where_to_secure": "School where the client is enrolled"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "5",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the parent or guardian",
+          "where_to_secure": "Parent or guardian or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-e-aics-social-case-study-educational-assistance",
+      "title": "Issuance of E-AICS Social Case Study (Educational Assistance)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses eligible residents seeking medical assistance under E-AICS and issues a Social Case Study when approved.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-07",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "2 hours and 20 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of a Social Case Study do not guarantee assistance, funding, or a benefit amount.",
+        "No active online application channel is published for this service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Hospital request, bill, or costing of the client (1 original and 1 photocopy)",
+          "where_to_secure": "Hospital where the client was admitted"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Medical Certificate or Clinical Abstract (1 original and 1 photocopy)",
+          "where_to_secure": "Hospital or doctor"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the client",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-e-aics-social-case-study-medical-assistance",
+      "title": "Issuance of E-AICS Social Case Study (Medical Assistance)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for assistive-device needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-08",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of an intake sheet do not guarantee an assistive device or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Medical Certificate or Clinical Abstract (1 original and 1 photocopy)",
+          "where_to_secure": "Hospital or doctor"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-assistive-device",
+      "title": "Issuance of General Intake Sheet (Assistive Device)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "5"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "6"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for burial assistance needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-09",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "This separately numbered Charter record is preserved without merging it with the similar burial-assistance entry.",
+        "Assessment and issuance of an intake sheet do not guarantee assistance or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Death Certificate (original or certified true copy for presentation, with 1 photocopy of front and back)",
+          "where_to_secure": "City Civil Registry Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Funeral Contract (original for presentation and 1 photocopy)",
+          "where_to_secure": "Funeral service provider"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the client",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-burial-assistance-charter-record-09",
+      "title": "Issuance of General Intake Sheet (Burial Assistance)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for educational-assistance needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-10",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of an intake sheet do not guarantee educational assistance, scholarship approval, funding, or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "For guardians",
+          "ordinal": "2",
+          "text": "Certificate or Affidavit of Guardianship (1 original)",
+          "where_to_secure": "Respective Barangay or Legal Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "School ID of the student (original for presentation and 1 photocopy)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Registration or Admission Confirmation or Certificate of Enrollment",
+          "where_to_secure": "School where the client is enrolled"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "5",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the parent or guardian",
+          "where_to_secure": "Parent or guardian or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-educational-assistance",
+      "title": "Issuance of General Intake Sheet (Educational Assistance)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for informal-settler assistance needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-11",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of an intake sheet do not guarantee assistance or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Endorsement Letter",
+          "where_to_secure": "Local Housing"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Court Order",
+          "where_to_secure": "Trial Court"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the client",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-informal-settlers",
+      "title": "Issuance of General Intake Sheet (Informal Settlers)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for medical-assistance needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-12",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of an intake sheet do not guarantee medical assistance, funding, or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Hospital request, bill, or costing of the client (1 original and 1 photocopy)",
+          "where_to_secure": "Hospital where the client was admitted"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Medical Certificate or Clinical Abstract (1 original and 1 photocopy)",
+          "where_to_secure": "Hospital or doctor"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the client",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-medical-assistance",
+      "title": "Issuance of General Intake Sheet (Medical Assistance)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the General Intake Sheet and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO conducts an initial assessment and issues a General Intake Sheet for needs arising from sporadic incidents.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-13",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 25 minutes"
+      },
+      "public_notes": [
+        "Assessment and issuance of an intake sheet do not guarantee relief, funding, or a benefit amount; availability is case-specific."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Incident Report",
+          "where_to_secure": "Bureau of Fire Protection or City Disaster Risk Reduction and Management Office"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "3",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature of the client",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-general-intake-sheet-sporadic-incidents",
+      "title": "Issuance of General Intake Sheet (Sporadic Incidents)",
+      "who_may_avail": "Individuals and families in the community who need an initial assessment to avail of programs and services"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses the applicant and issues a supporting Social Case Study for the centenarian-award process.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-20",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 2 hours"
+      },
+      "public_notes": [
+        "This service issues a supporting Social Case Study; it does not guarantee approval, funding, payout, or a City benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Latest Medical Certificate",
+          "where_to_secure": "Hospital or doctor"
+        },
+        {
+          "condition": "If unavailable, submit a Marriage Contract, Baptismal or Confirmation Certificate, or Birth Certificate of the client's children",
+          "ordinal": "2",
+          "text": "Live Birth Certificate",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Latest whole-body picture while holding a newspaper (2 copies)",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "issuance-of-social-case-study-100-years-old-and-above-centenarian-award",
+      "title": "Issuance of Social Case Study (100 Years Old and Above Centenarian Award)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses the applicant and issues a supporting Social Case Study for the 95-years-old-and-above incentive process.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-21",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 2 hours"
+      },
+      "public_notes": [
+        "This service issues a supporting Social Case Study; it does not guarantee approval, funding, payout, or a City benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Latest Medical Certificate",
+          "where_to_secure": "Hospital or doctor"
+        },
+        {
+          "condition": "If unavailable, submit a Marriage Contract, Baptismal or Confirmation Certificate, or Birth Certificate of the client's children",
+          "ordinal": "2",
+          "text": "Live Birth Certificate",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Notarized Barangay Resolution certifying that the prospective recipient is Kapampangan and a bona fide barangay resident, or a migrant with at least 20 years of permanent residency in Pampanga at the time of the grant",
+          "where_to_secure": "Respective Barangay and Public Attorney's Office or notarial firm"
+        }
+      ],
+      "slug": "issuance-of-social-case-study-95-years-old-and-above-one-time-cash-incentive-award",
+      "title": "Issuance of Social Case Study (95 Years Old and Above One-Time Cash Incentive Award)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses the applicant and issues a Social Case Study for assistive-device needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-22",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 2 hours"
+      },
+      "public_notes": [
+        "Assessment and issuance of a Social Case Study do not guarantee an assistive device, funding, or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Medical Certificate or Clinical Abstract (1 original and 1 photocopy)",
+          "where_to_secure": "Hospital or doctor"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "PWD ID (2 photocopies of front and back)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Whole-body picture, 3R size (2 copies)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or two accepted valid IDs with specimen signatures of the parent or guardian",
+          "where_to_secure": "Parent or guardian or issuing agencies"
+        }
+      ],
+      "slug": "issuance-of-social-case-study-assistive-device",
+      "title": "Issuance of Social Case Study (Assistive Device)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses the applicant and issues a Social Case Study for informal-settler assistance needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-24",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 2 hours"
+      },
+      "public_notes": [
+        "Assessment and issuance of a Social Case Study do not guarantee assistance, funding, or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Endorsement Letter",
+          "where_to_secure": "Local Housing"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Court Order",
+          "where_to_secure": "Trial Court"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or two accepted valid IDs with specimen signatures of the parent or guardian",
+          "where_to_secure": "Parent or guardian or issuing agencies"
+        }
+      ],
+      "slug": "issuance-of-social-case-study-informal-settlers",
+      "title": "Issuance of Social Case Study (Informal Settlers)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses the applicant and issues a Social Case Study for scholarship-grant needs.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-25",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 2 hours"
+      },
+      "public_notes": [
+        "Issuance of a Social Case Study does not guarantee scholarship approval, funding, or a benefit amount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client and beneficiary (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "For guardians",
+          "ordinal": "2",
+          "text": "Certificate or Affidavit of Guardianship (1 original)",
+          "where_to_secure": "Respective Barangay or Legal Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "School ID of the client (original for presentation and 1 photocopy)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Registration or Admission Confirmation or Certificate of Enrollment",
+          "where_to_secure": "School where the client is enrolled"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or two accepted valid IDs with specimen signatures of the parent or guardian",
+          "where_to_secure": "Parent or guardian or issuing agencies"
+        }
+      ],
+      "slug": "issuance-of-social-case-study-scholarship-grants",
+      "title": "Issuance of Social Case Study (Scholarship Grants)",
+      "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Visit the CSWDO, obtain a queue number, wait for your turn, and ask about the service requirements.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the assessment interview, answer the questions, and wait for the decision. A home visit may be conducted if necessary.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Upon approval, receive the Social Case Study and sign the logbook to acknowledge its release.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The CSWDO assesses the applicant and issues a Social Case Study for needs arising from sporadic incidents.",
+      "fee": {
+        "status": "not_stated",
+        "text": null
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-26",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 2 hours"
+      },
+      "public_notes": [
+        "Assessment and issuance of a Social Case Study do not guarantee relief, funding, or a benefit amount; availability is case-specific."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay Certificate of Residency or Barangay Indigency of the client (1 original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Incident Report",
+          "where_to_secure": "Bureau of Fire Protection or City Disaster Risk Reduction and Management Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or two accepted valid IDs with specimen signatures of the parent or guardian",
+          "where_to_secure": "Parent or guardian or issuing agencies"
+        }
+      ],
+      "slug": "issuance-of-social-case-study-sporadic-incidents",
+      "title": "Issuance of Social Case Study (Sporadic Incidents)",
+      "who_may_avail": "Indigent individuals and families in the community"
     }
   ]
 }

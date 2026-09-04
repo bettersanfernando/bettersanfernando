@@ -142,7 +142,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.assistancePrograms',
             href: '/services/assistance-programs',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.socialWelfare',

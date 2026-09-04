@@ -46,7 +46,7 @@ const categories = [
     'Assistance Programs',
     'assistance-programs',
     'Public assistance programs and eligibility guidance.',
-    'planned',
+    'published',
   ],
   [
     'Social Welfare',
@@ -213,13 +213,17 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                 {name}
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
-                {category === 'business'
-                  ? 'Reviewed services currently published from the Business License and Permit Division.'
-                  : 'Reviewed services currently published from the City Disaster Risk Reduction Management Office.'}
+                {category === 'business' &&
+                  'Reviewed services currently published from the Business License and Permit Division.'}
+                {category === 'disaster-preparedness' &&
+                  'Reviewed services currently published from the City Disaster Risk Reduction Management Office.'}
+                {category === 'assistance-programs' &&
+                  'A reviewed subset of City social-assistance services currently published from the City Social Welfare and Development Office.'}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
-                This is a bounded collection, not a complete inventory of City
-                Government services.
+                {category === 'assistance-programs'
+                  ? 'This is a bounded collection, not all assistance programs and not complete coverage of CSWDO or City social-welfare services.'
+                  : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

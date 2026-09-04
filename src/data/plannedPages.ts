@@ -3,7 +3,6 @@ const plannedPageRoutes = [
   { id: 'livelihood', path: '/services/livelihood' },
   { id: 'healthServices', path: '/services/health-services' },
   { id: 'educationServices', path: '/services/education' },
-  { id: 'assistancePrograms', path: '/services/assistance-programs' },
   { id: 'socialWelfare', path: '/services/social-welfare' },
   { id: 'seniorCitizens', path: '/services/senior-citizens' },
   { id: 'pwdServices', path: '/services/pwd-services' },

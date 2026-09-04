@@ -160,8 +160,13 @@ export default function ServiceDetail() {
     );
   }
 
+  const categoryNames = {
+    business: 'Business Services',
+    'disaster-preparedness': 'Disaster Preparedness',
+    'assistance-programs': 'Assistance Programs',
+  } as const;
   const categoryName =
-    category === 'business' ? 'Business Services' : 'Disaster Preparedness';
+    categoryNames[category as keyof typeof categoryNames] ?? category;
 
   return (
     <>
@@ -374,6 +379,11 @@ export default function ServiceDetail() {
               <p className="mt-2 text-sm text-gray-700">
                 {service.office.name}
               </p>
+              {'address' in service.office_contact && (
+                <p className="mt-1 text-sm text-gray-700">
+                  {service.office_contact.address}
+                </p>
+              )}
             </div>
             <div className="flex items-start gap-3 text-sm leading-6">
               <Phone

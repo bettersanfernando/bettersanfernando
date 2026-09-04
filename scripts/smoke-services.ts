@@ -13,6 +13,7 @@ import {
 const services = getServices();
 const blpd = services.filter(service => service.office.acronym === 'BLPD');
 const cdrrmo = services.filter(service => service.office.acronym === 'CDRRMO');
+const cswdo = services.filter(service => service.office.acronym === 'CSWDO');
 const appSource = readFileSync('src/App.tsx', 'utf8');
 const servicesPageSource = readFileSync('src/pages/Services.tsx', 'utf8');
 const detailPageSource = readFileSync('src/pages/ServiceDetail.tsx', 'utf8');
@@ -32,8 +33,13 @@ const canonicalCategories = [
   'environment',
   'disaster-preparedness',
 ] as const;
+const realCategorySlugs = [
+  'business',
+  'assistance-programs',
+  'disaster-preparedness',
+];
 const plannedCategorySlugs = canonicalCategories.filter(
-  slug => slug !== 'business' && slug !== 'disaster-preparedness'
+  slug => !realCategorySlugs.includes(slug)
 );
 
 const servicesNavigation = mainNavigation.find(item => item.id === 'services');
@@ -48,7 +54,7 @@ assert.deepEqual(
     section.items.map(item => item.kind)
   ),
   canonicalCategories.map(slug =>
-    slug === 'business' || slug === 'disaster-preparedness' ? 'real' : 'planned'
+    realCategorySlugs.includes(slug) ? 'real' : 'planned'
   )
 );
 assert.deepEqual(
@@ -57,6 +63,7 @@ assert.deepEqual(
     .map(page => page.path.replace('/services/', '')),
   plannedCategorySlugs
 );
+assert.match(appSource, /path="\/services\/assistance-programs"/);
 assert.match(appSource, /path="\/services\/:category\/:serviceSlug"/);
 assert.match(appSource, /path="\/services\/:slug"/);
 assert.match(
@@ -70,11 +77,12 @@ for (const slug of canonicalCategories) {
   );
 }
 
-assert.equal(services.length, 15);
+assert.equal(services.length, 34);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
-assert.equal(new Set(services.map(service => service.id)).size, 15);
-assert.equal(new Set(services.map(service => service.slug)).size, 15);
+assert.equal(cswdo.length, 19);
+assert.equal(new Set(services.map(service => service.id)).size, 34);
+assert.equal(new Set(services.map(service => service.slug)).size, 34);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -86,7 +94,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 15 service detail routes must resolve through the adapter'
+  'all 34 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -101,6 +109,14 @@ assert.ok(
       `/services/disaster-preparedness/${service.slug}`
   ),
   'all seven CDRRMO records must use canonical Disaster Preparedness routes'
+);
+assert.ok(
+  cswdo.every(
+    service =>
+      getServiceHref(service) ===
+      `/services/assistance-programs/${service.slug}`
+  ),
+  'all nineteen reviewed CSWDO records must use canonical Assistance Programs routes'
 );
 
 assert.deepEqual(
@@ -157,6 +173,36 @@ assert.deepEqual(
   ['961-4357', '961-4357']
 );
 
+assert.equal(new Set(cswdo.map(service => service.slug)).size, 19);
+assert.ok(
+  cswdo.every(
+    service =>
+      service.forms.length === 0 &&
+      service.online_channels.length === 0 &&
+      service.appointment === null
+  ),
+  'reviewed CSWDO records must not promote unresolved forms, digital channels, or appointment coverage'
+);
+assert.ok(
+  cswdo.every(
+    service =>
+      service.office_hours.scope === 'Published CSWDO office hours only'
+  )
+);
+assert.ok(
+  cswdo.every(service =>
+    service.requirements.every(
+      requirement =>
+        requirement.ordinal !== null && requirement.where_to_secure !== null
+    )
+  ),
+  'reviewed CSWDO requirements must not silently drop ordinal or where_to_secure'
+);
+assert.ok(
+  cswdo.every(service => !('agency_action' in service)),
+  'CSWDO records must not leak private agency-action fields'
+);
+
 for (const service of services) {
   for (const url of [
     service.canonical_source.url,
@@ -190,4 +236,6 @@ for (const forbidden of [
 assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
-console.log('  routes: 15/15; BLPD: 8; CDRRMO: 7; External: 15');
+console.log(
+  '  routes: 34/34; BLPD: 8; CDRRMO: 7; CSWDO: 19; External: 34; published categories: 3/13'
+);
