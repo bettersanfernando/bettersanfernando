@@ -218,13 +218,13 @@ const ServicesFileSchema = z
       z.literal('City Social Welfare and Development Office'),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(34),
+    record_count: z.literal(54),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(34),
+    services: z.array(ServiceSchema).length(54),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 34) {
+      if (new Set(file.services.map(service => service[key])).size !== 54) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -242,11 +242,11 @@ const ServicesFileSchema = z
     const cswdoCount = file.services.filter(
       service => service.office.acronym === 'CSWDO'
     ).length;
-    if (blpdCount !== 8 || cdrrmoCount !== 7 || cswdoCount !== 19) {
+    if (blpdCount !== 8 || cdrrmoCount !== 7 || cswdoCount !== 39) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, and 19 CSWDO records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, and 39 CSWDO records',
         path: ['services'],
       });
     }
@@ -254,7 +254,11 @@ const ServicesFileSchema = z
 
 export type Service = z.infer<typeof ServiceSchema>;
 export type PublishedServiceCategory =
-  'business' | 'disaster-preparedness' | 'assistance-programs';
+  | 'business'
+  | 'disaster-preparedness'
+  | 'assistance-programs'
+  | 'social-welfare'
+  | 'pwd-services';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -279,7 +283,37 @@ const categoryByAcronym: Record<
   CSWDO: 'assistance-programs',
 };
 
+// CSWDO covers three resident-facing purposes, not one category: reviewed
+// PWD ID/registration records and Solo Parent ID/registration records are
+// carved out of the general Assistance Programs bucket by stable service id.
+const pwdServiceIds = new Set([
+  'charter-2026-2e-city-social-welfare-and-development-office-external-14',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-15',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-16',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-17',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-18',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-19',
+]);
+const soloParentServiceIds = new Set([
+  'charter-2026-2e-city-social-welfare-and-development-office-external-27',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-28',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-29',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-30',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-31',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-32',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-33',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-34',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-35',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-36',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-37',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-38',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-39',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-40',
+]);
+
 export function getServiceCategory(service: Service): PublishedServiceCategory {
+  if (pwdServiceIds.has(service.id)) return 'pwd-services';
+  if (soloParentServiceIds.has(service.id)) return 'social-welfare';
   return categoryByAcronym[service.office.acronym];
 }
 

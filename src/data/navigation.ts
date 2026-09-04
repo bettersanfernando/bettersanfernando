@@ -147,7 +147,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.socialWelfare',
             href: '/services/social-welfare',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.seniorCitizens',
@@ -157,7 +157,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.pwdServices',
             href: '/services/pwd-services',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

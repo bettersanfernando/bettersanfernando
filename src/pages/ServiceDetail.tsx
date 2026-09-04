@@ -164,6 +164,8 @@ export default function ServiceDetail() {
     business: 'Business Services',
     'disaster-preparedness': 'Disaster Preparedness',
     'assistance-programs': 'Assistance Programs',
+    'social-welfare': 'Social Welfare',
+    'pwd-services': 'PWD Services',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;

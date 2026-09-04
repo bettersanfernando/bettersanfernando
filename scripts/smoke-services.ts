@@ -6,6 +6,7 @@ import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 import {
   getServiceBySlug,
+  getServiceCategory,
   getServiceHref,
   getServices,
 } from '../src/data/civic/services.ts';
@@ -14,6 +15,15 @@ const services = getServices();
 const blpd = services.filter(service => service.office.acronym === 'BLPD');
 const cdrrmo = services.filter(service => service.office.acronym === 'CDRRMO');
 const cswdo = services.filter(service => service.office.acronym === 'CSWDO');
+const assistancePrograms = cswdo.filter(
+  service => getServiceCategory(service) === 'assistance-programs'
+);
+const pwdServices = cswdo.filter(
+  service => getServiceCategory(service) === 'pwd-services'
+);
+const soloParentServices = cswdo.filter(
+  service => getServiceCategory(service) === 'social-welfare'
+);
 const appSource = readFileSync('src/App.tsx', 'utf8');
 const servicesPageSource = readFileSync('src/pages/Services.tsx', 'utf8');
 const detailPageSource = readFileSync('src/pages/ServiceDetail.tsx', 'utf8');
@@ -36,6 +46,8 @@ const canonicalCategories = [
 const realCategorySlugs = [
   'business',
   'assistance-programs',
+  'social-welfare',
+  'pwd-services',
   'disaster-preparedness',
 ];
 const plannedCategorySlugs = canonicalCategories.filter(
@@ -77,12 +89,15 @@ for (const slug of canonicalCategories) {
   );
 }
 
-assert.equal(services.length, 34);
+assert.equal(services.length, 54);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
-assert.equal(cswdo.length, 19);
-assert.equal(new Set(services.map(service => service.id)).size, 34);
-assert.equal(new Set(services.map(service => service.slug)).size, 34);
+assert.equal(cswdo.length, 39);
+assert.equal(assistancePrograms.length, 19);
+assert.equal(pwdServices.length, 6);
+assert.equal(soloParentServices.length, 14);
+assert.equal(new Set(services.map(service => service.id)).size, 54);
+assert.equal(new Set(services.map(service => service.slug)).size, 54);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -94,7 +109,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 34 service detail routes must resolve through the adapter'
+  'all 54 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -111,12 +126,64 @@ assert.ok(
   'all seven CDRRMO records must use canonical Disaster Preparedness routes'
 );
 assert.ok(
-  cswdo.every(
+  assistancePrograms.every(
     service =>
       getServiceHref(service) ===
       `/services/assistance-programs/${service.slug}`
   ),
-  'all nineteen reviewed CSWDO records must use canonical Assistance Programs routes'
+  'the existing nineteen reviewed CSWDO records must use canonical Assistance Programs routes'
+);
+assert.ok(
+  pwdServices.every(
+    service =>
+      getServiceHref(service) === `/services/pwd-services/${service.slug}`
+  ),
+  'all six reviewed PWD CSWDO records must use canonical PWD Services routes'
+);
+assert.ok(
+  soloParentServices.every(
+    service =>
+      getServiceHref(service) === `/services/social-welfare/${service.slug}`
+  ),
+  'all fourteen reviewed Solo Parent CSWDO records must use canonical Social Welfare routes'
+);
+
+// Independent expectations, not derived from getServiceCategory's id sets in
+// src/data/civic/services.ts, so a future miscategorization is caught even if
+// the same wrong ids were used on both sides.
+const expectedPwdServiceIds = [
+  'charter-2026-2e-city-social-welfare-and-development-office-external-14',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-15',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-16',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-17',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-18',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-19',
+].sort();
+const expectedSoloParentServiceIds = [
+  'charter-2026-2e-city-social-welfare-and-development-office-external-27',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-28',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-29',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-30',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-31',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-32',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-33',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-34',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-35',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-36',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-37',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-38',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-39',
+  'charter-2026-2e-city-social-welfare-and-development-office-external-40',
+].sort();
+assert.deepEqual(
+  pwdServices.map(service => service.id).sort(),
+  expectedPwdServiceIds,
+  'PWD Services must contain exactly the six approved PWD service ids'
+);
+assert.deepEqual(
+  soloParentServices.map(service => service.id).sort(),
+  expectedSoloParentServiceIds,
+  'Social Welfare must contain exactly the fourteen approved Solo Parent service ids'
 );
 
 assert.deepEqual(
@@ -173,7 +240,7 @@ assert.deepEqual(
   ['961-4357', '961-4357']
 );
 
-assert.equal(new Set(cswdo.map(service => service.slug)).size, 19);
+assert.equal(new Set(cswdo.map(service => service.slug)).size, 39);
 assert.ok(
   cswdo.every(
     service =>
@@ -237,5 +304,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 34/34; BLPD: 8; CDRRMO: 7; CSWDO: 19; External: 34; published categories: 3/13'
+  '  routes: 54/54; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); External: 54; published categories: 5/13'
 );

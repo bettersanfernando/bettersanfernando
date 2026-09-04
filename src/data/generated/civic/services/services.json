@@ -8,7 +8,7 @@
     "City Social Welfare and Development Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 34,
+  "record_count": 54,
   "schema_version": 1,
   "services": [
     {
@@ -3553,6 +3553,2378 @@
       "slug": "issuance-of-social-case-study-sporadic-incidents",
       "title": "Issuance of Social Case Study (Sporadic Incidents)",
       "who_may_avail": "Indigent individuals and families in the community"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Prepare the required documents and complete the PWD ID application form at the Persons with Disabilities Affairs Office (PDAO).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while PDAO staff review the submitted documents. Answer any questions for clarification.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval and verification of the application. On the given date, sign in at the CSWDO logbook and claim the replacement PWD ID from the CSWDO.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The PDAO issues a replacement Person with Disability (PWD) Identification Card and purchase booklets to a registered PWD whose ID was lost or stolen. The PWD ID supports access to the 20% discount and value-added-tax exemption on certain goods and services for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-14",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 40 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of loss of PWD ID",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Certificate of Residency (1 original, 1 photocopy)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "4",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": "If the client has an apparent disability, a 3R whole-body picture must also be attached",
+          "ordinal": "5",
+          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Medical Certificate (1 original, 1 photocopy) indicating the disability",
+          "where_to_secure": "Referral to City Medical Doctor, Rural Health Physician, and/or a specialist on the disability"
+        }
+      ],
+      "slug": "issuance-of-person-with-disability-identification-card-and-purchase-booklets-replace-lost-or-stolen-id",
+      "title": "Issuance of Person with Disability Identification Card and Purchase Booklets (Replace Lost or Stolen ID)",
+      "who_may_avail": "Registered persons with disability whose PWD ID was lost or stolen."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Prepare the required documents and complete the PWD ID application form at the Persons with Disabilities Affairs Office (PDAO).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while PDAO staff review the submitted documents, and sign in at the CSWDO logbook. Answer any questions for clarification.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval and verification of the application. On the given date, sign in at the CSWDO logbook and claim the PWD ID from the CSWDO.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The PDAO issues a Person with Disability (PWD) Identification Card and purchase booklets to a new applicant. The PWD ID supports access to the 20% discount and value-added-tax exemption on certain goods and services for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-15",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 40 minutes"
+      },
+      "public_notes": [
+        "National guidance distinguishes documentary requirements for apparent versus non-apparent disability (a Certificate of Disability is generally not required for apparent disability); the local Charter checklist does not draw this distinction explicitly. This publication preserves the Charter checklist without a City-issued update."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Barangay Certificate of Residency (1 original, 1 photocopy)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "3",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": "If the client has an apparent disability, a 3R whole-body picture must also be attached",
+          "ordinal": "4",
+          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Medical Certificate (1 original, 1 photocopy) indicating the disability",
+          "where_to_secure": "Referral to City Medical Doctor, Rural Health Physician, and/or a specialist on the disability"
+        }
+      ],
+      "slug": "issuance-of-person-with-disability-identification-card-and-purchase-booklets-for-new-applicants",
+      "title": "Issuance of Person with Disability Identification Card and Purchase Booklets for New Applicants",
+      "who_may_avail": "People with a long-term physical, mental, intellectual, or sensory impairment that may hinder full and effective participation in society."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the required documents at the Persons with Disabilities Affairs Office (PDAO).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while PDAO staff review the submitted documents, and sign in at the CSWDO logbook. Answer any questions for clarification.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval and verification of the application. On the given date, sign in at the CSWDO logbook and claim the renewed PWD ID from the CSWDO.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The PDAO renews a Person with Disability (PWD) Identification Card and purchase booklets for an existing registrant. The PWD ID supports access to the 20% discount and value-added-tax exemption on certain goods and services for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-16",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 40 minutes"
+      },
+      "public_notes": [
+        "National guidance describes a narrower renewal document set for an existing PRPWD registrant (a renewal application and the expired PWD ID); the local Charter checklist requests a broader set. This publication preserves the Charter checklist without a City-issued update."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Barangay Certificate of Residency (1 original, 1 photocopy)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "3",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": "If the client has an apparent disability, a 3R whole-body picture must also be attached",
+          "ordinal": "4",
+          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Medical Certificate (1 original, 1 photocopy) indicating the disability",
+          "where_to_secure": "Referral to City Medical Doctor, Rural Health Physician, and/or a specialist on the disability"
+        }
+      ],
+      "slug": "issuance-of-person-with-disability-identification-card-and-purchase-booklets-for-renewal",
+      "title": "Issuance of Person with Disability Identification Card and Purchase Booklets for Renewal",
+      "who_may_avail": "Registered persons with disability eligible to renew their PWD ID."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the required documents at the Persons with Disabilities Affairs Office (PDAO).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Claim the approved Certificate of Transfer on the scheduled release date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The PDAO issues a Certificate of Transfer certifying that a registered Person with Disability (PWD) in the City of San Fernando's registry is transferring residence to another city or municipality, to support endorsement of records and continuity of benefits.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-17",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 days and 40 minutes"
+      },
+      "public_notes": [
+        "This publication reflects the 2026 Citizen's Charter procedure only; no additional current City information was independently verified for this service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Original PWD ID (for verification)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Photocopy of PWD ID (front and back)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Letter stating the reason for transfer and the date of transfer",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-transfer-pwd-id-records",
+      "title": "Issuance of Certificate of Transfer (PWD ID Records)",
+      "who_may_avail": "Registered persons with disability who intend to transfer residence to another city or municipality."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the required documents at the Persons with Disabilities Affairs Office (PDAO).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Fill out the PWD Registration Form.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The PDAO accepts a Certificate of Transfer certifying that a registered Person with Disability (PWD) from another city or municipality is transferring residence to the City of San Fernando, and requests inclusion in the City's official PWD Registry to support continuity of benefits and services.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-18",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 days and 40 minutes"
+      },
+      "public_notes": [
+        "This publication reflects the 2026 Citizen's Charter procedure only; no additional current City information was independently verified for this service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Original Certificate of Transfer from the previous city or municipality",
+          "where_to_secure": "PDAO of the previous local government unit"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Original PWD ID issued by the previous local government unit (for verification)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Letter stating the reason for transfer and the date of transfer",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Barangay Clearance indicating residency in the City of San Fernando",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Duly Accomplished Form, with any other additional requirements as discussed with PDAO personnel",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "acceptance-of-certificate-of-transfer-pwd-id-records",
+      "title": "Acceptance of Certificate of Transfer (PWD ID Records)",
+      "who_may_avail": "Registered persons with disability transferring residence to the City of San Fernando."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Present the original PWD ID and submit a photocopy at the Persons with Disabilities Affairs Office (PDAO).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Claim the issued PhilHealth Certification and PRPWD verification document.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The PDAO issues a PhilHealth Certification and verifies the applicant's registration in the PRPWD System, certifying that the Person with Disability (PWD) is a duly registered member recognized in the official registry, for validation and legitimacy purposes.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-19",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 days and 40 minutes"
+      },
+      "public_notes": [],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Original PWD ID (for verification)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Photocopy of PWD ID (front and back)",
+          "where_to_secure": "Requesting client"
+        }
+      ],
+      "slug": "issuance-of-philhealth-certification-and-verification-to-prpwd-system",
+      "title": "Issuance of PhilHealth Certification and Verification to PRPWD System",
+      "who_may_avail": "Registered persons with disability requesting certification and verification of their PhilHealth and PRPWD System registration."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook and receive the checklist of requirements for replacing a lost or stolen Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the replacement Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents. The CSWDO issues a replacement card to a registered solo parent whose ID was lost or stolen, supporting access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-27",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Affidavit of loss of the Solo Parent ID",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Original colored 2x2 picture, white or red background (1 pc)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Barangay Certificate of Residency (1 original, 1 photocopy)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "7",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-replace-lost-or-stolen-id",
+      "title": "Issuance of Solo Parent Identification Card (Replace Lost or Stolen ID)",
+      "who_may_avail": "A registered solo parent whose Solo Parent ID was lost or stolen."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Surrender the old Solo Parent ID, undergo the initial validation interview at the CSWDO, and receive the checklist of requirements for renewal.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the renewed Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents. The CSWDO renews the card for a registered solo parent, supporting access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-28",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines.",
+        "National guidance describes renewal documentation that varies by qualifying Solo Parent category; this publication preserves the Charter's general renewal checklist without a City-issued update."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Surrender of the old Solo Parent ID",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Sworn affidavit declaring no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": "If applicable to the qualifying circumstance",
+          "ordinal": "3",
+          "text": "Affidavit of two (2) disinterested persons, and photocopy of the Judicial Decree of Separation",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms; Trial Court"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Original colored 2x2 picture, white or red background (1 pc)",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Barangay Certificate of Residency (1 original, 1 photocopy)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "11",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-applicants-renewal",
+      "title": "Issuance of Solo Parent Identification Card for Applicants' Renewal",
+      "who_may_avail": "A solo parent eligible to renew their Solo Parent ID."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-29",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate/CENOMAR",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Death Certificate of the spouse",
+          "where_to_secure": "Philippine Statistics Authority/Local Civil Registry"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "9",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-death-of-spouse",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Death of Spouse)",
+      "who_may_avail": "A parent left solo with the responsibility of parenthood due to the death of a spouse."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-30",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Proof of guardianship, foster care, or adoption issued by a court or the National Authority for Child Care (NACC)",
+          "where_to_secure": "National Authority for Child Care/Trial Court"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "8",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-legal-guardian-adoptive-or-foster-parent",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Legal Guardian, Adoptive, or Foster Parent)",
+      "who_may_avail": "Any legal guardian, adoptive parent, or foster parent who solely provides parental care and support to a child or children."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-31",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines.",
+        "The Charter's eligibility wording refers to a declaration decreed by 'a court or by a church,' while national law (RA 11861 and its Revised IRR) refers to a court recognized by law or an applicable divorce. This publication preserves the Charter's wording without alteration."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Court Decision",
+          "where_to_secure": "Trial Court"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "9",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-nullity-or-annulment-of-marriage",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Nullity or Annulment of Marriage)",
+      "who_may_avail": "A parent left solo with the responsibility of parenthood due to a declaration of nullity or annulment of marriage, or divorce, as decreed by a court, provided the parent is entrusted with custody of the children."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-32",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate (if spouse) or Birth Certificate/other competent proof of the applicant's relationship to the OFW",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Overseas Employment Certificate (OEC) or its equivalent document",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Photocopy of passport with stamps showing 12 continuous months of overseas work, or a corresponding certification",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "10",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "11",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-overseas-filipino-worker-low-semi-skilled",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Overseas Filipino Worker, Low/Semi-Skilled)",
+      "who_may_avail": "The spouse or another family member of an overseas Filipino worker (OFW), or the guardian of the child or children of an OFW, provided the OFW is a semi-skilled worker who has been away from the Philippines for an uninterrupted period of 12 months."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-33",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate/CENOMAR",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Certificate of Detention or Court Order",
+          "where_to_secure": "Trial Court"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "9",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-person-deprived-of-liberty",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Person Deprived of Liberty)",
+      "who_may_avail": "A parent left solo with the responsibility of parenthood while the spouse is detained, or is serving a sentence for a criminal conviction, for at least three (3) months."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-34",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Medical record of pregnancy",
+          "where_to_secure": "Hospital/Doctor"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "8",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-pregnant-woman",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Pregnant Woman)",
+      "who_may_avail": "A pregnant woman who provides sole parental care and support to her unborn child or children."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-35",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines.",
+        "This publication carries only service-category information; no victim identity, case history, or legal-case identifier is included."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Complaint affidavit",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Medical record on the incident",
+          "where_to_secure": "Hospital/Doctor"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "9",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-rape-victim",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Rape Victim)",
+      "who_may_avail": "A woman who gives birth as a result of rape or other crimes against chastity."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-36",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Death Certificate, or certificate of incapacity of the parents or legal guardian; or police or barangay records evidencing disappearance or absence of the parent or legal guardian for at least six (6) months",
+          "where_to_secure": "Philippine Statistics Authority/Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Proof of the relative's relationship to the parent or legal guardian",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Sworn affidavit declaring sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "9",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-relative-within-the-fourth-civil-degree",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Relative Within the Fourth Civil Degree)",
+      "who_may_avail": "Any relative within the fourth civil degree of consanguinity or affinity of the parent or legal guardian, whose death, disappearance, or abandonment of the child or children for at least six (6) months led the relative to assume sole parental care and support of the child or children."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-37",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate/CENOMAR",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Affidavit of two (2) disinterested persons attesting to the abandonment",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Police or barangay record of the fact of abandonment",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "10",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "11",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-spouse-abandonment",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Spouse Abandonment)",
+      "who_may_avail": "A parent left solo with the responsibility of parenthood due to abandonment by a spouse for at least six (6) months."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-38",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines.",
+        "The Charter requires certification by a 'public' medical practitioner; national law (RA 11861 and its Revised IRR) allows certification by a public or private medical practitioner. This publication preserves the Charter's wording without alteration."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate, or affidavit of cohabitation",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Medical record or abstract (not more than 3 months old) or PWD ID",
+          "where_to_secure": "Hospital/Doctor"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "9",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "10",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-spouse-incapacitated-due-to-physical-or-mental-condition",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Spouse Incapacitated Due to Physical or Mental Condition)",
+      "who_may_avail": "A parent left solo with the responsibility of parenthood due to the physical and/or mental incapacity of a spouse, as certified by a public medical practitioner."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-39",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 29 minutes"
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Marriage Certificate/CENOMAR",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Judicial Decree of Legal Separation",
+          "where_to_secure": "Trial Court"
+        },
+        {
+          "condition": "For de facto separation",
+          "ordinal": "7",
+          "text": "Affidavit of two (2) disinterested persons attesting to the fact of separation",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "8",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "10",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "11",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-legal-or-de-facto-separation",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Legal or De Facto Separation)",
+      "who_may_avail": "A parent left solo with the responsibility of parenthood due to legal separation or de facto separation from a spouse for at least six (6) months, provided the parent is entrusted with custody of the children."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Complex",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign in at the CSWDO logbook, undergo the initial validation interview, and receive the checklist of requirements for the Solo Parent ID.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the completed requirements and the Solo Parent Application Form to the Solo Parent Focal Person at the CSWDO.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the approval of the application. Once approved, sign in at the logbook for ID release and claim the Solo Parent ID from the Solo Parent Desk Officer/Focal Person on the given date.",
+          "sequence": "3"
+        }
+      ],
+      "description": "A Solo Parent ID is a government-issued identification card for solo or single parents, granted after CSWDO assessment of the applicant's qualifying circumstance, that provides access to certain government discounts and benefits for residents of the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "No fee"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-social-welfare-and-development-office-external-40",
+      "last_verified": "2026-09-01",
+      "office": {
+        "acronym": "CSWDO",
+        "division": null,
+        "name": "City Social Welfare and Development Office"
+      },
+      "office_contact": {
+        "address": "Old City College Building / Heroes Hall area, San Juan, City of San Fernando, Pampanga",
+        "emails": [
+          "cswd@cityofsanfernando.gov.ph",
+          "cswdo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published CSWDO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "refer_to_charter",
+        "text": "Refer to the Citizen's Charter; the published total processing-time row is incomplete."
+      },
+      "public_notes": [
+        "Issuance of a Solo Parent ID is subject to CSWDO assessment and approval; it does not guarantee automatic Solo Parent status, and continuing eligibility is subject to renewal and reassessment under national guidelines."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Duly Accomplished Form",
+          "where_to_secure": "City Social Welfare and Development Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit of Barangay Official attesting that the solo parent is a resident of the barangay and that the child or children are under his or her parental care and support",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay Clearance of the client (original)",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Birth Certificate(s) of the child or children, 22 years old and below",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Certificate of No Marriage/CENOMAR",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Sworn affidavit of no cohabitation with a partner or co-parent, and of having sole parental care and support of the child or children",
+          "where_to_secure": "Public Attorney's Office/Notarial Firms"
+        },
+        {
+          "condition": null,
+          "ordinal": "7",
+          "text": "Two (2) pieces of colored 1x1 ID picture, white or red background",
+          "where_to_secure": "Requesting client"
+        },
+        {
+          "condition": "Submit one accepted identification document",
+          "ordinal": "8",
+          "text": "Photocopy of Voter's ID, Voter's Certification, or another accepted valid ID with specimen signature. Accepted IDs include ePhilID, Philippine Passport, SSS ID or UMID Card, GSIS ID or UMID Card, Driver's License, PRC ID, OWWA ID, Senior Citizen ID, PWD ID, NBI Clearance, PhilHealth ID (digitized PVC), Integrated Bar of the Philippines ID, School ID (for students), TIN ID, Postal ID, Barangay Certification, GSIS E-CARD, Certification from the National Council for the Welfare of Disabled Persons, Company ID issued by a private entity, Police Clearance, Cedula or Community Tax Certificate, Form 137 (for students), Transcript of Records, Marriage Contract, or Birth Certificate.",
+          "where_to_secure": "Requesting client or issuing agency"
+        },
+        {
+          "condition": null,
+          "ordinal": "9",
+          "text": "Solo Parents Orientation Seminar Certificate of Attendance",
+          "where_to_secure": "City Social Welfare and Development Office"
+        }
+      ],
+      "slug": "issuance-of-solo-parent-identification-card-for-new-applicants-circumstances-unmarried-father-or-mother",
+      "title": "Issuance of Solo Parent Identification Card for New Applicants (Circumstances: Unmarried Father or Mother)",
+      "who_may_avail": "An unmarried mother or father who has chosen to keep and rear her or his child or children alone."
     }
   ]
 }

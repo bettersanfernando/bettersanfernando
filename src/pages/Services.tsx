@@ -52,7 +52,7 @@ const categories = [
     'Social Welfare',
     'social-welfare',
     'Local social-welfare services and referral routes.',
-    'planned',
+    'published',
   ],
   [
     'Senior Citizens',
@@ -64,7 +64,7 @@ const categories = [
     'PWD Services',
     'pwd-services',
     'Services and support for persons with disabilities.',
-    'planned',
+    'published',
   ],
   [
     'Infrastructure & Public Works',
@@ -219,9 +219,15 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   'Reviewed services currently published from the City Disaster Risk Reduction Management Office.'}
                 {category === 'assistance-programs' &&
                   'A reviewed subset of City social-assistance services currently published from the City Social Welfare and Development Office.'}
+                {category === 'social-welfare' &&
+                  'A reviewed subset of Solo Parent identification and registration services currently published from the City Social Welfare and Development Office.'}
+                {category === 'pwd-services' &&
+                  'A reviewed subset of PWD identification and registration services currently published from the City Social Welfare and Development Office.'}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
-                {category === 'assistance-programs'
+                {category === 'assistance-programs' ||
+                category === 'social-welfare' ||
+                category === 'pwd-services'
                   ? 'This is a bounded collection, not all assistance programs and not complete coverage of CSWDO or City social-welfare services.'
                   : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
