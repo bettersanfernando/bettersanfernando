@@ -93,6 +93,27 @@ No READY pages remain in the current general frontend implementation sequence.
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `/statistics/demographics` | The approved purpose is composition beyond population totals, but authoritative age, sex, household, density, or another selected dimension is not published | Choose the dimensions first, research authoritative data for them, and create a frontend-safe export. Population alone belongs on `/statistics/population` and must not be repackaged as broad demographics. |
 
+## Completed service-publication batches
+
+These are bounded, publication-reviewed subsets already implemented on their
+canonical `PARTIAL` category pages (see `PAGE-DATA-MATRIX.md`). They are not
+READY pages: each category remains a bounded subset, not complete coverage of
+its office or purpose.
+
+| Batch                   |  Count | Category                      | Route                             |
+| ----------------------- | -----: | ----------------------------- | --------------------------------- |
+| BLPD                    |      8 | Business Services             | `/services/business`              |
+| CDRRMO                  |      7 | Disaster Preparedness         | `/services/disaster-preparedness` |
+| CSWDO Social Assistance |     19 | Assistance Programs           | `/services/assistance-programs`   |
+| CSWDO PWD               |      6 | PWD Services                  | `/services/pwd-services`          |
+| CSWDO Solo Parent       |     14 | Social Welfare                | `/services/social-welfare`        |
+| **Total**               | **54** | **five published categories** |                                   |
+
+Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
+201 External services remain unpublished, including the City Health Office's
+61; the 74 Internal services are outside the resident-facing Services scope
+and remain unpublished.
+
 ## Phase 3 — Private data workstream
 
 Work in this phase remains private until validation, publication review, and a
@@ -100,14 +121,20 @@ versioned allowlisted export are complete.
 
 ### RESEARCH queue
 
-| Priority | Work                                                                                                                          | Public page(s) unblocked                                                                  |
-| -------: | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the published 8 BLPD and 7 CDRRMO External services | The 11 planned Services categories and broader coverage within the 2 published categories |
-|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates | `/government/structure`; later enriches `/government`                                     |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions          | `/legislation/resolutions`                                                                |
-|        4 | Verify exact official CSFP web and social destinations and their owning entities                                              | `/government/links`                                                                       |
-|        5 | Verify hotline purpose, operating scope/hours, update cadence, and the disputed CDRRMO number                                 | Moves `/government/hotlines` from `PARTIAL` to `READY`                                    |
-|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                |
+| Priority | Work                                                                                                                                          | Public page(s) unblocked                                                                                       |
+| -------: | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 54 External services across five categories | The 8 remaining planned Services categories and broader coverage within the 5 published but PARTIAL categories |
+|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                 | `/government/structure`; later enriches `/government`                                                          |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                          | `/legislation/resolutions`                                                                                     |
+|        4 | Verify exact official CSFP web and social destinations and their owning entities                                                              | `/government/links`                                                                                            |
+|        5 | Verify hotline purpose, operating scope/hours, update cadence, and the disputed CDRRMO number                                                 | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                         |
+|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                     |
+
+The next bounded service-data task within priority 1 is the City Health
+Office: 61 External Charter services with extraction and freshness/source
+verification already complete, but four human-review reconciliations remain
+open, publication review is not complete, no frontend-safe export exists, and
+no frontend implementation exists. It is not READY and not published.
 
 Research must not be mixed with a decision to publish sensitive fields or
 with the mechanical creation of an export.

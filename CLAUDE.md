@@ -20,6 +20,10 @@ Pre-commit hook runs `lint-staged` automatically (ESLint + Prettier on staged fi
 
 This repo (`bettersanfernando`) is the **public frontend only**. Canonical/raw civic research data, source PDFs/XLSX, and research docs live only in the private `../bettersanfernando-data` repo — never copy root `data/`, `pdf/`, or `xlsx/` here. This repo consumes only the public-safe generated export via `pnpm data:sync`; `src/data/generated/civic/` is the expected, allowed vendored copy.
 
+### Documentation-impact checkpoint
+
+Every data publication, export sync, category activation, or frontend injection must check whether it changes: dataset counts; published/planned category status; route availability; public coverage statements; provenance or source versions; or roadmap completion state. If it does, either (1) update the affected authoritative documents in the same change, or (2) explicitly report `Documentation impact: none` with a specific reason. Documents to check: `docs/PAGE-DATA-MATRIX.md`, `docs/IMPLEMENTATION-ROADMAP.md`; `docs/SITE-ARCHITECTURE.md` only when taxonomy or canonical routes change; `README.md` only when public project scope materially changes; the generated manifest only through `pnpm data:sync`, never by hand.
+
 ## Architecture
 
 This is a React 19 + TypeScript + Vite app for Philippine Local Government Units (LGUs). It uses React Router, Tailwind CSS, i18next for multilingual support, and a YAML-based content system.
