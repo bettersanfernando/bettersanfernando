@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count |
 | --------------------------------- | --------------- |
-| Reviewed External service records | 54              |
-| Published service categories      | 5 of 13         |
-| Planned service categories        | 8 of 13         |
+| Reviewed External service records | 113             |
+| Published service categories      | 6 of 13         |
+| Planned service categories        | 7 of 13         |
 | Project records                   | 239             |
 | Project-evidence records          | 334             |
 | Barangays                         | 35              |
@@ -60,11 +60,16 @@ Published service categories:
 | Assistance Programs   |      19 | `/services/assistance-programs`   |
 | Social Welfare        |      14 | `/services/social-welfare`        |
 | PWD Services          |       6 | `/services/pwd-services`          |
+| Health Services       |      59 | `/services/health-services`       |
 
-The remaining 8 service categories (Employment, Livelihood, Health Services,
-Education Services, Senior Citizens, Infrastructure & Public Works,
-Agriculture & Fisheries, Environment) are visible in navigation as planned
-sections; they do not yet contain published service records. See
+The remaining 7 service categories (Employment, Livelihood, Education
+Services, Senior Citizens, Infrastructure & Public Works, Agriculture &
+Fisheries, Environment) are visible in navigation as planned sections; they do
+not yet contain published service records. Health Services is `PARTIAL`, not
+`READY`: its 59 publication-reviewed CHO records are a bounded subset of the
+canonical inventory. Another 142 External services and all 74 Internal services
+remain unpublished; CHO records external-22 and external-60 remain held and are
+not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
 page-by-page readiness assessment and
 [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is

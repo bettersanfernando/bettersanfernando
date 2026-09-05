@@ -34,7 +34,7 @@ const categories = [
     'Health Services',
     'health-services',
     'Local health services and access guidance.',
-    'planned',
+    'published',
   ],
   [
     'Education Services',

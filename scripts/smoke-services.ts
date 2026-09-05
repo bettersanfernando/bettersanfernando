@@ -15,6 +15,7 @@ const services = getServices();
 const blpd = services.filter(service => service.office.acronym === 'BLPD');
 const cdrrmo = services.filter(service => service.office.acronym === 'CDRRMO');
 const cswdo = services.filter(service => service.office.acronym === 'CSWDO');
+const cho = services.filter(service => service.office.acronym === 'CHO');
 const assistancePrograms = cswdo.filter(
   service => getServiceCategory(service) === 'assistance-programs'
 );
@@ -45,6 +46,7 @@ const canonicalCategories = [
 ] as const;
 const realCategorySlugs = [
   'business',
+  'health-services',
   'assistance-programs',
   'social-welfare',
   'pwd-services',
@@ -76,6 +78,7 @@ assert.deepEqual(
   plannedCategorySlugs
 );
 assert.match(appSource, /path="\/services\/assistance-programs"/);
+assert.match(appSource, /path="\/services\/health-services"/);
 assert.match(appSource, /path="\/services\/:category\/:serviceSlug"/);
 assert.match(appSource, /path="\/services\/:slug"/);
 assert.match(
@@ -89,15 +92,16 @@ for (const slug of canonicalCategories) {
   );
 }
 
-assert.equal(services.length, 54);
+assert.equal(services.length, 113);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
+assert.equal(cho.length, 59);
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 54);
-assert.equal(new Set(services.map(service => service.slug)).size, 54);
+assert.equal(new Set(services.map(service => service.id)).size, 113);
+assert.equal(new Set(services.map(service => service.slug)).size, 113);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -109,7 +113,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 54 service detail routes must resolve through the adapter'
+  'all 113 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -147,6 +151,13 @@ assert.ok(
   ),
   'all fourteen reviewed Solo Parent CSWDO records must use canonical Social Welfare routes'
 );
+assert.ok(
+  cho.every(
+    service =>
+      getServiceHref(service) === `/services/health-services/${service.slug}`
+  ),
+  'all fifty-nine CHO records must use canonical Health Services routes'
+);
 
 // Independent expectations, not derived from getServiceCategory's id sets in
 // src/data/civic/services.ts, so a future miscategorization is caught even if
@@ -175,6 +186,67 @@ const expectedSoloParentServiceIds = [
   'charter-2026-2e-city-social-welfare-and-development-office-external-39',
   'charter-2026-2e-city-social-welfare-and-development-office-external-40',
 ].sort();
+const expectedChoServiceIds = [
+  'charter-2026-2e-city-health-office-external-01',
+  'charter-2026-2e-city-health-office-external-02',
+  'charter-2026-2e-city-health-office-external-03',
+  'charter-2026-2e-city-health-office-external-04',
+  'charter-2026-2e-city-health-office-external-05',
+  'charter-2026-2e-city-health-office-external-06',
+  'charter-2026-2e-city-health-office-external-07',
+  'charter-2026-2e-city-health-office-external-08',
+  'charter-2026-2e-city-health-office-external-09',
+  'charter-2026-2e-city-health-office-external-10',
+  'charter-2026-2e-city-health-office-external-11',
+  'charter-2026-2e-city-health-office-external-12',
+  'charter-2026-2e-city-health-office-external-13',
+  'charter-2026-2e-city-health-office-external-14',
+  'charter-2026-2e-city-health-office-external-15',
+  'charter-2026-2e-city-health-office-external-16',
+  'charter-2026-2e-city-health-office-external-17',
+  'charter-2026-2e-city-health-office-external-18',
+  'charter-2026-2e-city-health-office-external-19',
+  'charter-2026-2e-city-health-office-external-20',
+  'charter-2026-2e-city-health-office-external-21',
+  'charter-2026-2e-city-health-office-external-23',
+  'charter-2026-2e-city-health-office-external-24',
+  'charter-2026-2e-city-health-office-external-25',
+  'charter-2026-2e-city-health-office-external-26',
+  'charter-2026-2e-city-health-office-external-27',
+  'charter-2026-2e-city-health-office-external-28',
+  'charter-2026-2e-city-health-office-external-29',
+  'charter-2026-2e-city-health-office-external-30',
+  'charter-2026-2e-city-health-office-external-31',
+  'charter-2026-2e-city-health-office-external-32',
+  'charter-2026-2e-city-health-office-external-33',
+  'charter-2026-2e-city-health-office-external-34',
+  'charter-2026-2e-city-health-office-external-35',
+  'charter-2026-2e-city-health-office-external-36',
+  'charter-2026-2e-city-health-office-external-37',
+  'charter-2026-2e-city-health-office-external-38',
+  'charter-2026-2e-city-health-office-external-39',
+  'charter-2026-2e-city-health-office-external-40',
+  'charter-2026-2e-city-health-office-external-41',
+  'charter-2026-2e-city-health-office-external-42',
+  'charter-2026-2e-city-health-office-external-43',
+  'charter-2026-2e-city-health-office-external-44',
+  'charter-2026-2e-city-health-office-external-45',
+  'charter-2026-2e-city-health-office-external-46',
+  'charter-2026-2e-city-health-office-external-47',
+  'charter-2026-2e-city-health-office-external-48',
+  'charter-2026-2e-city-health-office-external-49',
+  'charter-2026-2e-city-health-office-external-50',
+  'charter-2026-2e-city-health-office-external-51',
+  'charter-2026-2e-city-health-office-external-52',
+  'charter-2026-2e-city-health-office-external-53',
+  'charter-2026-2e-city-health-office-external-54',
+  'charter-2026-2e-city-health-office-external-55',
+  'charter-2026-2e-city-health-office-external-56',
+  'charter-2026-2e-city-health-office-external-57',
+  'charter-2026-2e-city-health-office-external-58',
+  'charter-2026-2e-city-health-office-external-59',
+  'charter-2026-2e-city-health-office-external-61',
+].sort();
 assert.deepEqual(
   pwdServices.map(service => service.id).sort(),
   expectedPwdServiceIds,
@@ -184,6 +256,20 @@ assert.deepEqual(
   soloParentServices.map(service => service.id).sort(),
   expectedSoloParentServiceIds,
   'Social Welfare must contain exactly the fourteen approved Solo Parent service ids'
+);
+assert.deepEqual(
+  cho.map(service => service.id).sort(),
+  expectedChoServiceIds,
+  'Health Services must contain exactly the fifty-nine approved CHO service ids'
+);
+assert.ok(
+  !services.some(service =>
+    [
+      'charter-2026-2e-city-health-office-external-22',
+      'charter-2026-2e-city-health-office-external-60',
+    ].includes(service.id)
+  ),
+  'held CHO records external-22 and external-60 must remain unpublished'
 );
 
 assert.deepEqual(
@@ -203,6 +289,17 @@ assert.equal(
   createHash('sha256').update(JSON.stringify(blpd)).digest('hex'),
   'de2902281cf7bf42e6f97ec8ea6d445064026355428815c5fb687b4153bfb95a',
   'the existing eight BLPD records must remain semantically unchanged'
+);
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(service => service.office.acronym !== 'CHO')
+      )
+    )
+    .digest('hex'),
+  '74691515890427c26704f91983229fd52c48ac17961a6baa32d605974eb347c1',
+  'the previous fifty-four published service records must remain semantically unchanged'
 );
 assert.equal(
   getServiceBySlug('permit-to-operate-temporary-permit')?.client_steps.at(-1)
@@ -304,5 +401,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 54/54; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); External: 54; published categories: 5/13'
+  '  routes: 113/113; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); External: 113; published categories: 6/13; planned categories: 7/13'
 );

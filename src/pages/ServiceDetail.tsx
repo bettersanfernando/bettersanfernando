@@ -166,6 +166,7 @@ export default function ServiceDetail() {
     'assistance-programs': 'Assistance Programs',
     'social-welfare': 'Social Welfare',
     'pwd-services': 'PWD Services',
+    'health-services': 'Health Services',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;
@@ -401,9 +402,9 @@ export default function ServiceDetail() {
                 </a>
                 {'extensions' in service.office_contact && (
                   <p className="mt-1 text-gray-700">
-                    Extensions {service.office_contact.extensions.join(', ')};
-                    Extension Office{' '}
-                    {service.office_contact.extension_office_extension}
+                    Extensions {service.office_contact.extensions.join(', ')}
+                    {'extension_office_extension' in service.office_contact &&
+                      `; Extension Office ${service.office_contact.extension_office_extension}`}
                   </p>
                 )}
               </div>

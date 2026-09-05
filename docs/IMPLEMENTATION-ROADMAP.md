@@ -100,19 +100,21 @@ canonical `PARTIAL` category pages (see `PAGE-DATA-MATRIX.md`). They are not
 READY pages: each category remains a bounded subset, not complete coverage of
 its office or purpose.
 
-| Batch                   |  Count | Category                      | Route                             |
-| ----------------------- | -----: | ----------------------------- | --------------------------------- |
-| BLPD                    |      8 | Business Services             | `/services/business`              |
-| CDRRMO                  |      7 | Disaster Preparedness         | `/services/disaster-preparedness` |
-| CSWDO Social Assistance |     19 | Assistance Programs           | `/services/assistance-programs`   |
-| CSWDO PWD               |      6 | PWD Services                  | `/services/pwd-services`          |
-| CSWDO Solo Parent       |     14 | Social Welfare                | `/services/social-welfare`        |
-| **Total**               | **54** | **five published categories** |                                   |
+| Batch                   |   Count | Category                     | Route                             |
+| ----------------------- | ------: | ---------------------------- | --------------------------------- |
+| BLPD                    |       8 | Business Services            | `/services/business`              |
+| CDRRMO                  |       7 | Disaster Preparedness        | `/services/disaster-preparedness` |
+| CSWDO Social Assistance |      19 | Assistance Programs          | `/services/assistance-programs`   |
+| CSWDO PWD               |       6 | PWD Services                 | `/services/pwd-services`          |
+| CSWDO Solo Parent       |      14 | Social Welfare               | `/services/social-welfare`        |
+| CHO                     |      59 | Health Services              | `/services/health-services`       |
+| **Total**               | **113** | **six published categories** |                                   |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-201 External services remain unpublished, including the City Health Office's
-61; the 74 Internal services are outside the resident-facing Services scope
-and remain unpublished.
+142 External services remain unpublished; the 74 Internal services are outside
+the resident-facing Services scope and remain unpublished. The published Health
+Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
+CHO records, while external-22 and external-60 remain held and unpublished.
 
 ## Phase 3 — Private data workstream
 
@@ -123,18 +125,15 @@ versioned allowlisted export are complete.
 
 | Priority | Work                                                                                                                                          | Public page(s) unblocked                                                                                       |
 | -------: | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 54 External services across five categories | The 8 remaining planned Services categories and broader coverage within the 5 published but PARTIAL categories |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 113 External services across six categories | The 7 remaining planned Services categories and broader coverage within the 6 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                 | `/government/structure`; later enriches `/government`                                                          |
 |        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                          | `/legislation/resolutions`                                                                                     |
 |        4 | Verify exact official CSFP web and social destinations and their owning entities                                                              | `/government/links`                                                                                            |
 |        5 | Verify hotline purpose, operating scope/hours, update cadence, and the disputed CDRRMO number                                                 | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                         |
 |        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                     |
 
-The next bounded service-data task within priority 1 is the City Health
-Office: 61 External Charter services with extraction and freshness/source
-verification already complete, but four human-review reconciliations remain
-open, publication review is not complete, no frontend-safe export exists, and
-no frontend implementation exists. It is not READY and not published.
+The City Health Office publication batch is implemented as the bounded,
+publication-reviewed set described above. Health Services remains `PARTIAL`.
 
 Research must not be mixed with a decision to publish sensitive fields or
 with the mechanical creation of an export.

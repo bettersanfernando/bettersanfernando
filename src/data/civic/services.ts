@@ -201,10 +201,56 @@ const CswdoServiceSchema = z.strictObject({
   requirements: z.array(CswdoRequirementSchema).min(1),
 });
 
+const ChoServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  classification: z.strictObject({
+    complexity: z.union([z.literal('Simple'), z.literal(''), z.null()]),
+    service_scope: z.literal('External'),
+    transaction_types: z.tuple([z.literal('G2C')]),
+  }),
+  fee: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CHO'),
+    division: z.null(),
+    name: z.literal('City Health Office'),
+  }),
+  office_contact: z.strictObject({
+    address: NonEmptyString,
+    emails: z.array(z.email()).min(1),
+    extensions: z.array(NonEmptyString).min(1),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.strictObject({
+    schedule: NonEmptyString,
+    scope: z.literal('Published CHO main office hours only'),
+  }),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  requirements: z
+    .array(
+      z.strictObject({
+        condition: NonEmptyString.nullable(),
+        ordinal: NonEmptyString,
+        text: NonEmptyString,
+        where_to_secure: z.string().nullable(),
+      })
+    )
+    .min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
   CswdoServiceSchema,
+  ChoServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -216,15 +262,16 @@ const ServicesFileSchema = z
       z.literal('Business License and Permit Division'),
       z.literal('City Disaster Risk Reduction Management Office'),
       z.literal('City Social Welfare and Development Office'),
+      z.literal('City Health Office'),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(54),
+    record_count: z.literal(113),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(54),
+    services: z.array(ServiceSchema).length(113),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 54) {
+      if (new Set(file.services.map(service => service[key])).size !== 113) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -242,11 +289,19 @@ const ServicesFileSchema = z
     const cswdoCount = file.services.filter(
       service => service.office.acronym === 'CSWDO'
     ).length;
-    if (blpdCount !== 8 || cdrrmoCount !== 7 || cswdoCount !== 39) {
+    const choCount = file.services.filter(
+      service => service.office.acronym === 'CHO'
+    ).length;
+    if (
+      blpdCount !== 8 ||
+      cdrrmoCount !== 7 ||
+      cswdoCount !== 39 ||
+      choCount !== 59
+    ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, and 39 CSWDO records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, and 59 CHO records',
         path: ['services'],
       });
     }
@@ -258,7 +313,8 @@ export type PublishedServiceCategory =
   | 'disaster-preparedness'
   | 'assistance-programs'
   | 'social-welfare'
-  | 'pwd-services';
+  | 'pwd-services'
+  | 'health-services';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -281,6 +337,7 @@ const categoryByAcronym: Record<
   BLPD: 'business',
   CDRRMO: 'disaster-preparedness',
   CSWDO: 'assistance-programs',
+  CHO: 'health-services',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

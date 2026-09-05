@@ -127,7 +127,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.healthServices',
             href: '/services/health-services',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.educationServices',

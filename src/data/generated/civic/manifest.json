@@ -47,9 +47,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 54,
+      "record_count": 113,
       "schema_version": 1,
-      "sha256": "ffe3d6e9c7c5ebd7d15c3d02405515ca5325cf95a2238450c0fc953d61025cb4"
+      "sha256": "dd70cd03b7e53bf593078f7a20eb5fee4256b938fc74d6cf627c378fe4766ffd"
     }
   },
   "export_version": "v0.1.0",
@@ -72,7 +72,9 @@
     "data/services/cswdo-social-assistance-freshness-enrichment.json",
     "data/services/cswdo-social-assistance-publication-review.json",
     "data/services/cswdo-pwd-solo-parent-freshness-enrichment.json",
-    "data/services/cswdo-pwd-solo-parent-publication-review.json"
+    "data/services/cswdo-pwd-solo-parent-publication-review.json",
+    "data/services/city-health-office-freshness-enrichment.json",
+    "data/services/city-health-office-publication-review.json"
   ],
   "jurisdiction": {
     "name": "City of San Fernando",
@@ -97,7 +99,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "4935b0e57cc2762df88a5fb3961dbb5eaf022db5",
+  "source_commit": "7a1d40022a8d26eb79d1dbbdfd17e0d3fbbc61f3",
   "source_data_version": "v0.1.1",
   "sources": [
     {
