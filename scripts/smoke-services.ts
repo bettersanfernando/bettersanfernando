@@ -46,6 +46,7 @@ const canonicalCategories = [
 ] as const;
 const realCategorySlugs = [
   'business',
+  'employment',
   'health-services',
   'assistance-programs',
   'social-welfare',
@@ -92,16 +93,20 @@ for (const slug of canonicalCategories) {
   );
 }
 
-assert.equal(services.length, 113);
+const cippeso = services.filter(
+  service => service.office.acronym === 'CIPPESO'
+);
+assert.equal(services.length, 120);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
 assert.equal(cho.length, 59);
+assert.equal(cippeso.length, 7, 'exactly seven CIPPESO Employment records');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 113);
-assert.equal(new Set(services.map(service => service.slug)).size, 113);
+assert.equal(new Set(services.map(service => service.id)).size, 120);
+assert.equal(new Set(services.map(service => service.slug)).size, 120);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -113,7 +118,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 113 service detail routes must resolve through the adapter'
+  'all 120 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -157,6 +162,13 @@ assert.ok(
       getServiceHref(service) === `/services/health-services/${service.slug}`
   ),
   'all fifty-nine CHO records must use canonical Health Services routes'
+);
+assert.ok(
+  cippeso.every(
+    service =>
+      getServiceHref(service) === `/services/employment/${service.slug}`
+  ),
+  'all seven CIPPESO records must use canonical Employment routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -272,6 +284,101 @@ assert.ok(
   'held CHO records external-22 and external-60 must remain unpublished'
 );
 
+const expectedCippesoServiceIds = [
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-02',
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-03',
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-04',
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-05',
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-06',
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-07',
+  'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-08',
+].sort();
+assert.deepEqual(
+  cippeso.map(service => service.id).sort(),
+  expectedCippesoServiceIds,
+  'Employment must contain exactly the seven approved CIPPESO service ids'
+);
+assert.deepEqual(
+  cippeso.map(service => service.title).sort(),
+  [
+    'Community-Based Skills Training',
+    "Employers' Engagement",
+    'Issuance of Working Permit',
+    "Issuance of Mayor's Clearance",
+    'Job Referral (Online)',
+    'Job Referral (Walk In)',
+    'Skills Training',
+  ].sort(),
+  'Employment titles must exactly match the seven approved CIPPESO records'
+);
+assert.ok(
+  !services.some(service =>
+    [
+      'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-01',
+      'charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-09',
+    ].includes(service.id)
+  ),
+  'external-01 (Investment Incentive) and external-09 (TVI Accreditation) must remain excluded from Employment'
+);
+assert.ok(
+  !services.some(
+    service =>
+      /investment incentive/i.test(service.title) ||
+      /technical vocational institutions accreditation/i.test(service.title)
+  ),
+  'excluded CIPPESO titles must not appear anywhere in the published set'
+);
+
+// Preserve the reviewed limitations for the seven Employment records.
+const cippesoBySlug = new Map(cippeso.map(service => [service.slug, service]));
+for (const slug of ['community-based-skills-training', 'skills-training']) {
+  const service = cippesoBySlug.get(slug);
+  assert.ok(service, `expected Employment service missing: ${slug}`);
+  assert.ok(
+    service!.public_notes.some(note =>
+      /availability depends on announced/i.test(note)
+    ),
+    `${slug} must preserve its batch/schedule-dependent limitation`
+  );
+}
+for (const slug of ['job-referral-online', 'job-referral-walk-in']) {
+  const service = cippesoBySlug.get(slug);
+  assert.ok(service, `expected Employment service missing: ${slug}`);
+  assert.ok(
+    service!.public_notes.some(note =>
+      /depend on current employer vacancies/i.test(note)
+    ),
+    `${slug} must preserve its vacancy-dependent limitation`
+  );
+  assert.ok(
+    !/currently available|guaranteed hiring/i.test(JSON.stringify(service)),
+    `${slug} must not claim current vacancy availability or guaranteed hiring`
+  );
+}
+const employersEngagement = cippesoBySlug.get('employers-engagement');
+assert.ok(employersEngagement, "Employers' Engagement must be published");
+assert.ok(
+  employersEngagement!.public_notes.some(
+    note => /POEA/.test(note) && /DMW|Department of Migrant Workers/.test(note)
+  ),
+  "Employers' Engagement must preserve the POEA-to-DMW freshness limitation"
+);
+for (const slug of [
+  'issuance-of-mayors-clearance',
+  'issuance-of-working-permit',
+]) {
+  const service = cippesoBySlug.get(slug);
+  assert.ok(service, `expected Employment service missing: ${slug}`);
+  assert.ok(
+    service!.public_notes.some(note => /Citizens Portal/i.test(note)),
+    `${slug} must preserve the Citizens Portal versus Charter-workflow limitation`
+  );
+  assert.ok(
+    service!.public_notes.some(note => /not established whether/i.test(note)),
+    `${slug} must preserve the hedge that it is not established whether the online channel replaces or only precedes the Charter workflow`
+  );
+}
+
 assert.deepEqual(
   blpd.map(service => service.slug),
   [
@@ -294,12 +401,27 @@ assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CHO')
+        services.filter(
+          service =>
+            service.office.acronym !== 'CHO' &&
+            service.office.acronym !== 'CIPPESO'
+        )
       )
     )
     .digest('hex'),
   '74691515890427c26704f91983229fd52c48ac17961a6baa32d605974eb347c1',
   'the previous fifty-four published service records must remain semantically unchanged'
+);
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(service => service.office.acronym !== 'CIPPESO')
+      )
+    )
+    .digest('hex'),
+  'eeac0f55132ddb2f84ba5341306ff1ba650d77ea2e0073ae9a3dc06af31ef717',
+  'the previous 113 published service records must remain semantically unchanged'
 );
 assert.equal(
   getServiceBySlug('permit-to-operate-temporary-permit')?.client_steps.at(-1)
@@ -401,5 +523,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 113/113; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); External: 113; published categories: 6/13; planned categories: 7/13'
+  '  routes: 120/120; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); External: 120; published categories: 7/13; planned categories: 6/13'
 );

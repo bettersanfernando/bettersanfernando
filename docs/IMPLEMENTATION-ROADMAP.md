@@ -142,21 +142,32 @@ canonical `PARTIAL` category pages (see `PAGE-DATA-MATRIX.md`). They are not
 READY pages: each category remains a bounded subset, not complete coverage of
 its office or purpose.
 
-| Batch                   |   Count | Category                     | Route                             |
-| ----------------------- | ------: | ---------------------------- | --------------------------------- |
-| BLPD                    |       8 | Business Services            | `/services/business`              |
-| CDRRMO                  |       7 | Disaster Preparedness        | `/services/disaster-preparedness` |
-| CSWDO Social Assistance |      19 | Assistance Programs          | `/services/assistance-programs`   |
-| CSWDO PWD               |       6 | PWD Services                 | `/services/pwd-services`          |
-| CSWDO Solo Parent       |      14 | Social Welfare               | `/services/social-welfare`        |
-| CHO                     |      59 | Health Services              | `/services/health-services`       |
-| **Total**               | **113** | **six published categories** |                                   |
+| Batch                   |   Count | Category                       | Route                             |
+| ----------------------- | ------: | ------------------------------ | --------------------------------- |
+| BLPD                    |       8 | Business Services              | `/services/business`              |
+| CDRRMO                  |       7 | Disaster Preparedness          | `/services/disaster-preparedness` |
+| CSWDO Social Assistance |      19 | Assistance Programs            | `/services/assistance-programs`   |
+| CSWDO PWD               |       6 | PWD Services                   | `/services/pwd-services`          |
+| CSWDO Solo Parent       |      14 | Social Welfare                 | `/services/social-welfare`        |
+| CHO                     |      59 | Health Services                | `/services/health-services`       |
+| CIPPESO                 |       7 | Employment                     | `/services/employment`            |
+| **Total**               | **120** | **seven published categories** |                                   |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-142 External services remain unpublished; the 74 Internal services are outside
+135 External services remain unpublished; the 74 Internal services are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
 CHO records, while external-22 and external-60 remain held and unpublished.
+The published Employment page is also `PARTIAL`, not `READY`: it contains 7
+publication-reviewed CIPPESO/CPESO records (Community-Based Skills Training,
+Employers' Engagement, Mayor's Clearance, Working Permit, Job Referral Online,
+Job Referral Walk-in, and Skills Training). CIPPESO's Investment Incentive
+record (external-01) is scoped to a future, non-Employment category, and its
+Technical Vocational Institutions Accreditation record (external-09) remains
+held and unpublished. No current job-fair, SPES, DILP, vacancy, or
+training-batch announcement is implied to be currently open; the reviewed
+batch/schedule, vacancy-dependence, POEA-to-DMW, and Citizens-Portal-versus-
+Charter-workflow limitations are preserved on their respective records.
 
 ## Phase 3 — Private data workstream
 
@@ -167,7 +178,7 @@ versioned allowlisted export are complete.
 
 | Priority | Work                                                                                                                                                                                                                                                          | Public page(s) unblocked                                                                                       |
 | -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 113 External services across six categories                                                                                                                 | The 7 remaining planned Services categories and broader coverage within the 6 published but PARTIAL categories |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 120 External services across seven categories                                                                                                               | The 6 remaining planned Services categories and broader coverage within the 7 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                 | `/government/structure`; later enriches `/government`                                                          |
 |        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                          | `/legislation/resolutions`                                                                                     |
 |        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                       | Moves `/government/links` from `PARTIAL` to `READY`                                                            |

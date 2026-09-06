@@ -199,10 +199,6 @@
     "status": "Data integration in progress",
     "statusDescription": "This destination is part of the approved portal structure. Information will be published after its sources and context are ready.",
     "pages": {
-      "employment": {
-        "title": "Employment",
-        "description": "Find verified information about local employment services, opportunities, and workforce support."
-      },
       "livelihood": {
         "title": "Livelihood",
         "description": "Find verified information about livelihood assistance, skills development, and related local programs."

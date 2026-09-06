@@ -62,9 +62,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 113,
+      "record_count": 120,
       "schema_version": 1,
-      "sha256": "dd70cd03b7e53bf593078f7a20eb5fee4256b938fc74d6cf627c378fe4766ffd"
+      "sha256": "5df562708bccff6d27611e8f978e62143209751d2770c91ed8449337c3615f93"
     }
   },
   "export_version": "v0.1.0",
@@ -90,6 +90,8 @@
     "data/services/cswdo-pwd-solo-parent-publication-review.json",
     "data/services/city-health-office-freshness-enrichment.json",
     "data/services/city-health-office-publication-review.json",
+    "data/services/cippeso-employment-freshness-enrichment.json",
+    "data/services/cippeso-employment-publication-review.json",
     "data/government/hotlines-publication-review.json",
     "data/government/barangay-contacts-publication-review.json",
     "data/government/official-links-publication-review.json"
@@ -117,7 +119,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "aaaad952cb62941a680eeacb4dc7269b8905449f",
+  "source_commit": "407d9d985bd7e2e54acd7fe9de02a47bb92049d7",
   "source_data_version": "v0.1.1",
   "sources": [
     {

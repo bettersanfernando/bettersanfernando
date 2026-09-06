@@ -113,7 +113,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.employment',
             href: '/services/employment',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.livelihood',

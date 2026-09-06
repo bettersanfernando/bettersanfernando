@@ -6,10 +6,11 @@
     "Business License and Permit Division",
     "City Disaster Risk Reduction Management Office",
     "City Social Welfare and Development Office",
-    "City Health Office"
+    "City Health Office",
+    "City Investment Promotions and Public Employment Services Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 113,
+  "record_count": 120,
   "schema_version": 1,
   "services": [
     {
@@ -11470,6 +11471,737 @@
       "slug": "transfer-referral-of-patient-to-other-health-facility",
       "title": "Transfer/Referral of Patient to Other Health Facility",
       "who_may_avail": "Women of Reproductive Age (15-49 years old)"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit a letter of intent addressed to the Barangay Captain regarding the proposed training.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait for the Barangay to inform its constituents about the training being offered.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait to be called or informed for training orientation.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Attend the training proper.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Attend the skills assessment, if applicable. A training allowance or starter kit may be provided under the program.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, coordinates community-based skills training with barangays and TESDA for out-of-school youth, unemployed, underemployed, and disadvantaged residents seeking self-employment or productive livelihood skills.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-02",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "6 hours and 53 minutes"
+      },
+      "public_notes": [
+        "Training availability depends on announced courses, partner institutions (including TESDA), barangay coordination, eligibility, and available slots. The Charter procedure does not establish that enrollment is continuously open.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay clearance",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Photocopy of a valid ID (e.g. Voter's ID or Police Clearance)",
+          "where_to_secure": "Respective issuing agency (private or government)"
+        }
+      ],
+      "slug": "community-based-skills-training",
+      "title": "Community-Based Skills Training",
+      "who_may_avail": "High School Graduate or Alternative Learning System (ALS) Graduate, out-of-school youth, unemployed, underemployed and/or disadvantaged workers"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit a letter of intent by email, addressed to the City Mayor through the CPESO Manager.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "If the letter of intent is approved, proceed to the Referral and Placement Section for an interview.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Fill out an Employer's Record Card (ERC).",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Submit the company profile, current Business Permit, and other required documents together with job vacancies/orders.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "If eligible for a Special Recruitment Activity or Local Recruitment Activity, secure the corresponding letter of no objection/approval.",
+          "sequence": "5"
+        },
+        {
+          "instruction": "Wait for release of the Letter of No Objection, where applicable.",
+          "sequence": "6"
+        },
+        {
+          "instruction": "For overseas recruitment activities, present the Special Recruitment Authorization to CPESO before the activity.",
+          "sequence": "7"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, works with employers on recruitment assistance, job-vacancy postings, and referral/placement activity, including job fairs and Special/Local Recruitment Activities.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-03",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 30 minutes"
+      },
+      "public_notes": [
+        "The Charter requires a \"POEA License for Overseas Agency\" and a Special Recruitment Authorization \"issued by POEA.\" The Philippine Overseas Employment Administration (POEA) has since been reorganized; the Department of Migrant Workers (DMW) currently operates the Online Recruitment Authority system for these applications. This service's core City employer-engagement function is current, but its overseas-agency documentary requirements are not republished here as independently current — verify current DMW requirements directly before relying on the Charter's POEA-specific overseas steps.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": "For employers",
+          "ordinal": "1",
+          "text": "Letter of intent (1 original)",
+          "where_to_secure": "Employer"
+        },
+        {
+          "condition": "For employers",
+          "ordinal": "2",
+          "text": "BIR Certificate of Registration (BIR Form 2303) (1 photocopy)",
+          "where_to_secure": "Bureau of Internal Revenue"
+        },
+        {
+          "condition": "For local recruitment agencies",
+          "ordinal": "3",
+          "text": "DOLE Certification for Local Agency (1 photocopy)",
+          "where_to_secure": "Department of Labor and Employment"
+        },
+        {
+          "condition": "For overseas recruitment agencies",
+          "ordinal": "4",
+          "text": "License for Overseas Agency, as printed in the Charter (\"POEA License\") (1 photocopy)",
+          "where_to_secure": "The Charter names the Philippine Overseas Employment Administration (POEA); see the freshness note below on the current Department of Migrant Workers context"
+        },
+        {
+          "condition": "For employers",
+          "ordinal": "5",
+          "text": "SEC or DTI Registration (1 photocopy)",
+          "where_to_secure": "Securities and Exchange Commission or Department of Trade and Industry"
+        },
+        {
+          "condition": "For employers",
+          "ordinal": "6",
+          "text": "Business Permit (1 photocopy)",
+          "where_to_secure": "Business License and Permit Division"
+        },
+        {
+          "condition": "For employers",
+          "ordinal": "7",
+          "text": "Job vacancies/orders (1 photocopy)",
+          "where_to_secure": "Employer"
+        }
+      ],
+      "slug": "employers-engagement",
+      "title": "Employers' Engagement",
+      "who_may_avail": "Jobseekers and Employers"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit complete documents at the Heroes Hall Lobby, 1st Floor.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Fill out the registration/employment-details form for PEIS registration.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Proceed to the Referral and Placement Section, 2nd Floor, Heroes Hall, for payment.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Wait for preparation and approval of the Mayor's Clearance.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Sign the receiving form and receive the Mayor's Clearance.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, issues a Mayor's Clearance to City of San Fernando residents for local employment purposes, and separately for those entering military or police service.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 150 (for purpose of employment); PHP 50 (for the purpose of entering military or police service)"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-04",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [
+        {
+          "availability_note": "Current online application intake. Its relationship to the Charter's later in-person verification, payment, and release steps is not established.",
+          "label": "Mayor's Working Permit and Mayor's Clearance Application",
+          "url": "https://citizensportal.csfp.io/mayor-working-permit"
+        }
+      ],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 5 minutes"
+      },
+      "public_notes": [
+        "A current CSFP Citizens Portal online application (\"Mayor's Working Permit and Mayor's Clearance Application\") is available in addition to the in-person process above. The online form does not visibly display the Charter's documentary checklist, fee, or processing time, so it is not established whether online submission replaces or only precedes the in-person verification, payment, and release steps described here.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": "For employment",
+          "ordinal": "1",
+          "text": "Police Clearance or NBI Clearance (1 original)",
+          "where_to_secure": "Local Police Station or NBI Office"
+        },
+        {
+          "condition": "For employment",
+          "ordinal": "2",
+          "text": "Barangay Clearance (1 original)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": "For employment",
+          "ordinal": "3",
+          "text": "Community Tax Certificate / Cedula (1 original)",
+          "where_to_secure": "City Treasurer's Office"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "4",
+          "text": "Police Clearance or NBI Clearance (1 original)",
+          "where_to_secure": "Local Police Station or NBI Office"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "5",
+          "text": "Barangay Clearance (1 original)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "6",
+          "text": "Community Tax Certificate / Cedula (1 original)",
+          "where_to_secure": "City Treasurer's Office"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "7",
+          "text": "Municipal Trial Court Clearance (1 original)",
+          "where_to_secure": "MTC"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "8",
+          "text": "Regional Trial Court Clearance (1 original)",
+          "where_to_secure": "RTC"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "9",
+          "text": "Prosecutor's Clearance (1 original)",
+          "where_to_secure": "Prosecutor's Office"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "10",
+          "text": "Voter's Certification (1 original)",
+          "where_to_secure": "COMELEC"
+        },
+        {
+          "condition": "For entering military or police service",
+          "ordinal": "11",
+          "text": "Birth Certificate (1 original)",
+          "where_to_secure": "PSA"
+        }
+      ],
+      "slug": "issuance-of-mayors-clearance",
+      "title": "Issuance of Mayor's Clearance",
+      "who_may_avail": "Residents of the City of San Fernando, Pampanga who need a clearance for employment purposes, or for entering military or police service"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit complete documents at the Heroes Hall Lobby, 1st Floor.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Fill out the registration/employment-details form for PEIS registration.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Proceed to the Referral and Placement Section, 2nd Floor, Heroes Hall, for payment.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Wait for preparation and approval of the Working Permit.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Sign the receiving form and receive the Working Permit.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, issues a Working Permit to individual workers or employees, whether temporary or permanent, employed by companies or establishments within the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 150"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-05",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [
+        {
+          "availability_note": "Current online application intake. Its relationship to the Charter's later in-person verification, payment, and release steps is not established.",
+          "label": "Mayor's Working Permit and Mayor's Clearance Application",
+          "url": "https://citizensportal.csfp.io/mayor-working-permit"
+        }
+      ],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 5 minutes"
+      },
+      "public_notes": [
+        "A current CSFP Citizens Portal online application (\"Mayor's Working Permit and Mayor's Clearance Application\") is available in addition to the in-person process above. The online form does not visibly display the Charter's documentary checklist, fee, or processing time, so it is not established whether online submission replaces or only precedes the in-person verification, payment, and release steps described here.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Police Clearance or NBI Clearance (1 original)",
+          "where_to_secure": "Local Police Station or NBI Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Barangay Clearance (1 original)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Community Tax Certificate / Cedula (1 original)",
+          "where_to_secure": "City Treasurer's Office"
+        }
+      ],
+      "slug": "issuance-of-working-permit",
+      "title": "Issuance of Working Permit",
+      "who_may_avail": "All workers or employees, temporary or permanent, under companies or establishments in the City of San Fernando. Exempt: government employees and professionals subject to the Professional Tax under Section 139 of the Local Government Code."
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Send your résumé/CV/PDS to the CPESO jobseeker email address, pesojobs.csf@gmail.com.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while CPESO reviews and forwards your résumé/CV/PDS to a matching employer.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for an update from the employer regarding the hiring process.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, provides electronic job matching and referral for jobseekers who submit a résumé, CV, or Personal Data Sheet by email.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-06",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 minutes, with a continuous timeframe afterward while waiting for an employer response"
+      },
+      "public_notes": [
+        "The referral service is ongoing, but job availability and employer response depend on current employer vacancies; a referral is not a guarantee of hiring. Individual vacancy postings are dated announcements and should not be treated as permanently open positions.",
+        "The résumé submissions may also be included in the national PESO Employment Information System (PEIS), integrated with PhilJobNet, and made available to PESO-registered employers.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Résumé / CV / Personal Data Sheet (1 original)",
+          "where_to_secure": "Jobseeker"
+        }
+      ],
+      "slug": "job-referral-online",
+      "title": "Job Referral (Online)",
+      "who_may_avail": "Jobseekers and Employers"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the registration/attendance form.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit your résumé/CV/PDS for review.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Attend the interview and job-matching session.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Wait while a referral letter is prepared, if you are qualified for a current opening.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Sign the receiving form and receive the referral letter.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, provides in-person registration, interview, job matching, and referral for jobseekers.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-07",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "32 minutes"
+      },
+      "public_notes": [
+        "The walk-in referral service is current at the program/office level, but successful matching and referral depend on current employer vacancies; a referral is not a guarantee of hiring. Individual vacancy postings are dated announcements and should not be treated as permanently open positions.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Résumé / CV / Personal Data Sheet (1 original)",
+          "where_to_secure": "Jobseeker"
+        }
+      ],
+      "slug": "job-referral-walk-in",
+      "title": "Job Referral (Walk In)",
+      "who_may_avail": "Jobseekers and Employers"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Secure and fill out the PESO Employment Information System (PEIS) Registration Form.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the fully accomplished PEIS form for review and interview.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "If qualified, wait for referral to a community-based training, or a referral slip to a partner Technical Vocational Institution (TVI) for school-based training.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Sign upon receipt of the referral or referral slip.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City Public Employment Services Office (CPESO), under CIPPESO, registers jobseekers into the PESO Employment Information System (PEIS) and refers qualified applicants to community-based or partner school-based (TVI) skills training.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-08",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CIPPESO",
+        "division": "City Public Employment Services Office (CPESO)",
+        "name": "City Investment Promotions and Public Employment Services Office"
+      },
+      "office_contact": {
+        "address": "Heroes Hall (1F Executive Building, Heroes Hall Compound, Brgy. San Juan, City of San Fernando, Pampanga); the Charter's own permit/clearance workflow sends applicants first to the Heroes Hall Lobby, 1st Floor, then to the Referral and Placement Section, 2nd Floor, for payment. No single definitive CPESO suite/floor is published.",
+        "emails": [
+          "cpeso@cityofsanfernando.gov.ph",
+          "pesojobs.csf@gmail.com"
+        ],
+        "extension": "101",
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": {
+        "schedule": null,
+        "scope": "Not established by current evidence."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "16 minutes"
+      },
+      "public_notes": [
+        "Training availability depends on announced courses, partner Technical Vocational Institutions, eligibility, and available slots. The Charter procedure does not establish that enrollment is continuously open.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Barangay clearance",
+          "where_to_secure": "Respective Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Photocopy of a valid ID (e.g. Voter's ID or Police Clearance)",
+          "where_to_secure": "Respective issuing agency (private or government)"
+        }
+      ],
+      "slug": "skills-training",
+      "title": "Skills Training",
+      "who_may_avail": "High School Graduate or Alternative Learning System (ALS) Graduate, out-of-school youth, unemployed, underemployed and/or disadvantaged workers"
     }
   ]
 }

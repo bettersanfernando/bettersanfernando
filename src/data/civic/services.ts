@@ -246,11 +246,48 @@ const ChoServiceSchema = z.strictObject({
     .min(1),
 });
 
+const CippesoServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  classification: z.strictObject({
+    complexity: z.literal('Simple'),
+    service_scope: z.literal('External'),
+    transaction_types: z.tuple([z.literal('G2C')]),
+  }),
+  fee: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CIPPESO'),
+    division: z.literal('City Public Employment Services Office (CPESO)'),
+    name: z.literal(
+      'City Investment Promotions and Public Employment Services Office'
+    ),
+  }),
+  office_contact: z.strictObject({
+    address: NonEmptyString,
+    emails: z.array(z.email()).min(1),
+    extension: NonEmptyString,
+    phone: NonEmptyString,
+  }),
+  office_hours: z.strictObject({
+    schedule: z.null(),
+    scope: z.literal('Not established by current evidence.'),
+  }),
+  processing_time: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(CswdoRequirementSchema).min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
   CswdoServiceSchema,
   ChoServiceSchema,
+  CippesoServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -263,15 +300,18 @@ const ServicesFileSchema = z
       z.literal('City Disaster Risk Reduction Management Office'),
       z.literal('City Social Welfare and Development Office'),
       z.literal('City Health Office'),
+      z.literal(
+        'City Investment Promotions and Public Employment Services Office'
+      ),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(113),
+    record_count: z.literal(120),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(113),
+    services: z.array(ServiceSchema).length(120),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 113) {
+      if (new Set(file.services.map(service => service[key])).size !== 120) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -292,16 +332,20 @@ const ServicesFileSchema = z
     const choCount = file.services.filter(
       service => service.office.acronym === 'CHO'
     ).length;
+    const cippesoCount = file.services.filter(
+      service => service.office.acronym === 'CIPPESO'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
       cswdoCount !== 39 ||
-      choCount !== 59
+      choCount !== 59 ||
+      cippesoCount !== 7
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, and 59 CHO records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, and 7 CIPPESO records',
         path: ['services'],
       });
     }
@@ -314,7 +358,8 @@ export type PublishedServiceCategory =
   | 'assistance-programs'
   | 'social-welfare'
   | 'pwd-services'
-  | 'health-services';
+  | 'health-services'
+  | 'employment';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -338,6 +383,7 @@ const categoryByAcronym: Record<
   CDRRMO: 'disaster-preparedness',
   CSWDO: 'assistance-programs',
   CHO: 'health-services',
+  CIPPESO: 'employment',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

@@ -22,7 +22,7 @@ const categories = [
     'Employment',
     'employment',
     'Employment services, opportunities, and workforce support.',
-    'planned',
+    'published',
   ],
   [
     'Livelihood',
@@ -223,13 +223,17 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   'A reviewed subset of Solo Parent identification and registration services currently published from the City Social Welfare and Development Office.'}
                 {category === 'pwd-services' &&
                   'A reviewed subset of PWD identification and registration services currently published from the City Social Welfare and Development Office.'}
+                {category === 'employment' &&
+                  'Reviewed services currently published from the City Investment Promotions and Public Employment Services Office (CIPPESO), also known as the City Public Employment Services Office (CPESO).'}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
                 category === 'social-welfare' ||
                 category === 'pwd-services'
                   ? 'This is a bounded collection, not all assistance programs and not complete coverage of CSWDO or City social-welfare services.'
-                  : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                  : category === 'employment'
+                    ? 'This is a bounded collection of seven reviewed CIPPESO/CPESO procedures, not a complete inventory of City employment programs, current job vacancies, or training-batch schedules.'
+                    : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

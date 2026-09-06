@@ -331,7 +331,7 @@ assert.match(metadata.overallPublicLimitation, /not a guarantee|reachable/i);
 assert.equal(metadata.route, '/government/hotlines');
 
 // 6. Existing 113 published services must remain unchanged by this addition.
-assert.equal(getServices().length, 113);
+assert.equal(getServices().length, 120);
 
 // 7. Route and navigation: the planned-page entry is gone, the route is real.
 assert.ok(
