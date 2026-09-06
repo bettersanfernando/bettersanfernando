@@ -6,7 +6,6 @@ const plannedPageRoutes = [
     id: 'infrastructurePublicWorks',
     path: '/services/infrastructure-public-works',
   },
-  { id: 'agricultureFisheries', path: '/services/agriculture-fisheries' },
   { id: 'environment', path: '/services/environment' },
   { id: 'resolutions', path: '/legislation/resolutions' },
   { id: 'governmentDocuments', path: '/government/documents' },

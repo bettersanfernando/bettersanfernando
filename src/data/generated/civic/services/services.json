@@ -7,10 +7,11 @@
     "City Disaster Risk Reduction Management Office",
     "City Social Welfare and Development Office",
     "City Health Office",
-    "City Investment Promotions and Public Employment Services Office"
+    "City Investment Promotions and Public Employment Services Office",
+    "City Agriculture and Veterinary Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 120,
+  "record_count": 127,
   "schema_version": 1,
   "services": [
     {
@@ -12202,6 +12203,592 @@
       "slug": "skills-training",
       "title": "Skills Training",
       "who_may_avail": "High School Graduate or Alternative Learning System (ALS) Graduate, out-of-school youth, unemployed, underemployed and/or disadvantaged workers"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Sign the logbook and submit the required documents.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Participate in the interview and masterlist validation.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the order of payment and pay the corresponding fee at the City Treasurer's Office.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Return to CAVO and present the official receipt.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Verify the correctness of the information encoded in the certificate.",
+          "sequence": "5"
+        },
+        {
+          "instruction": "Wait for approval and signing of the certificate.",
+          "sequence": "6"
+        },
+        {
+          "instruction": "Receive the Certificate for Bonafide Farmer.",
+          "sequence": "7"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Agriculture Division, issues a Certificate for Bonafide Farmers to farmers listed in the Updated General Master List, for use in private or government programs, financial or machinery loans, and other transactions.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 500.00"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-01",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Agriculture Division",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "40 minutes"
+      },
+      "public_notes": [
+        "This certificate is issued only to farmers listed in the General Masterlist whose farm area is within the City of San Fernando's jurisdiction.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": "For non-owners",
+          "ordinal": "1",
+          "text": "Barangay Certificate confirming bona fide tiller/farmer status (1 original)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": "For landowners",
+          "ordinal": "2",
+          "text": "Transfer Certificate of Title, or DAR/CLOA documentation (1 photocopy)",
+          "where_to_secure": "Registry of Deeds or DAR"
+        }
+      ],
+      "slug": "issuance-of-certificate-for-bonafide-farmers",
+      "title": "Issuance of Certificate for Bonafide Farmers",
+      "who_may_avail": "Farmers listed in the General Masterlist whose farm area is within the jurisdiction of the City of San Fernando, Pampanga"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Undergo an interview, or submit a request letter if available.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "If no letter was submitted, fill out the logbook with the details of your request.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Discuss your issue or concern with the assigned technical staff, or have your seminar/training request logged with its proposed date, venue, target audience, and contact details.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Agriculture Division, provides free consultation and technical assistance on integrated pest management (IPM), integrated nutrient management (INM), crop production, and related IEC seminars or training.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-02",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Agriculture Division",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 15 minutes"
+      },
+      "public_notes": [
+        "Walk-in consultation and technical assistance are available; seminars and training are dependent on CAVO's scheduling, staff, venue, and target audience, and are not continuously open.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "None",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "request-for-ipm-inm-crop-production-iec",
+      "title": "Request for IPM/INM/Crop Production/IEC",
+      "who_may_avail": "Bona fide Fernandino citizens"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the visitor's logbook, or submit a request letter, stating the seeds or seedlings needed.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "For large-quantity requests, wait for a technician's site inspection or field visit to determine the approved quantity.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "For seedlings, present the Approved Request Slip at the City Nursery and wait for release.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Receive your seeds or seedlings, subject to availability.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Agriculture Division, provides vegetable seeds and vegetable/fruit-bearing seedlings to individual farmers/clients, associations, and institutions, subject to availability.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-03",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Agriculture Division",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "Varies by request type and quantity; see the four request categories below."
+      },
+      "public_notes": [
+        "Seeds and seedlings are released subject to availability. Larger requests require a technician's site inspection or field visit, and the final approved quantity may differ from the amount requested. This is not a guarantee of stock or fixed quantities.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "None (a request letter is optional)",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "request-for-vegetable-seeds-and-request-for-vegetable-and-fruit-bearing-seedlings",
+      "title": "Request for Vegetable Seeds and Request for Vegetable and Fruit-Bearing Seedlings",
+      "variants": [
+        {
+          "label": "Vegetable seeds — 2 packs or fewer",
+          "processing_time": "20 minutes"
+        },
+        {
+          "label": "Vegetable seeds — more than 2 packs",
+          "note": "Requires a technician's site inspection or field visit before the approved quantity is released.",
+          "processing_time": "1 day and 24 minutes"
+        },
+        {
+          "label": "Vegetable or fruit-bearing seedlings — 100 or fewer",
+          "note": "Approved recipients proceed to the City Nursery for release.",
+          "processing_time": "1 hour and 35 minutes"
+        },
+        {
+          "label": "Vegetable or fruit-bearing seedlings — more than 100",
+          "note": "Requires a technician's site inspection or field visit; approved recipients proceed to the City Nursery for release.",
+          "processing_time": "1 day, 1 hour, and 39 minutes"
+        }
+      ],
+      "who_may_avail": "Bona fide Fernandino citizens"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the Veterinary Service Request Form and undergo an interview.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Provide details of your request and sign the logbook.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Allow the animal to be handled for the administration of the vaccine or treatment.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "For vaccination, sign the logbook and receive the Dog Card or Vaccination Record. For treatment, sign the logbook and receive the Animal Check-Up / Post-Treatment Management documentation.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Veterinary Division, provides vaccination and treatment for farm and companion animals to help prevent and control animal disease.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-04",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Veterinary Division",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "Walk-in: 25 minutes; On-site: 1 day and 12 minutes"
+      },
+      "public_notes": [
+        "Walk-in and on-site processing times are distinct; on-site requests take substantially longer than walk-in requests. Vaccine or medicine availability and staff scheduling are not guaranteed, and emergency or outbreak response may affect deployment. Dated barangay vaccination campaigns are not permanent availability.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "None",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "request-for-animal-vaccination-and-treatment",
+      "title": "Request for Animal Vaccination and Treatment",
+      "who_may_avail": "Livestock farmers and pet owners of the City of San Fernando, Pampanga"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the Veterinary Service Request Form and undergo an interview.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Provide details of your request, or submit a request letter, and sign the logbook.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Discuss your issue or concern with the assigned technical staff, or have your seminar/training request logged with its proposed date, venue, and target audience.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Veterinary Division, provides free consultation, IEC seminars, and training on livestock production.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-05",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Veterinary Division",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 15 minutes"
+      },
+      "public_notes": [
+        "Walk-in consultation is available; seminars and training are dependent on CAVO's schedule, staff, venue, and target audience, and are not continuously open. One-off livestock distributions or training events are not part of this standing service.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "None",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "request-for-livestock-production-iec-seminar",
+      "title": "Request for Livestock Production/IEC Seminar",
+      "who_may_avail": "Bona fide Fernandino citizens"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the Meat Inspection Certificate request form.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the form to the Meat Inspector for assessment and validation against the Animal Incoming Report.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for and receive the prepared Meat Inspection Certificate.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Veterinary Division / Regulatory Unit, issues a Meat Inspection Certificate for carcasses inspected and passed at a Locally Registered Poultry Dressing Plant, for shipping or other legal purposes.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-06",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Veterinary Division / Regulatory Unit",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 minutes"
+      },
+      "public_notes": [
+        "This service covers the Meat Inspection Certificate (MIC) only, for carcasses inspected and passed at the applicable Poultry Dressing Plant. The Charter's own procedure names \"MIC or NMMPIC\" in its final step, but this single step does not establish a separate or broader National Meat and Meat Products Certificate (NMMPIC) entitlement through this service; PDP NMMPIC issuance is not published here.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "None",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "request-for-meat-inspection-certificate-mic-poultry-dressing-plant-pdp",
+      "title": "Request for Meat Inspection Certificate (MIC) – Poultry Dressing Plant (PDP)",
+      "who_may_avail": "Chicken dealers and vendors"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "agriculture-fisheries",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the Meat Inspection Certificate / National Meat and Meat Products Certificate request form.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit the form to the Meat Inspector for assessment against the Animal Incoming Report.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for and receive the MIC or NMMPIC.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Agriculture and Veterinary Office (CAVO), Veterinary Division / Regulatory Unit, issues a Meat Inspection Certificate and/or National Meat and Meat Products Certificate for carcasses inspected and passed at the City Slaughterhouse, for shipping or other legal purposes.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-agriculture-and-veterinary-office-external-07",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CAVO",
+        "division": "City Agriculture and Veterinary Office – Veterinary Division / Regulatory Unit",
+        "name": "City Agriculture and Veterinary Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cavo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 281-1025"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CAVO main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 minutes"
+      },
+      "public_notes": [
+        "Certificates apply only to carcasses inspected and passed at the City Slaughterhouse. Availability depends on the City Slaughterhouse, Meat Inspector, and Animal Incoming Report workflow.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "None",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "request-for-meat-inspection-certificate-mic-and-or-national-meat-and-meat-products-certificate-nmmpic-city-slaughterhouse",
+      "title": "Request for Meat Inspection Certificate (MIC) and/or National Meat and Meat Products Certificate (NMMPIC) – City Slaughterhouse",
+      "who_may_avail": "Meat dealers and vendors"
     }
   ]
 }

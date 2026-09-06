@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 120                                                    |
-| Published service categories      | 7 of 13                                                |
-| Planned service categories        | 6 of 13                                                |
+| Reviewed External service records | 127                                                    |
+| Published service categories      | 8 of 13                                                |
+| Planned service categories        | 5 of 13                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -56,15 +56,16 @@ been verified and reviewed for publication.
 
 Published service categories:
 
-| Category              | Records | Route                             |
-| --------------------- | ------: | --------------------------------- |
-| Business Services     |       8 | `/services/business`              |
-| Disaster Preparedness |       7 | `/services/disaster-preparedness` |
-| Assistance Programs   |      19 | `/services/assistance-programs`   |
-| Social Welfare        |      14 | `/services/social-welfare`        |
-| PWD Services          |       6 | `/services/pwd-services`          |
-| Health Services       |      59 | `/services/health-services`       |
-| Employment            |       7 | `/services/employment`            |
+| Category                | Records | Route                             |
+| ----------------------- | ------: | --------------------------------- |
+| Business Services       |       8 | `/services/business`              |
+| Disaster Preparedness   |       7 | `/services/disaster-preparedness` |
+| Assistance Programs     |      19 | `/services/assistance-programs`   |
+| Social Welfare          |      14 | `/services/social-welfare`        |
+| PWD Services            |       6 | `/services/pwd-services`          |
+| Health Services         |      59 | `/services/health-services`       |
+| Employment              |       7 | `/services/employment`            |
+| Agriculture & Fisheries |       7 | `/services/agriculture-fisheries` |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -79,18 +80,24 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-The remaining 6 service categories (Livelihood, Education Services, Senior
-Citizens, Infrastructure & Public Works, Agriculture & Fisheries, Environment)
-are visible in navigation as planned sections; they do not yet contain
-published service records. Health Services and Employment are both `PARTIAL`,
-not `READY`: Health Services' 59 publication-reviewed CHO records and
-Employment's 7 publication-reviewed CIPPESO records are each a bounded subset
-of the canonical inventory. Employment's Investment Incentive record
+The remaining 5 service categories (Livelihood, Education Services, Senior
+Citizens, Infrastructure & Public Works, Environment) are visible in
+navigation as planned sections; they do not yet contain published service
+records. Health Services, Employment, and Agriculture & Fisheries are all
+`PARTIAL`, not `READY`: Health Services' 59 publication-reviewed CHO records,
+Employment's 7 publication-reviewed CIPPESO records, and Agriculture &
+Fisheries' 7 publication-reviewed CAVO records are each a bounded subset of
+the canonical inventory. Employment's Investment Incentive record
 (external-01) and Technical Vocational Institutions Accreditation record
 (external-09) are intentionally excluded — the former is scoped to a future
-category, the latter remains held. Another 135 External services and all 74
-Internal services remain unpublished; CHO records external-22 and external-60
-remain held and are not published. See
+category, the latter remains held. Agriculture & Fisheries publishes no
+standalone fisheries Charter service and no Fish Production Support
+service — the CAVO batch covers agriculture, crops, animal health, and meat
+regulation only; its Poultry Dressing Plant record is scoped to the Meat
+Inspection Certificate (MIC) only, not the National Meat and Meat Products
+Certificate (NMMPIC). Another 128 External services and all 74 Internal
+services remain unpublished; CHO records external-22 and external-60 remain
+held and are not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
 page-by-page readiness assessment and
 [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is

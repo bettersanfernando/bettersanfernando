@@ -75,8 +75,8 @@ const categories = [
   [
     'Agriculture & Fisheries',
     'agriculture-fisheries',
-    'Local agriculture, fisheries, and veterinary services.',
-    'planned',
+    'Local CAVO agriculture, crop, animal health, and meat-regulation services.',
+    'published',
   ],
   [
     'Environment',
@@ -225,6 +225,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   'A reviewed subset of PWD identification and registration services currently published from the City Social Welfare and Development Office.'}
                 {category === 'employment' &&
                   'Reviewed services currently published from the City Investment Promotions and Public Employment Services Office (CIPPESO), also known as the City Public Employment Services Office (CPESO).'}
+                {category === 'agriculture-fisheries' &&
+                  "Seven reviewed Citizen's Charter services currently published from the City Agriculture and Veterinary Office (CAVO), covering agriculture, crops, animal health, and meat regulation."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -233,7 +235,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   ? 'This is a bounded collection, not all assistance programs and not complete coverage of CSWDO or City social-welfare services.'
                   : category === 'employment'
                     ? 'This is a bounded collection of seven reviewed CIPPESO/CPESO procedures, not a complete inventory of City employment programs, current job vacancies, or training-batch schedules.'
-                    : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                    : category === 'agriculture-fisheries'
+                      ? 'This is a bounded collection of seven CAVO agriculture and veterinary procedures. No standalone fisheries Charter service is currently published, and this is not a complete inventory of City agriculture, fisheries, or veterinary programs, current seed/seedling/vaccine stock, or seminar and vaccination schedules.'
+                      : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

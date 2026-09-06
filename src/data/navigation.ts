@@ -173,7 +173,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.agriculture',
             href: '/services/agriculture-fisheries',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.environment',

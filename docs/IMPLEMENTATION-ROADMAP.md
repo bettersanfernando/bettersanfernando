@@ -151,10 +151,11 @@ its office or purpose.
 | CSWDO Solo Parent       |      14 | Social Welfare                 | `/services/social-welfare`        |
 | CHO                     |      59 | Health Services                | `/services/health-services`       |
 | CIPPESO                 |       7 | Employment                     | `/services/employment`            |
-| **Total**               | **120** | **seven published categories** |                                   |
+| CAVO                    |       7 | Agriculture & Fisheries        | `/services/agriculture-fisheries` |
+| **Total**               | **127** | **eight published categories** |                                   |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-135 External services remain unpublished; the 74 Internal services are outside
+128 External services remain unpublished; the 74 Internal services are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
 CHO records, while external-22 and external-60 remain held and unpublished.
@@ -168,6 +169,18 @@ held and unpublished. No current job-fair, SPES, DILP, vacancy, or
 training-batch announcement is implied to be currently open; the reviewed
 batch/schedule, vacancy-dependence, POEA-to-DMW, and Citizens-Portal-versus-
 Charter-workflow limitations are preserved on their respective records.
+The published Agriculture & Fisheries page is also `PARTIAL`, not `READY`: it
+contains 7 publication-reviewed CAVO records (Bonafide Farmers Certificate,
+IPM/INM/Crop Production/IEC, Vegetable Seeds and Seedlings, Animal Vaccination
+and Treatment, Livestock Production/IEC Seminar, Poultry Dressing Plant MIC,
+and City Slaughterhouse MIC/NMMPIC). No standalone fisheries Charter service
+or Fish Production Support procedure is published; the Poultry Dressing Plant
+record is scoped to the Meat Inspection Certificate (MIC) only, never the
+National Meat and Meat Products Certificate (NMMPIC). No current seed,
+seedling, vaccine, or medicine inventory, guaranteed same-day availability, or
+current seminar/vaccination schedule is implied; the reviewed
+Masterlist/jurisdiction, scheduling-dependence, availability, and
+certificate-scope limitations are preserved on their respective records.
 
 ## Phase 3 — Private data workstream
 
@@ -178,7 +191,7 @@ versioned allowlisted export are complete.
 
 | Priority | Work                                                                                                                                                                                                                                                          | Public page(s) unblocked                                                                                       |
 | -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 120 External services across seven categories                                                                                                               | The 6 remaining planned Services categories and broader coverage within the 7 published but PARTIAL categories |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 127 External services across eight categories                                                                                                               | The 5 remaining planned Services categories and broader coverage within the 8 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                 | `/government/structure`; later enriches `/government`                                                          |
 |        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                          | `/legislation/resolutions`                                                                                     |
 |        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                       | Moves `/government/links` from `PARTIAL` to `READY`                                                            |

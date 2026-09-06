@@ -51,6 +51,7 @@ const realCategorySlugs = [
   'assistance-programs',
   'social-welfare',
   'pwd-services',
+  'agriculture-fisheries',
   'disaster-preparedness',
 ];
 const plannedCategorySlugs = canonicalCategories.filter(
@@ -96,17 +97,23 @@ for (const slug of canonicalCategories) {
 const cippeso = services.filter(
   service => service.office.acronym === 'CIPPESO'
 );
-assert.equal(services.length, 120);
+const cavo = services.filter(service => service.office.acronym === 'CAVO');
+assert.equal(services.length, 127);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
 assert.equal(cho.length, 59);
 assert.equal(cippeso.length, 7, 'exactly seven CIPPESO Employment records');
+assert.equal(
+  cavo.length,
+  7,
+  'exactly seven CAVO Agriculture & Fisheries records'
+);
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 120);
-assert.equal(new Set(services.map(service => service.slug)).size, 120);
+assert.equal(new Set(services.map(service => service.id)).size, 127);
+assert.equal(new Set(services.map(service => service.slug)).size, 127);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -118,7 +125,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 120 service detail routes must resolve through the adapter'
+  'all 127 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -169,6 +176,14 @@ assert.ok(
       getServiceHref(service) === `/services/employment/${service.slug}`
   ),
   'all seven CIPPESO records must use canonical Employment routes'
+);
+assert.ok(
+  cavo.every(
+    service =>
+      getServiceHref(service) ===
+      `/services/agriculture-fisheries/${service.slug}`
+  ),
+  'all seven CAVO records must use canonical Agriculture & Fisheries routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -379,6 +394,167 @@ for (const slug of [
   );
 }
 
+const expectedCavoServiceIds = [
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-01',
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-02',
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-03',
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-04',
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-05',
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-06',
+  'charter-2026-2e-city-agriculture-and-veterinary-office-external-07',
+].sort();
+assert.deepEqual(
+  cavo.map(service => service.id).sort(),
+  expectedCavoServiceIds,
+  'Agriculture & Fisheries must contain exactly the seven approved CAVO service ids'
+);
+assert.deepEqual(
+  cavo.map(service => service.title).sort(),
+  [
+    'Issuance of Certificate for Bonafide Farmers',
+    'Request for IPM/INM/Crop Production/IEC',
+    'Request for Vegetable Seeds and Request for Vegetable and Fruit-Bearing Seedlings',
+    'Request for Animal Vaccination and Treatment',
+    'Request for Livestock Production/IEC Seminar',
+    'Request for Meat Inspection Certificate (MIC) – Poultry Dressing Plant (PDP)',
+    'Request for Meat Inspection Certificate (MIC) and/or National Meat and Meat Products Certificate (NMMPIC) – City Slaughterhouse',
+  ].sort(),
+  'Agriculture & Fisheries titles must exactly match the seven approved CAVO records'
+);
+assert.ok(
+  !services.some(service => /fish production support/i.test(service.title)),
+  'no Fish Production Support service may be introduced'
+);
+
+// Preserve the reviewed limitations for the seven CAVO records.
+const cavoBySlug = new Map(cavo.map(service => [service.slug, service]));
+const bonafideFarmers = cavoBySlug.get(
+  'issuance-of-certificate-for-bonafide-farmers'
+);
+assert.ok(bonafideFarmers, 'Bonafide Farmers certificate must be published');
+assert.ok(
+  bonafideFarmers!.public_notes.some(note =>
+    /General Masterlist/i.test(note)
+  ) &&
+    bonafideFarmers!.public_notes.some(note =>
+      /City of San Fernando's jurisdiction/i.test(note)
+    ),
+  'Bonafide Farmers certificate must preserve the Masterlist/jurisdiction limitation'
+);
+assert.equal(bonafideFarmers!.fee.text, 'PHP 500.00');
+assert.equal(bonafideFarmers!.processing_time.text, '40 minutes');
+
+const ipmIec = cavoBySlug.get('request-for-ipm-inm-crop-production-iec');
+assert.ok(ipmIec, 'IPM/INM/Crop Production/IEC must be published');
+assert.ok(
+  ipmIec!.public_notes.some(note =>
+    /scheduling, staff, venue, and target audience/i.test(note)
+  ),
+  'IPM/INM/Crop Production/IEC must preserve the schedule/staff/venue/audience-dependent limitation'
+);
+
+const seedsSeedlings = cavoBySlug.get(
+  'request-for-vegetable-seeds-and-request-for-vegetable-and-fruit-bearing-seedlings'
+);
+assert.ok(seedsSeedlings, 'Seeds and Seedlings must be published');
+assert.ok(
+  seedsSeedlings!.public_notes.some(note =>
+    /subject to availability/i.test(note)
+  ),
+  'Seeds and Seedlings must preserve the availability limitation'
+);
+assert.equal(
+  seedsSeedlings!.variants?.length,
+  4,
+  'Seeds and Seedlings must preserve all four request thresholds'
+);
+assert.deepEqual(
+  seedsSeedlings!.variants?.map(variant => variant.label).sort(),
+  [
+    'Vegetable seeds — 2 packs or fewer',
+    'Vegetable seeds — more than 2 packs',
+    'Vegetable or fruit-bearing seedlings — 100 or fewer',
+    'Vegetable or fruit-bearing seedlings — more than 100',
+  ].sort()
+);
+assert.ok(
+  seedsSeedlings!.variants?.every(variant => Boolean(variant.processing_time)),
+  'every seed/seedling threshold must preserve its own processing time'
+);
+assert.ok(
+  seedsSeedlings!.variants?.some(variant =>
+    /City Nursery/i.test(variant.note ?? '')
+  ),
+  'approved seedling release must preserve the City Nursery routing'
+);
+
+const animalVaccination = cavoBySlug.get(
+  'request-for-animal-vaccination-and-treatment'
+);
+assert.ok(
+  animalVaccination,
+  'Animal Vaccination and Treatment must be published'
+);
+assert.match(
+  animalVaccination!.processing_time.text,
+  /Walk-in:.*On-site:/i,
+  'walk-in and on-site processing times must remain distinct, not collapsed into one figure'
+);
+assert.ok(
+  animalVaccination!.public_notes.some(note => /not guaranteed/i.test(note)),
+  'Animal Vaccination and Treatment must preserve the supply/scheduling limitation'
+);
+
+const livestockIec = cavoBySlug.get(
+  'request-for-livestock-production-iec-seminar'
+);
+assert.ok(livestockIec, 'Livestock Production/IEC Seminar must be published');
+assert.ok(
+  livestockIec!.public_notes.some(note =>
+    /schedule, staff, venue, and target audience/i.test(note)
+  ),
+  'Livestock Production/IEC Seminar must preserve its schedule-dependent limitation'
+);
+
+const pdpMic = cavoBySlug.get(
+  'request-for-meat-inspection-certificate-mic-poultry-dressing-plant-pdp'
+);
+assert.ok(pdpMic, 'PDP Meat Inspection Certificate must be published');
+assert.ok(
+  pdpMic!.public_notes.some(
+    note => /NMMPIC/.test(note) && /not published/i.test(note)
+  ),
+  'PDP service must explicitly state that NMMPIC is not published through this service'
+);
+assert.ok(
+  !/NMMPIC.{0,40}(available|issued)(?!.{0,80}not)/i.test(
+    JSON.stringify(pdpMic)
+  ),
+  'PDP service must not claim NMMPIC availability'
+);
+
+const slaughterhouseMic = cavoBySlug.get(
+  'request-for-meat-inspection-certificate-mic-and-or-national-meat-and-meat-products-certificate-nmmpic-city-slaughterhouse'
+);
+assert.ok(
+  slaughterhouseMic,
+  'City Slaughterhouse MIC/NMMPIC must be published'
+);
+assert.ok(
+  slaughterhouseMic!.public_notes.some(note =>
+    /inspected and passed at the City Slaughterhouse/i.test(note)
+  ),
+  'City Slaughterhouse service must preserve the inspected-and-passed limitation'
+);
+
+assert.ok(
+  cavo.every(
+    service =>
+      service.online_channels.length === 0 && service.appointment === null
+  ),
+  'CAVO records must not promote a CAVO-specific online application or appointment channel'
+);
+
 assert.deepEqual(
   blpd.map(service => service.slug),
   [
@@ -404,7 +580,8 @@ assert.equal(
         services.filter(
           service =>
             service.office.acronym !== 'CHO' &&
-            service.office.acronym !== 'CIPPESO'
+            service.office.acronym !== 'CIPPESO' &&
+            service.office.acronym !== 'CAVO'
         )
       )
     )
@@ -416,12 +593,27 @@ assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CIPPESO')
+        services.filter(
+          service =>
+            service.office.acronym !== 'CIPPESO' &&
+            service.office.acronym !== 'CAVO'
+        )
       )
     )
     .digest('hex'),
   'eeac0f55132ddb2f84ba5341306ff1ba650d77ea2e0073ae9a3dc06af31ef717',
   'the previous 113 published service records must remain semantically unchanged'
+);
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(service => service.office.acronym !== 'CAVO')
+      )
+    )
+    .digest('hex'),
+  '204a1f9206106a5cbd4665fd99e91fb4002348deb38ca14ed0f48e8a1b4c9e2f',
+  'the previous 120 published service records must remain semantically unchanged'
 );
 assert.equal(
   getServiceBySlug('permit-to-operate-temporary-permit')?.client_steps.at(-1)
@@ -523,5 +715,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 120/120; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); External: 120; published categories: 7/13; planned categories: 6/13'
+  '  routes: 127/127; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); External: 127; published categories: 8/13; planned categories: 5/13'
 );
