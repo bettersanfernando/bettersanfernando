@@ -13,6 +13,7 @@ const DatasetPath = z.enum([
   'geography/city.geojson',
   'government/barangay-contacts.json',
   'government/hotlines.json',
+  'government/official-links.json',
   'legislation/executive-orders.json',
   'legislation/ordinances.json',
   'legislation/resolutions.json',

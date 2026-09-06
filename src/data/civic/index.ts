@@ -19,6 +19,7 @@ export * from './government.ts';
 export * from './governmentContacts.ts';
 export * from './governmentHotlines.ts';
 export * from './governmentBarangayContacts.ts';
+export * from './governmentOfficialLinks.ts';
 export * from './legislation.ts';
 export * from './legislationSummary.ts';
 export * from './sources.ts';

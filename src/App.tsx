@@ -26,6 +26,9 @@ const GovernmentHotlines = lazy(() => import('./pages/GovernmentHotlines'));
 const GovernmentBarangayContacts = lazy(
   () => import('./pages/GovernmentBarangayContacts')
 );
+const GovernmentOfficialLinks = lazy(
+  () => import('./pages/GovernmentOfficialLinks')
+);
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSources = lazy(() => import('./pages/ProjectSources'));
 const ProjectMethodology = lazy(() => import('./pages/ProjectMethodology'));
@@ -115,6 +118,10 @@ function App() {
                   <Route
                     path="/government/barangay-contacts"
                     element={<GovernmentBarangayContacts />}
+                  />
+                  <Route
+                    path="/government/links"
+                    element={<GovernmentOfficialLinks />}
                   />
                   <Route
                     path="/government/directory"

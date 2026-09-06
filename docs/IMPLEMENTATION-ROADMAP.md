@@ -117,6 +117,18 @@ pages are deliberately separate directories. It is `PARTIAL`, not `READY`:
 this is an initial batch with no established reverification cadence for
 personnel and number changes.
 
+`/government/links` shipped as a new canonical route: a publication-reviewed
+directory of 35 approved official destinations (30 official websites, 2
+digital services, 3 institutional Facebook pages), grouped by channel type
+with owning entity, purpose, verification date, and a limitation note per
+link. The approved CDRRMO Facebook destination carries only its narrow,
+reviewed purpose (official CDRRMO information and regular weather updates) —
+never a 24/7-monitoring or emergency-dispatch claim; residents are directed to
+`/government/hotlines` for emergencies. No phone numbers, addresses, or
+personal accounts are included. It is `PARTIAL`, not `READY`: broader
+exact-URL verification across remaining departments and city channels
+continues beyond this batch.
+
 ### Should wait for more data
 
 | Page                       | Exact READY blocker                                                                                                                                          | Required next work                                                                                                                                                                                           |
@@ -158,7 +170,7 @@ versioned allowlisted export are complete.
 |        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 113 External services across six categories                                                                                                                 | The 7 remaining planned Services categories and broader coverage within the 6 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                 | `/government/structure`; later enriches `/government`                                                          |
 |        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                          | `/legislation/resolutions`                                                                                     |
-|        4 | Verify exact official CSFP web and social destinations and their owning entities                                                                                                                                                                              | `/government/links`                                                                                            |
+|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                       | Moves `/government/links` from `PARTIAL` to `READY`                                                            |
 |        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                         |
 |        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                     |
 

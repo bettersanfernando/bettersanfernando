@@ -344,7 +344,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.officialGovernmentLinks',
             href: '/government/links',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

@@ -1,0 +1,790 @@
+{
+  "channel_type_breakdown": {
+    "OFFICIAL_DIGITAL_SERVICE": 2,
+    "OFFICIAL_FACEBOOK_PAGE": 3,
+    "OFFICIAL_WEBSITE": 30
+  },
+  "dataset": "government-official-links",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-09-06",
+  "links": [
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "citywide-departments-directory",
+      "label": "Departments Directory",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official website; the directory's own listed contents may change without notice.",
+      "office_acronym": null,
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Government of San Fernando",
+      "public_purpose": "Directory of all City Government departments and offices, for residents looking up which office handles a concern.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/departments/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "citywide-contact-directory",
+      "label": "Contact Us",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official website; the page's own listed contents may change without notice.",
+      "office_acronym": null,
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Government of San Fernando",
+      "public_purpose": "Official citywide contact-information page for City Government offices.",
+      "sources": [
+        {
+          "label": "Contact Us",
+          "url": "https://cityofsanfernando.gov.ph/contact-us/"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/contact-us/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "citywide-eservices-directory",
+      "label": "e-Services",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official website; the page's own listed contents may change without notice.",
+      "office_acronym": null,
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Government of San Fernando",
+      "public_purpose": "Directory of the City Government's online services and digital systems.",
+      "sources": [
+        {
+          "label": "e-Services",
+          "url": "https://cityofsanfernando.gov.ph/e-services/"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/e-services/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_DIGITAL_SERVICE",
+      "id": "citizens-portal",
+      "label": "Citizens Portal",
+      "limitation_note": "Availability of any specific service within this portal is not guaranteed by this listing; several sub-functions researched here (e.g. AICS, Solo Parent applications) had unclear availability as of 2026-09-01 and are not published as separate destinations.",
+      "office_acronym": null,
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Government of San Fernando",
+      "public_purpose": "Official online portal for City government transaction and service requests.",
+      "sources": [
+        {
+          "label": "Citizens Portal",
+          "url": "https://citizensportal.csfp.io/"
+        }
+      ],
+      "url": "https://citizensportal.csfp.io/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_DIGITAL_SERVICE",
+      "id": "cgsas",
+      "label": "City Government Services Appointment System (CGSAS)",
+      "limitation_note": "Reviewed as of 2026-09-01; coverage of individual services within this system is not established by current evidence.",
+      "office_acronym": null,
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Government of San Fernando",
+      "public_purpose": "Official online appointment-booking system for City government services.",
+      "sources": [
+        {
+          "label": "City Government Services Appointment System",
+          "url": "https://cgsas.csfp.io/"
+        }
+      ],
+      "url": "https://cgsas.csfp.io/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-mayors-office",
+      "label": "City Mayor's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CMO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Mayor's Office",
+      "public_purpose": "Official information page for the City Mayor's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-mayors-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-administrators-office",
+      "label": "City Administrator's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CAdminO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Administrator's Office",
+      "public_purpose": "Official information page for the City Administrator's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-administrators-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "office-city-vice-mayor",
+      "label": "Office of the City Vice-Mayor — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "OCVM",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "Office of the City Vice-Mayor",
+      "public_purpose": "Official information page for the Office of the City Vice-Mayor.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/office-of-the-city-vice-mayor/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "office-sangguniang-panlungsod",
+      "label": "Office of the Sangguniang Panlungsod — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "OSP",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "Office of the Sangguniang Panlungsod",
+      "public_purpose": "Official information page for the Office of the Sangguniang Panlungsod.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/office-of-the-sangguniang-panlungsod/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-college-san-fernando-pampanga",
+      "label": "City College of San Fernando Pampanga — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CCSFP",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City College of San Fernando Pampanga",
+      "public_purpose": "Official information page for the City College of San Fernando Pampanga.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-college/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cippeso-cpeso",
+      "label": "CIPPESO / CPESO — Official Website",
+      "limitation_note": "The office is currently referred to under two names (CIPPESO and CPESO) in different current City sources; this naming conflict is unresolved, but the page's URL and City ownership are not in question.",
+      "office_acronym": "CIPPESO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Investment Promotions and Public Employment Services Office / City Public Employment Services Office",
+      "public_purpose": "Official information page for the City Investment Promotions and Public Employment Services Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/cippeso/",
+      "verification_status": "CURRENT_VERIFIED_NAMING_OR_REORG_CONFLICT_UNRESOLVED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cdrrmo",
+      "label": "City Disaster Risk Reduction and Management Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CDRRMO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Disaster Risk Reduction and Management Office",
+      "public_purpose": "Official information page for the City Disaster Risk Reduction and Management Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-disaster-risk-reduction-and-management-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cpdco",
+      "label": "City Planning and Development Coordinator's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CPDCO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Planning and Development Coordinator's Office",
+      "public_purpose": "Official information page for the City Planning and Development Coordinator's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-planning-and-development-coordinators-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "chrmo",
+      "label": "City Human Resource Management Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CHRMO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Human Resource Management Office",
+      "public_purpose": "Official information page for the City Human Resource Management Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-human-resource-management-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-treasurers-office",
+      "label": "City Treasurer's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CTO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Treasurer's Office",
+      "public_purpose": "Official information page for the City Treasurer's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-treasurers-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-budget-office",
+      "label": "City Budget Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CBO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Budget Office",
+      "public_purpose": "Official information page for the City Budget Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-budget-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-assessors-office",
+      "label": "City Assessor's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CASSO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Assessor's Office",
+      "public_purpose": "Official information page for the City Assessor's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-assessors-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-accountants-office",
+      "label": "City Accountant's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CAccO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Accountant's Office",
+      "public_purpose": "Official information page for the City Accountant's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-accountants-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-engineers-office",
+      "label": "City Engineer's Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CEO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Engineer's Office",
+      "public_purpose": "Official information page for the City Engineer's Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-engineers-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-legal-office",
+      "label": "City Legal Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CLO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Legal Office",
+      "public_purpose": "Official information page for the City Legal Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-legal-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-general-services-office",
+      "label": "City General Services Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CGSO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City General Services Office",
+      "public_purpose": "Official information page for the City General Services Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-general-services-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-civil-registry-office",
+      "label": "City Civil Registry Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CCRO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Civil Registry Office",
+      "public_purpose": "Official information page for the City Civil Registry Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-civil-registry-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-health-office",
+      "label": "City Health Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CHO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Health Office",
+      "public_purpose": "Official information page for the City Health Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-health-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cswdo",
+      "label": "City Social Welfare and Development Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CSWDO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Social Welfare and Development Office",
+      "public_purpose": "Official information page for the City Social Welfare and Development Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-social-welfare-and-development-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cenro",
+      "label": "City Environment and Natural Resources Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CENRO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Environment and Natural Resources Office",
+      "public_purpose": "Official information page for the City Environment and Natural Resources Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-environment-and-natural-resources-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cavo",
+      "label": "City Agriculture and Veterinary Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CAVO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Agriculture and Veterinary Office",
+      "public_purpose": "Official information page for the City Agriculture and Veterinary Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-agriculture-and-veterinary-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "tourism-ctipo",
+      "label": "City Tourism Office / CTIPO — Official Website",
+      "limitation_note": "A possible reorganization/naming change between 'City Tourism Office' and 'CTIPO' is unresolved in current City sources; the page's URL and City ownership are not in question.",
+      "office_acronym": "CTIPO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Tourism Office / City Tourism and Investment Promotion Office",
+      "public_purpose": "Official information page for the City Tourism Office / City Tourism and Investment Promotion Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-tourism-and-investment-promotion-office/",
+      "verification_status": "CURRENT_VERIFIED_NAMING_OR_REORG_CONFLICT_UNRESOLVED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cicto",
+      "label": "City Information and Communications Technology Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CICTO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Information and Communications Technology Office",
+      "public_purpose": "Official information page for the City Information and Communications Technology Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-information-and-communications-technology-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "city-information-office",
+      "label": "City Information Office — Official Website",
+      "limitation_note": "This is the current page; an older page at a different URL for this office is stale and superseded (see duplicates_or_superseded).",
+      "office_acronym": "CIO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Information Office",
+      "public_purpose": "Official information page for the City Information Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/csfp-city-information-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cposco",
+      "label": "City Public Order and Safety Coordinating Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CPOSCO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Public Order and Safety Coordinating Office",
+      "public_purpose": "Official information page for the City Public Order and Safety Coordinating Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-public-order-and-safety-coordinating-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "ocbo",
+      "label": "Office of the City Building Official — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "OCBO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "Office of the City Building Official",
+      "public_purpose": "Official information page for the Office of the City Building Official.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/office-of-the-city-building-official/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_WEBSITE",
+      "id": "cydo",
+      "label": "City Youth Development Office — Official Website",
+      "limitation_note": "Reviewed as of 2026-09-01 from the City's own official Departments directory and the 2026 Citizen's Charter.",
+      "office_acronym": "CYDO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Youth Development Office",
+      "public_purpose": "Official information page for the City Youth Development Office.",
+      "sources": [
+        {
+          "label": "Departments directory",
+          "url": "https://cityofsanfernando.gov.ph/departments/"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ],
+      "url": "https://cityofsanfernando.gov.ph/city-youth-development-office/",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_FACEBOOK_PAGE",
+      "id": "cio-facebook",
+      "label": "City Information Office — Official Facebook Page",
+      "limitation_note": "Verified as this office's own official channel by the government-structure research pass as of 2026-09-01; not confirmed by a separate third-party citation.",
+      "office_acronym": "CIO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Information Office",
+      "public_purpose": "Official City Information Office social-media channel for public updates and announcements.",
+      "sources": [
+        {
+          "label": "City Information Office official page",
+          "url": "https://cityofsanfernando.gov.ph/csfp-city-information-office/"
+        }
+      ],
+      "url": "https://www.facebook.com/CIO.CSFP",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_FACEBOOK_PAGE",
+      "id": "cicto-facebook",
+      "label": "City Information and Communications Technology Office — Official Facebook Page",
+      "limitation_note": "Verified as this office's own official channel by the government-structure research pass as of 2026-09-01; not confirmed by a separate third-party citation.",
+      "office_acronym": "CICTO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Information and Communications Technology Office",
+      "public_purpose": "Official CICTO social-media channel for public updates and announcements.",
+      "sources": [
+        {
+          "label": "City Information and Communications Technology Office official page",
+          "url": "https://cityofsanfernando.gov.ph/city-information-and-communications-technology-office/"
+        }
+      ],
+      "url": "https://www.facebook.com/csfpictoffice",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-01"
+    },
+    {
+      "channel_type": "OFFICIAL_FACEBOOK_PAGE",
+      "id": "cdrrmo-facebook",
+      "label": "City Disaster Risk Reduction and Management Office — Official Facebook Page",
+      "limitation_note": "Verified via a cross-link from the CSFP City Information Office's own official Facebook channel (posted 2026-08-09), which explicitly labels this URL as the \"CDRRMO OFFICIAL FACEBOOK PAGE\" for regular weather updates. This does not establish that the page is continuously monitored or that it provides 24/7 emergency dispatch; for emergency dispatch numbers, see the Government Hotlines dataset.",
+      "office_acronym": "CDRRMO",
+      "ownership_status": "INSTITUTION_OWNED",
+      "owning_entity": "City Disaster Risk Reduction and Management Office",
+      "public_purpose": "Official CDRRMO information and regular weather updates.",
+      "sources": [
+        {
+          "label": "CSFP City Information Office post identifying the CDRRMO official Facebook page",
+          "url": "https://www.facebook.com/CIO.CSFP/posts/pfbid02t5PPfBLUSCMuut7UZxHEn53BMA6td47YgdCgc7wdUhdapKm32J8uRWVeFNpQnCXUl"
+        }
+      ],
+      "url": "https://www.facebook.com/cdrrmo.csfp.official",
+      "verification_status": "CURRENT_VERIFIED",
+      "verified_at": "2026-09-06"
+    }
+  ],
+  "overall_public_limitation": "Every link on this page is reproduced from the City's own official website, its own official digital-service subdomains, or a channel the City's own research pass verified as institution-owned, as of 2026-09-01. Link ownership and currency were reviewed at that date; destination page content is outside this project's control and may change without notice. This page does not carry phone numbers, physical addresses, or personal accounts — those are published separately in the Government Hotlines and Barangay Contacts datasets, and in the Office Directory.",
+  "publication_status": "PUBLICATION_REVIEW_COMPLETE",
+  "record_count": 35,
+  "route": "/government/links",
+  "schema_version": 1
+}
