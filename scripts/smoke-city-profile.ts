@@ -61,11 +61,11 @@ assert.equal(
   new Set(barangayBoundaries.map(feature => feature.properties.psgc_code)).size,
   35
 );
-assert.equal(offices.officeCount, 22);
+assert.equal(offices.officeCount, 44);
 assert.equal(offices.cityName, 'City of San Fernando');
 assert.equal(offices.province, 'Pampanga');
 
 console.log('[smoke-city-profile] OK');
 console.log('  City of San Fernando, Pampanga · PSGC 0305416000');
 console.log('  population 377534 · 35 barangays · 34 Urban · 1 Rural');
-console.log('  1 city boundary · 35 barangay boundaries · 22 office records');
+console.log('  1 city boundary · 35 barangay boundaries · 44 office records');

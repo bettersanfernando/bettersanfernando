@@ -1,0 +1,167 @@
+{
+  "contacts": [
+    {
+      "classification": "VERIFIED_INSTITUTIONAL_CONTACT",
+      "contact_type": "EMERGENCY",
+      "id": "national-911",
+      "limitation_note": "National number, included for context; not a City-specific line.",
+      "number": "911",
+      "operating_scope": "National service. City-specific 911 implementation and whether CDRRMO runs a local 911 center are both NOT_VERIFIED; the City does not own the 911 number.",
+      "organization": "National Emergency Hotline",
+      "presentation_group": "EMERGENCY_NUMBERS",
+      "public_purpose": "National emergency contact; recognized as a SAFRU referral origin.",
+      "sources": [
+        {
+          "label": "Citizens Portal Hotlines",
+          "url": "https://citizensportal.csfp.io/hotlines"
+        },
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ]
+    },
+    {
+      "address": "City Civic Center Extension, Alasas, City of San Fernando, Pampanga",
+      "classification": "VERIFIED_EMERGENCY_HOTLINE",
+      "contact_type": "EMERGENCY",
+      "id": "cdrrmo-command-center-help-line",
+      "label": "HELP",
+      "limitation_note": "Listed in the 2026 Citizen's Charter and the City's Contact page; not independently call-tested by this project.",
+      "number": "961-4357",
+      "operating_scope": "24/7 for emergency call reception and dispatch only; not a claim about general CDRRMO administrative office hours.",
+      "organization": "City Disaster Risk Reduction and Management Office (CDRRMO) – Command Center",
+      "presentation_group": "EMERGENCY_NUMBERS",
+      "public_purpose": "Report an emergency for dispatch of appropriate public-safety responders.",
+      "sources": [
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        },
+        {
+          "label": "Citizens Portal Hotlines",
+          "url": "https://citizensportal.csfp.io/hotlines"
+        },
+        {
+          "label": "Contact Us",
+          "url": "https://cityofsanfernando.gov.ph/contact-us/"
+        }
+      ]
+    },
+    {
+      "address": "City Civic Center Extension, Alasas, City of San Fernando, Pampanga",
+      "classification": "VERIFIED_INSTITUTIONAL_CONTACT",
+      "contact_type": "OFFICE_AND_EMERGENCY_LISTED_TOGETHER",
+      "id": "cdrrmo-command-center-office-line-649-6076",
+      "limitation_note": "Listed in the 2026 Citizen's Charter; not independently call-tested.",
+      "number": "649-6076",
+      "operating_scope": "Not documented as a distinct 24/7 line on its own; published as one directory row together with 961-4357 and 409-6750 for the CDRRMO Command Center.",
+      "organization": "CDRRMO – Command Center",
+      "presentation_group": "CDRRMO_COMMAND_CENTER_CONTACTS",
+      "public_purpose": "Office contact line, published together with the Command Center's other numbers.",
+      "sources": [
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        },
+        {
+          "label": "City Disaster Risk Reduction and Management Office",
+          "url": "https://cityofsanfernando.gov.ph/city-disaster-risk-reduction-and-management-office/"
+        }
+      ]
+    },
+    {
+      "address": "City Civic Center Extension, Alasas, City of San Fernando, Pampanga",
+      "classification": "CONFLICT_RESOLVED_BY_CURRENT_CHARTER",
+      "contact_type": "OFFICE_AND_EMERGENCY_LISTED_TOGETHER",
+      "id": "cdrrmo-command-center-409-6750",
+      "limitation_note": "Listed under the CDRRMO Command Center in the 2026 Citizen's Charter's official Directory of Offices. Not independently call-tested; no claim is made that the number is currently reachable.",
+      "number": "409-6750",
+      "operating_scope": "Not documented as a distinct 24/7 line on its own.",
+      "organization": "CDRRMO – Command Center",
+      "presentation_group": "CDRRMO_COMMAND_CENTER_CONTACTS",
+      "public_purpose": "Listed with the Command Center's other contact numbers in the current official directory.",
+      "sources": [
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        },
+        {
+          "label": "Contact Us",
+          "url": "https://cityofsanfernando.gov.ph/contact-us/"
+        }
+      ]
+    },
+    {
+      "address": "Ground Floor, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+      "classification": "OFFICIALLY_LISTED_NOT_CALL_TESTED",
+      "contact_type": "OFFICE",
+      "extension": "Local 112",
+      "id": "cdrrmo-safru-heroes-hall-office",
+      "limitation_note": "Listed in the 2026 Citizen's Charter's Heroes Hall directory table; not independently call-tested.",
+      "number": "649-8080",
+      "operating_scope": "Not documented as 24/7; this is the shared Heroes Hall trunk line (with a SAFRU extension), distinct from the Command Center's own direct emergency numbers.",
+      "organization": "CDRRMO – San Fernando Rescue Unit (SAFRU)",
+      "presentation_group": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "public_purpose": "Administrative/liaison office contact at Heroes Hall; not documented as the primary emergency-dispatch line.",
+      "sources": [
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ]
+    },
+    {
+      "address": "Ground Floor, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+      "classification": "OFFICIALLY_LISTED_NOT_CALL_TESTED",
+      "contact_type": "OFFICE",
+      "id": "cho-hems-heroes-hall-office",
+      "limitation_note": "Listed in the 2026 Citizen's Charter's Heroes Hall directory table; not independently call-tested. Not documented as the citizen-facing emergency-dispatch number for HEMS response; that routes through the CDRRMO command center per the Charter's own service procedure.",
+      "number": "0919-078-8456",
+      "operating_scope": "This is a City Health Office/HEMS office contact at Heroes Hall. For emergency ambulance requests, the 2026 Citizen's Charter directs residents to the C3 Command Center. This office number is not documented as a 24/7 emergency dispatch line.",
+      "organization": "City Health Office – Health Emergency Management Staff (HEMS)",
+      "presentation_group": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "public_purpose": "Administrative/liaison office contact at Heroes Hall for the HEMS unit.",
+      "sources": [
+        {
+          "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+          "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+        }
+      ]
+    }
+  ],
+  "dataset": "government-hotlines",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-09-05",
+  "overall_public_limitation": "All numbers on this page are reproduced from current official sources (the 2026 Citizen's Charter and the City's own published contact pages) as of the accessed_at dates above. They were not independently call-tested by this project, and a listing here is not a guarantee that a given line is presently staffed or reachable.",
+  "presentation_groups": [
+    {
+      "candidate_ids": [
+        "national-911",
+        "cdrrmo-command-center-help-line"
+      ],
+      "group_id": "EMERGENCY_NUMBERS",
+      "label": "Emergency numbers"
+    },
+    {
+      "candidate_ids": [
+        "cdrrmo-command-center-office-line-649-6076",
+        "cdrrmo-command-center-409-6750"
+      ],
+      "group_id": "CDRRMO_COMMAND_CENTER_CONTACTS",
+      "label": "CDRRMO Command Center contacts"
+    },
+    {
+      "candidate_ids": [
+        "cdrrmo-safru-heroes-hall-office",
+        "cho-hems-heroes-hall-office"
+      ],
+      "group_id": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "label": "Related emergency-service office contacts"
+    }
+  ],
+  "publication_status": "PUBLICATION_REVIEW_COMPLETE",
+  "record_count": 6,
+  "route": "/government/hotlines",
+  "schema_version": 1
+}

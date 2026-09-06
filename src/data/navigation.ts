@@ -333,7 +333,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.hotlinesContacts',
             href: '/government/hotlines',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.officialGovernmentLinks',

@@ -25,7 +25,7 @@ assert.equal(summary.population.total, 377_534);
 assert.equal(summary.population.barangays, 35);
 assert.equal(summary.projects.total, 239);
 assert.equal(summary.projects.evidence, 334);
-assert.equal(summary.government.officeRecords, 22);
+assert.equal(summary.government.officeRecords, 44);
 
 assert.match(pageSource, /BetterSanFernando/);
 assert.match(pageSource, /City of San Fernando, Pampanga/);

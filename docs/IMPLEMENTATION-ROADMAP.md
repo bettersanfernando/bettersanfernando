@@ -81,11 +81,22 @@ No READY pages remain in the current general frontend implementation sequence.
 
 ## Phase 2 — PARTIAL pages
 
-### Can ship safely with deliberately bounded scope
+### Completed bounded batch
 
-| Page                   | Exact READY blocker                                                                                              | Safe bounded release                                                                                                                                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/government/hotlines` | Operating scope/hours are not verified for the intended urgent-contact set, and a CDRRMO number remains disputed | Publish only cross-verified institutional hotline entries, omit disputed or person-level BHERT data, show verification dates, and label the limited coverage. It remains `PARTIAL` until the intended urgent-contact set is verified. |
+`/government/hotlines` shipped its first owner-approved batch: 6 institutional/
+emergency contacts (911; CDRRMO Command Center's 961-4357, 649-6076, and
+409-6750; CDRRMO/SAFRU's Heroes Hall line; CHO/HEMS's Heroes Hall line),
+grouped into Emergency numbers, CDRRMO Command Center contacts, and Related
+emergency-service office contacts. The previously disputed 409-6750 is now
+resolved to the CDRRMO Command Center by the current canonical Citizen's
+Charter, with the prior conflicting attribution preserved as history in the
+private repository, not deleted. Only 961-4357 carries the positive, scoped
+24/7 claim (emergency call reception and dispatch only); every other contact
+is explicitly described as not documented as 24/7. It remains `PARTIAL`, not
+`READY`: CDRRMO's mobile contact (0939-936-2423) remains held pending
+second-source corroboration, and broader citywide hotline coverage (other
+verified `city-offices.json` emergency contacts) has not yet been folded into
+this page.
 
 ### Should wait for more data
 
@@ -123,14 +134,14 @@ versioned allowlisted export are complete.
 
 ### RESEARCH queue
 
-| Priority | Work                                                                                                                                          | Public page(s) unblocked                                                                                       |
-| -------: | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 113 External services across six categories | The 7 remaining planned Services categories and broader coverage within the 6 published but PARTIAL categories |
-|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                 | `/government/structure`; later enriches `/government`                                                          |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                          | `/legislation/resolutions`                                                                                     |
-|        4 | Verify exact official CSFP web and social destinations and their owning entities                                                              | `/government/links`                                                                                            |
-|        5 | Verify hotline purpose, operating scope/hours, update cadence, and the disputed CDRRMO number                                                 | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                         |
-|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                     |
+| Priority | Work                                                                                                                                                                    | Public page(s) unblocked                                                                                       |
+| -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 113 External services across six categories                           | The 7 remaining planned Services categories and broader coverage within the 6 published but PARTIAL categories |
+|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                           | `/government/structure`; later enriches `/government`                                                          |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                    | `/legislation/resolutions`                                                                                     |
+|        4 | Verify exact official CSFP web and social destinations and their owning entities                                                                                        | `/government/links`                                                                                            |
+|        5 | Corroborate the held CDRRMO mobile contact (0939-936-2423) and review the remaining citywide hotline coverage; a first bounded batch of 6 contacts is already published | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                         |
+|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                         | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                     |
 
 The City Health Office publication batch is implemented as the bounded,
 publication-reviewed set described above. Health Services remains `PARTIAL`.

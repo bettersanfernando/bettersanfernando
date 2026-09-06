@@ -17,6 +17,7 @@ export * from './geography.ts';
 export * from './geographyMetadata.ts';
 export * from './government.ts';
 export * from './governmentContacts.ts';
+export * from './governmentHotlines.ts';
 export * from './legislation.ts';
 export * from './legislationSummary.ts';
 export * from './sources.ts';

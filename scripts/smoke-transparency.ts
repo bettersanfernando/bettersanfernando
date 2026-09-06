@@ -24,7 +24,7 @@ assert.equal(summary.projects.evidence, 334);
 assert.equal(summary.projects.bidResults, 233);
 assert.equal(summary.projects.awarded, 228);
 assert.equal(summary.projects.contracted, 6);
-assert.equal(summary.government.officeRecords, 22);
+assert.equal(summary.government.officeRecords, 44);
 assert.equal(summary.legislation.executiveOrders, 11);
 assert.equal(summary.legislation.ordinances, 6);
 assert.equal(summary.legislation.resolutions, 0);

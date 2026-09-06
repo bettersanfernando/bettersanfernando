@@ -11,11 +11,13 @@ const DatasetPath = z.enum([
   'directories/city-offices.json',
   'geography/barangays.geojson',
   'geography/city.geojson',
+  'government/hotlines.json',
   'legislation/executive-orders.json',
   'legislation/ordinances.json',
   'legislation/resolutions.json',
   'projects/city-projects.json',
   'projects/project-evidence.json',
+  'services/services.json',
 ]);
 
 const ManifestSchema = z.object({
