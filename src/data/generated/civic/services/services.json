@@ -11,10 +11,11 @@
     "City Agriculture and Veterinary Office",
     "City College of San Fernando Pampanga",
     "City Environment and Natural Resources Office",
-    "City Civil Registry Office"
+    "City Civil Registry Office",
+    "Office for Senior Citizen's Affairs"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 152,
+  "record_count": 154,
   "schema_version": 1,
   "services": [
     {
@@ -15075,6 +15076,202 @@
       "slug": "requesting-certified-copy-of-birth-death-marriage-and-other-civil-registry-documents",
       "title": "Requesting Certified Copy of Birth, Death, Marriage and other Civil Registry Documents",
       "who_may_avail": "The record owner or another requester authorized under the Charter's relationship, guardianship, representation, or deceased-relative rules"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "senior-citizens",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the requirements and receive the application form.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Accomplish the application form and submit it for document review.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Claim the Grocery and Cinema purchase booklets for availing discounts.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Provide the information needed for Senior Citizen ID encoding.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Wait while the Senior Citizen ID is printed.",
+          "sequence": "5"
+        },
+        {
+          "instruction": "Claim the Senior Citizen ID and sign the releasing logbook.",
+          "sequence": "6"
+        }
+      ],
+      "description": "San Fernando residents aged 60 and above may apply in person for a Senior Citizen's Card through OSCA under the City Mayor's Office.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-mayors-office-community-affairs-division-external-03",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "OSCA",
+        "division": "City Mayor's Office",
+        "name": "Office for Senior Citizen's Affairs"
+      },
+      "office_contact": {
+        "address": "1st Floor, Executive Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "14 minutes"
+      },
+      "public_notes": [
+        "The verified procedure is an in-person OSCA transaction. The Charter does not state an appointment requirement, and no official online application channel was verified.",
+        "ID and booklet stock is not guaranteed. PSA certificate issuance is a separate transaction."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application Form (1 original)",
+          "where_to_secure": "OSCA"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Barangay Certificate/Clearance (1 original)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Birth Certificate from PSA or the Local Civil Registry (1 photocopy)",
+          "where_to_secure": "PSA or Local Civil Registry"
+        },
+        {
+          "condition": "If a PSA/LCR birth certificate is available",
+          "ordinal": "4.1",
+          "text": "One additional valid ID or document",
+          "where_to_secure": null
+        },
+        {
+          "condition": "If a PSA/LCR birth certificate is unavailable",
+          "ordinal": "4.2",
+          "text": "Two valid IDs or documents, such as a passport, voter's certification, driver's license, PRC ID, baptismal record, marriage contract, or other government-issued ID",
+          "where_to_secure": null
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Two 1×1 photographs",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "applying-for-a-new-senior-citizens-card-id",
+      "title": "Applying for a New Senior Citizen’s Card (ID)",
+      "who_may_avail": "Senior citizens aged 60 and above who reside in the City of San Fernando, Pampanga"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "senior-citizens",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the requirements at OSCA for document review.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Provide the information needed for Senior Citizen ID encoding.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait while the Senior Citizen ID is printed.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Claim the Senior Citizen ID and sign the releasing logbook.",
+          "sequence": "4"
+        }
+      ],
+      "description": "San Fernando senior citizens may request in person that OSCA replace a lost Senior Citizen's Card.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-mayors-office-community-affairs-division-external-04",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "OSCA",
+        "division": "City Mayor's Office",
+        "name": "Office for Senior Citizen's Affairs"
+      },
+      "office_contact": {
+        "address": "1st Floor, Executive Building, Heroes Hall, San Juan, City of San Fernando, Pampanga",
+        "emails": [],
+        "phone": "(045) 649-8080"
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "8 minutes"
+      },
+      "public_notes": [
+        "The verified procedure is an in-person OSCA transaction. The Charter does not state an appointment requirement, and no official online replacement channel was verified.",
+        "Replacement-card stock is not guaranteed."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Affidavit of Loss (1 original)",
+          "where_to_secure": "City Legal Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "One 1×1 photograph",
+          "where_to_secure": null
+        }
+      ],
+      "slug": "applying-for-the-replacement-of-the-lost-senior-citizens-card",
+      "title": "Applying for the Replacement of the Lost Senior Citizen’s Card",
+      "who_may_avail": "Senior citizens who reside in the City of San Fernando, Pampanga"
     }
   ]
 }

@@ -54,6 +54,7 @@ const realCategorySlugs = [
   'civil-registry',
   'assistance-programs',
   'social-welfare',
+  'senior-citizens',
   'pwd-services',
   'agriculture-fisheries',
   'disaster-preparedness',
@@ -105,7 +106,8 @@ const cavo = services.filter(service => service.office.acronym === 'CAVO');
 const ccsfp = services.filter(service => service.office.acronym === 'CCSFP');
 const cenro = services.filter(service => service.office.acronym === 'CENRO');
 const ccro = services.filter(service => service.office.acronym === 'CCRO');
-assert.equal(services.length, 152);
+const osca = services.filter(service => service.office.acronym === 'OSCA');
+assert.equal(services.length, 154);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -119,11 +121,12 @@ assert.equal(
 assert.equal(ccsfp.length, 9, 'exactly nine CCSFP Education records');
 assert.equal(cenro.length, 1, 'exactly one CENRO Environment record');
 assert.equal(ccro.length, 15, 'exactly fifteen CCRO Civil Registry records');
+assert.equal(osca.length, 2, 'exactly two OSCA Senior Citizens records');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 152);
-assert.equal(new Set(services.map(service => service.slug)).size, 152);
+assert.equal(new Set(services.map(service => service.id)).size, 154);
+assert.equal(new Set(services.map(service => service.slug)).size, 154);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -135,7 +138,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 152 service detail routes must resolve through the adapter'
+  'all 154 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -212,6 +215,13 @@ assert.ok(
       getServiceHref(service) === `/services/civil-registry/${service.slug}`
   ),
   'all fifteen CCRO records must use canonical Civil Registry routes'
+);
+assert.ok(
+  osca.every(
+    service =>
+      getServiceHref(service) === `/services/senior-citizens/${service.slug}`
+  ),
+  'both OSCA records must use canonical Senior Citizens routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -821,11 +831,95 @@ assert.doesNotMatch(
   /mass wedding|mobile registration activit|dated campaign/i
 );
 
+const expectedOscaServices = [
+  ['03', 'Applying for a New Senior Citizen’s Card (ID)'],
+  ['04', 'Applying for the Replacement of the Lost Senior Citizen’s Card'],
+].map(([suffix, title]) => [
+  `charter-2026-2e-city-mayors-office-community-affairs-division-external-${suffix}`,
+  title,
+]);
+assert.deepEqual(
+  osca.map(service => [service.id, service.title]),
+  expectedOscaServices,
+  'Senior Citizens must contain exactly the two approved OSCA ids and titles'
+);
+assert.ok(
+  osca.every(
+    service =>
+      service.office.acronym === 'OSCA' &&
+      service.office.name === "Office for Senior Citizen's Affairs" &&
+      service.office.division === "City Mayor's Office"
+  ),
+  "OSCA records must preserve the City Mayor's Office parent relationship"
+);
+assert.ok(
+  osca.every(
+    service =>
+      service.forms.length === 0 &&
+      service.online_channels.length === 0 &&
+      service.appointment === null &&
+      service.office_hours === null
+  ),
+  'OSCA records must not claim online application, appointment, or unqualified office hours'
+);
+assert.ok(
+  osca.every(service => service.office_contact.emails.length === 0),
+  'OSCA records must not publish an OSCA-specific email'
+);
+assert.ok(
+  osca.every(service => service.office_contact.phone === '(045) 649-8080'),
+  'OSCA records must preserve the institutional contact number'
+);
+assert.ok(
+  osca.every(service => /Heroes Hall/i.test(service.office_contact.address)),
+  'OSCA records must preserve the Heroes Hall location'
+);
+assert.ok(
+  osca.every(service => service.fee.text === 'None'),
+  'OSCA records must preserve the free application/replacement fee'
+);
+assert.equal(
+  osca.find(service => service.id.endsWith('-03'))?.processing_time.text,
+  '14 minutes',
+  'the new Senior Citizen ID record must preserve its 14-minute processing time'
+);
+assert.equal(
+  osca.find(service => service.id.endsWith('-04'))?.processing_time.text,
+  '8 minutes',
+  'the lost-card replacement record must preserve its 8-minute processing time'
+);
+assert.doesNotMatch(
+  JSON.stringify(osca),
+  /ext\.?\s*126|osca@|renewal|damaged.card|transfer|record update|guaranteed (id|booklet)/i,
+  'OSCA records must not introduce an unapproved contact, email, or unreviewed procedure'
+);
+assert.doesNotMatch(
+  JSON.stringify(osca),
+  /medicine booklet|ncsc|digital nscid|social pension|dswd/i,
+  'OSCA records must not expand into unreviewed adjacent OSCA programs as standalone services'
+);
+
 assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CCRO')
+        services.filter(service => service.office.acronym !== 'OSCA')
+      )
+    )
+    .digest('hex'),
+  '333dde4980076d8d93741dd2c25643a5080a247bb06e6d8aa2a6e44087feaf8c',
+  'the previous 152 published service records must remain semantically unchanged'
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(
+          service =>
+            service.office.acronym !== 'OSCA' &&
+            service.office.acronym !== 'CCRO'
+        )
       )
     )
     .digest('hex'),
@@ -839,6 +933,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CENRO' &&
             service.office.acronym !== 'CCRO'
         )
@@ -873,6 +968,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
             service.office.acronym !== 'CCRO'
@@ -889,6 +985,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CHO' &&
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
@@ -908,6 +1005,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
@@ -926,6 +1024,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
@@ -1037,5 +1136,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 152/152; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); External: 152; published categories: 11/14; planned categories: 3/14'
+  '  routes: 154/154; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); External: 154; published categories: 12/14; planned categories: 2/14'
 );

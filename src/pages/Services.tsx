@@ -57,8 +57,8 @@ const categories = [
   [
     'Senior Citizens',
     'senior-citizens',
-    'Services and assistance intended for senior citizens.',
-    'planned',
+    'Reviewed OSCA senior citizen ID application and replacement procedures.',
+    'published',
   ],
   [
     'PWD Services',
@@ -239,6 +239,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "One publication-reviewed Citizen's Charter service currently published from the City Environment and Natural Resources Office (CENRO)."}
                 {category === 'civil-registry' &&
                   "Fifteen publication-reviewed Citizen's Charter services currently published from the City Civil Registry Office (CCRO)."}
+                {category === 'senior-citizens' &&
+                  "Two publication-reviewed Citizen's Charter services currently published from the Office for Senior Citizen's Affairs (OSCA), under the City Mayor's Office."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -255,7 +257,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                           ? 'This is not a complete inventory of City environmental programs or transactions. Two tree-related certification records remain unpublished because their current Charter titles, output names, and public/private-property scopes conflict. National tree-cutting permits remain under the applicable DENR/PENRO process; CENRO is not presented here as the national permit issuer.'
                           : category === 'civil-registry'
                             ? 'This is a bounded collection, not a complete inventory. CCRO handles local registration, certification, endorsement, and transmission; PSA documents and annotations, court matters, NACC/RACCO orders, and City Health Office services remain separate processes whose processing time is not included here.'
-                            : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                            : category === 'senior-citizens'
+                              ? 'This is a bounded collection covering only new Senior Citizen ID issuance and lost-card replacement. Renewal, transfer, damaged-card replacement, record updates, and other OSCA programs are not covered here and their current procedures remain unverified.'
+                              : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

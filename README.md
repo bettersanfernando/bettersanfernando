@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 152                                                    |
-| Published service categories      | 11 of 14                                               |
-| Planned service categories        | 3 of 14                                                |
+| Reviewed External service records | 154                                                    |
+| Published service categories      | 12 of 14                                               |
+| Planned service categories        | 2 of 14                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -69,6 +69,7 @@ Published service categories:
 | Education Services      |       9 | `/services/education`             |
 | Environment             |       1 | `/services/environment`           |
 | Civil Registry          |      15 | `/services/civil-registry`        |
+| Senior Citizens         |       2 | `/services/senior-citizens`       |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -83,7 +84,7 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-The remaining 3 service categories (Livelihood, Senior Citizens, and
+The remaining 2 service categories (Livelihood and
 Infrastructure & Public Works) are visible in
 navigation as planned sections; they do not yet contain published service
 records. Health Services, Employment, Agriculture & Fisheries, and Education
@@ -107,7 +108,10 @@ tree-related certification records remain held, and national tree-cutting
 permits remain under the applicable DENR/PENRO process. Civil Registry
 publishes 15 reviewed CCRO procedures and remains `PARTIAL`; four CCRO records
 remain held, and PSA, court, NACC/RACCO, and City Health Office responsibilities
-remain separate. Another 103 External services and all 74 Internal
+remain separate. Senior Citizens publishes two reviewed OSCA procedures (new
+Senior Citizen ID issuance and lost-card replacement) and remains `PARTIAL`;
+renewal, transfer, damaged-card replacement, and record-update procedures
+remain unverified. Another 101 External services and all 74 Internal
 services remain unpublished; CHO records external-22 and external-60 remain
 held and are not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full

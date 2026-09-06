@@ -154,7 +154,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.seniorCitizens',
             href: '/services/senior-citizens',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.pwdServices',

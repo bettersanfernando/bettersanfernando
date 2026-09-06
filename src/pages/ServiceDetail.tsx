@@ -170,6 +170,7 @@ export default function ServiceDetail() {
     education: 'Education Services',
     environment: 'Environment',
     'civil-registry': 'Civil Registry',
+    'senior-citizens': 'Senior Citizens',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;

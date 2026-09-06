@@ -1,6 +1,5 @@
 const plannedPageRoutes = [
   { id: 'livelihood', path: '/services/livelihood' },
-  { id: 'seniorCitizens', path: '/services/senior-citizens' },
   {
     id: 'infrastructurePublicWorks',
     path: '/services/infrastructure-public-works',

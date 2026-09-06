@@ -155,10 +155,11 @@ its office or purpose.
 | CCSFP                   |       9 | Education Services              | `/services/education`             |
 | CENRO                   |       1 | Environment                     | `/services/environment`           |
 | CCRO                    |      15 | Civil Registry                  | `/services/civil-registry`        |
-| **Total**               | **152** | **eleven published categories** |                                   |
+| OSCA                    |       2 | Senior Citizens                 | `/services/senior-citizens`       |
+| **Total**               | **154** | **twelve published categories** |                                   |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-103 External services remain unpublished; the 74 Internal services are outside
+101 External services remain unpublished; the 74 Internal services are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
 CHO records, while external-22 and external-60 remain held and unpublished.
@@ -200,6 +201,15 @@ The published Civil Registry page is also `PARTIAL`, not `READY`: it contains
 external-15, and external-17 remain held. CCRO local registration,
 certification, endorsement, and transmission remain distinct from PSA, court,
 NACC/RACCO, and City Health Office responsibilities and processing time.
+The published Senior Citizens page is also `PARTIAL`, not `READY`: it contains
+2 publication-reviewed OSCA services (Applying for a New Senior Citizen's
+Card and Applying for the Replacement of the Lost Senior Citizen's Card).
+Both are free, in-person-only transactions at Heroes Hall with no online
+application or appointment channel and no guaranteed ID/card stock; renewal,
+transfer, damaged-card replacement, and record-update procedures remain
+unverified and unpublished. Adjacent OSCA/national programs (Grocery/Cinema
+booklets, medicine booklets, NCSC Digital NSCID, DSWD Social Pension, and PSA
+certificate issuance) remain outside this bounded pair.
 
 ## Phase 3 — Private data workstream
 
@@ -210,7 +220,7 @@ versioned allowlisted export are complete.
 
 | Priority | Work                                                                                                                                                                                                                                                          | Public page(s) unblocked                                                                                        |
 | -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 152 External services across eleven categories                                                                                                              | The 3 remaining planned Services categories and broader coverage within the 11 published but PARTIAL categories |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 154 External services across twelve categories, including OSCA renewal, transfer, damaged-card replacement, and record-update procedures                    | The 2 remaining planned Services categories and broader coverage within the 12 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                 | `/government/structure`; later enriches `/government`                                                           |
 |        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                          | `/legislation/resolutions`                                                                                      |
 |        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                       | Moves `/government/links` from `PARTIAL` to `READY`                                                             |

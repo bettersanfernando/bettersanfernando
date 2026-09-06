@@ -438,6 +438,46 @@ const CcroServiceSchema = z.strictObject({
   requirements: z.array(CdrrmoRequirementSchema).min(1),
 });
 
+const OscaRequirementSchema = z.strictObject({
+  condition: NonEmptyString.nullable(),
+  ordinal: NonEmptyString,
+  text: NonEmptyString,
+  where_to_secure: NonEmptyString.nullable(),
+});
+
+const OscaServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('senior-citizens'),
+  classification: z.strictObject({
+    complexity: z.literal('Simple'),
+    service_scope: z.literal('External'),
+    transaction_types: z.tuple([z.literal('G2C')]),
+  }),
+  fee: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('OSCA'),
+    division: z.literal("City Mayor's Office"),
+    name: z.literal("Office for Senior Citizen's Affairs"),
+  }),
+  office_contact: z.strictObject({
+    address: NonEmptyString,
+    emails: z.tuple([]),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.null(),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(OscaRequirementSchema).min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
@@ -448,6 +488,7 @@ const ServiceSchema = z.union([
   CcsfpServiceSchema,
   CenroServiceSchema,
   CcroServiceSchema,
+  OscaServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -467,15 +508,16 @@ const ServicesFileSchema = z
       z.literal('City College of San Fernando Pampanga'),
       z.literal('City Environment and Natural Resources Office'),
       z.literal('City Civil Registry Office'),
+      z.literal("Office for Senior Citizen's Affairs"),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(152),
+    record_count: z.literal(154),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(152),
+    services: z.array(ServiceSchema).length(154),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 152) {
+      if (new Set(file.services.map(service => service[key])).size !== 154) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -511,6 +553,9 @@ const ServicesFileSchema = z
     const ccroCount = file.services.filter(
       service => service.office.acronym === 'CCRO'
     ).length;
+    const oscaCount = file.services.filter(
+      service => service.office.acronym === 'OSCA'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
@@ -520,12 +565,13 @@ const ServicesFileSchema = z
       cavoCount !== 7 ||
       ccsfpCount !== 9 ||
       cenroCount !== 1 ||
-      ccroCount !== 15
+      ccroCount !== 15 ||
+      oscaCount !== 2
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, and 15 CCRO records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, and 2 OSCA records',
         path: ['services'],
       });
     }
@@ -543,7 +589,8 @@ export type PublishedServiceCategory =
   | 'agriculture-fisheries'
   | 'education'
   | 'environment'
-  | 'civil-registry';
+  | 'civil-registry'
+  | 'senior-citizens';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -572,6 +619,7 @@ const categoryByAcronym: Record<
   CCSFP: 'education',
   CENRO: 'environment',
   CCRO: 'civil-registry',
+  OSCA: 'senior-citizens',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

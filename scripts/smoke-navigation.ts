@@ -107,7 +107,6 @@ for (const [pathname, expected] of activeRouteCases) {
 
 const approvedPlannedPaths = [
   '/services/livelihood',
-  '/services/senior-citizens',
   '/services/infrastructure-public-works',
   '/legislation/resolutions',
   '/government/documents',
@@ -139,6 +138,7 @@ const knownRealDestinations = new Set([
   '/services/disaster-preparedness',
   '/services/assistance-programs',
   '/services/social-welfare',
+  '/services/senior-citizens',
   '/services/pwd-services',
   '/services/agriculture-fisheries',
   '/services/education',
