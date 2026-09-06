@@ -114,6 +114,7 @@ support that purpose.
 │   ├── social-welfare
 │   ├── senior-citizens
 │   ├── pwd-services
+│   ├── civil-registry
 │   ├── infrastructure-public-works
 │   ├── agriculture-fisheries
 │   ├── environment

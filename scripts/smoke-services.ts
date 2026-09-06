@@ -39,6 +39,7 @@ const canonicalCategories = [
   'social-welfare',
   'senior-citizens',
   'pwd-services',
+  'civil-registry',
   'infrastructure-public-works',
   'agriculture-fisheries',
   'environment',
@@ -50,6 +51,7 @@ const realCategorySlugs = [
   'health-services',
   'education',
   'environment',
+  'civil-registry',
   'assistance-programs',
   'social-welfare',
   'pwd-services',
@@ -102,7 +104,8 @@ const cippeso = services.filter(
 const cavo = services.filter(service => service.office.acronym === 'CAVO');
 const ccsfp = services.filter(service => service.office.acronym === 'CCSFP');
 const cenro = services.filter(service => service.office.acronym === 'CENRO');
-assert.equal(services.length, 137);
+const ccro = services.filter(service => service.office.acronym === 'CCRO');
+assert.equal(services.length, 152);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -115,11 +118,12 @@ assert.equal(
 );
 assert.equal(ccsfp.length, 9, 'exactly nine CCSFP Education records');
 assert.equal(cenro.length, 1, 'exactly one CENRO Environment record');
+assert.equal(ccro.length, 15, 'exactly fifteen CCRO Civil Registry records');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 137);
-assert.equal(new Set(services.map(service => service.slug)).size, 137);
+assert.equal(new Set(services.map(service => service.id)).size, 152);
+assert.equal(new Set(services.map(service => service.slug)).size, 152);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -131,7 +135,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 137 service detail routes must resolve through the adapter'
+  'all 152 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -201,6 +205,13 @@ assert.equal(
   getServiceHref(cenro[0]),
   '/services/environment/sale-of-compost-fertilizer',
   'the CENRO record must use its canonical Environment route'
+);
+assert.ok(
+  ccro.every(
+    service =>
+      getServiceHref(service) === `/services/civil-registry/${service.slug}`
+  ),
+  'all fifteen CCRO records must use canonical Civil Registry routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -716,11 +727,121 @@ assert.match(
   /CENRO is not presented here as the national permit issuer/
 );
 
+const expectedCcroServices = [
+  ['02', 'Applying for a Marriage License'],
+  [
+    '03',
+    'Petition for Correction of Clerical Error /Change of First Name / Change of Sex and Correction of Day and Month of Birth (R.A. 9048 and R.A. 10172)',
+  ],
+  [
+    '04',
+    'Registration of Adoption (Under RA 11642, The Domestic Administrative Adoption and Alternative Child Care Act)',
+  ],
+  ['05', 'Registration of Court Decree'],
+  ['07', 'Registration of Death or Fetal Death – Timely'],
+  ['08', 'Registration of Legal Instruments - Legitimation'],
+  ['09', 'Registration of Legal Instruments - R.A. 9255'],
+  ['10', 'Registration of Legal Instruments – Other Legal Instruments'],
+  [
+    '11',
+    'Registration of Live Birth for Children in Need of Special Protection (CNSP)',
+  ],
+  [
+    '12',
+    'Registration of Live Birth for Marital (Legitimate) and Non-Marital (Illegitimate) Child – Delayed',
+  ],
+  ['13', 'Registration of Live Birth for Marital (Legitimate) Child – Timely'],
+  [
+    '14',
+    'Registration of Live Birth for Non-Marital (Illegitimate) Child – Timely',
+  ],
+  [
+    '16',
+    'Registration of Live Birth under Birth Registration Assistance Project (BRAP)',
+  ],
+  ['18', 'Registration of Marriage – Timely'],
+  [
+    '19',
+    'Requesting Certified Copy of Birth, Death, Marriage and other Civil Registry Documents',
+  ],
+].map(([suffix, title]) => [
+  `charter-2026-2e-city-civil-registry-office-external-${suffix}`,
+  title,
+]);
+assert.deepEqual(
+  ccro.map(service => [service.id, service.title]),
+  expectedCcroServices,
+  'Civil Registry must contain exactly the fifteen approved CCRO ids and titles'
+);
+for (const [suffix, title] of [
+  [
+    '01',
+    'Advance/Piecemeal Copy of Civil Registry Documents to Phil. Statistics Authority (PSA)',
+  ],
+  ['06', 'Registration of Death or Fetal Death – Delayed'],
+  [
+    '15',
+    'Registration of Live Birth of Persons with No known Parent/s (Foundling)',
+  ],
+  ['17', 'Registration of Marriage – Delayed'],
+] as const) {
+  assert.ok(
+    !services.some(service =>
+      service.id.endsWith(`city-civil-registry-office-external-${suffix}`)
+    ),
+    `held CCRO record external-${suffix} must remain unpublished`
+  );
+  assert.ok(!services.some(service => service.title === title));
+}
+assert.ok(
+  ccro.every(
+    service =>
+      service.forms.length === 0 &&
+      service.online_channels.length === 0 &&
+      service.appointment === null
+  ),
+  'CCRO records must not publish unsupported forms, online channels, or appointments'
+);
+const ccroNotes = ccro.flatMap(service => service.public_notes).join(' ');
+for (const boundary of [
+  /PSA/i,
+  /court/i,
+  /NACC|RACCO/i,
+  /City Health Office/i,
+]) {
+  assert.match(ccroNotes, boundary);
+}
+assert.match(
+  ccroNotes,
+  /does not include|not included|separate|outside|depends on|subject to/i,
+  'CCRO notes must preserve external-agency responsibility and timing boundaries'
+);
+assert.doesNotMatch(
+  JSON.stringify(ccro),
+  /mass wedding|mobile registration activit|dated campaign/i
+);
+
 assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CENRO')
+        services.filter(service => service.office.acronym !== 'CCRO')
+      )
+    )
+    .digest('hex'),
+  '7838777b7f7d4c4728e77a85a411755f48032bfa11442a46ca1b590c1bd3a934',
+  'the previous 137 published service records must remain semantically unchanged'
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(
+          service =>
+            service.office.acronym !== 'CENRO' &&
+            service.office.acronym !== 'CCRO'
+        )
       )
     )
     .digest('hex'),
@@ -753,7 +874,8 @@ assert.equal(
         services.filter(
           service =>
             service.office.acronym !== 'CCSFP' &&
-            service.office.acronym !== 'CENRO'
+            service.office.acronym !== 'CENRO' &&
+            service.office.acronym !== 'CCRO'
         )
       )
     )
@@ -771,7 +893,8 @@ assert.equal(
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
-            service.office.acronym !== 'CENRO'
+            service.office.acronym !== 'CENRO' &&
+            service.office.acronym !== 'CCRO'
         )
       )
     )
@@ -788,7 +911,8 @@ assert.equal(
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
-            service.office.acronym !== 'CENRO'
+            service.office.acronym !== 'CENRO' &&
+            service.office.acronym !== 'CCRO'
         )
       )
     )
@@ -804,7 +928,8 @@ assert.equal(
           service =>
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
-            service.office.acronym !== 'CENRO'
+            service.office.acronym !== 'CENRO' &&
+            service.office.acronym !== 'CCRO'
         )
       )
     )
@@ -912,5 +1037,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 137/137; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); External: 137; published categories: 10/13; planned categories: 3/13'
+  '  routes: 152/152; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); External: 152; published categories: 11/14; planned categories: 3/14'
 );

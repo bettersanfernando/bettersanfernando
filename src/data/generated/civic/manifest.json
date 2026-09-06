@@ -62,9 +62,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 137,
+      "record_count": 152,
       "schema_version": 1,
-      "sha256": "e4bb9e715e6d126b3570df6b093bee1e411a323fedec62adcb4965df13b2fb27"
+      "sha256": "fdc17e736430941bb65c8178011115f02f8413c37aa405c4cbb58dd1f63eaaf5"
     }
   },
   "export_version": "v0.1.0",
@@ -98,6 +98,8 @@
     "data/services/city-college-publication-review.json",
     "data/services/cenro-environment-freshness-enrichment.json",
     "data/services/cenro-environment-publication-review.json",
+    "data/services/ccro-civil-registry-freshness-enrichment.json",
+    "data/services/ccro-civil-registry-publication-review.json",
     "data/government/hotlines-publication-review.json",
     "data/government/barangay-contacts-publication-review.json",
     "data/government/official-links-publication-review.json"
@@ -125,7 +127,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "9f57e9e11eb73b9997685c3d162641a28a1c1855",
+  "source_commit": "16c0f07ce526202a3386264353962a6f4851430c",
   "source_data_version": "v0.1.1",
   "sources": [
     {

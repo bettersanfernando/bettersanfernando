@@ -67,6 +67,12 @@ const categories = [
     'published',
   ],
   [
+    'Civil Registry',
+    'civil-registry',
+    'Reviewed local civil-registration and certification procedures.',
+    'published',
+  ],
+  [
     'Infrastructure & Public Works',
     'infrastructure-public-works',
     'Resident-facing public-works requests and reporting.',
@@ -231,6 +237,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "Nine publication-reviewed Citizen's Charter services from the City College of San Fernando Pampanga (CCSFP)."}
                 {category === 'environment' &&
                   "One publication-reviewed Citizen's Charter service currently published from the City Environment and Natural Resources Office (CENRO)."}
+                {category === 'civil-registry' &&
+                  "Fifteen publication-reviewed Citizen's Charter services currently published from the City Civil Registry Office (CCRO)."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -245,7 +253,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                         ? 'This page does not announce a current admission or enrollment window. Service availability may depend on City College schedules, referrals, clinic staffing, and other published limitations.'
                         : category === 'environment'
                           ? 'This is not a complete inventory of City environmental programs or transactions. Two tree-related certification records remain unpublished because their current Charter titles, output names, and public/private-property scopes conflict. National tree-cutting permits remain under the applicable DENR/PENRO process; CENRO is not presented here as the national permit issuer.'
-                          : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                          : category === 'civil-registry'
+                            ? 'This is a bounded collection, not a complete inventory. CCRO handles local registration, certification, endorsement, and transmission; PSA documents and annotations, court matters, NACC/RACCO orders, and City Health Office services remain separate processes whose processing time is not included here.'
+                            : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

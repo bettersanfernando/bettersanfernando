@@ -111,6 +111,10 @@ function App() {
                     element={<Services category="environment" />}
                   />
                   <Route
+                    path="/services/civil-registry"
+                    element={<Services category="civil-registry" />}
+                  />
+                  <Route
                     path="/services/:category/:serviceSlug"
                     element={<ServiceDetail />}
                   />

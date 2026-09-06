@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 137                                                    |
-| Published service categories      | 10 of 13                                               |
-| Planned service categories        | 3 of 13                                                |
+| Reviewed External service records | 152                                                    |
+| Published service categories      | 11 of 14                                               |
+| Planned service categories        | 3 of 14                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -68,6 +68,7 @@ Published service categories:
 | Agriculture & Fisheries |       7 | `/services/agriculture-fisheries` |
 | Education Services      |       9 | `/services/education`             |
 | Environment             |       1 | `/services/environment`           |
+| Civil Registry          |      15 | `/services/civil-registry`        |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -103,8 +104,10 @@ procedures and remains `PARTIAL`; five City College Charter records remain
 held, and no current admission or enrollment window is claimed. Environment
 publishes one reviewed CENRO compost-sale service and remains `PARTIAL`; two
 tree-related certification records remain held, and national tree-cutting
-permits remain under the applicable DENR/PENRO process. Another 118 External
-services and all 74 Internal
+permits remain under the applicable DENR/PENRO process. Civil Registry
+publishes 15 reviewed CCRO procedures and remains `PARTIAL`; four CCRO records
+remain held, and PSA, court, NACC/RACCO, and City Health Office responsibilities
+remain separate. Another 103 External services and all 74 Internal
 services remain unpublished; CHO records external-22 and external-60 remain
 held and are not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full

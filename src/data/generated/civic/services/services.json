@@ -10,10 +10,11 @@
     "City Investment Promotions and Public Employment Services Office",
     "City Agriculture and Veterinary Office",
     "City College of San Fernando Pampanga",
-    "City Environment and Natural Resources Office"
+    "City Environment and Natural Resources Office",
+    "City Civil Registry Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 137,
+  "record_count": 152,
   "schema_version": 1,
   "services": [
     {
@@ -13588,6 +13589,1492 @@
       "slug": "sale-of-compost-fertilizer",
       "title": "Sale of Compost Fertilizer",
       "who_may_avail": "All"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Both applicants appear personally and submit the complete requirements at CCRO Window 47.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Receive the order of payment and pay the applicable fees at City Treasurer's Office Window 37.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Complete the separate City Health Office pre-marriage counseling or orientation prerequisite and submit its certificate.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Wait through the statutory 10-day posting period, then return for release and pay the PHP 2 marriage-license form fee.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City Civil Registry Office receives applications and issues City marriage licenses to qualified couples when either or both applicants reside in the City of San Fernando and no legal impediment exists.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 452 total (PHP 100 application forms, PHP 300 processing, PHP 50 pre-marriage counseling/orientation certificate, and PHP 2 marriage-license form at release)"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-02",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 days and 55 minutes"
+      },
+      "public_notes": [
+        "Personal appearance and the statutory posting period are required.",
+        "Pre-marriage counseling or orientation is a separate City Health prerequisite; its processing time is not added to CCRO's Charter total."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Personal appearance of both applicants",
+          "where_to_secure": null
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Application for Marriage License forms (Municipal Form 90 / Form 2)",
+          "where_to_secure": "CCRO Window 47"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Birth certificate, or baptismal certificate if the birth certificate is unavailable (2 photocopies)",
+          "where_to_secure": "PSA, CCRO, or the applicable church"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Current Community Tax Certificate / cedula (2 photocopies), 2x2 photograph (1 each), and an accepted valid ID (2 photocopies)",
+          "where_to_secure": "Applicable issuing authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Certificate of No Marriage Record (CENOMAR) or Advisory on Marriages (1 original and 1 photocopy)",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "6",
+          "text": "Pre-Marriage Counseling or Orientation completion certificate (1 original)",
+          "where_to_secure": "City Health Office / Population Office"
+        },
+        {
+          "condition": "As applicable to age, civil status, or citizenship",
+          "ordinal": "7",
+          "text": "Applicable parental consent or advice forms, prior-marriage documents, legal-capacity certificate, and foreign-divorce documents",
+          "where_to_secure": "Applicable parent, court, foreign authority, or Philippine court"
+        }
+      ],
+      "slug": "applying-for-a-marriage-license",
+      "title": "Applying for a Marriage License",
+      "who_may_avail": "A male and female with no legal impediment to marry, where either or both are residents of the City of San Fernando"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the applicable petition and complete supporting documents to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the applicable petition fee at the City Treasurer's Office and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Complete any required posting or publication steps and await CCRO processing and endorsement.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Follow up after the separate PSA Legal Services review period.",
+          "sequence": "4"
+        }
+      ],
+      "description": "CCRO receives eligible administrative petitions under RA 9048 and RA 10172 for clerical errors, change of first name, change of sex, or correction of the day or month of birth without a judicial order.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 1,000 for clerical error; PHP 3,000 for change of first name, sex, or day/month of birth; plus PHP 500 or PHP 1,000 for a migrant petition, as applicable"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-03",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 days, 1 hour, and 10 minutes"
+      },
+      "public_notes": [
+        "The Charter total is 10 days, 1 hour, and 10 minutes. It separately estimates 3–4 months depending on PSA Legal Services processing; these periods are not added together.",
+        "The governing references are RA 9048 and RA 10172. PSA national annotation and certificate issuance remain separate from CCRO processing."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Erroneous PSA civil-registry record and petitioner identification or certification (3 photocopies each)",
+          "where_to_secure": "PSA and applicable issuing authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "At least two public or private records supporting the correct entry (3 photocopies each)",
+          "where_to_secure": "Applicable record holder"
+        },
+        {
+          "condition": "For an authorized representative, except a change-of-sex petition",
+          "ordinal": "3",
+          "text": "Special Power of Attorney (3 photocopies)",
+          "where_to_secure": "Petitioner"
+        },
+        {
+          "condition": "Depending on petition type",
+          "ordinal": "4",
+          "text": "Case-specific employment, school, religious, medical, clearance, publication, or other supporting evidence required by the Charter (3 photocopies each)",
+          "where_to_secure": "Applicable issuing authority"
+        }
+      ],
+      "slug": "petition-for-correction-of-clerical-error-change-of-first-name-change-of-sex-and-correction-of-day-and-month-of-birth-r-a-9048-and-r-a-10172",
+      "title": "Petition for Correction of Clerical Error /Change of First Name / Change of Sex and Correction of Day and Month of Birth (R.A. 9048 and R.A. 10172)",
+      "who_may_avail": "A legal-age person with direct and personal interest, including the record owner or an eligible relative, guardian, or authorized representative as applicable"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the endorsement, final adoption documents, and existing birth record to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay PHP 500 at the City Treasurer's Office and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return after seven days for the registered documents.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a completed administrative adoption after the competent adoption authority has issued the final adoption order.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 500"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-04",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 45 minutes"
+      },
+      "public_notes": [
+        "NACC or RACCO adjudicates the adoption and issues the final order; CCRO registers the completed adoption.",
+        "Any nationally available new Certificate of Live Birth is issued through PSA, not by CCRO as a PSA certificate."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Endorsement letter",
+          "where_to_secure": "NACC or RACCO"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Certificate of Finality, Order of Adoption, and draft new Certificate of Live Birth (4 certified copies each)",
+          "where_to_secure": "NACC or RACCO"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Existing PSA or local Certificate of Live Birth (4 photocopies)",
+          "where_to_secure": "PSA or applicable LCRO"
+        }
+      ],
+      "slug": "registration-of-adoption-under-ra-11642-the-domestic-administrative-adoption-and-alternative-child-care-act",
+      "title": "Registration of Adoption (Under RA 11642, The Domestic Administrative Adoption and Alternative Child Care Act)",
+      "who_may_avail": "RACCO, the adult adoptee, an adopting parent, or an authorized representative"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the final court documents and applicable civil-registry record to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay PHP 500 at the City Treasurer's Office and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return after seven days for the registered decree documents.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a final court decree affecting a civil-registry record after the competent court process is complete.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 500"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-05",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 days and 45 minutes"
+      },
+      "public_notes": [
+        "The court supplies the judgment and Certificate of Finality; CCRO does not adjudicate the underlying case.",
+        "PSA national annotation and certificate issuance are separate downstream processes."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Court Decision and Certificate of Finality (4 certified copies each)",
+          "where_to_secure": "Court"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Relevant Certificate of Live Birth, Marriage, or Death (1 photocopy)",
+          "where_to_secure": "PSA or applicable LCRO"
+        },
+        {
+          "condition": "For an out-of-city court or judicial recognition of a foreign judgment",
+          "ordinal": "3",
+          "text": "Applicable registration certificate from the LCRO where the court functions or where a foreign judgment was registered (4 certified copies)",
+          "where_to_secure": "Applicable LCRO"
+        },
+        {
+          "condition": "When registered more than 15 days after the decision",
+          "ordinal": "4",
+          "text": "Affidavit for delayed registration (1 original)",
+          "where_to_secure": "Applicant"
+        }
+      ],
+      "slug": "registration-of-court-decree",
+      "title": "Registration of Court Decree",
+      "who_may_avail": "The party concerned"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete documents at CCRO Window 46.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while CCRO evaluates, encodes, assigns the registry number, and obtains approval.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered document.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a timely death or fetal death that occurred within the City's jurisdiction.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-07",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes"
+      },
+      "public_notes": [
+        "Burial, cremation, transfer, and exhumation permits are separate City Health Office services. Their fees and processing times are not part of this CCRO total."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of Death (Municipal Form 103) or Certificate of Fetal Death (Municipal Form 103A) (4 originals)",
+          "where_to_secure": "Hospital, physician, or applicable issuer"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Local Health Officer certification (4 originals)",
+          "where_to_secure": "City Health Office"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "3",
+          "text": "Embalmer certification (4 originals)",
+          "where_to_secure": "Embalmer"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Proof of payment for the applicable burial or transfer permit",
+          "where_to_secure": "City Health Office / City Treasurer's Office"
+        }
+      ],
+      "slug": "registration-of-death-or-fetal-death-timely",
+      "title": "Registration of Death or Fetal Death – Timely",
+      "who_may_avail": "Persons registering a death or fetal death within the applicable registration period"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete legitimation documents to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay PHP 200 at the City Treasurer's Office and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the locally registered legal instrument after processing and approval.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a legitimation instrument for an eligible non-marital child whose parents subsequently entered a valid marriage without legal impediment.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 200"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-08",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "44 minutes"
+      },
+      "public_notes": [
+        "Philippine judicial recognition is an external prerequisite where a foreign-divorce scenario applies.",
+        "CCRO registers the instrument locally; PSA national annotation and certificate issuance remain separate."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Registered Certificate of Live Birth (4 photocopies) and PSA marriage certificate",
+          "where_to_secure": "PSA or applicable LCRO"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Identification and cedula of each affiant (1 photocopy each), plus CENOMAR or Advisory on Marriages",
+          "where_to_secure": "Applicable issuing authorities and PSA"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Joint Affidavit of Legitimation (4 originals)",
+          "where_to_secure": "Parents"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "4",
+          "text": "Admission of Paternity (4 originals) or qualifying handwritten acknowledgment (4 photocopies)",
+          "where_to_secure": "Father"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "5",
+          "text": "Applicable previous-marriage or foreign-divorce documents",
+          "where_to_secure": "PSA or court"
+        }
+      ],
+      "slug": "registration-of-legal-instruments-legitimation",
+      "title": "Registration of Legal Instruments - Legitimation",
+      "who_may_avail": "Eligible parents or persons registering legitimation under the applicable law"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete RA 9255 legal-instrument documents to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay PHP 200 at the City Treasurer's Office and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the locally registered legal instrument after processing and approval.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers an eligible RA 9255 instrument allowing a non-marital child to use the father's surname.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 200"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-09",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "44 minutes"
+      },
+      "public_notes": [
+        "RA 9255 permits use of the father's surname but does not itself change legitimacy status.",
+        "CCRO local registration is separate from PSA national annotation and Security Paper issuance."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Registered Certificate of Live Birth (4 photocopies)",
+          "where_to_secure": "PSA or applicable LCRO"
+        },
+        {
+          "condition": "As applicable",
+          "ordinal": "2",
+          "text": "Admission or Acknowledgment of Paternity (4 originals) or qualifying handwritten instrument (4 photocopies)",
+          "where_to_secure": "Father"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Identification and cedula (1 photocopy each)",
+          "where_to_secure": "Applicable issuing authorities"
+        },
+        {
+          "condition": "As applicable",
+          "ordinal": "4",
+          "text": "Affidavit to Use the Surname of the Father (4 originals), with applicable age-specific execution or attestation",
+          "where_to_secure": "Eligible affiant"
+        }
+      ],
+      "slug": "registration-of-legal-instruments-r-a-9255",
+      "title": "Registration of Legal Instruments - R.A. 9255",
+      "who_may_avail": "Eligible parents, child, guardian, or authorized person under RA 9255 and the Charter's age-specific rules"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the requirements for the applicable component pathway to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay PHP 200 at the City Treasurer's Office and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the locally registered instrument or transfer documentation after processing and approval.",
+          "sequence": "3"
+        }
+      ],
+      "description": "One CCRO service registers other legal instruments through component pathways for supplemental reports, specified civil-registry corrections, and transfer of records registered in the wrong place.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 200"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-10",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "44 minutes"
+      },
+      "public_notes": [
+        "This remains one numbered Charter service with component pathways, not multiple services.",
+        "The Charter's ambiguous 'two supporting documents / 1 photocopy' wording is preserved; applicants should confirm the required copy count with CCRO."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Applicable PSA civil-registry document",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": "Supplemental-report pathway",
+          "ordinal": "2",
+          "text": "Affidavit of Supplemental Report and two supporting documents; the Charter prints '1 photocopy' without clearly allocating the copy count",
+          "where_to_secure": "Applicant and applicable record holders"
+        },
+        {
+          "condition": "Specified correction pathway",
+          "ordinal": "3",
+          "text": "PSA document (4 photocopies), discrepancy or explanation affidavit (4 originals), and identification/cedula (1 photocopy each)",
+          "where_to_secure": "PSA, applicant, and applicable issuing authority"
+        },
+        {
+          "condition": "Wrong-place registration transfer pathway",
+          "ordinal": "4",
+          "text": "PSA document and Certificate of Transfer (1 original and 4 photocopies each)",
+          "where_to_secure": "PSA and applicable LCRO"
+        }
+      ],
+      "slug": "registration-of-legal-instruments-other-legal-instruments",
+      "title": "Registration of Legal Instruments – Other Legal Instruments",
+      "who_may_avail": "Legal-age clients with an applicable legal instrument or record-transfer request"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple and Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete CNSP birth-registration documents to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while CCRO evaluates, encodes, assigns the registry number, and obtains approval.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered local document.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers the birth of a child within a Charter-defined Children in Need of Special Protection category.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-11",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes"
+      },
+      "public_notes": [
+        "Under the PSA advisory dated May 4, 2026, the PSA Negative Certification of Birth must be no more than six months old.",
+        "CCRO local registration remains separate from PSA national record availability and certificate issuance."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of Live Birth (Municipal Form 102) (4 originals)",
+          "where_to_secure": "CCRO or applicable birth attendant"
+        },
+        {
+          "condition": "If registration is delayed",
+          "ordinal": "2",
+          "text": "Affidavit for Delayed Registration (4 originals)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "PSA Negative Certification of Birth (1 original), issued no more than six months before submission",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Local certification of no birth record (1 photocopy)",
+          "where_to_secure": "Applicable LCRO"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "DSWD CNSP certification and medical or dental certification of approximate age (1 original each)",
+          "where_to_secure": "DSWD and applicable medical or dental professional"
+        }
+      ],
+      "slug": "registration-of-live-birth-for-children-in-need-of-special-protection-cnsp",
+      "title": "Registration of Live Birth for Children in Need of Special Protection (CNSP)",
+      "who_may_avail": "Children within the Charter's Children in Need of Special Protection categories and their authorized registering parties"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete delayed-birth registration documents to CCRO.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait through the required 10-day posting and CCRO evaluation, encoding, registration, and approval.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered local document.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO handles delayed registration of a marital or non-marital child's birth occurring within City jurisdiction after the applicable registration period.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-12",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 days and 25 minutes"
+      },
+      "public_notes": [
+        "Under the PSA advisory dated May 4, 2026, the PSA Negative Certification of Birth must be no more than six months old.",
+        "Out-of-town registration and PSA national availability are separate processes involving the applicable LCRO and PSA."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Applicable timely-birth documents and Certificate of Live Birth (Municipal Form 102)",
+          "where_to_secure": "CCRO and applicable birth attendant"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Affidavit for Delayed Registration (4 originals), local no-record certification (1 photocopy), and PSA Negative Certification of Birth (1 photocopy) issued no more than six months before submission",
+          "where_to_secure": "Applicant, applicable LCRO, and PSA"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Barangay certification, National ID, two unedited 2x2 photographs, registrant affidavit, and affidavit of two disinterested persons",
+          "where_to_secure": "Applicable issuing authority and affiants"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "At least two event evidences and at least two parent-identity evidences, with originals presented for checking",
+          "where_to_secure": "Applicable record holders and issuing authorities"
+        },
+        {
+          "condition": "As applicable",
+          "ordinal": "5",
+          "text": "Applicable AUSF, guardian, parental-status, foreign-parent, explanation, or out-of-town documents",
+          "where_to_secure": "Applicable affiant, court, foreign authority, or LCRO"
+        }
+      ],
+      "slug": "registration-of-live-birth-for-marital-legitimate-and-non-marital-illegitimate-child-delayed",
+      "title": "Registration of Live Birth for Marital (Legitimate) and Non-Marital (Illegitimate) Child – Delayed",
+      "who_may_avail": "Eligible persons registering a birth more than 30 days after occurrence within City jurisdiction"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete birth-registration documents at CCRO Window 46.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while CCRO evaluates, encodes, registers, and obtains approval.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered local document.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a timely birth for a child conceived and born during the parents' marriage within City jurisdiction.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-13",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes"
+      },
+      "public_notes": [
+        "CCRO registers the local civil-registry record. Any later PSA Security Paper certificate is issued separately by PSA."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of Live Birth (Municipal Form 102), completed in black ink (4 originals)",
+          "where_to_secure": "CCRO or applicable birth attendant"
+        },
+        {
+          "condition": "For a home birth",
+          "ordinal": "2",
+          "text": "Parents' marriage certificate (1 photocopy)",
+          "where_to_secure": "PSA or CCRO"
+        }
+      ],
+      "slug": "registration-of-live-birth-for-marital-legitimate-child-timely",
+      "title": "Registration of Live Birth for Marital (Legitimate) Child – Timely",
+      "who_may_avail": "Parents or authorized persons timely registering a marital child's birth within City jurisdiction"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete documents for the applicable non-marital birth-registration pathway.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "For an acknowledged child, complete legal-instrument registration before birth registration as applicable.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered local document after CCRO processing and approval.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a timely birth for a non-marital child through the applicable unacknowledged, acknowledged, or acknowledged-with-AUSF pathway.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-14",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes for an unacknowledged child; 37 minutes for acknowledged and acknowledged-with-AUSF pathways"
+      },
+      "public_notes": [
+        "The Charter's case-specific processing times are preserved.",
+        "CCRO local registration and legal-instrument work remain separate from PSA national annotation and certificate issuance."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of Live Birth (Municipal Form 102) (4 originals)",
+          "where_to_secure": "CCRO or applicable birth attendant"
+        },
+        {
+          "condition": "For an acknowledged child",
+          "ordinal": "2",
+          "text": "Acknowledgment or Admission of Paternity (4 originals) and identification (1 photocopy each)",
+          "where_to_secure": "Father and applicable issuing authority"
+        },
+        {
+          "condition": "For the acknowledged-with-AUSF pathway",
+          "ordinal": "3",
+          "text": "Affidavit to Use the Surname of the Father (4 originals), with applicable age, guardian, and sworn-attestation documents",
+          "where_to_secure": "Eligible affiant"
+        }
+      ],
+      "slug": "registration-of-live-birth-for-non-marital-illegitimate-child-timely",
+      "title": "Registration of Live Birth for Non-Marital (Illegitimate) Child – Timely",
+      "who_may_avail": "Parents or authorized persons timely registering a non-marital child's birth within City jurisdiction"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete BRAP birth-registration documents at CCRO Window 47.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait through the required posting and CCRO evaluation, registration, and approval.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered local document or applicable out-of-town handling instructions.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO provides the durable Charter birth-registration procedure under BRAP for eligible marginalized groups.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-16",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "10 days and 25 minutes"
+      },
+      "public_notes": [
+        "This publishes the durable Charter service only. No dated or temporary outreach availability is promised."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of Live Birth (Municipal Form 102) (4 originals)",
+          "where_to_secure": "CCRO or applicable birth attendant"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "PSA Negative Omnibus Certification (1 original) and local no-record birth certification (1 photocopy)",
+          "where_to_secure": "PSA and applicable LCRO"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Affidavit for Delayed Registration (4 originals) and barangay indigency certification (1 original)",
+          "where_to_secure": "Applicant and Barangay"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Available proof of identity (1 photocopy)",
+          "where_to_secure": "Applicable issuing authority"
+        }
+      ],
+      "slug": "registration-of-live-birth-under-birth-registration-assistance-project-brap",
+      "title": "Registration of Live Birth under Birth Registration Assistance Project (BRAP)",
+      "who_may_avail": "Eligible Indigenous Peoples, Muslim Filipinos, and persons in the poorest sector under the Charter"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the complete marriage-registration documents at CCRO Window 46.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while CCRO evaluates, encodes, registers, and obtains approval.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Receive the registered local document.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CCRO registers a marriage solemnized within the City during the applicable timely-registration period.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-18",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes"
+      },
+      "public_notes": [
+        "The national reporting boundary is 15 days for ordinary marriages and 30 days for license-exempt marriages.",
+        "CCRO registers the local record; PSA separately maintains and issues the national record."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Certificate of Marriage (Municipal Form 97) (4 originals)",
+          "where_to_secure": "Solemnizing officer"
+        },
+        {
+          "condition": "For non-Roman-Catholic rites",
+          "ordinal": "2",
+          "text": "Certificate of Registration of Authority to Solemnize Marriage (1 photocopy)",
+          "where_to_secure": "Philippine Statistics Authority"
+        },
+        {
+          "condition": "If solemnized outside a legally authorized place",
+          "ordinal": "3",
+          "text": "Parties' sworn statement (2 originals)",
+          "where_to_secure": "Parties"
+        },
+        {
+          "condition": "For a license-exempt marriage",
+          "ordinal": "4",
+          "text": "Solemnizing officer affidavit (4 originals) and, for Family Code Article 34, cohabitation affidavit (4 originals)",
+          "where_to_secure": "Solemnizing officer and parties"
+        }
+      ],
+      "slug": "registration-of-marriage-timely",
+      "title": "Registration of Marriage – Timely",
+      "who_may_avail": "Parties or authorized persons timely registering a marriage solemnized in the City of San Fernando"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "civil-registry",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the Request Form and applicable authority and identification documents at CCRO Window 45.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Receive the order of payment, pay PHP 50 at City Treasurer's Office Window 37, and return the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait while CCRO verifies the local record and prepares the certified transcript or photocopy.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Receive the City CCRO-certified local copy.",
+          "sequence": "4"
+        }
+      ],
+      "description": "CCRO issues a City-certified local transcript or photocopy of a birth, death, marriage, or other civil-registry document held in the local registry.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 50"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-civil-registry-office-external-19",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCRO",
+        "division": null,
+        "name": "City Civil Registry Office"
+      },
+      "office_contact": {
+        "emails": [
+          "ccro@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "CCRO 1st Floor: 144",
+          "CCRO 2nd Floor: 141"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.–7:00 p.m., Monday–Thursday",
+        "scope": "Published CCRO office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "25 minutes"
+      },
+      "public_notes": [
+        "The output is a City CCRO/local civil-registry certified copy or transcription, not a PSA Security Paper certificate.",
+        "The Charter permits a scanned authorization or SPA in applicable cases; this does not establish email or instant messaging as the application channel."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Request Form",
+          "where_to_secure": "CCRO Window 45"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Requester valid identification and proof of filiation where applicable (1 photocopy)",
+          "where_to_secure": "Applicable issuing authority"
+        },
+        {
+          "condition": "Depending on requester authority",
+          "ordinal": "3",
+          "text": "Authorization letter or Special Power of Attorney and applicable record-owner, guardian, or representative identification",
+          "where_to_secure": "Record owner or authorized party"
+        }
+      ],
+      "slug": "requesting-certified-copy-of-birth-death-marriage-and-other-civil-registry-documents",
+      "title": "Requesting Certified Copy of Birth, Death, Marriage and other Civil Registry Documents",
+      "who_may_avail": "The record owner or another requester authorized under the Charter's relationship, guardianship, representation, or deceased-relative rules"
     }
   ]
 }

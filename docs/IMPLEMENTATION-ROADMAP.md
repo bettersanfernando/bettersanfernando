@@ -142,22 +142,23 @@ canonical `PARTIAL` category pages (see `PAGE-DATA-MATRIX.md`). They are not
 READY pages: each category remains a bounded subset, not complete coverage of
 its office or purpose.
 
-| Batch                   |   Count | Category                     | Route                             |
-| ----------------------- | ------: | ---------------------------- | --------------------------------- |
-| BLPD                    |       8 | Business Services            | `/services/business`              |
-| CDRRMO                  |       7 | Disaster Preparedness        | `/services/disaster-preparedness` |
-| CSWDO Social Assistance |      19 | Assistance Programs          | `/services/assistance-programs`   |
-| CSWDO PWD               |       6 | PWD Services                 | `/services/pwd-services`          |
-| CSWDO Solo Parent       |      14 | Social Welfare               | `/services/social-welfare`        |
-| CHO                     |      59 | Health Services              | `/services/health-services`       |
-| CIPPESO                 |       7 | Employment                   | `/services/employment`            |
-| CAVO                    |       7 | Agriculture & Fisheries      | `/services/agriculture-fisheries` |
-| CCSFP                   |       9 | Education Services           | `/services/education`             |
-| CENRO                   |       1 | Environment                  | `/services/environment`           |
-| **Total**               | **137** | **ten published categories** |                                   |
+| Batch                   |   Count | Category                        | Route                             |
+| ----------------------- | ------: | ------------------------------- | --------------------------------- |
+| BLPD                    |       8 | Business Services               | `/services/business`              |
+| CDRRMO                  |       7 | Disaster Preparedness           | `/services/disaster-preparedness` |
+| CSWDO Social Assistance |      19 | Assistance Programs             | `/services/assistance-programs`   |
+| CSWDO PWD               |       6 | PWD Services                    | `/services/pwd-services`          |
+| CSWDO Solo Parent       |      14 | Social Welfare                  | `/services/social-welfare`        |
+| CHO                     |      59 | Health Services                 | `/services/health-services`       |
+| CIPPESO                 |       7 | Employment                      | `/services/employment`            |
+| CAVO                    |       7 | Agriculture & Fisheries         | `/services/agriculture-fisheries` |
+| CCSFP                   |       9 | Education Services              | `/services/education`             |
+| CENRO                   |       1 | Environment                     | `/services/environment`           |
+| CCRO                    |      15 | Civil Registry                  | `/services/civil-registry`        |
+| **Total**               | **152** | **eleven published categories** |                                   |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-118 External services remain unpublished; the 74 Internal services are outside
+103 External services remain unpublished; the 74 Internal services are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
 CHO records, while external-22 and external-60 remain held and unpublished.
@@ -194,6 +195,11 @@ publication-reviewed CENRO Sale of Compost Fertilizer service. Two tree-related
 certification records remain held because their current Charter titles, output
 names, and public/private-property scopes conflict. National tree-cutting
 permits remain under the applicable DENR/PENRO process.
+The published Civil Registry page is also `PARTIAL`, not `READY`: it contains
+15 publication-reviewed CCRO services, while external-01, external-06,
+external-15, and external-17 remain held. CCRO local registration,
+certification, endorsement, and transmission remain distinct from PSA, court,
+NACC/RACCO, and City Health Office responsibilities and processing time.
 
 ## Phase 3 — Private data workstream
 
@@ -204,7 +210,7 @@ versioned allowlisted export are complete.
 
 | Priority | Work                                                                                                                                                                                                                                                          | Public page(s) unblocked                                                                                        |
 | -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 137 External services across ten categories                                                                                                                 | The 3 remaining planned Services categories and broader coverage within the 10 published but PARTIAL categories |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 152 External services across eleven categories                                                                                                              | The 3 remaining planned Services categories and broader coverage within the 11 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                 | `/government/structure`; later enriches `/government`                                                           |
 |        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                          | `/legislation/resolutions`                                                                                      |
 |        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                       | Moves `/government/links` from `PARTIAL` to `READY`                                                             |

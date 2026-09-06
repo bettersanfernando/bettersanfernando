@@ -143,6 +143,7 @@ const knownRealDestinations = new Set([
   '/services/agriculture-fisheries',
   '/services/education',
   '/services/environment',
+  '/services/civil-registry',
   '/projects',
   '/projects/map',
   '/projects/sources',

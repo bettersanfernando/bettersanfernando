@@ -20,6 +20,7 @@ const destinationPresentation = {
   infrastructurePublicWorks: ['construction', 'infrastructurePublicWorks'],
   agriculture: ['wheat', 'agriculture'],
   environment: ['leaf', 'environment'],
+  civilRegistry: ['file-text', 'civilRegistry'],
   emergencyInformation: ['triangle-alert', 'emergencyInformation'],
   allCityProjects: ['list-checks', 'allCityProjects'],
   projectMap: ['map', 'projectMap'],
@@ -165,6 +166,11 @@ const navigationStructure = [
       {
         labelKey: 'navigation.sections.publicServices',
         items: [
+          {
+            labelKey: 'navigation.items.civilRegistry',
+            href: '/services/civil-registry',
+            kind: 'real',
+          },
           {
             labelKey: 'navigation.items.infrastructurePublicWorks',
             href: '/services/infrastructure-public-works',
