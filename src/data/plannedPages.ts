@@ -5,7 +5,6 @@ const plannedPageRoutes = [
     id: 'infrastructurePublicWorks',
     path: '/services/infrastructure-public-works',
   },
-  { id: 'environment', path: '/services/environment' },
   { id: 'resolutions', path: '/legislation/resolutions' },
   { id: 'governmentDocuments', path: '/government/documents' },
   { id: 'fullDisclosure', path: '/transparency/full-disclosure' },

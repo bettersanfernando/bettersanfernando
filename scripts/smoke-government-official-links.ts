@@ -197,8 +197,8 @@ assert.equal(
 );
 assert.equal(
   getServices().length,
-  136,
-  'existing services must remain unchanged (127 plus 9 Education records)'
+  137,
+  'existing services must remain unchanged (136 plus 1 Environment record)'
 );
 
 console.log('[smoke-government-official-links] OK');

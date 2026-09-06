@@ -178,7 +178,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.environment',
             href: '/services/environment',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.emergencyInformation',

@@ -62,9 +62,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 136,
+      "record_count": 137,
       "schema_version": 1,
-      "sha256": "ca0c90ec3b7147e51420130a86b6c81ff72022a785cf7a719403560a79400725"
+      "sha256": "e4bb9e715e6d126b3570df6b093bee1e411a323fedec62adcb4965df13b2fb27"
     }
   },
   "export_version": "v0.1.0",
@@ -96,6 +96,8 @@
     "data/services/cavo-publication-review.json",
     "data/services/city-college-freshness-enrichment.json",
     "data/services/city-college-publication-review.json",
+    "data/services/cenro-environment-freshness-enrichment.json",
+    "data/services/cenro-environment-publication-review.json",
     "data/government/hotlines-publication-review.json",
     "data/government/barangay-contacts-publication-review.json",
     "data/government/official-links-publication-review.json"
@@ -123,7 +125,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "940f77a58bf287ce387e0cb348f6321834f08b2c",
+  "source_commit": "9f57e9e11eb73b9997685c3d162641a28a1c1855",
   "source_data_version": "v0.1.1",
   "sources": [
     {

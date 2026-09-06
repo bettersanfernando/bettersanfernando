@@ -49,6 +49,7 @@ const realCategorySlugs = [
   'employment',
   'health-services',
   'education',
+  'environment',
   'assistance-programs',
   'social-welfare',
   'pwd-services',
@@ -100,7 +101,8 @@ const cippeso = services.filter(
 );
 const cavo = services.filter(service => service.office.acronym === 'CAVO');
 const ccsfp = services.filter(service => service.office.acronym === 'CCSFP');
-assert.equal(services.length, 136);
+const cenro = services.filter(service => service.office.acronym === 'CENRO');
+assert.equal(services.length, 137);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -112,11 +114,12 @@ assert.equal(
   'exactly seven CAVO Agriculture & Fisheries records'
 );
 assert.equal(ccsfp.length, 9, 'exactly nine CCSFP Education records');
+assert.equal(cenro.length, 1, 'exactly one CENRO Environment record');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 136);
-assert.equal(new Set(services.map(service => service.slug)).size, 136);
+assert.equal(new Set(services.map(service => service.id)).size, 137);
+assert.equal(new Set(services.map(service => service.slug)).size, 137);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -128,7 +131,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 136 service detail routes must resolve through the adapter'
+  'all 137 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -193,6 +196,11 @@ assert.ok(
     service => getServiceHref(service) === `/services/education/${service.slug}`
   ),
   'all nine CCSFP records must use canonical Education routes'
+);
+assert.equal(
+  getServiceHref(cenro[0]),
+  '/services/environment/sale-of-compost-fertilizer',
+  'the CENRO record must use its canonical Environment route'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -656,6 +664,70 @@ assert.doesNotMatch(
   /AY 2025[–-]2026|admission ongoing|scholarship application deadline|enrollment deadline/i
 );
 
+const compost = cenro[0];
+assert.equal(
+  compost.id,
+  'charter-2026-2e-city-environment-and-natural-resources-office-external-03'
+);
+assert.equal(compost.title, 'Sale of Compost Fertilizer');
+assert.equal(compost.fee.text, 'PHP 350.00 per sack');
+assert.equal(compost.processing_time.text, '21 minutes per sack');
+assert.deepEqual(
+  compost.client_steps.map(step => step.instruction),
+  [
+    'Obtain and complete the Compost Purchase Order Form at the BOSS-CENRO Desk.',
+    "Receive the order-of-payment form, then pay PHP 350.00 per sack at City Treasurer's Office Window 5 in the City Hall main lobby and obtain the official receipt.",
+    'Present the Compost Purchase Order Form and official receipt at the City Composting Center in the CGSO Compound, NPM, Del Pilar, City of San Fernando.',
+    'Complete the acknowledgement receipt and compost acceptance slip, sign the logbook, and receive the ordered compost.',
+  ]
+);
+assert.match(
+  compost.public_notes.join(' '),
+  /subject to current compost availability/i
+);
+assert.doesNotMatch(JSON.stringify(compost), /PHP 12.{0,20}(kilogram|kg)/i);
+assert.equal(compost.forms.length, 0);
+assert.equal(compost.online_channels.length, 0);
+assert.equal(compost.appointment, null);
+assert.doesNotMatch(
+  JSON.stringify(compost),
+  /guaranteed compost|guaranteed stock|tree-cutting permit|cleanup drive|tree planting|recycling campaign|coordination meeting|procurement|inspection program/i
+);
+for (const [suffix, title] of [
+  [
+    '01',
+    'Issuance of Certificate of No Anticipated/Outstanding Issues Logged for Trees Located in Public Places',
+  ],
+  ['02', 'Issuance of Certificate of No Objection'],
+] as const) {
+  assert.ok(
+    !services.some(service =>
+      service.id.endsWith(
+        `city-environment-and-natural-resources-office-external-${suffix}`
+      )
+    ),
+    `held CENRO record external-${suffix} must remain unpublished`
+  );
+  assert.ok(!services.some(service => service.title === title));
+}
+assert.match(servicesPageSource, /DENR\/PENRO process/);
+assert.match(
+  servicesPageSource,
+  /CENRO is not presented here as the national permit issuer/
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(service => service.office.acronym !== 'CENRO')
+      )
+    )
+    .digest('hex'),
+  '9d5b8aaa9642da485d053d29470296174e09bb19345030025c81111dda268687',
+  'the previous 136 published service records must remain semantically unchanged'
+);
+
 assert.deepEqual(
   blpd.map(service => service.slug),
   [
@@ -678,7 +750,11 @@ assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CCSFP')
+        services.filter(
+          service =>
+            service.office.acronym !== 'CCSFP' &&
+            service.office.acronym !== 'CENRO'
+        )
       )
     )
     .digest('hex'),
@@ -694,7 +770,8 @@ assert.equal(
             service.office.acronym !== 'CHO' &&
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
-            service.office.acronym !== 'CCSFP'
+            service.office.acronym !== 'CCSFP' &&
+            service.office.acronym !== 'CENRO'
         )
       )
     )
@@ -710,7 +787,8 @@ assert.equal(
           service =>
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
-            service.office.acronym !== 'CCSFP'
+            service.office.acronym !== 'CCSFP' &&
+            service.office.acronym !== 'CENRO'
         )
       )
     )
@@ -725,7 +803,8 @@ assert.equal(
         services.filter(
           service =>
             service.office.acronym !== 'CAVO' &&
-            service.office.acronym !== 'CCSFP'
+            service.office.acronym !== 'CCSFP' &&
+            service.office.acronym !== 'CENRO'
         )
       )
     )
@@ -833,5 +912,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 136/136; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); External: 136; published categories: 9/13; planned categories: 4/13'
+  '  routes: 137/137; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); External: 137; published categories: 10/13; planned categories: 3/13'
 );

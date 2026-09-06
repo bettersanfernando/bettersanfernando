@@ -81,8 +81,8 @@ const categories = [
   [
     'Environment',
     'environment',
-    'Local environmental programs, permits, and reporting.',
-    'planned',
+    'Reviewed environmental services and access guidance.',
+    'published',
   ],
   [
     'Disaster Preparedness',
@@ -229,6 +229,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "Seven reviewed Citizen's Charter services currently published from the City Agriculture and Veterinary Office (CAVO), covering agriculture, crops, animal health, and meat regulation."}
                 {category === 'education' &&
                   "Nine publication-reviewed Citizen's Charter services from the City College of San Fernando Pampanga (CCSFP)."}
+                {category === 'environment' &&
+                  "One publication-reviewed Citizen's Charter service currently published from the City Environment and Natural Resources Office (CENRO)."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -241,7 +243,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                       ? 'This is a bounded collection of seven CAVO agriculture and veterinary procedures. No standalone fisheries Charter service is currently published, and this is not a complete inventory of City agriculture, fisheries, or veterinary programs, current seed/seedling/vaccine stock, or seminar and vaccination schedules.'
                       : category === 'education'
                         ? 'This page does not announce a current admission or enrollment window. Service availability may depend on City College schedules, referrals, clinic staffing, and other published limitations.'
-                        : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                        : category === 'environment'
+                          ? 'This is not a complete inventory of City environmental programs or transactions. Two tree-related certification records remain unpublished because their current Charter titles, output names, and public/private-property scopes conflict. National tree-cutting permits remain under the applicable DENR/PENRO process; CENRO is not presented here as the national permit issuer.'
+                          : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

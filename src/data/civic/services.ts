@@ -366,6 +366,38 @@ const CcsfpServiceSchema = z.strictObject({
   requirements: z.array(CdrrmoRequirementSchema).min(1),
 });
 
+const CenroServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('environment'),
+  classification: z.strictObject({
+    complexity: z.literal('G2C \u2013 Government to Citizen'),
+    service_scope: z.literal('External'),
+    transaction_types: z.tuple([]),
+  }),
+  fee: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CENRO'),
+    division: z.literal('City Composting Center'),
+    name: z.literal('City Environment and Natural Resources Office'),
+  }),
+  office_contact: z.strictObject({
+    emails: z.array(z.email()).min(1),
+    phone: z.null(),
+  }),
+  office_hours: z.null(),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(CswdoRequirementSchema).min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
@@ -374,6 +406,7 @@ const ServiceSchema = z.union([
   CippesoServiceSchema,
   CavoServiceSchema,
   CcsfpServiceSchema,
+  CenroServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -391,15 +424,16 @@ const ServicesFileSchema = z
       ),
       z.literal('City Agriculture and Veterinary Office'),
       z.literal('City College of San Fernando Pampanga'),
+      z.literal('City Environment and Natural Resources Office'),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(136),
+    record_count: z.literal(137),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(136),
+    services: z.array(ServiceSchema).length(137),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 136) {
+      if (new Set(file.services.map(service => service[key])).size !== 137) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -429,6 +463,9 @@ const ServicesFileSchema = z
     const ccsfpCount = file.services.filter(
       service => service.office.acronym === 'CCSFP'
     ).length;
+    const cenroCount = file.services.filter(
+      service => service.office.acronym === 'CENRO'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
@@ -436,12 +473,13 @@ const ServicesFileSchema = z
       choCount !== 59 ||
       cippesoCount !== 7 ||
       cavoCount !== 7 ||
-      ccsfpCount !== 9
+      ccsfpCount !== 9 ||
+      cenroCount !== 1
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, and 9 CCSFP records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, and 1 CENRO record',
         path: ['services'],
       });
     }
@@ -457,7 +495,8 @@ export type PublishedServiceCategory =
   | 'health-services'
   | 'employment'
   | 'agriculture-fisheries'
-  | 'education';
+  | 'education'
+  | 'environment';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -484,6 +523,7 @@ const categoryByAcronym: Record<
   CIPPESO: 'employment',
   CAVO: 'agriculture-fisheries',
   CCSFP: 'education',
+  CENRO: 'environment',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

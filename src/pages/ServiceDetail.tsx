@@ -168,6 +168,7 @@ export default function ServiceDetail() {
     'pwd-services': 'PWD Services',
     'health-services': 'Health Services',
     education: 'Education Services',
+    environment: 'Environment',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;
@@ -389,27 +390,29 @@ export default function ServiceDetail() {
                 </p>
               )}
             </div>
-            <div className="flex items-start gap-3 text-sm leading-6">
-              <Phone
-                className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                aria-hidden="true"
-              />
-              <div>
-                <a
-                  className={externalLinkClass}
-                  href={`tel:${service.office_contact.phone.replace(/[^+\d]/g, '')}`}
-                >
-                  {service.office_contact.phone}
-                </a>
-                {'extensions' in service.office_contact && (
-                  <p className="mt-1 text-gray-700">
-                    Extensions {service.office_contact.extensions.join(', ')}
-                    {'extension_office_extension' in service.office_contact &&
-                      `; Extension Office ${service.office_contact.extension_office_extension}`}
-                  </p>
-                )}
+            {service.office_contact.phone && (
+              <div className="flex items-start gap-3 text-sm leading-6">
+                <Phone
+                  className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+                  aria-hidden="true"
+                />
+                <div>
+                  <a
+                    className={externalLinkClass}
+                    href={`tel:${service.office_contact.phone.replace(/[^+\d]/g, '')}`}
+                  >
+                    {service.office_contact.phone}
+                  </a>
+                  {'extensions' in service.office_contact && (
+                    <p className="mt-1 text-gray-700">
+                      Extensions {service.office_contact.extensions.join(', ')}
+                      {'extension_office_extension' in service.office_contact &&
+                        `; Extension Office ${service.office_contact.extension_office_extension}`}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
             {'emergency_contacts' in service &&
               service.emergency_contacts.map(contact => (
                 <div
@@ -452,17 +455,19 @@ export default function ServiceDetail() {
                 ))}
               </ul>
             </div>
-            <div className="flex items-start gap-3 text-sm leading-6 text-gray-700">
-              <CalendarClock
-                className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                aria-hidden="true"
-              />
-              <div>
-                <p className="font-semibold text-gray-900">Office hours</p>
-                <p>{service.office_hours.schedule}</p>
-                <p className="mt-1 text-xs">{service.office_hours.scope}</p>
+            {service.office_hours && (
+              <div className="flex items-start gap-3 text-sm leading-6 text-gray-700">
+                <CalendarClock
+                  className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p className="font-semibold text-gray-900">Office hours</p>
+                  <p>{service.office_hours.schedule}</p>
+                  <p className="mt-1 text-xs">{service.office_hours.scope}</p>
+                </div>
               </div>
-            </div>
+            )}
           </aside>
         </div>
       </main>

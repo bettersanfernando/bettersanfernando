@@ -107,6 +107,10 @@ function App() {
                     element={<Services category="education" />}
                   />
                   <Route
+                    path="/services/environment"
+                    element={<Services category="environment" />}
+                  />
+                  <Route
                     path="/services/:category/:serviceSlug"
                     element={<ServiceDetail />}
                   />

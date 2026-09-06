@@ -9,10 +9,11 @@
     "City Health Office",
     "City Investment Promotions and Public Employment Services Office",
     "City Agriculture and Veterinary Office",
-    "City College of San Fernando Pampanga"
+    "City College of San Fernando Pampanga",
+    "City Environment and Natural Resources Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 136,
+  "record_count": 137,
   "schema_version": 1,
   "services": [
     {
@@ -13512,6 +13513,81 @@
       "slug": "medical-consultation",
       "title": "Medical Consultation",
       "who_may_avail": "Students, faculty, administration, and staff"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "environment",
+      "classification": {
+        "complexity": "G2C – Government to Citizen",
+        "service_scope": "External",
+        "transaction_types": []
+      },
+      "client_steps": [
+        {
+          "instruction": "Obtain and complete the Compost Purchase Order Form at the BOSS-CENRO Desk.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Receive the order-of-payment form, then pay PHP 350.00 per sack at City Treasurer's Office Window 5 in the City Hall main lobby and obtain the official receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Present the Compost Purchase Order Form and official receipt at the City Composting Center in the CGSO Compound, NPM, Del Pilar, City of San Fernando.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Complete the acknowledgement receipt and compost acceptance slip, sign the logbook, and receive the ordered compost.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City Environment and Natural Resources Office sells compost soil enhancer produced from biodegradable waste collected from the City's two public markets, supporting organic farming, resource recovery, and livelihood.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 350.00 per sack"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-environment-and-natural-resources-office-external-03",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CENRO",
+        "division": "City Composting Center",
+        "name": "City Environment and Natural Resources Office"
+      },
+      "office_contact": {
+        "emails": [
+          "cenro@cityofsanfernando.gov.ph"
+        ],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "21 minutes per sack"
+      },
+      "public_notes": [
+        "Purchase and pickup are subject to current compost availability. Obtaining a form or seeing this service listed does not guarantee that compost is available for immediate purchase or pickup.",
+        "Only the current Charter's PHP 350.00-per-sack route is published."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Compost Purchase Order Form (1 original)",
+          "where_to_secure": "BOSS-CENRO Desk at Vida Arrozal (Atrium), City Hall"
+        }
+      ],
+      "slug": "sale-of-compost-fertilizer",
+      "title": "Sale of Compost Fertilizer",
+      "who_may_avail": "All"
     }
   ]
 }
