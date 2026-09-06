@@ -128,6 +128,124 @@
           "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
         }
       ]
+    },
+    {
+      "classification": "VERIFIED_EMERGENCY_HOTLINE",
+      "contact_type": "EMERGENCY",
+      "id": "cdrrmo-safru-mobile-hotline",
+      "limitation_note": "Listed by the CSFP Citizens Portal and directly by CDRRMO's own official social-media channel; not independently call-tested by this project.",
+      "number": "0939-936-2423",
+      "operating_scope": "24/7 for SAFRU rescue and emergency-response calls only; not a claim about general CDRRMO administrative office hours.",
+      "organization": "City Disaster Risk Reduction and Management Office (CDRRMO) – San Fernando Rescue Unit (SAFRU)",
+      "presentation_group": "EMERGENCY_NUMBERS",
+      "public_purpose": "Report an emergency for SAFRU rescue and emergency-response dispatch.",
+      "sources": [
+        {
+          "label": "Citizens Portal Hotlines",
+          "url": "https://citizensportal.csfp.io/hotlines"
+        },
+        {
+          "label": "CDRRMO official emergency/disaster hotline post",
+          "url": "https://www.facebook.com/cdrrmo.csfp.official/posts/for-emergencies-or-any-disaster-related-concerns-you-may-contact-the-following-h/3434408959976070/"
+        }
+      ]
+    },
+    {
+      "classification": "VERIFIED_INSTITUTIONAL_CONTACT",
+      "contact_type": "OFFICE_AND_PUBLIC_SAFETY",
+      "id": "cposco-traffic-public-safety-hotline",
+      "limitation_note": "Published directly by CPOSCO's own official social-media channel for traffic and public-safety concerns, and independently listed on the CSFP Citizens Portal; not independently call-tested, and not confirmed as a 24/7 or dispatch line.",
+      "number": "0967-889-4569",
+      "operating_scope": "Hours of operation are not established by current evidence. Whether this line supports 24/7 coverage or emergency dispatch is not established by current evidence.",
+      "organization": "City Public Order and Safety Coordinating Office (CPOSCO)",
+      "presentation_group": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "public_purpose": "Contact for traffic and public-safety concerns.",
+      "sources": [
+        {
+          "label": "CPOSCO official traffic/public-safety post",
+          "url": "https://www.facebook.com/CSFP.POSCO/posts/for-traffic-and-public-safety-concerns-contact-us-through-0967-889-4569-keep-saf/997283622556187/"
+        },
+        {
+          "label": "Citizens Portal Hotlines",
+          "url": "https://citizensportal.csfp.io/hotlines"
+        },
+        {
+          "label": "CPOSCO road and flood advisory, September 1, 2026",
+          "url": "https://www.facebook.com/CSFP.POSCO/posts/-road-and-flood-advisory-date-september-01-2026%EF%B8%8Ftime-904-am-as-ofintersection-fl/1408509974766881/"
+        }
+      ]
+    },
+    {
+      "alternate_official_label": "City of San Fernando Police Headquarters",
+      "classification": "VERIFIED_INSTITUTIONAL_CONTACT",
+      "contact_type": "OFFICE_AND_PUBLIC_SAFETY",
+      "id": "san-fernando-police-station-primary-hotline",
+      "limitation_note": "Published in official City of San Fernando Police Station social-media posts, and independently listed on the CSFP Citizens Portal under the 'Police Headquarters' label; not independently call-tested.",
+      "number": "0998-598-5465",
+      "operating_scope": "Hours of operation are not established by current evidence. Whether this line supports 24/7 coverage or emergency dispatch is not established by current evidence.",
+      "organization": "City of San Fernando Police Station",
+      "presentation_group": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "public_purpose": "Primary institutional contact for police and public-safety concerns.",
+      "sources": [
+        {
+          "label": "Official PNP City of San Fernando station post, August 30, 2026",
+          "url": "https://www.facebook.com/pnpcityofsanfernando.pampanga/posts/look-on-august-30-2026-at-about-411-pm-personnel-of-the-city-of-san-fernando-pol/2915540638788786/"
+        },
+        {
+          "label": "Official PNP City of San Fernando station post, September 1, 2026",
+          "url": "https://www.facebook.com/pnpcityofsanfernando.pampanga/posts/look-from-september-1-2026-to-date-at-about-1022-am-pltcol-pearl-joy-c-gollayan-/2918222005187316/"
+        },
+        {
+          "label": "Citizens Portal Hotlines",
+          "url": "https://citizensportal.csfp.io/hotlines"
+        }
+      ]
+    },
+    {
+      "classification": "OFFICIALLY_LISTED_NOT_CALL_TESTED",
+      "contact_type": "OFFICE_AND_PUBLIC_SAFETY",
+      "id": "san-fernando-police-station-secondary-hotline",
+      "limitation_note": "Published in official City of San Fernando Police Station social-media posts; not currently listed on the CSFP Citizens Portal hotlines page; both supplied posts are from the same official channel; not independently call-tested.",
+      "number": "0956-820-5255",
+      "operating_scope": "Hours of operation are not established by current evidence. Whether this line supports 24/7 coverage or emergency dispatch is not established by current evidence.",
+      "organization": "City of San Fernando Police Station",
+      "presentation_group": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "public_purpose": "Secondary institutional contact for police and public-safety concerns.",
+      "sources": [
+        {
+          "label": "Official PNP City of San Fernando station post, August 30, 2026",
+          "url": "https://www.facebook.com/pnpcityofsanfernando.pampanga/posts/look-on-august-30-2026-at-about-411-pm-personnel-of-the-city-of-san-fernando-pol/2915540638788786/"
+        },
+        {
+          "label": "Official PNP City of San Fernando station post, September 1, 2026",
+          "url": "https://www.facebook.com/pnpcityofsanfernando.pampanga/posts/look-from-september-1-2026-to-date-at-about-1022-am-pltcol-pearl-joy-c-gollayan-/2918222005187316/"
+        }
+      ]
+    },
+    {
+      "classification": "VERIFIED_INSTITUTIONAL_CONTACT",
+      "contact_type": "EMERGENCY",
+      "id": "san-fernando-fire-station-hotline",
+      "limitation_note": "Published in the BFP Region 3 directory and official City of San Fernando Fire Station social-media channels; not independently call-tested.",
+      "number": "0923-235-9725",
+      "operating_scope": "Hours of operation are not established by current evidence. Whether this line supports 24/7 emergency dispatch is not established by current evidence.",
+      "organization": "City of San Fernando Fire Station, Bureau of Fire Protection (BFP) Region 3",
+      "presentation_group": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
+      "public_purpose": "Contact for fire and related emergency concerns.",
+      "sources": [
+        {
+          "label": "BFP Region 3 directory",
+          "url": "https://region3.bfp.gov.ph/contact-us/"
+        },
+        {
+          "label": "Official BFP emergency post",
+          "url": "https://www.facebook.com/cityofsanfernandofs/posts/1309795631181278/"
+        },
+        {
+          "label": "Official BFP station page",
+          "url": "https://www.facebook.com/cityofsanfernandofs/"
+        }
+      ]
     }
   ],
   "dataset": "government-hotlines",
@@ -138,7 +256,8 @@
     {
       "candidate_ids": [
         "national-911",
-        "cdrrmo-command-center-help-line"
+        "cdrrmo-command-center-help-line",
+        "cdrrmo-safru-mobile-hotline"
       ],
       "group_id": "EMERGENCY_NUMBERS",
       "label": "Emergency numbers"
@@ -154,14 +273,18 @@
     {
       "candidate_ids": [
         "cdrrmo-safru-heroes-hall-office",
-        "cho-hems-heroes-hall-office"
+        "cho-hems-heroes-hall-office",
+        "cposco-traffic-public-safety-hotline",
+        "san-fernando-police-station-primary-hotline",
+        "san-fernando-police-station-secondary-hotline",
+        "san-fernando-fire-station-hotline"
       ],
       "group_id": "RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS",
       "label": "Related emergency-service office contacts"
     }
   ],
   "publication_status": "PUBLICATION_REVIEW_COMPLETE",
-  "record_count": 6,
+  "record_count": 11,
   "route": "/government/hotlines",
   "schema_version": 1
 }

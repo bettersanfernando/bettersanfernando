@@ -22,9 +22,9 @@
       "sha256": "651d9ca8f85dc92fedc5984450a186815a99d42dcf6920d08d578838f140fbf4"
     },
     "government/hotlines.json": {
-      "record_count": 6,
+      "record_count": 11,
       "schema_version": 1,
-      "sha256": "dea8bf7dd36159878a942df1918271a8e9ed0e5fb48ac4195650cb6cda4ba70b"
+      "sha256": "83e7b371817c3d1e9312b6d7bea79554568e82b6867326f15715eb4618425dc0"
     },
     "legislation/executive-orders.json": {
       "record_count": 11,
@@ -105,7 +105,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "1aa58658232d90eac1529b9d4d396fec8a046412",
+  "source_commit": "a3ca703d01567819a1af01c28827c3feefc6f40e",
   "source_data_version": "v0.1.1",
   "sources": [
     {

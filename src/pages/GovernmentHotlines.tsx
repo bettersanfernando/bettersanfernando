@@ -30,6 +30,14 @@ function isPositiveTwentyFourSeven(contact: HotlineContact) {
   return /^24\/7\b/.test(contact.operating_scope);
 }
 
+// The reviewed operating_scope always states its 24/7 claim (if any) as the
+// clause before the first semicolon, e.g. "24/7 for emergency call reception
+// and dispatch only". Deriving the badge text from that clause keeps it
+// accurate per contact instead of hardcoding one contact's wording for all.
+function twentyFourSevenLabel(contact: HotlineContact) {
+  return contact.operating_scope.split(';')[0]?.trim();
+}
+
 function ContactTypeBadge({ contact }: { contact: HotlineContact }) {
   if (contact.contact_type === 'EMERGENCY') {
     return (
@@ -44,6 +52,14 @@ function ContactTypeBadge({ contact }: { contact: HotlineContact }) {
       <span className="inline-flex items-center gap-1.5 rounded-full bg-warning-100 px-2.5 py-1 text-xs font-bold text-warning-900">
         <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
         Listed with the Command Center's emergency lines
+      </span>
+    );
+  }
+  if (contact.contact_type === 'OFFICE_AND_PUBLIC_SAFETY') {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-100 px-2.5 py-1 text-xs font-bold text-primary-800">
+        <ShieldAlert className="h-3.5 w-3.5" aria-hidden="true" />
+        Public-safety contact
       </span>
     );
   }
@@ -71,6 +87,11 @@ function ContactCard({ contact }: { contact: HotlineContact }) {
           >
             {contact.organization}
           </h3>
+          {contact.alternate_official_label && (
+            <p className="mt-0.5 text-xs italic text-gray-500">
+              Also listed as &ldquo;{contact.alternate_official_label}&rdquo;
+            </p>
+          )}
           <p className="mt-1 text-sm leading-relaxed text-gray-700">
             {contact.public_purpose}
           </p>
@@ -97,7 +118,7 @@ function ContactCard({ contact }: { contact: HotlineContact }) {
         )}
         {isPositiveTwentyFourSeven(contact) && (
           <span className="inline-flex items-center gap-1.5 rounded-full bg-success-100 px-2.5 py-1 text-xs font-bold text-success-800">
-            24/7 emergency call reception and dispatch
+            {twentyFourSevenLabel(contact)}
           </span>
         )}
       </div>
@@ -247,9 +268,10 @@ export default function GovernmentHotlines() {
               <p>
                 This is a bounded, publication-reviewed subset of emergency and
                 institutional hotlines, not a complete citywide directory of
-                every City office's contact number. At least one additional
-                CDRRMO mobile contact remains held pending independent
-                second-source corroboration before publication.
+                every City office's contact number. Some additional numbers
+                remain held pending further verification, such as an unresolved
+                landline conflict and a mobile contact that is currently
+                confirmed by only one official publisher.
               </p>
               <p>
                 Barangay-level, personal, and other not-yet-reviewed City office

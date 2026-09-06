@@ -51,12 +51,14 @@ export const HotlineContactSchema = z
       'EMERGENCY',
       'OFFICE',
       'OFFICE_AND_EMERGENCY_LISTED_TOGETHER',
+      'OFFICE_AND_PUBLIC_SAFETY',
     ]),
     operating_scope: NonEmptyString,
     address: NonEmptyString.optional(),
     classification: HotlineClassification,
     presentation_group: HotlinePresentationGroupId,
     limitation_note: NonEmptyString,
+    alternate_official_label: NonEmptyString.optional(),
     sources: z.array(HotlineSourceSchema).min(1),
   })
   .strict();
