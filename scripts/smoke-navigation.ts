@@ -161,6 +161,7 @@ const knownRealDestinations = new Set([
   '/government/offices',
   '/government/contact',
   '/government/hotlines',
+  '/government/barangay-contacts',
   '/legislation/executive-orders',
   '/legislation/ordinances',
   '/legislation',

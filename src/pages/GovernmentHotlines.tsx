@@ -295,6 +295,7 @@ export default function GovernmentHotlines() {
           <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
             {[
               ['/government/contact', 'Government Contact Directory'],
+              ['/government/barangay-contacts', 'Barangay Contacts'],
               ['/government/offices', 'City Offices'],
               ['/services/disaster-preparedness', 'Disaster Preparedness'],
               ['/transparency/sources', 'Published Data Sources'],

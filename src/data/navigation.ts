@@ -41,6 +41,7 @@ const destinationPresentation = {
   resolutions: ['file-check', 'resolutions'],
   officialDocuments: ['file-text', 'officialDocuments'],
   hotlinesContacts: ['phone', 'hotlinesContacts'],
+  barangayContacts: ['users', 'barangayContacts'],
   officialGovernmentLinks: ['external-link', 'officialGovernmentLinks'],
   fullDisclosureReports: ['file-check', 'fullDisclosureReports'],
   disclosureArchive: ['archive', 'disclosureArchive'],
@@ -333,6 +334,11 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.hotlinesContacts',
             href: '/government/hotlines',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.barangayContacts',
+            href: '/government/barangay-contacts',
             kind: 'real',
           },
           {

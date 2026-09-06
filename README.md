@@ -38,18 +38,20 @@ Government inventories. Coverage is progressive: absence from the portal does
 not mean a City service or record does not exist, only that it has not yet
 been verified and reviewed for publication.
 
-| Domain                            | Published count |
-| --------------------------------- | --------------- |
-| Reviewed External service records | 113             |
-| Published service categories      | 6 of 13         |
-| Planned service categories        | 7 of 13         |
-| Project records                   | 239             |
-| Project-evidence records          | 334             |
-| Barangays                         | 35              |
-| City-office directory records     | 44              |
-| Executive orders                  | 11              |
-| Ordinances                        | 6               |
-| Resolutions                       | 0               |
+| Domain                            | Published count               |
+| --------------------------------- | ----------------------------- |
+| Reviewed External service records | 113                           |
+| Published service categories      | 6 of 13                       |
+| Planned service categories        | 7 of 13                       |
+| Project records                   | 239                           |
+| Project-evidence records          | 334                           |
+| Barangays                         | 35                            |
+| City-office directory records     | 44                            |
+| Government Hotlines contacts      | 11                            |
+| Barangay Contacts records         | 324 (35 Secretary, 289 BHERT) |
+| Executive orders                  | 11                            |
+| Ordinances                        | 6                             |
+| Resolutions                       | 0                             |
 
 Published service categories:
 
@@ -61,6 +63,15 @@ Published service categories:
 | Social Welfare        |      14 | `/services/social-welfare`        |
 | PWD Services          |       6 | `/services/pwd-services`          |
 | Health Services       |      59 | `/services/health-services`       |
+
+[`/government/hotlines`](src/pages/GovernmentHotlines.tsx) and
+[`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx)
+are both `PARTIAL`, not `READY`, and are deliberately separate directories:
+Government Hotlines is the citywide emergency/institutional contact list (11
+contacts), while Barangay Contacts is a barangay-scoped Barangay
+Secretary/BHERT directory (324 contacts across all 35 barangays) reproduced
+from official CSFP City Information Office posts, not independently
+call-tested, and never a citywide emergency-dispatch destination.
 
 The remaining 7 service categories (Employment, Livelihood, Education
 Services, Senior Citizens, Infrastructure & Public Works, Agriculture &

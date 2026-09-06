@@ -11,6 +11,7 @@ const DatasetPath = z.enum([
   'directories/city-offices.json',
   'geography/barangays.geojson',
   'geography/city.geojson',
+  'government/barangay-contacts.json',
   'government/hotlines.json',
   'legislation/executive-orders.json',
   'legislation/ordinances.json',

@@ -21,6 +21,11 @@
       "schema_version": 1,
       "sha256": "651d9ca8f85dc92fedc5984450a186815a99d42dcf6920d08d578838f140fbf4"
     },
+    "government/barangay-contacts.json": {
+      "record_count": 324,
+      "schema_version": 1,
+      "sha256": "59ecfb99073510378d6b2f2a30dd4b191bcfdb1f8898594b555b70c632d90dac"
+    },
     "government/hotlines.json": {
       "record_count": 11,
       "schema_version": 1,
@@ -80,7 +85,8 @@
     "data/services/cswdo-pwd-solo-parent-publication-review.json",
     "data/services/city-health-office-freshness-enrichment.json",
     "data/services/city-health-office-publication-review.json",
-    "data/government/hotlines-publication-review.json"
+    "data/government/hotlines-publication-review.json",
+    "data/government/barangay-contacts-publication-review.json"
   ],
   "jurisdiction": {
     "name": "City of San Fernando",
@@ -105,7 +111,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "a3ca703d01567819a1af01c28827c3feefc6f40e",
+  "source_commit": "908565af862d6b1633e86721874e80e3499b0055",
   "source_data_version": "v0.1.1",
   "sources": [
     {

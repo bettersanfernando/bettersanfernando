@@ -131,6 +131,7 @@ support that purpose.
 │   ├── contact
 │   ├── offices
 │   ├── hotlines
+│   ├── barangay-contacts
 │   └── links
 ├── legislation
 │   ├── executive-orders
@@ -229,7 +230,11 @@ itself, a verified executed contract.
 
 Government helps readers understand and contact the institutions of the City
 Government. It owns the government landing page, structure, offices, central
-contact information, hotlines, official links, and access to legislation.
+contact information, citywide hotlines, the barangay-level Barangay
+Secretary/BHERT contact directory, official links, and access to legislation.
+`/government/barangay-contacts` is a separate, barangay-scoped directory from
+`/government/hotlines`; it must never be presented as a citywide
+emergency-dispatch destination.
 
 The Government landing page is a directory hub, not a license to publish an
 unsupported organizational chart, current-official roster, or generic
@@ -291,9 +296,14 @@ ambiguous "spending" value.
 identity, population, urban/rural classification, and geographic boundaries.
 It is distinct from `/statistics/population`, which is comparison-centered.
 
-Named barangay contacts, Barangay Secretaries, and BHERT records are not part
-of the current public export. They must not be added to barangay pages without
-a separate publication and privacy decision followed by a safe export.
+`/barangays` itself remains scoped to PSGC identity, population, classification,
+and geography; it does not embed named contacts. Named Barangay Secretary and
+BHERT (Barangay Health Emergency Response Team) contacts are published
+separately at `/government/barangay-contacts`, following a publication-review
+and privacy decision and a dedicated safe export
+(`government/barangay-contacts.json`). That directory is barangay-scoped, not
+a citywide emergency-dispatch destination — see `/government/hotlines` for
+that purpose.
 
 ### About
 
@@ -532,8 +542,6 @@ The following decisions remain outside this document's settled route model:
 
 - whether all currently listed Services categories remain in scope after
   local service research, and which audience pages warrant separate routes;
-- whether named Barangay Secretaries or BHERT contacts should ever be
-  published, subject to privacy and publication review;
 - whether Financial Transparency begins as document discovery, selected
   aggregate metrics, or both;
 - whether `/statistics/project-spending` should be renamed to reflect the

@@ -105,6 +105,18 @@ second-publisher corroboration; and broader citywide hotline coverage (other
 verified `city-offices.json` emergency contacts) has not yet been folded into
 this page.
 
+`/government/barangay-contacts` shipped as a new canonical route: a
+publication-reviewed, barangay-scoped directory of 324 contacts (35 Barangay
+Secretary, 289 BHERT) across all 35 barangays, reproduced from official CSFP
+City Information Office Facebook directory posts. Missing names (12), missing
+numbers (2), non-standard-length numbers (5), and published landline numbers
+(2) are preserved and shown transparently rather than corrected or hidden. No
+24/7 claim is made for any barangay-level contact, and the page directs
+residents to `/government/hotlines` for citywide emergency dispatch — the two
+pages are deliberately separate directories. It is `PARTIAL`, not `READY`:
+this is an initial batch with no established reverification cadence for
+personnel and number changes.
+
 ### Should wait for more data
 
 | Page                       | Exact READY blocker                                                                                                                                          | Required next work                                                                                                                                                                                           |
@@ -180,11 +192,10 @@ that a government record does not exist.
 
 ### DECISION queue
 
-| Priority | Decision                                                                                                                                                         | Public page(s) unblocked                                                                                                                         |
-| -------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-|        1 | Select the BetterSanFernando contact channel, responsible owner, moderation/abuse process, retention policy, and privacy copy                                    | `/contact`                                                                                                                                       |
-|        2 | Decide whether `/statistics/project-spending` is renamed and narrowed to procurement amounts or waits for an actual-expenditure export                           | `/statistics/project-spending`                                                                                                                   |
-|        3 | Decide whether named barangay secretary or BHERT/person-level contacts should ever be published, with consent, minimization, update, privacy, and takedown rules | Optional future contact features on `/barangays`, `/government/offices`, or `/government/hotlines`; no current READY page depends on publication |
+| Priority | Decision                                                                                                                               | Public page(s) unblocked       |
+| -------: | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+|        1 | Select the BetterSanFernando contact channel, responsible owner, moderation/abuse process, retention policy, and privacy copy          | `/contact`                     |
+|        2 | Decide whether `/statistics/project-spending` is renamed and narrowed to procurement amounts or waits for an actual-expenditure export | `/statistics/project-spending` |
 
 ## Phase 4 — DEFERRED
 
