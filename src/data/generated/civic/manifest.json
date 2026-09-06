@@ -62,9 +62,9 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 127,
+      "record_count": 136,
       "schema_version": 1,
-      "sha256": "fcf60f9bef0d792d063b541e09e0f0b7b3622d829ccc9886c47dab99e951f8a6"
+      "sha256": "ca0c90ec3b7147e51420130a86b6c81ff72022a785cf7a719403560a79400725"
     }
   },
   "export_version": "v0.1.0",
@@ -94,6 +94,8 @@
     "data/services/cippeso-employment-publication-review.json",
     "data/services/cavo-freshness-enrichment.json",
     "data/services/cavo-publication-review.json",
+    "data/services/city-college-freshness-enrichment.json",
+    "data/services/city-college-publication-review.json",
     "data/government/hotlines-publication-review.json",
     "data/government/barangay-contacts-publication-review.json",
     "data/government/official-links-publication-review.json"
@@ -121,7 +123,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "84e009636477cd2bd05499413a308fb62be41d68",
+  "source_commit": "940f77a58bf287ce387e0cb348f6321834f08b2c",
   "source_data_version": "v0.1.1",
   "sources": [
     {

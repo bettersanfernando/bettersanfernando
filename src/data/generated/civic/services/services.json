@@ -8,10 +8,11 @@
     "City Social Welfare and Development Office",
     "City Health Office",
     "City Investment Promotions and Public Employment Services Office",
-    "City Agriculture and Veterinary Office"
+    "City Agriculture and Veterinary Office",
+    "City College of San Fernando Pampanga"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 127,
+  "record_count": 136,
   "schema_version": 1,
   "services": [
     {
@@ -12789,6 +12790,728 @@
       "slug": "request-for-meat-inspection-certificate-mic-and-or-national-meat-and-meat-products-certificate-nmmpic-city-slaughterhouse",
       "title": "Request for Meat Inspection Certificate (MIC) and/or National Meat and Meat Products Certificate (NMMPIC) – City Slaughterhouse",
       "who_may_avail": "Meat dealers and vendors"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Report on the assigned day of examination and present your CET Permit for verification.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Take the examination (IQ and Aptitude Test).",
+          "sequence": "2"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Guidance Office administers the College Entrance Test (CET), which measures a student applicant's learning capacity and College Stanine requirement for admission.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-02",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Guidance Office",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "2 hours and 2 minutes"
+      },
+      "public_notes": [
+        "This test is available only during announced admission/testing schedules. It is not continuously open, and a past test date should not be treated as a current or standing schedule.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "CET Permit (1 original copy)",
+          "where_to_secure": "Office of the Registrar"
+        }
+      ],
+      "slug": "administration-of-college-entrance-test",
+      "title": "Administration of College Entrance Test",
+      "who_may_avail": "Student applicants"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Wait for the schedule of Faculty Evaluation to be announced.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Accomplish the Faculty Evaluation Form sent via the Google Form link provided by Guidance.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Submit your accomplished evaluation.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Wait for the summary of Faculty Evaluation ratings to be prepared and signed.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Receive the Certificate of Evaluation, if issued for your participation.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Guidance Office facilitates student evaluation of faculty members to identify areas of strength and improvement.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-03",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Guidance Office",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 5 mins"
+      },
+      "public_notes": [
+        "Evaluation is conducted only when scheduled by Guidance, once per semester. The Google Form link is sent by Guidance only when an evaluation is scheduled; it is not a standing, always-open application channel, and an old link should not be treated as currently valid.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "Faculty Evaluation Form (via Google Form, supplied by Guidance when evaluation is scheduled)",
+          "where_to_secure": "Guidance Office"
+        }
+      ],
+      "slug": "administration-of-faculty-evaluation",
+      "title": "Administration of Faculty Evaluation",
+      "who_may_avail": "Students"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Report for examination with your endorsement from the College President.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Take the examination.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Guidance Office administers a psychometric pre-employment examination to evaluate faculty applicants' cognitive ability and personality.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-04",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Guidance Office",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 35 mins"
+      },
+      "public_notes": [
+        "This examination is available only to applicants who have been endorsed by the College President, and only during a scheduled recruitment/examination period. This is not an announcement of an open faculty vacancy.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Endorsement from the College President (1 original copy)",
+          "where_to_secure": "Admin Office"
+        }
+      ],
+      "slug": "administration-of-pre-employment-examination",
+      "title": "Administration of Pre-Employment Examination",
+      "who_may_avail": "Teacher/faculty applicants"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "A subject teacher may refer you to the Guidance Counselor using a referral form.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "The referral form is completed and submitted to Guidance.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for a call from the Guidance Counselor.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Report to the Guidance Office for your counseling session.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Guidance Office provides free personal counseling and referral support for enrolled students' psychological and emotional well-being.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-06",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Guidance Office",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour and 17 mins"
+      },
+      "public_notes": [
+        "This service is subject to a subject-teacher referral and to Guidance's scheduling; it is not a standing walk-in or online application. Counseling content is private and is not disclosed in this listing.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "Counseling Referral Slip (1 original copy)",
+          "where_to_secure": "Guidance Office"
+        }
+      ],
+      "slug": "consultation-referral",
+      "title": "Consultation/Referral",
+      "who_may_avail": "Students"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Describe your condition to Clinic staff.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "See the dentist for a dental assessment; vital signs are checked and the dental procedure is scheduled.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Wait for the dental procedure to be completed.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Secure a prescription, if applicable, and receive instructions.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Clinic provides free dental services to bona fide City College students.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-07",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Clinic",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "27 minutes (time may vary depending on the dental services availed)"
+      },
+      "public_notes": [
+        "Availability is subject to Clinic schedule and staffing. Actual processing time varies according to the dental procedure availed (e.g. oral examination, prophylaxis, extraction, or restoration each have different durations).",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "Registration Form / School ID (1 original copy)",
+          "where_to_secure": "Office of the Registrar"
+        }
+      ],
+      "slug": "dental-services",
+      "title": "Dental Services",
+      "who_may_avail": "City College students"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the required documents for your applicant type (Grade 12 student or transferee).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while the Registrar checks and verifies your documents for admission qualification.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Office of the Registrar admits qualified students and maintains their academic records.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-08",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Office of the Registrar",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 mins"
+      },
+      "public_notes": [
+        "No admission application window is currently verified as open. Requirements and steps are shown as the durable Charter procedure; check current CCSFP channels before relying on any specific dated admission period.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": "For Grade 12 students",
+          "ordinal": "1",
+          "text": "Copy of grades, 1st semester",
+          "where_to_secure": "School last attended"
+        },
+        {
+          "condition": "For Grade 12 students",
+          "ordinal": "2",
+          "text": "Copy of Voter's ID / Registration / Certification (student or parents)",
+          "where_to_secure": "COMELEC"
+        },
+        {
+          "condition": "For Grade 12 students",
+          "ordinal": "3",
+          "text": "Copy of latest electric or internet bill, or other proof of billing",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "For Grade 12 students",
+          "ordinal": "4",
+          "text": "Fully accomplished CCSFP Application Form with 1.5x1.5 colored photo",
+          "where_to_secure": "Office of the Registrar"
+        },
+        {
+          "condition": "For transferees",
+          "ordinal": "5",
+          "text": "Copy of Transcript of Records",
+          "where_to_secure": "School last attended"
+        },
+        {
+          "condition": "For transferees",
+          "ordinal": "6",
+          "text": "Copy of Voter's ID / Registration / Certification (student or parents)",
+          "where_to_secure": "COMELEC"
+        },
+        {
+          "condition": "For transferees",
+          "ordinal": "7",
+          "text": "Copy of latest electric or internet bill, or other proof of billing",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "For transferees",
+          "ordinal": "8",
+          "text": "Fully accomplished CCSFP Application Form with 1.5x1.5 colored photo",
+          "where_to_secure": "Office of the Registrar"
+        }
+      ],
+      "slug": "admission",
+      "title": "Admission",
+      "who_may_avail": "Grade 12 students and transferees applying to CCSFP"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Present your ID and duly accomplished and signed clearance.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Receive your copy of final grades.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Office of the Registrar issues copies of grades to ongoing or dropped students, for use in succeeding enrollment or other purposes.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-09",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Office of the Registrar",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "2 mins"
+      },
+      "public_notes": [
+        "Release is subject to completion of grade posting and clearance, and to the applicable semester schedule.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "Completed and signed student clearance (1 original copy)",
+          "where_to_secure": "Office of the Registrar"
+        }
+      ],
+      "slug": "distribution-of-copy-of-grades",
+      "title": "Distribution of Copy of Grades",
+      "who_may_avail": "Students"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Fill out the requisition form; the Library verifies your details.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait for the referral letter and Letter of Appearance to be prepared and released.",
+          "sequence": "2"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Learning Resource Center (LRC) issues a referral letter so students may use other libraries for references not available at CCSFP.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-13",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Learning Resource Center (LRC)",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "4 minutes"
+      },
+      "public_notes": [
+        "Availability is subject to Library hours; use of the referral letter at another institution is also subject to that receiving library's own availability and hours.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Referral Slip / requisition form (1 original copy)",
+          "where_to_secure": "Library"
+        }
+      ],
+      "slug": "issuance-of-referral-letter",
+      "title": "Issuance of Referral Letter",
+      "who_may_avail": "Students"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "education",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Describe your condition to the nurse.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while the nurse checks your vital signs and administers first aid if needed. If your condition is beyond the Clinic's capacity, you will be referred to HEMS.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Report to the Clinic for follow-up, if needed.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City College of San Fernando Pampanga (CCSFP) Clinic, a CHED-mandated student service, provides medical consultation for students, faculty, administration, and staff.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-college-of-san-fernando-pampanga-external-14",
+      "last_verified": "2026-09-06",
+      "office": {
+        "acronym": "CCSFP",
+        "division": "Clinic",
+        "name": "City College of San Fernando Pampanga"
+      },
+      "office_contact": {
+        "emails": [
+          "citycollege@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 961-8957"
+      },
+      "office_hours": {
+        "schedule": "8:00 AM–7:00 PM, Monday–Thursday",
+        "scope": "Published City College main office hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "34 minutes"
+      },
+      "public_notes": [
+        "Availability is subject to Clinic hours, staff availability, triage, and referral needs. No standing online appointment channel is published.",
+        "Fees and processing times are attributed to the 2026 Citizen's Charter, 2nd Edition; they have not been separately reconfirmed by a newer source."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": null,
+          "text": "Registration Form / School ID (1 original copy)",
+          "where_to_secure": "Office of the Registrar"
+        }
+      ],
+      "slug": "medical-consultation",
+      "title": "Medical Consultation",
+      "who_may_avail": "Students, faculty, administration, and staff"
     }
   ]
 }

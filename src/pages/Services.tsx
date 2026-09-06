@@ -39,8 +39,8 @@ const categories = [
   [
     'Education Services',
     'education',
-    'Local education services and support programs.',
-    'planned',
+    'Reviewed City College services and student support procedures.',
+    'published',
   ],
   [
     'Assistance Programs',
@@ -227,6 +227,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   'Reviewed services currently published from the City Investment Promotions and Public Employment Services Office (CIPPESO), also known as the City Public Employment Services Office (CPESO).'}
                 {category === 'agriculture-fisheries' &&
                   "Seven reviewed Citizen's Charter services currently published from the City Agriculture and Veterinary Office (CAVO), covering agriculture, crops, animal health, and meat regulation."}
+                {category === 'education' &&
+                  "Nine publication-reviewed Citizen's Charter services from the City College of San Fernando Pampanga (CCSFP)."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -237,7 +239,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                     ? 'This is a bounded collection of seven reviewed CIPPESO/CPESO procedures, not a complete inventory of City employment programs, current job vacancies, or training-batch schedules.'
                     : category === 'agriculture-fisheries'
                       ? 'This is a bounded collection of seven CAVO agriculture and veterinary procedures. No standalone fisheries Charter service is currently published, and this is not a complete inventory of City agriculture, fisheries, or veterinary programs, current seed/seedling/vaccine stock, or seminar and vaccination schedules.'
-                      : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                      : category === 'education'
+                        ? 'This page does not announce a current admission or enrollment window. Service availability may depend on City College schedules, referrals, clinic staffing, and other published limitations.'
+                        : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

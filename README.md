@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 127                                                    |
-| Published service categories      | 8 of 13                                                |
-| Planned service categories        | 5 of 13                                                |
+| Reviewed External service records | 136                                                    |
+| Published service categories      | 9 of 13                                                |
+| Planned service categories        | 4 of 13                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -66,6 +66,7 @@ Published service categories:
 | Health Services         |      59 | `/services/health-services`       |
 | Employment              |       7 | `/services/employment`            |
 | Agriculture & Fisheries |       7 | `/services/agriculture-fisheries` |
+| Education Services      |       9 | `/services/education`             |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -80,10 +81,11 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-The remaining 5 service categories (Livelihood, Education Services, Senior
-Citizens, Infrastructure & Public Works, Environment) are visible in
+The remaining 4 service categories (Livelihood, Senior Citizens,
+Infrastructure & Public Works, Environment) are visible in
 navigation as planned sections; they do not yet contain published service
-records. Health Services, Employment, and Agriculture & Fisheries are all
+records. Health Services, Employment, Agriculture & Fisheries, and Education
+Services are all
 `PARTIAL`, not `READY`: Health Services' 59 publication-reviewed CHO records,
 Employment's 7 publication-reviewed CIPPESO records, and Agriculture &
 Fisheries' 7 publication-reviewed CAVO records are each a bounded subset of
@@ -95,7 +97,10 @@ standalone fisheries Charter service and no Fish Production Support
 service — the CAVO batch covers agriculture, crops, animal health, and meat
 regulation only; its Poultry Dressing Plant record is scoped to the Meat
 Inspection Certificate (MIC) only, not the National Meat and Meat Products
-Certificate (NMMPIC). Another 128 External services and all 74 Internal
+Certificate (NMMPIC). Education Services publishes nine reviewed City College
+procedures and remains `PARTIAL`; five City College Charter records remain
+held, and no current admission or enrollment window is claimed. Another 119
+External services and all 74 Internal
 services remain unpublished; CHO records external-22 and external-60 remain
 held and are not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full

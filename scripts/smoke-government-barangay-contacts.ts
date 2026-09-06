@@ -239,8 +239,8 @@ assert.equal(
 );
 assert.equal(
   getServices().length,
-  127,
-  'existing services must remain unchanged (113 plus 7 Employment plus 7 Agriculture & Fisheries records)'
+  136,
+  'existing services must remain unchanged (127 plus 9 Education records)'
 );
 
 console.log('[smoke-government-barangay-contacts] OK');

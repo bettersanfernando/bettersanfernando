@@ -48,6 +48,7 @@ const realCategorySlugs = [
   'business',
   'employment',
   'health-services',
+  'education',
   'assistance-programs',
   'social-welfare',
   'pwd-services',
@@ -98,7 +99,8 @@ const cippeso = services.filter(
   service => service.office.acronym === 'CIPPESO'
 );
 const cavo = services.filter(service => service.office.acronym === 'CAVO');
-assert.equal(services.length, 127);
+const ccsfp = services.filter(service => service.office.acronym === 'CCSFP');
+assert.equal(services.length, 136);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -109,11 +111,12 @@ assert.equal(
   7,
   'exactly seven CAVO Agriculture & Fisheries records'
 );
+assert.equal(ccsfp.length, 9, 'exactly nine CCSFP Education records');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 127);
-assert.equal(new Set(services.map(service => service.slug)).size, 127);
+assert.equal(new Set(services.map(service => service.id)).size, 136);
+assert.equal(new Set(services.map(service => service.slug)).size, 136);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -125,7 +128,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 127 service detail routes must resolve through the adapter'
+  'all 136 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -184,6 +187,12 @@ assert.ok(
       `/services/agriculture-fisheries/${service.slug}`
   ),
   'all seven CAVO records must use canonical Agriculture & Fisheries routes'
+);
+assert.ok(
+  ccsfp.every(
+    service => getServiceHref(service) === `/services/education/${service.slug}`
+  ),
+  'all nine CCSFP records must use canonical Education routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -555,6 +564,98 @@ assert.ok(
   'CAVO records must not promote a CAVO-specific online application or appointment channel'
 );
 
+const expectedCcsfpServices = [
+  ['02', 'Administration of College Entrance Test'],
+  ['03', 'Administration of Faculty Evaluation'],
+  ['04', 'Administration of Pre-Employment Examination'],
+  ['06', 'Consultation/Referral'],
+  ['07', 'Dental Services'],
+  ['08', 'Admission'],
+  ['09', 'Distribution of Copy of Grades'],
+  ['13', 'Issuance of Referral Letter'],
+  ['14', 'Medical Consultation'],
+].map(([suffix, title]) => [
+  `charter-2026-2e-city-college-of-san-fernando-pampanga-external-${suffix}`,
+  title,
+]);
+assert.deepEqual(
+  ccsfp.map(service => [service.id, service.title]),
+  expectedCcsfpServices,
+  'Education must contain exactly the nine approved CCSFP ids and titles'
+);
+for (const suffix of ['01', '05', '10', '11', '12']) {
+  assert.ok(
+    !services.some(service =>
+      service.id.endsWith(
+        `city-college-of-san-fernando-pampanga-external-${suffix}`
+      )
+    ),
+    `held CCSFP record external-${suffix} must remain unpublished`
+  );
+}
+for (const title of [
+  'Acceptance of Book Donations',
+  'Borrowing/Returning of Books',
+  'Enrollment',
+  'Issuance of Certifications and Other Credentials',
+  'Issuance of Good Moral Certificate',
+]) {
+  assert.ok(!services.some(service => service.title === title));
+}
+const educationBySlug = new Map(ccsfp.map(service => [service.slug, service]));
+for (const [slug, limitation] of [
+  [
+    'administration-of-college-entrance-test',
+    /announced admission\/testing schedules/i,
+  ],
+  [
+    'administration-of-faculty-evaluation',
+    /once per semester.*not a standing/is,
+  ],
+  [
+    'administration-of-pre-employment-examination',
+    /endorsed.*scheduled recruitment\/examination.*not an announcement/is,
+  ],
+  [
+    'consultation-referral',
+    /subject-teacher referral.*Guidance's scheduling.*private/is,
+  ],
+  ['dental-services', /Clinic schedule and staffing.*varies/is],
+  [
+    'admission',
+    /No admission application window is currently verified as open/i,
+  ],
+  [
+    'distribution-of-copy-of-grades',
+    /grade posting and clearance.*semester schedule/is,
+  ],
+  [
+    'issuance-of-referral-letter',
+    /Library hours.*receiving library's own availability/is,
+  ],
+  [
+    'medical-consultation',
+    /Clinic hours, staff availability, triage, and referral needs/i,
+  ],
+] as const) {
+  const service = educationBySlug.get(slug);
+  assert.ok(service, `expected Education service missing: ${slug}`);
+  assert.match(service.public_notes.join(' '), limitation);
+}
+assert.ok(
+  ccsfp.every(
+    service =>
+      service.forms.length === 0 &&
+      service.online_channels.length === 0 &&
+      service.appointment === null
+  ),
+  'CCSFP records must not publish permanent forms, online channels, or appointments'
+);
+assert.doesNotMatch(
+  JSON.stringify(ccsfp),
+  /AY 2025[–-]2026|admission ongoing|scholarship application deadline|enrollment deadline/i
+);
+
 assert.deepEqual(
   blpd.map(service => service.slug),
   [
@@ -577,11 +678,23 @@ assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
+        services.filter(service => service.office.acronym !== 'CCSFP')
+      )
+    )
+    .digest('hex'),
+  '52ac69f845e42bb2e7e101c62222b829146b0e0de072c68d2d45e2626010c02f',
+  'the previous 127 published service records must remain semantically unchanged'
+);
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
         services.filter(
           service =>
             service.office.acronym !== 'CHO' &&
             service.office.acronym !== 'CIPPESO' &&
-            service.office.acronym !== 'CAVO'
+            service.office.acronym !== 'CAVO' &&
+            service.office.acronym !== 'CCSFP'
         )
       )
     )
@@ -596,7 +709,8 @@ assert.equal(
         services.filter(
           service =>
             service.office.acronym !== 'CIPPESO' &&
-            service.office.acronym !== 'CAVO'
+            service.office.acronym !== 'CAVO' &&
+            service.office.acronym !== 'CCSFP'
         )
       )
     )
@@ -608,7 +722,11 @@ assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CAVO')
+        services.filter(
+          service =>
+            service.office.acronym !== 'CAVO' &&
+            service.office.acronym !== 'CCSFP'
+        )
       )
     )
     .digest('hex'),
@@ -715,5 +833,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 127/127; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); External: 127; published categories: 8/13; planned categories: 5/13'
+  '  routes: 136/136; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); External: 136; published categories: 9/13; planned categories: 4/13'
 );

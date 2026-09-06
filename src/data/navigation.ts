@@ -133,7 +133,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.educationServices',
             href: '/services/education',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

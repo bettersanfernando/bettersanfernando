@@ -167,6 +167,7 @@ export default function ServiceDetail() {
     'social-welfare': 'Social Welfare',
     'pwd-services': 'PWD Services',
     'health-services': 'Health Services',
+    education: 'Education Services',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;
