@@ -174,7 +174,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.infrastructurePublicWorks',
             href: '/services/infrastructure-public-works',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.agriculture',

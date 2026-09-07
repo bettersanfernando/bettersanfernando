@@ -56,6 +56,7 @@ const realCategorySlugs = [
   'social-welfare',
   'senior-citizens',
   'pwd-services',
+  'infrastructure-public-works',
   'agriculture-fisheries',
   'disaster-preparedness',
 ];
@@ -107,7 +108,10 @@ const ccsfp = services.filter(service => service.office.acronym === 'CCSFP');
 const cenro = services.filter(service => service.office.acronym === 'CENRO');
 const ccro = services.filter(service => service.office.acronym === 'CCRO');
 const osca = services.filter(service => service.office.acronym === 'OSCA');
-assert.equal(services.length, 154);
+const cadmino = services.filter(
+  service => service.office.acronym === 'CAdminO'
+);
+assert.equal(services.length, 155);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -122,11 +126,16 @@ assert.equal(ccsfp.length, 9, 'exactly nine CCSFP Education records');
 assert.equal(cenro.length, 1, 'exactly one CENRO Environment record');
 assert.equal(ccro.length, 15, 'exactly fifteen CCRO Civil Registry records');
 assert.equal(osca.length, 2, 'exactly two OSCA Senior Citizens records');
+assert.equal(
+  cadmino.length,
+  1,
+  'exactly one CAdminO Infrastructure & Public Works record'
+);
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 154);
-assert.equal(new Set(services.map(service => service.slug)).size, 154);
+assert.equal(new Set(services.map(service => service.id)).size, 155);
+assert.equal(new Set(services.map(service => service.slug)).size, 155);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -138,7 +147,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 154 service detail routes must resolve through the adapter'
+  'all 155 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -222,6 +231,11 @@ assert.ok(
       getServiceHref(service) === `/services/senior-citizens/${service.slug}`
   ),
   'both OSCA records must use canonical Senior Citizens routes'
+);
+assert.equal(
+  getServiceHref(cadmino[0]),
+  `/services/infrastructure-public-works/${cadmino[0].slug}`,
+  'the CAdminO record must use its canonical Infrastructure & Public Works route'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -899,11 +913,108 @@ assert.doesNotMatch(
   'OSCA records must not expand into unreviewed adjacent OSCA programs as standalone services'
 );
 
+assert.equal(cadmino.length, 1, 'exactly one CAdminO record is published');
+const infrastructure = cadmino[0];
+assert.equal(
+  infrastructure.id,
+  'charter-2026-2e-city-administrators-office-external-02'
+);
+assert.equal(
+  infrastructure.title,
+  'Processing of Complaints/and other Issues Related to the Territorial Jurisdiction of the City of San Fernando, Pampanga (Operations Management Services)'
+);
+assert.ok(
+  infrastructure.office.acronym === 'CAdminO' &&
+    infrastructure.office.name === 'City Administrator’s Office' &&
+    infrastructure.office.division === 'Administrative Services Division',
+  "the Infrastructure & Public Works record must preserve the City Administrator's Office parent relationship"
+);
+assert.deepEqual(
+  [...infrastructure.topics].sort(),
+  [
+    'bridges',
+    'drainage-flooding',
+    'other-city-infrastructure',
+    'public-buildings-facilities',
+    'roads',
+    'streetlights-public-lighting',
+  ],
+  'the Infrastructure & Public Works record must preserve all six reviewed topic aliases'
+);
+assert.ok(
+  infrastructure.topic_limitation_note.length > 0,
+  'the Infrastructure & Public Works record must preserve its topic/jurisdiction limitation note'
+);
+assert.match(
+  infrastructure.topic_limitation_note,
+  /does not establish|ownership|jurisdiction/i,
+  'the topic limitation note must preserve the ownership/jurisdiction disclaimer'
+);
+assert.equal(infrastructure.fee.text, 'None');
+assert.match(
+  infrastructure.processing_time.text,
+  /5 minutes.*11 hours 55 minutes.*12 hours/i,
+  'the processing time must preserve the 5-minute acknowledgment plus 11h55m referral = 12h breakdown'
+);
+assert.match(
+  infrastructure.public_notes.join(' '),
+  /not a repair-completion time/i,
+  'the 12-hour figure must be marked as intake/referral only, not repair completion'
+);
+assert.match(
+  infrastructure.public_notes.join(' '),
+  /inspection, evaluation, funding, procurement, scheduling, resolution, and repair time.*not stated/i,
+  'unstated downstream repair timing must remain explicit'
+);
+assert.match(
+  infrastructure.public_notes.join(' '),
+  /City may route the concern|responsibility depends on who owns or maintains/i,
+  'jurisdiction/ownership limitation must be preserved in public notes'
+);
+assert.equal(
+  infrastructure.forms.length,
+  0,
+  'the Infrastructure & Public Works record must not publish forms'
+);
+assert.equal(
+  infrastructure.online_channels.length,
+  0,
+  'the Infrastructure & Public Works record must not publish online channels'
+);
+assert.equal(infrastructure.appointment, null);
+assert.equal(infrastructure.office_hours, null);
+assert.doesNotMatch(
+  JSON.stringify(infrastructure),
+  /road.repair service|bridge.repair service|drainage.repair service|streetlight.repair service|facility repair service|@cityofsanfernando\.gov\.ph.{0,40}(facebook|messenger)|addressing public|work order|water district|ocbo|cpdco|guaranteed (repair|response)|SLA/i,
+  'the record must not introduce an excluded repair service, alternate channel, or guaranteed SLA'
+);
+assert.doesNotMatch(
+  JSON.stringify(infrastructure),
+  /complainant name|complainant identity|photo attachment|video attachment|property owner|inspection finding|work order number|enforcement record/i,
+  'the record must not expose complaint contents, complainant identity, or internal enforcement records'
+);
+
 assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'OSCA')
+        services.filter(service => service.office.acronym !== 'CAdminO')
+      )
+    )
+    .digest('hex'),
+  'bd1612926008c2c76a19ea4d956d7a442c1f22b47fb52df400805a4831b39883',
+  'the previous 154 published service records must remain semantically unchanged'
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(
+          service =>
+            service.office.acronym !== 'CAdminO' &&
+            service.office.acronym !== 'OSCA'
+        )
       )
     )
     .digest('hex'),
@@ -917,6 +1028,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CCRO'
         )
@@ -933,6 +1045,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CENRO' &&
             service.office.acronym !== 'CCRO'
@@ -968,6 +1081,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
@@ -985,6 +1099,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CHO' &&
             service.office.acronym !== 'CIPPESO' &&
@@ -1005,6 +1120,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CIPPESO' &&
             service.office.acronym !== 'CAVO' &&
@@ -1024,6 +1140,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
@@ -1136,5 +1253,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 154/154; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); External: 154; published categories: 12/14; planned categories: 2/14'
+  '  routes: 155/155; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); External: 155; published categories: 13/14; planned categories: 1/14'
 );

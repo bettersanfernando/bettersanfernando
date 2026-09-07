@@ -22,6 +22,15 @@ import {
 const externalLinkClass =
   'inline-flex items-center gap-1.5 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
 
+const topicLabels: Record<string, string> = {
+  roads: 'Roads',
+  bridges: 'Bridges',
+  'drainage-flooding': 'Drainage / Flooding',
+  'streetlights-public-lighting': 'Streetlights / Public Lighting',
+  'public-buildings-facilities': 'Public Buildings & Facilities',
+  'other-city-infrastructure': 'Other City Infrastructure',
+};
+
 function StatusValue({
   label,
   value,
@@ -171,6 +180,7 @@ export default function ServiceDetail() {
     environment: 'Environment',
     'civil-registry': 'Civil Registry',
     'senior-citizens': 'Senior Citizens',
+    'infrastructure-public-works': 'Infrastructure & Public Works',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;
@@ -218,6 +228,33 @@ export default function ServiceDetail() {
                     <strong>{service.availability.status}</strong> —{' '}
                     {service.availability.scope}
                   </span>
+                </div>
+              )}
+              {'topics' in service && service.topics.length > 0 && (
+                <div className="mt-5">
+                  <p className="text-sm font-semibold text-gray-900">
+                    Issue topics covered by this procedure
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {service.topics.map(topic => (
+                      <li
+                        key={topic}
+                        className="rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-800"
+                      >
+                        {topicLabels[topic] ?? topic}
+                      </li>
+                    ))}
+                  </ul>
+                  {'topic_limitation_note' in service &&
+                    service.topic_limitation_note && (
+                      <div className="mt-3 inline-flex items-start gap-2 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-950">
+                        <ShieldCheck
+                          className="mt-0.5 h-4 w-4 shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span>{service.topic_limitation_note}</span>
+                      </div>
+                    )}
                 </div>
               )}
             </div>

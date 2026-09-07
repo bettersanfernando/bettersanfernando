@@ -142,24 +142,25 @@ canonical `PARTIAL` category pages (see `PAGE-DATA-MATRIX.md`). They are not
 READY pages: each category remains a bounded subset, not complete coverage of
 its office or purpose.
 
-| Batch                   |   Count | Category                        | Route                             |
-| ----------------------- | ------: | ------------------------------- | --------------------------------- |
-| BLPD                    |       8 | Business Services               | `/services/business`              |
-| CDRRMO                  |       7 | Disaster Preparedness           | `/services/disaster-preparedness` |
-| CSWDO Social Assistance |      19 | Assistance Programs             | `/services/assistance-programs`   |
-| CSWDO PWD               |       6 | PWD Services                    | `/services/pwd-services`          |
-| CSWDO Solo Parent       |      14 | Social Welfare                  | `/services/social-welfare`        |
-| CHO                     |      59 | Health Services                 | `/services/health-services`       |
-| CIPPESO                 |       7 | Employment                      | `/services/employment`            |
-| CAVO                    |       7 | Agriculture & Fisheries         | `/services/agriculture-fisheries` |
-| CCSFP                   |       9 | Education Services              | `/services/education`             |
-| CENRO                   |       1 | Environment                     | `/services/environment`           |
-| CCRO                    |      15 | Civil Registry                  | `/services/civil-registry`        |
-| OSCA                    |       2 | Senior Citizens                 | `/services/senior-citizens`       |
-| **Total**               | **154** | **twelve published categories** |                                   |
+| Batch                   |   Count | Category                          | Route                                   |
+| ----------------------- | ------: | --------------------------------- | --------------------------------------- |
+| BLPD                    |       8 | Business Services                 | `/services/business`                    |
+| CDRRMO                  |       7 | Disaster Preparedness             | `/services/disaster-preparedness`       |
+| CSWDO Social Assistance |      19 | Assistance Programs               | `/services/assistance-programs`         |
+| CSWDO PWD               |       6 | PWD Services                      | `/services/pwd-services`                |
+| CSWDO Solo Parent       |      14 | Social Welfare                    | `/services/social-welfare`              |
+| CHO                     |      59 | Health Services                   | `/services/health-services`             |
+| CIPPESO                 |       7 | Employment                        | `/services/employment`                  |
+| CAVO                    |       7 | Agriculture & Fisheries           | `/services/agriculture-fisheries`       |
+| CCSFP                   |       9 | Education Services                | `/services/education`                   |
+| CENRO                   |       1 | Environment                       | `/services/environment`                 |
+| CCRO                    |      15 | Civil Registry                    | `/services/civil-registry`              |
+| OSCA                    |       2 | Senior Citizens                   | `/services/senior-citizens`             |
+| CAdminO                 |       1 | Infrastructure & Public Works     | `/services/infrastructure-public-works` |
+| **Total**               | **155** | **thirteen published categories** |                                         |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-101 External services remain unpublished; the 74 Internal services are outside
+100 External services remain unpublished; the 74 Internal services are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
 CHO records, while external-22 and external-60 remain held and unpublished.
@@ -210,6 +211,24 @@ transfer, damaged-card replacement, and record-update procedures remain
 unverified and unpublished. Adjacent OSCA/national programs (Grocery/Cinema
 booklets, medicine booklets, NCSC Digital NSCID, DSWD Social Pension, and PSA
 certificate issuance) remain outside this bounded pair.
+The published Infrastructure & Public Works page is also `PARTIAL`, not
+`READY`: it contains 1 publication-reviewed CAdminO complaint-intake and
+referral service (Processing of Complaints/and other Issues Related to the
+Territorial Jurisdiction of the City of San Fernando, Pampanga), presented as
+a single bounded procedure covering six issue topics (roads, bridges,
+drainage/flooding, streetlights/public lighting, public buildings/facilities,
+and other City infrastructure) rather than six separate services. Published
+timing covers acknowledgment (5 minutes) plus referral to the concerned Head
+of Office (11 hours 55 minutes), totaling 12 hours for intake and referral
+only; inspection, evaluation, funding, procurement, scheduling, resolution,
+and repair time are not stated and are not published. A topic does not
+establish City ownership or maintenance responsibility — that may belong to
+the City, barangay, Province, DPWH, a subdivision, a utility, or another
+asset owner. No dedicated road/bridge/drainage/streetlight/facility-repair
+service, alternate submission channel (email, phone, Facebook, messaging),
+CIO "Addressing Public Concerns" service, City Engineer internal form/work
+order, Water District service, OCBO/CPDCO service, or repair SLA is
+published or implied.
 
 ## Phase 3 — Private data workstream
 
@@ -218,14 +237,14 @@ versioned allowlisted export are complete.
 
 ### RESEARCH queue
 
-| Priority | Work                                                                                                                                                                                                                                                          | Public page(s) unblocked                                                                                        |
-| -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 154 External services across twelve categories, including OSCA renewal, transfer, damaged-card replacement, and record-update procedures                    | The 2 remaining planned Services categories and broader coverage within the 12 published but PARTIAL categories |
-|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                 | `/government/structure`; later enriches `/government`                                                           |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                          | `/legislation/resolutions`                                                                                      |
-|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                       | Moves `/government/links` from `PARTIAL` to `READY`                                                             |
-|        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                          |
-|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                               | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                      |
+| Priority | Work                                                                                                                                                                                                                                                                                      | Public page(s) unblocked                                                                                      |
+| -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 155 External services across thirteen categories, including OSCA renewal/transfer/damaged-card/record-update procedures and Infrastructure & Public Works repair/maintenance procedures | The 1 remaining planned Services category and broader coverage within the 13 published but PARTIAL categories |
+|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                                             | `/government/structure`; later enriches `/government`                                                         |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                                                      | `/legislation/resolutions`                                                                                    |
+|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                   | Moves `/government/links` from `PARTIAL` to `READY`                                                           |
+|        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                             | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                        |
+|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                           | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                    |
 
 The City Health Office publication batch is implemented as the bounded,
 publication-reviewed set described above. Health Services remains `PARTIAL`.

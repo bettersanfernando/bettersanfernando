@@ -478,6 +478,53 @@ const OscaServiceSchema = z.strictObject({
   requirements: z.array(OscaRequirementSchema).min(1),
 });
 
+const CAdminOServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('infrastructure-public-works'),
+  classification: z.strictObject({
+    complexity: z.literal('Highly Technical'),
+    service_scope: z.literal('External'),
+    transaction_types: z.tuple([z.literal('G2C')]),
+  }),
+  fee: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CAdminO'),
+    division: z.literal('Administrative Services Division'),
+    name: z.literal('City Administrator’s Office'),
+  }),
+  office_contact: z.strictObject({
+    email_use: z.literal('INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL'),
+    emails: z.array(z.email()).min(1),
+    extensions: z.array(NonEmptyString).min(1),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.null(),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(CdrrmoRequirementSchema).min(1),
+  topic_limitation_note: NonEmptyString,
+  topics: z
+    .array(
+      z.enum([
+        'roads',
+        'bridges',
+        'drainage-flooding',
+        'streetlights-public-lighting',
+        'public-buildings-facilities',
+        'other-city-infrastructure',
+      ])
+    )
+    .min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
@@ -489,6 +536,7 @@ const ServiceSchema = z.union([
   CenroServiceSchema,
   CcroServiceSchema,
   OscaServiceSchema,
+  CAdminOServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -509,15 +557,16 @@ const ServicesFileSchema = z
       z.literal('City Environment and Natural Resources Office'),
       z.literal('City Civil Registry Office'),
       z.literal("Office for Senior Citizen's Affairs"),
+      z.literal("City Administrator's Office"),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(154),
+    record_count: z.literal(155),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(154),
+    services: z.array(ServiceSchema).length(155),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 154) {
+      if (new Set(file.services.map(service => service[key])).size !== 155) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -556,6 +605,9 @@ const ServicesFileSchema = z
     const oscaCount = file.services.filter(
       service => service.office.acronym === 'OSCA'
     ).length;
+    const cAdminOCount = file.services.filter(
+      service => service.office.acronym === 'CAdminO'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
@@ -566,12 +618,13 @@ const ServicesFileSchema = z
       ccsfpCount !== 9 ||
       cenroCount !== 1 ||
       ccroCount !== 15 ||
-      oscaCount !== 2
+      oscaCount !== 2 ||
+      cAdminOCount !== 1
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, and 2 OSCA records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, and 1 CAdminO records',
         path: ['services'],
       });
     }
@@ -590,7 +643,8 @@ export type PublishedServiceCategory =
   | 'education'
   | 'environment'
   | 'civil-registry'
-  | 'senior-citizens';
+  | 'senior-citizens'
+  | 'infrastructure-public-works';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -620,6 +674,7 @@ const categoryByAcronym: Record<
   CENRO: 'environment',
   CCRO: 'civil-registry',
   OSCA: 'senior-citizens',
+  CAdminO: 'infrastructure-public-works',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

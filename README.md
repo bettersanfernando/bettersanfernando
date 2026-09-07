@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 154                                                    |
-| Published service categories      | 12 of 14                                               |
-| Planned service categories        | 2 of 14                                                |
+| Reviewed External service records | 155                                                    |
+| Published service categories      | 13 of 14                                               |
+| Planned service categories        | 1 of 14                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -56,20 +56,21 @@ been verified and reviewed for publication.
 
 Published service categories:
 
-| Category                | Records | Route                             |
-| ----------------------- | ------: | --------------------------------- |
-| Business Services       |       8 | `/services/business`              |
-| Disaster Preparedness   |       7 | `/services/disaster-preparedness` |
-| Assistance Programs     |      19 | `/services/assistance-programs`   |
-| Social Welfare          |      14 | `/services/social-welfare`        |
-| PWD Services            |       6 | `/services/pwd-services`          |
-| Health Services         |      59 | `/services/health-services`       |
-| Employment              |       7 | `/services/employment`            |
-| Agriculture & Fisheries |       7 | `/services/agriculture-fisheries` |
-| Education Services      |       9 | `/services/education`             |
-| Environment             |       1 | `/services/environment`           |
-| Civil Registry          |      15 | `/services/civil-registry`        |
-| Senior Citizens         |       2 | `/services/senior-citizens`       |
+| Category                      | Records | Route                                   |
+| ----------------------------- | ------: | --------------------------------------- |
+| Business Services             |       8 | `/services/business`                    |
+| Disaster Preparedness         |       7 | `/services/disaster-preparedness`       |
+| Assistance Programs           |      19 | `/services/assistance-programs`         |
+| Social Welfare                |      14 | `/services/social-welfare`              |
+| PWD Services                  |       6 | `/services/pwd-services`                |
+| Health Services               |      59 | `/services/health-services`             |
+| Employment                    |       7 | `/services/employment`                  |
+| Agriculture & Fisheries       |       7 | `/services/agriculture-fisheries`       |
+| Education Services            |       9 | `/services/education`                   |
+| Environment                   |       1 | `/services/environment`                 |
+| Civil Registry                |      15 | `/services/civil-registry`              |
+| Senior Citizens               |       2 | `/services/senior-citizens`             |
+| Infrastructure & Public Works |       1 | `/services/infrastructure-public-works` |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -84,9 +85,8 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-The remaining 2 service categories (Livelihood and
-Infrastructure & Public Works) are visible in
-navigation as planned sections; they do not yet contain published service
+The remaining 1 service category (Livelihood) is visible in
+navigation as a planned section; it does not yet contain published service
 records. Health Services, Employment, Agriculture & Fisheries, and Education
 Services are all
 `PARTIAL`, not `READY`: Health Services' 59 publication-reviewed CHO records,
@@ -111,9 +111,15 @@ remain held, and PSA, court, NACC/RACCO, and City Health Office responsibilities
 remain separate. Senior Citizens publishes two reviewed OSCA procedures (new
 Senior Citizen ID issuance and lost-card replacement) and remains `PARTIAL`;
 renewal, transfer, damaged-card replacement, and record-update procedures
-remain unverified. Another 101 External services and all 74 Internal
-services remain unpublished; CHO records external-22 and external-60 remain
-held and are not published. See
+remain unverified. Infrastructure & Public Works publishes one reviewed
+City Administrator's Office (CAdminO) complaint-intake and referral
+procedure and remains `PARTIAL`; it covers only the 12-hour intake/referral
+window across six issue topics (roads, bridges, drainage/flooding,
+streetlights, public buildings, and other City infrastructure) — it is not a
+repair service, and inspection, evaluation, funding, scheduling, resolution,
+and repair time are not stated. Another 100 External services and all 74
+Internal services remain unpublished; CHO records external-22 and
+external-60 remain held and are not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
 page-by-page readiness assessment and
 [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is

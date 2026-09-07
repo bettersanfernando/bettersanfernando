@@ -75,8 +75,8 @@ const categories = [
   [
     'Infrastructure & Public Works',
     'infrastructure-public-works',
-    'Resident-facing public-works requests and reporting.',
-    'planned',
+    'Reviewed complaint intake and referral procedure for roads, bridges, drainage, streetlights, and public facilities.',
+    'published',
   ],
   [
     'Agriculture & Fisheries',
@@ -241,6 +241,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "Fifteen publication-reviewed Citizen's Charter services currently published from the City Civil Registry Office (CCRO)."}
                 {category === 'senior-citizens' &&
                   "Two publication-reviewed Citizen's Charter services currently published from the Office for Senior Citizen's Affairs (OSCA), under the City Mayor's Office."}
+                {category === 'infrastructure-public-works' &&
+                  "One publication-reviewed Citizen's Charter complaint-intake and referral procedure currently published from the City Administrator's Office (CAdminO), covering roads, bridges, drainage, streetlights, public buildings, and other City infrastructure concerns."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -259,7 +261,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                             ? 'This is a bounded collection, not a complete inventory. CCRO handles local registration, certification, endorsement, and transmission; PSA documents and annotations, court matters, NACC/RACCO orders, and City Health Office services remain separate processes whose processing time is not included here.'
                             : category === 'senior-citizens'
                               ? 'This is a bounded collection covering only new Senior Citizen ID issuance and lost-card replacement. Renewal, transfer, damaged-card replacement, record updates, and other OSCA programs are not covered here and their current procedures remain unverified.'
-                              : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                              : category === 'infrastructure-public-works'
+                                ? 'This is a single bounded complaint-intake and referral procedure, not a repair service. Filing a complaint does not establish that the City owns or maintains the affected road, bridge, drainage facility, streetlight, or building; inspection, evaluation, funding, scheduling, resolution, and repair time are not stated and are not published here.'
+                                : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

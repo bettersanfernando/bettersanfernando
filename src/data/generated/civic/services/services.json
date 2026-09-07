@@ -12,10 +12,11 @@
     "City College of San Fernando Pampanga",
     "City Environment and Natural Resources Office",
     "City Civil Registry Office",
-    "Office for Senior Citizen's Affairs"
+    "Office for Senior Citizen's Affairs",
+    "City Administrator's Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 154,
+  "record_count": 155,
   "schema_version": 1,
   "services": [
     {
@@ -15272,6 +15273,96 @@
       "slug": "applying-for-the-replacement-of-the-lost-senior-citizens-card",
       "title": "Applying for the Replacement of the Lost Senior Citizen’s Card",
       "who_may_avail": "Senior citizens who reside in the City of San Fernando, Pampanga"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "infrastructure-public-works",
+      "classification": {
+        "complexity": "Highly Technical",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the written communication/letter of complaint in person to the Incoming and Outgoing Receiving Clerk, City Administrator's Office, and have it logged in the client logbook.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "The City Administrator's Office acknowledges and receives the complaint (5 minutes).",
+          "sequence": "2"
+        },
+        {
+          "instruction": "The City Administrator's Office refers the complaint to the concerned Head of Office for appropriate action (11 hours and 55 minutes).",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Administrator's Office - Administrative Services Division receives and logs complaints and other issues related to the territorial jurisdiction of the City of San Fernando, Pampanga, then refers the matter to the concerned Head of Office for appropriate action.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-administrators-office-external-02",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CAdminO",
+        "division": "Administrative Services Division",
+        "name": "City Administrator’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "cadmino@cityofsanfernando.gov.ph"
+        ],
+        "extensions": [
+          "103",
+          "128",
+          "133"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "5 minutes acknowledgment + 11 hours 55 minutes referral = 12 hours (complaint intake and referral only)"
+      },
+      "public_notes": [
+        "Published complaint intake/referral processing: 12 hours. This is not a repair-completion time.",
+        "Actual inspection, evaluation, funding, procurement, scheduling, resolution, and repair time by the concerned office are not stated in the Charter and are not published here.",
+        "The City may route the concern to the appropriate office. Repair responsibility depends on who owns or maintains the affected road, bridge, drainage facility, light, or property. National, provincial, barangay, utility, subdivision, and private assets may be handled by another authority.",
+        "Submit in person to the Incoming and Outgoing Receiving Clerk, City Administrator's Office. No online, email, telephone, or social-media filing channel is published for this service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Written communication/letter of complaint (1 original copy)",
+          "where_to_secure": "Complainant"
+        }
+      ],
+      "slug": "processing-of-complaints-and-other-issues-related-to-the-territorial-jurisdiction-of-the-city-of-san-fernando-pampanga-operations-management-services",
+      "title": "Processing of Complaints/and other Issues Related to the Territorial Jurisdiction of the City of San Fernando, Pampanga (Operations Management Services)",
+      "topic_limitation_note": "The topic does not establish that the City owns or maintains the affected asset. Responsibility depends on ownership and jurisdiction.",
+      "topics": [
+        "roads",
+        "bridges",
+        "drainage-flooding",
+        "streetlights-public-lighting",
+        "public-buildings-facilities",
+        "other-city-infrastructure"
+      ],
+      "who_may_avail": "Fernandino residents within the territorial jurisdiction of the City of San Fernando, Pampanga"
     }
   ]
 }
