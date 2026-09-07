@@ -15,10 +15,12 @@
     "Office for Senior Citizen's Affairs",
     "City Administrator's Office",
     "Office of the City Building Official",
-    "City of San Fernando Water District"
+    "City of San Fernando Water District",
+    "City Assessor's Office",
+    "City Treasurer's Office"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 166,
+  "record_count": 177,
   "schema_version": 1,
   "services": [
     {
@@ -16404,6 +16406,1119 @@
       "slug": "voluntary-disconnection-of-water-service-connection",
       "title": "Voluntary Disconnection of Water Service Connection",
       "who_may_avail": "Active concessionaires"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "File the application and supporting documents at the City Assessor's Office.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the assessed fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to the City Assessor's Office for encoding, approval, and release of the updated Tax Declaration and Notice of Assessment.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office updates its assessment record and tax declaration from one owner to another, based on documentary evidence such as a deed of sale, deed of donation, or extrajudicial settlement.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 100.00 per Real Property Unit (Declaration PHP 50 + Certified True Copy of Tax Declaration PHP 50)"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-01",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 hour per Real Property Unit"
+      },
+      "public_notes": [
+        "This service updates the City's own assessment record and tax declaration. It is not land-title registration and does not replace registering a title with the Registry of Deeds.",
+        "Payment at the City Treasurer's Office is a step within this Assessor service, not a separate Treasurer service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Accomplished application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "One photocopy of the owner's ID (from the Charter's accepted government-issued ID set)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "New Transfer Certificate of Title or certified true copy (original presented, one photocopy submitted)",
+          "where_to_secure": "Registry of Deeds"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Transfer instrument: deed of sale, deed of donation, extrajudicial settlement, affidavit of consolidation with certificate of sale, or other legal ownership evidence",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "Current-year Real Property Tax receipt or clearance",
+          "where_to_secure": "City Treasurer's Office"
+        },
+        {
+          "condition": "When required by BIR",
+          "ordinal": "6",
+          "text": "Certificate Authorizing Registration, when applicable",
+          "where_to_secure": "Bureau of Internal Revenue"
+        }
+      ],
+      "slug": "availing-of-transfer-of-ownership",
+      "title": "Availing of Transfer of Ownership",
+      "who_may_avail": "Real property owners and their authorized representatives, for property within the territorial jurisdiction of the City of San Fernando"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Get a queue number and file the request at the City Assessor's Clients Lounge / Window 22.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to Window 22 for printing, approval, and release of the certificate.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office certifies that a building or machinery assessment has already been cancelled and dropped from the assessment roll because the improvement no longer exists.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 50.00 per page"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-03",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes per certificate"
+      },
+      "public_notes": [
+        "This service requires that a building or machinery assessment has already been cancelled from the assessment roll. It does not itself perform the cancellation."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Government-issued ID (from the Charter's accepted ID set)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "When filed by a representative",
+          "ordinal": "3",
+          "text": "Authorization Letter plus one photocopy of the owner's ID, for an authorized representative",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Current-year Real Property Tax receipt/clearance, or title evidence as applicable",
+          "where_to_secure": "City Treasurer's Office / Registry of Deeds"
+        },
+        {
+          "condition": "For bank/agency verification requests",
+          "ordinal": "5",
+          "text": "Bank/agency request or attestation, for institutional property-verification requests",
+          "where_to_secure": "Requesting bank/agency"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-cancelled-assessment",
+      "title": "Issuance of Certificate of Cancelled Assessment",
+      "who_may_avail": "Real property owners and their authorized representatives"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Get a queue number and file the request at the City Assessor's Clients Lounge / Window 22.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to Window 22 for printing, approval, and release of the certificate.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office issues a certificate listing the real properties declared or registered under an owner's name in the City's assessment records.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 50.00 per page"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-06",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes per certificate"
+      },
+      "public_notes": [
+        "This service publishes only the procedure for requesting the certificate. Actual property holdings, addresses, parcel identifiers, or assessment values are never published or exposed here."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Government-issued ID (from the Charter's accepted ID set)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "When filed by a representative",
+          "ordinal": "3",
+          "text": "Authorization Letter plus one photocopy of the owner's ID, for an authorized representative",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Current-year Real Property Tax receipt/clearance, or title evidence",
+          "where_to_secure": "City Treasurer's Office / Registry of Deeds"
+        },
+        {
+          "condition": "For bank/agency verification requests",
+          "ordinal": "5",
+          "text": "Bank/agency request documentation, for institutional property-verification requests",
+          "where_to_secure": "Requesting bank/agency"
+        }
+      ],
+      "slug": "issuance-of-certificate-of-property-holdings",
+      "title": "Issuance of Certificate of Property Holdings",
+      "who_may_avail": "Real property owners and their authorized representatives"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Get a queue number and file the request at the City Assessor's Clients Lounge / Window 22.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to Window 22 for printing, approval, and release of the certified copy.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office issues a certified true copy of the City's permanent tax-declaration record for land, building, or machinery.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 50.00 per page"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-07",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes per Real Property Unit"
+      },
+      "public_notes": [
+        "The 2026 Charter's printed fee table for this service shows both the Certified True Copy fee and the Owner's Copy fee together. Ordinance No. 2017-033, Article 50 resolves this: Certified True Copy = PHP 50.00 per page, Owner's Copy = PHP 25.00 per page (a separate service, external-08). This service publishes the PHP 50.00 figure with this conflict disclosed, rather than silently picking a value."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Government-issued ID (from the Charter's accepted ID set)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "When filed by a representative",
+          "ordinal": "3",
+          "text": "Authorization Letter plus one photocopy of the owner's ID, for an authorized representative",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Current-year Real Property Tax receipt/clearance, contract of lease if necessary, or title evidence",
+          "where_to_secure": "City Treasurer's Office / Registry of Deeds"
+        },
+        {
+          "condition": "For bank/agency verification requests",
+          "ordinal": "5",
+          "text": "Bank/agency verification documentation, for institutional property-verification requests",
+          "where_to_secure": "Requesting bank/agency"
+        }
+      ],
+      "slug": "issuance-of-certified-true-copy-of-tax-declaration",
+      "title": "Issuance of Certified True Copy of Tax Declaration",
+      "who_may_avail": "Real property owners and their authorized representatives"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Get a queue number and file the request at the City Assessor's Clients Lounge / Window 22.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to Window 22 for printing, approval, and release of the owner's copy.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office issues an owner's copy of the City's permanent tax-declaration record for land, building, or machinery.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 25.00 per page"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-08",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes per Real Property Unit"
+      },
+      "public_notes": [
+        "The 2026 Charter's printed fee table for this service shows both tax-declaration-copy fees together. Ordinance No. 2017-033, Article 50 resolves this: Owner's Copy = PHP 25.00 per page, Certified True Copy = PHP 50.00 per page (a separate service, external-07). This service publishes the PHP 25.00 figure with this conflict disclosed, rather than silently picking a value."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Government-issued ID (from the Charter's accepted ID set)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "When filed by a representative",
+          "ordinal": "3",
+          "text": "Authorization Letter plus one photocopy of the owner's ID, for an authorized representative",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Current-year Real Property Tax receipt/clearance, contract of lease if necessary, or title evidence",
+          "where_to_secure": "City Treasurer's Office / Registry of Deeds"
+        },
+        {
+          "condition": "For bank/agency verification requests",
+          "ordinal": "5",
+          "text": "Bank/agency verification documentation, for institutional property-verification requests",
+          "where_to_secure": "Requesting bank/agency"
+        }
+      ],
+      "slug": "issuance-of-owners-copy-of-tax-declaration",
+      "title": "Issuance of Owner’s Copy of Tax Declaration",
+      "who_may_avail": "Real property owners and their authorized representatives"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "File the application at the City Assessor's Clients Lounge (appraisal/assessment windows).",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the assessed fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to the City Assessor's Office for acknowledgment and inspection scheduling.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "A City Assessor inspector conducts the on-site inspection.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "The City Assessor's Office completes appraisal/assessment evaluation and releases the Tax Declaration and Notice of Assessment.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The City Assessor's Office prepares a new tax declaration for a newly constructed building, or updates the assessment where an existing building has physically changed.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 300.00 within the reglementary period / PHP 400.00 beyond it (inspection PHP 200/300 + declaration PHP 50 + Certified True Copy of Tax Declaration PHP 50)"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-10",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 working days per Real Property Unit (RPU); an additional day per 3 RPUs applies if more than 3 RPUs are transacted; idle time between payment and the scheduled inspection is excluded from this measure"
+      },
+      "public_notes": [
+        "A Building Permit and Occupancy Permit from the Office of the City Building Official (OCBO) are prerequisites/evidence where applicable. The resulting Assessor tax declaration is not a building or occupancy permit and does not replace one.",
+        "No authorized-representative documentary requirement beyond the Charter's own owner-ID requirement is invented for this service."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Owner's government-issued ID",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Current-year Real Property Tax receipt/clearance and title evidence",
+          "where_to_secure": "City Treasurer's Office / Registry of Deeds"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Building plans, if any, and vicinity map, if necessary",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "5",
+          "text": "Building Permit, if applicable",
+          "where_to_secure": "Office of the City Building Official"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "6",
+          "text": "Occupancy Permit, if applicable",
+          "where_to_secure": "Office of the City Building Official"
+        }
+      ],
+      "slug": "securing-assessment-for-declaration-of-buildings",
+      "title": "Securing Assessment for Declaration of Buildings",
+      "who_may_avail": "Real property owners and their authorized representatives, for property within the territorial jurisdiction of the City of San Fernando"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Get a queue number and file the request at the City Assessor's Clients Lounge / Tax Mapping Window 18.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to Window 18 for printing, approval, and release of the certificate.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office issues a certification identifying a property's location based on the City's latest tax-mapping record.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 50.00 per certificate"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-13",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes per certificate"
+      },
+      "public_notes": [
+        "This service and Securing of Certified Tax Map (external-14) are published as two separate services, matching the 2026 Charter's own service boundaries.",
+        "Published using the Charter's more restrictive header eligibility (real property owners and authorized representatives); broader target-client wording elsewhere in the Charter is not published until clarified."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Government-issued ID (from the Charter's accepted ID set)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "When filed by a representative",
+          "ordinal": "3",
+          "text": "Authorization Letter plus one photocopy of the owner's ID, for an authorized representative",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Current-year Real Property Tax receipt/clearance or title evidence",
+          "where_to_secure": "City Treasurer's Office / Registry of Deeds"
+        },
+        {
+          "condition": "For bank/agency verification requests",
+          "ordinal": "5",
+          "text": "Bank/agency verification documentation, for institutional property-verification requests",
+          "where_to_secure": "Requesting bank/agency"
+        }
+      ],
+      "slug": "securing-of-certification-as-per-tax-mapping",
+      "title": "Securing of Certification as per Tax Mapping",
+      "who_may_avail": "Real property owners and their authorized representatives"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Get a queue number and file the request at the City Assessor's Clients Lounge / Window 18.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Pay the fee at the City Treasurer's Land Tax windows and receive the Official Receipt.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Return to Window 18 for printing, approval, and release of the certified tax map.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The City Assessor's Office issues a certified graphical representation of the area/location of a property within a section map.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 200.00 per section map, computer generated"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-assessors-office-external-14",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CASSO",
+        "division": null,
+        "name": "City Assessor’s Office"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "casso@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published City Assessor's Office institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "30 minutes per section map"
+      },
+      "public_notes": [
+        "This service and Securing of Certification as per Tax Mapping (external-13) are published as two separate services, matching the 2026 Charter's own service boundaries.",
+        "Published using the Charter's more restrictive header eligibility (real property owners and authorized representatives); broader target-client wording elsewhere in the Charter is not published until clarified.",
+        "No actual certified tax map, parcel identifier, or section-map example is published here."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Accomplished application form",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "One photocopy of any government-issued ID or Company ID",
+          "where_to_secure": "Applicant"
+        }
+      ],
+      "slug": "securing-of-certified-tax-map",
+      "title": "Securing of Certified Tax Map",
+      "who_may_avail": "Real property owners and their authorized representatives"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2G",
+          "G2B"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Secure a queue number and proceed to Window 33, 34, 35, or 36. Documents are received, evaluated, and verified.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while the tax is computed in the City's revenue-collection system and the real-property-tax bill / RPT Order of Payment (RPTOP) is printed.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Proceed to Window 38, 39, 41, or 42 and pay the corresponding tax.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "The RPTOP is recorded and the Official Receipt is printed and released.",
+          "sequence": "4"
+        }
+      ],
+      "description": "The Real Property Tax Division of the City Treasurer's Office collects the annual real property tax on land, buildings, machinery, and other improvements within the City of San Fernando.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "Assessed Value x 1% x number of years x 2 (Basic RPT + Special Education Fund)"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-treasurers-office-external-10",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CTO",
+        "division": null,
+        "name": "CITY TREASURER’S OFFICE"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "cto@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "Published City Treasurer's Office institutional hours only",
+        "scope": "No specific published hours beyond the general City Hall office schedule were verified for this batch."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "12 minutes"
+      },
+      "public_notes": [
+        "Installment deadlines (March 31, June 30, September 30, December 31), the 10% prompt-payment discount, the advance-payment discounts, and the delinquency-interest rule follow Ordinance No. 2017-033 and are not restated here as a single invented figure beyond what is officially established.",
+        "RPT account inquiry and statement-of-account capability are supporting information within this service; they are not published as a separate service.",
+        "No official online RPT payment channel is currently verified. This service does not publish an online-payment URL."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Proof of last payment (previous tax receipt or clearance)",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "2",
+          "text": "Tax bill or statement of RPT delinquency, if applicable",
+          "where_to_secure": "City Treasurer's Office"
+        },
+        {
+          "condition": "If no record on hand",
+          "ordinal": "3",
+          "text": "Latest Tax Declaration, if the taxpayer has no record on hand",
+          "where_to_secure": "City Assessor's Office"
+        },
+        {
+          "condition": "If no record on hand",
+          "ordinal": "4",
+          "text": "Transfer Certificate of Title, if the taxpayer has no record on hand",
+          "where_to_secure": "Registry of Deeds"
+        }
+      ],
+      "slug": "payment-of-real-property-tax-or-amilyar",
+      "title": "Payment of Real Property Tax or Amilyar",
+      "who_may_avail": "Property owner or duly authorized representative"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2G",
+          "G2B"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the required documents at Window 42. Documents are received and evaluated.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while the transfer tax is computed and the taxpayer is informed of the amount due.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Pay the corresponding tax and receive the Official Receipt.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The Real Property Tax Division of the City Treasurer's Office collects the local transfer tax arising from a sale, donation, barter, or other transfer of real-property ownership or title within the City of San Fernando.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "75% of 1% (0.75%) of the Fair Market Value or Consideration involved, whichever is higher"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-treasurers-office-external-13",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CTO",
+        "division": null,
+        "name": "CITY TREASURER’S OFFICE"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "cto@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "Published City Treasurer's Office institutional hours only",
+        "scope": "No specific published hours beyond the general City Hall office schedule were verified for this batch."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "12 minutes"
+      },
+      "public_notes": [
+        "Ordinance No. 2017-033 sets a statutory 60-day payment deadline from execution of the deed (or from the property owner's death, as applicable), payable by the seller, donor, transferor, executor, or administrator. This deadline is published; no transaction-specific late-penalty formula is published because the available evidence does not establish one cleanly for this tax.",
+        "This service updates evidence used by the Registry of Deeds for title registration and by the City Assessor for cancelling/reissuing the Tax Declaration. It does not itself register a land title or reassess the property.",
+        "No official online transfer-tax payment channel is currently verified. This service does not publish an online-payment URL."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Original copy of Deed of Sale/Donation",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Photocopy of Deed of Sale/Donation",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Latest Tax Declaration",
+          "where_to_secure": "City Assessor's Office / Registry of Deeds / Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Land Tax Clearance",
+          "where_to_secure": "City Treasurer's Office"
+        },
+        {
+          "condition": "If applicable",
+          "ordinal": "5",
+          "text": "Certificate of No Improvement, if applicable",
+          "where_to_secure": "City Assessor's Office"
+        }
+      ],
+      "slug": "payment-of-tax-on-transfer-of-real-property-ownership",
+      "title": "Payment of Tax on Transfer of Real Property Ownership",
+      "who_may_avail": "Property owner or duly authorized representative; statutorily, the seller, donor, transferor, executor, or administrator is responsible for payment"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "property-taxes",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Accomplish the Personal Data Form and submit it at Window 1 or 2. It is received, reviewed, and verified.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Wait while the information is encoded and the tax due is computed.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Pay the corresponding tax and receive the Community Tax Certificate.",
+          "sequence": "3"
+        }
+      ],
+      "description": "The Permits and Licenses Division of the City Treasurer's Office collects individual community tax and issues the Community Tax Certificate (CTC).",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "PHP 5.00 basic tax plus PHP 1.00 for every PHP 1,000.00 of income, subject to the statutory individual additional-tax cap of PHP 5,000.00"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-city-treasurers-office-external-15",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CTO",
+        "division": null,
+        "name": "CITY TREASURER’S OFFICE"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "cto@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "Published City Treasurer's Office institutional hours only",
+        "scope": "No specific published hours beyond the general City Hall office schedule were verified for this batch."
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "7 minutes"
+      },
+      "public_notes": [
+        "The 2026 Charter's frontline wording states the fee as 'PHP 1 for every PHP 1,000 of Salaries.' Ordinance No. 2017-033 establishes a broader statutory basis (income from business, profession, or property, not salaries alone), which this service publishes with the Charter's narrower wording disclosed as a limitation.",
+        "Whether Community Tax Certificates are also issued by deputized barangay treasurers is not published here; no current official list of issuing barangays was verified. Only the City Hall service is published.",
+        "No official online CTC application or payment channel is currently verified. This service does not publish an online-payment URL."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Personal Data Form (PDF)",
+          "where_to_secure": "Public Assistance and Complaints Desk (PACD)"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Identification Card",
+          "where_to_secure": "Any appropriate government agency or company"
+        }
+      ],
+      "slug": "securing-community-tax-certificate-individual",
+      "title": "Securing Community Tax Certificate - Individual",
+      "who_may_avail": "Individual aged 18 years old and above"
     }
   ]
 }

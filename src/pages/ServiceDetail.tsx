@@ -226,6 +226,7 @@ export default function ServiceDetail() {
     'infrastructure-public-works': 'Infrastructure & Public Works',
     'housing-land-use': 'Housing & Land Use',
     'utilities-water': 'Utilities & Water',
+    'property-taxes': 'Property & Taxes',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;

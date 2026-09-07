@@ -95,6 +95,12 @@ const categories = [
     'published',
   ],
   [
+    'Property & Taxes',
+    'property-taxes',
+    'Reviewed City Assessor and City Treasurer property-tax procedures.',
+    'published',
+  ],
+  [
     'Agriculture & Fisheries',
     'agriculture-fisheries',
     'Local CAVO agriculture, crop, animal health, and meat-regulation services.',
@@ -195,6 +201,64 @@ function ServicesHub() {
   );
 }
 
+function ServiceCard({ service }: { service: (typeof services)[number] }) {
+  return (
+    <article className="py-7">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
+        <div className="min-w-0">
+          <h3 className="text-xl font-bold leading-snug text-gray-900 md:text-2xl">
+            <Link
+              to={getServiceHref(service)}
+              className="hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600"
+            >
+              {service.title}
+            </Link>
+          </h3>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
+            {service.description}
+          </p>
+          <p className="mt-3 text-sm text-gray-700">
+            <span className="font-semibold text-gray-900">Who may avail:</span>{' '}
+            {service.who_may_avail}
+          </p>
+        </div>
+        <div className="space-y-3 text-sm text-gray-700">
+          <p className="flex items-start gap-2">
+            <Clock3
+              className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+              aria-hidden="true"
+            />
+            <span>
+              <span className="font-semibold text-gray-900">
+                Processing time:
+              </span>{' '}
+              {service.processing_time.text ??
+                "Not stated in the Citizen's Charter"}
+            </span>
+          </p>
+          <p className="flex items-start gap-2">
+            <FileText
+              className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+              aria-hidden="true"
+            />
+            <span>
+              <span className="font-semibold text-gray-900">Fee:</span>{' '}
+              {service.fee.text ?? "Not stated in the Citizen's Charter"}
+            </span>
+          </p>
+          <Link
+            to={getServiceHref(service)}
+            className="inline-flex font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+            aria-label={`View details for ${service.title}`}
+          >
+            View service details
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
   const [query, setQuery] = useState('');
   const [name] = categories.find(item => item[1] === category)!;
@@ -212,6 +276,15 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
       )
     );
   }, [categoryServices, query]);
+  const assessorServices = useMemo(
+    () =>
+      filteredServices.filter(service => service.office.acronym === 'CASSO'),
+    [filteredServices]
+  );
+  const treasurerServices = useMemo(
+    () => filteredServices.filter(service => service.office.acronym === 'CTO'),
+    [filteredServices]
+  );
 
   return (
     <>
@@ -263,6 +336,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "Two publication-reviewed Citizen's Charter certificate procedures currently published from the Office of the City Building Official (OCBO)."}
                 {category === 'utilities-water' &&
                   "Nine publication-reviewed Citizen's Charter transactions currently published from the City of San Fernando Water District (CSFWD), a distinct Water District organized under Presidential Decree 198 — not a City Government office or City Engineer division."}
+                {category === 'property-taxes' &&
+                  "Eleven publication-reviewed Citizen's Charter records currently published from two offices with distinct responsibilities. The City Assessor's Office handles appraisal, assessment, tax declarations, ownership-record updates, tax mapping, and assessment documents. The City Treasurer's Office handles tax computation, collection, payment records, receipts, transfer tax, RPT/Amilyar, and individual Community Tax Certificates. A Treasurer payment window inside an Assessor procedure does not make that Assessor service Treasurer-owned. Land-title registration remains with the Registry of Deeds/LRA; applicable national tax requirements remain with the BIR; building, occupancy, zoning, and locational responsibilities remain with OCBO and CPDCO."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -287,7 +362,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                                   ? 'This is a bounded collection of two OCBO certificate procedures, not a complete inventory of building, zoning, or land-use services. Building permits, certificates of occupancy, zoning clearances, and other building/zoning transactions remain unpublished pending source clarification. Fees follow the PD 1096 Schedule of Fees and applicable regulatory or ordinance charges; no fixed peso amount is shown, and the physical inspection itself is excluded from the published certificate-processing time.'
                                   : category === 'utilities-water'
                                     ? 'This is a bounded collection of nine CSFWD Charter transactions, not a complete inventory of water-utility services. Service availability applies only within CSFWD/PW-CSF coverage — not every San Fernando barangay or property is served. No universal flat new-connection fee, online payment, online application, or 24/7 hotline or office is published; two separate reconnection procedures and one maintenance procedure covering eight technical subtypes are preserved as reviewed.'
-                                    : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                                    : category === 'property-taxes'
+                                      ? 'This is a bounded collection of eight Assessor and three Treasurer records, not a complete inventory of property or tax procedures. Six additional Assessor services, Market Stall Rental, and a standalone RPT Clearance service remain held pending further review. No online RPT, transfer-tax, or CTC payment/application channel is published, no universal barangay CTC availability is claimed, and no current Schedule of Market Values table is included. RPT account inquiry and statement-of-account information stays integrated within the RPT record as exported, not as a separate service.'
+                                      : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>
@@ -342,68 +419,42 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
           </div>
 
           {filteredServices.length ? (
-            <div className="divide-y divide-gray-200 border-y border-gray-200 bg-white px-5 md:px-7">
-              {filteredServices.map(service => (
-                <article key={service.id} className="py-7">
-                  <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
-                    <div className="min-w-0">
-                      <h3 className="text-xl font-bold leading-snug text-gray-900 md:text-2xl">
-                        <Link
-                          to={getServiceHref(service)}
-                          className="hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600"
-                        >
-                          {service.title}
-                        </Link>
-                      </h3>
-                      <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
-                        {service.description}
-                      </p>
-                      <p className="mt-3 text-sm text-gray-700">
-                        <span className="font-semibold text-gray-900">
-                          Who may avail:
-                        </span>{' '}
-                        {service.who_may_avail}
-                      </p>
-                    </div>
-                    <div className="space-y-3 text-sm text-gray-700">
-                      <p className="flex items-start gap-2">
-                        <Clock3
-                          className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                          aria-hidden="true"
-                        />
-                        <span>
-                          <span className="font-semibold text-gray-900">
-                            Processing time:
-                          </span>{' '}
-                          {service.processing_time.text ??
-                            "Not stated in the Citizen's Charter"}
-                        </span>
-                      </p>
-                      <p className="flex items-start gap-2">
-                        <FileText
-                          className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                          aria-hidden="true"
-                        />
-                        <span>
-                          <span className="font-semibold text-gray-900">
-                            Fee:
-                          </span>{' '}
-                          {service.fee.text ??
-                            "Not stated in the Citizen's Charter"}
-                        </span>
-                      </p>
-                      <Link
-                        to={getServiceHref(service)}
-                        className="inline-flex font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
-                        aria-label={`View details for ${service.title}`}
-                      >
-                        View service details
-                      </Link>
+            category === 'property-taxes' ? (
+              <div className="space-y-10">
+                {assessorServices.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      City Assessor's Office — {assessorServices.length}{' '}
+                      {assessorServices.length === 1 ? 'service' : 'services'}
+                    </h3>
+                    <div className="mt-3 divide-y divide-gray-200 border-y border-gray-200 bg-white px-5 md:px-7">
+                      {assessorServices.map(service => (
+                        <ServiceCard key={service.id} service={service} />
+                      ))}
                     </div>
                   </div>
-                </article>
-              ))}
-            </div>
+                )}
+                {treasurerServices.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      City Treasurer's Office — {treasurerServices.length}{' '}
+                      {treasurerServices.length === 1 ? 'service' : 'services'}
+                    </h3>
+                    <div className="mt-3 divide-y divide-gray-200 border-y border-gray-200 bg-white px-5 md:px-7">
+                      {treasurerServices.map(service => (
+                        <ServiceCard key={service.id} service={service} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-200 border-y border-gray-200 bg-white px-5 md:px-7">
+                {filteredServices.map(service => (
+                  <ServiceCard key={service.id} service={service} />
+                ))}
+              </div>
+            )
           ) : (
             <div className="rounded-xl bg-white px-5 py-10 text-center">
               <h2 className="text-lg font-bold text-gray-900">

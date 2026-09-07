@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 166                                                    |
-| Published service categories      | 15 of 15                                               |
-| Planned service categories        | 0 of 15                                                |
+| Reviewed External service records | 177                                                    |
+| Published service categories      | 16 of 16                                               |
+| Planned service categories        | 0 of 16                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -73,6 +73,7 @@ Published service categories:
 | Infrastructure & Public Works |       1 | `/services/infrastructure-public-works` |
 | Housing & Land Use            |       2 | `/services/housing-land-use`            |
 | Utilities & Water             |       9 | `/services/utilities-water`             |
+| Property & Taxes              |      11 | `/services/property-taxes`              |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -87,7 +88,7 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-All 15 canonical service categories are published; none remain planned. A
+All 16 canonical service categories are published; none remain planned. A
 completed no-export research decision found no unique, permanent,
 publication-ready City service for a standalone Livelihood category, so no
 Livelihood category or page is published; livelihood-related services
@@ -134,7 +135,7 @@ issuance. OCBO's downloadable forms remain temporarily unavailable and no
 online filing channel is published; the institutional email is an inquiries
 -only contact, not a submission channel. Building permits, certificates of
 occupancy, zoning clearances, and other building/zoning transactions remain
-unpublished pending source clarification. Another 98 CSFP External services
+unpublished pending source clarification. Another 87 CSFP External services
 and all 74 CSFP Internal services remain unpublished; CHO records
 external-22 and external-60 remain held and are not published. Utilities &
 Water publishes nine reviewed City of San Fernando Water District (CSFWD)
@@ -148,7 +149,20 @@ Fernando barangay or property. No universal flat new-connection fee, online
 payment, online application, or 24/7 hotline/office is published for
 Utilities & Water; the two reconnection procedures remain separate, and the
 maintenance procedure's eight technical subtypes remain one canonical
-service, not separate pages. See
+service, not separate pages. Property & Taxes publishes eleven reviewed
+records from two offices and remains `PARTIAL`: eight City Assessor's
+Office records (appraisal, assessment, tax declarations, ownership-record
+updates, tax mapping, and assessment documents) and three City Treasurer's
+Office records (RPT/Amilyar, transfer tax, and individual Community Tax
+Certificate). Six additional Assessor records, Market Stall Rental, and a
+standalone RPT Clearance service remain held. Assessor Transfer of
+Ownership updates the City's own assessment record only and does not
+perform land-title registration, which remains with the Registry of
+Deeds/LRA; applicable national tax requirements remain with the BIR; and
+building, occupancy, zoning, and locational responsibilities remain with
+OCBO and CPDCO. No online RPT, transfer-tax, or CTC payment/application
+channel is published, no universal barangay CTC availability is claimed,
+and no current Schedule of Market Values table is included. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
 page-by-page readiness assessment and
 [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is

@@ -43,6 +43,7 @@ const canonicalCategories = [
   'infrastructure-public-works',
   'housing-land-use',
   'utilities-water',
+  'property-taxes',
   'agriculture-fisheries',
   'environment',
   'disaster-preparedness',
@@ -136,7 +137,9 @@ const cadmino = services.filter(
 );
 const ocbo = services.filter(service => service.office.acronym === 'OCBO');
 const csfwd = services.filter(service => service.office.acronym === 'CSFWD');
-assert.equal(services.length, 166);
+const casso = services.filter(service => service.office.acronym === 'CASSO');
+const cto = services.filter(service => service.office.acronym === 'CTO');
+assert.equal(services.length, 177);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -162,11 +165,13 @@ assert.equal(
   9,
   'exactly nine CSFWD Utilities & Water transactions'
 );
+assert.equal(casso.length, 8, 'exactly eight City Assessor records');
+assert.equal(cto.length, 3, 'exactly three City Treasurer records');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 166);
-assert.equal(new Set(services.map(service => service.slug)).size, 166);
+assert.equal(new Set(services.map(service => service.id)).size, 177);
+assert.equal(new Set(services.map(service => service.slug)).size, 177);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -178,7 +183,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 166 service detail routes must resolve through the adapter'
+  'all 177 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -281,6 +286,13 @@ assert.ok(
       getServiceHref(service) === `/services/utilities-water/${service.slug}`
   ),
   'all nine CSFWD records must use canonical Utilities & Water routes'
+);
+assert.ok(
+  [...casso, ...cto].every(
+    service =>
+      getServiceHref(service) === `/services/property-taxes/${service.slug}`
+  ),
+  'all eleven CASSO and CTO records must use canonical Property & Taxes routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -1295,6 +1307,210 @@ assert.ok(
   'every CSFWD fee must be preserved exactly as exported'
 );
 
+assert.equal(casso.length, 8, 'exactly eight CASSO records are published');
+const expectedCassoServices = [
+  ['01', 'Availing of Transfer of Ownership'],
+  ['03', 'Issuance of Certificate of Cancelled Assessment'],
+  ['06', 'Issuance of Certificate of Property Holdings'],
+  ['07', 'Issuance of Certified True Copy of Tax Declaration'],
+  ['08', 'Issuance of Owner’s Copy of Tax Declaration'],
+  ['10', 'Securing Assessment for Declaration of Buildings'],
+  ['13', 'Securing of Certification as per Tax Mapping'],
+  ['14', 'Securing of Certified Tax Map'],
+].map(([suffix, title]) => [
+  `charter-2026-2e-city-assessors-office-external-${suffix}`,
+  title,
+]);
+assert.deepEqual(
+  casso.map(service => [service.id, service.title]),
+  expectedCassoServices,
+  'Property & Taxes must contain exactly the eight approved City Assessor ids and titles'
+);
+assert.equal(cto.length, 3, 'exactly three CTO records are published');
+const expectedCtoServices = [
+  ['10', 'Payment of Real Property Tax or Amilyar'],
+  ['13', 'Payment of Tax on Transfer of Real Property Ownership'],
+  ['15', 'Securing Community Tax Certificate - Individual'],
+].map(([suffix, title]) => [
+  `charter-2026-2e-city-treasurers-office-external-${suffix}`,
+  title,
+]);
+assert.deepEqual(
+  cto.map(service => [service.id, service.title]),
+  expectedCtoServices,
+  'Property & Taxes must contain exactly the three approved City Treasurer ids and titles'
+);
+assert.ok(
+  casso.every(
+    service =>
+      service.office.acronym === 'CASSO' &&
+      service.office.name === 'City Assessor’s Office'
+  ),
+  'CASSO records must preserve the City Assessor’s Office identity'
+);
+assert.ok(
+  cto.every(
+    service =>
+      service.office.acronym === 'CTO' &&
+      service.office.name === 'CITY TREASURER’S OFFICE'
+  ),
+  'CTO records must preserve the City Treasurer’s Office identity'
+);
+
+const transferOfOwnership = casso.find(service => service.id.endsWith('-01'));
+assert.match(
+  transferOfOwnership!.public_notes.join(' '),
+  /not land-title registration.*does not replace registering a title with the Registry of Deeds/i,
+  'Transfer of Ownership must not imply title registration'
+);
+const certifiedTrueCopy = casso.find(service => service.id.endsWith('-07'));
+assert.equal(
+  certifiedTrueCopy!.fee.text,
+  'PHP 50.00 per page',
+  'Certified True Copy of Tax Declaration must preserve its PHP 50/page fee'
+);
+const ownersCopy = casso.find(service => service.id.endsWith('-08'));
+assert.equal(
+  ownersCopy!.fee.text,
+  'PHP 25.00 per page',
+  "Owner's Copy of Tax Declaration must preserve its PHP 25/page fee"
+);
+assert.match(
+  certifiedTrueCopy!.public_notes.join(' '),
+  /Ordinance No\. 2017-033.{0,200}conflict disclosed/is,
+  'Certified True Copy must preserve the disclosed Charter-versus-ordinance fee conflict'
+);
+assert.match(
+  ownersCopy!.public_notes.join(' '),
+  /Ordinance No\. 2017-033.{0,200}conflict disclosed/is,
+  "Owner's Copy must preserve the disclosed Charter-versus-ordinance fee conflict"
+);
+
+const rpt = cto.find(service => service.id.endsWith('-10'));
+assert.equal(
+  rpt!.fee.text,
+  'Assessed Value x 1% x number of years x 2 (Basic RPT + Special Education Fund)',
+  'RPT must preserve its 1% Basic plus 1% SEF fee basis exactly'
+);
+assert.equal(
+  rpt!.processing_time.text,
+  '12 minutes',
+  'RPT must preserve its 12-minute frontline processing time'
+);
+assert.match(
+  rpt!.public_notes.join(' '),
+  /Installment deadlines.*10% prompt-payment discount.*advance-payment discounts.*delinquency-interest rule/is,
+  'RPT must preserve its installment, discount, and delinquency rules exactly as exported'
+);
+assert.match(
+  rpt!.public_notes.join(' '),
+  /No official online RPT payment channel is currently verified/i,
+  'RPT must preserve the no-online-payment-channel disclaimer'
+);
+assert.match(
+  rpt!.public_notes.join(' '),
+  /not published as a separate service/i,
+  'RPT account inquiry/statement-of-account must stay integrated, not a separate service'
+);
+
+const transferTax = cto.find(service => service.id.endsWith('-13'));
+assert.equal(
+  transferTax!.fee.text,
+  '75% of 1% (0.75%) of the Fair Market Value or Consideration involved, whichever is higher',
+  'Transfer tax must preserve its 0.75% basis exactly'
+);
+assert.equal(
+  transferTax!.processing_time.text,
+  '12 minutes',
+  'Transfer tax must preserve its 12-minute processing time'
+);
+assert.match(
+  transferTax!.public_notes.join(' '),
+  /statutory 60-day payment deadline/i,
+  'Transfer tax must preserve the verified 60-day deadline'
+);
+assert.match(
+  transferTax!.public_notes.join(' '),
+  /no transaction-specific late-penalty formula is published because the available evidence does not establish one/i,
+  'Transfer tax must not invent a late-penalty formula'
+);
+assert.match(
+  transferTax!.public_notes.join(' '),
+  /does not itself register a land title/i,
+  'Transfer tax must not imply it performs title registration'
+);
+
+const individualCtc = cto.find(service => service.id.endsWith('-15'));
+assert.match(
+  individualCtc!.public_notes.join(' '),
+  /2026 Charter's frontline wording states the fee as.*Ordinance No\. 2017-033 establishes a broader statutory basis/is,
+  'Individual CTC must preserve the Charter-process-versus-Revenue-Code distinction'
+);
+assert.match(
+  individualCtc!.public_notes.join(' '),
+  /no current official list of issuing barangays was verified/i,
+  'Individual CTC must not claim universal barangay availability'
+);
+
+assert.doesNotMatch(
+  JSON.stringify([...casso, ...cto]),
+  /online (payment|application) channel is (verified|confirmed|available)/i,
+  'Property & Taxes records must not affirmatively claim an online RPT, transfer-tax, or CTC payment/application channel'
+);
+assert.ok(
+  [rpt, transferTax, individualCtc].every(service =>
+    service!.public_notes.some(note => /no official online/i.test(note))
+  ),
+  'RPT, transfer tax, and Individual CTC must each preserve their no-online-channel disclaimer'
+);
+assert.doesNotMatch(
+  JSON.stringify([...casso, ...cto]),
+  /schedule of market values|smv table/i,
+  'no current Schedule of Market Values table may be published'
+);
+
+const heldPropertyTaxTitles = [
+  'Market Stall Rental',
+  'Business Community Tax Certificate',
+];
+for (const title of heldPropertyTaxTitles) {
+  assert.ok(
+    !services.some(service => service.title === title),
+    `held/excluded Property & Taxes record must remain unpublished: ${title}`
+  );
+}
+assert.ok(
+  !services.some(service => /^RPT Clearance$/i.test(service.title)),
+  'no standalone RPT Clearance service may be published'
+);
+assert.ok(
+  !services.some(service =>
+    /RPT (account inquiry|statement.of.account)/i.test(service.title)
+  ),
+  'no separate RPT account-inquiry or Statement-of-Account service may exist'
+);
+assert.doesNotMatch(
+  JSON.stringify([...casso, ...cto].map(service => service.title)),
+  /calesa|tricycle|tri-wheeler/i,
+  'no calesa, tricycle, or tri-wheeler permit may appear in Property & Taxes'
+);
+assert.doesNotMatch(
+  JSON.stringify([...casso, ...cto]),
+  /taxpayer name|property address|title number|tax declaration number|parcel number|account number|receipt number|payment reference|deed (upload|attachment)|signature captured|payment credential/i,
+  'Property & Taxes records must not display or invent private taxpayer, property, or payment data'
+);
+
+const propertyTaxesNavigation = mainNavigation
+  .flatMap(item => item.sections ?? [])
+  .flatMap(section => section.items);
+assert.equal(
+  propertyTaxesNavigation.filter(
+    item => item.href === '/services/property-taxes'
+  ).length,
+  1,
+  'navigation must contain exactly one Property & Taxes destination'
+);
+
 const utilitiesWaterResources = getUtilitiesWaterResources();
 assert.equal(
   utilitiesWaterResources.length,
@@ -1348,7 +1564,28 @@ assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CSFWD')
+        services.filter(
+          service =>
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
+        )
+      )
+    )
+    .digest('hex'),
+  '85d32ee7845093baf69c4afedd2a72c0ce82f9d4f862fa3fad4c294994062b70',
+  'the previous 166 published service records must remain semantically unchanged'
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(
+          service =>
+            service.office.acronym !== 'CSFWD' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
+        )
       )
     )
     .digest('hex'),
@@ -1363,7 +1600,9 @@ assert.equal(
         services.filter(
           service =>
             service.office.acronym !== 'CSFWD' &&
-            service.office.acronym !== 'OCBO'
+            service.office.acronym !== 'OCBO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1380,7 +1619,9 @@ assert.equal(
           service =>
             service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
-            service.office.acronym !== 'CAdminO'
+            service.office.acronym !== 'CAdminO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1398,7 +1639,9 @@ assert.equal(
             service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
-            service.office.acronym !== 'OSCA'
+            service.office.acronym !== 'OSCA' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1417,7 +1660,9 @@ assert.equal(
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
-            service.office.acronym !== 'CCRO'
+            service.office.acronym !== 'CCRO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1437,7 +1682,9 @@ assert.equal(
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CENRO' &&
-            service.office.acronym !== 'CCRO'
+            service.office.acronym !== 'CCRO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1476,7 +1723,9 @@ assert.equal(
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
-            service.office.acronym !== 'CCRO'
+            service.office.acronym !== 'CCRO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1499,7 +1748,9 @@ assert.equal(
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
-            service.office.acronym !== 'CCRO'
+            service.office.acronym !== 'CCRO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1521,7 +1772,9 @@ assert.equal(
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
-            service.office.acronym !== 'CCRO'
+            service.office.acronym !== 'CCRO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1542,7 +1795,9 @@ assert.equal(
             service.office.acronym !== 'CAVO' &&
             service.office.acronym !== 'CCSFP' &&
             service.office.acronym !== 'CENRO' &&
-            service.office.acronym !== 'CCRO'
+            service.office.acronym !== 'CCRO' &&
+            service.office.acronym !== 'CASSO' &&
+            service.office.acronym !== 'CTO'
         )
       )
     )
@@ -1650,5 +1905,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 166/166; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); CSFWD: 9 (Utilities & Water: 9); External: 166; published categories: 15/15; planned categories: 0/15'
+  '  routes: 177/177; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); CSFWD: 9 (Utilities & Water: 9); CASSO: 8, CTO: 3 (Property & Taxes: 11); External: 177; published categories: 16/16; planned categories: 0/16'
 );

@@ -141,6 +141,7 @@ const knownRealDestinations = new Set([
   '/services/infrastructure-public-works',
   '/services/housing-land-use',
   '/services/utilities-water',
+  '/services/property-taxes',
   '/services/agriculture-fisheries',
   '/services/education',
   '/services/environment',

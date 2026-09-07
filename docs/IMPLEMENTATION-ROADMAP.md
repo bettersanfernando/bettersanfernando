@@ -159,10 +159,12 @@ its office or purpose.
 | CAdminO                 |       1 | Infrastructure & Public Works    | `/services/infrastructure-public-works` |
 | OCBO                    |       2 | Housing & Land Use               | `/services/housing-land-use`            |
 | CSFWD                   |       9 | Utilities & Water                | `/services/utilities-water`             |
-| **Total**               | **166** | **fifteen published categories** |                                         |
+| CASSO                   |       8 | Property & Taxes                 | `/services/property-taxes`              |
+| CTO                     |       3 | Property & Taxes                 | `/services/property-taxes`              |
+| **Total**               | **177** | **sixteen published categories** |                                         |
 
 Of the canonical CSFP Citizen's Charter's 329 services (255 External, 74
-Internal), 98 External services remain unpublished; the 74 Internal services
+Internal), 87 External services remain unpublished; the 74 Internal services
 are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
@@ -277,6 +279,34 @@ one canonical service, not separate service pages. No septage/desludging
 service, PWD/lifeline discount, named third-party payment partner, or
 unauthenticated Facebook link is published; the Charter-named Facebook page
 is explicitly noted as unconfirmed and withheld.
+The published Property & Taxes page is also `PARTIAL`, not `READY`: it
+contains 11 publication-reviewed records from two offices with distinct
+responsibilities — 8 City Assessor's Office records (Availing of Transfer
+of Ownership, Issuance of Certificate of Cancelled Assessment, Issuance of
+Certificate of Property Holdings, Issuance of Certified True Copy of Tax
+Declaration, Issuance of Owner's Copy of Tax Declaration, Securing
+Assessment for Declaration of Buildings, Securing of Certification as per
+Tax Mapping, and Securing of Certified Tax Map) and 3 City Treasurer's
+Office records (Payment of Real Property Tax or Amilyar, Payment of Tax on
+Transfer of Real Property Ownership, and Securing Community Tax Certificate
+– Individual). The City Assessor's Office handles appraisal, assessment,
+tax declarations, ownership-record updates, tax mapping, and assessment
+documents; the City Treasurer's Office handles tax computation, collection,
+payment records, receipts, transfer tax, RPT/Amilyar, and individual
+Community Tax Certificates. A Treasurer payment window inside an Assessor
+procedure does not make that Assessor service Treasurer-owned. Land-title
+registration remains with the Registry of Deeds/LRA; applicable national
+tax requirements remain with the BIR; building, occupancy, zoning, and
+locational responsibilities remain with OCBO and CPDCO. Six additional
+Assessor records, Market Stall Rental, a standalone RPT Clearance service,
+Business Community Tax Certificate, Assessor/OCBO/BLPD/CCRO cashiering
+legs, calesa/tricycle/tri-wheeler permits, and other business
+certifications and out-of-category collections remain held or excluded. No
+online RPT, transfer-tax, or CTC payment/application channel is published,
+no universal barangay CTC availability is claimed, and no current Schedule
+of Market Values table is included; RPT account inquiry and
+statement-of-account information stay integrated within the RPT record as
+exported, not as a separate service.
 Livelihood research is complete and closed with a no-export decision: no
 unique, permanent, publication-ready City service was verified for a
 standalone Livelihood category, so no Livelihood category or page is
@@ -290,7 +320,7 @@ Production/IEC Seminar), and Environment (Sale of Compost Fertilizer) — with
 no duplication. Investment Incentive assistance, TVI Accreditation, DILP
 distributions/starter-kit awards, Kayabe Ka/King Kabiayan, job fairs and
 training announcements, and DOLE/DSWD/DTI/TESDA national programs remain
-excluded as CSFP-owned services. All 15 canonical Services categories are now
+excluded as CSFP-owned services. All 16 canonical Services categories are now
 published; zero planned service-category placeholders remain.
 
 ## Phase 3 — Private data workstream
@@ -300,14 +330,14 @@ versioned allowlisted export are complete.
 
 ### RESEARCH queue
 
-| Priority | Work                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Public page(s) unblocked                                        |
-| -------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 157 CSFP External services across fourteen CSFP-owned categories, including OSCA renewal/transfer/damaged-card/record-update procedures, Infrastructure & Public Works repair/maintenance procedures, and Housing & Land Use building-permit/occupancy/zoning transactions; separately, continue verifying additional CSFWD Charter procedures beyond the nine published Utilities & Water transactions | Broader coverage within the 15 published but PARTIAL categories |
-|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                                                                                                                                                                                                                                                             | `/government/structure`; later enriches `/government`           |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                                                                                                                                                                                                                                                                      | `/legislation/resolutions`                                      |
-|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                                                                                                                                                                                                                                   | Moves `/government/links` from `PARTIAL` to `READY`             |
-|        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                                                                                                                                                                                                                                             | Moves `/government/hotlines` from `PARTIAL` to `READY`          |
-|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                                                                                                                                                                                                                                           | Moves `/statistics/demographics` from `PARTIAL` to `READY`      |
+| Priority | Work                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Public page(s) unblocked                                        |
+| -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 168 CSFP External services across fifteen CSFP-owned categories, including OSCA renewal/transfer/damaged-card/record-update procedures, Infrastructure & Public Works repair/maintenance procedures, Housing & Land Use building-permit/occupancy/zoning transactions, and the six held Property & Taxes Assessor records, Market Stall Rental, and standalone RPT Clearance; separately, continue verifying additional CSFWD Charter procedures beyond the nine published Utilities & Water transactions | Broader coverage within the 16 published but PARTIAL categories |
+|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `/government/structure`; later enriches `/government`           |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `/legislation/resolutions`                                      |
+|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Moves `/government/links` from `PARTIAL` to `READY`             |
+|        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                                                                                                                                                                                                                                                                                                                                               | Moves `/government/hotlines` from `PARTIAL` to `READY`          |
+|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Moves `/statistics/demographics` from `PARTIAL` to `READY`      |
 
 The City Health Office publication batch is implemented as the bounded,
 publication-reviewed set described above. Health Services remains `PARTIAL`.

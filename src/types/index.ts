@@ -44,6 +44,7 @@ export type NavigationIcon =
   | 'map'
   | 'network'
   | 'phone'
+  | 'receipt'
   | 'scale'
   | 'search'
   | 'shield-check'

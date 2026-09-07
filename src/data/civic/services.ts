@@ -605,6 +605,80 @@ const CsfwdServiceSchema = z.strictObject({
   variants: z.array(CsfwdVariantSchema).min(1).optional(),
 });
 
+const CassoServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('property-taxes'),
+  classification: z.strictObject({
+    complexity: z.null(),
+    service_scope: z.literal('External'),
+    transaction_types: z.array(z.enum(['G2C', 'G2B', 'G2G'])).min(1),
+  }),
+  fee: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CASSO'),
+    division: z.null(),
+    name: z.literal('City Assessor’s Office'),
+  }),
+  office_contact: z.strictObject({
+    email_use: z.literal('INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL'),
+    emails: z.array(z.email()).min(1),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.strictObject({
+    schedule: NonEmptyString,
+    scope: z.literal(
+      "Published City Assessor's Office institutional page hours only"
+    ),
+  }),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(BlpdRequirementSchema).min(1),
+});
+
+const CtoServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('property-taxes'),
+  classification: z.strictObject({
+    complexity: z.literal('Simple'),
+    service_scope: z.literal('External'),
+    transaction_types: z.array(z.enum(['G2C', 'G2B', 'G2G'])).min(1),
+  }),
+  fee: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CTO'),
+    division: z.null(),
+    name: z.literal('CITY TREASURER’S OFFICE'),
+  }),
+  office_contact: z.strictObject({
+    email_use: z.literal('INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL'),
+    emails: z.array(z.email()).min(1),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.strictObject({
+    schedule: NonEmptyString,
+    scope: NonEmptyString,
+  }),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(BlpdRequirementSchema).min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
@@ -619,6 +693,8 @@ const ServiceSchema = z.union([
   CAdminOServiceSchema,
   OcboServiceSchema,
   CsfwdServiceSchema,
+  CassoServiceSchema,
+  CtoServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -642,15 +718,17 @@ const ServicesFileSchema = z
       z.literal("City Administrator's Office"),
       z.literal('Office of the City Building Official'),
       z.literal('City of San Fernando Water District'),
+      z.literal("City Assessor's Office"),
+      z.literal("City Treasurer's Office"),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(166),
+    record_count: z.literal(177),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(166),
+    services: z.array(ServiceSchema).length(177),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 166) {
+      if (new Set(file.services.map(service => service[key])).size !== 177) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -698,6 +776,12 @@ const ServicesFileSchema = z
     const csfwdCount = file.services.filter(
       service => service.office.acronym === 'CSFWD'
     ).length;
+    const cassoCount = file.services.filter(
+      service => service.office.acronym === 'CASSO'
+    ).length;
+    const ctoCount = file.services.filter(
+      service => service.office.acronym === 'CTO'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
@@ -711,12 +795,14 @@ const ServicesFileSchema = z
       oscaCount !== 2 ||
       cAdminOCount !== 1 ||
       ocboCount !== 2 ||
-      csfwdCount !== 9
+      csfwdCount !== 9 ||
+      cassoCount !== 8 ||
+      ctoCount !== 3
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, 1 CAdminO, 2 OCBO, and 9 CSFWD records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, 1 CAdminO, 2 OCBO, 9 CSFWD, 8 CASSO, and 3 CTO records',
         path: ['services'],
       });
     }
@@ -738,7 +824,8 @@ export type PublishedServiceCategory =
   | 'senior-citizens'
   | 'infrastructure-public-works'
   | 'housing-land-use'
-  | 'utilities-water';
+  | 'utilities-water'
+  | 'property-taxes';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -771,6 +858,8 @@ const categoryByAcronym: Record<
   CAdminO: 'infrastructure-public-works',
   OCBO: 'housing-land-use',
   CSFWD: 'utilities-water',
+  CASSO: 'property-taxes',
+  CTO: 'property-taxes',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed
