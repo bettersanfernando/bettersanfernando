@@ -79,6 +79,12 @@ const categories = [
     'published',
   ],
   [
+    'Housing & Land Use',
+    'housing-land-use',
+    'Reviewed OCBO annual inspection, operation, and electrical-completion certificate procedures.',
+    'published',
+  ],
+  [
     'Agriculture & Fisheries',
     'agriculture-fisheries',
     'Local CAVO agriculture, crop, animal health, and meat-regulation services.',
@@ -243,6 +249,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "Two publication-reviewed Citizen's Charter services currently published from the Office for Senior Citizen's Affairs (OSCA), under the City Mayor's Office."}
                 {category === 'infrastructure-public-works' &&
                   "One publication-reviewed Citizen's Charter complaint-intake and referral procedure currently published from the City Administrator's Office (CAdminO), covering roads, bridges, drainage, streetlights, public buildings, and other City infrastructure concerns."}
+                {category === 'housing-land-use' &&
+                  "Two publication-reviewed Citizen's Charter certificate procedures currently published from the Office of the City Building Official (OCBO)."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -263,7 +271,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                               ? 'This is a bounded collection covering only new Senior Citizen ID issuance and lost-card replacement. Renewal, transfer, damaged-card replacement, record updates, and other OSCA programs are not covered here and their current procedures remain unverified.'
                               : category === 'infrastructure-public-works'
                                 ? 'This is a single bounded complaint-intake and referral procedure, not a repair service. Filing a complaint does not establish that the City owns or maintains the affected road, bridge, drainage facility, streetlight, or building; inspection, evaluation, funding, scheduling, resolution, and repair time are not stated and are not published here.'
-                                : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                                : category === 'housing-land-use'
+                                  ? 'This is a bounded collection of two OCBO certificate procedures, not a complete inventory of building, zoning, or land-use services. Building permits, certificates of occupancy, zoning clearances, and other building/zoning transactions remain unpublished pending source clarification. Fees follow the PD 1096 Schedule of Fees and applicable regulatory or ordinance charges; no fixed peso amount is shown, and the physical inspection itself is excluded from the published certificate-processing time.'
+                                  : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>

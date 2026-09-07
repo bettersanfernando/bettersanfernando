@@ -18,6 +18,7 @@ const destinationPresentation = {
   pwdServices: ['accessibility', 'pwdServices'],
   hotlines: ['phone', 'hotlines'],
   infrastructurePublicWorks: ['construction', 'infrastructurePublicWorks'],
+  housingLandUse: ['building', 'housingLandUse'],
   agriculture: ['wheat', 'agriculture'],
   environment: ['leaf', 'environment'],
   civilRegistry: ['file-text', 'civilRegistry'],
@@ -174,6 +175,11 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.infrastructurePublicWorks',
             href: '/services/infrastructure-public-works',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.housingLandUse',
+            href: '/services/housing-land-use',
             kind: 'real',
           },
           {

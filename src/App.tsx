@@ -125,6 +125,10 @@ function App() {
                     }
                   />
                   <Route
+                    path="/services/housing-land-use"
+                    element={<Services category="housing-land-use" />}
+                  />
+                  <Route
                     path="/services/:category/:serviceSlug"
                     element={<ServiceDetail />}
                   />

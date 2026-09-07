@@ -525,6 +525,42 @@ const CAdminOServiceSchema = z.strictObject({
     .min(1),
 });
 
+const OcboServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('housing-land-use'),
+  classification: z.strictObject({
+    complexity: z.literal('Simple'),
+    service_scope: z.literal('External'),
+    transaction_types: z.array(z.enum(['G2C', 'G2B', 'G2G'])).min(1),
+  }),
+  fee: z.strictObject({
+    status: z.literal('refer_to_charter'),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('OCBO'),
+    division: z.null(),
+    name: z.literal('Office of the City Building Official'),
+  }),
+  office_contact: z.strictObject({
+    email_use: z.literal('INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL'),
+    emails: z.array(z.email()).min(1),
+    phone: NonEmptyString,
+  }),
+  office_hours: z.strictObject({
+    schedule: NonEmptyString,
+    scope: z.literal('Published OCBO institutional page hours only'),
+  }),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(BlpdRequirementSchema).min(1),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
@@ -537,6 +573,7 @@ const ServiceSchema = z.union([
   CcroServiceSchema,
   OscaServiceSchema,
   CAdminOServiceSchema,
+  OcboServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -558,15 +595,16 @@ const ServicesFileSchema = z
       z.literal('City Civil Registry Office'),
       z.literal("Office for Senior Citizen's Affairs"),
       z.literal("City Administrator's Office"),
+      z.literal('Office of the City Building Official'),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(155),
+    record_count: z.literal(157),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(155),
+    services: z.array(ServiceSchema).length(157),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 155) {
+      if (new Set(file.services.map(service => service[key])).size !== 157) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -608,6 +646,9 @@ const ServicesFileSchema = z
     const cAdminOCount = file.services.filter(
       service => service.office.acronym === 'CAdminO'
     ).length;
+    const ocboCount = file.services.filter(
+      service => service.office.acronym === 'OCBO'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
@@ -619,12 +660,13 @@ const ServicesFileSchema = z
       cenroCount !== 1 ||
       ccroCount !== 15 ||
       oscaCount !== 2 ||
-      cAdminOCount !== 1
+      cAdminOCount !== 1 ||
+      ocboCount !== 2
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, and 1 CAdminO records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, 1 CAdminO, and 2 OCBO records',
         path: ['services'],
       });
     }
@@ -644,7 +686,8 @@ export type PublishedServiceCategory =
   | 'environment'
   | 'civil-registry'
   | 'senior-citizens'
-  | 'infrastructure-public-works';
+  | 'infrastructure-public-works'
+  | 'housing-land-use';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -675,6 +718,7 @@ const categoryByAcronym: Record<
   CCRO: 'civil-registry',
   OSCA: 'senior-citizens',
   CAdminO: 'infrastructure-public-works',
+  OCBO: 'housing-land-use',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

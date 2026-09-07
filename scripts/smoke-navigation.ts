@@ -140,6 +140,7 @@ const knownRealDestinations = new Set([
   '/services/senior-citizens',
   '/services/pwd-services',
   '/services/infrastructure-public-works',
+  '/services/housing-land-use',
   '/services/agriculture-fisheries',
   '/services/education',
   '/services/environment',

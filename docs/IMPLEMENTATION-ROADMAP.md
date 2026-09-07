@@ -157,10 +157,11 @@ its office or purpose.
 | CCRO                    |      15 | Civil Registry                    | `/services/civil-registry`              |
 | OSCA                    |       2 | Senior Citizens                   | `/services/senior-citizens`             |
 | CAdminO                 |       1 | Infrastructure & Public Works     | `/services/infrastructure-public-works` |
-| **Total**               | **155** | **thirteen published categories** |                                         |
+| OCBO                    |       2 | Housing & Land Use                | `/services/housing-land-use`            |
+| **Total**               | **157** | **fourteen published categories** |                                         |
 
 Of the canonical Citizen's Charter's 329 services (255 External, 74 Internal),
-100 External services remain unpublished; the 74 Internal services are outside
+98 External services remain unpublished; the 74 Internal services are outside
 the resident-facing Services scope and remain unpublished. The published Health
 Services page is `PARTIAL`, not `READY`: it contains 59 publication-reviewed
 CHO records, while external-22 and external-60 remain held and unpublished.
@@ -229,6 +230,28 @@ service, alternate submission channel (email, phone, Facebook, messaging),
 CIO "Addressing Public Concerns" service, City Engineer internal form/work
 order, Water District service, OCBO/CPDCO service, or repair SLA is
 published or implied.
+The published Housing & Land Use page is also `PARTIAL`, not `READY`: it
+contains 2 publication-reviewed Office of the City Building Official (OCBO)
+services (Annual Inspection Certificate & Certificate of Operation, and
+Certificate of Final Electrical Inspection/Completion for Small Electrical).
+Both use the PD 1096 Schedule of Fees and applicable regulatory/ordinance
+charges — no fixed peso amount is shown. The Annual Inspection Certificate's
+processing time is a maximum of 3 working days (Simple); the electrical
+completion certificate's is 3 working days (Simple); both explicitly exclude
+the physical inspection itself from that figure, and neither guarantees an
+inspection slot or immediate issuance. The electrical certificate is scoped
+to Small Electrical only, not a general electrical permit or large-project
+completion service. OCBO's downloadable forms remain temporarily unavailable
+while procedures are reengineered; no online filing channel is published,
+and the institutional email is an inquiries-only contact, not a submission
+channel — the reviewed in-person OCBO/City Treasurer workflow is preserved.
+Held/excluded building and zoning records (Building Permit and other
+Ancillary/Accessory Permits, Certificate of Occupancy, Document/
+Certification Requests, Securing Locational Clearance/Zoning for Building,
+Securing Zoning Certificate for Land, Securing Zoning Certificate for
+Business Permit, Dole Permit to Operate – Payment, Requesting for a
+Certificate of Conformity Based on CSFP Heritage Ordinance, and Notice of
+Violations) remain unpublished pending source clarification.
 
 ## Phase 3 — Private data workstream
 
@@ -237,14 +260,14 @@ versioned allowlisted export are complete.
 
 ### RESEARCH queue
 
-| Priority | Work                                                                                                                                                                                                                                                                                      | Public page(s) unblocked                                                                                      |
-| -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 155 External services across thirteen categories, including OSCA renewal/transfer/damaged-card/record-update procedures and Infrastructure & Public Works repair/maintenance procedures | The 1 remaining planned Services category and broader coverage within the 13 published but PARTIAL categories |
-|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                                             | `/government/structure`; later enriches `/government`                                                         |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                                                      | `/legislation/resolutions`                                                                                    |
-|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                   | Moves `/government/links` from `PARTIAL` to `READY`                                                           |
-|        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                             | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                        |
-|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                           | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                    |
+| Priority | Work                                                                                                                                                                                                                                                                                                                                                         | Public page(s) unblocked                                                                                      |
+| -------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+|        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 157 External services across fourteen categories, including OSCA renewal/transfer/damaged-card/record-update procedures, Infrastructure & Public Works repair/maintenance procedures, and Housing & Land Use building-permit/occupancy/zoning transactions | The 1 remaining planned Services category and broader coverage within the 14 published but PARTIAL categories |
+|        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                                                                                                                | `/government/structure`; later enriches `/government`                                                         |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                                                                                                                         | `/legislation/resolutions`                                                                                    |
+|        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                                                                                      | Moves `/government/links` from `PARTIAL` to `READY`                                                           |
+|        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                                                                                                | Moves `/government/hotlines` from `PARTIAL` to `READY`                                                        |
+|        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                                                                                              | Moves `/statistics/demographics` from `PARTIAL` to `READY`                                                    |
 
 The City Health Office publication batch is implemented as the bounded,
 publication-reviewed set described above. Health Services remains `PARTIAL`.

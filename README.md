@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 155                                                    |
-| Published service categories      | 13 of 14                                               |
-| Planned service categories        | 1 of 14                                                |
+| Reviewed External service records | 157                                                    |
+| Published service categories      | 14 of 15                                               |
+| Planned service categories        | 1 of 15                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -71,6 +71,7 @@ Published service categories:
 | Civil Registry                |      15 | `/services/civil-registry`              |
 | Senior Citizens               |       2 | `/services/senior-citizens`             |
 | Infrastructure & Public Works |       1 | `/services/infrastructure-public-works` |
+| Housing & Land Use            |       2 | `/services/housing-land-use`            |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -117,8 +118,19 @@ procedure and remains `PARTIAL`; it covers only the 12-hour intake/referral
 window across six issue topics (roads, bridges, drainage/flooding,
 streetlights, public buildings, and other City infrastructure) — it is not a
 repair service, and inspection, evaluation, funding, scheduling, resolution,
-and repair time are not stated. Another 100 External services and all 74
-Internal services remain unpublished; CHO records external-22 and
+and repair time are not stated. Housing & Land Use publishes two reviewed
+Office of the City Building Official (OCBO) certificate procedures (Annual
+Inspection Certificate & Certificate of Operation, and Certificate of Final
+Electrical Inspection/Completion for Small Electrical) and remains
+`PARTIAL`; both use the PD 1096 Schedule of Fees with no fixed peso amount
+shown, a maximum/exactly-3-working-day Simple processing time that excludes
+the physical inspection itself, and no guaranteed inspection slot or
+issuance. OCBO's downloadable forms remain temporarily unavailable and no
+online filing channel is published; the institutional email is an inquiries
+-only contact, not a submission channel. Building permits, certificates of
+occupancy, zoning clearances, and other building/zoning transactions remain
+unpublished pending source clarification. Another 98 External services and
+all 74 Internal services remain unpublished; CHO records external-22 and
 external-60 remain held and are not published. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
 page-by-page readiness assessment and

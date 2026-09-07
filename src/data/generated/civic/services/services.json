@@ -13,10 +13,11 @@
     "City Environment and Natural Resources Office",
     "City Civil Registry Office",
     "Office for Senior Citizen's Affairs",
-    "City Administrator's Office"
+    "City Administrator's Office",
+    "Office of the City Building Official"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 155,
+  "record_count": 157,
   "schema_version": 1,
   "services": [
     {
@@ -15363,6 +15364,221 @@
         "other-city-infrastructure"
       ],
       "who_may_avail": "Fernandino residents within the territorial jurisdiction of the City of San Fernando, Pampanga"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "housing-land-use",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit all copies of the required documents at the OCBO Receiving Window.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "OCBO evaluates the documents and conducts the inspection through the Inspection and Enforcement Division.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "OCBO assesses applicable fees and prepares the Order of Payment.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Pay the assessed fees at the City Treasurer's Office and receive the Official Receipt.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Receive the approved Certificate at the OCBO Releasing Window.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The Office of the City Building Official issues the Certificate of Annual Inspection and Certificate of Operation, as mandated by the National Building Code (P.D. 1096) and other referral codes, to promote public safety, order, and welfare.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to the Revised IRR/Schedule of Fees of PD 1096 and other applicable regulatory or ordinance charges"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-office-of-the-city-building-official-external-01",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "OCBO",
+        "division": null,
+        "name": "Office of the City Building Official"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "ocbo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published OCBO institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "Maximum of 3 working days, Simple"
+      },
+      "public_notes": [
+        "The physical inspection itself is excluded from this 3-working-day, Simple certificate-processing time.",
+        "Availability of an inspection slot and immediate certificate issuance are not guaranteed.",
+        "Online/downloadable OCBO forms are temporarily unavailable; obtain current forms/instructions directly from OCBO.",
+        "No online filing channel is published. Submit in person at the OCBO Receiving Window."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Annual Inspection Establishment Data form (where applicable)",
+          "where_to_secure": "OCBO"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "OCBO inspection report",
+          "where_to_secure": "OCBO"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Professional certification(s) required by the inspection",
+          "where_to_secure": "Professional(s) hired by the applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Other inspection-driven supporting documents the inspector may require based on the conducted inspection",
+          "where_to_secure": "Applicant"
+        }
+      ],
+      "slug": "annual-inspection-certificate-certificate-of-operation",
+      "title": "Annual Inspection Certificate & Certificate of Operation",
+      "who_may_avail": "Citizen / Business / Government"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2026 (2nd Edition)",
+        "label": "City Government of San Fernando, Pampanga Citizen's Charter 2026 (2nd Edition)",
+        "landing_page_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf"
+      },
+      "category": "housing-land-use",
+      "classification": {
+        "complexity": "Simple",
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit proof of ownership and the CFEIC application at OCBO Receiving Windows 28 and 29.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "OCBO's Inspection and Enforcement Division conducts the ocular inspection and the Electrical Engineer of the Permitting and Enforcement Division (PED) performs technical evaluation.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "OCBO assesses applicable fees and prepares the Unified Order of Payment.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Pay the assessed fees at the City Treasurer's Office and receive the Official Receipt.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Receive the approved Certificate of Final Electrical Inspection/Completion at the OCBO Releasing Window.",
+          "sequence": "5"
+        }
+      ],
+      "description": "The Office of the City Building Official issues the Certificate of Final Electrical Inspection/Completion (Small Electrical), as mandated by the National Building Code (P.D. 1096) and its Implementing Rules and Regulations, to obtain electric utility service and in compliance with the Philippine Electrical Code (R.A. 7920).",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Refer to the PD 1096 Schedule of Fees and applicable regulatory or ordinance charges"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "charter-2026-2e-office-of-the-city-building-official-external-03",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "OCBO",
+        "division": null,
+        "name": "Office of the City Building Official"
+      },
+      "office_contact": {
+        "email_use": "INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL",
+        "emails": [
+          "ocbo@cityofsanfernando.gov.ph"
+        ],
+        "phone": "(045) 649-8540"
+      },
+      "office_hours": {
+        "schedule": "8:00 a.m.-7:00 p.m., Monday-Thursday",
+        "scope": "Published OCBO institutional page hours only"
+      },
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 working days, Simple"
+      },
+      "public_notes": [
+        "This service covers Small Electrical final inspection/completion only; it is not a general electrical permit or a large-project completion service.",
+        "The physical inspection itself is excluded from this 3-working-day, Simple certificate-processing time.",
+        "Availability of an inspection slot and immediate certificate issuance are not guaranteed.",
+        "Online/downloadable OCBO forms are temporarily unavailable; obtain current forms/instructions directly from OCBO.",
+        "No online filing channel is published. Submit in person at OCBO Receiving Windows 28 and 29."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Completed Application for Final Electrical Inspection/Completion (CFEIC)",
+          "where_to_secure": "OCBO Receiving Window"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Electrical permit/layout and professional certification/seal from a licensed professional electrical engineer",
+          "where_to_secure": "Applicant / professional electrical engineer"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Related property/authorization documents establishing the applicant's right to the property",
+          "where_to_secure": "Applicant"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Applicable technical clearances, including the Certificate of Electrical Inspection secured at the Bureau of Fire Protection (BFP)",
+          "where_to_secure": "Bureau of Fire Protection (BFP)"
+        }
+      ],
+      "slug": "certificate-of-final-electrical-inspection-completion-small-electrical",
+      "title": "Certificate of Final Electrical Inspection/ Completion (Small Electrical)",
+      "who_may_avail": "Citizen / Business / Government"
     }
   ]
 }

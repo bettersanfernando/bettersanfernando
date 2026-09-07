@@ -181,6 +181,7 @@ export default function ServiceDetail() {
     'civil-registry': 'Civil Registry',
     'senior-citizens': 'Senior Citizens',
     'infrastructure-public-works': 'Infrastructure & Public Works',
+    'housing-land-use': 'Housing & Land Use',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;
@@ -476,24 +477,35 @@ export default function ServiceDetail() {
                   </div>
                 </div>
               ))}
-            <div className="flex items-start gap-3 text-sm leading-6">
-              <Mail
-                className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
-                aria-hidden="true"
-              />
-              <ul className="min-w-0 space-y-1">
-                {service.office_contact.emails.map(email => (
-                  <li key={email}>
-                    <a
-                      className={`${externalLinkClass} break-all`}
-                      href={`mailto:${email}`}
-                    >
-                      {email}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {service.office_contact.emails.length > 0 && (
+              <div className="flex items-start gap-3 text-sm leading-6">
+                <Mail
+                  className="mt-0.5 h-4 w-4 shrink-0 text-primary-700"
+                  aria-hidden="true"
+                />
+                <div className="min-w-0">
+                  <ul className="space-y-1">
+                    {service.office_contact.emails.map(email => (
+                      <li key={email}>
+                        <a
+                          className={`${externalLinkClass} break-all`}
+                          href={`mailto:${email}`}
+                        >
+                          {email}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  {'email_use' in service.office_contact &&
+                    service.office_contact.email_use ===
+                      'INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL' && (
+                      <p className="mt-1 text-xs text-gray-700">
+                        Inquiries only — not an application-submission channel.
+                      </p>
+                    )}
+                </div>
+              </div>
+            )}
             {service.office_hours && (
               <div className="flex items-start gap-3 text-sm leading-6 text-gray-700">
                 <CalendarClock

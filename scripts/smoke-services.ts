@@ -41,6 +41,7 @@ const canonicalCategories = [
   'pwd-services',
   'civil-registry',
   'infrastructure-public-works',
+  'housing-land-use',
   'agriculture-fisheries',
   'environment',
   'disaster-preparedness',
@@ -57,6 +58,7 @@ const realCategorySlugs = [
   'senior-citizens',
   'pwd-services',
   'infrastructure-public-works',
+  'housing-land-use',
   'agriculture-fisheries',
   'disaster-preparedness',
 ];
@@ -111,7 +113,8 @@ const osca = services.filter(service => service.office.acronym === 'OSCA');
 const cadmino = services.filter(
   service => service.office.acronym === 'CAdminO'
 );
-assert.equal(services.length, 155);
+const ocbo = services.filter(service => service.office.acronym === 'OCBO');
+assert.equal(services.length, 157);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -131,11 +134,12 @@ assert.equal(
   1,
   'exactly one CAdminO Infrastructure & Public Works record'
 );
+assert.equal(ocbo.length, 2, 'exactly two OCBO Housing & Land Use records');
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 155);
-assert.equal(new Set(services.map(service => service.slug)).size, 155);
+assert.equal(new Set(services.map(service => service.id)).size, 157);
+assert.equal(new Set(services.map(service => service.slug)).size, 157);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -147,7 +151,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 155 service detail routes must resolve through the adapter'
+  'all 157 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -236,6 +240,13 @@ assert.equal(
   getServiceHref(cadmino[0]),
   `/services/infrastructure-public-works/${cadmino[0].slug}`,
   'the CAdminO record must use its canonical Infrastructure & Public Works route'
+);
+assert.ok(
+  ocbo.every(
+    service =>
+      getServiceHref(service) === `/services/housing-land-use/${service.slug}`
+  ),
+  'both OCBO records must use canonical Housing & Land Use routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -994,11 +1005,157 @@ assert.doesNotMatch(
   'the record must not expose complaint contents, complainant identity, or internal enforcement records'
 );
 
+assert.equal(ocbo.length, 2, 'exactly two OCBO records are published');
+const expectedOcboServices = [
+  ['01', 'Annual Inspection Certificate & Certificate of Operation'],
+  [
+    '03',
+    'Certificate of Final Electrical Inspection/ Completion (Small Electrical)',
+  ],
+].map(([suffix, title]) => [
+  `charter-2026-2e-office-of-the-city-building-official-external-${suffix}`,
+  title,
+]);
+assert.deepEqual(
+  ocbo.map(service => [service.id, service.title]),
+  expectedOcboServices,
+  'Housing & Land Use must contain exactly the two approved OCBO ids and titles'
+);
+assert.ok(
+  ocbo.every(
+    service =>
+      service.office.acronym === 'OCBO' &&
+      service.office.name === 'Office of the City Building Official' &&
+      service.office.division === null
+  ),
+  'OCBO records must preserve the Office of the City Building Official identity'
+);
+assert.ok(
+  ocbo.every(service => service.fee.status === 'refer_to_charter'),
+  'OCBO records must not show a fixed peso fee amount'
+);
+assert.ok(
+  ocbo.every(service => /PD 1096/i.test(service.fee.text)),
+  'OCBO fee text must reference the PD 1096 Schedule of Fees'
+);
+assert.doesNotMatch(
+  JSON.stringify(ocbo.map(service => service.fee.text)),
+  /PHP\s?\d/,
+  'OCBO fee text must not contain a fixed peso amount'
+);
+const annualInspection = ocbo.find(service => service.id.endsWith('-01'));
+assert.ok(annualInspection, 'Annual Inspection Certificate must be published');
+assert.match(
+  annualInspection!.processing_time.text,
+  /maximum of 3 working days, simple/i,
+  'Annual Inspection Certificate must preserve its maximum-3-working-day Simple processing time'
+);
+const electricalCompletion = ocbo.find(service => service.id.endsWith('-03'));
+assert.ok(
+  electricalCompletion,
+  'Certificate of Final Electrical Inspection/Completion must be published'
+);
+assert.match(
+  electricalCompletion!.processing_time.text,
+  /3 working days, simple/i,
+  'Electrical completion certificate must preserve its 3-working-day Simple processing time'
+);
+assert.match(
+  electricalCompletion!.title,
+  /Small Electrical/,
+  'the electrical completion certificate must preserve its Small Electrical scope'
+);
+assert.match(
+  electricalCompletion!.public_notes.join(' '),
+  /not a general electrical permit or a large-project/i,
+  'the electrical completion certificate must not broaden into a general/large-project service'
+);
+assert.ok(
+  ocbo.every(service =>
+    service.public_notes.some(note =>
+      /physical inspection itself is excluded/i.test(note)
+    )
+  ),
+  'OCBO records must state that the physical inspection is excluded from certificate-processing time'
+);
+assert.ok(
+  ocbo.every(service =>
+    service.public_notes.some(note => /not guaranteed/i.test(note))
+  ),
+  'OCBO records must not guarantee immediate inspection or issuance'
+);
+assert.ok(
+  ocbo.every(service =>
+    service.public_notes.some(note => /temporarily unavailable/i.test(note))
+  ),
+  'OCBO records must preserve the temporarily-unavailable downloadable-forms limitation'
+);
+assert.ok(
+  ocbo.every(service =>
+    service.public_notes.some(note => /no online filing channel/i.test(note))
+  ),
+  'OCBO records must not claim an online filing channel'
+);
+assert.ok(
+  ocbo.every(
+    service =>
+      service.forms.length === 0 && service.online_channels.length === 0
+  ),
+  'OCBO records must not publish stale forms or online channels'
+);
+assert.ok(
+  ocbo.every(
+    service =>
+      'email_use' in service.office_contact &&
+      service.office_contact.email_use ===
+        'INQUIRIES_ONLY_NOT_AN_APPLICATION_CHANNEL'
+  ),
+  'OCBO institutional email must be marked inquiries-only, not an application channel'
+);
+const heldOcboTitles = [
+  'Building Permit and other Ancillary and Accessory Permits',
+  'Certificate of Occupancy',
+  'Document/Certification Requests',
+  'Securing Locational Clearance/Zoning for Building',
+  'Securing Zoning Certificate for Land',
+  'Securing Zoning Certificate for Business Permit',
+  'Dole Permit to Operate – Payment',
+  'Requesting for a Certificate of Conformity Based on CSFP Heritage Ordinance',
+  'Notice of Violations',
+];
+for (const title of heldOcboTitles) {
+  assert.ok(
+    !services.some(service => service.title === title),
+    `held/excluded record must remain unpublished: ${title}`
+  );
+}
+assert.doesNotMatch(
+  JSON.stringify(ocbo),
+  /applicant name|applicant identity|structural calculation|tax declaration number|title number|deed number|enforcement case (file|number)|internal assessment note|routing slip/i,
+  'OCBO records must not expose private applicant identities, titles/deeds, or internal review/routing documents'
+);
+
 assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'CAdminO')
+        services.filter(service => service.office.acronym !== 'OCBO')
+      )
+    )
+    .digest('hex'),
+  '25e0d37e8b9e790ceaa2f62ea28493849fb5dd0fdf9926da11dc82def47a4d42',
+  'the previous 155 published service records must remain semantically unchanged'
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(
+          service =>
+            service.office.acronym !== 'OCBO' &&
+            service.office.acronym !== 'CAdminO'
+        )
       )
     )
     .digest('hex'),
@@ -1012,6 +1169,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA'
         )
@@ -1028,6 +1186,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CCRO'
@@ -1045,6 +1204,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CENRO' &&
@@ -1081,6 +1241,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CCSFP' &&
@@ -1099,6 +1260,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CHO' &&
@@ -1120,6 +1282,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CIPPESO' &&
@@ -1140,6 +1303,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
             service.office.acronym !== 'CAVO' &&
@@ -1253,5 +1417,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 155/155; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); External: 155; published categories: 13/14; planned categories: 1/14'
+  '  routes: 157/157; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); External: 157; published categories: 14/15; planned categories: 1/15'
 );
