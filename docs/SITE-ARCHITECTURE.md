@@ -107,7 +107,6 @@ support that purpose.
 │   ├── business
 │   │   └── :serviceSlug
 │   ├── employment
-│   ├── livelihood
 │   ├── health-services
 │   ├── education
 │   ├── assistance-programs

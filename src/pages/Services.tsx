@@ -25,12 +25,6 @@ const categories = [
     'published',
   ],
   [
-    'Livelihood',
-    'livelihood',
-    'Livelihood assistance, skills development, and local programs.',
-    'planned',
-  ],
-  [
     'Health Services',
     'health-services',
     'Local health services and access guidance.',

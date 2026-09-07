@@ -32,7 +32,6 @@ const detailPageSource = readFileSync('src/pages/ServiceDetail.tsx', 'utf8');
 const canonicalCategories = [
   'business',
   'employment',
-  'livelihood',
   'health-services',
   'education',
   'assistance-programs',
@@ -46,24 +45,14 @@ const canonicalCategories = [
   'environment',
   'disaster-preparedness',
 ] as const;
-const realCategorySlugs = [
-  'business',
-  'employment',
-  'health-services',
-  'education',
-  'environment',
-  'civil-registry',
-  'assistance-programs',
-  'social-welfare',
-  'senior-citizens',
-  'pwd-services',
-  'infrastructure-public-works',
-  'housing-land-use',
-  'agriculture-fisheries',
-  'disaster-preparedness',
-];
+const realCategorySlugs = [...canonicalCategories];
 const plannedCategorySlugs = canonicalCategories.filter(
   slug => !realCategorySlugs.includes(slug)
+);
+assert.equal(
+  plannedCategorySlugs.length,
+  0,
+  'zero planned service-category placeholders must remain'
 );
 
 const servicesNavigation = mainNavigation.find(item => item.id === 'services');
@@ -101,6 +90,36 @@ for (const slug of canonicalCategories) {
     `${slug} must appear on the Services category hub`
   );
 }
+assert.ok(
+  !canonicalCategories.includes(
+    'livelihood' as (typeof canonicalCategories)[number]
+  ),
+  'livelihood must no longer be a canonical service category'
+);
+assert.doesNotMatch(
+  appSource,
+  /\/services\/livelihood/,
+  'the Livelihood route must no longer appear in App.tsx'
+);
+assert.doesNotMatch(
+  servicesPageSource,
+  /'Livelihood'|'livelihood'/,
+  'the Services category hub must no longer define a Livelihood category entry'
+);
+assert.ok(
+  !plannedPages.some(page => page.path === '/services/livelihood'),
+  'no planned-page entry may remain for /services/livelihood'
+);
+assert.ok(
+  !plannedPages.some(page => page.id === 'livelihood'),
+  'no planned-page id may remain for livelihood'
+);
+assert.ok(
+  !servicesNavigation?.sections?.some(section =>
+    section.items.some(item => item.href === '/services/livelihood')
+  ),
+  'no Livelihood navigation destination may remain'
+);
 
 const cippeso = services.filter(
   service => service.office.acronym === 'CIPPESO'
@@ -1417,5 +1436,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 157/157; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); External: 157; published categories: 14/15; planned categories: 1/15'
+  '  routes: 157/157; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); External: 157; published categories: 14/14; planned categories: 0/14'
 );

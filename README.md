@@ -41,8 +41,8 @@ been verified and reviewed for publication.
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
 | Reviewed External service records | 157                                                    |
-| Published service categories      | 14 of 15                                               |
-| Planned service categories        | 1 of 15                                                |
+| Published service categories      | 14 of 14                                               |
+| Planned service categories        | 0 of 14                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -86,10 +86,14 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-The remaining 1 service category (Livelihood) is visible in
-navigation as a planned section; it does not yet contain published service
-records. Health Services, Employment, Agriculture & Fisheries, and Education
-Services are all
+All 14 canonical service categories are published; none remain planned. A
+completed no-export research decision found no unique, permanent,
+publication-ready City service for a standalone Livelihood category, so no
+Livelihood category or page is published; livelihood-related services
+(skills training, agricultural support, and compost-fertilizer sale) remain
+available under Employment, Agriculture & Fisheries, and Environment. Health
+Services, Employment, Agriculture & Fisheries, and Education Services are
+all
 `PARTIAL`, not `READY`: Health Services' 59 publication-reviewed CHO records,
 Employment's 7 publication-reviewed CIPPESO records, and Agriculture &
 Fisheries' 7 publication-reviewed CAVO records are each a bounded subset of

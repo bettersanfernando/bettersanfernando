@@ -106,7 +106,6 @@ for (const [pathname, expected] of activeRouteCases) {
 }
 
 const approvedPlannedPaths = [
-  '/services/livelihood',
   '/legislation/resolutions',
   '/government/documents',
   '/transparency/full-disclosure',
@@ -190,6 +189,20 @@ for (const destination of megaMenus.flatMap(menu =>
     );
   }
 }
+
+const servicesMenu = megaMenus.find(menu => menu.id === 'services');
+assert.ok(
+  servicesMenu?.sections?.every(section =>
+    section.items.every(item => item.kind === 'real')
+  ),
+  'zero planned service-category placeholders may remain in the Services navigation'
+);
+assert.ok(
+  !servicesMenu?.sections?.some(section =>
+    section.items.some(item => item.href === '/services/livelihood')
+  ),
+  'no Livelihood navigation destination may remain'
+);
 
 function readLocale(locale: 'en' | 'fil' | 'pam') {
   return JSON.parse(

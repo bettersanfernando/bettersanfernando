@@ -59,7 +59,6 @@
       "businessServices": "Business Services",
       "permitsLicenses": "Permits & Licenses",
       "employment": "Employment",
-      "livelihood": "Livelihood",
       "healthServices": "Health Services",
       "educationServices": "Education Services",
       "assistancePrograms": "Assistance Programs",
@@ -117,7 +116,6 @@
       "businessServices": "Find permits, registration guidance and business information.",
       "permitsLicenses": "Access available permit and licensing guidance.",
       "employment": "Explore public employment resources and opportunities.",
-      "livelihood": "Find livelihood programs and community support resources.",
       "healthServices": "Find available public health services and guidance.",
       "educationServices": "Explore education services and learning support.",
       "assistancePrograms": "Find public assistance programs and eligibility guidance.",
@@ -203,10 +201,6 @@
     "status": "Data integration in progress",
     "statusDescription": "This destination is part of the approved portal structure. Information will be published after its sources and context are ready.",
     "pages": {
-      "livelihood": {
-        "title": "Livelihood",
-        "description": "Find verified information about livelihood assistance, skills development, and related local programs."
-      },
       "healthServices": {
         "title": "Health Services",
         "description": "Find verified information about local health services and access guidance."
