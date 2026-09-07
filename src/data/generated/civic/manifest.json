@@ -62,9 +62,14 @@
       "sha256": "f51b72a58f04675cc4d8f0e38fbe0d2d71b28c3986c82709a338b470d83f36df"
     },
     "services/services.json": {
-      "record_count": 157,
+      "record_count": 166,
       "schema_version": 1,
-      "sha256": "0d4bc2757f77757b29decd2ca23f52e9d2c83b9635fcfdddec095f5336e7a658"
+      "sha256": "e220afa66a43cd4a6cc151d7fe7f88756aad2a9c7ff97d8397bc457134acef4d"
+    },
+    "services/utilities-water-resources.json": {
+      "record_count": 2,
+      "schema_version": 1,
+      "sha256": "7ebb165b2881b3599e5c5dbd49626b7fd3a3c92a335fc023a8fc011a548fba98"
     }
   },
   "export_version": "v0.1.0",
@@ -106,6 +111,9 @@
     "data/services/cadmino-complaints-publication-review.json",
     "data/services/ocbo-housing-freshness-enrichment.json",
     "data/services/ocbo-housing-publication-review.json",
+    "data/services/csfwd-water-charter-services.json",
+    "data/services/csfwd-water-freshness-enrichment.json",
+    "data/services/csfwd-water-publication-review.json",
     "data/government/hotlines-publication-review.json",
     "data/government/barangay-contacts-publication-review.json",
     "data/government/official-links-publication-review.json"
@@ -133,7 +141,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "9a7e6553723dd33e6e8f04f51b8687889cb246f7",
+  "source_commit": "69556e9ed8bad2f2e3e13f553b1e2bbb636fe2a9",
   "source_data_version": "v0.1.1",
   "sources": [
     {

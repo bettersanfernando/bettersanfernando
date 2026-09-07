@@ -18,6 +18,7 @@ const destinationPresentation = {
   hotlines: ['phone', 'hotlines'],
   infrastructurePublicWorks: ['construction', 'infrastructurePublicWorks'],
   housingLandUse: ['building', 'housingLandUse'],
+  utilitiesWater: ['droplet', 'utilitiesWater'],
   agriculture: ['wheat', 'agriculture'],
   environment: ['leaf', 'environment'],
   civilRegistry: ['file-text', 'civilRegistry'],
@@ -174,6 +175,11 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.housingLandUse',
             href: '/services/housing-land-use',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.utilitiesWater',
+            href: '/services/utilities-water',
             kind: 'real',
           },
           {

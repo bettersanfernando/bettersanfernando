@@ -1,5 +1,12 @@
 import { useMemo, useState } from 'react';
-import { Clock3, FileText, Search } from 'lucide-react';
+import {
+  Clock3,
+  ExternalLink,
+  FileText,
+  Mail,
+  Phone,
+  Search,
+} from 'lucide-react';
 import { Link } from 'react-router';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import SEO from '../components/SEO';
@@ -9,6 +16,9 @@ import {
   getServices,
   type PublishedServiceCategory,
 } from '../data/civic/services';
+import { getUtilitiesWaterResources } from '../data/civic/utilitiesWaterResources';
+
+const utilitiesWaterResources = getUtilitiesWaterResources();
 
 const services = getServices();
 const categories = [
@@ -76,6 +86,12 @@ const categories = [
     'Housing & Land Use',
     'housing-land-use',
     'Reviewed OCBO annual inspection, operation, and electrical-completion certificate procedures.',
+    'published',
+  ],
+  [
+    'Utilities & Water',
+    'utilities-water',
+    'Reviewed CSFWD water-service transactions plus billing-inquiry and complaints resources.',
     'published',
   ],
   [
@@ -245,6 +261,8 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                   "One publication-reviewed Citizen's Charter complaint-intake and referral procedure currently published from the City Administrator's Office (CAdminO), covering roads, bridges, drainage, streetlights, public buildings, and other City infrastructure concerns."}
                 {category === 'housing-land-use' &&
                   "Two publication-reviewed Citizen's Charter certificate procedures currently published from the Office of the City Building Official (OCBO)."}
+                {category === 'utilities-water' &&
+                  "Nine publication-reviewed Citizen's Charter transactions currently published from the City of San Fernando Water District (CSFWD), a distinct Water District organized under Presidential Decree 198 — not a City Government office or City Engineer division."}
               </p>
               <p className="mt-3 text-sm leading-6 text-gray-700">
                 {category === 'assistance-programs' ||
@@ -267,7 +285,9 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
                                 ? 'This is a single bounded complaint-intake and referral procedure, not a repair service. Filing a complaint does not establish that the City owns or maintains the affected road, bridge, drainage facility, streetlight, or building; inspection, evaluation, funding, scheduling, resolution, and repair time are not stated and are not published here.'
                                 : category === 'housing-land-use'
                                   ? 'This is a bounded collection of two OCBO certificate procedures, not a complete inventory of building, zoning, or land-use services. Building permits, certificates of occupancy, zoning clearances, and other building/zoning transactions remain unpublished pending source clarification. Fees follow the PD 1096 Schedule of Fees and applicable regulatory or ordinance charges; no fixed peso amount is shown, and the physical inspection itself is excluded from the published certificate-processing time.'
-                                  : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                                  : category === 'utilities-water'
+                                    ? 'This is a bounded collection of nine CSFWD Charter transactions, not a complete inventory of water-utility services. Service availability applies only within CSFWD/PW-CSF coverage — not every San Fernando barangay or property is served. No universal flat new-connection fee, online payment, online application, or 24/7 hotline or office is published; two separate reconnection procedures and one maintenance procedure covering eight technical subtypes are preserved as reviewed.'
+                                    : 'This is a bounded collection, not a complete inventory of City Government services.'}
               </p>
             </div>
           </div>
@@ -402,6 +422,111 @@ function ServiceCategory({ category }: { category: PublishedServiceCategory }) {
             </div>
           )}
         </section>
+
+        {category === 'utilities-water' && (
+          <section
+            className="border-t border-gray-200 bg-white"
+            aria-labelledby="supporting-resources-heading"
+          >
+            <div className="container mx-auto px-4 py-8 md:py-12">
+              <h2
+                id="supporting-resources-heading"
+                className="text-2xl font-bold text-gray-900 md:text-3xl"
+              >
+                Supporting resources
+              </h2>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-700">
+                These are CSFWD/PrimeWater support resources, not Charter
+                transactions.
+              </p>
+              <div className="mt-6 grid gap-5 md:grid-cols-2">
+                {utilitiesWaterResources.map(resource => (
+                  <article
+                    key={resource.id}
+                    className="flex flex-col rounded-xl border border-gray-200 p-5"
+                  >
+                    <h3 className="text-lg font-bold text-gray-900">
+                      {resource.title}
+                    </h3>
+                    {resource.resource_type === 'digital_utility' && (
+                      <>
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-primary-800">
+                          Inquiry tool — not online payment
+                        </p>
+                        <p className="mt-3 text-sm leading-6 text-gray-700">
+                          {resource.description}
+                        </p>
+                        <p className="mt-3 text-sm leading-6 text-gray-700">
+                          {resource.function_note}
+                        </p>
+                        <a
+                          href={resource.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center gap-1.5 self-start font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+                          aria-label={`${resource.title} (opens in a new tab)`}
+                        >
+                          Open Billing Inquiry
+                          <ExternalLink
+                            className="h-3.5 w-3.5"
+                            aria-hidden="true"
+                          />
+                        </a>
+                        {resource.contact.phone && (
+                          <p className="mt-3 flex items-center gap-2 text-sm text-gray-700">
+                            <Phone
+                              className="h-4 w-4 shrink-0 text-primary-700"
+                              aria-hidden="true"
+                            />
+                            {resource.contact.phone}
+                          </p>
+                        )}
+                      </>
+                    )}
+                    {resource.resource_type === 'shared_support_resource' && (
+                      <>
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-primary-800">
+                          Shared customer support
+                        </p>
+                        <p className="mt-3 text-sm leading-6 text-gray-700">
+                          {resource.description}
+                        </p>
+                        <div className="mt-3 space-y-2 text-sm text-gray-700">
+                          <p className="flex items-center gap-2">
+                            <Mail
+                              className="h-4 w-4 shrink-0 text-primary-700"
+                              aria-hidden="true"
+                            />
+                            {resource.channels.email}
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <Phone
+                              className="h-4 w-4 shrink-0 text-primary-700"
+                              aria-hidden="true"
+                            />
+                            {resource.channels.phone}
+                          </p>
+                          <p>Walk-in: {resource.channels.walk_in}</p>
+                        </div>
+                        <p className="mt-3 text-sm leading-6 text-gray-700">
+                          <span className="font-semibold text-gray-900">
+                            Reply standard:
+                          </span>{' '}
+                          {resource.reply_standard}
+                        </p>
+                      </>
+                    )}
+                    <ul className="mt-4 list-disc space-y-2 pl-5 text-xs leading-6 text-gray-600 marker:text-primary-700">
+                      {resource.public_notes.map(note => (
+                        <li key={note}>{note}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </>
   );

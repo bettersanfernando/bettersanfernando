@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
+import { getUtilitiesWaterResources } from '../src/data/civic/utilitiesWaterResources.ts';
 import {
   getServiceBySlug,
   getServiceCategory,
@@ -41,6 +42,7 @@ const canonicalCategories = [
   'civil-registry',
   'infrastructure-public-works',
   'housing-land-use',
+  'utilities-water',
   'agriculture-fisheries',
   'environment',
   'disaster-preparedness',
@@ -133,7 +135,8 @@ const cadmino = services.filter(
   service => service.office.acronym === 'CAdminO'
 );
 const ocbo = services.filter(service => service.office.acronym === 'OCBO');
-assert.equal(services.length, 157);
+const csfwd = services.filter(service => service.office.acronym === 'CSFWD');
+assert.equal(services.length, 166);
 assert.equal(blpd.length, 8);
 assert.equal(cdrrmo.length, 7);
 assert.equal(cswdo.length, 39);
@@ -154,11 +157,16 @@ assert.equal(
   'exactly one CAdminO Infrastructure & Public Works record'
 );
 assert.equal(ocbo.length, 2, 'exactly two OCBO Housing & Land Use records');
+assert.equal(
+  csfwd.length,
+  9,
+  'exactly nine CSFWD Utilities & Water transactions'
+);
 assert.equal(assistancePrograms.length, 19);
 assert.equal(pwdServices.length, 6);
 assert.equal(soloParentServices.length, 14);
-assert.equal(new Set(services.map(service => service.id)).size, 157);
-assert.equal(new Set(services.map(service => service.slug)).size, 157);
+assert.equal(new Set(services.map(service => service.id)).size, 166);
+assert.equal(new Set(services.map(service => service.slug)).size, 166);
 assert.ok(
   services.every(service => service.classification.service_scope === 'External')
 );
@@ -170,7 +178,7 @@ assert.ok(
 );
 assert.ok(
   services.every(service => getServiceBySlug(service.slug) === service),
-  'all 157 service detail routes must resolve through the adapter'
+  'all 166 service detail routes must resolve through the adapter'
 );
 assert.ok(
   blpd.every(
@@ -266,6 +274,13 @@ assert.ok(
       getServiceHref(service) === `/services/housing-land-use/${service.slug}`
   ),
   'both OCBO records must use canonical Housing & Land Use routes'
+);
+assert.ok(
+  csfwd.every(
+    service =>
+      getServiceHref(service) === `/services/utilities-water/${service.slug}`
+  ),
+  'all nine CSFWD records must use canonical Utilities & Water routes'
 );
 
 // Independent expectations, not derived from getServiceCategory's id sets in
@@ -1154,11 +1169,202 @@ assert.doesNotMatch(
   'OCBO records must not expose private applicant identities, titles/deeds, or internal review/routing documents'
 );
 
+assert.equal(csfwd.length, 9, 'exactly nine CSFWD records are published');
+const expectedCsfwdServices = [
+  ['01', 'Acceptance of Water Bill Payments'],
+  ['02', 'Change of Account Name'],
+  ['03', 'New Service Application'],
+  ['04', 'Reconnection of Accounts Disconnected Within Twenty-Four (24) Hours'],
+  ['05', 'Reconnection of Accounts Disconnected After Twenty-Four (24) Hours'],
+  ['06', 'Senior Citizen Discount'],
+  [
+    '07',
+    'Transfer of Water Service Line / Meter on Same or Different Location',
+  ],
+  ['08', 'Various MAINTENANCE Services'],
+  ['09', 'Voluntary Disconnection of Water Service Connection'],
+].map(([suffix, title]) => [`csfwd-charter-2025-1e-external-${suffix}`, title]);
+assert.deepEqual(
+  csfwd.map(service => [service.id, service.title]),
+  expectedCsfwdServices,
+  'Utilities & Water must contain exactly the nine approved CSFWD transactions'
+);
+assert.ok(
+  csfwd.every(
+    service =>
+      service.office.acronym === 'CSFWD' &&
+      service.office.name === 'City of San Fernando Water District'
+  ),
+  'CSFWD records must preserve the City of San Fernando Water District identity'
+);
+assert.ok(
+  csfwd.every(
+    service =>
+      service.forms.length === 0 &&
+      service.online_channels.length === 0 &&
+      service.appointment === null &&
+      service.office_hours === null
+  ),
+  'CSFWD records must not claim forms, online channels, appointments, or office hours'
+);
+const reconnectionWithin24 = csfwd.find(service => service.id.endsWith('-04'));
+const reconnectionAfter24 = csfwd.find(service => service.id.endsWith('-05'));
+assert.ok(
+  reconnectionWithin24 && reconnectionAfter24,
+  'both reconnection transactions must be published'
+);
+assert.notEqual(
+  reconnectionWithin24!.id,
+  reconnectionAfter24!.id,
+  'reconnection within 24 hours and after 24 hours must remain two separate services, not merged'
+);
+const maintenance = csfwd.find(service => service.id.endsWith('-08'));
+assert.ok(maintenance, 'Various MAINTENANCE Services must be published');
+assert.ok(
+  'variants' in maintenance! && maintenance!.variants,
+  'the maintenance record must carry its variants array'
+);
+assert.equal(
+  maintenance!.variants?.length,
+  8,
+  'the maintenance record must preserve all eight technical subtypes as one canonical service, not separate services'
+);
+assert.ok(
+  !services.some(
+    service =>
+      service.id !== maintenance!.id &&
+      /leak|pressure|water.quality|meter.test|meter.replac/i.test(service.title)
+  ),
+  'no separate leak, pressure, water-quality, meter-testing, or meter-replacement service page may exist'
+);
+assert.doesNotMatch(
+  JSON.stringify(csfwd),
+  /septage|desludging/i,
+  'no septage/desludging service may be published'
+);
+assert.doesNotMatch(
+  JSON.stringify(csfwd),
+  /\bPWD discount|lifeline (discount|rate)/i,
+  'no PWD or lifeline discount may be published'
+);
+assert.doesNotMatch(
+  JSON.stringify(csfwd),
+  /facebook\.com|pay online|apply online/i,
+  'CSFWD records must not claim online payment, online application, or an unauthenticated Facebook link'
+);
+assert.doesNotMatch(
+  JSON.stringify(csfwd).replace(
+    /no online (payment|application) channel[^"]*/gi,
+    ''
+  ),
+  /online (payment|application) channel/i,
+  'CSFWD records must not affirmatively claim an online payment or application channel'
+);
+assert.ok(
+  csfwd.some(service =>
+    service.public_notes.some(note => /no online payment channel/i.test(note))
+  ),
+  'the water-bill-payment record must preserve the no-online-payment-channel disclaimer'
+);
+assert.ok(
+  csfwd.some(service =>
+    service.public_notes.some(note =>
+      /no online application channel/i.test(note)
+    )
+  ),
+  'the new-service-application record must preserve the no-online-application-channel disclaimer'
+);
+assert.ok(
+  !services.some(
+    service =>
+      service.office.acronym === 'CSFWD' &&
+      /is a 24\/7|has a 24\/7|24\/7 (hotline|office) (is|available)/i.test(
+        JSON.stringify(service)
+      )
+  ),
+  'CSFWD records must not affirmatively claim a 24/7 hotline or office'
+);
+const newServiceApplication = csfwd.find(service => service.id.endsWith('-03'));
+assert.doesNotMatch(
+  newServiceApplication!.fee.text,
+  /^(?:PHP\s?[\d,.]+|None)$/i,
+  'the New Service Application fee must not collapse into a single flat amount'
+);
+assert.ok(
+  csfwd.every(service => service.fee.text.trim().length > 0),
+  'every CSFWD fee must be preserved exactly as exported'
+);
+
+const utilitiesWaterResources = getUtilitiesWaterResources();
+assert.equal(
+  utilitiesWaterResources.length,
+  2,
+  'exactly two Utilities & Water supporting resources must be published'
+);
+const billingInquiry = utilitiesWaterResources.find(
+  resource => resource.resource_type === 'digital_utility'
+);
+const feedbackComplaints = utilitiesWaterResources.find(
+  resource => resource.resource_type === 'shared_support_resource'
+);
+assert.ok(billingInquiry, 'Billing Inquiry resource must be published');
+assert.equal(billingInquiry!.title, 'Billing Inquiry');
+assert.match(
+  billingInquiry!.function_note,
+  /inquiry tool only.*not an online-payment facility/i,
+  'Billing Inquiry must be labeled as an inquiry tool, not online payment'
+);
+assert.match(new URL(billingInquiry!.url).protocol, /^https?:$/);
+assert.ok(
+  billingInquiry!.public_notes.some(note =>
+    /never published or stored/i.test(note)
+  ),
+  'Billing Inquiry must preserve the disclaimer that account numbers and returned billing information are never published or stored'
+);
+assert.doesNotMatch(
+  servicesPageSource,
+  /<input[^>]*account/i,
+  'the Services page must not render an input for collecting account numbers'
+);
+assert.ok(
+  feedbackComplaints,
+  'Feedback and Complaints Mechanism resource must be published'
+);
+assert.equal(feedbackComplaints!.title, 'Feedback and Complaints Mechanism');
+assert.equal(feedbackComplaints!.channels.email, 'csfwd@yahoo.com');
+assert.ok(feedbackComplaints!.reply_standard.length > 0);
+assert.equal(
+  feedbackComplaints!.url,
+  null,
+  'Feedback and Complaints must not carry an invented URL'
+);
+assert.doesNotMatch(
+  JSON.stringify(feedbackComplaints),
+  /facebook\.com\/[a-z0-9.]/i,
+  'no Facebook URL may be added or inferred for Feedback and Complaints'
+);
+
 assert.equal(
   createHash('sha256')
     .update(
       JSON.stringify(
-        services.filter(service => service.office.acronym !== 'OCBO')
+        services.filter(service => service.office.acronym !== 'CSFWD')
+      )
+    )
+    .digest('hex'),
+  '0c03ea2b4c4da80eae7b15d12bc074bfa9e413e4772fdfcacd060ad593a44629',
+  'the previous 157 published service records must remain semantically unchanged'
+);
+
+assert.equal(
+  createHash('sha256')
+    .update(
+      JSON.stringify(
+        services.filter(
+          service =>
+            service.office.acronym !== 'CSFWD' &&
+            service.office.acronym !== 'OCBO'
+        )
       )
     )
     .digest('hex'),
@@ -1172,6 +1378,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO'
         )
@@ -1188,6 +1395,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA'
@@ -1205,6 +1413,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
@@ -1223,6 +1432,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
@@ -1260,6 +1470,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
@@ -1279,6 +1490,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
@@ -1301,6 +1513,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
@@ -1322,6 +1535,7 @@ assert.equal(
       JSON.stringify(
         services.filter(
           service =>
+            service.office.acronym !== 'CSFWD' &&
             service.office.acronym !== 'OCBO' &&
             service.office.acronym !== 'CAdminO' &&
             service.office.acronym !== 'OSCA' &&
@@ -1436,5 +1650,5 @@ assert.equal(getServiceBySlug('missing-service'), undefined);
 
 console.log('Services civic data smoke checks passed.');
 console.log(
-  '  routes: 157/157; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); External: 157; published categories: 14/14; planned categories: 0/14'
+  '  routes: 166/166; BLPD: 8; CDRRMO: 7; CSWDO: 39 (Assistance Programs: 19, PWD Services: 6, Social Welfare: 14); CHO: 59 (Health Services: 59); CIPPESO: 7 (Employment: 7); CAVO: 7 (Agriculture & Fisheries: 7); CCSFP: 9 (Education: 9); CENRO: 1 (Environment: 1); CCRO: 15 (Civil Registry: 15); OSCA: 2 (Senior Citizens: 2); CAdminO: 1 (Infrastructure & Public Works: 1); OCBO: 2 (Housing & Land Use: 2); CSFWD: 9 (Utilities & Water: 9); External: 166; published categories: 15/15; planned categories: 0/15'
 );

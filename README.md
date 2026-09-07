@@ -40,9 +40,9 @@ been verified and reviewed for publication.
 
 | Domain                            | Published count                                        |
 | --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 157                                                    |
-| Published service categories      | 14 of 14                                               |
-| Planned service categories        | 0 of 14                                                |
+| Reviewed External service records | 166                                                    |
+| Published service categories      | 15 of 15                                               |
+| Planned service categories        | 0 of 15                                                |
 | Project records                   | 239                                                    |
 | Project-evidence records          | 334                                                    |
 | Barangays                         | 35                                                     |
@@ -72,6 +72,7 @@ Published service categories:
 | Senior Citizens               |       2 | `/services/senior-citizens`             |
 | Infrastructure & Public Works |       1 | `/services/infrastructure-public-works` |
 | Housing & Land Use            |       2 | `/services/housing-land-use`            |
+| Utilities & Water             |       9 | `/services/utilities-water`             |
 
 [`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
 [`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
@@ -86,7 +87,7 @@ phone numbers or addresses. None claims to be independently call-tested or a
 citywide emergency-dispatch destination; BetterSanFernando remains
 independent from the City Government throughout.
 
-All 14 canonical service categories are published; none remain planned. A
+All 15 canonical service categories are published; none remain planned. A
 completed no-export research decision found no unique, permanent,
 publication-ready City service for a standalone Livelihood category, so no
 Livelihood category or page is published; livelihood-related services
@@ -133,9 +134,21 @@ issuance. OCBO's downloadable forms remain temporarily unavailable and no
 online filing channel is published; the institutional email is an inquiries
 -only contact, not a submission channel. Building permits, certificates of
 occupancy, zoning clearances, and other building/zoning transactions remain
-unpublished pending source clarification. Another 98 External services and
-all 74 Internal services remain unpublished; CHO records external-22 and
-external-60 remain held and are not published. See
+unpublished pending source clarification. Another 98 CSFP External services
+and all 74 CSFP Internal services remain unpublished; CHO records
+external-22 and external-60 remain held and are not published. Utilities &
+Water publishes nine reviewed City of San Fernando Water District (CSFWD)
+Charter transactions plus two supporting resources (a Billing Inquiry tool
+and the Feedback and Complaints Mechanism) and remains `PARTIAL`. CSFWD is a
+distinct Water District organized under Presidential Decree 198 — not a
+City Government office or City Engineer division — and its own Citizen's
+Charter is separate from the CSFP Citizen's Charter counted above; service
+availability applies only within CSFWD/PW-CSF coverage, not every San
+Fernando barangay or property. No universal flat new-connection fee, online
+payment, online application, or 24/7 hotline/office is published for
+Utilities & Water; the two reconnection procedures remain separate, and the
+maintenance procedure's eight technical subtypes remain one canonical
+service, not separate pages. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
 page-by-page readiness assessment and
 [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is

@@ -1,0 +1,50 @@
+{
+  "category": "utilities-water",
+  "dataset": "utilities-water-resources",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-09-07",
+  "publication_status": "PUBLICATION_REVIEW_COMPLETE",
+  "record_count": 2,
+  "resources": [
+    {
+      "category": "utilities-water",
+      "channels": null,
+      "contact": {
+        "phone": "(045) 961-5804"
+      },
+      "description": "An official CSFWD website tool that lets a concessionaire enter their account number to view billing/account information.",
+      "function_note": "This is an inquiry tool only. It is not an online-payment facility.",
+      "id": "csfwd-charter-2025-1e-resource-01",
+      "public_notes": [
+        "Account numbers, query inputs, balances, due dates, disconnection results, and other returned customer information are never published or stored here.",
+        "This is not an online-payment channel; no payment capability is implied."
+      ],
+      "reply_standard": null,
+      "resource_type": "digital_utility",
+      "title": "Billing Inquiry",
+      "url": "https://csfwd.com.ph/bill-inquiry/"
+    },
+    {
+      "category": "utilities-water",
+      "channels": {
+        "email": "csfwd@yahoo.com",
+        "phone": "(045) 961-3546, local 110, 108, or 202",
+        "walk_in": "CSFWD Administrative/Finance Office or PrimeWater Commercial Office"
+      },
+      "contact": null,
+      "description": "The Charter-wide channel for general customer feedback and complaints to CSFWD/PrimeWater management, distinct from technical maintenance reporting.",
+      "function_note": null,
+      "id": "csfwd-charter-2025-1e-resource-02",
+      "public_notes": [
+        "Use this channel for general customer feedback and complaints. To report a technical water-supply or equipment concern (leaks, low pressure, water quality, meter issues), use Various MAINTENANCE Services instead.",
+        "A Facebook page is named in the Charter as an additional channel, but its exact current authenticated URL was not established and is not published.",
+        "Complaint contents and complainant information are never published."
+      ],
+      "reply_standard": "CSFWD/PrimeWater Management investigates and replies within three working days from receipt",
+      "resource_type": "shared_support_resource",
+      "title": "Feedback and Complaints Mechanism",
+      "url": null
+    }
+  ],
+  "schema_version": 1
+}

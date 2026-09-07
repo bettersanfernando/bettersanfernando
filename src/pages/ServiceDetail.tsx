@@ -130,6 +130,49 @@ function ClientSteps({ service }: { service: Service }) {
   );
 }
 
+function Variants({ service }: { service: Service }) {
+  if (!('variants' in service) || !service.variants) return null;
+
+  return (
+    <section aria-labelledby="variants-heading">
+      <h2 id="variants-heading" className="text-2xl font-bold text-gray-900">
+        Subtypes and variants
+      </h2>
+      <ol className="mt-5 divide-y divide-gray-200 border-y border-gray-200">
+        {service.variants.map((variant, index) => {
+          const name = 'subtype' in variant ? variant.subtype : variant.label;
+          return (
+            <li key={`${name}-${index}`} className="py-5">
+              <p className="text-sm font-bold text-gray-900">{name}</p>
+              <dl className="mt-2 grid gap-2 sm:grid-cols-2">
+                {'fee' in variant && (
+                  <div>
+                    <dt className="text-xs font-semibold text-gray-700">Fee</dt>
+                    <dd className="text-sm text-gray-900">{variant.fee}</dd>
+                  </div>
+                )}
+                <div>
+                  <dt className="text-xs font-semibold text-gray-700">
+                    Processing time
+                  </dt>
+                  <dd className="text-sm text-gray-900">
+                    {variant.processing_time}
+                  </dd>
+                </div>
+              </dl>
+              {'note' in variant && variant.note && (
+                <p className="mt-2 text-sm leading-6 text-gray-700">
+                  {variant.note}
+                </p>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+}
+
 export default function ServiceDetail() {
   const { category, serviceSlug, slug } = useParams();
   const service = getServiceBySlug(serviceSlug ?? slug ?? '');
@@ -182,6 +225,7 @@ export default function ServiceDetail() {
     'senior-citizens': 'Senior Citizens',
     'infrastructure-public-works': 'Infrastructure & Public Works',
     'housing-land-use': 'Housing & Land Use',
+    'utilities-water': 'Utilities & Water',
   } as const;
   const categoryName =
     categoryNames[category as keyof typeof categoryNames] ?? category;
@@ -288,6 +332,7 @@ export default function ServiceDetail() {
           <div className="min-w-0 space-y-12">
             <Requirements service={service} />
             <ClientSteps service={service} />
+            <Variants service={service} />
 
             {(service.forms.length > 0 ||
               service.online_channels.length > 0 ||

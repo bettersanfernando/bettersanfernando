@@ -14,10 +14,11 @@
     "City Civil Registry Office",
     "Office for Senior Citizen's Affairs",
     "City Administrator's Office",
-    "Office of the City Building Official"
+    "Office of the City Building Official",
+    "City of San Fernando Water District"
   ],
   "publication_status": "INITIAL_PILOT",
-  "record_count": 157,
+  "record_count": 166,
   "schema_version": 1,
   "services": [
     {
@@ -15579,6 +15580,830 @@
       "slug": "certificate-of-final-electrical-inspection-completion-small-electrical",
       "title": "Certificate of Final Electrical Inspection/ Completion (Small Electrical)",
       "who_may_avail": "Citizen / Business / Government"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Present the billing document or account ledger and pay the cashier at a CSFWD/PW-CSF Main or Sub-Office; retain the Official Receipt.",
+          "sequence": "1"
+        }
+      ],
+      "description": "CSFWD/PW-CSF accepts water bill payments in person and issues an Official Receipt.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-01",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department (PW-CSF Commercial Department)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 minute"
+      },
+      "public_notes": [
+        "'None' means no separate processing fee is charged for accepting the payment. It does not mean the water bill itself is waived.",
+        "Only in-person payment at a CSFWD/PW-CSF Main or Sub-Office is published; no online payment channel is confirmed."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Current billing notice or customer account ledger",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Cash or check payment",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "acceptance-of-water-bill-payments",
+      "title": "Acceptance of Water Bill Payments",
+      "who_may_avail": "All CSFWD/PW-CSF concessionaires"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Request the Change Name Form at CSFWD/PW-CSF Customer Service.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Submit documents for validation.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Pay the ownership/name-change fee at the teller.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Sign the updated Water Service Contract.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Customer Service forwards the change to Customer Accounts for the account-record update.",
+          "sequence": "5"
+        }
+      ],
+      "description": "CSFWD/PW-CSF processes a change of registered account name/ownership on an active water service connection.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 500.00"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-02",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department (PW-CSF Commercial Department)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "6 minutes"
+      },
+      "public_notes": [
+        "This is change of registered account name/ownership only, not a general mailing-address or contact-information update."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Change Name Form",
+          "where_to_secure": "CSFWD/PW-CSF Customer Service"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Proof of property ownership",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Two Philippine government-issued IDs for the new owner, with three specimen signatures",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "Water Service Contract",
+          "where_to_secure": "CSFWD/PW-CSF Customer Service"
+        }
+      ],
+      "slug": "change-of-account-name",
+      "title": "Change of Account Name",
+      "who_may_avail": "Concessionaires with an active service connection"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C",
+          "G2B",
+          "G2G"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "File the application at CSFWD/PW-CSF Customer Service; the Customer Service Assistant encodes it and schedules inspection.",
+          "sequence": "Day 1"
+        },
+        {
+          "instruction": "The inspector performs the site inspection and assesses required materials, permits, and charges.",
+          "sequence": "Day 2"
+        },
+        {
+          "instruction": "The assessment is encoded.",
+          "sequence": "Day 3"
+        },
+        {
+          "instruction": "Sign the Water Service Contract, receive a brief policy orientation, then pay the assessed amount; the job order is prepared.",
+          "sequence": "Day 4"
+        },
+        {
+          "instruction": "Installation proceeds under normal working conditions and subject to resource availability.",
+          "sequence": "Day 5-9"
+        }
+      ],
+      "description": "CSFWD/PW-CSF processes new water service connection applications for eligible residential, commercial, and government entities within its service coverage area.",
+      "fee": {
+        "status": "refer_to_charter",
+        "text": "Assessed application fee (PHP 400.00 residential/government, PHP 1,000.00 commercial) plus tapping/installation, boring/jetting, cutting/breaking, excavation, restoration, and other site-dependent material charges. Not a single flat connection fee."
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-03",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department and Technical Department (PW-CSF Commercial and Technical Departments)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "9 working days (Day 1-9)"
+      },
+      "public_notes": [
+        "Eligibility is limited to the City of San Fernando and Sto. Tomas, Pampanga, within CSFWD/PW-CSF service coverage. Confirm coverage before relying on this service; not every San Fernando barangay or property is served.",
+        "No online application channel is confirmed; apply in person at CSFWD/PW-CSF Customer Service.",
+        "Tapping/installation, boring/jetting, cutting/breaking, excavation, restoration, and material charges are subject to current market values and site conditions. No universal flat connection fee is published.",
+        "This replaces an older legacy web workflow (1-2 day survey, fixed Monday/Wednesday orientation, 1-5 day installation), which is superseded by the current 2025 Charter's Day 1-9 process."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Application form",
+          "where_to_secure": "CSFWD/PW-CSF Customer Service"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Two Philippine government-issued IDs with specimen signatures",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Proof appropriate to the applicant's occupancy: private owners submit title/deed or equivalent ownership evidence; tenants submit a notarized lease plus ownership evidence; accredited informal-settler associations and occupants of government/private property may require association or Barangay certification and undertakings",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "4",
+          "text": "For representatives: applicant/representative identification and notarized authority where the applicant cannot sign",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "5",
+          "text": "For corporate/business applicants: application, ownership evidence or notarized lease, representative authorization, relevant business/registration document, and landlord authorization where the premises are leased",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "new-service-application",
+      "title": "New Service Application",
+      "who_may_avail": "Residential, commercial, and government entities in the City of San Fernando and Sto. Tomas, Pampanga, within the service coverage area of CSFWD/PW-CSF"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Pay the arrears/water bill at the teller.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "CSFWD/PW-CSF accepts payment, creates a job order, dispatches, and implements the reconnection.",
+          "sequence": "2"
+        }
+      ],
+      "description": "CSFWD/PW-CSF reconnects a water service account that was disconnected for delinquency not exceeding 24 hours, once the amount due is paid.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None (reconnection processing fee); outstanding arrears/water bill must still be paid"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-04",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department and Technical Department (PW-CSF Commercial and Technical Departments)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "1 working day and 6 minutes total; implementation occurs within 24 working hours after preparation of the Job Order"
+      },
+      "public_notes": [
+        "'24 working hours' describes this transaction's technical implementation standard. It is not evidence of a 24/7 hotline or a round-the-clock office."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Billing notice",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Payment of outstanding account, where applicable",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "reconnection-of-accounts-disconnected-within-twenty-four-24-hours",
+      "title": "Reconnection of Accounts Disconnected Within Twenty-Four (24) Hours",
+      "who_may_avail": "Inactive/disconnected concessionaires newly disconnected for delinquency, not exceeding 24 hours"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the reconnection request at CSFWD/PW-CSF Customer Service.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Account assessment and site inspection.",
+          "sequence": "Day 2"
+        },
+        {
+          "instruction": "Encoding.",
+          "sequence": "Day 3"
+        },
+        {
+          "instruction": "Pay the assessed amount; the job order is prepared.",
+          "sequence": "Day 4"
+        },
+        {
+          "instruction": "Implementation.",
+          "sequence": "Day 5-9"
+        }
+      ],
+      "description": "CSFWD/PW-CSF reconnects a water service account that has been disconnected for more than 24 hours, including prior voluntary or delinquency disconnections.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 300.00 if disconnected from the service line; PHP 500.00 if disconnected from the main line; plus market-variable material cost and outstanding account amounts"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-05",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department and Technical Department (PW-CSF Commercial and Technical Departments)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "9 working days total; the Charter also records 1 working day and 37 minutes of active handling/implementation"
+      },
+      "public_notes": [
+        "This is a separate transaction from Reconnection Within 24 Hours; the two are not combined."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Billing notice",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Customer account ledger",
+          "where_to_secure": "CSFWD/PW-CSF Customer Service"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Payment of reconnection fee, outstanding balances, and required materials",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": "If inactive over one year",
+          "ordinal": "4",
+          "text": "If inactive over one year: account-owner ID and Transfer Certificate of Title (TCT) proof",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": "If filed by a representative",
+          "ordinal": "5",
+          "text": "For a representative: notarized Special Power of Attorney (SPA)",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "reconnection-of-accounts-disconnected-after-twenty-four-24-hours",
+      "title": "Reconnection of Accounts Disconnected After Twenty-Four (24) Hours",
+      "who_may_avail": "Inactive/disconnected concessionaires, including prior voluntary or delinquency disconnections"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the Senior Citizen Discount application at CSFWD/PW-CSF Customer Service.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Customer Service validates and forwards the application.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Customer Accounts processes the new or renewal discount entry.",
+          "sequence": "3"
+        }
+      ],
+      "description": "CSFWD/PW-CSF applies a discount on water consumption for an active connection registered to a senior citizen who resides at the premises.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-06",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department (PW-CSF Commercial Department)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "3 minutes"
+      },
+      "public_notes": [
+        "Verified benefit: a 5% discount where monthly consumption is 30 cubic meters or below.",
+        "No PWD, lifeline, or other discount procedure is currently published; this service covers only the verified senior citizen discount."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Account ledger showing an active connection for at least one year",
+          "where_to_secure": "CSFWD/PW-CSF Customer Service"
+        },
+        {
+          "condition": null,
+          "ordinal": "2",
+          "text": "Senior Citizen ID with three specimen signatures",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Current billing notice / Official Receipt / account ledger",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "senior-citizen-discount",
+      "title": "Senior Citizen Discount",
+      "who_may_avail": "Active water connection registered to a senior citizen who resides at the premises"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit the transfer request at CSFWD/PW-CSF Customer Service.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Account check and job order.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Inspection and assessment.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Encoding.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Pay the assessed amount at the teller.",
+          "sequence": "5"
+        },
+        {
+          "instruction": "Engineering job order and implementation, scheduled within five working days after job-order preparation.",
+          "sequence": "6"
+        }
+      ],
+      "description": "CSFWD/PW-CSF transfers an active concessionaire's water service line or meter to the same or a different location.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "PHP 600.00 plus material cost, subject to current market values"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-07",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department (PW-CSF Commercial Department)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "9 working days total; implementation is scheduled within five working days after job-order preparation"
+      },
+      "public_notes": [
+        "Same-location and different-location transfers use different requirement sets, both preserved here.",
+        "This service integrates the earlier separate meter-relocation and different-location transfer procedures into one Charter transaction."
+      ],
+      "requirements": [
+        {
+          "condition": "Same-location transfer",
+          "ordinal": "1",
+          "text": "Same location: current billing notice / Official Receipt / account ledger",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": "Different-location transfer",
+          "ordinal": "2",
+          "text": "Different location: billing document/ledger; two government IDs plus specimen signatures; Request for Inspection - Transfer Line; appropriate proof of ownership/occupancy",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "transfer-of-water-service-line-meter-on-same-or-different-location",
+      "title": "Transfer of Water Service Line / Meter on Same or Different Location",
+      "who_may_avail": "Active concessionaires"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Report the concern to CSFWD/PW-CSF Customer Service.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Customer Service validates applicable requirements, creates a complaint job order, and forwards it to the appropriate technical unit.",
+          "sequence": "2"
+        }
+      ],
+      "description": "CSFWD/PW-CSF receives and addresses technical maintenance concerns on an active concessionaire's water service, including leaks, low pressure, water quality, and meter issues.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "Generally none; water-meter replacement may be charged at market cost when damage was intentionally caused"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-08",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department and Technical Department (PW-CSF Commercial and Technical Departments)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "Varies by subtype; see variants"
+      },
+      "public_notes": [
+        "Leak reports, no-water/low-pressure complaints, water-quality concerns, meter-accuracy checks, and meter replacement are subtypes of this one canonical service, not separate services or routes.",
+        "A stolen meter report additionally requires an original Barangay blotter.",
+        "This is the technical maintenance-reporting channel. It is separate from the Feedback and Complaints Mechanism, which handles general customer feedback/complaints, not technical water-supply reports."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Report of the concern to Customer Service",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": "Stolen-meter reports only",
+          "ordinal": "2",
+          "text": "For a stolen meter: original Barangay blotter",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "various-maintenance-services",
+      "title": "Various MAINTENANCE Services",
+      "variants": [
+        {
+          "fee": "None",
+          "processing_time": "1 day upon report",
+          "subtype": "Main-line leak repair"
+        },
+        {
+          "fee": "None",
+          "processing_time": "1 day upon report",
+          "subtype": "Service-line leak repair"
+        },
+        {
+          "fee": "None",
+          "processing_time": "1 day upon report",
+          "subtype": "Meter-stand leak repair"
+        },
+        {
+          "fee": "None",
+          "processing_time": "1 day; Day 1-2",
+          "subtype": "No water / low pressure"
+        },
+        {
+          "fee": "None",
+          "processing_time": "1 day upon report",
+          "subtype": "Water-quality concerns"
+        },
+        {
+          "fee": "None",
+          "processing_time": "5 working days after job order",
+          "subtype": "Meter accuracy - high consumption"
+        },
+        {
+          "fee": "None",
+          "processing_time": "5 working days after job order",
+          "subtype": "Meter accuracy - low consumption"
+        },
+        {
+          "fee": "None, or market cost where intentional damage applies",
+          "processing_time": "5 working days after job order",
+          "subtype": "Defective/damaged/stolen meter replacement"
+        }
+      ],
+      "who_may_avail": "Active concessionaires"
+    },
+    {
+      "appointment": null,
+      "canonical_source": {
+        "edition": "2025 (1st Edition)",
+        "label": "Citizen's Charter Handbook 2025 (1st Edition)",
+        "landing_page_url": "https://csfwd.com.ph/",
+        "source_role": "CURRENT_CANONICAL",
+        "url": "https://csfwd.com.ph/wp-content/uploads/2025/03/Citizens-Charter-Handbook-2025-1st-Edition-FINAL.pdf"
+      },
+      "category": "utilities-water",
+      "classification": {
+        "complexity": null,
+        "service_scope": "External",
+        "transaction_types": [
+          "G2C"
+        ]
+      },
+      "client_steps": [
+        {
+          "instruction": "Submit identification/authorization at CSFWD/PW-CSF Customer Service.",
+          "sequence": "1"
+        },
+        {
+          "instruction": "Account/balance verification.",
+          "sequence": "2"
+        },
+        {
+          "instruction": "Pay the outstanding balance at the teller.",
+          "sequence": "3"
+        },
+        {
+          "instruction": "Sign the voluntary-disconnection log.",
+          "sequence": "4"
+        },
+        {
+          "instruction": "Job order and physical disconnection.",
+          "sequence": "5"
+        }
+      ],
+      "description": "CSFWD/PW-CSF processes a concessionaire's voluntary request to disconnect their water service connection.",
+      "fee": {
+        "status": "as_stated_in_charter",
+        "text": "None (processing fee); outstanding obligations remain payable"
+      },
+      "forms": [],
+      "freshness_status": "verified",
+      "id": "csfwd-charter-2025-1e-external-09",
+      "last_verified": "2026-09-07",
+      "office": {
+        "acronym": "CSFWD",
+        "division": "Commercial Service Department and Technical Department (PW-CSF Commercial and Technical Departments)",
+        "name": "City of San Fernando Water District"
+      },
+      "office_contact": {
+        "emails": [],
+        "phone": null
+      },
+      "office_hours": null,
+      "online_channels": [],
+      "processing_time": {
+        "status": "as_stated_in_charter",
+        "text": "4 working days total; the Charter separately shows 1 day and 4 minutes of active handling/implementation"
+      },
+      "public_notes": [
+        "Full settlement of the outstanding balance is required before disconnection."
+      ],
+      "requirements": [
+        {
+          "condition": null,
+          "ordinal": "1",
+          "text": "Account-owner ID",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": "If filed by a representative",
+          "ordinal": "2",
+          "text": "Notarized Special Power of Attorney (SPA) for a representative",
+          "where_to_secure": "Customer"
+        },
+        {
+          "condition": null,
+          "ordinal": "3",
+          "text": "Full settlement of the bill / other outstanding balance",
+          "where_to_secure": "Customer"
+        }
+      ],
+      "slug": "voluntary-disconnection-of-water-service-connection",
+      "title": "Voluntary Disconnection of Water Service Connection",
+      "who_may_avail": "Active concessionaires"
     }
   ]
 }

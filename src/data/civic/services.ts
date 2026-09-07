@@ -8,7 +8,9 @@ const PublicUrl = z.url().refine(url => /^https?:\/\//.test(url), {
 });
 const ServiceId = z
   .string()
-  .regex(/^charter-2026-2e-[a-z0-9]+(?:-[a-z0-9]+)*-external-\d{2}$/);
+  .regex(
+    /^(?:charter-2026-2e-[a-z0-9]+(?:-[a-z0-9]+)*-external-\d{2}|csfwd-charter-2025-1e-external-\d{2})$/
+  );
 const Slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 
 const BlpdRequirementSchema = z.strictObject({
@@ -561,6 +563,48 @@ const OcboServiceSchema = z.strictObject({
   requirements: z.array(BlpdRequirementSchema).min(1),
 });
 
+const CsfwdVariantSchema = z.strictObject({
+  fee: NonEmptyString,
+  processing_time: NonEmptyString,
+  subtype: NonEmptyString,
+});
+
+const CsfwdServiceSchema = z.strictObject({
+  ...SharedServiceShape,
+  appointment: z.null(),
+  category: z.literal('utilities-water'),
+  classification: z.strictObject({
+    complexity: z.null(),
+    service_scope: z.literal('External'),
+    transaction_types: z.array(z.enum(['G2C', 'G2B', 'G2G'])).min(1),
+  }),
+  fee: z.strictObject({
+    status: z.enum(['as_stated_in_charter', 'refer_to_charter']),
+    text: NonEmptyString,
+  }),
+  office: z.strictObject({
+    acronym: z.literal('CSFWD'),
+    division: z.enum([
+      'Commercial Service Department (PW-CSF Commercial Department)',
+      'Commercial Service Department and Technical Department (PW-CSF Commercial and Technical Departments)',
+    ]),
+    name: z.literal('City of San Fernando Water District'),
+  }),
+  office_contact: z.strictObject({
+    emails: z.tuple([]),
+    phone: z.null(),
+  }),
+  office_hours: z.null(),
+  online_channels: z.tuple([]),
+  forms: z.tuple([]),
+  processing_time: z.strictObject({
+    status: z.literal('as_stated_in_charter'),
+    text: NonEmptyString,
+  }),
+  requirements: z.array(BlpdRequirementSchema).min(1),
+  variants: z.array(CsfwdVariantSchema).min(1).optional(),
+});
+
 const ServiceSchema = z.union([
   BlpdServiceSchema,
   CdrrmoServiceSchema,
@@ -574,6 +618,7 @@ const ServiceSchema = z.union([
   OscaServiceSchema,
   CAdminOServiceSchema,
   OcboServiceSchema,
+  CsfwdServiceSchema,
 ]);
 
 const ServicesFileSchema = z
@@ -596,15 +641,16 @@ const ServicesFileSchema = z
       z.literal("Office for Senior Citizen's Affairs"),
       z.literal("City Administrator's Office"),
       z.literal('Office of the City Building Official'),
+      z.literal('City of San Fernando Water District'),
     ]),
     publication_status: z.literal('INITIAL_PILOT'),
-    record_count: z.literal(157),
+    record_count: z.literal(166),
     schema_version: z.literal(1),
-    services: z.array(ServiceSchema).length(157),
+    services: z.array(ServiceSchema).length(166),
   })
   .superRefine((file, context) => {
     for (const key of ['id', 'slug'] as const) {
-      if (new Set(file.services.map(service => service[key])).size !== 157) {
+      if (new Set(file.services.map(service => service[key])).size !== 166) {
         context.addIssue({
           code: 'custom',
           message: `Service ${key}s must be unique`,
@@ -649,6 +695,9 @@ const ServicesFileSchema = z
     const ocboCount = file.services.filter(
       service => service.office.acronym === 'OCBO'
     ).length;
+    const csfwdCount = file.services.filter(
+      service => service.office.acronym === 'CSFWD'
+    ).length;
     if (
       blpdCount !== 8 ||
       cdrrmoCount !== 7 ||
@@ -661,12 +710,13 @@ const ServicesFileSchema = z
       ccroCount !== 15 ||
       oscaCount !== 2 ||
       cAdminOCount !== 1 ||
-      ocboCount !== 2
+      ocboCount !== 2 ||
+      csfwdCount !== 9
     ) {
       context.addIssue({
         code: 'custom',
         message:
-          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, 1 CAdminO, and 2 OCBO records',
+          'Services must contain exactly 8 BLPD, 7 CDRRMO, 39 CSWDO, 59 CHO, 7 CIPPESO, 7 CAVO, 9 CCSFP, 1 CENRO, 15 CCRO, 2 OSCA, 1 CAdminO, 2 OCBO, and 9 CSFWD records',
         path: ['services'],
       });
     }
@@ -687,7 +737,8 @@ export type PublishedServiceCategory =
   | 'civil-registry'
   | 'senior-citizens'
   | 'infrastructure-public-works'
-  | 'housing-land-use';
+  | 'housing-land-use'
+  | 'utilities-water';
 
 const servicesFile = ServicesFileSchema.parse(servicesJson);
 const services: readonly Service[] = Object.freeze(servicesFile.services);
@@ -719,6 +770,7 @@ const categoryByAcronym: Record<
   OSCA: 'senior-citizens',
   CAdminO: 'infrastructure-public-works',
   OCBO: 'housing-land-use',
+  CSFWD: 'utilities-water',
 };
 
 // CSWDO covers three resident-facing purposes, not one category: reviewed

@@ -28,3 +28,4 @@ export * from './bidResults.ts';
 export * from './contracts.ts';
 export * from './procurementStatistics.ts';
 export * from './services.ts';
+export * from './utilitiesWaterResources.ts';

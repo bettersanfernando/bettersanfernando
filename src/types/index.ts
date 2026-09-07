@@ -30,6 +30,7 @@ export type NavigationIcon =
   | 'chart'
   | 'construction'
   | 'database'
+  | 'droplet'
   | 'external-link'
   | 'file-check'
   | 'file-text'
