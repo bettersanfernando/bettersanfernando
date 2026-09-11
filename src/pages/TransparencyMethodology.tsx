@@ -133,9 +133,8 @@ export default function TransparencyMethodology() {
   const hasUnpublishedFinance = inventory.unavailableDomains.some(
     domain => domain.id === 'finance' && domain.status === 'NOT_EXPORTED'
   );
-  const hasUnpublishedDisclosure = inventory.unavailableDomains.some(
-    domain =>
-      domain.id === 'full-disclosure' && domain.status === 'NOT_EXPORTED'
+  const fullDisclosureDomain = inventory.publishedDomains.find(
+    domain => domain.id === 'full-disclosure'
   );
 
   return (
@@ -502,10 +501,18 @@ export default function TransparencyMethodology() {
                       'City offices',
                       'The current published directory is bounded coverage, not necessarily a complete organizational chart.',
                     ],
-                    ...(hasUnpublishedFinance && hasUnpublishedDisclosure
+                    ...(fullDisclosureDomain
                       ? ([
                           [
-                            'Finance and Full Disclosure',
+                            'Full Disclosure',
+                            fullDisclosureDomain.coverageNote,
+                          ],
+                        ] as const)
+                      : []),
+                    ...(hasUnpublishedFinance
+                      ? ([
+                          [
+                            'Finance',
                             'Not currently included in the public frontend export. This describes release availability, not whether records exist elsewhere.',
                           ],
                         ] as const)

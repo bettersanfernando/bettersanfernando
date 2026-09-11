@@ -28,6 +28,7 @@
     "barangays:smoke": "node --experimental-strip-types scripts/smoke-barangays.ts",
     "city-profile:smoke": "node --experimental-strip-types scripts/smoke-city-profile.ts",
     "transparency-sources:smoke": "node --experimental-strip-types scripts/smoke-transparency-sources.ts",
+    "full-disclosure:smoke": "node --experimental-strip-types scripts/smoke-full-disclosure.ts",
     "transparency-methodology:smoke": "node --experimental-strip-types scripts/smoke-transparency-methodology.ts",
     "ordinances:smoke": "node --experimental-strip-types scripts/smoke-ordinances.ts",
     "bid-results:smoke": "node --experimental-strip-types scripts/smoke-bid-results.ts",

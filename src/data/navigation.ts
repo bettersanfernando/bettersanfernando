@@ -374,7 +374,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.fullDisclosureReports',
             href: '/transparency/full-disclosure',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.officialDocuments',

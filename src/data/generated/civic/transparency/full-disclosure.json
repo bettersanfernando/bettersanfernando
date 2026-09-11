@@ -1,0 +1,163 @@
+{
+  "dataset": "transparency-full-disclosure",
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-09-11",
+  "overall_public_limitation": "This is a bounded metadata-only export of 10 Full Disclosure Policy report records (2023-2026) with complete, documented verification already present in this repository as of 2026-09-11. It is not a complete Full Disclosure archive: the canonical inventory separately tracks approximately 200 official source records across 2020-2026, of which only these 13 have individual record-level metadata, and only 10 of those 13 have a verified official URL. No report's financial contents (amounts, line items, disbursements) are extracted, summarized, or published anywhere in this repository.",
+  "publication_status": "PUBLICATION_REVIEW_COMPLETE",
+  "record_count": 10,
+  "records": [
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "fdp-trust-2026-q2",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/Trust-Fund-Utilization-2Q-2026.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/trust-fund-utilization-2q-2026/",
+      "publishing_agency": "City Government of San Fernando, Pampanga",
+      "quarter": "Q2",
+      "report_type": "Trust Fund Utilization",
+      "reporting_year": 2026,
+      "title": "Trust Fund Utilization 2Q 2026",
+      "verification_date": "2026-08-31"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "fdp-sef-2026-q2",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/Report-of-Special-Education-Fund-Utilization-2Q-2026.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/report-of-special-education-fund-utilization-2q-2026/",
+      "publishing_agency": "City Government of San Fernando, Pampanga",
+      "quarter": "Q2",
+      "report_type": "Special Education Fund Utilization",
+      "reporting_year": 2026,
+      "title": "Report of Special Education Fund Utilization 2Q 2026",
+      "verification_date": "2026-08-31"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "fdp-trust-2026-q1",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/04/Trust-Fund-Utilization-1Q-2026.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/trust-fund-utilization-1q-2026/",
+      "publishing_agency": "City Government of San Fernando, Pampanga",
+      "quarter": "Q1",
+      "report_type": "Trust Fund Utilization",
+      "reporting_year": 2026,
+      "title": "Trust Fund Utilization 1Q 2026",
+      "verification_date": "2026-08-31"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "fdp-sef-2026-q1",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/04/Report-of-Special-Education-Fund-Utilization-1Q-2026.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/report-of-special-education-fund-utilization-1q-2026/",
+      "publishing_agency": "City Government of San Fernando, Pampanga",
+      "quarter": "Q1",
+      "report_type": "Special Education Fund Utilization",
+      "reporting_year": 2026,
+      "title": "Report of Special Education Fund Utilization 1Q 2026",
+      "verification_date": "2026-08-31"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "PDF",
+      "id": "app-2026",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-ANNUAL-PROCUREMENT-PLAN-2026.pdf",
+      "official_page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-annual-procurement-plan-2026/",
+      "publishing_agency": "City Government of San Fernando, Pampanga (BAC)",
+      "quarter": null,
+      "report_type": "Annual Procurement Plan",
+      "reporting_year": 2026,
+      "title": "APP CY2026",
+      "verification_date": "2026-08-30"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "PDF",
+      "id": "app-2025",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-ANNUAL-PROCUREMENT-PLAN-2025.pdf",
+      "official_page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-annual-procurement-plan-2025/",
+      "publishing_agency": "City Government of San Fernando, Pampanga (BAC)",
+      "quarter": null,
+      "report_type": "Annual Procurement Plan",
+      "reporting_year": 2025,
+      "title": "APP CY2025",
+      "verification_date": "2026-08-30"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "app-2024",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/LGU-CSFP-Annual-Procurement-Plan-2024.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-annual-procurement-plan-2024/",
+      "publishing_agency": "City Government of San Fernando, Pampanga (BAC)",
+      "quarter": null,
+      "report_type": "Annual Procurement Plan",
+      "reporting_year": 2024,
+      "title": "APP CY2024",
+      "verification_date": "2026-08-30"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "app-2023",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/LGU-CSFP-Annual-Procurement-Plan-2023.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-annual-procurement-plan-2023/",
+      "publishing_agency": "City Government of San Fernando, Pampanga (BAC)",
+      "quarter": null,
+      "report_type": "Annual Procurement Plan",
+      "reporting_year": 2023,
+      "title": "APP CY2023",
+      "verification_date": "2026-08-30"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "PDF",
+      "id": "pmr-2025",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-PROCUREMENT-MONITORING-REPORT-2025.pdf",
+      "official_page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
+      "publishing_agency": "City Government of San Fernando, Pampanga (BAC Secretariat)",
+      "quarter": null,
+      "report_type": "Procurement Monitoring Report",
+      "reporting_year": 2025,
+      "title": "Procurement Monitoring Report FY2025",
+      "verification_date": "2026-08-30"
+    },
+    {
+      "availability_status": "VERIFIED_ACCESSIBLE",
+      "file_type": "XLSX",
+      "id": "pmr-2023",
+      "official_attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/PMR-2023_LGU-CITY-OF-SAN-FERNANDO-PAMPANGA.xlsx",
+      "official_page_url": "https://cityofsanfernando.gov.ph/pmr-2023_lgu-city-of-san-fernando-pampanga/",
+      "publishing_agency": "City Government of San Fernando, Pampanga (BAC Secretariat)",
+      "quarter": null,
+      "report_type": "Procurement Monitoring Report",
+      "reporting_year": 2023,
+      "title": "Procurement Monitoring Report 2023",
+      "verification_date": "2026-08-30"
+    }
+  ],
+  "report_type_breakdown": {
+    "Annual Procurement Plan": 4,
+    "Procurement Monitoring Report": 2,
+    "Special Education Fund Utilization": 2,
+    "Trust Fund Utilization": 2
+  },
+  "route": "/transparency/full-disclosure",
+  "schema_version": 1,
+  "year_quarter_coverage": {
+    "2023": [
+      "ANNUAL"
+    ],
+    "2024": [
+      "ANNUAL"
+    ],
+    "2025": [
+      "ANNUAL"
+    ],
+    "2026": [
+      "Q1",
+      "Q2"
+    ]
+  }
+}

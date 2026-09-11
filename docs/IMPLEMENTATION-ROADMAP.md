@@ -129,6 +129,19 @@ personal accounts are included. It is `PARTIAL`, not `READY`: broader
 exact-URL verification across remaining departments and city channels
 continues beyond this batch.
 
+`/transparency/full-disclosure` shipped as a new canonical route: a
+publication-reviewed directory of 10 individually verified Full Disclosure
+Policy report records (2023–2026) — 4 Annual Procurement Plans, 2 Procurement
+Monitoring Reports, 2 Trust Fund Utilization reports, and 2 Special Education
+Fund Utilization reports — each with an official page link, an official
+attachment link where provided, file type, publishing agency, and
+verification date. Search, report-type and year filters, and reporting-year
+grouping are implemented; no financial amounts, line items, or disbursements
+are extracted or published. It is `PARTIAL`, not `READY`: three unverified
+records (APP CY2021, Indicative APP CY2021, PMR 2nd Semester 2020) remain held
+and unpublished, and the canonical inventory separately tracks a materially
+larger set of official source records not yet individually verified.
+
 ### Should wait for more data
 
 | Page                       | Exact READY blocker                                                                                                                                          | Required next work                                                                                                                                                                                           |
@@ -338,6 +351,7 @@ versioned allowlisted export are complete.
 |        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Moves `/government/links` from `PARTIAL` to `READY`             |
 |        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                                                                                                                                                                                                                                                                                                                                               | Moves `/government/hotlines` from `PARTIAL` to `READY`          |
 |        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Moves `/statistics/demographics` from `PARTIAL` to `READY`      |
+|        7 | Continue verifying additional Full Disclosure report years and types beyond the published 10-record batch, including the three held records (APP CY2021, Indicative APP CY2021, PMR 2nd Semester 2020)                                                                                                                                                                                                                                                                                                                                                                                                      | Moves `/transparency/full-disclosure` from `PARTIAL` to `READY` |
 
 The City Health Office publication batch is implemented as the bounded,
 publication-reviewed set described above. Health Services remains `PARTIAL`.
@@ -347,13 +361,13 @@ with the mechanical creation of an export.
 
 ### RECOVERY queue
 
-| Priority | Work                                                                                                                                                                        | Public page(s) unblocked or improved                                                                                    |
-| -------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-|        1 | Recover project contract documents, notices to proceed, completion evidence, unresolved linkages, collisions, and source conflicts without advancing lifecycle by inference | Improves `/projects/:projectId`, `/procurement/contracts`, `/statistics/projects`, and `/statistics/procurement`        |
-|        2 | Recover missing ordinance full text and additional verified ordinances                                                                                                      | Improves `/legislation/ordinances` and `/legislation`                                                                   |
-|        3 | Recover the three older referenced executive orders                                                                                                                         | Improves `/legislation/executive-orders` and `/legislation`                                                             |
-|        4 | Recover individual resolution evidence after jurisdiction and authority checks                                                                                              | Unblocks `/legislation/resolutions` and improves `/legislation`                                                         |
-|        5 | Continue targeted finance recovery for a comparable Annual Budget year, 2023 Q4 SIPB, selected 2022 OCR needs, and COA reports                                              | Improves the future exports for `/transparency/finance`, `/transparency/full-disclosure`, and `/transparency/documents` |
+| Priority | Work                                                                                                                                                                        | Public page(s) unblocked or improved                                                                             |
+| -------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+|        1 | Recover project contract documents, notices to proceed, completion evidence, unresolved linkages, collisions, and source conflicts without advancing lifecycle by inference | Improves `/projects/:projectId`, `/procurement/contracts`, `/statistics/projects`, and `/statistics/procurement` |
+|        2 | Recover missing ordinance full text and additional verified ordinances                                                                                                      | Improves `/legislation/ordinances` and `/legislation`                                                            |
+|        3 | Recover the three older referenced executive orders                                                                                                                         | Improves `/legislation/executive-orders` and `/legislation`                                                      |
+|        4 | Recover individual resolution evidence after jurisdiction and authority checks                                                                                              | Unblocks `/legislation/resolutions` and improves `/legislation`                                                  |
+|        5 | Continue targeted finance recovery for a comparable Annual Budget year, 2023 Q4 SIPB, selected 2022 OCR needs, and COA reports                                              | Improves the future exports for `/transparency/finance` and `/transparency/documents`                            |
 
 `NOT_FOUND_AFTER_TARGETED_SEARCH` records a recovery outcome; it never proves
 that a government record does not exist.
@@ -362,10 +376,9 @@ that a government record does not exist.
 
 | Priority | Export work                                                                                                                                                             | Public page(s) unblocked                                                                                                          |
 | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-|        1 | Create public-safe Full Disclosure metadata with report type, period, agency, official URL, provenance, coverage gaps, and reviewed attachment handling                 | `/transparency/full-disclosure`                                                                                                   |
-|        2 | Create a unified allowlisted document projection for approved disclosure classes, excluding private paths, audit notes, recovery queues, and sensitive rows             | `/transparency/documents`                                                                                                         |
-|        3 | Create a sanitized aggregate finance export and typed frontend module with metric definitions, derivation tests, period-comparability rules, and privacy classification | `/transparency/finance`; may inform the decision on `/statistics/project-spending`                                                |
-|        4 | Only if future scope expands beyond the approved bounded subset, create a dedicated safe procurement/bid-results export                                                 | Expands `/procurement`, `/procurement/bid-results`, and `/statistics/procurement`; it does not block their bounded READY versions |
+|        1 | Create a unified allowlisted document projection for approved disclosure classes, excluding private paths, audit notes, recovery queues, and sensitive rows             | `/transparency/documents`                                                                                                         |
+|        2 | Create a sanitized aggregate finance export and typed frontend module with metric definitions, derivation tests, period-comparability rules, and privacy classification | `/transparency/finance`; may inform the decision on `/statistics/project-spending`                                                |
+|        3 | Only if future scope expands beyond the approved bounded subset, create a dedicated safe procurement/bid-results export                                                 | Expands `/procurement`, `/procurement/bid-results`, and `/statistics/procurement`; it does not block their bounded READY versions |
 
 ### DECISION queue
 

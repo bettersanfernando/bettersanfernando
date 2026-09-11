@@ -88,7 +88,7 @@ assert.doesNotMatch(
 );
 assert.match(
   pageSource,
-  /Actual expenditure is not currently available in the\s+published procurement dataset\./
+  /Actual expenditure is not currently available in the\s+published\s+procurement dataset\./
 );
 
 const appSource = readFileSync('src/App.tsx', 'utf8');

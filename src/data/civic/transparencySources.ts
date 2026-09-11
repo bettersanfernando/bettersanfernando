@@ -5,6 +5,7 @@ import officesJson from '../generated/civic/directories/city-offices.json' with 
 import executiveOrdersJson from '../generated/civic/legislation/executive-orders.json' with { type: 'json' };
 import ordinancesJson from '../generated/civic/legislation/ordinances.json' with { type: 'json' };
 import { getAllProjectEvidence, getProjects } from './projects.ts';
+import { getFullDisclosureMetadata } from './fullDisclosure.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
@@ -20,6 +21,8 @@ const DatasetPath = z.enum([
   'projects/city-projects.json',
   'projects/project-evidence.json',
   'services/services.json',
+  'services/utilities-water-resources.json',
+  'transparency/full-disclosure.json',
 ]);
 
 const ManifestSchema = z.object({
@@ -88,7 +91,8 @@ export type PublishedSourceDomain = Readonly<{
     | 'geography'
     | 'city-offices'
     | 'executive-orders'
-    | 'ordinances';
+    | 'ordinances'
+    | 'full-disclosure';
   name: string;
   description: string;
   authority: string;
@@ -102,7 +106,7 @@ export type PublishedSourceDomain = Readonly<{
 }>;
 
 export type UnavailableSourceDomain = Readonly<{
-  id: 'finance' | 'full-disclosure' | 'person-directories' | 'resolutions';
+  id: 'finance' | 'person-directories' | 'resolutions';
   name: string;
   status: 'NOT_EXPORTED' | 'NOT_VERIFIED';
   note: string;
@@ -124,6 +128,7 @@ function uniqueLinks(
 }
 
 export function getTransparencySourceInventory() {
+  const fullDisclosure = getFullDisclosureMetadata();
   const projects = getProjects();
   const projectEvidence = getAllProjectEvidence();
   const projectYears = projects.map(project => project.year);
@@ -314,6 +319,26 @@ export function getTransparencySourceInventory() {
       coverageNote:
         'Six verified records are published; two include full text and four currently establish metadata or existence only.',
     },
+    {
+      id: 'full-disclosure',
+      name: 'Full Disclosure Policy reports',
+      description:
+        'Individually verified Full Disclosure Policy report metadata: Annual Procurement Plans, Procurement Monitoring Reports, and Trust Fund and Special Education Fund utilization reports.',
+      authority: 'City Government of San Fernando, Pampanga',
+      referencePeriod: '2023–2026',
+      lastVerified: fullDisclosure.lastVerified,
+      recordCount: recordCount('transparency/full-disclosure.json'),
+      recordLabel: 'report records',
+      datasetPaths: ['transparency/full-disclosure.json'],
+      links: [
+        {
+          label: 'Browse Full Disclosure Reports',
+          url: '/transparency/full-disclosure',
+          type: 'internal',
+        },
+      ],
+      coverageNote: fullDisclosure.overallPublicLimitation,
+    },
   ];
 
   if (projects.length !== publishedDomains[0].recordCount) {
@@ -329,12 +354,6 @@ export function getTransparencySourceInventory() {
     {
       id: 'finance',
       name: 'Finance aggregates',
-      status: 'NOT_EXPORTED',
-      note: 'Not currently included in the public frontend export.',
-    },
-    {
-      id: 'full-disclosure',
-      name: 'Full Disclosure archive',
       status: 'NOT_EXPORTED',
       note: 'Not currently included in the public frontend export.',
     },

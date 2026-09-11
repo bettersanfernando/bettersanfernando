@@ -36,12 +36,16 @@ assert.equal(summary.population.ruralBarangays, 1);
 assert.equal(summary.geography.cityBoundaries, 1);
 assert.equal(summary.geography.barangayBoundaries, 35);
 
-for (const id of ['finance', 'full-disclosure'] as const) {
+for (const id of ['finance'] as const) {
   assert.equal(
     summary.unavailable.find(domain => domain.id === id)?.status,
     'NOT_EXPORTED'
   );
 }
+assert.ok(
+  !summary.unavailable.some(domain => domain.id === 'full-disclosure'),
+  'full-disclosure must no longer be listed as unavailable now that it is published'
+);
 assert.equal(
   summary.unavailable.find(domain => domain.id === 'resolutions')?.status,
   'NOT_VERIFIED'

@@ -291,10 +291,6 @@
         "title": "Transparency",
         "description": "Explore what happened, what was spent, which public records exist, and where the evidence comes from."
       },
-      "fullDisclosure": {
-        "title": "Full Disclosure Reports",
-        "description": "Access verified full-disclosure records and their official source documents."
-      },
       "transparencyDocuments": {
         "title": "Official Documents",
         "description": "Explore official public documents used to support transparency information."

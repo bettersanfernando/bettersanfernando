@@ -70,6 +70,11 @@
       "record_count": 2,
       "schema_version": 1,
       "sha256": "7ebb165b2881b3599e5c5dbd49626b7fd3a3c92a335fc023a8fc011a548fba98"
+    },
+    "transparency/full-disclosure.json": {
+      "record_count": 10,
+      "schema_version": 1,
+      "sha256": "e3003ab526ace81a895317d41b61ae2d7aad29182f0f8a65adc8e7cc9c88b011"
     }
   },
   "export_version": "v0.1.0",
@@ -120,7 +125,9 @@
     "data/services/city-treasurer-property-publication-review.json",
     "data/government/hotlines-publication-review.json",
     "data/government/barangay-contacts-publication-review.json",
-    "data/government/official-links-publication-review.json"
+    "data/government/official-links-publication-review.json",
+    "data/transparency/full-disclosure-metadata-inventory.json",
+    "data/transparency/full-disclosure-publication-review.json"
   ],
   "jurisdiction": {
     "name": "City of San Fernando",
@@ -145,7 +152,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "ab175f6ca8214274de0b53a0bdff888296e8bba1",
+  "source_commit": "9385f13cacadec526b74f403b075cbd0888dc3e3",
   "source_data_version": "v0.1.1",
   "sources": [
     {
