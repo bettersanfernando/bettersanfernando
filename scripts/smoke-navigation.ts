@@ -67,6 +67,16 @@ assert.match(
   /path="\/transparency\/archive"[\s\S]{0,80}to="\/transparency\/full-disclosure"[\s\S]{0,40}replace/,
   '/transparency/archive must permanently redirect to /transparency/full-disclosure with replace semantics'
 );
+assert.match(
+  appSource,
+  /path="\/contact"[\s\S]{0,80}to="\/government\/contact"[\s\S]{0,40}replace/,
+  '/contact must permanently redirect to /government/contact with replace semantics'
+);
+assert.match(
+  appSource,
+  /path="\/government\/contact"[\s\S]{0,80}element={<GovernmentContact \/>}/,
+  '/government/contact must remain the canonical real <Route>'
+);
 
 const allNavigationHrefs = megaMenus.flatMap(menu =>
   menu.sections!.flatMap(section => section.items.map(item => item.href))
@@ -112,6 +122,25 @@ assert.ok(
 assert.ok(
   !plannedPages.some(page => page.path === '/transparency/full-disclosure'),
   '/transparency/full-disclosure must no longer be registered as a planned page'
+);
+assert.ok(
+  !plannedPages.some(page => page.path === '/contact'),
+  '/contact must no longer be registered as a planned page'
+);
+
+const contactTopLevel = mainNavigation.find(item => item.id === 'contact');
+assert.equal(
+  contactTopLevel?.href,
+  '/government/contact',
+  'the top-level Contact navigation item must point directly to /government/contact'
+);
+const directContactDestinations = mainNavigation.filter(
+  item => item.href === '/government/contact'
+);
+assert.equal(
+  directContactDestinations.length,
+  1,
+  'exactly one top-level navigation item may point directly at /government/contact'
 );
 const transparencyDocumentsDestination = megaMenus
   .flatMap(menu => menu.sections!.flatMap(section => section.items))
@@ -168,7 +197,6 @@ const activeRouteCases = [
   ['/statistics/projects', 'transparency'],
   ['/barangays', 'transparency'],
   ['/about', 'about'],
-  ['/contact', 'contact'],
 ] as const;
 
 for (const [pathname, expected] of activeRouteCases) {
@@ -188,7 +216,6 @@ const approvedPlannedPaths = [
   '/statistics/government',
   '/statistics/legislation',
   '/statistics/public-records',
-  '/contact',
 ];
 
 assert.deepEqual(
@@ -332,6 +359,30 @@ const referencedEnglishKeys = [
 for (const key of referencedEnglishKeys) {
   assert.ok(hasTranslationKey(english, key), `missing English key: ${key}`);
 }
+
+function resolveTranslation(key: string): string | undefined {
+  let node: unknown = english;
+  for (const segment of key.split('.')) {
+    if (typeof node !== 'object' || node === null) return undefined;
+    node = (node as Record<string, unknown>)[segment];
+  }
+  return typeof node === 'string' ? node : undefined;
+}
+
+const allVisibleLabelKeys = [
+  ...mainNavigation.map(item => item.labelKey),
+  ...megaMenus.flatMap(menu =>
+    menu.sections!.flatMap(section => section.items.map(item => item.labelKey))
+  ),
+];
+const contactLabels = allVisibleLabelKeys
+  .map(resolveTranslation)
+  .filter(label => label === 'Contact');
+assert.equal(
+  contactLabels.length,
+  1,
+  'exactly one visible navigation item may be labeled exactly "Contact"'
+);
 
 console.log(
   `Navigation smoke passed: ${mainNavigation.length} top-level entries, ${plannedPages.length} planned routes, EN/FIL/PAM resources valid.`

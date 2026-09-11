@@ -25,8 +25,9 @@ The site has exactly seven top-level navigation areas:
   Statistics is a content area under Transparency, not a separate top-level
   item.
 - **About** — the project's purpose, independence, and methodology.
-- **Contact** — a channel for BetterSanFernando itself, kept separate from
-  official City Government contacts.
+- **Contact** — `/government/contact`, a concise hub for verified official
+  City Government contact channels. `/contact` permanently redirects here;
+  there is no separate BetterSanFernando feedback channel.
 
 Full route ownership and publication rules are defined in
 [`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md).

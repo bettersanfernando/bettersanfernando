@@ -7,7 +7,6 @@ const plannedPageRoutes = [
   { id: 'governmentStatistics', path: '/statistics/government' },
   { id: 'legislationStatistics', path: '/statistics/legislation' },
   { id: 'publicRecordsStatistics', path: '/statistics/public-records' },
-  { id: 'contact', path: '/contact' },
 ] as const;
 
 export type PlannedPageId = (typeof plannedPageRoutes)[number]['id'];

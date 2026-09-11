@@ -61,7 +61,7 @@ to the human maintainer.
 |    11 | `/procurement/bid-results`      | None                                                      |
 |    12 | `/procurement/contracts`        | `/transparency/contracts`                                 |
 |    13 | `/statistics/procurement`       | None                                                      |
-|    14 | `/government/contact`           | None                                                      |
+|    14 | `/government/contact`           | `/contact`                                                |
 |    15 | `/legislation`                  | None                                                      |
 |    16 | `/procurement`                  | `/transparency/procurement`                               |
 |    17 | `/transparency`                 | None                                                      |
@@ -74,6 +74,17 @@ to the human maintainer.
 `/government/directory` and `/government/contacts` now redirect to
 `/government/offices`. `/government/departments` remains in the redirect
 registry and is not recorded as completed by this batch.
+
+`/government/contact` was later redesigned from a searchable 44-office
+directory into a concise contact hub: emergency contacts (911, CDRRMO's
+primary emergency-dispatch line, the City of San Fernando Police
+Headquarters, and the Bureau of Fire Protection San Fernando), general City
+Hall and Heroes Hall trunk lines, and destination cards to the fuller
+`/government/hotlines`, `/government/barangay-contacts`, `/government/links`,
+and `/services` directories. `/contact` now permanently redirects here — it
+was previously its own registered planned page — and the top-level Contact
+navigation item points directly at `/government/contact`, so there is exactly
+one visible Contact navigation destination.
 
 ### Remaining READY implementation sequence
 
@@ -384,8 +395,12 @@ that a government record does not exist.
 
 | Priority | Decision                                                                                                                               | Public page(s) unblocked       |
 | -------: | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-|        1 | Select the BetterSanFernando contact channel, responsible owner, moderation/abuse process, retention policy, and privacy copy          | `/contact`                     |
-|        2 | Decide whether `/statistics/project-spending` is renamed and narrowed to procurement amounts or waits for an actual-expenditure export | `/statistics/project-spending` |
+|        1 | Decide whether `/statistics/project-spending` is renamed and narrowed to procurement amounts or waits for an actual-expenditure export | `/statistics/project-spending` |
+
+`/contact` is resolved: it permanently redirects to `/government/contact`
+rather than hosting a distinct BetterSanFernando feedback channel. No contact
+form or message-forwarding claim is implemented; residents are directed to
+official City Government channels only.
 
 ## Phase 4 — DEFERRED
 

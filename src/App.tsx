@@ -155,6 +155,10 @@ function App() {
                     element={<GovernmentContact />}
                   />
                   <Route
+                    path="/contact"
+                    element={<Navigate to="/government/contact" replace />}
+                  />
+                  <Route
                     path="/government/hotlines"
                     element={<GovernmentHotlines />}
                   />

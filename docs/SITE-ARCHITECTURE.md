@@ -30,8 +30,9 @@ In particular:
 
 - official City Government contact information must be labeled as official
   source information, not as a way to contact BetterSanFernando;
-- `/government/contact` belongs to the City Government information area,
-  while `/contact` belongs to the independent BetterSanFernando project;
+- `/government/contact` is the single canonical Contact page; `/contact` is a
+  permanent redirect alias to it, and BetterSanFernando does not claim to
+  receive or forward messages sent through the official channels it lists;
 - source links lead readers to official publications, but BetterSanFernando's
   interpretation, organization, and presentation remain independent; and
 - every major public surface should make the independent/not-official position
@@ -316,10 +317,15 @@ community civic project rather than a City Government publication.
 
 ### Contact
 
-`/contact` is for contacting BetterSanFernando. It must not blur project
-contact channels with City Government channels. Official city contact details
-belong at `/government/contact` and should be linked with a clear explanation
-that the user is leaving the independent project's contact context.
+`/government/contact` is the single canonical Contact page: a concise hub
+that helps residents quickly identify the correct verified official contact
+channel (emergency contacts, general City Hall/Heroes Hall lines, and links
+to the fuller hotline, barangay-contact, official-link, and services
+directories). `/contact` is a permanent redirect alias, not a distinct page.
+There is no separate BetterSanFernando feedback channel; the page must not
+claim that BetterSanFernando receives or forwards messages sent through the
+official channels it lists, and must not include a contact form or collect
+resident information.
 
 ### Search
 
@@ -450,8 +456,8 @@ and planned-route registry. Redirect behavior will be implemented separately.
 | `/government/offices`              | `/government/offices`                    | Canonical searchable office directory, including verified contact fields     |
 | `/government/directory`            | `/government/offices`                    | Permanent redirect; may preserve a directory view query if needed            |
 | `/government/contacts`             | `/government/offices`                    | Permanent redirect; may target a contact-details anchor or view              |
-| `/government/contact`              | `/government/contact`                    | Remains distinct: central City Government contact information                |
-| `/contact`                         | `/contact`                               | Remains distinct: contact the independent BetterSanFernando project          |
+| `/government/contact`              | `/government/contact`                    | Canonical single Contact page: a concise, verified government-contact hub    |
+| `/contact`                         | `/government/contact`                    | Permanent redirect; no distinct BetterSanFernando feedback channel           |
 | `/procurement`                     | `/procurement`                           | Canonical procurement overview                                               |
 | `/transparency/procurement`        | `/procurement`                           | Permanent redirect; Transparency cross-links the canonical page              |
 | `/procurement/contracts`           | `/procurement/contracts`                 | Canonical contracts and awards destination                                   |

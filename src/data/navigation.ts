@@ -479,8 +479,8 @@ const navigationStructure = [
   {
     id: 'contact',
     labelKey: 'navigation.topLevel.contact',
-    href: '/contact',
-    activePathPrefixes: ['/contact'],
+    href: '/government/contact',
+    activePathPrefixes: ['/government/contact'],
   },
 ] satisfies NavigationItemInput[];
 
