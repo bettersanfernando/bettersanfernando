@@ -100,7 +100,6 @@
       "barangayContacts": "Barangay Contacts",
       "officialGovernmentLinks": "Official Government Links",
       "fullDisclosureReports": "Full Disclosure Reports",
-      "disclosureArchive": "Disclosure Archive",
       "cityProjects": "City Projects",
       "procurementRecords": "Procurement Records",
       "financialTransparency": "Financial Transparency",
@@ -159,7 +158,6 @@
       "barangayContacts": "Find published Barangay Secretary and BHERT contacts by barangay.",
       "officialGovernmentLinks": "Visit verified official government websites and resources.",
       "fullDisclosureReports": "Access public financial and disclosure records.",
-      "disclosureArchive": "Browse disclosure records organized for public reference.",
       "cityProjects": "Browse verified city projects and their supporting records.",
       "procurementRecords": "Review procurement records with project and spending context.",
       "financialTransparency": "Explore public financial records and their sources.",
@@ -289,10 +287,6 @@
         "title": "Resolutions",
         "description": "Browse verified city resolutions with links to available source records."
       },
-      "governmentDocuments": {
-        "title": "Official Documents",
-        "description": "Find verified public documents issued or published by official government sources."
-      },
       "transparency": {
         "title": "Transparency",
         "description": "Explore what happened, what was spent, which public records exist, and where the evidence comes from."
@@ -300,10 +294,6 @@
       "fullDisclosure": {
         "title": "Full Disclosure Reports",
         "description": "Access verified full-disclosure records and their official source documents."
-      },
-      "disclosureArchive": {
-        "title": "Disclosure Archive",
-        "description": "Browse verified disclosure records organized for long-term public reference."
       },
       "transparencyDocuments": {
         "title": "Official Documents",

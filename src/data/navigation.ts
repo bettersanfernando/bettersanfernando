@@ -47,7 +47,6 @@ const destinationPresentation = {
   barangayContacts: ['users', 'barangayContacts'],
   officialGovernmentLinks: ['external-link', 'officialGovernmentLinks'],
   fullDisclosureReports: ['file-check', 'fullDisclosureReports'],
-  disclosureArchive: ['archive', 'disclosureArchive'],
   cityProjects: ['list-checks', 'cityProjects'],
   procurementRecords: ['shopping-cart', 'procurementRecords'],
   financialTransparency: ['wallet', 'financialTransparency'],
@@ -345,11 +344,6 @@ const navigationStructure = [
         labelKey: 'navigation.sections.publicInformation',
         items: [
           {
-            labelKey: 'navigation.items.officialDocuments',
-            href: '/government/documents',
-            kind: 'planned',
-          },
-          {
             labelKey: 'navigation.items.hotlinesContacts',
             href: '/government/hotlines',
             kind: 'real',
@@ -380,11 +374,6 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.fullDisclosureReports',
             href: '/transparency/full-disclosure',
-            kind: 'planned',
-          },
-          {
-            labelKey: 'navigation.items.disclosureArchive',
-            href: '/transparency/archive',
             kind: 'planned',
           },
           {

@@ -56,6 +56,80 @@ assert.equal(
 assert.equal(getSearchHref('  city projects  '), '/search?q=city%20projects');
 assert.equal(getSearchHref('   '), '/search');
 
+const appSource = readFileSync('src/App.tsx', 'utf8');
+assert.match(
+  appSource,
+  /path="\/government\/documents"[\s\S]{0,80}to="\/transparency\/documents"[\s\S]{0,40}replace/,
+  '/government/documents must permanently redirect to /transparency/documents with replace semantics'
+);
+assert.match(
+  appSource,
+  /path="\/transparency\/archive"[\s\S]{0,80}to="\/transparency\/full-disclosure"[\s\S]{0,40}replace/,
+  '/transparency/archive must permanently redirect to /transparency/full-disclosure with replace semantics'
+);
+
+const allNavigationHrefs = megaMenus.flatMap(menu =>
+  menu.sections!.flatMap(section => section.items.map(item => item.href))
+);
+for (const href of [
+  '/transparency/documents',
+  '/transparency/full-disclosure',
+]) {
+  assert.equal(
+    allNavigationHrefs.filter(item => item === href).length,
+    1,
+    `${href} must have exactly one navigation destination, not a duplicate alias entry`
+  );
+}
+assert.ok(
+  !allNavigationHrefs.includes('/government/documents'),
+  '/government/documents must not remain as an independent navigation destination'
+);
+assert.ok(
+  !allNavigationHrefs.includes('/transparency/archive'),
+  '/transparency/archive must not remain as an independent navigation destination'
+);
+assert.ok(
+  allNavigationHrefs.includes('/transparency/documents'),
+  'the canonical Transparency Documents navigation entry must remain present'
+);
+assert.ok(
+  allNavigationHrefs.includes('/transparency/full-disclosure'),
+  'the canonical Full Disclosure Reports navigation entry must remain present'
+);
+assert.ok(
+  !plannedPages.some(page => page.path === '/government/documents'),
+  '/government/documents must no longer be registered as a planned page'
+);
+assert.ok(
+  !plannedPages.some(page => page.path === '/transparency/archive'),
+  '/transparency/archive must no longer be registered as a planned page'
+);
+assert.ok(
+  plannedPages.some(page => page.path === '/transparency/documents'),
+  '/transparency/documents must remain a planned page'
+);
+assert.ok(
+  plannedPages.some(page => page.path === '/transparency/full-disclosure'),
+  '/transparency/full-disclosure must remain a planned page'
+);
+const transparencyDocumentsDestination = megaMenus
+  .flatMap(menu => menu.sections!.flatMap(section => section.items))
+  .find(item => item.href === '/transparency/documents');
+const fullDisclosureDestination = megaMenus
+  .flatMap(menu => menu.sections!.flatMap(section => section.items))
+  .find(item => item.href === '/transparency/full-disclosure');
+assert.equal(
+  transparencyDocumentsDestination?.kind,
+  'planned',
+  'Transparency Documents must remain a planned navigation destination, not implemented'
+);
+assert.equal(
+  fullDisclosureDestination?.kind,
+  'planned',
+  'Full Disclosure Reports must remain a planned navigation destination, not implemented'
+);
+
 const services = mainNavigation.find(item => item.id === 'services');
 const serviceHrefs = services?.sections?.flatMap(section =>
   section.items.map(item => item.href)
@@ -87,7 +161,7 @@ const activeRouteCases = [
   ['/government/contact', 'government'],
   ['/legislation/ordinances', 'government'],
   ['/legislation', 'government'],
-  ['/transparency/archive', 'transparency'],
+  ['/transparency/full-disclosure', 'transparency'],
   ['/statistics', 'transparency'],
   ['/statistics/population', 'transparency'],
   ['/statistics/city-profile', 'transparency'],
@@ -107,9 +181,7 @@ for (const [pathname, expected] of activeRouteCases) {
 
 const approvedPlannedPaths = [
   '/legislation/resolutions',
-  '/government/documents',
   '/transparency/full-disclosure',
-  '/transparency/archive',
   '/transparency/documents',
   '/transparency/finance',
   '/statistics/demographics',

@@ -286,6 +286,16 @@ function App() {
                       />
                     }
                   />
+                  <Route
+                    path="/government/documents"
+                    element={<Navigate to="/transparency/documents" replace />}
+                  />
+                  <Route
+                    path="/transparency/archive"
+                    element={
+                      <Navigate to="/transparency/full-disclosure" replace />
+                    }
+                  />
                   {plannedPages.map(page => (
                     <Route
                       key={page.id}
