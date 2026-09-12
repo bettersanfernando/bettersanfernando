@@ -1,0 +1,336 @@
+{
+  "archive_coverage": [
+    {
+      "availability_status": "metadata_only",
+      "canonical_route": "/legislation",
+      "complete_calendar_year": false,
+      "count": 126,
+      "count_basis": "archive_range_only",
+      "coverage_note": "Archive range evidence only; no individual titles, dates, or records are generated or counted as published legislation.",
+      "metadata_granularity": "archive_range",
+      "official_source_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/11/2024-10-02076.pdf",
+      "period_end": "2022-12-31",
+      "period_start": "2022-07-01",
+      "range_end": 126,
+      "range_start": 1,
+      "record_class": "archive_coverage_evidence",
+      "record_type": "resolution_archive_range",
+      "source_family": "csfp_osp_archive_books",
+      "unit_label": "archive range positions",
+      "verification_status": "verified_archive_range",
+      "year": 2022
+    },
+    {
+      "availability_status": "metadata_only",
+      "canonical_route": "/legislation",
+      "complete_calendar_year": true,
+      "count": 264,
+      "count_basis": "archive_range_only",
+      "coverage_note": "Archive range evidence only; no individual titles, dates, or records are generated or counted as published legislation.",
+      "metadata_granularity": "archive_range",
+      "official_source_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/11/2024-10-02076.pdf",
+      "period_end": "2023-12-31",
+      "period_start": "2023-01-01",
+      "range_end": 264,
+      "range_start": 1,
+      "record_class": "archive_coverage_evidence",
+      "record_type": "resolution_archive_range",
+      "source_family": "csfp_osp_archive_books",
+      "unit_label": "archive range positions",
+      "verification_status": "verified_archive_range",
+      "year": 2023
+    },
+    {
+      "availability_status": "metadata_only",
+      "canonical_route": "/legislation",
+      "complete_calendar_year": false,
+      "count": 15,
+      "count_basis": "archive_range_only",
+      "coverage_note": "Archive range evidence only; no individual titles, dates, or records are generated or counted as published legislation.",
+      "metadata_granularity": "archive_range",
+      "official_source_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/11/2024-10-02076.pdf",
+      "period_end": "2022-11-30",
+      "period_start": "2022-07-01",
+      "range_end": 15,
+      "range_start": 1,
+      "record_class": "archive_coverage_evidence",
+      "record_type": "ordinance_archive_range",
+      "source_family": "csfp_osp_archive_books",
+      "unit_label": "archive range positions",
+      "verification_status": "verified_archive_range",
+      "year": 2022
+    },
+    {
+      "availability_status": "metadata_only",
+      "canonical_route": "/legislation",
+      "complete_calendar_year": true,
+      "count": 7,
+      "count_basis": "archive_range_only",
+      "coverage_note": "Archive range evidence only; no individual titles, dates, or records are generated or counted as published legislation.",
+      "metadata_granularity": "archive_range",
+      "official_source_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/11/2024-10-02076.pdf",
+      "period_end": "2022-12-31",
+      "period_start": "2022-01-01",
+      "range_end": 7,
+      "range_start": 1,
+      "record_class": "archive_coverage_evidence",
+      "record_type": "appropriation_ordinance_archive_range",
+      "source_family": "csfp_osp_archive_books",
+      "unit_label": "archive range positions",
+      "verification_status": "verified_archive_range",
+      "year": 2022
+    },
+    {
+      "availability_status": "metadata_only",
+      "canonical_route": "/legislation",
+      "complete_calendar_year": true,
+      "count": 44,
+      "count_basis": "archive_range_only",
+      "coverage_note": "Archive range evidence only; no individual titles, dates, or records are generated or counted as published legislation.",
+      "metadata_granularity": "archive_range",
+      "official_source_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/11/2024-10-02076.pdf",
+      "period_end": "2023-12-31",
+      "period_start": "2023-01-01",
+      "range_end": 44,
+      "range_start": 1,
+      "record_class": "archive_coverage_evidence",
+      "record_type": "ordinance_archive_range",
+      "source_family": "csfp_osp_archive_books",
+      "unit_label": "archive range positions",
+      "verification_status": "verified_archive_range",
+      "year": 2023
+    },
+    {
+      "availability_status": "metadata_only",
+      "canonical_route": "/legislation",
+      "complete_calendar_year": true,
+      "count": 5,
+      "count_basis": "archive_range_only",
+      "coverage_note": "Archive range evidence only; no individual titles, dates, or records are generated or counted as published legislation.",
+      "metadata_granularity": "archive_range",
+      "official_source_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/11/2024-10-02076.pdf",
+      "period_end": "2023-12-31",
+      "period_start": "2023-01-01",
+      "range_end": 5,
+      "range_start": 1,
+      "record_class": "archive_coverage_evidence",
+      "record_type": "appropriation_ordinance_archive_range",
+      "source_family": "csfp_osp_archive_books",
+      "unit_label": "archive range positions",
+      "verification_status": "verified_archive_range",
+      "year": 2023
+    }
+  ],
+  "as_of": "2026-09-12",
+  "dataset": "public-records-coverage",
+  "metrics": [
+    {
+      "availability_status": "available",
+      "canonical_route": "/projects",
+      "count": 324,
+      "count_basis": "published_item_level",
+      "coverage_note": "Published project records only; this is not every project undertaken by the City.",
+      "metadata_granularity": "record_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/transparency/",
+      "period_coverage": {
+        "end_year": 2026,
+        "start_year": 2022,
+        "years": [
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      },
+      "record_class": "structured_record",
+      "record_type": "project",
+      "source_family": "csfp_procurement",
+      "unit_label": "projects",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/projects/sources",
+      "count": 563,
+      "count_basis": "published_evidence_records",
+      "coverage_note": "Evidence records support projects and are not additional projects or necessarily unique source documents.",
+      "metadata_granularity": "evidence_record_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/transparency/",
+      "period_coverage": {
+        "end_year": 2026,
+        "start_year": 2022,
+        "years": [
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      },
+      "record_class": "evidence_record",
+      "record_type": "project_evidence",
+      "source_family": "csfp_procurement",
+      "unit_label": "evidence records",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/services",
+      "count": 177,
+      "count_basis": "derived_records",
+      "coverage_note": "Resident-facing service records are derived from Citizen's Charter documents; they are not documents themselves.",
+      "metadata_granularity": "derived_record_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/citizens-charter/",
+      "period_coverage": {
+        "end_year": 2026,
+        "start_year": 2025,
+        "years": [
+          2025,
+          2026
+        ]
+      },
+      "record_class": "derived_structured_record",
+      "record_type": "service",
+      "source_family": "csfp_citizens_charter",
+      "unit_label": "structured services",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/transparency/full-disclosure",
+      "count": 10,
+      "count_basis": "published_item_level",
+      "coverage_note": "A bounded verified subset of Full Disclosure documents; archive headings and duplicate-looking cards are not counted.",
+      "metadata_granularity": "document_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/full-disclosure-report/",
+      "period_coverage": {
+        "end_year": 2026,
+        "start_year": 2023,
+        "years": [
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      },
+      "record_class": "source_document",
+      "record_type": "full_disclosure_document",
+      "source_family": "csfp_full_disclosure",
+      "unit_label": "documents",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/transparency/documents",
+      "count": 9,
+      "count_basis": "published_item_level",
+      "coverage_note": "General official documents not already counted in a specialized canonical source-document dataset.",
+      "metadata_granularity": "document_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/",
+      "period_coverage": {
+        "end_year": 2026,
+        "start_year": 2022,
+        "years": [
+          2022,
+          2024,
+          2025,
+          2026
+        ]
+      },
+      "record_class": "source_document",
+      "record_type": "official_document",
+      "source_family": "multiple_official_csfp_collections",
+      "unit_label": "documents",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/legislation",
+      "count": 13,
+      "count_basis": "published_item_level",
+      "coverage_note": "Verified holdings include the visible 2013 archive and subject-verified 2023 cross-references; historical coverage is incomplete.",
+      "metadata_granularity": "record_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/executive-orders/",
+      "period_coverage": {
+        "end_year": 2023,
+        "start_year": 2013,
+        "years": [
+          2013,
+          2023
+        ]
+      },
+      "record_class": "source_document",
+      "record_type": "executive_order",
+      "source_family": "csfp_executive_orders",
+      "unit_label": "executive order records",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/legislation",
+      "count": 11,
+      "count_basis": "published_item_level",
+      "coverage_note": "Verified full-text and official-reference records only; archive ranges do not increase this count.",
+      "metadata_granularity": "record_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/office-of-the-sangguniang-panlungsod/",
+      "period_coverage": {
+        "end_year": 2023,
+        "start_year": 2008,
+        "years": [
+          2008,
+          2014,
+          2015,
+          2017,
+          2018,
+          2022,
+          2023
+        ]
+      },
+      "record_class": "source_document",
+      "record_type": "ordinance",
+      "source_family": "csfp_legislation",
+      "unit_label": "ordinance records",
+      "verification_status": "verified_partial_coverage"
+    },
+    {
+      "availability_status": "available",
+      "canonical_route": "/legislation",
+      "count": 2,
+      "count_basis": "published_item_level",
+      "coverage_note": "Count means currently verified BetterSanFernando resolution records, never the number issued by the City.",
+      "metadata_granularity": "record_level",
+      "official_source_url": "https://cityofsanfernando.gov.ph/office-of-the-sangguniang-panlungsod/",
+      "period_coverage": {
+        "end_year": 2018,
+        "start_year": 2015,
+        "years": [
+          2015,
+          2018
+        ]
+      },
+      "record_class": "source_document",
+      "record_type": "resolution",
+      "source_family": "csfp_legislation",
+      "unit_label": "resolution records",
+      "verification_status": "verified_partial_coverage"
+    }
+  ],
+  "overall_limitation": "BetterSanFernando publishes selected records verified from official public sources. Counts describe BetterSanFernando's current published coverage, not every record held or produced by the City Government. Different record types use different units and must not be added together.",
+  "related_collections": [
+    {
+      "canonical_route": "/transparency/finance",
+      "count": 53,
+      "count_basis": "specialized_collection_with_source_overlap",
+      "coverage_note": "Specialized City Finances reports may reference artifacts already represented in Full Disclosure. This related collection is not a core holding count and must not be added to other metrics.",
+      "record_class": "specialized_source_document_collection",
+      "record_type": "finance_report",
+      "unit_label": "finance reports"
+    }
+  ],
+  "route": "/statistics/public-records",
+  "schema_version": 1,
+  "scope": "published-public-records-coverage",
+  "title": "Public Records Coverage",
+  "verification_date": "2026-09-12"
+}

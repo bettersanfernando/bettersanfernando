@@ -1,5 +1,5 @@
 {
-  "description": "Complete capture of the currently visible public CSFP Executive Orders archive (11 of 11 entries shown at https://cityofsanfernando.gov.ph/executive-orders/ as of the source retrieval date). This is not a claim that only 11 Executive Orders existed in 2013, that EO numbering was consecutive, that CMO2013-021 exists, or that the public archive page is a complete historical register. See data/legislation/executive-order-recovery-queue.json for older/referenced Executive Orders known to exist but not yet independently recovered.",
+  "description": "Verified CSFP Executive Order subset: all 11 entries currently visible in the public Executive Orders archive plus 2 subject-verified 2023 orders recovered from official City cross-references. The 2023 records are not full-text orders and do not have recovered verbatim formal titles. This is not a complete historical register.",
   "document_type": "Executive Order",
   "executive_orders": [
     {
@@ -166,13 +166,48 @@
       "source_authority": "PRIMARY_OFFICIAL",
       "title": "AN ORDER CREATING AND ORGANIZING THE CITY SCHOLARSHIP COMMITTEE TO IMPLEMENT THE CITY SCHOLARSHIP PROGRAM OF THE CITY OF SAN FERNANDO PAMPANGA, APPOINTING MEMBERS THEREOF, SPECIFYING ITS DUTIES AND FUNCTIONS AND FOR OTHER PURPOSES",
       "year": 2013
+    },
+    {
+      "date_issued": "2023-01-19",
+      "date_precision": "day",
+      "document_number": "CMO2023-006",
+      "document_type": "Executive Order",
+      "full_text_available": false,
+      "id": "eo-cmo2023-006",
+      "issuing_body": "Office of the City Mayor",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/08/2025-08-01280.pdf",
+      "related_measures": [
+        "ord-2023-026"
+      ],
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "subject": "Establishment of the City Human Rights Action Center to provide an avenue for redress in cases of human-rights violations",
+      "title": null,
+      "verification_level": "SUBJECT_VERIFIED",
+      "year": 2023
+    },
+    {
+      "date_issued": null,
+      "date_precision": "year",
+      "document_number": "CMO2023-026",
+      "document_type": "Executive Order",
+      "full_text_available": false,
+      "id": "eo-cmo2023-026",
+      "issuing_body": "Office of the City Mayor",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/08/2023-08-01903.pdf",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "subject": "Disallowing the use of bottled water and beverages during meetings and events scheduled and organized by the City Government of San Fernando, Pampanga",
+      "title": null,
+      "verification_level": "SUBJECT_VERIFIED",
+      "year": 2023
     }
   ],
   "jurisdiction_name": "City of San Fernando",
   "jurisdiction_psgc": "0305416000",
-  "last_verified": "2026-08-30",
+  "last_verified": "2026-09-12",
   "province": "Pampanga",
-  "record_count": 11,
+  "record_count": 13,
   "source_archive_url": "https://cityofsanfernando.gov.ph/executive-orders/",
   "source_retrieved_at": "2026-08-30"
 }

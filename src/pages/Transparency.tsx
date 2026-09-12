@@ -40,12 +40,20 @@ const domains = [
   {
     title: 'Legislation',
     icon: Scale,
-    description: `${summary.legislation.executiveOrders} Executive Orders and ${summary.legislation.ordinances} ordinances are published as separate record classes.`,
+    description: `${summary.legislation.executiveOrders} Executive Orders, ${summary.legislation.ordinances} ordinances, and ${summary.legislation.resolutions} resolutions are published as separate record classes.`,
     links: [
       ['/legislation', 'Explore legislation'],
       ['/legislation/executive-orders', 'View Executive Orders'],
       ['/legislation/ordinances', 'View ordinances'],
+      ['/legislation/resolutions', 'View resolutions'],
     ],
+  },
+  {
+    title: 'City Finances',
+    icon: Landmark,
+    description:
+      'Selected official aggregate finance reports and their non-additive, source-reported observations.',
+    links: [['/transparency/finance', 'Explore City Finances']],
   },
   {
     title: 'Population and geography',

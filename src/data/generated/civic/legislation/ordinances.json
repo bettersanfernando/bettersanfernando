@@ -1,9 +1,9 @@
 {
-  "description": "Currently verified CSFP ordinance subset: full legal text for 2 ordinances, and 4 ordinances confirmed to exist by official or secondary-official evidence but whose full text has not yet been located. This is not a claim of a complete historical CSFP ordinance register. Candidates without a primary official source, and claimed ordinance-number ranges awaiting attachment verification, are tracked separately in data/legislation/ordinance-recovery-queue.json and are not included here.",
+  "description": "Currently verified CSFP ordinance subset: full legal text for 2 ordinances, and 9 ordinances confirmed by official or secondary-official evidence but whose full text has not yet been located. This is not a claim of a complete historical CSFP ordinance register. Archive ranges remain separate coverage metadata and are never expanded into individual records.",
   "document_type": "Ordinance",
   "jurisdiction_name": "City of San Fernando",
   "jurisdiction_psgc": "0305416000",
-  "last_verified": "2026-08-30",
+  "last_verified": "2026-09-12",
   "ordinances": [
     {
       "date_adopted": "2008-01-16",
@@ -85,8 +85,86 @@
       "reference_url": "https://cityofsanfernando.gov.ph/828-2/",
       "source_authority": "PRIMARY_OFFICIAL",
       "year": 2018
+    },
+    {
+      "date_adopted": null,
+      "date_precision": "year",
+      "document_number": "2014-007",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2014-007",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_title": "Smoke-Free Ordinance of the City of San Fernando",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/2023-11-02703-1.pdf",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "verification_level": "EXACT_METADATA",
+      "year": 2014
+    },
+    {
+      "date_adopted": null,
+      "date_precision": "year",
+      "document_number": "2015-006",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2015-006",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_title": "Anti-Squatting Ordinance of the City of San Fernando, Pampanga",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/2023-11-02703-1.pdf",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "verification_level": "EXACT_METADATA",
+      "year": 2015
+    },
+    {
+      "date_adopted": null,
+      "date_precision": "year",
+      "document_number": "2015-024",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2015-024",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_title": "The Games and Amusement Code of the CSFP",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/CGSFP-CITIZENS-CHARTER-2026%5EJ-2nd-EDITION.pdf",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "verification_level": "EXACT_METADATA",
+      "year": 2015
+    },
+    {
+      "date_adopted": null,
+      "date_precision": "year",
+      "document_number": "2022-012",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2022-012",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_title": "An Ordinance Prohibiting Acts of Online Sexual Abuse and Exploitation of Children (OSAEC) in the City of San Fernando, Pampanga",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/2023-11-02703-1.pdf",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "verification_level": "EXACT_METADATA",
+      "year": 2022
+    },
+    {
+      "date_adopted": "2023-09-20",
+      "date_precision": "day",
+      "document_number": "2023-026",
+      "document_type": "Ordinance",
+      "full_text_available": false,
+      "id": "ord-2023-026",
+      "issuing_body": "Sangguniang Panlungsod",
+      "official_title": "An Ordinance Institutionalizing the Human Rights Action Center in the City of San Fernando, Pampanga and Defining its Powers and Functions and For Other Purposes",
+      "reference_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/08/2025-08-01280.pdf",
+      "related_measures": [
+        "eo-cmo2023-006"
+      ],
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_kind": "official_cross_reference",
+      "verification_level": "EXACT_METADATA",
+      "year": 2023
     }
   ],
   "province": "Pampanga",
-  "record_count": 6
+  "record_count": 11
 }

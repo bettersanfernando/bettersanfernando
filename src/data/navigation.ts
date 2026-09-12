@@ -61,6 +61,7 @@ const destinationPresentation = {
   demographicsStatistics: ['users', 'demographicsStatistics'],
   governmentStatisticsPage: ['landmark', 'governmentStatisticsPage'],
   publicRecordsStatistics: ['library', 'publicRecordsStatistics'],
+  legislationStatistics: ['scale', 'legislationStatistics'],
 } as const satisfies Record<string, readonly [NavigationIcon, string]>;
 
 type NavigationDestinationInput = Omit<
@@ -338,7 +339,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.resolutions',
             href: '/legislation/resolutions',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },
@@ -406,7 +407,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.financialTransparency',
             href: '/transparency/finance',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },
@@ -476,7 +477,12 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.publicRecordsStatistics',
             href: '/statistics/public-records',
-            kind: 'planned',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.legislationStatistics',
+            href: '/statistics/legislation',
+            kind: 'real',
           },
         ],
       },

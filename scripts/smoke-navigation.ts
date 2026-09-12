@@ -159,6 +159,22 @@ assert.equal(
   'Full Disclosure Reports must now be a real navigation destination'
 );
 
+for (const href of [
+  '/legislation/resolutions',
+  '/transparency/finance',
+  '/statistics/public-records',
+  '/statistics/legislation',
+]) {
+  const destination = megaMenus
+    .flatMap(menu => menu.sections!.flatMap(section => section.items))
+    .find(item => item.href === href);
+  assert.equal(
+    destination?.kind,
+    'real',
+    `${href} must now be a real navigation destination`
+  );
+}
+
 const services = mainNavigation.find(item => item.id === 'services');
 const serviceHrefs = services?.sections?.flatMap(section =>
   section.items.map(item => item.href)
@@ -189,8 +205,10 @@ const activeRouteCases = [
   ['/government/offices', 'government'],
   ['/government/contact', 'government'],
   ['/legislation/ordinances', 'government'],
+  ['/legislation/resolutions', 'government'],
   ['/legislation', 'government'],
   ['/transparency/full-disclosure', 'transparency'],
+  ['/transparency/finance', 'transparency'],
   ['/statistics', 'transparency'],
   ['/statistics/population', 'transparency'],
   ['/statistics/demographics', 'transparency'],
@@ -198,6 +216,8 @@ const activeRouteCases = [
   ['/statistics/city-profile', 'transparency'],
   ['/statistics/projects', 'transparency'],
   ['/statistics/project-spending', 'transparency'],
+  ['/statistics/legislation', 'transparency'],
+  ['/statistics/public-records', 'transparency'],
   ['/barangays', 'transparency'],
   ['/about', 'about'],
 ] as const;
@@ -210,17 +230,10 @@ for (const [pathname, expected] of activeRouteCases) {
   );
 }
 
-const approvedPlannedPaths = [
-  '/legislation/resolutions',
-  '/transparency/finance',
-  '/statistics/legislation',
-  '/statistics/public-records',
-];
-
 assert.deepEqual(
-  plannedPages.map(page => page.path).sort(),
-  [...approvedPlannedPaths].sort(),
-  'the planned-page registry must contain every approved non-real route'
+  plannedPages.map(page => page.path),
+  [],
+  'every canonical planned route has shipped — the planned-page registry must now be empty'
 );
 
 const plannedPaths = new Set(plannedPages.map(page => page.path));
@@ -267,14 +280,18 @@ const knownRealDestinations = new Set([
   '/government/links',
   '/transparency/full-disclosure',
   '/transparency/documents',
+  '/transparency/finance',
   '/legislation/executive-orders',
   '/legislation/ordinances',
+  '/legislation/resolutions',
   '/legislation',
   '/transparency',
   '/transparency/sources',
   '/transparency/methodology',
   '/transparency/verification',
   '/transparency/limitations',
+  '/statistics/legislation',
+  '/statistics/public-records',
 ]);
 
 for (const destination of megaMenus.flatMap(menu =>

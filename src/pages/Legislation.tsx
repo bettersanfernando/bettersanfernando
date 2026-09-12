@@ -27,7 +27,7 @@ function PreviewList({
   type,
 }: {
   records: readonly LegislationPreviewRecord[];
-  type: 'executive-order' | 'ordinance';
+  type: 'executive-order' | 'ordinance' | 'resolution';
 }) {
   return (
     <ol className="mt-6 divide-y divide-gray-200 border-y border-gray-200">
@@ -37,6 +37,7 @@ function PreviewList({
             <div className="flex flex-wrap items-center gap-2">
               <span className="break-all font-mono text-sm font-semibold text-primary-800">
                 {type === 'ordinance' && 'Ordinance No. '}
+                {type === 'resolution' && 'Resolution No. '}
                 {record.documentNumber}
               </span>
               {type === 'ordinance' && (
@@ -235,30 +236,35 @@ export default function Legislation() {
         </section>
 
         <section className="border-y border-gray-200 bg-white">
-          <div className="container mx-auto grid gap-6 px-4 py-10 lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-start md:py-12">
-            <div className="flex items-center gap-3">
-              <FileText className="h-6 w-6 text-gray-600" aria-hidden="true" />
+          <div className="container mx-auto px-4 py-10 md:py-12">
+            <div className="flex items-start justify-between gap-5">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Resolutions
                 </h2>
-                <p className="mt-1 text-sm font-semibold text-gray-600">
-                  Not currently published
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-700">
+                  A bounded set of subject-verified resolution records — neither
+                  includes full text, a verbatim formal title, or an exact
+                  adoption date.
                 </p>
               </div>
+              <span className="shrink-0 text-3xl font-bold tabular-nums text-primary-800">
+                {summary.resolutions.total}
+              </span>
             </div>
-            <div className="max-w-3xl text-sm leading-6 text-gray-700">
-              <p>
-                No resolution records currently meet BetterSanFernando&apos;s
-                verification and publication standard. This public availability
-                state does not mean that City resolutions do not exist or that
-                none were passed.
-              </p>
-              <p className="mt-2">
-                A resolution archive will only become a public destination when
-                qualifying records can be supported safely.
-              </p>
-            </div>
+
+            <PreviewList
+              records={summary.resolutions.preview}
+              type="resolution"
+            />
+
+            <Link
+              to="/legislation/resolutions"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+            >
+              View all Resolutions
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </section>
 

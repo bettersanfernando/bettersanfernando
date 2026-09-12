@@ -23,15 +23,28 @@ export const LegislationSourceAuthority = z.enum([
  * their document type (e.g. executive orders use title/issuer_*, ordinances
  * use official_title/official_alias).
  */
+/**
+ * SUBJECT_VERIFIED records (recovered only from an official cross-reference,
+ * not the document itself) omit title/official_title and instead carry a
+ * plain-language `subject`, plus a `date_precision` marking how exact their
+ * date is. EXACT_METADATA records have a fully sourced title and date.
+ */
+export const LegislationVerificationLevel = z.enum([
+  'SUBJECT_VERIFIED',
+  'EXACT_METADATA',
+]);
+
 export const LegislationRecordSchema = z.object({
   id: z.string(),
   document_type: z.string(),
   document_number: z.string(),
-  title: z.string().optional(),
+  title: z.string().nullable().optional(),
   official_title: z.string().nullable().optional(),
   official_alias: z.string().optional(),
   described_context: z.string().optional(),
   described_subject: z.string().optional(),
+  subject: z.string().optional(),
+  date_precision: z.enum(['day', 'year']).optional(),
   date_issued: IsoDateString.nullable().optional(),
   date_adopted: IsoDateString.nullable().optional(),
   date_approved: IsoDateString.nullable().optional(),
@@ -43,6 +56,9 @@ export const LegislationRecordSchema = z.object({
   official_pdf_url: z.url().nullable().optional(),
   reference_url: z.url().optional(),
   source_authority: LegislationSourceAuthority,
+  source_kind: z.string().optional(),
+  verification_level: LegislationVerificationLevel.optional(),
+  related_measures: z.array(z.string()).optional(),
   full_text_available: z.boolean(),
 });
 export type LegislationRecord = z.infer<typeof LegislationRecordSchema>;
@@ -94,6 +110,16 @@ export function getLegislationSourceUrl(
 
 export function hasLegislationFullText(record: LegislationRecord): boolean {
   return record.full_text_available && Boolean(record.official_pdf_url);
+}
+
+/**
+ * SUBJECT_VERIFIED records have no title (only known via an official
+ * cross-reference, not the document itself); official_alias/official_title
+ * cover ordinance/EO naming variants. Never returns the record's verified
+ * `subject` describing untitled content as if it were a formal title.
+ */
+export function getLegislationTitle(record: LegislationRecord): string | null {
+  return record.title ?? record.official_title ?? record.official_alias ?? null;
 }
 
 export function getResolutions(): readonly LegislationRecord[] {

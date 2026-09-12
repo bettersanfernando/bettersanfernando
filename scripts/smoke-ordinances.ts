@@ -13,9 +13,9 @@ const referenceOnlyRecords = ordinances.filter(
   ordinance => !hasLegislationFullText(ordinance)
 );
 
-assert.equal(ordinances.length, 6);
+assert.equal(ordinances.length, 11);
 assert.equal(fullTextRecords.length, 2);
-assert.equal(referenceOnlyRecords.length, 4);
+assert.equal(referenceOnlyRecords.length, 9);
 assert.equal(new Set(ordinances.map(item => item.id)).size, ordinances.length);
 assert.equal(
   new Set(ordinances.map(item => item.document_number)).size,

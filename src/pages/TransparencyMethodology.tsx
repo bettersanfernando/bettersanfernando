@@ -130,11 +130,11 @@ function MethodSection({
 
 export default function TransparencyMethodology() {
   const inventory = getTransparencySourceInventory();
-  const hasUnpublishedFinance = inventory.unavailableDomains.some(
-    domain => domain.id === 'finance' && domain.status === 'NOT_EXPORTED'
-  );
   const fullDisclosureDomain = inventory.publishedDomains.find(
     domain => domain.id === 'full-disclosure'
+  );
+  const financeDomain = inventory.publishedDomains.find(
+    domain => domain.id === 'finance'
   );
 
   return (
@@ -509,12 +509,9 @@ export default function TransparencyMethodology() {
                           ],
                         ] as const)
                       : []),
-                    ...(hasUnpublishedFinance
+                    ...(financeDomain
                       ? ([
-                          [
-                            'Finance',
-                            'Not currently included in the public frontend export. This describes release availability, not whether records exist elsewhere.',
-                          ],
+                          ['City Finances', financeDomain.coverageNote],
                         ] as const)
                       : []),
                   ].map(([domain, limitation]) => (

@@ -9,6 +9,7 @@ import { Text } from '../components/ui/Text';
 import SEO from '../components/SEO';
 import {
   getExecutiveOrders,
+  getLegislationTitle,
   type LegislationRecord,
 } from '../data/civic/legislation';
 
@@ -29,6 +30,7 @@ function matchesQuery(order: LegislationRecord, query: string): boolean {
   return [
     order.document_number,
     order.title,
+    order.subject,
     order.issuer_name,
     order.issuer_title,
     order.issuing_body,
@@ -157,6 +159,7 @@ export default function ExecutiveOrders() {
               {visibleOrders.map(order => {
                 const sourceUrl =
                   order.official_page_url ?? order.reference_url;
+                const title = getLegislationTitle(order) ?? order.subject;
 
                 return (
                   <Card key={order.id} className="mb-0">
@@ -171,9 +174,9 @@ export default function ExecutiveOrders() {
                           </span>
                         </div>
 
-                        {order.title && (
+                        {title && (
                           <h2 className="text-base font-semibold leading-relaxed text-gray-900">
-                            {order.title}
+                            {title}
                           </h2>
                         )}
 

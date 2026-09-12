@@ -1,5 +1,6 @@
 import {
   getExecutiveOrders,
+  getLegislationTitle,
   getOrdinances,
   getResolutions,
   hasLegislationFullText,
@@ -21,8 +22,10 @@ function relevantDate(record: LegislationRecord) {
   );
 }
 
+// Falls back to the verified `subject` only for preview display, never as a
+// claimed formal title — SUBJECT_VERIFIED records have no other display text.
 function displayTitle(record: LegislationRecord) {
-  return record.title ?? record.official_title ?? record.official_alias ?? null;
+  return getLegislationTitle(record) ?? record.subject ?? null;
 }
 
 function preview(records: readonly LegislationRecord[]) {
@@ -66,6 +69,9 @@ export function getLegislationSummary() {
       referenceOnly: ordinances.length - ordinanceFullText,
       preview: Object.freeze(preview(ordinances)),
     }),
-    resolutions: Object.freeze({ total: resolutions.length }),
+    resolutions: Object.freeze({
+      total: resolutions.length,
+      preview: Object.freeze(preview(resolutions)),
+    }),
   });
 }

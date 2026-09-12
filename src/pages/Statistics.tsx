@@ -5,6 +5,7 @@ import {
   Database,
   FolderKanban,
   Landmark,
+  Library,
   Scale,
   ShieldCheck,
   UsersRound,
@@ -14,9 +15,13 @@ import SEO from '../components/SEO';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Section from '../components/ui/Section';
 import { getStatisticsSummary } from '../data/civic/statisticsSummary';
+import { getLegislationSummary } from '../data/civic/legislationSummary';
+import { getPublicRecordsMetrics } from '../data/civic/publicRecordsCoverage';
 
 const numberFormatter = new Intl.NumberFormat('en-PH');
 const summary = getStatisticsSummary();
+const legislation = getLegislationSummary();
+const publicRecordsDatasetCount = getPublicRecordsMetrics().length;
 
 const statisticalViews = [
   {
@@ -58,6 +63,26 @@ const statisticalViews = [
     context: `${summary.population.urbanBarangays} urban · ${summary.population.ruralBarangays} rural`,
     description:
       'See a concise cross-domain baseline for population, barangays, geographic coverage, and the published institutional directory.',
+  },
+  {
+    href: '/statistics/legislation',
+    action: 'View Legislation Statistics',
+    title: 'Legislation',
+    icon: Scale,
+    measure: `${legislation.executiveOrders.total} EO · ${legislation.ordinances.total} Ord · ${legislation.resolutions.total} Res`,
+    context: 'Bounded published holdings',
+    description:
+      'Compare BetterSanFernando’s verified Executive Order, Ordinance, and Resolution coverage by type and year.',
+  },
+  {
+    href: '/statistics/public-records',
+    action: 'View Public Records Statistics',
+    title: 'Public Records',
+    icon: Library,
+    measure: `${publicRecordsDatasetCount} tracked datasets`,
+    context: 'Each dataset keeps its own unit',
+    description:
+      'See collection coverage, publication status, and limits for every dataset BetterSanFernando currently publishes.',
   },
 ] as const;
 
@@ -286,16 +311,6 @@ export default function Statistics() {
                   published data. Approved budget, winning bid, and contract
                   amount are separate procurement fields and are not treated as
                   spending.
-                </p>
-              </li>
-              <li className="py-5">
-                <h3 className="font-bold text-gray-950">
-                  Public-record statistics
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-gray-700">
-                  A defensible cross-domain records universe and shared
-                  denominator have not been established for a separate
-                  statistical view.
                 </p>
               </li>
             </ul>

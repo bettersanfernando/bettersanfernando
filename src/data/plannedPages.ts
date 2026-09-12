@@ -1,9 +1,8 @@
-const plannedPageRoutes = [
-  { id: 'resolutions', path: '/legislation/resolutions' },
-  { id: 'financialTransparency', path: '/transparency/finance' },
-  { id: 'legislationStatistics', path: '/statistics/legislation' },
-  { id: 'publicRecordsStatistics', path: '/statistics/public-records' },
-] as const;
+// Every canonical planned route has shipped as a real page; kept as a typed
+// empty registry (rather than deleted outright) since App.tsx's route-map
+// wiring, PlannedPage, and numerous smoke tests still reference it as the
+// live source of truth for "no planned routes remain."
+const plannedPageRoutes: readonly { id: string; path: string }[] = [];
 
 export type PlannedPageId = (typeof plannedPageRoutes)[number]['id'];
 

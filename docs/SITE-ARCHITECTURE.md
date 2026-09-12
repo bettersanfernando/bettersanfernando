@@ -152,6 +152,7 @@ support that purpose.
 │   ├── population
 │   ├── demographics
 │   ├── government
+│   ├── legislation
 │   ├── projects
 │   ├── project-spending
 │   ├── procurement
@@ -259,9 +260,14 @@ collections because they have different issuing authorities, evidence, and
 coverage.
 
 Collection counts must be described as records available in
-BetterSanFernando, not as totals produced by the City. An empty resolutions
-dataset means that no individual resolution currently meets the publication
-standard; it does not mean the City issued no resolutions.
+BetterSanFernando, not as totals produced by the City. A bounded or partial
+collection count — including the 2 currently subject-verified resolutions —
+means only that BetterSanFernando has verified and published that many
+individual records; it never implies the City issued, adopted, or holds
+exactly that many measures. Archive-range metadata (e.g. the 2022/2023
+resolution and ordinance range counts in `statistics/public-records-coverage.json`)
+must remain clearly separate from individually published records and is
+never expanded into individual entries.
 
 ### Transparency
 
@@ -271,7 +277,7 @@ incomplete. It owns:
 
 - full-disclosure document discovery;
 - cross-domain official documents;
-- financial transparency;
+- City Finances (`/transparency/finance`);
 - the site-wide source inventory;
 - site-wide verification methodology and limitations; and
 - the Statistics content area.
@@ -284,6 +290,17 @@ publication-reviewed nine-record export. It groups Citizen’s Charters,
 business forms, and privacy documents while linking laws, Full Disclosure,
 procurement, projects, and services to their existing canonical datasets.
 The collection is partial; held and excluded documents remain unpublished.
+
+`/transparency/finance` is published under the public title "City Finances":
+53 owner-approved official aggregate finance reports and 121 non-additive
+observations. It provides a coverage summary by report family/fund/year, a
+searchable and filterable report catalog, and comparisons limited to
+observations sharing the same report, fund, period, and accounting basis.
+Currency and unit are unstated throughout, so amounts render as plain
+numbers, never as PHP. Cumulative year-to-date quarters are never summed,
+incompatible funds/periods/bases are never combined, no citywide spending
+total is computed, and City Finances is never combined with the separate 298
+Project Cost & Utilization observations.
 
 ### Statistics
 
@@ -320,6 +337,27 @@ projects with repeated observations. Source currency is unstated. Approved budge
 contract amount, and this year-to-date utilization figure are different
 concepts and must never be collapsed into a single ambiguous "spending"
 value, and none of them may be presented as actual expenditure or payment.
+
+`/statistics/legislation` compares BetterSanFernando's published 13 Executive
+Orders, 11 Ordinances, and 2 Resolutions by count and by published year,
+using the same `statistics/public-records-coverage.json` per-type coverage
+metadata that backs `/statistics/public-records`. Archive-range positions
+(e.g. the 2022/2023 resolution and ordinance ranges) are shown in a
+clearly separate table and are never counted toward these three totals. It
+must never infer legal effect, current validity, repeal status, sponsors,
+authors, or complete archive coverage, and its counts describe
+BetterSanFernando's verified published holdings, not the City's total
+legislative output.
+
+`/statistics/public-records` presents per-dataset coverage — publication
+status, years, limitations, and canonical destination — for every dataset
+BetterSanFernando currently publishes, backed by the
+`statistics/public-records-coverage.json` export. Each metric keeps its own
+unit label (projects, evidence records, structured services, documents,
+executive order records, ordinance records, resolution records); different
+units must never be added together into one "total public records" figure.
+The 53 City Finances reports appear only as a separate related collection,
+never folded into the core metrics.
 
 ### Barangays
 
@@ -578,8 +616,6 @@ The following decisions remain outside this document's settled route model:
 
 - whether all currently listed Services categories remain in scope after
   local service research, and which audience pages warrant separate routes;
-- whether Financial Transparency begins as document discovery, selected
-  aggregate metrics, or both;
 - whether current elected officials belong in the initial Government scope
   and how term changes will be maintained;
 - whether a dedicated historical Full Disclosure workflow eventually becomes

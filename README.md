@@ -55,9 +55,11 @@ been verified and reviewed for publication.
 | Government Hotlines contacts      | 11                                                              |
 | Barangay Contacts records         | 324 (35 Secretary, 289 BHERT)                                   |
 | Official Government Links         | 35 (30 websites, 2 digital services, 3 Facebook pages)          |
-| Executive orders                  | 11                                                              |
-| Ordinances                        | 6                                                               |
-| Resolutions                       | 0                                                               |
+| Executive orders                  | 13 (11 archive-captured, 2 subject-verified 2023)               |
+| Ordinances                        | 11 (2 full text, 9 metadata/reference)                          |
+| Resolutions                       | 2 (subject-verified)                                            |
+| City Finances reports             | 53 reports, 121 observations                                    |
+| Public Records Coverage metrics   | 8 datasets, 6 archive-range entries, 1 related collection       |
 
 Published service categories:
 

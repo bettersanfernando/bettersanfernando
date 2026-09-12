@@ -46,14 +46,13 @@ for (const href of [
   '/statistics/projects',
   '/statistics/procurement',
   '/statistics/city-profile',
+  '/statistics/legislation',
+  '/statistics/public-records',
 ]) {
   assert.match(pageSource, new RegExp(`href: ["']${href}["']`));
 }
 
-for (const plannedHref of [
-  '/statistics/demographics',
-  '/statistics/public-records',
-]) {
+for (const plannedHref of ['/statistics/demographics']) {
   assert.doesNotMatch(
     pageSource,
     new RegExp(`(?:to|href)=["']${plannedHref}["']`)

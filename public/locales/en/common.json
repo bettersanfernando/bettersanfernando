@@ -102,7 +102,7 @@
       "fullDisclosureReports": "Full Disclosure Reports",
       "cityProjects": "City Projects",
       "procurementRecords": "Procurement Records",
-      "financialTransparency": "Financial Transparency",
+      "financialTransparency": "City Finances",
       "dataSources": "Data Sources",
       "methodology": "Methodology",
       "howWeVerify": "How We Verify",
@@ -113,7 +113,8 @@
       "barangayDirectory": "Barangay Directory",
       "demographicsStatistics": "Demographics",
       "governmentStatisticsPage": "Government Statistics",
-      "publicRecordsStatistics": "Public Records Statistics"
+      "publicRecordsStatistics": "Public Records Statistics",
+      "legislationStatistics": "Legislation Statistics"
     },
     "descriptions": {
       "businessServices": "Find permits, registration guidance and business information.",
@@ -162,7 +163,7 @@
       "fullDisclosureReports": "Access public financial and disclosure records.",
       "cityProjects": "Browse verified city projects and their supporting records.",
       "procurementRecords": "Review procurement records with project and spending context.",
-      "financialTransparency": "Explore public financial records and their sources.",
+      "financialTransparency": "Explore official aggregate finance reports and their sources.",
       "dataSources": "See where BetterSanFernando's published information comes from.",
       "methodology": "Learn how civic records are collected and presented.",
       "howWeVerify": "Understand the checks applied before information is published.",
@@ -173,7 +174,8 @@
       "barangayDirectory": "Browse all 35 barangays and their verified public facts.",
       "demographicsStatistics": "Explore 2024 household population, 2020 age/sex structure, and 2023 poverty estimates.",
       "governmentStatisticsPage": "Explore verified City Government entity, directory, and relationship counts.",
-      "publicRecordsStatistics": "Understand the coverage of published public records."
+      "publicRecordsStatistics": "Understand the coverage of published public records.",
+      "legislationStatistics": "Explore verified Executive Order, Ordinance, and Resolution coverage."
     },
     "search": "Search",
     "searchPlaceholder": "Search BetterSanFernando",
@@ -287,10 +289,6 @@
         "title": "Ordinances",
         "description": "Browse verified city ordinances with links to available source records."
       },
-      "resolutions": {
-        "title": "Resolutions",
-        "description": "Browse verified city resolutions with links to available source records."
-      },
       "transparency": {
         "title": "Transparency",
         "description": "Explore what happened, what was spent, which public records exist, and where the evidence comes from."
@@ -302,10 +300,6 @@
       "transparencyContracts": {
         "title": "Contracts & Awards",
         "description": "Review verified contract and award records with supporting evidence."
-      },
-      "financialTransparency": {
-        "title": "Financial Transparency",
-        "description": "Explore verified public financial records with clear source context and limitations."
       },
       "transparencySources": {
         "title": "Data Sources",
@@ -346,14 +340,6 @@
       "procurementStatistics": {
         "title": "Procurement Statistics",
         "description": "Explore patterns in verified procurement, bid, contract, and award records."
-      },
-      "legislationStatistics": {
-        "title": "Legislation Statistics",
-        "description": "Explore patterns in verified executive order, ordinance, and resolution records."
-      },
-      "publicRecordsStatistics": {
-        "title": "Public Records Statistics",
-        "description": "Understand the coverage and composition of verified public records in the portal."
       },
       "barangays": {
         "title": "Barangay Directory",

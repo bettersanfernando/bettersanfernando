@@ -25,9 +25,9 @@ assert.equal(summary.projects.bidResults, 233);
 assert.equal(summary.projects.awarded, 228);
 assert.equal(summary.projects.contracted, 6);
 assert.equal(summary.government.officeRecords, 44);
-assert.equal(summary.legislation.executiveOrders, 11);
-assert.equal(summary.legislation.ordinances, 6);
-assert.equal(summary.legislation.resolutions, 0);
+assert.equal(summary.legislation.executiveOrders, 13);
+assert.equal(summary.legislation.ordinances, 11);
+assert.equal(summary.legislation.resolutions, 2);
 assert.equal(summary.population.total, 377_534);
 assert.equal(summary.population.census, '2024 POPCEN');
 assert.equal(summary.population.barangays, 35);
@@ -36,31 +36,21 @@ assert.equal(summary.population.ruralBarangays, 1);
 assert.equal(summary.geography.cityBoundaries, 1);
 assert.equal(summary.geography.barangayBoundaries, 35);
 
-for (const id of ['finance'] as const) {
-  assert.equal(
-    summary.unavailable.find(domain => domain.id === id)?.status,
-    'NOT_EXPORTED'
-  );
-}
 assert.ok(
   !summary.unavailable.some(domain => domain.id === 'full-disclosure'),
   'full-disclosure must no longer be listed as unavailable now that it is published'
 );
-assert.equal(
-  summary.unavailable.find(domain => domain.id === 'resolutions')?.status,
-  'NOT_VERIFIED'
+assert.ok(
+  !summary.unavailable.some(domain => domain.id === 'finance'),
+  'finance must no longer be listed as unavailable now that City Finances is published'
+);
+assert.ok(
+  !summary.unavailable.some(domain => domain.id === 'resolutions'),
+  'resolutions must no longer be listed as unavailable now that Resolutions is published'
 );
 
-for (const plannedHref of [
-  '/transparency/finance',
-  '/transparency/full-disclosure',
-  '/transparency/documents',
-  '/legislation/resolutions',
-]) {
-  assert.doesNotMatch(
-    pageSource,
-    new RegExp(`(?:to|href)=["']${plannedHref}["']`)
-  );
+for (const href of ['/transparency/finance', '/legislation/resolutions']) {
+  assert.match(pageSource, new RegExp(`["']${href}["']`));
 }
 
 assert.doesNotMatch(pageSource, /data does not exist|City has no resolutions/i);

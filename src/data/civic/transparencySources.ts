@@ -4,10 +4,12 @@ import demographicsJson from '../generated/civic/demographics/barangays.json' wi
 import officesJson from '../generated/civic/directories/city-offices.json' with { type: 'json' };
 import executiveOrdersJson from '../generated/civic/legislation/executive-orders.json' with { type: 'json' };
 import ordinancesJson from '../generated/civic/legislation/ordinances.json' with { type: 'json' };
+import resolutionsJson from '../generated/civic/legislation/resolutions.json' with { type: 'json' };
 import { getAllProjectEvidence, getProjects } from './projects.ts';
 import { getFullDisclosureMetadata } from './fullDisclosure.ts';
 import { getOfficialDocumentsMetadata } from './officialDocuments.ts';
 import { getProjectCostUtilizationMetadata } from './projectCostUtilization.ts';
+import { getFinanceMetadata, getFinanceReports } from './finance.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
@@ -22,11 +24,14 @@ const DatasetPath = z.enum([
   'legislation/executive-orders.json',
   'legislation/ordinances.json',
   'legislation/resolutions.json',
+  'finance/finance-reports.json',
+  'finance/finance-observations.json',
   'projects/city-projects.json',
   'projects/project-cost-utilization.json',
   'projects/project-evidence.json',
   'services/services.json',
   'services/utilities-water-resources.json',
+  'statistics/public-records-coverage.json',
   'transparency/full-disclosure.json',
   'transparency/official-documents.json',
 ]);
@@ -82,6 +87,12 @@ const ordinances = z
     ),
   })
   .parse(ordinancesJson);
+const resolutions = z
+  .object({
+    last_verified: z.string(),
+    resolutions: z.array(z.object({ reference_url: z.url().optional() })),
+  })
+  .parse(resolutionsJson);
 
 export type TransparencySourceLink = Readonly<{
   label: string;
@@ -98,6 +109,8 @@ export type PublishedSourceDomain = Readonly<{
     | 'city-offices'
     | 'executive-orders'
     | 'ordinances'
+    | 'resolutions'
+    | 'finance'
     | 'full-disclosure'
     | 'official-documents'
     | 'project-cost-utilization';
@@ -114,7 +127,7 @@ export type PublishedSourceDomain = Readonly<{
 }>;
 
 export type UnavailableSourceDomain = Readonly<{
-  id: 'finance' | 'person-directories' | 'resolutions';
+  id: 'person-directories';
   name: string;
   status: 'NOT_EXPORTED' | 'NOT_VERIFIED';
   note: string;
@@ -308,7 +321,8 @@ export function getTransparencySourceInventory() {
       description:
         'Executive-order metadata and public links captured from the visible City Government archive.',
       authority: 'City Government of San Fernando, Pampanga',
-      referencePeriod: '2013 archive entries visible in the audited source',
+      referencePeriod:
+        '2013 archive entries visible in the audited source, plus 2 subject-verified 2023 cross-references',
       lastVerified: executiveOrders.last_verified,
       recordCount: recordCount('legislation/executive-orders.json'),
       recordLabel: 'executive orders',
@@ -326,7 +340,7 @@ export function getTransparencySourceInventory() {
         },
       ],
       coverageNote:
-        'Complete capture of the 11 entries visible in the audited archive, not a claim of complete historical coverage.',
+        'Complete capture of the 11 entries visible in the audited archive, plus 2 subject-verified 2023 cross-references, not a claim of complete historical coverage.',
     },
     {
       id: 'ordinances',
@@ -349,7 +363,58 @@ export function getTransparencySourceInventory() {
         'View public ordinance source'
       ),
       coverageNote:
-        'Six verified records are published; two include full text and four currently establish metadata or existence only.',
+        'Eleven verified records are published; two include full text and nine currently establish metadata or existence only.',
+    },
+    {
+      id: 'resolutions',
+      name: 'Resolutions',
+      description:
+        'A bounded, subject-verified resolution subset identified by official City cross-references, without full text or exact adoption dates.',
+      authority: 'City Government primary official cross-references',
+      referencePeriod:
+        'Subject-verified records currently included in the export',
+      lastVerified: resolutions.last_verified,
+      recordCount: recordCount('legislation/resolutions.json'),
+      recordLabel: 'resolutions',
+      datasetPaths: ['legislation/resolutions.json'],
+      links: [
+        ...uniqueLinks(
+          resolutions.resolutions
+            .map(record => record.reference_url)
+            .filter((url): url is string => Boolean(url)),
+          'View public resolution cross-reference'
+        ),
+        {
+          label: 'Browse published resolutions',
+          url: '/legislation/resolutions',
+          type: 'internal',
+        },
+      ],
+      coverageNote:
+        'Two subject-verified records only — never a claim of the number of resolutions the City has adopted.',
+    },
+    {
+      id: 'finance',
+      name: 'City Finances',
+      description:
+        'Selected official aggregate finance reports and their non-additive, source-reported observations.',
+      authority: 'City Government of San Fernando, Pampanga',
+      referencePeriod: `${Math.min(...getFinanceReports().map(report => report.reporting_year))}–${Math.max(...getFinanceReports().map(report => report.reporting_year))}`,
+      lastVerified: getFinanceMetadata().lastVerified,
+      recordCount: recordCount('finance/finance-reports.json'),
+      recordLabel: 'finance reports',
+      datasetPaths: [
+        'finance/finance-reports.json',
+        'finance/finance-observations.json',
+      ],
+      links: [
+        {
+          label: 'Browse City Finances',
+          url: '/transparency/finance',
+          type: 'internal',
+        },
+      ],
+      coverageNote: getFinanceMetadata().overallPublicLimitation,
     },
     {
       id: 'full-disclosure',
@@ -405,22 +470,10 @@ export function getTransparencySourceInventory() {
 
   const unavailableDomains: readonly UnavailableSourceDomain[] = [
     {
-      id: 'finance',
-      name: 'Finance aggregates',
-      status: 'NOT_EXPORTED',
-      note: 'Not currently included in the public frontend export.',
-    },
-    {
       id: 'person-directories',
       name: 'BHERT and person-level directories',
       status: 'NOT_EXPORTED',
       note: 'Not currently included in the public frontend export.',
-    },
-    {
-      id: 'resolutions',
-      name: 'Resolutions',
-      status: 'NOT_VERIFIED',
-      note: 'No individual resolution currently meets the publication standard for this frontend release.',
     },
   ];
 

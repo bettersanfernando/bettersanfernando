@@ -62,6 +62,14 @@ const TransparencyMethodology = lazy(
 );
 const FullDisclosure = lazy(() => import('./pages/FullDisclosure'));
 const OfficialDocuments = lazy(() => import('./pages/OfficialDocuments'));
+const CityFinances = lazy(() => import('./pages/CityFinances'));
+const Resolutions = lazy(() => import('./pages/Resolutions'));
+const LegislationStatistics = lazy(
+  () => import('./pages/LegislationStatistics')
+);
+const PublicRecordsStatistics = lazy(
+  () => import('./pages/PublicRecordsStatistics')
+);
 const Search = lazy(() => import('./pages/Search'));
 const PlannedPage = lazy(() => import('./pages/PlannedPage'));
 
@@ -265,6 +273,14 @@ function App() {
                     path="/statistics/government"
                     element={<GovernmentStatistics />}
                   />
+                  <Route
+                    path="/statistics/legislation"
+                    element={<LegislationStatistics />}
+                  />
+                  <Route
+                    path="/statistics/public-records"
+                    element={<PublicRecordsStatistics />}
+                  />
                   <Route path="/statistics" element={<Statistics />} />
                   <Route
                     path="/statistics/city-profile"
@@ -283,6 +299,10 @@ function App() {
                   <Route
                     path="/legislation/ordinances"
                     element={<Ordinances />}
+                  />
+                  <Route
+                    path="/legislation/resolutions"
+                    element={<Resolutions />}
                   />
                   <Route
                     path="/transparency/sources"
@@ -322,6 +342,10 @@ function App() {
                   <Route
                     path="/transparency/full-disclosure"
                     element={<FullDisclosure />}
+                  />
+                  <Route
+                    path="/transparency/finance"
+                    element={<CityFinances />}
                   />
                   <Route
                     path="/transparency/archive"

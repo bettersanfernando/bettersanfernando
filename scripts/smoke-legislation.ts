@@ -29,9 +29,10 @@ assert.equal(
   ordinances.filter(record => !hasLegislationFullText(record)).length
 );
 assert.equal(summary.resolutions.total, resolutions.length);
-assert.equal(summary.resolutions.total, 0);
+assert.equal(summary.resolutions.total, 2);
 assert.ok(summary.executiveOrders.preview.length <= 3);
 assert.ok(summary.ordinances.preview.length <= 3);
+assert.ok(summary.resolutions.preview.length <= 3);
 assert.deepEqual(
   getLegislationSummary(),
   summary,
@@ -41,6 +42,7 @@ assert.deepEqual(
 for (const record of [
   ...summary.executiveOrders.preview,
   ...summary.ordinances.preview,
+  ...summary.resolutions.preview,
 ]) {
   assert.deepEqual(
     Object.keys(record).sort(),
@@ -61,7 +63,7 @@ assert.equal(mainNavigation.length, 7);
 const pageSource = readFileSync('src/pages/Legislation.tsx', 'utf8');
 assert.doesNotMatch(pageSource, /17 total laws|total laws/i);
 assert.doesNotMatch(pageSource, /no resolutions exist|City Council passed no/i);
-assert.doesNotMatch(pageSource, /legislation\/resolutions/);
+assert.match(pageSource, /legislation\/resolutions/);
 for (const privateTerm of [
   'resolution recovery queue',
   'collision notes',
@@ -73,6 +75,7 @@ for (const privateTerm of [
 }
 assert.match(pageSource, /View all Executive Orders/);
 assert.match(pageSource, /View all Ordinances/);
+assert.match(pageSource, /View all Resolutions/);
 
 const appSource = readFileSync('src/App.tsx', 'utf8');
 assert.match(appSource, /path="\/legislation"/);

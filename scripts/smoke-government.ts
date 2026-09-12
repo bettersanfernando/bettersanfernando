@@ -24,8 +24,8 @@ assert.equal(summary.officeRecords, offices.length);
 assert.equal(summary.executiveOrders, getExecutiveOrders().length);
 assert.equal(summary.ordinances, getOrdinances().length);
 assert.equal(summary.officeRecords, 44);
-assert.equal(summary.executiveOrders, 11);
-assert.equal(summary.ordinances, 6);
+assert.equal(summary.executiveOrders, 13);
+assert.equal(summary.ordinances, 11);
 assert.deepEqual(
   getGovernmentSummary(),
   summary,

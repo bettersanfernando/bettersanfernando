@@ -159,8 +159,8 @@ assert(rejectedMalformed, 'expected schema to reject a malformed feature');
 
 const executiveOrders = getExecutiveOrders();
 assert(
-  executiveOrders.length === 11,
-  `expected 11 Executive Orders, got ${executiveOrders.length}`
+  executiveOrders.length === 13,
+  `expected 13 Executive Orders, got ${executiveOrders.length}`
 );
 assert(
   executiveOrders.every(order => order.document_type === 'Executive Order'),

@@ -21,6 +21,16 @@
       "schema_version": 1,
       "sha256": "ba4bbcfbd274b16250f5c1fdf5f1b995cd3df3f3535878c809d07781c7d4f0cb"
     },
+    "finance/finance-observations.json": {
+      "record_count": 121,
+      "schema_version": 1,
+      "sha256": "8fde33646ca0c59ebd382e12f3b0324505d952e683df2ed69bea55f8908b3abf"
+    },
+    "finance/finance-reports.json": {
+      "record_count": 53,
+      "schema_version": 1,
+      "sha256": "9a27dbabb8cf44766dbf0c15f11978f065c0332dcf4fa04ea37c04052785bf44"
+    },
     "geography/barangays.geojson": {
       "record_count": 35,
       "schema_version": 1,
@@ -47,19 +57,19 @@
       "sha256": "8b534c3edbe16c1b757b03a08feb09e00f4301c64e40c49d509e59f48ae1be64"
     },
     "legislation/executive-orders.json": {
-      "record_count": 11,
+      "record_count": 13,
       "schema_version": 1,
-      "sha256": "ad913551a07bd7dc36232bed81758aec5eed97f8e4d2b9720e36107780ca344a"
+      "sha256": "2ffb275711ec945d1af64273d68d523998ead3dfebe1d29686b4064ccb73d750"
     },
     "legislation/ordinances.json": {
-      "record_count": 6,
+      "record_count": 11,
       "schema_version": 1,
-      "sha256": "d817903668b91c03908a5cc93e5c74fc330efe48e4be39e3fd01fa89681af132"
+      "sha256": "3ad6b4ed63ecc3c6b1483f45c0f22ae91d17397f64f6694dc9a1b27ab7b9a509"
     },
     "legislation/resolutions.json": {
-      "record_count": 0,
+      "record_count": 2,
       "schema_version": 1,
-      "sha256": "6d78716bea652fb99e09814b3ac69b52570717ecff31995593f57cf984da8cdf"
+      "sha256": "6406acb11d81d458b41132717e6fde39cebb5daa7b49eee4f5e7aac468e62246"
     },
     "projects/city-projects.json": {
       "record_count": 324,
@@ -86,6 +96,11 @@
       "schema_version": 1,
       "sha256": "7ebb165b2881b3599e5c5dbd49626b7fd3a3c92a335fc023a8fc011a548fba98"
     },
+    "statistics/public-records-coverage.json": {
+      "record_count": 8,
+      "schema_version": 1,
+      "sha256": "76f73035efe93509497218d5e497c7f790bad7a56adf6aaccac933e2c38119c3"
+    },
     "transparency/full-disclosure.json": {
       "record_count": 10,
       "schema_version": 1,
@@ -105,6 +120,8 @@
     "data/directories/city-offices.json",
     "data/government/government-structure-institutional-links.json",
     "data/legislation/executive-orders.json",
+    "data/legislation/legislation-archive-coverage.json",
+    "data/legislation/legislation-publication-reconciliation.json",
     "data/legislation/ordinances.json",
     "data/legislation/resolutions.json",
     "data/projects/city-projects.json",
@@ -152,6 +169,8 @@
     "data/transparency/official-documents-publication-review.json",
     "data/transparency/official-documents-source-manifest.json",
     "data/finance/nta-utilization-project-extraction.json",
+    "data/finance/city-finance-extraction.json",
+    "data/finance/city-finance-publication-review.json",
     "data/projects/nta-utilization-match-review.json",
     "data/projects/nta-utilization-publication-review.json",
     "data/demographics/demographic-profile.json",
@@ -167,7 +186,9 @@
   "not_exported_in_this_release": [
     "data/directories/barangay-secretaries.json",
     "data/directories/bhert-contacts.json",
-    "data/finance/*",
+    "data/finance/financial-*.json",
+    "data/finance/city-finance-source-manifest.json",
+    "data/finance/city-finance-version-review.json",
     "data/projects/project-conflict-triage.json",
     "data/projects/project-recovery-queue.json",
     "data/projects/*-candidates.json",
@@ -175,6 +196,7 @@
     "data/projects/*-schema-analysis.json",
     "data/projects/*-source-manifest.json",
     "data/legislation/*-recovery-queue.json",
+    "data/legislation/legislation-publication-reconciliation.json",
     "data/legislation/legislation-archive-coverage.json",
     "data/demographics/*-source-manifest.json",
     "data/services/citizens-charter-extraction-analysis.json",
@@ -184,7 +206,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "6d17885c842deb1b5c6ad16c747dd3e80497ee8f",
+  "source_commit": "965b1fc8a9d61aefa8ce8e3ff8480e434caba1c1",
   "source_data_version": "v0.1.1",
   "sources": [
     {

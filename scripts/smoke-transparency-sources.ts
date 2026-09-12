@@ -7,8 +7,8 @@ const inventory = getTransparencySourceInventory();
 
 assert.equal(inventory.release.exportVersion, 'v0.1.0');
 assert.equal(inventory.release.sourceDataVersion, 'v0.1.1');
-assert.equal(inventory.release.datasetCount, 19);
-assert.equal(inventory.publishedDomains.length, 10);
+assert.equal(inventory.release.datasetCount, 22);
+assert.equal(inventory.publishedDomains.length, 12);
 assert.deepEqual(
   inventory.publishedDomains.map(domain => domain.id),
   [
@@ -20,6 +20,8 @@ assert.deepEqual(
     'city-offices',
     'executive-orders',
     'ordinances',
+    'resolutions',
+    'finance',
     'full-disclosure',
     'official-documents',
   ]
@@ -32,8 +34,10 @@ const expectedRecordCounts = {
   population: 35,
   geography: 36,
   'city-offices': 44,
-  'executive-orders': 11,
-  ordinances: 6,
+  'executive-orders': 13,
+  ordinances: 11,
+  resolutions: 2,
+  finance: 53,
   'full-disclosure': 10,
   'official-documents': 9,
 };
@@ -58,11 +62,7 @@ assert.equal(geography.links.length, 2);
 
 assert.deepEqual(
   inventory.unavailableDomains.map(domain => [domain.id, domain.status]),
-  [
-    ['finance', 'NOT_EXPORTED'],
-    ['person-directories', 'NOT_EXPORTED'],
-    ['resolutions', 'NOT_VERIFIED'],
-  ]
+  [['person-directories', 'NOT_EXPORTED']]
 );
 
 const pageSource = readFileSync('src/pages/TransparencySources.tsx', 'utf8');

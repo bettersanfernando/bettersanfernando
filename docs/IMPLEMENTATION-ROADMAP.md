@@ -168,6 +168,60 @@ none, and none is implied to have zero cost. It is `PARTIAL`, not `READY`:
 only 109 of 324 projects have a reviewed observation, and Total Cost Incurred
 to Date is not proof of cash payment or disbursement.
 
+`/legislation/resolutions` shipped as a new canonical route: 2 subject-verified
+resolution records (identified only via official City cross-references), each
+showing its document number, verified subject, year-level date precision, and
+issuing body, with a link to its official cross-reference. Neither record has
+a formal title, an exact adoption date, or full text — none is manufactured.
+The 2022 (126 positions) and 2023 (264 positions) archive-range counts from
+`statistics/public-records-coverage.json` are shown in a clearly separate
+"archive-range context" section and are never promoted into individually
+published resolution records. It is `PARTIAL`, not `READY`: this is a bounded
+2-record batch, and additional resolutions remain in recovery.
+
+`/transparency/finance` shipped as "City Finances": 53 owner-approved official
+aggregate finance reports and 121 non-additive, source-reported observations,
+backed by the typed `civic/finance.ts` access layer. The page provides a
+coverage summary by report family/fund/year, a searchable and filterable
+report catalog with official page and attachment links, and comparison-safe
+charts limited to observations that share the same report, fund, period, and
+accounting basis: receipts vs. expenditures (SRE), authorized budget
+(annual budget), ending cash balance (cash flow), outstanding debt
+(indebtedness snapshots), SEF utilization, and derived LDRRMF/20% NTA-IRA
+utilization percentages. `currency_code` and `unit_text` are null throughout,
+so every amount renders as a plain number with an explicit "unit not stated"
+note — never PHP, pesos, thousands, or millions. Cumulative year-to-date
+quarters are never summed, incompatible funds/periods/bases are never
+combined, and City Finances is never combined with the separate 298 Project
+Cost & Utilization observations. UCA report rows stay aggregate-only. It is
+`PARTIAL`, not `READY`: this is a bounded 53-report batch, and additional
+report years and families remain in recovery.
+
+`/statistics/legislation` shipped as a new canonical route: a coverage
+comparison of BetterSanFernando's published 13 Executive Orders, 11
+Ordinances, and 2 Resolutions, by count and by published year (drawn from
+`statistics/public-records-coverage.json`'s per-type `period_coverage`), with
+links to each collection. The 2022/2023 resolution, ordinance, and
+appropriation-ordinance archive-range positions are shown in a clearly
+separate table and never counted as individually published records. The page
+states that BetterSanFernando does not infer legal effect, current validity,
+repeal status, sponsors, authors, or complete archive coverage, and that these
+counts are not the City's total legislative output. It is `PARTIAL`, not
+`READY`: legislation recovery for all three record types continues.
+
+`/statistics/public-records` shipped as a new canonical route: a per-dataset
+coverage view backed by the `statistics/public-records-coverage.json` export
+(8 core metrics, 6 archive-range entries, 1 related collection), typed via
+`civic/publicRecordsCoverage.ts`. Each metric — projects (324), project
+evidence (563), services (177), Full Disclosure documents (10), official
+documents (9), Executive Orders (13), Ordinances (11), and Resolutions (2) —
+keeps its own unit label, coverage years, and canonical-route link; the 53
+City Finances reports appear only in a separate "related specialized
+collections" section, and archive-range positions appear only in their own
+table. No combined "total public records" figure is computed or published.
+It is `PARTIAL`, not `READY`: coverage will expand as additional datasets are
+published.
+
 ### Should wait for more data
 
 `/statistics/demographics` was previously listed here pending authoritative
@@ -377,7 +431,7 @@ versioned allowlisted export are complete.
 | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 |        1 | Continue verifying CSFP Citizen's Charter and current city sources beyond the currently published 168 CSFP External services across fifteen CSFP-owned categories, including OSCA renewal/transfer/damaged-card/record-update procedures, Infrastructure & Public Works repair/maintenance procedures, Housing & Land Use building-permit/occupancy/zoning transactions, and the six held Property & Taxes Assessor records, Market Stall Rental, and standalone RPT Clearance; separately, continue verifying additional CSFWD Charter procedures beyond the nine published Utilities & Water transactions | Broader coverage within the 16 published but PARTIAL categories |
 |        2 | Extract and verify the current City Government structure, organizational relationships, mandates, officials, and source dates                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `/government/structure`; later enriches `/government`           |
-|        3 | Recover qualifying primary or otherwise publication-grade evidence for individual Sangguniang Panlungsod resolutions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `/legislation/resolutions`                                      |
+|        3 | Recover qualifying primary or otherwise publication-grade evidence for additional individual Sangguniang Panlungsod resolutions beyond the 2 currently subject-verified and published                                                                                                                                                                                                                                                                                                                                                                                                                       | `/legislation/resolutions` (implemented, `PARTIAL`)             |
 |        4 | Continue exact official CSFP web and social destination verification beyond the published 35-link batch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Moves `/government/links` from `PARTIAL` to `READY`             |
 |        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                                                                                                                                                                                                                                                                                                                                               | Moves `/government/hotlines` from `PARTIAL` to `READY`          |
 |        6 | Retry the PSA population-density source table (held since 2026-07-06 due to a PXWeb server error) once it becomes available                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Moves `/statistics/demographics` from `PARTIAL` to `READY`      |
@@ -397,8 +451,8 @@ with the mechanical creation of an export.
 |        1 | Recover project contract documents, notices to proceed, completion evidence, unresolved linkages, collisions, and source conflicts without advancing lifecycle by inference | Improves `/projects/:projectId`, `/procurement/contracts`, `/statistics/projects`, and `/statistics/procurement` |
 |        2 | Recover missing ordinance full text and additional verified ordinances                                                                                                      | Improves `/legislation/ordinances` and `/legislation`                                                            |
 |        3 | Recover the three older referenced executive orders                                                                                                                         | Improves `/legislation/executive-orders` and `/legislation`                                                      |
-|        4 | Recover individual resolution evidence after jurisdiction and authority checks                                                                                              | Unblocks `/legislation/resolutions` and improves `/legislation`                                                  |
-|        5 | Continue targeted finance recovery for a comparable Annual Budget year, 2023 Q4 SIPB, selected 2022 OCR needs, and COA reports                                              | Improves the future export for `/transparency/finance`                                                           |
+|        4 | Recover additional individual resolution evidence after jurisdiction and authority checks                                                                                   | Improves `/legislation/resolutions` (implemented, `PARTIAL`) and `/legislation`                                  |
+|        5 | Continue targeted finance recovery for a comparable Annual Budget year, 2023 Q4 SIPB, selected 2022 OCR needs, and COA reports                                              | Improves `/transparency/finance` (implemented, `PARTIAL`, 53 reports/121 observations)                           |
 
 `NOT_FOUND_AFTER_TARGETED_SEARCH` records a recovery outcome; it never proves
 that a government record does not exist.
@@ -409,12 +463,17 @@ that a government record does not exist.
 nine-record export. It remains `PARTIAL`: canonical laws, Full Disclosure,
 procurement, projects, and services stay in their own datasets, while held and
 excluded documents remain unpublished.
-The planned-page registry now contains six routes.
+All four canonical planned routes have shipped as real, publication-reviewed
+pages, and the planned-page registry is now empty (0 routes). The sanitized
+aggregate finance export and typed `civic/finance.ts` module (item 1, below)
+are complete: 53 reports and 121 observations back `/transparency/finance`
+with metric definitions, non-additive-comparison rules, and a privacy
+classification (UCA rows stay aggregate-only).
 
-| Priority | Export work                                                                                                                                                             | Public page(s) unblocked                                                                                                          |
-| -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-|        1 | Create a sanitized aggregate finance export and typed frontend module with metric definitions, derivation tests, period-comparability rules, and privacy classification | `/transparency/finance`                                                                                                           |
-|        2 | Only if future scope expands beyond the approved bounded subset, create a dedicated safe procurement/bid-results export                                                 | Expands `/procurement`, `/procurement/bid-results`, and `/statistics/procurement`; it does not block their bounded READY versions |
+| Priority | Export work                                                                                                                          | Public page(s) unblocked                                                                                                          |
+| -------: | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+|        1 | ~~Create a sanitized aggregate finance export and typed frontend module~~ — done; continue expanding report-year and family coverage | `/transparency/finance` (implemented, `PARTIAL`)                                                                                  |
+|        2 | Only if future scope expands beyond the approved bounded subset, create a dedicated safe procurement/bid-results export              | Expands `/procurement`, `/procurement/bid-results`, and `/statistics/procurement`; it does not block their bounded READY versions |
 
 ### DECISION queue
 
@@ -433,13 +492,17 @@ described above, not actual expenditure.
 
 ## Phase 4 — DEFERRED
 
-| Page or feature                                                              | Why postponed                                                                                                                                                                                                                                                                                                                       | Reconsider when                                                                                                                   |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `/statistics/public-records`                                                 | There is no defensible cross-domain records universe, shared denominator, or comparable status model; private recovery counts cannot become government-performance claims                                                                                                                                                           | A reviewed methodology defines the records universe, periods, publication criteria, and comparable denominators                   |
-| Project point map                                                            | No verified project point locations exist, and centroids or approximate coordinates would misrepresent project locations                                                                                                                                                                                                            | Verified point coordinates are recovered, reviewed, safely exported, and the architecture approves a distinct point-level purpose |
-| Separate Full Disclosure archive workflow                                    | Filtering by type/year/period is already owned by `/transparency/full-disclosure`                                                                                                                                                                                                                                                   | User research demonstrates a materially distinct historical workflow and the architecture is updated first                        |
-| Legislation statistics route                                                 | `/statistics/legislation` is not an approved canonical destination; uneven legislative captures do not yet justify a standalone route. `/statistics/government` was approved and implemented as a bounded `PARTIAL` page backed by the `government-structure-summary` export (see `PAGE-DATA-MATRIX.md`) and is no longer deferred. | A distinct civic purpose, adequate verified measures, and an architecture update all exist                                        |
-| Generic legacy News, Guides and Regulations, and Public Consultations routes | They are unsupported starter-kit concepts outside the approved information architecture                                                                                                                                                                                                                                             | Product scope, authoritative data, maintenance ownership, and canonical route review justify them                                 |
+| Page or feature                                                              | Why postponed                                                                                                            | Reconsider when                                                                                                                   |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| Project point map                                                            | No verified project point locations exist, and centroids or approximate coordinates would misrepresent project locations | Verified point coordinates are recovered, reviewed, safely exported, and the architecture approves a distinct point-level purpose |
+| Separate Full Disclosure archive workflow                                    | Filtering by type/year/period is already owned by `/transparency/full-disclosure`                                        | User research demonstrates a materially distinct historical workflow and the architecture is updated first                        |
+| Generic legacy News, Guides and Regulations, and Public Consultations routes | They are unsupported starter-kit concepts outside the approved information architecture                                  | Product scope, authoritative data, maintenance ownership, and canonical route review justify them                                 |
+
+`/statistics/public-records` and `/statistics/legislation` are no longer
+deferred: both were approved and implemented as bounded `PARTIAL` pages,
+backed by the `statistics/public-records-coverage.json` export (8 metrics,
+6 archive-range entries, 1 related collection) and the existing legislation
+exports, respectively (see `PAGE-DATA-MATRIX.md`).
 
 ## Operating model
 
