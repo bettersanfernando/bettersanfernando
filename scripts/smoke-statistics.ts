@@ -51,7 +51,6 @@ for (const href of [
 
 for (const plannedHref of [
   '/statistics/demographics',
-  '/statistics/project-spending',
   '/statistics/public-records',
 ]) {
   assert.doesNotMatch(

@@ -195,6 +195,7 @@ const activeRouteCases = [
   ['/statistics/population', 'transparency'],
   ['/statistics/city-profile', 'transparency'],
   ['/statistics/projects', 'transparency'],
+  ['/statistics/project-spending', 'transparency'],
   ['/barangays', 'transparency'],
   ['/about', 'about'],
 ] as const;
@@ -212,7 +213,6 @@ const approvedPlannedPaths = [
   '/transparency/documents',
   '/transparency/finance',
   '/statistics/demographics',
-  '/statistics/project-spending',
   '/statistics/government',
   '/statistics/legislation',
   '/statistics/public-records',
@@ -254,6 +254,7 @@ const knownRealDestinations = new Set([
   '/statistics',
   '/statistics/projects',
   '/statistics/procurement',
+  '/statistics/project-spending',
   '/statistics/population',
   '/statistics/city-profile',
   '/barangays',

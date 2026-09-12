@@ -278,7 +278,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.spendingStatistics',
             href: '/statistics/project-spending',
-            kind: 'planned',
+            kind: 'real',
           },
           {
             labelKey: 'navigation.items.procurementStatistics',

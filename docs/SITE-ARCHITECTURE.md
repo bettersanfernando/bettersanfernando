@@ -289,10 +289,13 @@ BetterSanFernando must never be labeled as total government output.
 as age, sex, or households and must not duplicate the population page while
 those measures are unavailable.
 
-`/statistics/project-spending` may be published only after its terminology is
-resolved. Approved budget, winning bid, contract amount, and actual
-expenditure are different concepts and must never be collapsed into a single
-ambiguous "spending" value.
+`/statistics/project-spending` is published under the public title "Project
+Cost & Utilization," scoped strictly to source-reported, year-to-date
+cost-utilization observations (Total Cost Incurred to Date and physical
+completion) for a bounded subset of projects. Approved budget, winning bid,
+contract amount, and this year-to-date utilization figure are different
+concepts and must never be collapsed into a single ambiguous "spending"
+value, and none of them may be presented as actual expenditure or payment.
 
 ### Barangays
 
@@ -553,8 +556,6 @@ The following decisions remain outside this document's settled route model:
   local service research, and which audience pages warrant separate routes;
 - whether Financial Transparency begins as document discovery, selected
   aggregate metrics, or both;
-- whether `/statistics/project-spending` should be renamed to reflect the
-  available budget, bid, and contract fields;
 - whether current elected officials belong in the initial Government scope
   and how term changes will be maintained;
 - whether a dedicated historical Full Disclosure workflow eventually becomes

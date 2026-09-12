@@ -3,7 +3,6 @@ const plannedPageRoutes = [
   { id: 'transparencyDocuments', path: '/transparency/documents' },
   { id: 'financialTransparency', path: '/transparency/finance' },
   { id: 'demographics', path: '/statistics/demographics' },
-  { id: 'projectSpending', path: '/statistics/project-spending' },
   { id: 'governmentStatistics', path: '/statistics/government' },
   { id: 'legislationStatistics', path: '/statistics/legislation' },
   { id: 'publicRecordsStatistics', path: '/statistics/public-records' },

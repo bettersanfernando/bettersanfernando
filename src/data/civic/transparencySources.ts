@@ -6,6 +6,7 @@ import executiveOrdersJson from '../generated/civic/legislation/executive-orders
 import ordinancesJson from '../generated/civic/legislation/ordinances.json' with { type: 'json' };
 import { getAllProjectEvidence, getProjects } from './projects.ts';
 import { getFullDisclosureMetadata } from './fullDisclosure.ts';
+import { getProjectCostUtilizationMetadata } from './projectCostUtilization.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
@@ -19,6 +20,7 @@ const DatasetPath = z.enum([
   'legislation/ordinances.json',
   'legislation/resolutions.json',
   'projects/city-projects.json',
+  'projects/project-cost-utilization.json',
   'projects/project-evidence.json',
   'services/services.json',
   'services/utilities-water-resources.json',
@@ -92,7 +94,8 @@ export type PublishedSourceDomain = Readonly<{
     | 'city-offices'
     | 'executive-orders'
     | 'ordinances'
-    | 'full-disclosure';
+    | 'full-disclosure'
+    | 'project-cost-utilization';
   name: string;
   description: string;
   authority: string;
@@ -130,6 +133,9 @@ function uniqueLinks(
 export function getTransparencySourceInventory() {
   const fullDisclosure = getFullDisclosureMetadata();
   const projects = getProjects();
+  const projectCostUtilization = getProjectCostUtilizationMetadata(
+    projects.length
+  );
   const projectEvidence = getAllProjectEvidence();
   const projectYears = projects.map(project => project.year);
   const projectStatusDates = projects
@@ -188,6 +194,26 @@ export function getTransparencySourceInventory() {
       ],
       coverageNote:
         'Authorities and links vary by documentary stage. This inventory does not repeat all evidence records.',
+    },
+    {
+      id: 'project-cost-utilization',
+      name: 'Project cost and utilization',
+      description:
+        'Source-reported, year-to-date cost-utilization observations (Total Cost Incurred to Date and physical completion) for a bounded subset of published projects.',
+      authority: 'City Government of San Fernando, Pampanga',
+      referencePeriod: 'Year-to-date observations, 2022–2026',
+      lastVerified: projectCostUtilization.lastVerified,
+      recordCount: recordCount('projects/project-cost-utilization.json'),
+      recordLabel: 'observation records',
+      datasetPaths: ['projects/project-cost-utilization.json'],
+      links: [
+        {
+          label: 'Browse Project Cost & Utilization',
+          url: '/statistics/project-spending',
+          type: 'internal',
+        },
+      ],
+      coverageNote: projectCostUtilization.coverageLimitation,
     },
     {
       id: 'population',

@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router';
+import { ExternalLink, FileText } from 'lucide-react';
 import Section from '../components/ui/Section';
 import { Heading } from '../components/ui/Heading';
 import { Text } from '../components/ui/Text';
@@ -13,10 +14,89 @@ import {
   type ProjectEvidence,
 } from '../data/civic/projects';
 import {
+  getObservationsForProject,
+  type ProjectCostUtilizationObservation,
+} from '../data/civic/projectCostUtilization';
+import {
   getEvidenceSourceLabel,
   isPrimaryOfficialSource,
 } from '../data/civic/sources';
-import { formatPeso, formatIsoDate, titleCaseEnum } from '../lib/utils';
+import {
+  formatPeso,
+  formatIsoDate,
+  titleCaseEnum,
+  formatUnstatedAmount,
+} from '../lib/utils';
+
+function costUtilizationSourceLink(
+  observation: ProjectCostUtilizationObservation
+): { url: string; kind: 'page' | 'attachment' } {
+  return observation.official_page_url
+    ? { url: observation.official_page_url, kind: 'page' }
+    : { url: observation.official_attachment_url, kind: 'attachment' };
+}
+
+function CostUtilizationObservationRow({
+  observation,
+}: {
+  observation: ProjectCostUtilizationObservation;
+}) {
+  const { url, kind } = costUtilizationSourceLink(observation);
+  return (
+    <dl className="space-y-2 text-sm">
+      <div className="flex justify-between gap-4">
+        <dt className="text-gray-500">Total Cost</dt>
+        <dd className="text-gray-900 font-medium text-right">
+          {formatUnstatedAmount(observation.total_cost)}
+        </dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-gray-500">Total Cost Incurred to Date</dt>
+        <dd className="text-gray-900 font-medium text-right">
+          {formatUnstatedAmount(observation.total_cost_incurred_to_date)}
+        </dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-gray-500">Cost incurred to date (derived %)</dt>
+        <dd className="text-gray-900 font-medium text-right">
+          {observation.cost_incurred_to_date_percent_derived === null
+            ? 'Not available'
+            : `${observation.cost_incurred_to_date_percent_derived}%`}
+        </dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-gray-500">Physical completion (source-reported)</dt>
+        <dd className="text-gray-900 font-medium text-right">
+          {observation.physical_completion_percent}%
+        </dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-gray-500">Status remarks (source-reported)</dt>
+        <dd className="text-gray-900 text-right break-words">
+          {observation.status_remarks}
+        </dd>
+      </div>
+      <div className="flex justify-between gap-4">
+        <dt className="text-gray-500">Source</dt>
+        <dd className="text-right">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open the official ${kind === 'page' ? 'source page' : 'source attachment'} for this observation (opens in a new tab)`}
+            className="inline-flex items-center gap-1.5 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+          >
+            <FileText className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            {kind === 'page'
+              ? 'Official source page'
+              : 'Official source document'}
+            <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
+          </a>
+        </dd>
+      </div>
+    </dl>
+  );
+}
 
 const IDENTIFIER_LABELS: Record<string, string> = {
   bid_reference: 'Bid Reference',
@@ -91,6 +171,12 @@ export default function ProjectDetail() {
   const identifiers = Object.entries(project.identifiers).filter(
     ([, value]) => value !== null
   ) as [keyof typeof IDENTIFIER_LABELS, string][];
+  const costUtilizationObservations = getObservationsForProject(project.id);
+  const latestCostUtilizationObservation = costUtilizationObservations.at(-1);
+  const previousCostUtilizationObservations = costUtilizationObservations.slice(
+    0,
+    -1
+  );
 
   return (
     <>
@@ -222,6 +308,66 @@ export default function ProjectDetail() {
             </CardContent>
           </Card>
         </div>
+
+        {latestCostUtilizationObservation && (
+          <div className="mb-8">
+            <Heading level={3}>Project Cost &amp; Utilization</Heading>
+            <Text className="text-gray-600 mb-4 text-sm">
+              A verified, source-reported cost-utilization observation exists
+              for this project.{' '}
+              <Link
+                to="/statistics/project-spending"
+                className="text-primary-600 hover:text-primary-700 font-medium"
+              >
+                View the full Project Cost &amp; Utilization statistics
+              </Link>
+              .
+            </Text>
+            <Card>
+              <CardContent>
+                <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                  Latest observation —{' '}
+                  {latestCostUtilizationObservation.reporting_year} Q
+                  {latestCostUtilizationObservation.reporting_quarter}
+                </h4>
+                <CostUtilizationObservationRow
+                  observation={latestCostUtilizationObservation}
+                />
+
+                {previousCostUtilizationObservations.length > 0 && (
+                  <>
+                    <h4 className="text-sm font-semibold text-gray-900 mt-6 mb-3">
+                      Previous observations (chronological)
+                    </h4>
+                    <div className="space-y-4">
+                      {previousCostUtilizationObservations.map(observation => (
+                        <div
+                          key={observation.id}
+                          className="border-t border-gray-200 pt-4"
+                        >
+                          <p className="text-xs font-semibold text-gray-600 mb-2">
+                            {observation.reporting_year} Q
+                            {observation.reporting_quarter}
+                          </p>
+                          <CostUtilizationObservationRow
+                            observation={observation}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                <p className="text-xs text-gray-500 mt-5 pt-4 border-t border-gray-200">
+                  These are year-to-date figures from the official source, not
+                  proof of cash payment or disbursement. Currency is not stated
+                  in the source; amounts are shown as plain numbers. Coverage is
+                  limited to a bounded subset of published projects.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         <Heading level={3}>Evidence &amp; Sources</Heading>
         {evidence.length === 0 ? (

@@ -84,7 +84,7 @@
       "projectDataSources": "Project Data Sources",
       "projectMethodology": "Project Methodology",
       "projectStatistics": "Project Statistics",
-      "spendingStatistics": "Spending Statistics",
+      "spendingStatistics": "Project Cost & Utilization",
       "procurementStatistics": "Procurement Statistics",
       "governmentOverview": "Government Overview",
       "cityStructure": "City Structure",
@@ -142,7 +142,7 @@
       "projectDataSources": "See which public records contribute to project data.",
       "projectMethodology": "Learn how project records are structured and checked.",
       "projectStatistics": "Explore patterns in verified city project data.",
-      "spendingStatistics": "Review project spending patterns with source context.",
+      "spendingStatistics": "Review verified project cost-utilization observations for a bounded subset of projects.",
       "procurementStatistics": "Explore patterns in procurement and award records.",
       "governmentOverview": "Understand the City Government information available here.",
       "cityStructure": "See how documented City Government units relate.",
@@ -346,10 +346,6 @@
       "projectStatistics": {
         "title": "Project Statistics",
         "description": "Understand patterns in the verified city projects dataset."
-      },
-      "projectSpending": {
-        "title": "Spending Statistics",
-        "description": "Explore verified project spending patterns with source context and limitations."
       },
       "procurementStatistics": {
         "title": "Procurement Statistics",

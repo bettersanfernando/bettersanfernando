@@ -31,6 +31,20 @@ export function formatPeso(amount: number | null | undefined): string {
   }).format(amount);
 }
 
+/**
+ * Formats a numeric amount whose source document never states a currency
+ * unit. Never attach a currency symbol or code here — pair the result with
+ * an explicit "Currency not stated in source" label instead of guessing PHP.
+ */
+export function formatUnstatedAmount(
+  amount: number | null | undefined
+): string {
+  if (amount === null || amount === undefined) return 'Not available';
+  return new Intl.NumberFormat('en-PH', {
+    maximumFractionDigits: 2,
+  }).format(amount);
+}
+
 /** Turns a SNAKE_CASE enum value into a display label without changing its meaning. */
 export function titleCaseEnum(value: string): string {
   return value

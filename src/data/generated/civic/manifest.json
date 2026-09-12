@@ -56,6 +56,11 @@
       "schema_version": 1,
       "sha256": "1ea791665437cebabf7311d13d4b4c1578f503a33e7cac30ded15a063881625b"
     },
+    "projects/project-cost-utilization.json": {
+      "record_count": 54,
+      "schema_version": 1,
+      "sha256": "e67ddd3b851615a72d4b8e9606dd998ac7200417597dc4eb47a3c4a02e192127"
+    },
     "projects/project-evidence.json": {
       "record_count": 334,
       "schema_version": 1,
@@ -127,7 +132,10 @@
     "data/government/barangay-contacts-publication-review.json",
     "data/government/official-links-publication-review.json",
     "data/transparency/full-disclosure-metadata-inventory.json",
-    "data/transparency/full-disclosure-publication-review.json"
+    "data/transparency/full-disclosure-publication-review.json",
+    "data/finance/nta-utilization-project-extraction.json",
+    "data/projects/nta-utilization-match-review.json",
+    "data/projects/nta-utilization-publication-review.json"
   ],
   "jurisdiction": {
     "name": "City of San Fernando",
@@ -152,7 +160,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "9385f13cacadec526b74f403b075cbd0888dc3e3",
+  "source_commit": "56d7f2c741f2db7d85de7544ab1d599bdda53edc",
   "source_data_version": "v0.1.1",
   "sources": [
     {
