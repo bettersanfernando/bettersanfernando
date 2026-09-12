@@ -1,8 +1,6 @@
 const plannedPageRoutes = [
   { id: 'resolutions', path: '/legislation/resolutions' },
   { id: 'financialTransparency', path: '/transparency/finance' },
-  { id: 'demographics', path: '/statistics/demographics' },
-  { id: 'governmentStatistics', path: '/statistics/government' },
   { id: 'legislationStatistics', path: '/statistics/legislation' },
   { id: 'publicRecordsStatistics', path: '/statistics/public-records' },
 ] as const;

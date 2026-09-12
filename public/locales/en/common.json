@@ -111,6 +111,8 @@
       "cityProfile": "City Profile",
       "populationDemographics": "Population & Demographics",
       "barangayDirectory": "Barangay Directory",
+      "demographicsStatistics": "Demographics",
+      "governmentStatisticsPage": "Government Statistics",
       "publicRecordsStatistics": "Public Records Statistics"
     },
     "descriptions": {
@@ -169,6 +171,8 @@
       "cityProfile": "Explore population, barangay and city-level statistics.",
       "populationDemographics": "Explore verified population and demographic information.",
       "barangayDirectory": "Browse all 35 barangays and their verified public facts.",
+      "demographicsStatistics": "Explore 2024 household population, 2020 age/sex structure, and 2023 poverty estimates.",
+      "governmentStatisticsPage": "Explore verified City Government entity, directory, and relationship counts.",
       "publicRecordsStatistics": "Understand the coverage of published public records."
     },
     "search": "Search",
@@ -335,10 +339,6 @@
         "title": "Barangay Population",
         "description": "Compare verified population information across barangays when the full experience is ready."
       },
-      "demographics": {
-        "title": "Demographics",
-        "description": "Explore verified demographic measures with source notes and clear definitions."
-      },
       "projectStatistics": {
         "title": "Project Statistics",
         "description": "Understand patterns in the verified city projects dataset."
@@ -346,10 +346,6 @@
       "procurementStatistics": {
         "title": "Procurement Statistics",
         "description": "Explore patterns in verified procurement, bid, contract, and award records."
-      },
-      "governmentStatistics": {
-        "title": "Government Statistics",
-        "description": "Explore verified summary information derived from public government records."
       },
       "legislationStatistics": {
         "title": "Legislation Statistics",

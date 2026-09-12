@@ -41,6 +41,10 @@ const ProjectSpendingStatistics = lazy(
   () => import('./pages/ProjectSpendingStatistics')
 );
 const PopulationStatistics = lazy(() => import('./pages/PopulationStatistics'));
+const DemographicsStatistics = lazy(
+  () => import('./pages/DemographicsStatistics')
+);
+const GovernmentStatistics = lazy(() => import('./pages/GovernmentStatistics'));
 const Statistics = lazy(() => import('./pages/Statistics'));
 const CityProfile = lazy(() => import('./pages/CityProfile'));
 const Barangays = lazy(() => import('./pages/Barangays'));
@@ -252,6 +256,14 @@ function App() {
                   <Route
                     path="/statistics/population"
                     element={<PopulationStatistics />}
+                  />
+                  <Route
+                    path="/statistics/demographics"
+                    element={<DemographicsStatistics />}
+                  />
+                  <Route
+                    path="/statistics/government"
+                    element={<GovernmentStatistics />}
                   />
                   <Route path="/statistics" element={<Statistics />} />
                   <Route

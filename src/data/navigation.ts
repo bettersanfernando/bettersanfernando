@@ -58,6 +58,8 @@ const destinationPresentation = {
   cityProfile: ['landmark', 'cityProfile'],
   populationDemographics: ['users', 'populationDemographics'],
   barangayDirectory: ['map', 'barangayDirectory'],
+  demographicsStatistics: ['users', 'demographicsStatistics'],
+  governmentStatisticsPage: ['landmark', 'governmentStatisticsPage'],
   publicRecordsStatistics: ['library', 'publicRecordsStatistics'],
 } as const satisfies Record<string, readonly [NavigationIcon, string]>;
 
@@ -449,6 +451,16 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.populationDemographics',
             href: '/statistics/population',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.demographicsStatistics',
+            href: '/statistics/demographics',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.governmentStatisticsPage',
+            href: '/statistics/government',
             kind: 'real',
           },
           {

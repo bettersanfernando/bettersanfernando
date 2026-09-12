@@ -11,7 +11,9 @@ import { getProjectCostUtilizationMetadata } from './projectCostUtilization.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
+  'demographics/demographic-profile.json',
   'directories/city-offices.json',
+  'directories/government-structure-summary.json',
   'geography/barangays.geojson',
   'geography/city.geojson',
   'government/barangay-contacts.json',

@@ -39,23 +39,25 @@ Government inventories. Coverage is progressive: absence from the portal does
 not mean a City service or record does not exist, only that it has not yet
 been verified and reviewed for publication.
 
-| Domain                            | Published count                                        |
-| --------------------------------- | ------------------------------------------------------ |
-| Reviewed External service records | 177                                                    |
-| Published service categories      | 16 of 16                                               |
-| Planned service categories        | 0 of 16                                                |
-| Project records                   | 324                                                    |
-| Project-evidence records          | 563                                                    |
-| Project Cost & Utilization        | 298 observations across 109 projects                   |
-| Official Documents                | 9 verified records                                     |
-| Barangays                         | 35                                                     |
-| City-office directory records     | 44                                                     |
-| Government Hotlines contacts      | 11                                                     |
-| Barangay Contacts records         | 324 (35 Secretary, 289 BHERT)                          |
-| Official Government Links         | 35 (30 websites, 2 digital services, 3 Facebook pages) |
-| Executive orders                  | 11                                                     |
-| Ordinances                        | 6                                                      |
-| Resolutions                       | 0                                                      |
+| Domain                            | Published count                                                 |
+| --------------------------------- | --------------------------------------------------------------- |
+| Reviewed External service records | 177                                                             |
+| Published service categories      | 16 of 16                                                        |
+| Planned service categories        | 0 of 16                                                         |
+| Project records                   | 324                                                             |
+| Project-evidence records          | 563                                                             |
+| Project Cost & Utilization        | 298 observations across 109 projects                            |
+| Official Documents                | 9 verified records                                              |
+| Barangays                         | 35                                                              |
+| City-office directory records     | 44                                                              |
+| Demographic profile records       | 136 (2024 household population, 2020 age/sex, 2023 poverty SAE) |
+| Government structure entities     | 44 (33 official-directory matches, 14 verified relationships)   |
+| Government Hotlines contacts      | 11                                                              |
+| Barangay Contacts records         | 324 (35 Secretary, 289 BHERT)                                   |
+| Official Government Links         | 35 (30 websites, 2 digital services, 3 Facebook pages)          |
+| Executive orders                  | 11                                                              |
+| Ordinances                        | 6                                                               |
+| Resolutions                       | 0                                                               |
 
 Published service categories:
 

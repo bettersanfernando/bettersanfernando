@@ -193,6 +193,8 @@ const activeRouteCases = [
   ['/transparency/full-disclosure', 'transparency'],
   ['/statistics', 'transparency'],
   ['/statistics/population', 'transparency'],
+  ['/statistics/demographics', 'transparency'],
+  ['/statistics/government', 'transparency'],
   ['/statistics/city-profile', 'transparency'],
   ['/statistics/projects', 'transparency'],
   ['/statistics/project-spending', 'transparency'],
@@ -211,8 +213,6 @@ for (const [pathname, expected] of activeRouteCases) {
 const approvedPlannedPaths = [
   '/legislation/resolutions',
   '/transparency/finance',
-  '/statistics/demographics',
-  '/statistics/government',
   '/statistics/legislation',
   '/statistics/public-records',
 ];
@@ -255,6 +255,8 @@ const knownRealDestinations = new Set([
   '/statistics/procurement',
   '/statistics/project-spending',
   '/statistics/population',
+  '/statistics/demographics',
+  '/statistics/government',
   '/statistics/city-profile',
   '/barangays',
   '/government',

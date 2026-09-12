@@ -151,6 +151,7 @@ support that purpose.
 │   ├── city-profile
 │   ├── population
 │   ├── demographics
+│   ├── government
 │   ├── projects
 │   ├── project-spending
 │   ├── procurement
@@ -296,9 +297,20 @@ reference period, coverage, and relevant limitations. Counts of records in
 BetterSanFernando must never be labeled as total government output.
 
 `/statistics/population` owns city and barangay population comparisons.
-`/statistics/demographics` is reserved for additional verified measures such
-as age, sex, or households and must not duplicate the population page while
-those measures are unavailable.
+`/statistics/demographics` presents 2024 household population and
+households, 2020 age/sex structure with derived age bands, and a 2023
+poverty small area estimate, each kept in its own reference period; it must
+never blend those periods into one trend or conflate household population
+with the total population shown on `/statistics/population`. Population
+density remains held pending an available PSA source table.
+
+`/statistics/government` presents a verified, partial City Government entity
+and relationship summary backed by the `government-structure-summary`
+export: reconciled entities, official-directory match counts, verified
+public facilities/service units, and explicitly verified relationships only.
+It must never claim a total office count or a complete organizational chart,
+and must never convert a held or unresolved classification into a
+hierarchy.
 
 `/statistics/project-spending` is published under the public title "Project
 Cost & Utilization," scoped strictly to source-reported, year-to-date

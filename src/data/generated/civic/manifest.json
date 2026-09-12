@@ -6,10 +6,20 @@
       "schema_version": 1,
       "sha256": "a76ad6b50e9e463a1c642045f79e346f080751ee80f822faa41c4f7df354792d"
     },
+    "demographics/demographic-profile.json": {
+      "record_count": 136,
+      "schema_version": 1,
+      "sha256": "d96cf7c270c2ba09364766edf6a829a260d39ec561002ebf08f8f0d9416a43c7"
+    },
     "directories/city-offices.json": {
       "record_count": 44,
       "schema_version": 2,
       "sha256": "9116dd7cb93af50c1019266745af0d1fbf0d151bb16116fc230225ec7943342b"
+    },
+    "directories/government-structure-summary.json": {
+      "record_count": 44,
+      "schema_version": 1,
+      "sha256": "ba4bbcfbd274b16250f5c1fdf5f1b995cd3df3f3535878c809d07781c7d4f0cb"
     },
     "geography/barangays.geojson": {
       "record_count": 35,
@@ -143,7 +153,11 @@
     "data/transparency/official-documents-source-manifest.json",
     "data/finance/nta-utilization-project-extraction.json",
     "data/projects/nta-utilization-match-review.json",
-    "data/projects/nta-utilization-publication-review.json"
+    "data/projects/nta-utilization-publication-review.json",
+    "data/demographics/demographic-profile.json",
+    "data/demographics/demographic-profile-publication-review.json",
+    "data/government/government-structure-summary.json",
+    "data/government/government-structure-summary-publication-review.json"
   ],
   "jurisdiction": {
     "name": "City of San Fernando",
@@ -161,6 +175,8 @@
     "data/projects/*-schema-analysis.json",
     "data/projects/*-source-manifest.json",
     "data/legislation/*-recovery-queue.json",
+    "data/legislation/legislation-archive-coverage.json",
+    "data/demographics/*-source-manifest.json",
     "data/services/citizens-charter-extraction-analysis.json",
     "data/services/citizens-charter-extraction-review-queue.json",
     "data/services/*-freshness-enrichment.json",
@@ -168,7 +184,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "3fa7a21287f277c0bbb93b4f5085fa2c4843cd32",
+  "source_commit": "6d17885c842deb1b5c6ad16c747dd3e80497ee8f",
   "source_data_version": "v0.1.1",
   "sources": [
     {
@@ -203,6 +219,46 @@
       "publisher": "City Government of San Fernando, Pampanga",
       "reference_note": "Fallback for BID_RESULTS sources without an exact verified landing page; currently unused. Bid Results evidence records resolve directly to their workbook's own confirmed official_page_url/official_attachment_url in bid-results-source-manifest.json / cy2022-source-manifest.json whenever one has been verified; this entry only applies if a future workbook lacks one.",
       "url": "https://cityofsanfernando.gov.ph/full-disclosure-report/"
+    },
+    {
+      "applies_to": [
+        "demographics/demographic-profile.json#dimension=household_population,number_of_households"
+      ],
+      "id": "psa-2024-popcen-household-region3",
+      "name": "Total Population, Household Population, and Number of Households by Province, City, Municipality, and Barangay as of 01 July 2024: Region III (Central Luzon)",
+      "publisher": "Philippine Statistics Authority",
+      "reference_note": "Official 2024 POPCEN household population and household counts, city and barangay level.",
+      "url": "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__1A__PO_2024/0031A6DTPH2.px/"
+    },
+    {
+      "applies_to": [
+        "demographics/demographic-profile.json#dimension=age_sex_population,age_band_population"
+      ],
+      "id": "psa-2020-cph-age-sex",
+      "name": "Household Population by Age Group, Sex, Region, Province and City/Municipality: Philippines, 2020 Census of Population and Housing",
+      "publisher": "Philippine Statistics Authority",
+      "reference_note": "Official 2020 CPH citywide age/sex structure (PSA Ref. 2022-322); age bands 0-14/15-64/65+ are derived from these official age-group rows.",
+      "url": "https://psa.gov.ph/statistics/population-and-housing/node/167965"
+    },
+    {
+      "applies_to": [
+        "demographics/demographic-profile.json#dimension=poverty_incidence"
+      ],
+      "id": "psa-2023-sae-poverty",
+      "name": "2023 City- and Municipal-Level Poverty Small Area Estimates",
+      "publisher": "Philippine Statistics Authority",
+      "reference_note": "Official model-based Small Area Estimate (PSA Ref. 2026-43) with standard error, coefficient of variation, and 90% confidence interval.",
+      "url": "https://psa.gov.ph/statistics/poverty-sae/node/1684082420"
+    },
+    {
+      "applies_to": [
+        "directories/government-structure-summary.json"
+      ],
+      "id": "csfp-departments-directory",
+      "name": "Departments directory",
+      "publisher": "City Government of San Fernando, Pampanga",
+      "reference_note": "Current official directory of 33 entities (27 top-level + 6 explicitly nested); source-scoped counts only, not a claim of total city offices.",
+      "url": "https://cityofsanfernando.gov.ph/departments/"
     }
   ]
 }

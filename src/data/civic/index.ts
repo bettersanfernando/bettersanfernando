@@ -13,6 +13,8 @@
  */
 export * from './projects.ts';
 export * from './demographics.ts';
+export * from './demographicProfile.ts';
+export * from './governmentStructureSummary.ts';
 export * from './geography.ts';
 export * from './geographyMetadata.ts';
 export * from './government.ts';
