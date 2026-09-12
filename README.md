@@ -47,6 +47,7 @@ been verified and reviewed for publication.
 | Project records                   | 324                                                    |
 | Project-evidence records          | 563                                                    |
 | Project Cost & Utilization        | 298 observations across 109 projects                   |
+| Official Documents                | 9 verified records                                     |
 | Barangays                         | 35                                                     |
 | City-office directory records     | 44                                                     |
 | Government Hotlines contacts      | 11                                                     |
@@ -192,6 +193,10 @@ frontend only**:
 - Project Cost & Utilization has partial coverage (109 of 324 projects). Source
   currency is unstated, and Total Cost Incurred to Date is not interpreted as
   actual payment or spending.
+- `/transparency/documents` is a hybrid discovery hub and bounded nine-record
+  collection of Citizen’s Charters, business forms, and privacy documents.
+  Laws, Full Disclosure, procurement, projects, and services remain in their
+  canonical datasets; held and excluded documents remain unpublished.
 - Private research files, sensitive or person-level data, recovery queues, and
   source workbooks existing privately does not make them publication-safe —
   publishing a dataset requires a deliberate, allowlisted export and

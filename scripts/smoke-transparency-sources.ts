@@ -7,8 +7,8 @@ const inventory = getTransparencySourceInventory();
 
 assert.equal(inventory.release.exportVersion, 'v0.1.0');
 assert.equal(inventory.release.sourceDataVersion, 'v0.1.1');
-assert.equal(inventory.release.datasetCount, 16);
-assert.equal(inventory.publishedDomains.length, 9);
+assert.equal(inventory.release.datasetCount, 17);
+assert.equal(inventory.publishedDomains.length, 10);
 assert.deepEqual(
   inventory.publishedDomains.map(domain => domain.id),
   [
@@ -21,6 +21,7 @@ assert.deepEqual(
     'executive-orders',
     'ordinances',
     'full-disclosure',
+    'official-documents',
   ]
 );
 
@@ -34,6 +35,7 @@ const expectedRecordCounts = {
   'executive-orders': 11,
   ordinances: 6,
   'full-disclosure': 10,
+  'official-documents': 9,
 };
 for (const domain of inventory.publishedDomains) {
   assert.equal(domain.recordCount, expectedRecordCounts[domain.id]);

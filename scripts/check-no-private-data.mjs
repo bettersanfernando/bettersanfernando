@@ -65,6 +65,29 @@ if (
       'src/data/generated/civic/projects/project-evidence.json:source_sha256'
     );
   }
+  const officialDocuments = readFileSync(
+    fileURLToPath(
+      new URL(
+        '../src/data/generated/civic/transparency/official-documents.json',
+        import.meta.url
+      )
+    ),
+    'utf8'
+  );
+  for (const privateField of [
+    'source_sha256',
+    'local_path',
+    'reviewer',
+    'review_notes',
+    'inventory_disposition',
+    'reconciliation',
+  ]) {
+    if (officialDocuments.includes(`"${privateField}"`)) {
+      violations.push(
+        `src/data/generated/civic/transparency/official-documents.json:${privateField}`
+      );
+    }
+  }
 
   if (violations.length > 0) {
     console.error(

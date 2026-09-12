@@ -6,6 +6,7 @@ import executiveOrdersJson from '../generated/civic/legislation/executive-orders
 import ordinancesJson from '../generated/civic/legislation/ordinances.json' with { type: 'json' };
 import { getAllProjectEvidence, getProjects } from './projects.ts';
 import { getFullDisclosureMetadata } from './fullDisclosure.ts';
+import { getOfficialDocumentsMetadata } from './officialDocuments.ts';
 import { getProjectCostUtilizationMetadata } from './projectCostUtilization.ts';
 
 const DatasetPath = z.enum([
@@ -25,6 +26,7 @@ const DatasetPath = z.enum([
   'services/services.json',
   'services/utilities-water-resources.json',
   'transparency/full-disclosure.json',
+  'transparency/official-documents.json',
 ]);
 
 const ManifestSchema = z.object({
@@ -95,6 +97,7 @@ export type PublishedSourceDomain = Readonly<{
     | 'executive-orders'
     | 'ordinances'
     | 'full-disclosure'
+    | 'official-documents'
     | 'project-cost-utilization';
   name: string;
   description: string;
@@ -132,6 +135,7 @@ function uniqueLinks(
 
 export function getTransparencySourceInventory() {
   const fullDisclosure = getFullDisclosureMetadata();
+  const officialDocuments = getOfficialDocumentsMetadata();
   const projects = getProjects();
   const projectCostUtilization = getProjectCostUtilizationMetadata(
     projects.length
@@ -364,6 +368,27 @@ export function getTransparencySourceInventory() {
         },
       ],
       coverageNote: fullDisclosure.overallPublicLimitation,
+    },
+    {
+      id: 'official-documents',
+      name: 'Official documents',
+      description:
+        'A bounded index of Citizen’s Charters, business forms, and privacy documents from verified official sources.',
+      authority: 'City Government of San Fernando, Pampanga',
+      referencePeriod:
+        'Current and superseded documents in the reviewed export',
+      lastVerified: officialDocuments.lastVerified,
+      recordCount: recordCount('transparency/official-documents.json'),
+      recordLabel: 'official documents',
+      datasetPaths: ['transparency/official-documents.json'],
+      links: [
+        {
+          label: 'Browse Official Documents',
+          url: '/transparency/documents',
+          type: 'internal',
+        },
+      ],
+      coverageNote: officialDocuments.overallPublicLimitation,
     },
   ];
 

@@ -29,6 +29,7 @@
     "city-profile:smoke": "node --experimental-strip-types scripts/smoke-city-profile.ts",
     "transparency-sources:smoke": "node --experimental-strip-types scripts/smoke-transparency-sources.ts",
     "full-disclosure:smoke": "node --experimental-strip-types scripts/smoke-full-disclosure.ts",
+    "official-documents:smoke": "node --experimental-strip-types scripts/smoke-official-documents.ts",
     "project-cost-utilization:smoke": "node --experimental-strip-types scripts/smoke-project-cost-utilization.ts",
     "transparency-methodology:smoke": "node --experimental-strip-types scripts/smoke-transparency-methodology.ts",
     "ordinances:smoke": "node --experimental-strip-types scripts/smoke-ordinances.ts",

@@ -12,7 +12,7 @@ const population = getCityDemographicsSource();
 
 assert.equal(inventory.release.exportVersion, 'v0.1.0');
 assert.equal(inventory.release.sourceDataVersion, 'v0.1.1');
-assert.equal(inventory.publishedDomains.length, 9);
+assert.equal(inventory.publishedDomains.length, 10);
 assert.deepEqual(ProjectLifecycleStatus.options, [
   'PLANNED',
   'PROCUREMENT',

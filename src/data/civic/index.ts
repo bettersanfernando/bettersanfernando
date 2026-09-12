@@ -21,6 +21,7 @@ export * from './governmentHotlines.ts';
 export * from './governmentBarangayContacts.ts';
 export * from './governmentOfficialLinks.ts';
 export * from './fullDisclosure.ts';
+export * from './officialDocuments.ts';
 export * from './projectCostUtilization.ts';
 export * from './legislation.ts';
 export * from './legislationSummary.ts';

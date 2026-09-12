@@ -57,6 +57,7 @@ const TransparencyMethodology = lazy(
   () => import('./pages/TransparencyMethodology')
 );
 const FullDisclosure = lazy(() => import('./pages/FullDisclosure'));
+const OfficialDocuments = lazy(() => import('./pages/OfficialDocuments'));
 const Search = lazy(() => import('./pages/Search'));
 const PlannedPage = lazy(() => import('./pages/PlannedPage'));
 
@@ -301,6 +302,10 @@ function App() {
                   <Route
                     path="/government/documents"
                     element={<Navigate to="/transparency/documents" replace />}
+                  />
+                  <Route
+                    path="/transparency/documents"
+                    element={<OfficialDocuments />}
                   />
                   <Route
                     path="/transparency/full-disclosure"

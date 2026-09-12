@@ -278,6 +278,12 @@ incomplete. It owns:
 Transparency cross-links Projects, Procurement, Government, and Legislation
 but does not duplicate their primary record experiences.
 
+`/transparency/documents` is a hybrid discovery hub backed by a bounded,
+publication-reviewed nine-record export. It groups Citizen’s Charters,
+business forms, and privacy documents while linking laws, Full Disclosure,
+procurement, projects, and services to their existing canonical datasets.
+The collection is partial; held and excluded documents remain unpublished.
+
 ### Statistics
 
 Statistics provides careful summaries derived from verified public datasets.

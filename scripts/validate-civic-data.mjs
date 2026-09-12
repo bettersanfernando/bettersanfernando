@@ -111,6 +111,7 @@ const projects = parsed['projects/city-projects.json'];
 const evidence = parsed['projects/project-evidence.json'];
 const utilization = parsed['projects/project-cost-utilization.json'];
 const services = parsed['services/services.json'];
+const officialDocuments = parsed['transparency/official-documents.json'];
 
 if (barangays) {
   if (barangays.barangay_count !== 35 || barangays.barangays?.length !== 35) {
@@ -175,6 +176,15 @@ if (utilization) {
 
 if (services?.services?.length !== 177) {
   fail(`Expected 177 services, got ${services?.services?.length}`);
+}
+
+if (
+  officialDocuments?.record_count !== 9 ||
+  officialDocuments?.records?.length !== 9
+) {
+  fail(
+    `Expected 9 official documents, got record_count=${officialDocuments?.record_count}, array length=${officialDocuments?.records?.length}`
+  );
 }
 
 if (errors.length > 0) {

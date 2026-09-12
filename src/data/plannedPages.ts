@@ -1,6 +1,5 @@
 const plannedPageRoutes = [
   { id: 'resolutions', path: '/legislation/resolutions' },
-  { id: 'transparencyDocuments', path: '/transparency/documents' },
   { id: 'financialTransparency', path: '/transparency/finance' },
   { id: 'demographics', path: '/statistics/demographics' },
   { id: 'governmentStatistics', path: '/statistics/government' },

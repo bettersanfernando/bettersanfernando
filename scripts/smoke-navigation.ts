@@ -116,8 +116,8 @@ assert.ok(
   '/transparency/archive must no longer be registered as a planned page'
 );
 assert.ok(
-  plannedPages.some(page => page.path === '/transparency/documents'),
-  '/transparency/documents must remain a planned page'
+  !plannedPages.some(page => page.path === '/transparency/documents'),
+  '/transparency/documents must be removed from planned pages'
 );
 assert.ok(
   !plannedPages.some(page => page.path === '/transparency/full-disclosure'),
@@ -150,8 +150,8 @@ const fullDisclosureDestination = megaMenus
   .find(item => item.href === '/transparency/full-disclosure');
 assert.equal(
   transparencyDocumentsDestination?.kind,
-  'planned',
-  'Transparency Documents must remain a planned navigation destination, not implemented'
+  'real',
+  'Transparency Documents must be a real navigation destination'
 );
 assert.equal(
   fullDisclosureDestination?.kind,
@@ -210,7 +210,6 @@ for (const [pathname, expected] of activeRouteCases) {
 
 const approvedPlannedPaths = [
   '/legislation/resolutions',
-  '/transparency/documents',
   '/transparency/finance',
   '/statistics/demographics',
   '/statistics/government',
@@ -265,6 +264,7 @@ const knownRealDestinations = new Set([
   '/government/barangay-contacts',
   '/government/links',
   '/transparency/full-disclosure',
+  '/transparency/documents',
   '/legislation/executive-orders',
   '/legislation/ordinances',
   '/legislation',

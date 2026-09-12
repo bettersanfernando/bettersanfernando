@@ -291,10 +291,6 @@
         "title": "Transparency",
         "description": "Explore what happened, what was spent, which public records exist, and where the evidence comes from."
       },
-      "transparencyDocuments": {
-        "title": "Official Documents",
-        "description": "Explore official public documents used to support transparency information."
-      },
       "transparencyProcurement": {
         "title": "Procurement Records",
         "description": "Review verified procurement records and their relationship to projects and spending."

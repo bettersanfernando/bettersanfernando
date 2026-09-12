@@ -379,7 +379,7 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.officialDocuments',
             href: '/transparency/documents',
-            kind: 'planned',
+            kind: 'real',
           },
         ],
       },

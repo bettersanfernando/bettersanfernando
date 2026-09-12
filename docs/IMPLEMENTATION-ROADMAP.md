@@ -394,18 +394,23 @@ with the mechanical creation of an export.
 |        2 | Recover missing ordinance full text and additional verified ordinances                                                                                                      | Improves `/legislation/ordinances` and `/legislation`                                                            |
 |        3 | Recover the three older referenced executive orders                                                                                                                         | Improves `/legislation/executive-orders` and `/legislation`                                                      |
 |        4 | Recover individual resolution evidence after jurisdiction and authority checks                                                                                              | Unblocks `/legislation/resolutions` and improves `/legislation`                                                  |
-|        5 | Continue targeted finance recovery for a comparable Annual Budget year, 2023 Q4 SIPB, selected 2022 OCR needs, and COA reports                                              | Improves the future exports for `/transparency/finance` and `/transparency/documents`                            |
+|        5 | Continue targeted finance recovery for a comparable Annual Budget year, 2023 Q4 SIPB, selected 2022 OCR needs, and COA reports                                              | Improves the future export for `/transparency/finance`                                                           |
 
 `NOT_FOUND_AFTER_TARGETED_SEARCH` records a recovery outcome; it never proves
 that a government record does not exist.
 
 ### EXPORT queue
 
+`/transparency/documents` is implemented as a hybrid hub backed by a bounded
+nine-record export. It remains `PARTIAL`: canonical laws, Full Disclosure,
+procurement, projects, and services stay in their own datasets, while held and
+excluded documents remain unpublished.
+The planned-page registry now contains six routes.
+
 | Priority | Export work                                                                                                                                                             | Public page(s) unblocked                                                                                                          |
 | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-|        1 | Create a unified allowlisted document projection for approved disclosure classes, excluding private paths, audit notes, recovery queues, and sensitive rows             | `/transparency/documents`                                                                                                         |
-|        2 | Create a sanitized aggregate finance export and typed frontend module with metric definitions, derivation tests, period-comparability rules, and privacy classification | `/transparency/finance`                                                                                                           |
-|        3 | Only if future scope expands beyond the approved bounded subset, create a dedicated safe procurement/bid-results export                                                 | Expands `/procurement`, `/procurement/bid-results`, and `/statistics/procurement`; it does not block their bounded READY versions |
+|        1 | Create a sanitized aggregate finance export and typed frontend module with metric definitions, derivation tests, period-comparability rules, and privacy classification | `/transparency/finance`                                                                                                           |
+|        2 | Only if future scope expands beyond the approved bounded subset, create a dedicated safe procurement/bid-results export                                                 | Expands `/procurement`, `/procurement/bid-results`, and `/statistics/procurement`; it does not block their bounded READY versions |
 
 ### DECISION queue
 

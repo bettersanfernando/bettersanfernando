@@ -80,6 +80,11 @@
       "record_count": 10,
       "schema_version": 1,
       "sha256": "e3003ab526ace81a895317d41b61ae2d7aad29182f0f8a65adc8e7cc9c88b011"
+    },
+    "transparency/official-documents.json": {
+      "record_count": 9,
+      "schema_version": 1,
+      "sha256": "6c88566858bc073b2873ccbe21b0673297667f48c0623dc665f36151012562cc"
     }
   },
   "export_version": "v0.1.0",
@@ -133,6 +138,9 @@
     "data/government/official-links-publication-review.json",
     "data/transparency/full-disclosure-metadata-inventory.json",
     "data/transparency/full-disclosure-publication-review.json",
+    "data/transparency/official-documents-inventory.json",
+    "data/transparency/official-documents-publication-review.json",
+    "data/transparency/official-documents-source-manifest.json",
     "data/finance/nta-utilization-project-extraction.json",
     "data/projects/nta-utilization-match-review.json",
     "data/projects/nta-utilization-publication-review.json"
@@ -160,7 +168,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "7169fdf1af5d830739be5a88f76c33bb255f20b0",
+  "source_commit": "3fa7a21287f277c0bbb93b4f5085fa2c4843cd32",
   "source_data_version": "v0.1.1",
   "sources": [
     {

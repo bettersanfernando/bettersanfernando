@@ -129,8 +129,8 @@ assert.ok(
   'the planned-page entry for /transparency/full-disclosure must be removed'
 );
 assert.ok(
-  plannedPages.some(page => page.path === '/transparency/documents'),
-  '/transparency/documents must remain planned'
+  !plannedPages.some(page => page.path === '/transparency/documents'),
+  '/transparency/documents must be implemented'
 );
 const megaMenus = mainNavigation.filter(item => item.sections);
 const navigationDestinations = megaMenus.flatMap(menu =>
@@ -150,8 +150,8 @@ const transparencyDocumentsDestination = navigationDestinations.find(
 );
 assert.equal(
   transparencyDocumentsDestination?.kind,
-  'planned',
-  'Transparency Documents must remain planned'
+  'real',
+  'Transparency Documents must be implemented'
 );
 
 const appSource = readFileSync('src/App.tsx', 'utf8');
