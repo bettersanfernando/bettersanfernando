@@ -45,6 +45,10 @@ export function getStatisticsSummary() {
         CONTRACTED:
           projectStatistics.lifecycle.find(item => item.key === 'CONTRACTED')
             ?.count ?? 0,
+        IMPLEMENTATION_REPORTED:
+          projectStatistics.lifecycle.find(
+            item => item.key === 'IMPLEMENTATION_REPORTED'
+          )?.count ?? 0,
       },
       attributedToBarangay: projectStatistics.barangayAttribution.attributed,
       unattributed: projectStatistics.barangayAttribution.unattributed,

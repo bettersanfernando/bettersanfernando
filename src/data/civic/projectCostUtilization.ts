@@ -7,7 +7,7 @@ const NonEmptyString = z.string().trim().min(1);
 const PublicHttpsUrl = z.url().refine(url => url.startsWith('https://'), {
   message: 'Expected a public HTTPS URL',
 });
-const Percent = z.number().min(0).max(100);
+const Percent = z.number().nonnegative();
 
 export const ProjectCostUtilizationObservationSchema = z
   .object({
@@ -22,7 +22,7 @@ export const ProjectCostUtilizationObservationSchema = z
     reporting_quarter: z.number().int().min(1).max(4),
     reporting_year: z.number().int(),
     status_remarks: NonEmptyString,
-    total_cost: z.number().nonnegative(),
+    total_cost: z.number().nonnegative().nullable(),
     total_cost_incurred_to_date: z.number().nonnegative().nullable(),
     verification_date: IsoDateString,
   })

@@ -42,7 +42,13 @@ export function getProcurementStatistics() {
   );
 
   const lifecycle = (
-    ['PLANNED', 'PROCUREMENT', 'AWARDED', 'CONTRACTED'] as const
+    [
+      'PLANNED',
+      'PROCUREMENT',
+      'AWARDED',
+      'CONTRACTED',
+      'IMPLEMENTATION_REPORTED',
+    ] as const
   ).map(key =>
     coverage(
       key,

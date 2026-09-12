@@ -18,6 +18,7 @@ assert.deepEqual(ProjectLifecycleStatus.options, [
   'PROCUREMENT',
   'AWARDED',
   'CONTRACTED',
+  'IMPLEMENTATION_REPORTED',
 ]);
 assert.equal(population.publisher, 'Philippine Statistics Authority');
 assert.equal(population.census, '2024 POPCEN');

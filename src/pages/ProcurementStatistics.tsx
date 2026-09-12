@@ -24,6 +24,8 @@ const LIFECYCLE_DESCRIPTIONS = {
   PROCUREMENT: 'Published evidence establishes an active procurement stage.',
   AWARDED: 'Published evidence establishes an award decision.',
   CONTRACTED: 'Published evidence supports an executed contract.',
+  IMPLEMENTATION_REPORTED:
+    'An official implementation or utilization report describes project activity without establishing an award, contract, payment, disbursement, or physical verification.',
 } as const;
 
 const RELATED_PAGES = [
@@ -279,7 +281,8 @@ export default function ProcurementStatistics() {
                 Denominator: {statistics.bidResults.total} published BID_RESULTS
                 evidence records, representing{' '}
                 {statistics.bidResults.projectsRepresented} canonically linked
-                projects. These counts do not use the 239-project denominator.
+                projects. These counts do not use the{' '}
+                {statistics.projects.total}-project denominator.
               </p>
             </div>
 

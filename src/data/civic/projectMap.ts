@@ -17,7 +17,13 @@ export interface ProjectDistribution {
 }
 
 function emptyLifecycleCounts(): Record<ProjectLifecycleStatus, number> {
-  return { PLANNED: 0, PROCUREMENT: 0, AWARDED: 0, CONTRACTED: 0 };
+  return {
+    PLANNED: 0,
+    PROCUREMENT: 0,
+    AWARDED: 0,
+    CONTRACTED: 0,
+    IMPLEMENTATION_REPORTED: 0,
+  };
 }
 
 function emptyCategoryCounts(): Record<Project['project_category'], number> {

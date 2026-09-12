@@ -44,8 +44,9 @@ been verified and reviewed for publication.
 | Reviewed External service records | 177                                                    |
 | Published service categories      | 16 of 16                                               |
 | Planned service categories        | 0 of 16                                                |
-| Project records                   | 239                                                    |
-| Project-evidence records          | 334                                                    |
+| Project records                   | 324                                                    |
+| Project-evidence records          | 563                                                    |
+| Project Cost & Utilization        | 298 observations across 109 projects                   |
 | Barangays                         | 35                                                     |
 | City-office directory records     | 44                                                     |
 | Government Hotlines contacts      | 11                                                     |
@@ -184,6 +185,13 @@ frontend only**:
   and never by reading the private repository at build or run time.
 - Generated frontend data is refreshed only through the established sync
   workflow (`pnpm data:sync`); it is never hand-edited.
+- The 85 NTA-sourced projects use `IMPLEMENTATION_REPORTED`: an official
+  implementation or utilization report describes activity, without independently
+  establishing an award, signed contract, payment, disbursement, or physical
+  verification.
+- Project Cost & Utilization has partial coverage (109 of 324 projects). Source
+  currency is unstated, and Total Cost Incurred to Date is not interpreted as
+  actual payment or spending.
 - Private research files, sensitive or person-level data, recovery queues, and
   source workbooks existing privately does not make them publication-safe —
   publishing a dataset requires a deliberate, allowlisted export and

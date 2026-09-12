@@ -23,15 +23,15 @@ assert.equal(summary.projects.bidResults, statistics.procurement.bidResults);
 assert.deepEqual(summary.government, government);
 assert.equal(summary.population.total, 377_534);
 assert.equal(summary.population.barangays, 35);
-assert.equal(summary.projects.total, 239);
-assert.equal(summary.projects.evidence, 334);
+assert.equal(summary.projects.total, 324);
+assert.equal(summary.projects.evidence, 563);
 assert.equal(summary.government.officeRecords, 44);
 
 assert.match(pageSource, /BetterSanFernando/);
 assert.match(pageSource, /City of San Fernando, Pampanga/);
 assert.match(pageSource, /not an official City\s+Government website/i);
 assert.match(pageSource, /published project records/i);
-assert.doesNotMatch(pageSource, /239 City projects/i);
+assert.doesNotMatch(pageSource, /324 City projects/i);
 assert.doesNotMatch(pageSource, /22 City Government offices/i);
 assert.match(pageSource, /getSearchHref/);
 

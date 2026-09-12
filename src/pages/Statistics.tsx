@@ -216,7 +216,7 @@ export default function Statistics() {
               <div>
                 <dt className="font-bold text-gray-950">Coverage is bounded</dt>
                 <dd className="mt-2 text-sm leading-6 text-gray-700">
-                  A published dataset count is not a citywide total. The 239
+                  A published dataset count is not a citywide total. The 324
                   project records describe BetterSanFernando&apos;s current
                   bounded project dataset.
                 </dd>

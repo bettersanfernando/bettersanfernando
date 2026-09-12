@@ -205,7 +205,12 @@ connected to each project. It owns:
 - project-specific evidence and source records; and
 - the methodology for normalizing and verifying project facts.
 
-The current project dataset is a bounded infrastructure/public-works subset.
+The current project dataset contains 324 records and 563 public evidence
+records in a bounded infrastructure/public-works subset. Its 85 NTA-sourced
+projects use `IMPLEMENTATION_REPORTED`: an official implementation or
+utilization report describes project activity without independently
+establishing an award, signed contract, payment, disbursement, or physical
+verification.
 It does not represent every project undertaken by the City, every procurement,
 or all historical activity. Project lifecycle states are evidence states, not
 claims of physical progress. For example, `AWARDED` does not mean construction
@@ -292,7 +297,8 @@ those measures are unavailable.
 `/statistics/project-spending` is published under the public title "Project
 Cost & Utilization," scoped strictly to source-reported, year-to-date
 cost-utilization observations (Total Cost Incurred to Date and physical
-completion) for a bounded subset of projects. Approved budget, winning bid,
+completion): 298 observations covering 109 of 324 projects, including 108
+projects with repeated observations. Source currency is unstated. Approved budget, winning bid,
 contract amount, and this year-to-date utilization figure are different
 concepts and must never be collapsed into a single ambiguous "spending"
 value, and none of them may be presented as actual expenditure or payment.

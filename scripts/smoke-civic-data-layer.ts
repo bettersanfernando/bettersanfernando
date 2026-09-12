@@ -17,6 +17,7 @@ import { fileURLToPath } from 'url';
 // Zod schemas with no Vite-specific import, so it's reused here directly
 // against the files on disk instead of duplicating the validation logic.
 import {
+  getProjectById,
   getProjects,
   getAllProjectEvidence,
 } from '../src/data/civic/projects.ts';
@@ -38,17 +39,48 @@ function assert(condition: boolean, message: string): void {
 
 const projects = getProjects();
 assert(
-  projects.length === 239,
-  `expected 239 projects, got ${projects.length}`
+  projects.length === 324,
+  `expected 324 projects, got ${projects.length}`
 );
 
 const projectIds = new Set(projects.map(p => p.id));
 assert(projectIds.size === projects.length, 'duplicate project IDs found');
+assert(
+  projects.every(project => getProjectById(project.id) === project),
+  'all 324 canonical project detail IDs must resolve'
+);
+
+const implementationReported = projects.filter(
+  project => project.lifecycle_status === 'IMPLEMENTATION_REPORTED'
+);
+assert(
+  implementationReported.length === 85,
+  'expected 85 IMPLEMENTATION_REPORTED projects'
+);
+assert(
+  implementationReported.every(
+    project =>
+      project.estimated_budget === null &&
+      project.approved_budget_abc === null &&
+      project.winning_bid_amount === null &&
+      project.contract_amount === null &&
+      Object.values(project.identifiers).every(value => value === null)
+  ),
+  'NTA-sourced projects must not expose procurement amounts or identifiers'
+);
 
 const evidence = getAllProjectEvidence();
 assert(
-  evidence.length === 334,
-  `expected 334 evidence records, got ${evidence.length}`
+  evidence.length === 563,
+  `expected 563 evidence records, got ${evidence.length}`
+);
+assert(
+  evidence.filter(e => e.stage === 'NTA_UTILIZATION_REPORT').length === 229,
+  'expected 229 NTA_UTILIZATION_REPORT evidence records'
+);
+assert(
+  evidence.every(e => !Object.hasOwn(e, 'source_sha256')),
+  'source_sha256 must not exist in public evidence'
 );
 
 const orphanEvidence = evidence.filter(e => !projectIds.has(e.project_id));

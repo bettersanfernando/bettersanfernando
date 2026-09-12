@@ -268,7 +268,7 @@ export default function TransparencySources() {
                 to="/projects/sources"
                 className="font-bold underline decoration-primary-300 underline-offset-4 hover:text-primary-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
               >
-                Browse all 334 project evidence records
+                Browse all 563 project evidence records
               </Link>
               . Site-wide verification rules will live on the separate{' '}
               <Link

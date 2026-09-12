@@ -64,6 +64,11 @@ export default function ProjectMap() {
               infrastructure and public-works project subset are attributed
               across the city’s 35 barangays.
             </p>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-600">
+              The map groups records by source-reported barangay. It does not
+              plot exact project coordinates; records without a barangay
+              association remain projects and are counted as not mapped.
+            </p>
           </div>
 
           <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 border-y border-gray-200 py-5">
@@ -84,7 +89,9 @@ export default function ProjectMap() {
               </dd>
             </div>
             <div>
-              <dt className="text-sm text-gray-600">Barangay not attributed</dt>
+              <dt className="text-sm text-gray-600">
+                Not mapped to a barangay
+              </dt>
               <dd className="mt-1 text-2xl font-semibold tabular-nums text-gray-900">
                 {distribution.unattributedProjects}
               </dd>
@@ -288,6 +295,12 @@ export default function ProjectMap() {
                     >
                       Contracted
                     </th>
+                    <th
+                      scope="col"
+                      className="hidden px-4 py-3 text-right font-semibold lg:table-cell"
+                    >
+                      Implementation reported
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -318,6 +331,9 @@ export default function ProjectMap() {
                       </td>
                       <td className="hidden px-4 py-3 text-right tabular-nums text-gray-700 sm:table-cell">
                         {barangay.lifecycleCounts.CONTRACTED}
+                      </td>
+                      <td className="hidden px-4 py-3 text-right tabular-nums text-gray-700 lg:table-cell">
+                        {barangay.lifecycleCounts.IMPLEMENTATION_REPORTED}
                       </td>
                     </tr>
                   ))}

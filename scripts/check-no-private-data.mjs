@@ -12,6 +12,7 @@
  */
 
 import { execFileSync } from 'child_process';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -50,6 +51,20 @@ if (
   const output = execFileSync('git', gitArgs, { encoding: 'utf8' });
   const paths = output.split('\n').filter(Boolean);
   const violations = findViolations(paths);
+  const publicEvidence = readFileSync(
+    fileURLToPath(
+      new URL(
+        '../src/data/generated/civic/projects/project-evidence.json',
+        import.meta.url
+      )
+    ),
+    'utf8'
+  );
+  if (publicEvidence.includes('"source_sha256"')) {
+    violations.push(
+      'src/data/generated/civic/projects/project-evidence.json:source_sha256'
+    );
+  }
 
   if (violations.length > 0) {
     console.error(

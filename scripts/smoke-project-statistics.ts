@@ -6,7 +6,17 @@ import { getProjects, type Project } from '../src/data/civic/projects.ts';
 const projects = getProjects();
 const statistics = aggregateProjectStatistics(projects);
 
-assert.equal(statistics.totalProjects, 239);
+assert.equal(statistics.totalProjects, 324);
+assert.deepEqual(
+  Object.fromEntries(statistics.lifecycle.map(item => [item.key, item.count])),
+  {
+    PLANNED: 2,
+    PROCUREMENT: 3,
+    AWARDED: 228,
+    CONTRACTED: 6,
+    IMPLEMENTATION_REPORTED: 85,
+  }
+);
 assert.equal(
   statistics.lifecycle.reduce((sum, item) => sum + item.count, 0),
   statistics.totalProjects,

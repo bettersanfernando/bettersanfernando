@@ -213,6 +213,16 @@ export default function ProjectDetail() {
           {formatIsoDate(project.status_as_of)}
         </Text>
 
+        {project.lifecycle_status === 'IMPLEMENTATION_REPORTED' && (
+          <Banner
+            type="info"
+            title="Implementation reported"
+            description="An official implementation or utilization report describes project activity. This does not independently establish procurement award, signed contract, payment, disbursement, or physical verification."
+            icon
+            className="mb-6"
+          />
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <Card>
             <CardContent>

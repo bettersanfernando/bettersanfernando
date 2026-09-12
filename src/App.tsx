@@ -9,7 +9,7 @@ import { plannedPages } from './data/plannedPages';
 import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router';
 
 // Route-level code splitting: each page ships as its own lazy chunk instead
-// of the initial bundle, so e.g. Projects' 239 records only load for
+// of the initial bundle, so project records only load for
 // visitors who actually go to /projects.
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));

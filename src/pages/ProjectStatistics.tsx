@@ -13,6 +13,8 @@ const lifecycleDescriptions = {
   PROCUREMENT: 'A procurement process is documented.',
   AWARDED: 'Award evidence is available; this does not establish a contract.',
   CONTRACTED: 'Contract evidence is available.',
+  IMPLEMENTATION_REPORTED:
+    'An official implementation or utilization report describes project activity. This does not independently establish procurement award, signed contract, payment, disbursement, or physical verification.',
 } as const;
 
 const amountLabels = {
@@ -120,7 +122,7 @@ export default function ProjectStatistics() {
     <>
       <SEO
         title="Project statistics"
-        description="Explore careful, source-aware summaries of BetterSanFernando's bounded set of 239 verified infrastructure and public-works project records."
+        description={`Explore careful, source-aware summaries of BetterSanFernando's bounded set of ${statistics.totalProjects} verified infrastructure and public-works project records.`}
         keywords="San Fernando project statistics, infrastructure projects, public works, project lifecycle"
         url={`${import.meta.env.VITE_WEBSITE_URL || ''}/statistics/projects`}
         siteName="BetterSanFernando"
@@ -233,8 +235,8 @@ export default function ProjectStatistics() {
                   ))}
                 </dl>
                 <p className="mt-5 border-t border-primary-700 pt-5 text-sm leading-6 text-primary-100">
-                  Awarded and contracted are separate states. Neither state
-                  claims that construction started, progressed, or finished.
+                  Each lifecycle is separate. Documentary status does not prove
+                  payment, disbursement, or physical completion.
                 </p>
               </div>
             </div>
@@ -267,7 +269,7 @@ export default function ProjectStatistics() {
               />
               <DistributionTable
                 title="Project record year"
-                description="Record count by stated project year; denominator: 239 published records."
+                description={`Record count by stated project year; denominator: ${statistics.totalProjects} published records.`}
                 headingLevel="h3"
                 items={statistics.years.map(item => ({
                   label: String(item.key),

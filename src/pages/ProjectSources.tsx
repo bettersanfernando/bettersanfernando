@@ -379,7 +379,7 @@ export default function ProjectSources() {
           </h2>
           <div className="mt-3 grid gap-4 text-sm leading-6 text-gray-700 md:grid-cols-3">
             <p>
-              This evidence covers the current bounded set of 239 infrastructure
+              This evidence covers the current bounded set of 324 infrastructure
               and public-works projects, not every City Government activity.
             </p>
             <p>

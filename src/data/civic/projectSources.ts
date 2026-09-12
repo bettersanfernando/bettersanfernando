@@ -98,5 +98,8 @@ export function countProjectEvidenceByStage(
     PROCUREMENT_MONITORING_REPORT: evidence.filter(
       item => item.stage === 'PROCUREMENT_MONITORING_REPORT'
     ).length,
+    NTA_UTILIZATION_REPORT: evidence.filter(
+      item => item.stage === 'NTA_UTILIZATION_REPORT'
+    ).length,
   };
 }

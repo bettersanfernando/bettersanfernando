@@ -22,11 +22,11 @@ const projects = getProjects();
 const records = resolveProjectEvidence(evidence);
 const counts = countProjectEvidenceByStage(evidence);
 
-assert.equal(evidence.length, 334);
-assert.equal(projects.length, 239);
+assert.equal(evidence.length, 563);
+assert.equal(projects.length, 324);
 assert.equal(counts.BID_RESULTS, 233);
 assert.equal(records.length, evidence.length, 'no evidence may be orphaned');
-assert.equal(new Set(evidence.map(item => item.project_id)).size, 239);
+assert.equal(new Set(evidence.map(item => item.project_id)).size, 324);
 
 for (const item of evidence) {
   assert.ok(

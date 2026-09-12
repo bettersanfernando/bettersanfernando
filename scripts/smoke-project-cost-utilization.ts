@@ -20,23 +20,23 @@ const coveredProjectIds = getCoveredProjectIds();
 const repeatedProjectIds = getRepeatedObservationProjectIds();
 
 // 1. Exact schema/counts.
-assert.equal(observations.length, 54, 'exactly 54 verified observations');
-assert.equal(metadata.recordCount, 54);
-assert.equal(coveredProjectIds.length, 19, 'exactly 19 unique projects');
-assert.equal(metadata.uniqueProjectCount, 19);
+assert.equal(observations.length, 298, 'exactly 298 verified observations');
+assert.equal(metadata.recordCount, 298);
+assert.equal(coveredProjectIds.length, 109, 'exactly 109 unique projects');
+assert.equal(metadata.uniqueProjectCount, 109);
 assert.equal(
   repeatedProjectIds.length,
-  18,
-  'exactly 18 projects with repeated observations'
+  108,
+  'exactly 108 projects with repeated observations'
 );
-assert.equal(metadata.repeatedObservationProjectCount, 18);
+assert.equal(metadata.repeatedObservationProjectCount, 108);
 assert.equal(
   new Set(observations.map(o => o.id)).size,
-  54,
+  298,
   'observation ids must be unique'
 );
 
-// 2. All project references resolve against the 239-project canonical set.
+// 2. All project references resolve against the 324-project canonical set.
 for (const observation of observations) {
   const project = getProjectById(observation.canonical_project_id);
   assert.ok(
@@ -44,7 +44,7 @@ for (const observation of observations) {
     `observation ${observation.id} must resolve to a canonical project`
   );
 }
-assert.equal(getProjects().length, 239, 'canonical projects must remain 239');
+assert.equal(getProjects().length, 324, 'canonical projects must be 324');
 
 // 3. currency_unit null throughout; period_basis is year_to_date.
 for (const observation of observations) {
@@ -163,7 +163,19 @@ for (const project of getProjects()) {
     );
   }
 }
-assert.equal(coveredProjectIds.length + (239 - coveredProjectIds.length), 239);
+assert.equal(coveredProjectIds.length + (324 - coveredProjectIds.length), 324);
+assert.equal(
+  getProjects().filter(
+    project => getObservationsForProject(project.id).length > 0
+  ).length,
+  109
+);
+assert.equal(
+  getProjects().filter(
+    project => getObservationsForProject(project.id).length === 0
+  ).length,
+  215
+);
 
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
 // currency formatting, across the data module, page, and detail integration.
@@ -220,7 +232,7 @@ for (const source of [pageSource, projectDetailSource]) {
 }
 
 // 12. UI presentation: compact initial comparison view, View all/Show fewer
-// toggle, all 19 projects still reachable, pagination, and a Browse-all-239
+// toggle, all 109 projects still reachable, pagination, and a Browse-all-324
 // link — the smaller-footprint redesign must not drop any underlying data.
 assert.match(
   pageSource,
@@ -241,7 +253,7 @@ assert.match(pageSource, /Show fewer/);
 assert.match(
   pageSource,
   /latestByProject/,
-  'the full 19-project comparison list must remain in memory, not truncated at the source'
+  'the full 109-project comparison list must remain in memory, not truncated at the source'
 );
 assert.match(
   pageSource,
@@ -263,17 +275,17 @@ assert.match(pageSource, />\s*Next\s*</);
 assert.match(
   pageSource,
   /Browse all \{metadata\.canonicalProjectCount\} projects/,
-  'the page must link to /projects labeled to browse all 239 projects'
+  'the page must link to /projects labeled to browse all 324 projects'
 );
 assert.match(
   pageSource,
   /to="\/projects"[\s\S]{0,300}Browse all/,
-  'the Browse-all-239 control must link to /projects'
+  'the Browse-all-324 control must link to /projects'
 );
 assert.match(
   pageSource,
   /projects with verified\s+utilization observations out of/i,
-  'the coverage clarifier sentence must state 19 of 239 explicitly'
+  'the coverage clarifier sentence must state 109 of 324 explicitly'
 );
 assert.doesNotMatch(
   pageSource,
@@ -285,6 +297,13 @@ assert.doesNotMatch(
 // observations or 19 projects — only the rendered slice per page/view.
 assert.match(pageSource, /filteredObservations\.slice/);
 assert.match(pageSource, /pagedObservations/);
+assert.equal(
+  Array.from({ length: Math.ceil(observations.length / 10) }, (_, page) =>
+    observations.slice(page * 10, (page + 1) * 10)
+  ).flat().length,
+  298,
+  '10-row pagination must make all 298 observations reachable'
+);
 
 // 11. Existing regressions: services, Full Disclosure, and Utilities & Water
 // datasets unchanged by this sync.

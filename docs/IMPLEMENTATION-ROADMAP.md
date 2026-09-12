@@ -154,8 +154,8 @@ and unpublished, and the canonical inventory separately tracks a materially
 larger set of official source records not yet individually verified.
 
 `/statistics/project-spending` shipped under the safer public title "Project
-Cost & Utilization": 54 verified, source-reported, year-to-date
-cost-utilization observations covering 19 of the 239 canonical projects (18
+Cost & Utilization": 298 verified, source-reported, year-to-date
+cost-utilization observations covering 109 of the 324 canonical projects (108
 with repeated within-year observations across their reporting quarters).
 Each observation shows Total Cost, Total Cost Incurred to Date, a derived
 cost-incurred percentage, source-reported physical completion, and a link to
@@ -163,9 +163,9 @@ its official source; `currency_unit` is null throughout and every amount is
 labeled "Currency not stated in source" rather than formatted as PHP or
 peso. Quarterly observations are never summed, and observations are never
 connected across different years. The matched project-detail pages show a
-conditional Project Cost & Utilization section; the other 220 projects show
+conditional Project Cost & Utilization section; the other 215 projects show
 none, and none is implied to have zero cost. It is `PARTIAL`, not `READY`:
-only 19 of 239 projects have a reviewed observation, and Total Cost Incurred
+only 109 of 324 projects have a reviewed observation, and Total Cost Incurred
 to Date is not proof of cash payment or disbursement.
 
 ### Should wait for more data
@@ -378,7 +378,7 @@ versioned allowlisted export are complete.
 |        5 | Clarify the conflicting BFP landline pair, obtain second-publisher corroboration for the single-publisher-sourced secondary police contact, and review the remaining citywide hotline coverage; 11 contacts across two approval batches are already published                                                                                                                                                                                                                                                                                                                                               | Moves `/government/hotlines` from `PARTIAL` to `READY`          |
 |        6 | Select and obtain authoritative demographic dimensions beyond population totals                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Moves `/statistics/demographics` from `PARTIAL` to `READY`      |
 |        7 | Continue verifying additional Full Disclosure report years and types beyond the published 10-record batch, including the three held records (APP CY2021, Indicative APP CY2021, PMR 2nd Semester 2020)                                                                                                                                                                                                                                                                                                                                                                                                      | Moves `/transparency/full-disclosure` from `PARTIAL` to `READY` |
-|        8 | Continue verifying additional Project Cost & Utilization observations beyond the published 19-of-239-project batch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Moves `/statistics/project-spending` from `PARTIAL` to `READY`  |
+|        8 | Continue verifying additional Project Cost & Utilization observations beyond the published 109-of-324-project batch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Moves `/statistics/project-spending` from `PARTIAL` to `READY`  |
 
 The City Health Office publication batch is implemented as the bounded,
 publication-reviewed set described above. Health Services remains `PARTIAL`.
@@ -417,8 +417,8 @@ form or message-forwarding claim is implemented; residents are directed to
 official City Government channels only.
 
 `/statistics/project-spending` is resolved: it is implemented under the
-safer title "Project Cost & Utilization," scoped strictly to the 54 verified
-year-to-date observations for 19 of 239 projects. No renamed-vs-narrowed
+safer title "Project Cost & Utilization," scoped strictly to the 298 verified
+year-to-date observations for 109 of 324 projects. No renamed-vs-narrowed
 decision remains open — the export supplies exactly the safe, bounded scope
 described above, not actual expenditure.
 

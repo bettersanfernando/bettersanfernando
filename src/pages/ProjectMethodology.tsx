@@ -45,6 +45,12 @@ const LIFECYCLE_MEANINGS: Record<
     establishes: 'Contract evidence supports an executed contract.',
     doesNotEstablish: 'A notice to proceed, physical progress, or completion.',
   },
+  IMPLEMENTATION_REPORTED: {
+    establishes:
+      'An official implementation or utilization report describes project activity.',
+    doesNotEstablish:
+      'Procurement award, signed contract, payment, disbursement, or physical verification.',
+  },
 };
 
 const AMOUNT_ROWS = [
