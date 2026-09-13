@@ -5,6 +5,14 @@
 @source '../node_modules/@bettergov/kapwa/dist';
 @import '@bettergov/kapwa/styles';
 
+/* Non-JS/CSS civic data and content assets never contain Tailwind classes;
+   excluded so bundler-integrated content detection (Turbopack) doesn't try
+   to load .md/.yaml/.geojson as modules. */
+@source not '../content';
+@source not './data/generated';
+@source not './data/services.yaml';
+@source not './data/government.yaml';
+
 @theme {
   --font-serif: Georgia, 'Times New Roman', serif;
 
