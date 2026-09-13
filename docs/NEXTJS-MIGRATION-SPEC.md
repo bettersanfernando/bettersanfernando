@@ -639,6 +639,58 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: maplibre-gl fails to load under Next's asset pipeline —
   isolate as a spike before the rest of the batch proceeds.
 - **Suggested commit message**: `feat(migration): port search, filters, and MapLibre client islands`
+- **Completed** — implementation notes:
+  - All 10 routes ported: `/search`, `/projects`, `/projects/map`,
+    `/projects/sources`, `/barangays`, `/procurement/bid-results`,
+    `/procurement/contracts`, `/legislation/executive-orders`,
+    `/legislation/ordinances`, `/government/barangay-contacts`.
+  - **Search index**: `src/data/civic/search.ts` needed zero changes — it
+    was already framework-neutral (no `import.meta.glob`, no Vite-only
+    syntax), building its MiniSearch index in-memory at module load from
+    the same civic accessors (`getProjects`, `getBarangays`,
+    `getCityOffices`, `getExecutiveOrders`/`getOrdinances`,
+    `getAllProjectEvidence`) both builds already use. Verified document
+    count: **990** (324 projects + 35 barangays + 44 offices + 24
+    legislation + 563 sources).
+  - **Rendering mode**: every one of the 9 nuqs-driven pages is registered
+    with `export const dynamic = 'force-dynamic'` in its `page.page.tsx`,
+    not statically generated. A first attempt wrapped each page in
+    `<Suspense>` to satisfy Next's static-generation
+    `useSearchParams()`-needs-a-boundary requirement, but since these
+    pages' entire content depends on the request's query string, static
+    generation baked in the Suspense **fallback** as the one shell served
+    for every query string — an empty-shell regression caught during
+    production HTTP verification. `force-dynamic` makes Next render each
+    request server-side with the real query string already available,
+    which is what actually satisfies "meaningful initial HTML" for a
+    filter/search page; it also removes the Suspense-boundary requirement
+    entirely (that requirement is specific to the static-generation
+    CSR-bailout path).
+  - **MapLibre / client-only architecture**: `/projects/map`'s
+    `page.page.tsx` stays a static Server Component (stats, legend,
+    barangay-distribution table, "what this map shows" copy). The click-
+    driven "Map details" panel and the MapLibre canvas live in
+    `project-map-view.next.tsx` (Client Component), which loads
+    `BarangayProjectMap.next.tsx` via `next/dynamic(..., { ssr: false })` —
+    the only way to guarantee `window`/`document` are never touched during
+    server rendering. `BarangayProjectMap.next.tsx` is a straight port of
+    the legacy component with one change: the worker asset import uses
+    `new URL('maplibre-gl/dist/maplibre-gl-worker.mjs', import.meta.url)`
+    instead of Vite's `?url` suffix (no Next/webpack equivalent). Geometry
+    still comes only from the synced barangay/city GeoJSON — no project
+    coordinate is invented, and unattributed projects remain counted
+    separately rather than being force-placed on the map.
+  - **Vite-only import compatibility**: two adapter files were added, both
+    following the established `*.next.ts(x)` pattern: `geography.next.ts`
+    (reads the same synced `.geojson` files via `fs.readFileSync` instead
+    of Vite's `?raw` suffix) and `BarangayProjectMap.next.tsx` (the worker-
+    URL fix above). No dependency was added — `maplibre-gl` was already
+    installed for the legacy build.
+  - **Deferred to Batch 6**: the 16 literal redirect aliases, custom
+    not-found UI, `metadataBase`, page metadata/canonical tags, OG images,
+    sitemap, robots.txt, JSON-LD, final SEO, Vercel deployment, removal of
+    the Vite application, removal of the temporary `*.next.tsx` duplicates,
+    and removal of the `pageExtensions` workaround.
 
 ### Batch 6 — Redirects, not-found, metadata, sitemap, robots, JSON-LD
 

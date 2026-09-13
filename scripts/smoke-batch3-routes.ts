@@ -86,11 +86,12 @@ assert.match(
   'the real home page must render actual BetterSanFernando content'
 );
 
-// 4. Batch 5's client-island routes must not have been accidentally
-//    implemented yet, and the rejected sibling-[slug]-folder anti-pattern
-//    (see docs/NEXTJS-MIGRATION-SPEC.md §5) must never appear. Batch 4
-//    legitimately added [category]/[serviceSlug]/[officeId]/[projectId], so
-//    those are no longer checked here — see smoke-batch4-dynamic-routes.ts.
+// 4. The rejected sibling-[slug]-folder anti-pattern (see
+//    docs/NEXTJS-MIGRATION-SPEC.md §5) must never appear. Batch 4 and
+//    Batch 5 both legitimately added dynamic/client-island routes, so this
+//    only checks the one pattern that must never exist regardless of batch
+//    — see smoke-batch4-dynamic-routes.ts and smoke-batch5-routes.ts for
+//    their own scopes.
 function collectAppFiles(dir: string): string[] {
   const entries = readdirSync(dir, { withFileTypes: true });
   return entries.flatMap(entry => {
@@ -104,23 +105,6 @@ assert.ok(
   !allAppFiles.some(file => file.includes('[slug]')),
   '[slug] must never exist as a sibling of services/[category] — Next.js treats same-position dynamic segments as one route regardless of param name (§5)'
 );
-for (const deferredRoute of [
-  'src/app/search',
-  'src/app/projects/page.page.tsx',
-  'src/app/projects/map',
-  'src/app/barangays',
-  'src/app/procurement/bid-results',
-  'src/app/procurement/contracts',
-  'src/app/legislation/executive-orders',
-  'src/app/legislation/ordinances',
-  'src/app/government/barangay-contacts',
-  'src/app/projects/sources',
-]) {
-  assert.ok(
-    !existsSync(deferredRoute),
-    `${deferredRoute} is a Batch 5 (nuqs/MapLibre client-island) route and must not exist yet`
-  );
-}
 
 // 5. The root layout stays a Server Component (already the authoritative
 //    check in smoke-next-shell.ts; re-asserted here since real page content
@@ -149,5 +133,5 @@ for (const [route, pattern] of Object.entries(civicDataImportsByRoute)) {
 }
 
 console.log(
-  `Batch 3 route smoke passed: all ${routeEntries.length} static routes exist, use next/link (no react-router/react-helmet-async), the temporary home placeholder is gone, no Batch 4/5 route was implemented early, and pages read the shared civic-data modules.`
+  `Batch 3 route smoke passed: all ${routeEntries.length} static routes exist, use next/link (no react-router/react-helmet-async), the temporary home placeholder is gone, the rejected services/[slug] sibling-folder pattern is absent, and pages read the shared civic-data modules.`
 );

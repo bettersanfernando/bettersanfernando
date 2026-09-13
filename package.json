@@ -63,6 +63,7 @@
     "next-shell:smoke": "node --experimental-strip-types scripts/smoke-next-shell.ts",
     "batch3-routes:smoke": "node --experimental-strip-types scripts/smoke-batch3-routes.ts",
     "batch4-dynamic-routes:smoke": "node --experimental-strip-types scripts/smoke-batch4-dynamic-routes.ts",
+    "batch5-routes:smoke": "node --experimental-strip-types scripts/smoke-batch5-routes.ts",
     "check:public-data-boundary": "node scripts/check-no-private-data.mjs",
     "test:public-data-boundary": "node --test scripts/check-no-private-data.test.mjs"
   },
