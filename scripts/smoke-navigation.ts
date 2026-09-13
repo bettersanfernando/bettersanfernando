@@ -339,6 +339,106 @@ for (const destination of megaMenus.flatMap(menu =>
   }
 }
 
+// Mega-menu balancing/recategorization: exact per-group item counts, no
+// destination duplicated within one mega menu, and Project Statistics
+// appearing exactly once inside Projects (cross-menu reuse, e.g. from
+// Transparency, remains intentional and is not restricted here).
+function menuSectionCounts(menuId: string) {
+  return megaMenus
+    .find(menu => menu.id === menuId)!
+    .sections!.map(section => section.items.length);
+}
+function menuSectionHeadingKeys(menuId: string) {
+  return megaMenus
+    .find(menu => menu.id === menuId)!
+    .sections!.map(section => section.labelKey);
+}
+
+assert.deepEqual(
+  menuSectionCounts('services'),
+  [4, 4, 4, 4],
+  'Services mega menu must be balanced 4/4/4/4'
+);
+assert.deepEqual(menuSectionHeadingKeys('services'), [
+  'navigation.sections.businessOpportunity',
+  'navigation.sections.healthCommunitySupport',
+  'navigation.sections.peopleCivicServices',
+  'navigation.sections.infrastructureEnvironment',
+]);
+
+assert.deepEqual(
+  menuSectionCounts('projects'),
+  [3, 4, 3],
+  'Projects mega menu must be balanced 3/4/3'
+);
+assert.deepEqual(menuSectionHeadingKeys('projects'), [
+  'navigation.sections.cityProjects',
+  'navigation.sections.procurement',
+  'navigation.sections.evidenceInsights',
+]);
+
+assert.deepEqual(
+  menuSectionCounts('government'),
+  [3, 3, 3],
+  'Government mega menu must be balanced 3/3/3'
+);
+assert.deepEqual(menuSectionHeadingKeys('government'), [
+  'navigation.sections.cityGovernment',
+  'navigation.sections.legislation',
+  'navigation.sections.publicInformation',
+]);
+
+assert.deepEqual(
+  menuSectionCounts('transparency'),
+  [5, 5, 5, 4],
+  'Transparency mega menu must be balanced 5/5/5/4, with the smaller group last'
+);
+assert.deepEqual(menuSectionHeadingKeys('transparency'), [
+  'navigation.sections.publicRecordsFinance',
+  'navigation.sections.dataVerification',
+  'navigation.sections.cityCommunity',
+  'navigation.sections.projectsProcurement',
+]);
+
+for (const menu of megaMenus) {
+  const hrefs = menu.sections!.flatMap(section =>
+    section.items.map(item => item.href)
+  );
+  assert.equal(
+    new Set(hrefs).size,
+    hrefs.length,
+    `${menu.id} mega menu must not duplicate any destination within itself`
+  );
+}
+
+const projectsMenuHrefs = megaMenus
+  .find(menu => menu.id === 'projects')!
+  .sections!.flatMap(section => section.items.map(item => item.href));
+assert.equal(
+  projectsMenuHrefs.filter(href => href === '/statistics/projects').length,
+  1,
+  'Project Statistics must appear exactly once inside the Projects mega menu'
+);
+assert.ok(
+  megaMenus
+    .find(menu => menu.id === 'transparency')!
+    .sections!.flatMap(section => section.items.map(item => item.href))
+    .includes('/statistics/projects'),
+  'Transparency may still intentionally cross-link Project Statistics — uniqueness is per-menu, not site-wide'
+);
+
+const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
+assert.match(
+  navbarSource,
+  /item\.sections!\.map\(section =>/,
+  'the desktop mega menu must render from item.sections'
+);
+assert.match(
+  navbarSource,
+  /item\.sections\.map\(section =>/,
+  'mobile navigation must render from the same item.sections structure, not a separate mobile-only data model'
+);
+
 const servicesMenu = megaMenus.find(menu => menu.id === 'services');
 assert.ok(
   servicesMenu?.sections?.every(section =>

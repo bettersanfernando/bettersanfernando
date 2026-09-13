@@ -30,23 +30,26 @@ const appSource = readFileSync('src/App.tsx', 'utf8');
 const servicesPageSource = readFileSync('src/pages/Services.tsx', 'utf8');
 const detailPageSource = readFileSync('src/pages/ServiceDetail.tsx', 'utf8');
 
+// Order matches the balanced Business & Opportunity / Health & Community
+// Support / People & Civic Services / Infrastructure & Environment mega-menu
+// groups in src/data/navigation.ts (4/4/4/4), not the earlier 2/2/4/8 layout.
 const canonicalCategories = [
   'business',
   'employment',
-  'health-services',
   'education',
+  'agriculture-fisheries',
+  'health-services',
   'assistance-programs',
   'social-welfare',
+  'disaster-preparedness',
   'senior-citizens',
   'pwd-services',
   'civil-registry',
+  'property-taxes',
   'infrastructure-public-works',
   'housing-land-use',
   'utilities-water',
-  'property-taxes',
-  'agriculture-fisheries',
   'environment',
-  'disaster-preparedness',
 ] as const;
 const realCategorySlugs = [...canonicalCategories];
 const plannedCategorySlugs = canonicalCategories.filter(

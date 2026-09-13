@@ -108,7 +108,7 @@ const navigationStructure = [
     activePathPrefixes: ['/services'],
     sections: [
       {
-        labelKey: 'navigation.sections.businessLivelihood',
+        labelKey: 'navigation.sections.businessOpportunity',
         items: [
           {
             labelKey: 'navigation.items.businessServices',
@@ -120,26 +120,26 @@ const navigationStructure = [
             href: '/services/employment',
             kind: 'real',
           },
+          {
+            labelKey: 'navigation.items.educationServices',
+            href: '/services/education',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.agriculture',
+            href: '/services/agriculture-fisheries',
+            kind: 'real',
+          },
         ],
       },
       {
-        labelKey: 'navigation.sections.healthEducation',
+        labelKey: 'navigation.sections.healthCommunitySupport',
         items: [
           {
             labelKey: 'navigation.items.healthServices',
             href: '/services/health-services',
             kind: 'real',
           },
-          {
-            labelKey: 'navigation.items.educationServices',
-            href: '/services/education',
-            kind: 'real',
-          },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.communitySupport',
-        items: [
           {
             labelKey: 'navigation.items.assistancePrograms',
             href: '/services/assistance-programs',
@@ -151,6 +151,16 @@ const navigationStructure = [
             kind: 'real',
           },
           {
+            labelKey: 'navigation.items.emergencyInformation',
+            href: '/services/disaster-preparedness',
+            kind: 'real',
+          },
+        ],
+      },
+      {
+        labelKey: 'navigation.sections.peopleCivicServices',
+        items: [
+          {
             labelKey: 'navigation.items.seniorCitizens',
             href: '/services/senior-citizens',
             kind: 'real',
@@ -160,16 +170,21 @@ const navigationStructure = [
             href: '/services/pwd-services',
             kind: 'real',
           },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.publicServices',
-        items: [
           {
             labelKey: 'navigation.items.civilRegistry',
             href: '/services/civil-registry',
             kind: 'real',
           },
+          {
+            labelKey: 'navigation.items.propertyTaxes',
+            href: '/services/property-taxes',
+            kind: 'real',
+          },
+        ],
+      },
+      {
+        labelKey: 'navigation.sections.infrastructureEnvironment',
+        items: [
           {
             labelKey: 'navigation.items.infrastructurePublicWorks',
             href: '/services/infrastructure-public-works',
@@ -186,23 +201,8 @@ const navigationStructure = [
             kind: 'real',
           },
           {
-            labelKey: 'navigation.items.propertyTaxes',
-            href: '/services/property-taxes',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.agriculture',
-            href: '/services/agriculture-fisheries',
-            kind: 'real',
-          },
-          {
             labelKey: 'navigation.items.environment',
             href: '/services/environment',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.emergencyInformation',
-            href: '/services/disaster-preparedness',
             kind: 'real',
           },
         ],
@@ -229,8 +229,8 @@ const navigationStructure = [
             kind: 'real',
           },
           {
-            labelKey: 'navigation.items.projectStatistics',
-            href: '/statistics/projects',
+            labelKey: 'navigation.items.spendingStatistics',
+            href: '/statistics/project-spending',
             kind: 'real',
           },
         ],
@@ -253,10 +253,15 @@ const navigationStructure = [
             href: '/procurement/contracts',
             kind: 'real',
           },
+          {
+            labelKey: 'navigation.items.procurementStatistics',
+            href: '/statistics/procurement',
+            kind: 'real',
+          },
         ],
       },
       {
-        labelKey: 'navigation.sections.projectTransparency',
+        labelKey: 'navigation.sections.evidenceInsights',
         items: [
           {
             labelKey: 'navigation.items.evidenceSources',
@@ -268,24 +273,9 @@ const navigationStructure = [
             href: '/projects/methodology',
             kind: 'real',
           },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.reportsStatistics',
-        items: [
           {
             labelKey: 'navigation.items.projectStatistics',
             href: '/statistics/projects',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.spendingStatistics',
-            href: '/statistics/project-spending',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.procurementStatistics',
-            href: '/statistics/procurement',
             kind: 'real',
           },
         ],
@@ -307,18 +297,13 @@ const navigationStructure = [
             kind: 'real',
           },
           {
-            labelKey: 'navigation.items.contactCity',
-            href: '/government/contact',
-            kind: 'real',
-          },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.officesDepartments',
-        items: [
-          {
             labelKey: 'navigation.items.cityOffices',
             href: '/government/offices',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.contactCity',
+            href: '/government/contact',
             kind: 'real',
           },
         ],
@@ -372,7 +357,7 @@ const navigationStructure = [
     activePathPrefixes: ['/transparency', '/statistics', '/barangays'],
     sections: [
       {
-        labelKey: 'navigation.sections.fullDisclosure',
+        labelKey: 'navigation.sections.publicRecordsFinance',
         items: [
           {
             labelKey: 'navigation.items.fullDisclosureReports',
@@ -384,29 +369,19 @@ const navigationStructure = [
             href: '/transparency/documents',
             kind: 'real',
           },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.procurementSpending',
-        items: [
-          {
-            labelKey: 'navigation.items.cityProjects',
-            href: '/projects',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.procurementRecords',
-            href: '/procurement',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.contractsAwards',
-            href: '/procurement/contracts',
-            kind: 'real',
-          },
           {
             labelKey: 'navigation.items.financialTransparency',
             href: '/transparency/finance',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.publicRecordsStatistics',
+            href: '/statistics/public-records',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.legislationStatistics',
+            href: '/statistics/legislation',
             kind: 'real',
           },
         ],
@@ -434,16 +409,16 @@ const navigationStructure = [
             href: '/transparency/limitations',
             kind: 'real',
           },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.statisticsInsights',
-        items: [
           {
             labelKey: 'navigation.items.statisticsOverview',
             href: '/statistics',
             kind: 'real',
           },
+        ],
+      },
+      {
+        labelKey: 'navigation.sections.cityCommunity',
+        items: [
           {
             labelKey: 'navigation.items.cityProfile',
             href: '/statistics/city-profile',
@@ -469,19 +444,29 @@ const navigationStructure = [
             href: '/barangays',
             kind: 'real',
           },
+        ],
+      },
+      {
+        labelKey: 'navigation.sections.projectsProcurement',
+        items: [
+          {
+            labelKey: 'navigation.items.cityProjects',
+            href: '/projects',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.procurementRecords',
+            href: '/procurement',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.contractsAwards',
+            href: '/procurement/contracts',
+            kind: 'real',
+          },
           {
             labelKey: 'navigation.items.projectStatistics',
             href: '/statistics/projects',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.publicRecordsStatistics',
-            href: '/statistics/public-records',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.legislationStatistics',
-            href: '/statistics/legislation',
             kind: 'real',
           },
         ],

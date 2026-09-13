@@ -38,22 +38,20 @@
       "contact": "Contact"
     },
     "sections": {
-      "businessLivelihood": "Business & Livelihood",
-      "healthEducation": "Health & Education",
-      "communitySupport": "Community Support",
-      "publicServices": "Public Services",
+      "businessOpportunity": "Business & Opportunity",
+      "healthCommunitySupport": "Health & Community Support",
+      "peopleCivicServices": "People & Civic Services",
+      "infrastructureEnvironment": "Infrastructure & Environment",
       "cityProjects": "City Projects",
       "procurement": "Procurement",
-      "projectTransparency": "Project Transparency",
-      "reportsStatistics": "Reports & Statistics",
+      "evidenceInsights": "Evidence & Insights",
       "cityGovernment": "City Government",
-      "officesDepartments": "Offices & Departments",
       "legislation": "Legislation",
       "publicInformation": "Public Information",
-      "fullDisclosure": "Full Disclosure",
-      "procurementSpending": "Procurement & Spending",
+      "publicRecordsFinance": "Public Records & Finance",
       "dataVerification": "Data & Verification",
-      "statisticsInsights": "Statistics & Insights"
+      "cityCommunity": "City & Community",
+      "projectsProcurement": "Projects & Procurement"
     },
     "items": {
       "businessServices": "Business Services",

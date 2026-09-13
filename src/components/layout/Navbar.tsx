@@ -57,6 +57,15 @@ import CivicUtilityBar from './CivicUtilityBar';
 const BRAND_LOGO =
   '/assets/brand/logos/horizontal/better-san-fernando-horizontal-blue-transparent.svg';
 const DESKTOP_CLOSE_DELAY_MS = 160;
+// Static Tailwind class per column count (Tailwind's JIT scanner needs the
+// literal class strings present in source, not a template-built name like
+// `grid-cols-${n}`) — keeps every mega menu's column count matched to its
+// actual balanced section count instead of a fixed 4, which is what left a
+// phantom empty column for any menu with fewer than 4 groups.
+const DESKTOP_MEGA_MENU_GRID_COLS: Record<number, string> = {
+  3: 'grid-cols-3',
+  4: 'grid-cols-4',
+};
 const focusStyles =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2';
 
@@ -391,7 +400,12 @@ export default function Navbar() {
               className="absolute inset-x-0 top-full hidden px-4 pt-2 pb-4 xl:block"
               onPointerEnter={cancelDesktopClose}
             >
-              <div className="container mx-auto grid max-w-7xl grid-cols-4 gap-5 rounded-xl bg-white px-6 py-6 shadow-[0_18px_48px_rgba(15,23,42,0.16)] ring-1 ring-gray-200">
+              <div
+                className={`container mx-auto grid max-h-[calc(100vh-10rem)] max-w-7xl items-start gap-5 overflow-y-auto rounded-xl bg-white px-6 py-6 shadow-[0_18px_48px_rgba(15,23,42,0.16)] ring-1 ring-gray-200 ${
+                  DESKTOP_MEGA_MENU_GRID_COLS[item.sections!.length] ??
+                  'grid-cols-4'
+                }`}
+              >
                 {item.sections!.map(section => (
                   <div key={section.labelKey} className="min-w-0">
                     <h2 className="mb-2 border-b border-primary-100 px-2.5 pb-3 text-xs font-bold tracking-wide text-gray-900 uppercase">
