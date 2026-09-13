@@ -86,11 +86,11 @@ assert.match(
   'the real home page must render actual BetterSanFernando content'
 );
 
-// 4. Later-batch dynamic routes must not have been accidentally implemented
-//    yet: no [category], [serviceSlug], [officeId], [projectId] segment
-//    anywhere under src/app, and none of the Batch 5 client-island routes
-//    (search, projects list, map, barangays, bid-results, contracts,
-//    executive-orders, ordinances, barangay-contacts, project sources).
+// 4. Batch 5's client-island routes must not have been accidentally
+//    implemented yet, and the rejected sibling-[slug]-folder anti-pattern
+//    (see docs/NEXTJS-MIGRATION-SPEC.md §5) must never appear. Batch 4
+//    legitimately added [category]/[serviceSlug]/[officeId]/[projectId], so
+//    those are no longer checked here — see smoke-batch4-dynamic-routes.ts.
 function collectAppFiles(dir: string): string[] {
   const entries = readdirSync(dir, { withFileTypes: true });
   return entries.flatMap(entry => {
@@ -100,18 +100,10 @@ function collectAppFiles(dir: string): string[] {
   });
 }
 const allAppFiles = collectAppFiles('src/app');
-for (const pattern of [
-  '[category]',
-  '[serviceSlug]',
-  '[officeId]',
-  '[projectId]',
-  '[slug]',
-]) {
-  assert.ok(
-    !allAppFiles.some(file => file.includes(pattern)),
-    `${pattern} is Batch 4 scope and must not exist yet under src/app`
-  );
-}
+assert.ok(
+  !allAppFiles.some(file => file.includes('[slug]')),
+  '[slug] must never exist as a sibling of services/[category] — Next.js treats same-position dynamic segments as one route regardless of param name (§5)'
+);
 for (const deferredRoute of [
   'src/app/search',
   'src/app/projects/page.page.tsx',
@@ -142,7 +134,6 @@ assert.ok(
 // 6. Migrated pages must use the shared civic-data modules, not copied data.
 const civicDataImportsByRoute: Record<string, RegExp> = {
   '/': /from '\.\.\/data\/civic\/homeSummary'/,
-  '/services': /from '\.\.\/\.\.\/data\/civic\/services'/,
   '/government/offices': /from '\.\.\/\.\.\/\.\.\/data\/civic\/government'/,
   '/statistics/projects':
     /from '\.\.\/\.\.\/\.\.\/data\/civic\/projectStatistics'/,
