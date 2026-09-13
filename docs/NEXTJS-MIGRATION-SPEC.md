@@ -26,16 +26,16 @@ or database.
 
 Re-confirmed from the prior audit and this task's own inspection:
 
-| Layer                 | Verified value                                                                                                                                                                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Framework             | React 19.1.1 + Vite 8.1.5, client-only `createRoot().render()` — no SSR, no prerendering today                                                                                                                                                                            |
-| Routing               | react-router 8.3.0, `<BrowserRouter>`, 81 `<Route>` elements in source (1 is a no-op `plannedPages.map`, contributing 0 routes since that array is empty)                                                                                                                 |
-| Language/style        | TypeScript 6.0.3 strict, Tailwind CSS 4                                                                                                                                                                                                                                   |
-| Data                  | Zod 4 `.strict()` schemas over 22 checksummed, manifest-driven datasets synced from `bettersanfernando-data`                                                                                                                                                              |
-| Interactive libs      | MapLibre GL (WebGL map), MiniSearch (in-memory client search), nuqs (URL query state, 9 pages), i18next (client-only, chrome strings only)                                                                                                                                |
-| Effective route count | 66 real page routes (58 static literal paths + 8 dynamic-parameter patterns) + 16 client-side `<Navigate>` redirects (recomputed directly from `src/App.tsx`, counting every distinct source URL separately — see §4.1)                                                   |
-| Scale                 | 324 projects, 177 services, 44 government entities (from the 22-dataset export), 0 planned routes                                                                                                                                                                         |
-| Hosting evidence      | `vercel.json` present and project-specific (SPA catch-all rewrite `/(.*) → /index.html`, `framework: "vite"`); no `.github/` workflows; `terraform/` and most of `DEPLOYMENT-GUIDE.md` are generic, unfilled starter-kit scaffolding, not evidence of the live deployment |
+| Layer                 | Verified value                                                                                                                                                                                                                                                                               |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework             | React 19.1.1 + Vite 8.1.5, client-only `createRoot().render()` — no SSR, no prerendering today                                                                                                                                                                                               |
+| Routing               | react-router 8.3.0, `<BrowserRouter>`, 81 `<Route>` elements in source (1 is a no-op `plannedPages.map`, contributing 0 routes since that array is empty)                                                                                                                                    |
+| Language/style        | TypeScript 6.0.3 strict, Tailwind CSS 4                                                                                                                                                                                                                                                      |
+| Data                  | Zod 4 `.strict()` schemas over 22 checksummed, manifest-driven datasets synced from `bettersanfernando-data`                                                                                                                                                                                 |
+| Interactive libs      | MapLibre GL (WebGL map), MiniSearch (in-memory client search), nuqs (URL query state, 9 pages), i18next (client-only, chrome strings only)                                                                                                                                                   |
+| Effective route count | 62 real page routes (54 static literal paths + 8 dynamic-parameter patterns, recomputed directly from `src/App.tsx` during Batch 3 — corrects an earlier "58 static / 66 total" miscount) + 16 client-side `<Navigate>` redirects (counting every distinct source URL separately — see §4.1) |
+| Scale                 | 324 projects, 177 services, 44 government entities (from the 22-dataset export), 0 planned routes                                                                                                                                                                                            |
+| Hosting evidence      | `vercel.json` present and project-specific (SPA catch-all rewrite `/(.*) → /index.html`, `framework: "vite"`); no `.github/` workflows; `terraform/` and most of `DEPLOYMENT-GUIDE.md` are generic, unfilled starter-kit scaffolding, not evidence of the live deployment                    |
 
 ## 3. Corrected rendering and hosting decision
 
@@ -578,7 +578,22 @@ committable unit. No batch includes visual-redesign changes.
 
 ### Batch 3 — Static routes
 
-- **Scope**: all 58 static literal-path pages.
+- **Scope**: the 28 static literal-path pages that remain static after the
+  §5/§11 correction — the "58" figure in earlier drafts of this line
+  predated that correction and double-counted routes that actually belong
+  to later batches: the 16 `/services/{category}` pages move into Batch 4's
+  `[category]` dispatcher (§5/§11), and 9 nuqs-filtered pages
+  (Barangays, BidResults, Contracts, ExecutiveOrders,
+  GovernmentBarangayContacts, Ordinances, Projects, ProjectSources, Search)
+  plus the MapLibre-backed `/projects/map` stay in Batch 5 (§9/§12). The 28
+  are: `/`, `/about`, `/services` (hub only), `/government`,
+  `/government/offices`, `/government/contact`, `/government/hotlines`,
+  `/government/links`, `/procurement`, `/projects/methodology`,
+  `/statistics` and its 9 static subpages (`projects`, `procurement`,
+  `project-spending`, `population`, `demographics`, `government`,
+  `legislation`, `public-records`, `city-profile`), `/legislation` and
+  `/legislation/resolutions`, and `/transparency` and its 6 static subpages
+  (`sources`, `methodology`, `documents`, `full-disclosure`, `finance`).
 - **Dependencies**: Batch 2.
 - **Risk**: medium (volume, mostly mechanical react-router → next/navigation
   swap).
@@ -698,7 +713,7 @@ after Batch 8 is verified stable in production.
 
 ## 14. Validation and acceptance checklist
 
-- [ ] All current canonical routes preserved (66 real routes, minus the 4
+- [ ] All current canonical routes preserved (62 real routes, minus the 4
       route _families_ explicitly resolved in §6, whose removal is justified
       by verified evidence, not convenience).
 - [ ] All 16 aliases (§4.1, recomputed directly from `src/App.tsx`) preserved
