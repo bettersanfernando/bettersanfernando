@@ -168,10 +168,17 @@ export async function generateMetadata({
   const { projectId } = await params;
   const project = getProjectById(projectId);
   if (!project) return {};
+  const title = getProjects().some(
+    candidate =>
+      candidate.id !== project.id &&
+      candidate.project_name === project.project_name
+  )
+    ? `${project.project_name} (${project.id})`
+    : project.project_name;
 
   return buildPageMetadata({
-    title: project.project_name,
-    description: `${titleCaseEnum(project.project_type)} project in ${project.barangay ?? 'the City of San Fernando, Pampanga'} — ${titleCaseEnum(project.lifecycle_status)}.`,
+    title,
+    description: `${titleCaseEnum(project.project_type)} project ${project.id} in ${project.barangay ?? 'the City of San Fernando, Pampanga'} — ${titleCaseEnum(project.lifecycle_status)}.`,
     path: `/projects/${project.id}`,
   });
 }

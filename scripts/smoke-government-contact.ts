@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 import {
   filterAndSortGovernmentContacts,
   getGovernmentContactRecords,
@@ -145,17 +145,7 @@ assert.equal(heroesHallOffice?.primary_phone, '(045) 649-8080');
 // 5. Route and navigation.
 assert.equal(mainNavigation.length, 7);
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/government\/contact"[\s\S]{0,80}element={<GovernmentContact \/>}/,
-  '/government/contact must remain a real <Route>'
-);
-assert.match(
-  appSource,
-  /path="\/contact"[\s\S]{0,80}to="\/government\/contact"[\s\S]{0,40}replace/,
-  '/contact must permanently redirect to /government/contact with replace semantics'
-);
+await assertNextRedirect('/contact', '/government/contact');
 
 const contactDestinations = mainNavigation.filter(
   item => item.href === '/government/contact'
@@ -170,7 +160,7 @@ assert.equal(contactDestinations[0]?.id, 'contact');
 // 6. Page content: emergency numbers, general offices, and the four required
 // related-destination links are present; no contact form or personal-data
 // collection; the independent-portal and call-testing limitations remain.
-const pageSource = readFileSync('src/pages/GovernmentContact.tsx', 'utf8');
+const pageSource = readNextRoute('/government/contact');
 
 for (const requiredText of [
   'national-911',

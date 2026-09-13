@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { getProcurementStatistics } from '../src/data/civic/procurementStatistics.ts';
 import {
   getProjects,
@@ -7,6 +6,7 @@ import {
 } from '../src/data/civic/projects.ts';
 import { getBidResultEvidence } from '../src/data/civic/bidResults.ts';
 import { mainNavigation } from '../src/data/navigation.ts';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 
 const statistics = getProcurementStatistics();
 const projects = getProjects();
@@ -26,7 +26,7 @@ assert.equal(
 );
 assert.equal(mainNavigation.length, 7);
 
-const pageSource = readFileSync('src/pages/Procurement.tsx', 'utf8');
+const pageSource = readNextRoute('/procurement');
 for (const href of [
   '/procurement/bid-results',
   '/procurement/contracts',
@@ -56,12 +56,7 @@ for (const privateTerm of [
   );
 }
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/procurement"/);
-assert.match(
-  appSource,
-  /path="\/transparency\/procurement"[\s\S]*?<Navigate to="\/procurement" replace \/>/
-);
+await assertNextRedirect('/transparency/procurement', '/procurement');
 
 console.log('[smoke-procurement] OK');
 console.log(

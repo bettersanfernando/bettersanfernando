@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import { getProcurementStatistics } from '../src/data/civic/procurementStatistics.ts';
 
 const first = getProcurementStatistics();
@@ -72,7 +72,7 @@ assert.equal(first.awardsAndContracts.contracted, 6);
 assert.equal(first.awardsAndContracts.withContractAmount, 8);
 assert.equal(first.awardsAndContracts.withContractNumber, 6);
 
-const pageSource = readFileSync('src/pages/ProcurementStatistics.tsx', 'utf8');
+const pageSource = readNextRoute('/statistics/procurement');
 for (const privateField of [
   'source_sha256',
   'retrieval_status',
@@ -96,9 +96,6 @@ assert.match(
   pageSource,
   /Actual expenditure is not currently available in the\s+published\s+procurement dataset\./
 );
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/statistics\/procurement"/);
 
 console.log('[smoke-procurement-statistics] OK');
 console.log(

@@ -200,10 +200,16 @@ export async function generateMetadata({
   if (!service || getServiceCategory(service) !== category) {
     return {};
   }
+  const title = getServices().some(
+    candidate =>
+      candidate.id !== service.id && candidate.title === service.title
+  )
+    ? `${service.title} (${service.id})`
+    : service.title;
 
   return buildPageMetadata({
-    title: service.title,
-    description: service.description,
+    title,
+    description: `${service.description} Record ${service.id}.`,
     path: getServiceHref(service),
   });
 }

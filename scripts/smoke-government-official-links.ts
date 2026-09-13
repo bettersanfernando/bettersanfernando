@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getOfficialLinks,
   getOfficialLinksMetadata,
@@ -137,18 +137,8 @@ assert.ok(
 );
 assert.equal(officialLinksDestination?.kind, 'real');
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/government\/links"[\s\S]{0,80}element={<GovernmentOfficialLinks \/>}/,
-  '/government/links must be a real <Route>'
-);
-
 // 8. External links use safe target/rel attributes.
-const pageSource = readFileSync(
-  'src/pages/GovernmentOfficialLinks.tsx',
-  'utf8'
-);
+const pageSource = readNextRoute('/government/links');
 assert.match(
   pageSource,
   /target="_blank"/,

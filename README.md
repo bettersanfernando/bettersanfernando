@@ -211,8 +211,8 @@ exact rules agents and contributors must follow.
 
 ## Technology
 
-- React 19, TypeScript, Vite
-- React Router, Tailwind CSS
+- Next.js App Router, React 19, TypeScript, Tailwind CSS
+- Vite + React Router retained temporarily as the Batch 8 rollback build
 - i18next for multilingual support
 - Zod-validated typed data access layer
 - pnpm as the package manager (`packageManager: pnpm@11.9.0`)
@@ -221,8 +221,10 @@ exact rules agents and contributors must follow.
 
 ```bash
 pnpm install       # Install dependencies
-pnpm dev           # Start the development server (localhost:5173)
-pnpm build         # TypeScript check + production build
+pnpm dev           # Start Next.js development (localhost:3000)
+pnpm build         # Next.js production build
+pnpm dev:legacy    # Start the temporary Vite fallback (localhost:5173)
+pnpm build:legacy  # Build the temporary Vite fallback
 pnpm lint          # Run ESLint
 ```
 

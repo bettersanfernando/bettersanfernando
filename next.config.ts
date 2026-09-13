@@ -63,7 +63,7 @@ const nextConfig: NextConfig = {
   typescript: {
     tsconfigPath: 'tsconfig.next.json',
   },
-  // TEMPORARY, remove once src/pages/ is deleted (Batch 7/8): Next.js
+  // TEMPORARY, remove once the Batch 8 preview/cutover retires src/pages/:
   // treats any `pages`/`src/pages` directory as its own Pages Router and
   // compiles every matching file inside it as a route. This repo's
   // src/pages/ predates Next.js entirely (react-router components,

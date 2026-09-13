@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getGovernmentEntities,
   getGovernmentStructureMetadata,
@@ -90,7 +90,7 @@ assert.ok(
     .every(e => e.government_level === 'city')
 );
 
-const pageSource = readFileSync('src/pages/GovernmentStatistics.tsx', 'utf8');
+const pageSource = readNextRoute('/statistics/government');
 assert.match(pageSource, /partial/i);
 assert.doesNotMatch(
   pageSource,
@@ -110,12 +110,6 @@ const governmentStatisticsDestinations = mainNavigation
 assert.equal(governmentStatisticsDestinations.length, 1);
 assert.equal(governmentStatisticsDestinations[0]?.kind, 'real');
 assert.ok(!plannedPages.some(page => page.path === '/statistics/government'));
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/statistics\/government"[\s\S]{0,80}element={<GovernmentStatistics \/>}/
-);
 
 console.log('[smoke-government-statistics] OK');
 console.log(

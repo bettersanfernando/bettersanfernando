@@ -7,6 +7,7 @@ import {
   searchNavigation,
 } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 
 const expectedTopLevelIds = [
   'home',
@@ -56,54 +57,23 @@ assert.equal(
 assert.equal(getSearchHref('  city projects  '), '/search?q=city%20projects');
 assert.equal(getSearchHref('   '), '/search');
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/government\/documents"[\s\S]{0,80}to="\/transparency\/documents"[\s\S]{0,40}replace/,
-  '/government/documents must permanently redirect to /transparency/documents with replace semantics'
-);
-assert.match(
-  appSource,
-  /path="\/transparency\/archive"[\s\S]{0,80}to="\/transparency\/full-disclosure"[\s\S]{0,40}replace/,
-  '/transparency/archive must permanently redirect to /transparency/full-disclosure with replace semantics'
-);
-assert.match(
-  appSource,
-  /path="\/contact"[\s\S]{0,80}to="\/government\/contact"[\s\S]{0,40}replace/,
-  '/contact must permanently redirect to /government/contact with replace semantics'
-);
-assert.match(
-  appSource,
-  /path="\/government\/contact"[\s\S]{0,80}element={<GovernmentContact \/>}/,
-  '/government/contact must remain the canonical real <Route>'
-);
-assert.match(
-  appSource,
-  /path="\/government\/departments"[\s\S]{0,80}to="\/government\/offices"[\s\S]{0,40}replace/,
-  '/government/departments must permanently redirect to /government/offices with replace semantics'
-);
-assert.match(
-  appSource,
-  /path="\/government\/transparency-documents"[\s\S]{0,80}to="\/transparency\/documents"[\s\S]{0,40}replace/,
-  '/government/transparency-documents must permanently redirect to /transparency/documents with replace semantics'
-);
-assert.match(
-  appSource,
-  /path="\/philippines\/hotlines"[\s\S]{0,80}to="\/government\/hotlines"[\s\S]{0,40}replace/,
-  '/philippines/hotlines must permanently redirect to /government/hotlines with replace semantics'
-);
-for (const [path, component] of [
-  ['/government/offices', 'GovernmentOffices'],
-  ['/transparency/documents', 'OfficialDocuments'],
-  ['/government/hotlines', 'GovernmentHotlines'],
+for (const [source, destination] of [
+  ['/government/documents', '/transparency/documents'],
+  ['/transparency/archive', '/transparency/full-disclosure'],
+  ['/contact', '/government/contact'],
+  ['/government/departments', '/government/offices'],
+  ['/government/transparency-documents', '/transparency/documents'],
+  ['/philippines/hotlines', '/government/hotlines'],
 ] as const) {
-  assert.match(
-    appSource,
-    new RegExp(
-      `path="${path.replace(/\//g, '\\/')}"[\\s\\S]{0,40}element={<${component} \\/>}`
-    ),
-    `${path} must be a real canonical <Route>, not another redirect`
-  );
+  await assertNextRedirect(source, destination);
+}
+for (const route of [
+  '/government/contact',
+  '/government/offices',
+  '/transparency/documents',
+  '/government/hotlines',
+]) {
+  readNextRoute(route);
 }
 
 const allNavigationHrefs = megaMenus.flatMap(menu =>
@@ -427,7 +397,10 @@ assert.ok(
   'Transparency may still intentionally cross-link Project Statistics — uniqueness is per-menu, not site-wide'
 );
 
-const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
+const navbarSource = readFileSync(
+  'src/components/layout/Navbar.next.tsx',
+  'utf8'
+);
 assert.match(
   navbarSource,
   /item\.sections!\.map\(section =>/,

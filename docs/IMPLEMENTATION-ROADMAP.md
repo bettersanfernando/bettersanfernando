@@ -5,6 +5,16 @@ This roadmap derives from the reconciled `SITE-ARCHITECTURE.md` and
 frontend to read the private data repository or turn unreviewed private
 records into public content.
 
+## Next.js migration status
+
+Migration Batches 1–7 are complete on `feat/nextjs-migration`. Batch 7 proves
+parity across 38 literal routes, 561 generated routes, 599 unique canonical
+URLs, 16 permanent aliases, the complete smoke suite, and the protected data
+boundary. Batch 8 remains: deploy a Vercel preview, verify the assigned stable
+production hostname and platform routing, exercise the three fragment aliases
+in a real browser, document rollback, and only then retire the legacy
+Vite/React Router fallback and temporary migration file conventions.
+
 ## Phase 0 — Architecture / legacy alignment
 
 1. Implement the 15 agreed redirects in the matrix's Redirect / Alias

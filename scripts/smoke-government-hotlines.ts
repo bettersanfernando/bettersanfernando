@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getGovernmentHotlineGroups,
   getGovernmentHotlines,
@@ -349,14 +349,7 @@ assert.equal(
   'navigation must present the route as real, not planned'
 );
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/government\/hotlines"[\s\S]{0,80}element={<GovernmentHotlines \/>}/,
-  '/government/hotlines must be a real <Route>, not routed through PlannedPage'
-);
-
-const pageSource = readFileSync('src/pages/GovernmentHotlines.tsx', 'utf8');
+const pageSource = readNextRoute('/government/hotlines');
 for (const forbidden of [
   '(045) 961-2313',
   '(045) 961-2331',

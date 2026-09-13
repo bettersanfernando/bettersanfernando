@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getPublicRecordsArchiveCoverage,
   getPublicRecordsMetrics,
@@ -55,16 +55,7 @@ assert.ok(
   '/statistics/public-records must no longer be a planned page'
 );
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/statistics\/public-records"[\s\S]{0,40}element={<PublicRecordsStatistics \/>}/
-);
-
-const pageSource = readFileSync(
-  'src/pages/PublicRecordsStatistics.tsx',
-  'utf8'
-);
+const pageSource = readNextRoute('/statistics/public-records');
 assert.doesNotMatch(pageSource, /total public records|grand total/i);
 assert.match(pageSource, /own unit/i);
 

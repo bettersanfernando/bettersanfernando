@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getAgeBandPopulation2020,
   getAgeSexPopulation2020,
@@ -101,7 +101,7 @@ assert.notEqual(
   'total population and household population must remain distinct measures'
 );
 
-const pageSource = readFileSync('src/pages/DemographicsStatistics.tsx', 'utf8');
+const pageSource = readNextRoute('/statistics/demographics');
 assert.match(pageSource, /statistics\/population/);
 assert.match(pageSource, /derived/i);
 assert.match(pageSource, /Not available/);
@@ -126,12 +126,6 @@ const demographicsDestinations = mainNavigation
 assert.equal(demographicsDestinations.length, 1);
 assert.equal(demographicsDestinations[0]?.kind, 'real');
 assert.ok(!plannedPages.some(page => page.path === '/statistics/demographics'));
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/statistics\/demographics"[\s\S]{0,80}element={<DemographicsStatistics \/>}/
-);
 
 console.log('[smoke-demographics-statistics] OK');
 console.log(

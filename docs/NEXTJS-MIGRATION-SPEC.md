@@ -1,8 +1,8 @@
 # Next.js Migration Specification — BetterSanFernando
 
-Status: **SPECIFICATION ONLY.** No application code, dependencies, branches, or
-deployments have been created or changed by this document. This corrects and
-finalizes the architecture direction from the prior read-only audit.
+Status: **BATCH 7 COMPLETE.** Batches 1–7 are implemented on
+`feat/nextjs-migration`; Batch 8 preview deployment and production readiness
+remain pending. The data repository and civic records are unchanged.
 
 ---
 
@@ -785,6 +785,56 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: any parity mismatch found here blocks Batch 8 until
   resolved.
 - **Suggested commit message**: `test(migration): adapt smoke suite and verify full route/data parity`
+- **Completed** — implementation and audit notes:
+  - **Route inventory**: 38 literal routes (28 Batch 3 + 10 Batch 5) and 561
+    generated routes (16 categories + 177 services + 324 projects + 44
+    offices) produce exactly **599 unique canonical sitemap URLs**. The 16
+    literal aliases and legacy short service URLs remain redirects, never
+    sitemap entries.
+  - **Test ownership**: seven tests were already framework-neutral
+    (`barangays`, `city-profile`, `civic-data-layer`, `population-statistics`,
+    `project-map`, `project-statistics`, `strict-schemas`); four already
+    validated Next (`batch3-routes`, `batch4-dynamic-routes`, `batch5-routes`,
+    `batch6-seo`); 31 were moved from legacy-only source inspection to App
+    Router route modules and evaluated Next redirects (`about`, `bid-results`,
+    `contracts`, `demographics-statistics`, `finance`, `full-disclosure`,
+    `government`, `government-barangay-contacts`, `government-contact`,
+    `government-hotlines`, `government-official-links`,
+    `government-statistics`, `home`, `legislation`,
+    `legislation-statistics`, `navigation`, `official-documents`, `ordinances`,
+    `procurement`, `procurement-statistics`, `project-cost-utilization`,
+    `project-methodology`, `project-sources`, `public-records-statistics`,
+    `resolutions`, `search`, `services`, `statistics`, `transparency`,
+    `transparency-methodology`, `transparency-sources`). No meaningful test
+    was obsolete or deleted.
+  - **Dual-stack ownership**: `smoke-next-shell.ts` intentionally remains the
+    sole dual Next/legacy test until Batch 8 because it proves both retained
+    shells consume the same navigation data while `build:legacy` remains the
+    rollback build. The rest of the suite treats Next as primary.
+  - **Production HTTP audit**: all 599 canonical URLs return 200 with a
+    heading, meaningful content, the application header/footer, unique
+    canonical metadata, production-origin OG data, independent/non-official
+    identity wording, and no raw navigation/footer keys. All 16 aliases return
+    exact 308 destinations; representative legacy service slugs return their
+    category-qualified 308; invalid general/service/project/office routes
+    return 404 + noindex; all nine filtered route families return query-specific
+    HTML and canonicalize to the clean base route.
+  - **Parity fixes found by Batch 7**: the existing breadcrumb JSON-LD helper
+    was unused, so the shared visible Next breadcrumb now renders the matching
+    `BreadcrumbList` on every breadcrumb-bearing route. The sweep also found
+    duplicate titles for recurring project names and two same-titled service
+    records; only those duplicate dynamic titles now include their public
+    canonical record ID, and dynamic descriptions include the ID. `WebPage`
+    and `Dataset` JSON-LD are not requirements in this specification and no
+    unsupported schema was added.
+  - **Force-dynamic review**: all nine uses remain justified. Each route's
+    complete initial result/filter HTML depends on request query parameters;
+    removing `force-dynamic` would restore the previously observed static
+    Suspense fallback regression and break URL-state HTML parity.
+  - **Retained for Batch 8**: Vite, React Router, `src/pages/**`, temporary
+    `*.next.tsx` ports, the `pageExtensions` workaround, and `build:legacy`.
+    Batch 7 does not authorize their removal; the fallback remains available
+    through preview verification and production cutover.
 
 ### Batch 8 — Vercel preview deployment and production readiness
 
@@ -823,54 +873,54 @@ after Batch 8 is verified stable in production.
 
 ## 14. Validation and acceptance checklist
 
-- [ ] All current canonical routes preserved (62 real routes, minus the 4
+- [x] All current canonical routes preserved (62 real routes, minus the 4
       route _families_ explicitly resolved in §6, whose removal is justified
       by verified evidence, not convenience).
-- [ ] All 16 aliases (§4.1, recomputed directly from `src/App.tsx`) preserved
+- [x] All 16 aliases (§4.1, recomputed directly from `src/App.tsx`) preserved
       as real HTTP redirects (308), including the 3 fragment-bearing
       destinations, verified in-browser.
-- [ ] `/services/[category]` is a single route (no sibling `[slug]`/
+- [x] `/services/[category]` is a single route (no sibling `[slug]`/
       `[segment]` folder at the same position) whose category match always
       takes precedence over its legacy-slug fallback.
-- [ ] All 16 real service categories render via `/services/{category}` and
+- [x] All 16 real service categories render via `/services/{category}` and
       are statically generated via `generateStaticParams`.
-- [ ] Every known legacy `/services/{slug}` (all 177) redirects (308) to its
+- [x] Every known legacy `/services/{slug}` (all 177) redirects (308) to its
       category-qualified canonical URL; every unknown `/services/{value}`
       returns a genuine HTTP 404 via `notFound()` — **never** a redirect to
       `/services`.
-- [ ] `/government/departments` redirects (308) to `/government/offices`
+- [x] `/government/departments` redirects (308) to `/government/offices`
       (preserved exactly from current `src/App.tsx` behavior — see §6.3).
-- [ ] All 324 project pages generated via `generateStaticParams`.
-- [ ] All 177 canonical service pages generated via `generateStaticParams`.
-- [ ] All 44 office pages generated via `generateStaticParams`.
-- [ ] All verified, real document routes (content-genuinely-used) generated;
+- [x] All 324 project pages generated via `generateStaticParams`.
+- [x] All 177 canonical service pages generated via `generateStaticParams`.
+- [x] All 44 office pages generated via `generateStaticParams`.
+- [x] All verified, real document routes (content-genuinely-used) generated;
       no wrong-jurisdiction or unlinked legacy content published under any
       URL.
-- [ ] All 22 datasets synchronized and validated (`pnpm data:sync`,
+- [x] All 22 datasets synchronized and validated (`pnpm data:sync`,
       `pnpm data:validate` both pass unchanged).
-- [ ] Protected dataset counts unchanged (324 projects / 563 evidence / 298
+- [x] Protected dataset counts unchanged (324 projects / 563 evidence / 298
       cost-utilization / 177 services / 10 full disclosure / 9 official
       documents / 13 EO / 11 ordinances / 2 resolutions / 53 finance reports
       / 121 finance observations / 136 demographic / 44 government entities
       / 0 planned routes).
-- [ ] No private-data leakage (`pnpm check:public-data-boundary` passes
+- [x] No private-data leakage (`pnpm check:public-data-boundary` passes
       unchanged).
-- [ ] Filters (9 nuqs pages), search, navigation (desktop mega-menu + mobile
+- [x] Filters (9 nuqs pages), search, navigation (desktop mega-menu + mobile
       accordion), MapLibre map, and pagination all function identically to
       the current Vite build.
-- [ ] Correct, unique canonical metadata on every indexable route — no
+- [x] Correct, unique canonical metadata on every indexable route — no
       fallback-to-root canonical.
-- [ ] `app/sitemap.ts` output is valid and its entry count matches the final
+- [x] `app/sitemap.ts` output is valid and its entry count matches the final
       route inventory; `app/robots.ts` correctly allows the indexable
       surface.
-- [ ] Genuine HTTP 404 (with `noindex`) for the routes resolved as
+- [x] Genuine HTTP 404 (with `noindex`) for the routes resolved as
       not-found in §6, and for any other unmatched URL.
-- [ ] `tsc --noEmit`, `eslint`, `next build`, `pnpm data:validate`,
+- [x] `tsc --noEmit`, `eslint`, `next build`, `pnpm data:validate`,
       `pnpm check:public-data-boundary`, and the full adapted smoke suite all
       pass.
 - [ ] Vercel preview deployment verified (real redirects, real 404s, real
       metadata) before any production deployment.
-- [ ] No visual-redesign changes present in the migration diff.
+- [x] No visual-redesign changes present in the migration diff.
 
 ## 15. Deployment approach
 

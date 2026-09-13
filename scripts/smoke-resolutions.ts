@@ -1,8 +1,8 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { getResolutions } from '../src/data/civic/legislation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
 const resolutions = getResolutions();
 
@@ -31,13 +31,7 @@ assert.ok(
   '/legislation/resolutions must no longer be a planned page'
 );
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/legislation\/resolutions"[\s\S]{0,40}element={<Resolutions \/>}/
-);
-
-const pageSource = readFileSync('src/pages/Resolutions.tsx', 'utf8');
+const pageSource = readNextRoute('/legislation/resolutions');
 assert.match(pageSource, /getResolutions\(\)/);
 assert.match(pageSource, /resolution\.subject/);
 assert.doesNotMatch(pageSource, /manufactured title|invented adoption date/i);
