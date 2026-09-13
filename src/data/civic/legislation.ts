@@ -34,55 +34,67 @@ export const LegislationVerificationLevel = z.enum([
   'EXACT_METADATA',
 ]);
 
-export const LegislationRecordSchema = z.object({
-  id: z.string(),
-  document_type: z.string(),
-  document_number: z.string(),
-  title: z.string().nullable().optional(),
-  official_title: z.string().nullable().optional(),
-  official_alias: z.string().optional(),
-  described_context: z.string().optional(),
-  described_subject: z.string().optional(),
-  subject: z.string().optional(),
-  date_precision: z.enum(['day', 'year']).optional(),
-  date_issued: IsoDateString.nullable().optional(),
-  date_adopted: IsoDateString.nullable().optional(),
-  date_approved: IsoDateString.nullable().optional(),
-  year: z.number().int(),
-  issuing_body: z.string(),
-  issuer_name: z.string().optional(),
-  issuer_title: z.string().optional(),
-  official_page_url: z.url().optional(),
-  official_pdf_url: z.url().nullable().optional(),
-  reference_url: z.url().optional(),
-  source_authority: LegislationSourceAuthority,
-  source_kind: z.string().optional(),
-  verification_level: LegislationVerificationLevel.optional(),
-  related_measures: z.array(z.string()).optional(),
-  full_text_available: z.boolean(),
-});
+export const LegislationRecordSchema = z
+  .object({
+    id: z.string(),
+    document_type: z.string(),
+    document_number: z.string(),
+    title: z.string().nullable().optional(),
+    official_title: z.string().nullable().optional(),
+    official_alias: z.string().optional(),
+    described_context: z.string().optional(),
+    described_subject: z.string().optional(),
+    subject: z.string().optional(),
+    date_precision: z.enum(['day', 'year']).optional(),
+    date_issued: IsoDateString.nullable().optional(),
+    date_adopted: IsoDateString.nullable().optional(),
+    date_approved: IsoDateString.nullable().optional(),
+    year: z.number().int(),
+    issuing_body: z.string(),
+    issuer_name: z.string().optional(),
+    issuer_title: z.string().optional(),
+    official_page_url: z.url().optional(),
+    official_pdf_url: z.url().nullable().optional(),
+    reference_url: z.url().optional(),
+    source_authority: LegislationSourceAuthority,
+    source_kind: z.string().optional(),
+    verification_level: LegislationVerificationLevel.optional(),
+    related_measures: z.array(z.string()).optional(),
+    full_text_available: z.boolean(),
+  })
+  .strict();
 export type LegislationRecord = z.infer<typeof LegislationRecordSchema>;
 
 const legislationFileFields = {
+  description: z.string(),
   document_type: z.string(),
   jurisdiction_name: z.string(),
   jurisdiction_psgc: PsgcCode,
+  last_verified: z.string(),
   province: z.string(),
   record_count: z.number().int(),
 };
 
-const ExecutiveOrdersFileSchema = z.object({
-  ...legislationFileFields,
-  executive_orders: z.array(LegislationRecordSchema),
-});
-const OrdinancesFileSchema = z.object({
-  ...legislationFileFields,
-  ordinances: z.array(LegislationRecordSchema),
-});
-const ResolutionsFileSchema = z.object({
-  ...legislationFileFields,
-  resolutions: z.array(LegislationRecordSchema),
-});
+const ExecutiveOrdersFileSchema = z
+  .object({
+    ...legislationFileFields,
+    executive_orders: z.array(LegislationRecordSchema),
+    source_archive_url: z.url(),
+    source_retrieved_at: z.string(),
+  })
+  .strict();
+const OrdinancesFileSchema = z
+  .object({
+    ...legislationFileFields,
+    ordinances: z.array(LegislationRecordSchema),
+  })
+  .strict();
+const ResolutionsFileSchema = z
+  .object({
+    ...legislationFileFields,
+    resolutions: z.array(LegislationRecordSchema),
+  })
+  .strict();
 
 const executiveOrders: readonly LegislationRecord[] = Object.freeze(
   ExecutiveOrdersFileSchema.parse(executiveOrdersJson).executive_orders

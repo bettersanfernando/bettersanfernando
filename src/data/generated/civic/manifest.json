@@ -126,6 +126,8 @@
     "data/legislation/resolutions.json",
     "data/projects/city-projects.json",
     "data/projects/project-evidence.json",
+    "data/projects/bid-results-source-manifest.json",
+    "data/projects/cy2022-source-manifest.json",
     "data/services/citizens-charter-services.json",
     "data/services/blpd-service-freshness-enrichment.json",
     "data/services/blpd-service-publication-review.json",

@@ -41,77 +41,81 @@ export const FinancePeriodType = z.enum([
 // currency_text, and unit_text — the source documents never state a
 // normalized unit. Amounts must always be displayed as plain numbers with a
 // visible "unit not stated" note, never assumed to be PHP/pesos.
-export const FinanceReportSchema = z.object({
-  accounting_basis: NonEmptyString,
-  as_of_date: IsoDateString.nullable(),
-  canonical_source_document_id: NonEmptyString.nullable(),
-  currency_code: NonEmptyString.nullable(),
-  currency_text: NonEmptyString.nullable(),
-  extraction_status: NonEmptyString,
-  file_type: z.enum(['XLSX', 'PDF']),
-  fund_name_exact: NonEmptyString.nullable(),
-  fund_type: FinanceFundType,
-  id: NonEmptyString,
-  is_cumulative: z.boolean(),
-  official_attachment_url: PublicHttpsUrl,
-  official_page_url: PublicHttpsUrl,
-  period_end: IsoDateString,
-  period_start: IsoDateString,
-  period_type: FinancePeriodType,
-  privacy_treatment: z.literal('aggregate_only'),
-  public_limitation: NonEmptyString,
-  publisher: NonEmptyString,
-  quarter: z.number().int().min(1).max(4).nullable(),
-  reconciliation_status: NonEmptyString,
-  report_title_exact: NonEmptyString,
-  report_type: FinanceReportType,
-  reporting_year: z.number().int(),
-  responsible_office: NonEmptyString.nullable(),
-  source_published_at: IsoDateString.nullable(),
-  unit_text: NonEmptyString.nullable(),
-  verification_status: NonEmptyString,
-  version_group: NonEmptyString,
-  version_status: z.literal('canonical'),
-});
+export const FinanceReportSchema = z
+  .object({
+    accounting_basis: NonEmptyString,
+    as_of_date: IsoDateString.nullable(),
+    canonical_source_document_id: NonEmptyString.nullable(),
+    currency_code: NonEmptyString.nullable(),
+    currency_text: NonEmptyString.nullable(),
+    extraction_status: NonEmptyString,
+    file_type: z.enum(['XLSX', 'PDF']),
+    fund_name_exact: NonEmptyString.nullable(),
+    fund_type: FinanceFundType,
+    id: NonEmptyString,
+    is_cumulative: z.boolean(),
+    official_attachment_url: PublicHttpsUrl,
+    official_page_url: PublicHttpsUrl,
+    period_end: IsoDateString,
+    period_start: IsoDateString,
+    period_type: FinancePeriodType,
+    privacy_treatment: z.literal('aggregate_only'),
+    public_limitation: NonEmptyString,
+    publisher: NonEmptyString,
+    quarter: z.number().int().min(1).max(4).nullable(),
+    reconciliation_status: NonEmptyString,
+    report_title_exact: NonEmptyString,
+    report_type: FinanceReportType,
+    reporting_year: z.number().int(),
+    responsible_office: NonEmptyString.nullable(),
+    source_published_at: IsoDateString.nullable(),
+    unit_text: NonEmptyString.nullable(),
+    verification_status: NonEmptyString,
+    version_group: NonEmptyString,
+    version_status: z.literal('canonical'),
+  })
+  .strict();
 export type FinanceReport = z.infer<typeof FinanceReportSchema>;
 
-export const FinanceObservationSchema = z.object({
-  accounting_basis: NonEmptyString,
-  amount: z.number(),
-  comparability_key: NonEmptyString.nullable(),
-  currency_code: NonEmptyString.nullable(),
-  currency_text: NonEmptyString.nullable(),
-  derivation: NonEmptyString.nullable(),
-  fund_type: FinanceFundType,
-  id: NonEmptyString,
-  is_cumulative: z.boolean(),
-  is_derived: z.boolean(),
-  metric_code: NonEmptyString,
-  metric_label_exact: NonEmptyString,
-  period_type: FinancePeriodType,
-  public_note: NonEmptyString.nullable(),
-  quarter: z.number().int().min(1).max(4).nullable(),
-  reconciliation_status: NonEmptyString,
-  report_id: NonEmptyString,
-  reporting_year: z.number().int(),
-  unit_text: NonEmptyString.nullable(),
-  value_basis: z.enum([
-    'authorized_budget',
-    'appropriation',
-    'receipt',
-    'expenditure',
-    'surplus_deficit',
-    'cash_inflow',
-    'cash_outflow',
-    'ending_balance',
-    'outstanding_debt',
-    'utilization',
-    'disbursement',
-    'unliquidated_cash_advance_total',
-    'revenue',
-    'expense',
-  ]),
-});
+export const FinanceObservationSchema = z
+  .object({
+    accounting_basis: NonEmptyString,
+    amount: z.number(),
+    comparability_key: NonEmptyString.nullable(),
+    currency_code: NonEmptyString.nullable(),
+    currency_text: NonEmptyString.nullable(),
+    derivation: NonEmptyString.nullable(),
+    fund_type: FinanceFundType,
+    id: NonEmptyString,
+    is_cumulative: z.boolean(),
+    is_derived: z.boolean(),
+    metric_code: NonEmptyString,
+    metric_label_exact: NonEmptyString,
+    period_type: FinancePeriodType,
+    public_note: NonEmptyString.nullable(),
+    quarter: z.number().int().min(1).max(4).nullable(),
+    reconciliation_status: NonEmptyString,
+    report_id: NonEmptyString,
+    reporting_year: z.number().int(),
+    unit_text: NonEmptyString.nullable(),
+    value_basis: z.enum([
+      'authorized_budget',
+      'appropriation',
+      'receipt',
+      'expenditure',
+      'surplus_deficit',
+      'cash_inflow',
+      'cash_outflow',
+      'ending_balance',
+      'outstanding_debt',
+      'utilization',
+      'disbursement',
+      'unliquidated_cash_advance_total',
+      'revenue',
+      'expense',
+    ]),
+  })
+  .strict();
 export type FinanceObservation = z.infer<typeof FinanceObservationSchema>;
 
 const FinanceReportsFileSchema = z
@@ -129,6 +133,7 @@ const FinanceReportsFileSchema = z
     schema_version: z.literal(1),
     title: NonEmptyString,
   })
+  .strict()
   .refine(file => file.record_count === file.reports.length, {
     message: 'record_count must match reports length',
   })
@@ -153,6 +158,7 @@ const FinanceObservationsFileSchema = z
     schema_version: z.literal(1),
     title: NonEmptyString,
   })
+  .strict()
   .refine(
     file => file.record_count === file.observations.length,
     'record_count must match observations length'

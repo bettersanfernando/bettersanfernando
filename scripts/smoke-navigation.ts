@@ -77,6 +77,34 @@ assert.match(
   /path="\/government\/contact"[\s\S]{0,80}element={<GovernmentContact \/>}/,
   '/government/contact must remain the canonical real <Route>'
 );
+assert.match(
+  appSource,
+  /path="\/government\/departments"[\s\S]{0,80}to="\/government\/offices"[\s\S]{0,40}replace/,
+  '/government/departments must permanently redirect to /government/offices with replace semantics'
+);
+assert.match(
+  appSource,
+  /path="\/government\/transparency-documents"[\s\S]{0,80}to="\/transparency\/documents"[\s\S]{0,40}replace/,
+  '/government/transparency-documents must permanently redirect to /transparency/documents with replace semantics'
+);
+assert.match(
+  appSource,
+  /path="\/philippines\/hotlines"[\s\S]{0,80}to="\/government\/hotlines"[\s\S]{0,40}replace/,
+  '/philippines/hotlines must permanently redirect to /government/hotlines with replace semantics'
+);
+for (const [path, component] of [
+  ['/government/offices', 'GovernmentOffices'],
+  ['/transparency/documents', 'OfficialDocuments'],
+  ['/government/hotlines', 'GovernmentHotlines'],
+] as const) {
+  assert.match(
+    appSource,
+    new RegExp(
+      `path="${path.replace(/\//g, '\\/')}"[\\s\\S]{0,40}element={<${component} \\/>}`
+    ),
+    `${path} must be a real canonical <Route>, not another redirect`
+  );
+}
 
 const allNavigationHrefs = megaMenus.flatMap(menu =>
   menu.sections!.flatMap(section => section.items.map(item => item.href))
@@ -370,15 +398,25 @@ const referencedEnglishKeys = [
   'navigation.searchSubmit',
   'navigation.language',
   'plannedPages.status',
-  'search.unavailableTitle',
-  'search.unavailableDescription',
-  'search.unavailableStatus',
-  'search.unavailableGuidance',
+  'plannedPages.statusDescription',
 ];
 
 for (const key of referencedEnglishKeys) {
   assert.ok(hasTranslationKey(english, key), `missing English key: ${key}`);
 }
+
+// Orphaned once the planned-route count reached zero (no page ever calls
+// t() with a plannedPages.pages.* key again) or once local search shipped
+// (Search.tsx is a real implemented page, not an i18n "unavailable" state) —
+// these must stay removed rather than silently reappearing.
+assert.ok(
+  !hasTranslationKey(english, 'plannedPages.pages'),
+  'plannedPages.pages.* is orphaned now that the planned-route count is zero and must not be reintroduced'
+);
+assert.ok(
+  !hasTranslationKey(english, 'search'),
+  'the orphaned search.unavailable* locale namespace must not be reintroduced now that local search is implemented'
+);
 
 function resolveTranslation(key: string): string | undefined {
   let node: unknown = english;

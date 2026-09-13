@@ -36,24 +36,45 @@ const DatasetPath = z.enum([
   'transparency/official-documents.json',
 ]);
 
-const ManifestSchema = z.object({
-  completeness_note: z.string(),
-  datasets: z.record(
-    DatasetPath,
-    z.object({ record_count: z.number().int().nonnegative() })
-  ),
-  export_version: z.string(),
-  source_data_version: z.string(),
-  sources: z.array(
-    z.object({
-      id: z.string(),
-      name: z.string(),
-      publisher: z.string(),
-      reference_note: z.string(),
-      url: z.url(),
-    })
-  ),
-});
+export const ManifestSchema = z
+  .object({
+    completeness_note: z.string(),
+    datasets: z.record(
+      DatasetPath,
+      z
+        .object({
+          record_count: z.number().int().nonnegative(),
+          schema_version: z.number().int(),
+          sha256: z.string(),
+        })
+        .strict()
+    ),
+    export_version: z.string(),
+    generated_from: z.array(z.string()),
+    jurisdiction: z
+      .object({
+        name: z.string(),
+        province: z.string(),
+        psgc_code: z.string(),
+      })
+      .strict(),
+    not_exported_in_this_release: z.array(z.string()),
+    source_commit: z.string(),
+    source_data_version: z.string(),
+    sources: z.array(
+      z
+        .object({
+          applies_to: z.array(z.string()),
+          id: z.string(),
+          name: z.string(),
+          publisher: z.string(),
+          reference_note: z.string(),
+          url: z.url(),
+        })
+        .strict()
+    ),
+  })
+  .strict();
 
 const manifest = ManifestSchema.parse(manifestJson);
 const demographics = z

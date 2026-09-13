@@ -4,29 +4,33 @@ import barangaysJson from '../generated/civic/demographics/barangays.json' with 
 
 export const BarangayClassification = z.enum(['Urban', 'Rural']);
 
-export const BarangaySchema = z.object({
-  psgc_code: PsgcCode,
-  name: z.string(),
-  classification: BarangayClassification,
-  population: z.number().int().nonnegative(),
-});
+export const BarangaySchema = z
+  .object({
+    psgc_code: PsgcCode,
+    name: z.string(),
+    classification: BarangayClassification,
+    population: z.number().int().nonnegative(),
+  })
+  .strict();
 export type Barangay = z.infer<typeof BarangaySchema>;
 
-const BarangaysFileSchema = z.object({
-  city_name: z.string(),
-  city_psgc_code: PsgcCode,
-  province: z.string(),
-  region: z.string(),
-  reference_year: z.number().int(),
-  psgc_release: z.string(),
-  source_publisher: z.string(),
-  source_url: z.url(),
-  census: z.string(),
-  last_verified: z.string(),
-  barangay_count: z.number().int(),
-  total_population: z.number().int().nonnegative(),
-  barangays: z.array(BarangaySchema),
-});
+const BarangaysFileSchema = z
+  .object({
+    city_name: z.string(),
+    city_psgc_code: PsgcCode,
+    province: z.string(),
+    region: z.string(),
+    reference_year: z.number().int(),
+    psgc_release: z.string(),
+    source_publisher: z.string(),
+    source_url: z.url(),
+    census: z.string(),
+    last_verified: z.string(),
+    barangay_count: z.number().int(),
+    total_population: z.number().int().nonnegative(),
+    barangays: z.array(BarangaySchema),
+  })
+  .strict();
 export type BarangaysFile = z.infer<typeof BarangaysFileSchema>;
 
 const barangaysFile = BarangaysFileSchema.parse(barangaysJson);

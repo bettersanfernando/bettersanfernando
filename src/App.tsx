@@ -179,6 +179,10 @@ function App() {
                     element={<GovernmentHotlines />}
                   />
                   <Route
+                    path="/philippines/hotlines"
+                    element={<Navigate to="/government/hotlines" replace />}
+                  />
+                  <Route
                     path="/government/barangay-contacts"
                     element={<GovernmentBarangayContacts />}
                   />
@@ -192,6 +196,10 @@ function App() {
                   />
                   <Route
                     path="/government/contacts"
+                    element={<Navigate to="/government/offices" replace />}
+                  />
+                  <Route
+                    path="/government/departments"
                     element={<Navigate to="/government/offices" replace />}
                   />
                   <Route
@@ -333,6 +341,10 @@ function App() {
                   />
                   <Route
                     path="/government/documents"
+                    element={<Navigate to="/transparency/documents" replace />}
+                  />
+                  <Route
+                    path="/government/transparency-documents"
                     element={<Navigate to="/transparency/documents" replace />}
                   />
                   <Route

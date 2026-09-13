@@ -544,17 +544,17 @@ and planned-route registry. Redirect behavior will be implemented separately.
 
 Additional legacy-route decisions:
 
-- `/government/departments` should redirect to `/government/offices` rather
-  than preserve the starter-kit department hierarchy.
+- `/government/departments` permanently redirects to `/government/offices`
+  rather than preserving the starter-kit department hierarchy.
 - `/government/reports-and-statistics` should redirect to `/statistics` or a
   more specific canonical statistics page.
-- `/government/transparency-documents` should redirect to
+- `/government/transparency-documents` permanently redirects to
   `/transparency/documents`.
 - generic starter-kit News, Guides and Regulations, and Public Consultations
   routes are not part of this architecture. They require a future scope
   decision rather than automatic preservation.
-- the footer's `/philippines/hotlines` should redirect to
-  `/government/hotlines` if retained.
+- the footer's `/philippines/hotlines` permanently redirects to
+  `/government/hotlines`, since the legacy footer route is retained.
 
 Redirect aliases must not appear as separate navigation items, sitemap
 entries, canonical metadata URLs, analytics destinations, or search results.

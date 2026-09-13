@@ -72,8 +72,12 @@ to the human maintainer.
 |    22 | `/`                             | None                                                      |
 
 `/government/directory` and `/government/contacts` now redirect to
-`/government/offices`. `/government/departments` remains in the redirect
-registry and is not recorded as completed by this batch.
+`/government/offices`. `/government/departments` was not recorded as
+completed by this batch, but has since been implemented as the same
+permanent redirect to `/government/offices`, along with
+`/government/transparency-documents` (redirects to `/transparency/documents`)
+and the footer's `/philippines/hotlines` (redirects to
+`/government/hotlines`) — all three now match the redirect registry.
 
 `/government/contact` was later redesigned from a searchable 44-office
 directory into a concise contact hub: emergency contacts (911, CDRRMO's
