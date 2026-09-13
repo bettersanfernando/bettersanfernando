@@ -10,6 +10,15 @@ import {
 import Breadcrumbs from '../../components/ui/Breadcrumbs.next';
 import { getProcurementStatistics } from '../../data/civic/procurementStatistics';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Procurement',
+  description:
+    'Explore the bounded procurement records and statistics BetterSanFernando publishes for its verified infrastructure and public-works project subset.',
+  path: '/procurement',
+});
+
 const statistics = getProcurementStatistics();
 
 const destinations = [

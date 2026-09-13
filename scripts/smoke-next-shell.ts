@@ -108,14 +108,15 @@ for (const [name, source] of [
 }
 
 // Ordinary components must not spread the temporary .page.tsx workaround —
-// only the two Next special-file conventions may use it.
+// only Next's special-file conventions (layout, page, not-found) may use it
+// at the src/app root.
 const appDir = 'src/app';
 const appFiles = readdirSync(appDir);
 const pageExtensionFiles = appFiles.filter(file => file.endsWith('.page.tsx'));
 assert.deepEqual(
   pageExtensionFiles.sort(),
-  ['layout.page.tsx', 'page.page.tsx'],
-  'only the Next.js layout/page convention files may use the temporary .page.tsx workaround (see next.config.ts pageExtensions)'
+  ['layout.page.tsx', 'not-found.page.tsx', 'page.page.tsx'],
+  'only Next.js special-convention files may use the temporary .page.tsx workaround (see next.config.ts pageExtensions)'
 );
 
 // Next's i18n bootstrap must supply real, non-empty English resources

@@ -13,6 +13,15 @@ import Breadcrumbs from '../../components/ui/Breadcrumbs.next';
 import Section from '../../components/ui/Section';
 import { getTransparencySummary } from '../../data/civic/transparencySummary';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Transparency',
+  description:
+    'Explore the bounded public civic datasets, source records, methodology, and current publication gaps documented by BetterSanFernando.',
+  path: '/transparency',
+});
+
 const summary = getTransparencySummary();
 
 const domains = [

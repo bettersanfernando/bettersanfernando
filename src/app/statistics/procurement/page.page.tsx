@@ -4,6 +4,15 @@ import Breadcrumbs from '../../../components/ui/Breadcrumbs.next';
 import { getProcurementStatistics } from '../../../data/civic/procurementStatistics';
 import { titleCaseEnum } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Procurement Statistics',
+  description:
+    "Denominator-first statistics describing BetterSanFernando's bounded, published infrastructure and public-works procurement dataset.",
+  path: '/statistics/procurement',
+});
+
 const PROJECT_FIELD_LABELS = {
   approvedBudgetAbc: 'Approved Budget for the Contract (ABC)',
   winningBidAmount: 'Winning bid amount',

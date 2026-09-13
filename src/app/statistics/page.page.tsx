@@ -17,6 +17,15 @@ import { getStatisticsSummary } from '../../data/civic/statisticsSummary';
 import { getLegislationSummary } from '../../data/civic/legislationSummary';
 import { getPublicRecordsMetrics } from '../../data/civic/publicRecordsCoverage';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Statistics',
+  description:
+    "Explore descriptive population, project, procurement, and city-profile statistics derived from BetterSanFernando's bounded frontend-safe civic datasets.",
+  path: '/statistics',
+});
+
 const numberFormatter = new Intl.NumberFormat('en-PH');
 const summary = getStatisticsSummary();
 const legislation = getLegislationSummary();

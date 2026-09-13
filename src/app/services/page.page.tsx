@@ -2,6 +2,15 @@ import Link from 'next/link';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.next';
 import { categories } from './categories';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Services',
+  description:
+    "Browse BetterSanFernando's progressively published City service guidance by need.",
+  path: '/services',
+});
+
 // Next.js port of src/pages/Services.tsx's ServicesHub view (Batch 3).
 // The category-detail view (ServiceCategory in the legacy file) now lives
 // in service-category-view.next.tsx, rendered by the [category] dispatcher

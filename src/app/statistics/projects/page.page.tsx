@@ -5,6 +5,15 @@ import { aggregateProjectStatistics } from '../../../data/civic/projectStatistic
 import { getProjects } from '../../../data/civic/projects';
 import { formatIsoDate, titleCaseEnum } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Project statistics',
+  description:
+    "Explore careful, source-aware summaries of BetterSanFernando's bounded set of verified infrastructure and public-works project records.",
+  path: '/statistics/projects',
+});
+
 const statistics = aggregateProjectStatistics(getProjects());
 
 const lifecycleDescriptions = {

@@ -14,6 +14,15 @@ import Breadcrumbs from '../../../components/ui/Breadcrumbs.next';
 import Section from '../../../components/ui/Section';
 import { getTransparencySourceInventory } from '../../../data/civic/transparencySources';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Transparency Methodology',
+  description:
+    'How BetterSanFernando sources, verifies, normalizes, limits, and responsibly publishes civic information.',
+  path: '/transparency/methodology',
+});
+
 const SECTION_LINKS = [
   ['trust-authority', 'Trust and source authority'],
   ['verification', 'Verification workflow'],

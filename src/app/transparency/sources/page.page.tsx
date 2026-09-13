@@ -17,6 +17,15 @@ import {
 } from '../../../data/civic/transparencySources';
 import { formatIsoDate } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Transparency Sources',
+  description:
+    'See the public datasets, publishers, reference periods, and source links supporting information published by BetterSanFernando.',
+  path: '/transparency/sources',
+});
+
 function SourceLink({ link }: { link: TransparencySourceLink }) {
   const className =
     'inline-flex min-h-11 items-center gap-2 font-semibold text-primary-700 underline decoration-primary-200 underline-offset-4 hover:text-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2';

@@ -1,5 +1,14 @@
 import ExecutiveOrdersView from './ExecutiveOrders.next';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Executive Orders',
+  description:
+    'Browse the Executive Orders currently verified and published by BetterSanFernando, with links to their official sources.',
+  path: '/legislation/executive-orders',
+});
+
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
 // statically generated — `force-dynamic` opts out of static generation

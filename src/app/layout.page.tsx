@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import '../fonts.css';
 import '../index.css';
@@ -6,12 +5,10 @@ import Providers from './providers';
 import Navbar from '../components/layout/Navbar.next';
 import Footer from '../components/layout/Footer.next';
 import ScrollToTop from '../components/ui/ScrollToTop.next';
+import { getRootMetadata } from '../lib/metadata';
+import { WebSiteJsonLd } from '../lib/json-ld';
 
-// Batch 6 owns real metadata (canonical URLs, OG tags, metadataBase). This
-// placeholder only satisfies the App Router's required `metadata` export.
-export const metadata: Metadata = {
-  title: 'BetterSanFernando — Next.js migration foundation',
-};
+export const metadata = getRootMetadata();
 
 // Same shell composition and order as src/App.tsx's
 // <div className="min-h-screen flex flex-col"><Navbar/><ScrollToTop/>
@@ -24,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <WebSiteJsonLd />
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Navbar />

@@ -7,6 +7,15 @@ import { Text } from '../../../components/ui/Text';
 import { getResolutions } from '../../../data/civic/legislation';
 import { getPublicRecordsArchiveCoverage } from '../../../data/civic/publicRecordsCoverage';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Resolutions',
+  description:
+    'Browse the subject-verified City of San Fernando resolution records currently published by BetterSanFernando.',
+  path: '/legislation/resolutions',
+});
+
 const resolutions = getResolutions();
 const archiveRanges = getPublicRecordsArchiveCoverage().filter(
   entry => entry.record_type === 'resolution_archive_range'

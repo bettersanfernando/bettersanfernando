@@ -17,6 +17,17 @@ import {
 import { getCityTotalPopulation } from '../../../data/civic/demographics';
 import { formatIsoDate } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export function generateMetadata() {
+  return buildPageMetadata({
+    title: 'Demographics',
+    description:
+      'Explore official 2024 POPCEN household population, 2020 CPH age and sex structure, and 2023 poverty small area estimates for San Fernando, Pampanga, each kept in its own reference period.',
+    path: '/statistics/demographics',
+  });
+}
+
 const numberFormatter = new Intl.NumberFormat('en-PH');
 const percentFormatter = new Intl.NumberFormat('en-PH', {
   minimumFractionDigits: 1,

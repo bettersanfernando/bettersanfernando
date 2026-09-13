@@ -18,6 +18,7 @@ import {
   getCityOfficesMetadata,
   getParentOffice,
 } from '../../../../data/civic/government';
+import { buildPageMetadata } from '../../../../lib/metadata';
 
 // Ported from src/pages/GovernmentOfficeDetail.tsx: identical content/
 // markup; react-router's useParams()/Link replaced with Next's params prop
@@ -40,6 +41,22 @@ function phoneHref(value: string) {
 
 export function generateStaticParams() {
   return getCityOffices().map(office => ({ officeId: office.office_id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ officeId: string }>;
+}) {
+  const { officeId } = await params;
+  const office = getCityOfficeById(officeId);
+  if (!office) return {};
+
+  return buildPageMetadata({
+    title: office.office_name,
+    description: `Published office directory record for ${office.office_name} in the City of San Fernando, Pampanga.`,
+    path: `/government/offices/${office.office_id}`,
+  });
 }
 
 export default async function GovernmentOfficeDetailPage({

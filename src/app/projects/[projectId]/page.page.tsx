@@ -28,6 +28,7 @@ import {
   titleCaseEnum,
   formatUnstatedAmount,
 } from '../../../lib/utils';
+import { buildPageMetadata } from '../../../lib/metadata';
 
 // Ported from src/pages/ProjectDetail.tsx: identical content/markup;
 // react-router's useParams()/Link replaced with Next's params prop and
@@ -157,6 +158,22 @@ function EvidenceCard({ evidence }: { evidence: ProjectEvidence }) {
 
 export function generateStaticParams() {
   return getProjects().map(project => ({ projectId: project.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ projectId: string }>;
+}) {
+  const { projectId } = await params;
+  const project = getProjectById(projectId);
+  if (!project) return {};
+
+  return buildPageMetadata({
+    title: project.project_name,
+    description: `${titleCaseEnum(project.project_type)} project in ${project.barangay ?? 'the City of San Fernando, Pampanga'} — ${titleCaseEnum(project.lifecycle_status)}.`,
+    path: `/projects/${project.id}`,
+  });
 }
 
 export default async function ProjectDetailPage({

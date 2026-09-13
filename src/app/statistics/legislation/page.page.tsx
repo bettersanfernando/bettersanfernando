@@ -11,6 +11,15 @@ import {
   getPublicRecordsMetrics,
 } from '../../../data/civic/publicRecordsCoverage';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Legislation Statistics',
+  description:
+    "Coverage statistics for BetterSanFernando's published Executive Order, Ordinance, and Resolution collections.",
+  path: '/statistics/legislation',
+});
+
 const executiveOrders = getExecutiveOrders();
 const ordinances = getOrdinances();
 const resolutions = getResolutions();

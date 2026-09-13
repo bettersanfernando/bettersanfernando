@@ -19,6 +19,15 @@ import {
   type CityOffice,
 } from '../../../data/civic/government';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Government Contact',
+  description:
+    'Quickly find the right verified City Government of San Fernando, Pampanga contact channel — emergency hotlines, general offices, and related directories.',
+  path: '/government/contact',
+});
+
 // Stable dataset IDs, not hardcoded numbers — resolved against the reviewed
 // government/hotlines.json export so this panel never drifts from it.
 const EMERGENCY_CONTACT_IDS = [

@@ -14,6 +14,13 @@ import {
 } from 'lucide-react';
 import HomeSearchForm from './home-search-form.next';
 import { getHomeSummary } from '../data/civic/homeSummary';
+import { absoluteUrl } from '../lib/site-url';
+
+export const metadata = {
+  description:
+    'An independent civic transparency portal that makes verified public information about the City of San Fernando, Pampanga easier to find, understand, and trace back to sources.',
+  alternates: { canonical: absoluteUrl('/') },
+};
 
 // Next.js port of src/pages/Home.tsx (Batch 3). Identical content, layout,
 // and copy; SEO (react-helmet-async, Batch 6's job) is dropped and the one

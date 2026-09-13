@@ -1,5 +1,14 @@
 import GovernmentBarangayContactsView from './GovernmentBarangayContacts.next';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Barangay Contacts',
+  description:
+    'Browse the published Barangay Secretary and BHERT (Barangay Health Emergency Response Team) contact directory for all 35 barangays in the City of San Fernando, Pampanga.',
+  path: '/government/barangay-contacts',
+});
+
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
 // statically generated — `force-dynamic` opts out of static generation

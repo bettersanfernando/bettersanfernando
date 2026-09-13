@@ -9,6 +9,15 @@ import { aggregateProjectsByBarangay } from '../../../data/civic/projectMap';
 import { getProjects } from '../../../data/civic/projects';
 import ProjectMapView from './project-map-view.next';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Project distribution by barangay',
+  description:
+    "Explore how the verified BetterSanFernando infrastructure and public-works project subset is distributed across San Fernando's barangays.",
+  path: '/projects/map',
+});
+
 // Ported from src/pages/ProjectMap.tsx. Everything except the MapLibre
 // canvas and its click-driven "Map details" panel is static content, so
 // only that piece (project-map-view.next.tsx) is a Client Component; this

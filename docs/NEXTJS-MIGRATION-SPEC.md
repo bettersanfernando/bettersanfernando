@@ -712,6 +712,64 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: any redirect destination mismatches its specified
   target in §4.1/§5 — must match exactly, no substitutions.
 - **Suggested commit message**: `feat(migration): implement redirects, not-found, metadata, sitemap, and robots`
+- **Completed** — implementation notes:
+  - **Site URL**: `src/lib/site-url.ts` resolves the domain blocker via the
+    environment-based priority described in the updated §18 — no real
+    domain was assigned, so this was the only viable Batch 6 path.
+  - **Redirects**: all 16 entries implemented in `next.config.ts`'s
+    `redirects()`, `permanent: true` (HTTP 308), verified byte-for-byte
+    against §4.1 including all 3 fragment-bearing destinations.
+  - **Custom 404**: `app/not-found.page.tsx` (named with the temporary
+    `.page.tsx` suffix — Next's `not-found` convention is affected by the
+    `pageExtensions` workaround the same way `page`/`layout` are), noindex,
+    links to Home/Services/Projects/Government/Search.
+  - **Metadata**: `src/lib/metadata.ts` centralizes `metadataBase`, the
+    default description (independent/community-run, never implying
+    official City Government status), default OG/Twitter tags, and
+    `buildPageMetadata()` for canonical construction. All 38 static/
+    interactive routes carry page-specific `metadata` (or `generateMetadata`
+    where a same-named local `metadata`/data variable already existed).
+    Seven Batch 3 pages that were previously whole-page Client Components
+    (`GovernmentOffices`, `GovernmentOfficialLinks`,
+    `ProjectSpendingStatistics`, `PublicRecordsStatistics`,
+    `OfficialDocuments`, `FullDisclosure`, `CityFinances`) were split into a
+    thin Server Component `page.page.tsx` (metadata) + a sibling
+    `*.next.tsx` Client Component (unchanged content) — metadata cannot be
+    exported from a `'use client'` file. The 4 dynamic route families use
+    `generateMetadata()` reading the same civic accessors as their
+    `generateStaticParams()` — no hardcoded title table. Query-string pages
+    (9 nuqs pages) canonicalize to their own clean base path regardless of
+    the request's actual query string.
+  - **OG image**: `public/og-default.png`, 1200×630 PNG, composed from the
+    existing horizontal brand logo (`better-san-fernando-horizontal-blue-transparent.png`)
+    with independent-portal wording — generated once with `sharp` (already
+    present transitively via Next's own dependency tree, referenced by its
+    resolved `node_modules/.pnpm` path for this one-off script, never added
+    to `package.json`) and committed as a static asset; no dynamic
+    per-record OG generation.
+  - **Sitemap**: `app/sitemap.ts` lists the 28 Batch 3 + 10 Batch 5 literal
+    routes explicitly (not data records, so not a "hardcoded title table")
+    plus the 16 categories/177 services/324 projects/44 offices derived
+    live from civic accessors — 599 total, independently recomputed by
+    `scripts/smoke-batch6-seo.ts` rather than trusted as a constant. No
+    `lastModified` field (no verified per-page date exists).
+  - **Robots**: `app/robots.ts` allows all crawling and points at
+    `absoluteUrl('/sitemap.xml')`.
+  - **JSON-LD**: `src/lib/json-ld.tsx`'s `safeJsonLd()` escapes `<` to
+    `<` before serializing, preventing script-closing injection;
+    `WebSiteJsonLd` renders once in the root layout; `BreadcrumbListJsonLd`
+    is available for pages with a visible breadcrumb trail. Never types
+    BetterSanFernando as `GovernmentOrganization`.
+  - **pageExtensions workaround extended**: `sitemap.ts`/`robots.ts` needed
+    Next's standard (non-`.page.`) filenames for its metadata-route type
+    generation to recognize them correctly — adding bare `ts` to
+    `pageExtensions` (alongside the existing `page.tsx`/`page.ts`/etc.)
+    made that possible without reintroducing any `src/pages/*.tsx` file as
+    a route (none of them has a plain `.ts`, non-`.tsx`, extension).
+  - **Headers**: none added. No header requirement is documented anywhere
+    in this specification beyond the already-covered static-export
+    limitations (§3), so introducing one now would be scope not actually
+    approved here — deferred until a real requirement is documented.
 
 ### Batch 7 — Smoke-test adaptation and full route/data parity
 
@@ -868,17 +926,27 @@ Explicitly deferred, not part of this migration:
 
 ## 18. Remaining blockers
 
-1. **Production hosting details are still unconfirmed** — the real Vercel
-   project (if any already exists), the real production domain, and the real
-   `.env`/`VITE_WEBSITE_URL` value are not visible from this repository
-   checkout. **This does not block Batch 1** (foundation/config work needs no
-   domain) **or any batch through Batch 5** (no page needs `metadataBase`
-   until metadata is actually written). It **must be finalized before Batch 6
-   completes** (`generateMetadata`, `metadataBase`, and `app/sitemap.ts`'s
-   absolute URLs all depend on the real production domain) **and before
-   Batch 8** (the Vercel preview/production deployment itself needs the real
-   domain and `.env` values). The site is confirmed not yet deployed; Vercel
-   is the approved target once these values exist.
+1. **Resolved in Batch 6** — production hosting details (the real Vercel
+   project, production domain, and `.env` values) were still unconfirmed
+   entering Batch 6, since no custom domain exists yet and the site is not
+   yet deployed. Rather than blocking on that, Batch 6 implements a
+   centralized site-URL resolver (`src/lib/site-url.ts`) that every
+   canonical/OG/sitemap/robots/JSON-LD URL goes through, with this
+   priority: (1) `NEXT_PUBLIC_SITE_URL` when explicitly configured, (2)
+   `https://${VERCEL_PROJECT_PRODUCTION_URL}` when Vercel provides it, (3)
+   `http://localhost:3000` for non-Vercel local builds only.
+   `VERCEL_URL`/`VERCEL_BRANCH_URL` are never used (both identify a
+   specific, possibly-preview deployment, not the stable production
+   hostname); building with `VERCEL=1` set but neither of the first two
+   configured throws instead of silently emitting a localhost canonical.
+   This means `metadataBase`, `generateMetadata`, and `app/sitemap.ts`
+   already resolve correctly today with no real domain assigned yet, and
+   will resolve correctly again with zero code changes once a custom
+   domain exists — only `NEXT_PUBLIC_SITE_URL` (or Vercel's own project
+   settings) needs to change. **Batch 8 still must verify the actual
+   assigned Vercel production hostname** end-to-end against a live
+   deployment before any production cutover — this resolver removes the
+   _blocker_, not the verification step.
 2. **The exact implementation mechanism for the legacy-slug fallback branch
    of `/services/[category]` (§5)** — a single-route Server Component that
    checks category match first, then reads the synced `services.json`

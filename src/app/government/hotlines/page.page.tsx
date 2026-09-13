@@ -14,6 +14,17 @@ import {
   type HotlineContact,
 } from '../../../data/civic/governmentHotlines';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export function generateMetadata() {
+  return buildPageMetadata({
+    title: 'Government Hotlines',
+    description:
+      'Find the bounded set of institutional and emergency contact numbers currently reviewed and published by BetterSanFernando for the City of San Fernando, Pampanga.',
+    path: '/government/hotlines',
+  });
+}
+
 const groups = getGovernmentHotlineGroups();
 const metadata = getGovernmentHotlinesMetadata();
 const totalContacts = groups.reduce(

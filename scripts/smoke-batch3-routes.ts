@@ -116,15 +116,35 @@ assert.ok(
 );
 
 // 6. Migrated pages must use the shared civic-data modules, not copied data.
-const civicDataImportsByRoute: Record<string, RegExp> = {
-  '/': /from '\.\.\/data\/civic\/homeSummary'/,
-  '/government/offices': /from '\.\.\/\.\.\/\.\.\/data\/civic\/government'/,
-  '/statistics/projects':
-    /from '\.\.\/\.\.\/\.\.\/data\/civic\/projectStatistics'/,
-  '/transparency/finance': /from '\.\.\/\.\.\/\.\.\/data\/civic\/finance'/,
+// Some routes (Batch 6 split these to attach page-level metadata to a
+// Server Component) read civic data in a sibling *.next.tsx view instead of
+// the page.page.tsx route entry itself — both still count as "the shared
+// module", so the file checked is whichever one actually holds the import.
+const civicDataImportsByRoute: Record<
+  string,
+  { file: string; pattern: RegExp }
+> = {
+  '/': {
+    file: batch3Routes['/'],
+    pattern: /from '\.\.\/data\/civic\/homeSummary'/,
+  },
+  '/government/offices': {
+    file: 'src/app/government/offices/GovernmentOffices.next.tsx',
+    pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/government'/,
+  },
+  '/statistics/projects': {
+    file: batch3Routes['/statistics/projects'],
+    pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/projectStatistics'/,
+  },
+  '/transparency/finance': {
+    file: 'src/app/transparency/finance/CityFinances.next.tsx',
+    pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/finance'/,
+  },
 };
-for (const [route, pattern] of Object.entries(civicDataImportsByRoute)) {
-  const source = readFileSync(batch3Routes[route], 'utf8');
+for (const [route, { file, pattern }] of Object.entries(
+  civicDataImportsByRoute
+)) {
+  const source = readFileSync(file, 'utf8');
   assert.match(
     source,
     pattern,

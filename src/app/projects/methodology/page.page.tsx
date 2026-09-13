@@ -11,6 +11,15 @@ import {
 import { isPrimaryOfficialSource } from '../../../data/civic/sources';
 import { titleCaseEnum } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Project Methodology',
+  description:
+    'How BetterSanFernando collects, connects, verifies, and presents its bounded public project dataset.',
+  path: '/projects/methodology',
+});
+
 const SECTION_LINKS = [
   ['how-to-read', 'How to read the data'],
   ['evidence-model', 'Sources and evidence'],

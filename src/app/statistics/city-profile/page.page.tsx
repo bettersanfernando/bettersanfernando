@@ -19,6 +19,15 @@ import { getCityOfficesMetadata } from '../../../data/civic/government';
 import { aggregatePopulationStatistics } from '../../../data/civic/populationStatistics';
 import { formatIsoDate } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'City profile: San Fernando, Pampanga',
+  description:
+    'A compact, source-aware profile of the City of San Fernando in Pampanga, Philippines, including its PSA 2024 population baseline, barangays, boundary coverage, and published office directory.',
+  path: '/statistics/city-profile',
+});
+
 const numberFormatter = new Intl.NumberFormat('en-PH');
 const populationSource = getCityDemographicsSource();
 const geography = getGeographyMetadata();

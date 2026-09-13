@@ -13,6 +13,15 @@ import {
 } from 'lucide-react';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.next';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'About BetterSanFernando',
+  description:
+    'Learn what BetterSanFernando is, why the independent civic transparency project exists, and how it publishes sourced public information about the City of San Fernando, Pampanga.',
+  path: '/about',
+});
+
 const scopeAreas = [
   [
     'Projects and procurement',

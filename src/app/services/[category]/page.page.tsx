@@ -6,6 +6,8 @@ import {
   getServices,
   type PublishedServiceCategory,
 } from '../../../data/civic/services';
+import { categories } from '../categories';
+import { buildPageMetadata } from '../../../lib/metadata';
 import ServiceCategoryView from '../service-category-view.next';
 
 // Single dynamic segment handling BOTH real categories and legacy one-
@@ -25,6 +27,25 @@ function isValidCategory(value: string): value is PublishedServiceCategory {
 
 export function generateStaticParams() {
   return [...validCategories].map(category => ({ category }));
+}
+
+// Only the 16 real-category case gets real metadata — a legacy-slug or
+// unknown segment redirects/404s before this would ever matter for a real
+// response, and notFound()'s own metadata (noindex) takes over instead.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const { category: segment } = await params;
+  if (!isValidCategory(segment)) return {};
+
+  const [name, , description] = categories.find(item => item[1] === segment)!;
+  return buildPageMetadata({
+    title: name,
+    description: `Browse ${description.toLowerCase()} published by BetterSanFernando.`,
+    path: `/services/${segment}`,
+  });
 }
 
 export default async function ServiceCategoryOrLegacySlugPage({

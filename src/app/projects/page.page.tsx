@@ -1,5 +1,14 @@
 import ProjectsView from './Projects.next';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'City Projects',
+  description:
+    'Infrastructure and procurement projects of the City of San Fernando, Pampanga, with sourced evidence for every fact.',
+  path: '/projects',
+});
+
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
 // statically generated — `force-dynamic` opts out of static generation

@@ -10,6 +10,15 @@ import Breadcrumbs from '../../components/ui/Breadcrumbs.next';
 import { getLegislationSummary } from '../../data/civic/legislationSummary';
 import type { LegislationPreviewRecord } from '../../data/civic/legislationSummary';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Legislation',
+  description:
+    'Explore the bounded Executive Order and ordinance collections currently verified and published by BetterSanFernando.',
+  path: '/legislation',
+});
+
 const summary = getLegislationSummary();
 
 function formatDate(value: string) {

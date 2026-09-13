@@ -12,6 +12,15 @@ import {
 import Breadcrumbs from '../../components/ui/Breadcrumbs.next';
 import { getGovernmentSummary } from '../../data/civic/governmentSummary';
 
+import { buildPageMetadata } from '../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Government',
+  description:
+    'Find currently published government office, contact, legislation, statistics, and transparency information for the City of San Fernando, Pampanga.',
+  path: '/government',
+});
+
 const summary = getGovernmentSummary();
 
 const destinations = [

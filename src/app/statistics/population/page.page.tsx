@@ -14,6 +14,15 @@ import {
 import { aggregatePopulationStatistics } from '../../../data/civic/populationStatistics';
 import { formatIsoDate } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export const metadata = buildPageMetadata({
+  title: 'Population statistics',
+  description:
+    'Compare the PSA 2024 POPCEN population of San Fernando, Pampanga across all 35 barangays, with exact values and source context.',
+  path: '/statistics/population',
+});
+
 const numberFormatter = new Intl.NumberFormat('en-PH');
 const percentFormatter = new Intl.NumberFormat('en-PH', {
   style: 'percent',

@@ -17,6 +17,7 @@ import {
   getServices,
   type Service,
 } from '../../../../data/civic/services';
+import { buildPageMetadata } from '../../../../lib/metadata';
 
 // Canonical service-detail route. Ported from src/pages/ServiceDetail.tsx:
 // identical content/markup; react-router's useParams()/Navigate/Link
@@ -184,6 +185,27 @@ export function generateStaticParams() {
     category: getServiceCategory(service),
     serviceSlug: service.slug,
   }));
+}
+
+// Unknown/mismatched slugs 404 or redirect in the page component itself;
+// generateMetadata only needs to handle the one real-record case, since
+// neither of those other outcomes ever serves this metadata to a client.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string; serviceSlug: string }>;
+}) {
+  const { category, serviceSlug } = await params;
+  const service = getServiceBySlug(serviceSlug);
+  if (!service || getServiceCategory(service) !== category) {
+    return {};
+  }
+
+  return buildPageMetadata({
+    title: service.title,
+    description: service.description,
+    path: getServiceHref(service),
+  });
 }
 
 export default async function ServiceDetailPage({

@@ -8,6 +8,17 @@ import {
 } from '../../../data/civic/governmentStructureSummary';
 import { titleCaseEnum } from '../../../lib/utils';
 
+import { buildPageMetadata } from '../../../lib/metadata';
+
+export function generateMetadata() {
+  return buildPageMetadata({
+    title: 'Government Statistics',
+    description:
+      'A verified, partial summary of City Government of San Fernando organizational entities, official directory matches, and explicitly verified relationships — not a complete organizational chart.',
+    path: '/statistics/government',
+  });
+}
+
 const numberFormatter = new Intl.NumberFormat('en-PH');
 
 const metadata = getGovernmentStructureMetadata();
