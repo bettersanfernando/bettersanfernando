@@ -1,15 +1,33 @@
-import { useMemo } from 'react';
-import { ExternalLink, Globe } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import {
+  Cloud,
+  CloudLightning,
+  CloudRain,
+  ExternalLink,
+  Globe,
+  Sun,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import {
   civicUtilityBar,
   formatPhilippineTime,
+  SAN_FERNANDO_COORDINATES,
 } from '../../data/headerUtility';
 import { SUPPORTED_LANGUAGES } from '../../i18n/languages';
 import type { LanguageType } from '../../types';
 
 const focusStyles =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2';
+
+// A few visual buckets, not an exhaustive map of Open-Meteo's WMO codes.
+function weatherIconFor(code: number) {
+  if (code >= 95)
+    return <CloudLightning className="h-3.5 w-3.5" aria-hidden="true" />;
+  if (code >= 51)
+    return <CloudRain className="h-3.5 w-3.5" aria-hidden="true" />;
+  if (code <= 1) return <Sun className="h-3.5 w-3.5" aria-hidden="true" />;
+  return <Cloud className="h-3.5 w-3.5" aria-hidden="true" />;
+}
 
 export default function CivicUtilityBar({
   currentLanguage,
@@ -21,6 +39,38 @@ export default function CivicUtilityBar({
   const { t } = useTranslation('common');
   // Computed once per mount; a live-ticking clock isn't worth the timer for a date/time strip.
   const phtTime = useMemo(() => formatPhilippineTime(new Date()), []);
+
+  const [weather, setWeather] = useState<{
+    temperature: number;
+    code: number;
+  } | null>(null);
+  const [usdToPhp, setUsdToPhp] = useState<number | null>(null);
+
+  useEffect(() => {
+    const { latitude, longitude } = SAN_FERNANDO_COORDINATES;
+    fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code`
+    )
+      .then(res => (res.ok ? res.json() : Promise.reject()))
+      .then(data =>
+        setWeather({
+          temperature: data.current.temperature_2m,
+          code: data.current.weather_code,
+        })
+      )
+      .catch(() => {
+        // Weather failure must never break the header; keep the "—" fallback.
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('https://open.er-api.com/v6/latest/USD')
+      .then(res => (res.ok ? res.json() : Promise.reject()))
+      .then(data => setUsdToPhp(data.rates.PHP))
+      .catch(() => {
+        // Exchange-rate failure must never break the header; keep the "—" fallback.
+      });
+  }, []);
 
   return (
     <div className="border-b border-gray-200 bg-gray-50">
@@ -45,11 +95,20 @@ export default function CivicUtilityBar({
         </div>
 
         <div className="flex shrink-0 items-center gap-3 text-gray-600">
-          <span className="hidden md:inline">
-            {t(civicUtilityBar.currencyLabelKey)}
+          <span className="hidden whitespace-nowrap md:inline">
+            {usdToPhp !== null
+              ? `USD/PHP ₱${usdToPhp.toFixed(2)}`
+              : t(civicUtilityBar.currencyLabelKey)}
           </span>
-          <span className="hidden lg:inline">
-            {t(civicUtilityBar.weatherLabelKey)}
+          <span className="hidden items-center gap-1 whitespace-nowrap lg:inline-flex">
+            {weather ? (
+              <>
+                {weatherIconFor(weather.code)}
+                {Math.round(weather.temperature)}°C
+              </>
+            ) : (
+              t(civicUtilityBar.weatherLabelKey)
+            )}
           </span>
           <span className="hidden whitespace-nowrap sm:inline">{phtTime}</span>
 
