@@ -1,6 +1,6 @@
 // Service-category tile presentation (display name, slug, description,
 // publication status), shared by the /services hub and the
-// [category]/service-category-view.next.tsx detail view so the two never
+// [category]/service-category-view.tsx detail view so the two never
 // drift out of sync. Ported verbatim from src/pages/Services.tsx.
 export const categories = [
   [

@@ -1,11 +1,15 @@
+'use client';
+
 import { TriangleAlert } from 'lucide-react';
-import { Link } from 'react-router';
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { emergencyStrip } from '../../data/headerUtility';
 
 const focusStyles =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red-900';
 
+// Next.js port of EmergencyStrip.tsx — identical markup, next/link instead
+// of react-router's Link. See ../../data/headerUtility for the shared copy.
 export default function EmergencyStrip() {
   const { t } = useTranslation('common');
 
@@ -17,7 +21,7 @@ export default function EmergencyStrip() {
           <span className="truncate">{t(emergencyStrip.titleKey)}</span>
         </span>
         <Link
-          to={emergencyStrip.href}
+          href={emergencyStrip.href}
           className={`shrink-0 whitespace-nowrap font-medium text-white/90 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white ${focusStyles}`}
         >
           {t(emergencyStrip.ctaKey)} →

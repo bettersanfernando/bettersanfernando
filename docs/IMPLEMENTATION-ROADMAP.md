@@ -10,10 +10,12 @@ records into public content.
 Migration Batches 1–7 are complete on `feat/nextjs-migration`. Batch 7 proves
 parity across 38 literal routes, 561 generated routes, 599 unique canonical
 URLs, 16 permanent aliases, the complete smoke suite, and the protected data
-boundary. Batch 8 remains: deploy a Vercel preview, verify the assigned stable
-production hostname and platform routing, exercise the three fragment aliases
-in a real browser, document rollback, and only then retire the legacy
-Vite/React Router fallback and temporary migration file conventions.
+boundary. The legacy Vite/React Router application and the temporary
+migration file-naming conventions (`*.page.tsx`, `*.next.tsx`, the
+`pageExtensions` workaround) have since been retired — Next.js App Router is
+the sole implementation. Batch 8 remains: deploy a Vercel preview, verify the
+assigned stable production hostname and platform routing, exercise the three
+fragment aliases in a real browser, and document rollback.
 
 ## Phase 0 — Architecture / legacy alignment
 

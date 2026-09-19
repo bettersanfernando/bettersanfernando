@@ -1,28 +1,19 @@
 #!/usr/bin/env -S node --experimental-strip-types
-// Batch 2 focused coverage for the Next.js App Router shell. Narrow by
-// design — full smoke-test adaptation is Batch 7's job. This only checks
-// what's new in this batch: the root layout's composition, that the Next
-// navigation port uses Next APIs (not react-router), and that it still
-// consumes the one shared navigation.ts source (already exhaustively
-// verified by smoke-navigation.ts, so not re-checked here).
+// Coverage for the Next.js App Router shell: the root layout's composition,
+// that navigation uses Next APIs, and that i18n bootstraps correctly for
+// server render + first client hydration.
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 
-const layoutSource = readFileSync('src/app/layout.page.tsx', 'utf8');
+const layoutSource = readFileSync('src/app/layout.tsx', 'utf8');
 const providersSource = readFileSync('src/app/providers.tsx', 'utf8');
-const i18nNextSource = readFileSync('src/i18n.next.ts', 'utf8');
-const navbarNextSource = readFileSync(
-  'src/components/layout/Navbar.next.tsx',
-  'utf8'
-);
-const footerNextSource = readFileSync(
-  'src/components/layout/Footer.next.tsx',
-  'utf8'
-);
-const scrollToTopNextSource = readFileSync(
-  'src/components/ui/ScrollToTop.next.tsx',
+const i18nSource = readFileSync('src/i18n.ts', 'utf8');
+const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
+const footerSource = readFileSync('src/components/layout/Footer.tsx', 'utf8');
+const scrollToTopSource = readFileSync(
+  'src/components/ui/ScrollToTop.tsx',
   'utf8'
 );
 
@@ -30,7 +21,7 @@ const scrollToTopNextSource = readFileSync(
 // client boundary is pushed down into Providers instead.
 assert.ok(
   !/^\s*['"]use client['"]/m.test(layoutSource),
-  'src/app/layout.page.tsx must not be a Client Component'
+  'src/app/layout.tsx must not be a Client Component'
 );
 assert.match(
   providersSource,
@@ -38,8 +29,8 @@ assert.match(
   'src/app/providers.tsx must be the Client Component boundary'
 );
 
-// The root layout renders the same globally-present shell components as
-// src/App.tsx, in the same order: Navbar, ScrollToTop, {children}, Footer.
+// The root layout renders the shell components in order: Navbar,
+// ScrollToTop, {children}, Footer.
 assert.match(
   layoutSource,
   /<Navbar\s*\/>[\s\S]*<ScrollToTop\s*\/>[\s\S]*\{children\}[\s\S]*<Footer\s*\/>/,
@@ -47,26 +38,25 @@ assert.match(
 );
 assert.match(
   layoutSource,
-  /from '\.\.\/components\/layout\/Navbar\.next'/,
-  'root layout must use the Next-ported Navbar'
+  /from '\.\.\/components\/layout\/Navbar'/,
+  'root layout must use Navbar'
 );
 assert.match(
   layoutSource,
-  /from '\.\.\/components\/layout\/Footer\.next'/,
-  'root layout must use the Next-ported Footer'
+  /from '\.\.\/components\/layout\/Footer'/,
+  'root layout must use Footer'
 );
 assert.match(
   layoutSource,
-  /from '\.\.\/components\/ui\/ScrollToTop\.next'/,
-  'root layout must use the Next-ported ScrollToTop'
+  /from '\.\.\/components\/ui\/ScrollToTop'/,
+  'root layout must use ScrollToTop'
 );
 
-// Next-facing shell components must use next/link + next/navigation, never
-// react-router (that stays exclusive to the legacy Vite build).
+// Shell components must use next/link + next/navigation, never react-router.
 for (const [name, source] of [
-  ['Navbar.next.tsx', navbarNextSource],
-  ['Footer.next.tsx', footerNextSource],
-  ['ScrollToTop.next.tsx', scrollToTopNextSource],
+  ['Navbar.tsx', navbarSource],
+  ['Footer.tsx', footerSource],
+  ['ScrollToTop.tsx', scrollToTopSource],
 ] as const) {
   assert.ok(
     !/from ['"]react-router['"]/.test(source),
@@ -74,49 +64,29 @@ for (const [name, source] of [
   );
 }
 assert.match(
-  navbarNextSource,
+  navbarSource,
   /from 'next\/link'/,
-  'Navbar.next.tsx must use next/link'
+  'Navbar.tsx must use next/link'
 );
 assert.match(
-  navbarNextSource,
+  navbarSource,
   /from 'next\/navigation'/,
-  'Navbar.next.tsx must use next/navigation'
+  'Navbar.tsx must use next/navigation'
 );
 assert.match(
-  footerNextSource,
+  footerSource,
   /from 'next\/link'/,
-  'Footer.next.tsx must use next/link'
+  'Footer.tsx must use next/link'
 );
 assert.match(
-  scrollToTopNextSource,
+  scrollToTopSource,
   /from 'next\/navigation'/,
-  'ScrollToTop.next.tsx must use next/navigation'
+  'ScrollToTop.tsx must use next/navigation'
 );
-
-// Both the Vite and Next navbars render from the same navigation.ts source
-// — no independent/duplicated navigation configuration.
-for (const [name, source] of [
-  ['Navbar.tsx', readFileSync('src/components/layout/Navbar.tsx', 'utf8')],
-  ['Navbar.next.tsx', navbarNextSource],
-] as const) {
-  assert.match(
-    source,
-    /from '\.\.\/\.\.\/data\/navigation'/,
-    `${name} must import navigation data from ../../data/navigation`
-  );
-}
-
-// Ordinary components must not spread the temporary .page.tsx workaround —
-// only Next's special-file conventions (layout, page, not-found) may use it
-// at the src/app root.
-const appDir = 'src/app';
-const appFiles = readdirSync(appDir);
-const pageExtensionFiles = appFiles.filter(file => file.endsWith('.page.tsx'));
-assert.deepEqual(
-  pageExtensionFiles.sort(),
-  ['layout.page.tsx', 'not-found.page.tsx', 'page.page.tsx'],
-  'only Next.js special-convention files may use the temporary .page.tsx workaround (see next.config.ts pageExtensions)'
+assert.match(
+  navbarSource,
+  /from '\.\.\/\.\.\/data\/navigation'/,
+  'Navbar.tsx must import navigation data from ../../data/navigation'
 );
 
 // Next's i18n bootstrap must supply real, non-empty English resources
@@ -133,31 +103,29 @@ assert.ok(
   'public/locales/en/common.json must contain real, non-empty translations'
 );
 assert.match(
-  i18nNextSource,
+  i18nSource,
   /import enCommon from '\.\.\/public\/locales\/en\/common\.json'/,
-  'src/i18n.next.ts must import the real public/locales/en/common.json file, not duplicate its text'
+  'src/i18n.ts must import the real public/locales/en/common.json file, not duplicate its text'
 );
 assert.match(
-  i18nNextSource,
+  i18nSource,
   /resources:\s*\{\s*en:\s*\{\s*common:\s*enCommon\s*\}\s*\}/,
-  'src/i18n.next.ts must initialize with the real imported English resource bundle'
+  'src/i18n.ts must initialize with the real imported English resource bundle'
 );
 assert.ok(
-  !/resources:\s*\{\s*en:\s*\{\s*common:\s*\{\s*\}\s*\}\s*\}/.test(
-    i18nNextSource
-  ),
-  'src/i18n.next.ts must not initialize with an empty English resource bundle'
+  !/resources:\s*\{\s*en:\s*\{\s*common:\s*\{\s*\}\s*\}\s*\}/.test(i18nSource),
+  'src/i18n.ts must not initialize with an empty English resource bundle'
 );
 assert.match(
-  i18nNextSource,
+  i18nSource,
   /^\s*lng: 'en',/m,
-  'src/i18n.next.ts must set an unconditional initial language of "en" — identical on the server and the first client render, before any browser-only detection can run'
+  'src/i18n.ts must set an unconditional initial language of "en" — identical on the server and the first client render, before any browser-only detection can run'
 );
 assert.ok(
   !/^\s*import .* from ['"]i18next-browser-languagedetector['"]/m.test(
-    i18nNextSource
+    i18nSource
   ),
-  'src/i18n.next.ts must not import i18next-browser-languagedetector — attaching it would resolve navigator/localStorage synchronously during init, making the first client render disagree with the always-English server render'
+  'src/i18n.ts must not import i18next-browser-languagedetector — attaching it would resolve navigator/localStorage synchronously during init, making the first client render disagree with the always-English server render'
 );
 
 // Browser-only language detection/persistence must be deferred to a
@@ -175,9 +143,9 @@ assert.match(
 
 // suppressHydrationWarning must never be used to paper over a mismatch.
 for (const [name, source] of [
-  ['src/app/layout.page.tsx', layoutSource],
+  ['src/app/layout.tsx', layoutSource],
   ['src/app/providers.tsx', providersSource],
-  ['src/i18n.next.ts', i18nNextSource],
+  ['src/i18n.ts', i18nSource],
 ] as const) {
   assert.ok(
     !/suppressHydrationWarning/.test(source),
@@ -195,5 +163,5 @@ assert.equal(
 assert.equal(mainNavigation.length, 7, 'expected 7 top-level entries');
 
 console.log(
-  `Next shell smoke passed: layout stays a Server Component, ${mainNavigation.length} top-level entries wired through Navbar.next.tsx via next/link + next/navigation, i18n bootstraps with real bundled English resources (no suppressHydrationWarning), 0 planned routes.`
+  `Next shell smoke passed: layout stays a Server Component, ${mainNavigation.length} top-level entries wired through Navbar.tsx via next/link + next/navigation, i18n bootstraps with real bundled English resources (no suppressHydrationWarning), 0 planned routes.`
 );

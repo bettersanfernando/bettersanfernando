@@ -22,10 +22,10 @@ import {
 } from '../src/data/civic/government.ts';
 
 const routeFiles = {
-  categoryDispatcher: 'src/app/services/[category]/page.page.tsx',
-  serviceDetail: 'src/app/services/[category]/[serviceSlug]/page.page.tsx',
-  projectDetail: 'src/app/projects/[projectId]/page.page.tsx',
-  officeDetail: 'src/app/government/offices/[officeId]/page.page.tsx',
+  categoryDispatcher: 'src/app/services/[category]/page.tsx',
+  serviceDetail: 'src/app/services/[category]/[serviceSlug]/page.tsx',
+  projectDetail: 'src/app/projects/[projectId]/page.tsx',
+  officeDetail: 'src/app/government/offices/[officeId]/page.tsx',
 };
 
 // 1. All four required dynamic route files exist.

@@ -1,8 +1,14 @@
 # Next.js Migration Specification — BetterSanFernando
 
-Status: **BATCH 7 COMPLETE.** Batches 1–7 are implemented on
-`feat/nextjs-migration`; Batch 8 preview deployment and production readiness
-remain pending. The data repository and civic records are unchanged.
+Status: **LEGACY RETIREMENT COMPLETE.** Batches 1–7 are implemented on
+`feat/nextjs-migration`, and the legacy Vite/React Router application, the
+temporary `*.page.tsx`/`*.next.tsx` migration file-naming conventions, and the
+`pageExtensions` workaround have all been retired — Next.js App Router is now
+the sole application. Batch 8's remaining scope (an actual Vercel preview
+deployment, verification against the real production hostname/routing layer,
+and rollback documentation) has **not** been performed as part of this
+cleanup and remains outstanding. The data repository and civic records are
+unchanged.
 
 ---
 
@@ -831,10 +837,12 @@ committable unit. No batch includes visual-redesign changes.
     complete initial result/filter HTML depends on request query parameters;
     removing `force-dynamic` would restore the previously observed static
     Suspense fallback regression and break URL-state HTML parity.
-  - **Retained for Batch 8**: Vite, React Router, `src/pages/**`, temporary
-    `*.next.tsx` ports, the `pageExtensions` workaround, and `build:legacy`.
-    Batch 7 does not authorize their removal; the fallback remains available
-    through preview verification and production cutover.
+  - **Retained through Batch 7, since removed**: Vite, React Router,
+    `src/pages/**`, temporary `*.next.tsx`/`*.page.tsx` naming, the
+    `pageExtensions` workaround, and `build:legacy`/`dev:legacy` were kept as
+    a rollback fallback through Batch 7. A subsequent legacy-retirement
+    cleanup (post-Batch-7) removed all of them once live verification passed;
+    see the status line above and §12's Batch 8 note.
 
 ### Batch 8 — Vercel preview deployment and production readiness
 
@@ -842,7 +850,7 @@ committable unit. No batch includes visual-redesign changes.
   redirects/404s/metadata against the **real** Vercel routing layer (not just
   local preview); confirm the hosting question is fully resolved (real
   domain, real `.env`) before any production cutover; document the rollback
-  step (revert the production alias to the current Vite deployment).
+  step.
 - **Dependencies**: Batch 7 passing completely.
 - **Risk**: medium (production-only discrepancies between local preview and
   Vercel's actual routing layer are possible and must be checked explicitly).
@@ -851,6 +859,33 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: any preview-only discrepancy — resolve before
   requesting a production cutover; do not cut over with open discrepancies.
 - **Suggested commit message**: `chore(migration): verify Vercel preview deployment and rollback plan`
+- **Legacy retirement completed ahead of preview verification** — implementation notes:
+  - Once local (non-Vercel) verification of the Next.js application passed,
+    a separate cleanup pass retired the legacy Vite/React Router application
+    entirely (`src/main.tsx`, `src/App.tsx`, `src/pages/**`, `vite.config.ts`,
+    root `index.html`, Vite-only tsconfig, `dev:legacy`/`build:legacy`, and
+    the `vite`/`@vitejs/plugin-react`/`@tailwindcss/vite`/`react-router`/
+    `react-helmet-async` dependencies), renamed every temporary
+    `*.page.tsx`/`*.next.tsx` file to its clean final name, and removed the
+    `pageExtensions` workaround from `next.config.ts` now that `src/pages/`
+    no longer exists.
+  - A handful of components that only ever existed to serve the two routes
+    already decided as **not ported** in §6 (`Document.tsx`'s `/:documentSlug`
+    and `/:lang/:documentSlug`) and the legacy `Home.tsx` hero section were
+    found to be fully orphaned (zero importers) once `src/pages/` was
+    removed, and were deleted as dead code: `src/components/SEO.tsx`,
+    `src/components/home/{GovernmentActivitySection,ServicesSection}.tsx`,
+    `src/components/sections/Hero.tsx`, and the markdown/typography-theme
+    subsystem (`src/lib/markdownLoader.ts`, `src/lib/markdownComponents.tsx`,
+    `src/lib/typographyThemes.ts`, `src/components/ui/ThemeSelector.tsx`).
+    The `react-markdown`/`remark-gfm`/`i18next-browser-languagedetector`
+    dependencies were removed as a direct consequence (nothing else imported
+    them). `meilisearch` (npm package and `src/lib/meilisearch.ts`) was left
+    untouched per this document's own §16 deferral.
+  - **Not done in this pass**: an actual Vercel preview deployment and
+    verification against Vercel's real routing layer (redirects, 404s,
+    metadata) — that remains genuine outstanding Batch 8 scope, performed
+    only via local `next build`/`next start` HTTP checks instead.
 
 Batches 9 (later visual redesign) and 10 (final SEO/performance
 optimization) from the original audit remain explicitly **out of scope** for

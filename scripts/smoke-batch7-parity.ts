@@ -56,12 +56,12 @@ assert.equal(plannedPages.length, 0);
 const staticPaths = (readdirSync('src/app', { recursive: true }) as string[])
   .filter(
     file =>
-      file.endsWith('page.page.tsx') &&
+      file.endsWith('page.tsx') &&
       !file.includes('[') &&
-      !file.endsWith('not-found.page.tsx')
+      !file.endsWith('not-found.tsx')
   )
   .map(file => {
-    const route = file.replace(/\\/g, '/').replace(/\/?page\.page\.tsx$/, '');
+    const route = file.replace(/\\/g, '/').replace(/\/?page\.tsx$/, '');
     return route ? `/${route}` : '/';
   });
 const dynamicPaths = [
@@ -90,21 +90,18 @@ const queryRoutes = [
   '/government/barangay-contacts',
 ];
 for (const route of queryRoutes) {
-  const source = readFileSync(`src/app${route}/page.page.tsx`, 'utf8');
+  const source = readFileSync(`src/app${route}/page.tsx`, 'utf8');
   assert.match(source, /export const dynamic = ['"]force-dynamic['"]/);
   assert.match(source, /query string|search parameters/i);
 }
 
 const breadcrumbsSource = readFileSync(
-  'src/components/ui/Breadcrumbs.next.tsx',
+  'src/components/ui/Breadcrumbs.tsx',
   'utf8'
 );
 assert.match(breadcrumbsSource, /<BreadcrumbListJsonLd/);
 
-const navbarSource = readFileSync(
-  'src/components/layout/Navbar.next.tsx',
-  'utf8'
-);
+const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
 for (const behavior of [
   /setIsMobileOpen\(open => !open\)/,
   /document\.addEventListener\('pointerdown'/,
@@ -115,7 +112,7 @@ for (const behavior of [
   assert.match(navbarSource, behavior);
 }
 const serviceCategorySource = readFileSync(
-  'src/app/services/service-category-view.next.tsx',
+  'src/app/services/service-category-view.tsx',
   'utf8'
 );
 assert.match(serviceCategorySource, /categoryServices\.filter/);

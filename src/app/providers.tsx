@@ -3,7 +3,7 @@
 import { type ReactNode, useEffect } from 'react';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '../i18n.next';
+import i18n from '../i18n';
 import { SUPPORTED_LANGUAGES } from '../i18n/languages';
 import type { LanguageType } from '../types';
 
@@ -46,7 +46,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     // Browser-only language detection/persistence — deliberately run here,
     // in an effect, so it only ever applies after the first client render
     // has already matched the server's English HTML. Applying it earlier
-    // (e.g. during i18n.next.ts's module-level init) is exactly what would
+    // (e.g. during i18n.ts's module-level init) is exactly what would
     // make that first client render disagree with the server.
     const detected = detectSupportedLanguage();
     if (detected && detected !== i18n.language) {

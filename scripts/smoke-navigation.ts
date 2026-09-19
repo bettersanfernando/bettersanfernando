@@ -397,10 +397,7 @@ assert.ok(
   'Transparency may still intentionally cross-link Project Statistics — uniqueness is per-menu, not site-wide'
 );
 
-const navbarSource = readFileSync(
-  'src/components/layout/Navbar.next.tsx',
-  'utf8'
-);
+const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
 assert.match(
   navbarSource,
   /item\.sections!\.map\(section =>/,

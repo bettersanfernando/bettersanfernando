@@ -5,7 +5,7 @@ import nextConfig from '../next.config.ts';
 
 export function readNextRoute(route: string): string {
   const directory = join('src/app', route === '/' ? '' : route.slice(1));
-  const page = join(directory, 'page.page.tsx');
+  const page = join(directory, 'page.tsx');
 
   assert.ok(existsSync(page), `${route} must be an App Router page`);
 

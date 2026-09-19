@@ -1,3 +1,5 @@
+'use client';
+
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import {
   Accessibility,
@@ -36,7 +38,8 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import {
   getActiveNavigationId,
@@ -54,14 +57,15 @@ import type {
 import EmergencyStrip from './EmergencyStrip';
 import CivicUtilityBar from './CivicUtilityBar';
 
+// Next.js port of Navbar.tsx. Consumes the same ../../data/navigation
+// source as the Vite version (no navigation data is duplicated); only the
+// router bindings differ (next/link + next/navigation in place of
+// react-router). Keep both files in sync until src/pages/ + the Vite build
+// are retired and this becomes the only Navbar.
+
 const BRAND_LOGO =
   '/assets/brand/logos/horizontal/better-san-fernando-horizontal-blue-transparent.svg';
 const DESKTOP_CLOSE_DELAY_MS = 160;
-// Static Tailwind class per column count (Tailwind's JIT scanner needs the
-// literal class strings present in source, not a template-built name like
-// `grid-cols-${n}`) — keeps every mega menu's column count matched to its
-// actual balanced section count instead of a fixed 4, which is what left a
-// phantom empty column for any menu with fewer than 4 groups.
 const DESKTOP_MEGA_MENU_GRID_COLS: Record<number, string> = {
   3: 'grid-cols-3',
   4: 'grid-cols-4',
@@ -106,9 +110,6 @@ const destinationIcons: Record<NavigationIcon, LucideIcon> = {
 function BrandLogo() {
   const { t } = useTranslation('common');
 
-  // The horizontal lockup's own artboard has generous padding around the
-  // mark, so sizing by height (not width) with intrinsic aspect ratio is
-  // what keeps the full symbol and wordmark visible without cropping.
   return (
     <img
       src={BRAND_LOGO}
@@ -163,7 +164,7 @@ function DestinationLink({
   }
 
   return (
-    <Link to={destination.href} className={className} onClick={onNavigate}>
+    <Link href={destination.href} className={className} onClick={onNavigate}>
       {content}
     </Link>
   );
@@ -181,10 +182,10 @@ export default function Navbar() {
   const desktopTriggerRefs = useRef(new Map<NavigationId, HTMLButtonElement>());
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suppressFocusOpenRef = useRef<NavigationId | null>(null);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname() ?? '/';
+  const router = useRouter();
   const { t, i18n } = useTranslation('common');
-  const activeNavigationId = getActiveNavigationId(location.pathname);
+  const activeNavigationId = getActiveNavigationId(pathname);
   const currentLanguage = SUPPORTED_LANGUAGES.some(
     language => language.code === i18n.resolvedLanguage
   )
@@ -256,7 +257,7 @@ export default function Navbar() {
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    navigate(getSearchHref(String(formData.get('q') ?? '')));
+    router.push(getSearchHref(String(formData.get('q') ?? '')));
     closeNavigation();
   };
 
@@ -277,7 +278,7 @@ export default function Navbar() {
       >
         <div className="container mx-auto flex min-h-20 items-center gap-4 px-4 py-2">
           <Link
-            to="/"
+            href="/"
             onClick={closeNavigation}
             className={`flex shrink-0 items-center rounded-md ${focusStyles}`}
           >
@@ -313,7 +314,7 @@ export default function Navbar() {
                   }}
                 >
                   <Link
-                    to={item.href}
+                    href={item.href}
                     onClick={closeNavigation}
                     aria-current={isActive ? 'page' : undefined}
                     className={`border-b-2 px-2 py-2.5 text-sm font-medium whitespace-nowrap transition-colors ${focusStyles} ${
@@ -357,7 +358,7 @@ export default function Navbar() {
             })}
 
             <Link
-              to={searchNavigation.href}
+              href={searchNavigation.href}
               onClick={closeNavigation}
               aria-label={t(searchNavigation.labelKey)}
               className={`ml-1 hidden h-10 w-10 items-center justify-center rounded-lg text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-700 xl:flex ${focusStyles}`}
@@ -462,7 +463,7 @@ export default function Navbar() {
                 >
                   <div className="flex min-h-11 items-center gap-1">
                     <Link
-                      to={item.href}
+                      href={item.href}
                       onClick={closeNavigation}
                       aria-current={isActive ? 'page' : undefined}
                       className={`flex-1 rounded-md px-3 py-2.5 text-base font-medium transition-colors ${focusStyles} ${

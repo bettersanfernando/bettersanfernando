@@ -10,39 +10,38 @@
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
-// route -> [App Router path segments under src/app, without page.page.tsx]
+// route -> [App Router path segments under src/app, without page.tsx]
 const batch3Routes: Record<string, string> = {
-  '/': 'src/app/page.page.tsx',
-  '/about': 'src/app/about/page.page.tsx',
-  '/services': 'src/app/services/page.page.tsx',
-  '/government': 'src/app/government/page.page.tsx',
-  '/government/offices': 'src/app/government/offices/page.page.tsx',
-  '/government/contact': 'src/app/government/contact/page.page.tsx',
-  '/government/hotlines': 'src/app/government/hotlines/page.page.tsx',
-  '/government/links': 'src/app/government/links/page.page.tsx',
-  '/procurement': 'src/app/procurement/page.page.tsx',
-  '/projects/methodology': 'src/app/projects/methodology/page.page.tsx',
-  '/statistics': 'src/app/statistics/page.page.tsx',
-  '/statistics/projects': 'src/app/statistics/projects/page.page.tsx',
-  '/statistics/procurement': 'src/app/statistics/procurement/page.page.tsx',
+  '/': 'src/app/page.tsx',
+  '/about': 'src/app/about/page.tsx',
+  '/services': 'src/app/services/page.tsx',
+  '/government': 'src/app/government/page.tsx',
+  '/government/offices': 'src/app/government/offices/page.tsx',
+  '/government/contact': 'src/app/government/contact/page.tsx',
+  '/government/hotlines': 'src/app/government/hotlines/page.tsx',
+  '/government/links': 'src/app/government/links/page.tsx',
+  '/procurement': 'src/app/procurement/page.tsx',
+  '/projects/methodology': 'src/app/projects/methodology/page.tsx',
+  '/statistics': 'src/app/statistics/page.tsx',
+  '/statistics/projects': 'src/app/statistics/projects/page.tsx',
+  '/statistics/procurement': 'src/app/statistics/procurement/page.tsx',
   '/statistics/project-spending':
-    'src/app/statistics/project-spending/page.page.tsx',
-  '/statistics/population': 'src/app/statistics/population/page.page.tsx',
-  '/statistics/demographics': 'src/app/statistics/demographics/page.page.tsx',
-  '/statistics/government': 'src/app/statistics/government/page.page.tsx',
-  '/statistics/legislation': 'src/app/statistics/legislation/page.page.tsx',
-  '/statistics/public-records':
-    'src/app/statistics/public-records/page.page.tsx',
-  '/statistics/city-profile': 'src/app/statistics/city-profile/page.page.tsx',
-  '/legislation': 'src/app/legislation/page.page.tsx',
-  '/legislation/resolutions': 'src/app/legislation/resolutions/page.page.tsx',
-  '/transparency': 'src/app/transparency/page.page.tsx',
-  '/transparency/sources': 'src/app/transparency/sources/page.page.tsx',
-  '/transparency/methodology': 'src/app/transparency/methodology/page.page.tsx',
-  '/transparency/documents': 'src/app/transparency/documents/page.page.tsx',
+    'src/app/statistics/project-spending/page.tsx',
+  '/statistics/population': 'src/app/statistics/population/page.tsx',
+  '/statistics/demographics': 'src/app/statistics/demographics/page.tsx',
+  '/statistics/government': 'src/app/statistics/government/page.tsx',
+  '/statistics/legislation': 'src/app/statistics/legislation/page.tsx',
+  '/statistics/public-records': 'src/app/statistics/public-records/page.tsx',
+  '/statistics/city-profile': 'src/app/statistics/city-profile/page.tsx',
+  '/legislation': 'src/app/legislation/page.tsx',
+  '/legislation/resolutions': 'src/app/legislation/resolutions/page.tsx',
+  '/transparency': 'src/app/transparency/page.tsx',
+  '/transparency/sources': 'src/app/transparency/sources/page.tsx',
+  '/transparency/methodology': 'src/app/transparency/methodology/page.tsx',
+  '/transparency/documents': 'src/app/transparency/documents/page.tsx',
   '/transparency/full-disclosure':
-    'src/app/transparency/full-disclosure/page.page.tsx',
-  '/transparency/finance': 'src/app/transparency/finance/page.page.tsx',
+    'src/app/transparency/full-disclosure/page.tsx',
+  '/transparency/finance': 'src/app/transparency/finance/page.tsx',
 };
 
 const expectedRouteCount = 28;
@@ -78,7 +77,7 @@ for (const [route, filePath] of routeEntries) {
 const homeSource = readFileSync(batch3Routes['/'], 'utf8');
 assert.ok(
   !/Next\.js migration foundation/.test(homeSource),
-  'src/app/page.page.tsx must no longer be the Batch 1 placeholder — it must be the real home page'
+  'src/app/page.tsx must no longer be the Batch 1 placeholder — it must be the real home page'
 );
 assert.match(
   homeSource,
@@ -109,16 +108,16 @@ assert.ok(
 // 5. The root layout stays a Server Component (already the authoritative
 //    check in smoke-next-shell.ts; re-asserted here since real page content
 //    now renders inside it).
-const layoutSource = readFileSync('src/app/layout.page.tsx', 'utf8');
+const layoutSource = readFileSync('src/app/layout.tsx', 'utf8');
 assert.ok(
   !/^\s*['"]use client['"]/m.test(layoutSource),
-  'src/app/layout.page.tsx must remain a Server Component'
+  'src/app/layout.tsx must remain a Server Component'
 );
 
 // 6. Migrated pages must use the shared civic-data modules, not copied data.
 // Some routes (Batch 6 split these to attach page-level metadata to a
-// Server Component) read civic data in a sibling *.next.tsx view instead of
-// the page.page.tsx route entry itself — both still count as "the shared
+// Server Component) read civic data in a sibling *.tsx view instead of
+// the page.tsx route entry itself — both still count as "the shared
 // module", so the file checked is whichever one actually holds the import.
 const civicDataImportsByRoute: Record<
   string,
@@ -129,7 +128,7 @@ const civicDataImportsByRoute: Record<
     pattern: /from '\.\.\/data\/civic\/homeSummary'/,
   },
   '/government/offices': {
-    file: 'src/app/government/offices/GovernmentOffices.next.tsx',
+    file: 'src/app/government/offices/GovernmentOffices.tsx',
     pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/government'/,
   },
   '/statistics/projects': {
@@ -137,7 +136,7 @@ const civicDataImportsByRoute: Record<
     pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/projectStatistics'/,
   },
   '/transparency/finance': {
-    file: 'src/app/transparency/finance/CityFinances.next.tsx',
+    file: 'src/app/transparency/finance/CityFinances.tsx',
     pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/finance'/,
   },
 };

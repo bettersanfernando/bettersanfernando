@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 // Batch 5 focused coverage: the ten interactive/URL-state routes exist as
-// a thin Server Component route entry + a narrowly scoped *.next.tsx
+// a thin Server Component route entry + a narrowly scoped *.tsx
 // Client Component, use the same nuqs query-parameter names as the legacy
 // pages, never import react-router/react-helmet-async/import.meta.glob,
 // and the project-map's browser-only MapLibre code never touches
@@ -74,18 +74,18 @@ const routes: Record<
 // 1. All ten route files exist.
 for (const [route, { dir }] of Object.entries(routes)) {
   assert.ok(
-    existsSync(`${dir}/page.page.tsx`),
-    `${route} must have a page.page.tsx route entry`
+    existsSync(`${dir}/page.tsx`),
+    `${route} must have a page.tsx route entry`
   );
 }
 
 // 2. Route entries remain Server Components (no top-level 'use client');
-//    the Client Component lives in a sibling *.next.tsx file instead.
+//    the Client Component lives in a sibling *.tsx file instead.
 for (const [route, { dir }] of Object.entries(routes)) {
-  const source = readFileSync(`${dir}/page.page.tsx`, 'utf8');
+  const source = readFileSync(`${dir}/page.tsx`, 'utf8');
   assert.ok(
     !/^\s*['"]use client['"]/m.test(source),
-    `${route}'s page.page.tsx must remain a Server Component`
+    `${route}'s page.tsx must remain a Server Component`
   );
 }
 
@@ -95,7 +95,7 @@ for (const [route, { dir }] of Object.entries(routes)) {
 //    Vite-only import.meta.glob.
 for (const [route, { dir, component }] of Object.entries(routes)) {
   if (!component) continue; // /projects/map has its own dedicated check below
-  const clientPath = `${dir}/${component}.next.tsx`;
+  const clientPath = `${dir}/${component}.tsx`;
   assert.ok(existsSync(clientPath), `${route} must have ${clientPath}`);
   const source = readFileSync(clientPath, 'utf8');
   assert.match(
@@ -142,7 +142,7 @@ for (const component of ['ProjectSources', 'BidResults', 'Contracts']) {
   const route = Object.entries(routes).find(
     ([, r]) => r.component === component
   )!;
-  const source = readFileSync(`${route[1].dir}/${component}.next.tsx`, 'utf8');
+  const source = readFileSync(`${route[1].dir}/${component}.tsx`, 'utf8');
   assert.match(
     source,
     /filtered\w*\.slice\(0, visibleCount\)|visibleCount/,
@@ -153,44 +153,41 @@ for (const component of ['ProjectSources', 'BidResults', 'Contracts']) {
 // 6. Project-map: the MapLibre component is client-only, dynamically
 //    imported with ssr:false from within a Client Component (never from
 //    the Server Component route entry), and never invents coordinates.
-const mapPageSource = readFileSync(
-  'src/app/projects/map/page.page.tsx',
-  'utf8'
-);
+const mapPageSource = readFileSync('src/app/projects/map/page.tsx', 'utf8');
 assert.ok(
   !/^\s*['"]use client['"]/m.test(mapPageSource),
-  'src/app/projects/map/page.page.tsx must remain a Server Component'
+  'src/app/projects/map/page.tsx must remain a Server Component'
 );
 assert.ok(
   !/window\.|document\./.test(mapPageSource),
   'the map route entry (Server Component) must never touch window/document'
 );
 const mapViewSource = readFileSync(
-  'src/app/projects/map/project-map-view.next.tsx',
+  'src/app/projects/map/project-map-view.tsx',
   'utf8'
 );
 assert.match(
   mapViewSource,
   /^\s*['"]use client['"]/m,
-  'project-map-view.next.tsx must be a Client Component'
+  'project-map-view.tsx must be a Client Component'
 );
 assert.match(
   mapViewSource,
-  /dynamic\(\s*\(\)\s*=>\s*import\(['"]\.\.\/\.\.\/\.\.\/components\/projects\/BarangayProjectMap\.next['"]\),\s*\{\s*ssr:\s*false/,
+  /dynamic\(\s*\(\)\s*=>\s*import\(['"]\.\.\/\.\.\/\.\.\/components\/projects\/BarangayProjectMap['"]\),\s*\{\s*ssr:\s*false/,
   'the MapLibre component must be loaded via next/dynamic with ssr:false'
 );
 const barangayMapSource = readFileSync(
-  'src/components/projects/BarangayProjectMap.next.tsx',
+  'src/components/projects/BarangayProjectMap.tsx',
   'utf8'
 );
 assert.match(
   barangayMapSource,
   /^\s*['"]use client['"]/m,
-  'BarangayProjectMap.next.tsx must be a Client Component'
+  'BarangayProjectMap.tsx must be a Client Component'
 );
 assert.ok(
   !/^\s*import .* from ['"][^'"]+\?url['"]/m.test(barangayMapSource),
-  'BarangayProjectMap.next.tsx must not use Vite-only ?url asset imports'
+  'BarangayProjectMap.tsx must not use Vite-only ?url asset imports'
 );
 assert.match(
   barangayMapSource,

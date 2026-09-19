@@ -162,10 +162,10 @@ assert.match(
 // 9. Dynamic metadata: all four dynamic route families define
 // generateMetadata() using civic accessors (not a hardcoded title table).
 const dynamicMetadataFiles = [
-  'src/app/services/[category]/page.page.tsx',
-  'src/app/services/[category]/[serviceSlug]/page.page.tsx',
-  'src/app/projects/[projectId]/page.page.tsx',
-  'src/app/government/offices/[officeId]/page.page.tsx',
+  'src/app/services/[category]/page.tsx',
+  'src/app/services/[category]/[serviceSlug]/page.tsx',
+  'src/app/projects/[projectId]/page.tsx',
+  'src/app/government/offices/[officeId]/page.tsx',
 ];
 for (const file of dynamicMetadataFiles) {
   const source = readFileSync(file, 'utf8');
@@ -301,7 +301,7 @@ assert.ok(
 );
 
 // 14. Custom 404: presence, noindex, and useful links.
-const notFoundSource = readFileSync('src/app/not-found.page.tsx', 'utf8');
+const notFoundSource = readFileSync('src/app/not-found.tsx', 'utf8');
 assert.match(
   notFoundSource,
   /robots:\s*\{\s*index:\s*false/,
