@@ -141,11 +141,38 @@ assert.equal(
 assert.equal(spendingDestinations[0]?.kind, 'real');
 
 // 8. Project-detail sections limited to exactly the 19 matched projects.
-const projectDetailSource = readNextRoute('/projects/[projectId]');
+const projectDetailSource = readFileSync(
+  'src/app/projects/[projectId]/page.tsx',
+  'utf8'
+);
+const projectDetailViewPath =
+  'src/app/projects/[projectId]/ProjectDetailView.tsx';
+const projectDetailViewSource = readFileSync(projectDetailViewPath, 'utf8');
+const projectDetailPresentationSource = `${projectDetailSource}\n${projectDetailViewSource}`;
 assert.match(
   projectDetailSource,
   /getObservationsForProject/,
   'ProjectDetail must resolve observations per project instead of hardcoding them'
+);
+assert.match(
+  projectDetailSource,
+  /ProjectDetailView/,
+  'the Server Component must delegate Kapwa rendering to the project-detail client boundary'
+);
+assert.doesNotMatch(
+  projectDetailSource,
+  /@bettergov\/kapwa\/(card|banner)/,
+  'the Server Component must not import Kapwa Card or Banner directly'
+);
+assert.match(
+  projectDetailViewSource,
+  /^'use client';/,
+  'the Kapwa-rendering project-detail view must be a Client Component'
+);
+assert.match(
+  projectDetailViewSource,
+  /@bettergov\/kapwa\/(card|banner)/,
+  'the client boundary must own the Kapwa Card/Banner imports'
 );
 for (const project of getProjects()) {
   const list = getObservationsForProject(project.id);
@@ -176,7 +203,7 @@ assert.equal(
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
 // currency formatting, across the data module, page, and detail integration.
 const pageSource = readNextRoute('/statistics/project-spending');
-for (const source of [pageSource, projectDetailSource]) {
+for (const source of [pageSource, projectDetailPresentationSource]) {
   for (const forbidden of [
     'formatPeso(observation',
     "style: 'currency'",
@@ -219,7 +246,7 @@ assert.match(
 );
 
 // 10. Safe external links.
-for (const source of [pageSource, projectDetailSource]) {
+for (const source of [pageSource, projectDetailPresentationSource]) {
   assert.match(source, /target="_blank"/);
   assert.match(source, /rel="noopener noreferrer"/);
 }

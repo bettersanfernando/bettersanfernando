@@ -38,7 +38,7 @@ const isBrowser = typeof window !== 'undefined';
   lng: 'en',
   supportedLngs: SUPPORTED_LANGUAGES.map(language => language.code),
   load: 'languageOnly',
-  debug: process.env.NODE_ENV !== 'production',
+  debug: process.env.NEXT_PUBLIC_I18N_DEBUG === 'true',
   defaultNS: 'common',
   ns: ['common'],
   resources: { en: { common: enCommon } },
@@ -48,14 +48,16 @@ const isBrowser = typeof window !== 'undefined';
     useSuspense: false,
   },
 
-  backend: {
-    loadPath: '/locales/{{lng}}/{{ns}}.json',
-    // Locale JSON is a static public/ asset with no content hash in its
-    // URL, so a browser that cached an earlier response (e.g. before new
-    // keys were added) would keep serving it and render those keys raw.
-    // Forcing revalidation on every fetch keeps translations current.
-    requestOptions: { cache: 'no-cache' },
-  },
+  ...(isBrowser && {
+    backend: {
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
+      // Locale JSON is a static public/ asset with no content hash in its
+      // URL, so a browser that cached an earlier response (e.g. before new
+      // keys were added) would keep serving it and render those keys raw.
+      // Forcing revalidation on every fetch keeps translations current.
+      requestOptions: { cache: 'no-cache' },
+    },
+  }),
 
   interpolation: {
     escapeValue: false,
