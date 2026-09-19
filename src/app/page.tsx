@@ -84,7 +84,7 @@ export default function Home() {
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-700 text-white">
               <Landmark className="h-6 w-6" aria-hidden="true" />
             </div>
-            <h1 className="text-4xl font-bold leading-tight tracking-[-0.03em] text-gray-900 md:text-6xl">
+            <h1 className="text-4xl font-bold text-display text-gray-900 md:text-6xl">
               BetterSanFernando
             </h1>
             <p className="mt-5 max-w-[66ch] text-lg leading-8 text-gray-700">

@@ -129,7 +129,7 @@ export default function TransparencySources() {
 
           <header className="grid gap-8 border-b border-gray-300 pb-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end">
             <div className="max-w-3xl">
-              <h1 className="text-4xl font-bold tracking-[-0.03em] text-gray-950 sm:text-5xl">
+              <h1 className="text-4xl font-bold text-display text-gray-950 sm:text-5xl">
                 The public sources behind BetterSanFernando
               </h1>
               <p className="mt-5 max-w-[70ch] text-lg leading-8 text-gray-700">

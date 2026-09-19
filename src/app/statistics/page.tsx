@@ -127,7 +127,7 @@ export default function Statistics() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-700 text-white">
                 <BarChart3 className="h-6 w-6" aria-hidden="true" />
               </div>
-              <h1 className="text-4xl font-bold tracking-[-0.03em] text-gray-950 sm:text-5xl">
+              <h1 className="text-4xl font-bold text-display text-gray-950 sm:text-5xl">
                 Statistics
               </h1>
               <p className="mt-5 max-w-[70ch] text-lg leading-8 text-gray-700">

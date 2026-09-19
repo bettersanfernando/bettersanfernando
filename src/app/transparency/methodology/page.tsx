@@ -159,7 +159,7 @@ export default function TransparencyMethodology() {
           />
 
           <header className="max-w-4xl border-b border-gray-300 pb-10">
-            <h1 className="text-4xl font-bold tracking-[-0.03em] text-gray-950 sm:text-5xl">
+            <h1 className="text-4xl font-bold text-display text-gray-950 sm:text-5xl">
               How BetterSanFernando publishes civic data
             </h1>
             <p className="mt-5 max-w-[72ch] text-lg leading-8 text-gray-700">

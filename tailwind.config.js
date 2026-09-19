@@ -8,7 +8,6 @@ export default {
       fontFamily: {
         sans: [
           'Inter',
-          'Figtree',
           '-apple-system',
           'BlinkMacSystemFont',
           'Segoe UI',

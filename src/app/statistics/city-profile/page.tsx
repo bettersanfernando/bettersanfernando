@@ -130,7 +130,7 @@ export default function CityProfile() {
                 <dt className="text-sm font-medium text-gray-600">
                   Population · {populationSource.referenceYear}
                 </dt>
-                <dd className="mt-2 text-4xl font-bold tracking-[-0.03em] tabular-nums text-gray-900">
+                <dd className="mt-2 text-4xl font-bold text-stat-value text-gray-900">
                   {numberFormatter.format(population.totalPopulation)}
                 </dd>
                 <dd className="mt-2 text-sm text-gray-600">
@@ -139,7 +139,7 @@ export default function CityProfile() {
               </div>
               <div className="border-t border-gray-200 p-6 sm:border-r sm:border-t-0 md:p-7">
                 <dt className="text-sm font-medium text-gray-600">Barangays</dt>
-                <dd className="mt-2 text-4xl font-bold tracking-[-0.03em] tabular-nums text-gray-900">
+                <dd className="mt-2 text-4xl font-bold text-stat-value text-gray-900">
                   {population.barangayCount}
                 </dd>
                 <dd className="mt-2 text-sm text-gray-600">
