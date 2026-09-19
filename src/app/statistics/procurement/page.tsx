@@ -40,7 +40,7 @@ const RELATED_PAGES = [
   ['/procurement/bid-results', 'Browse Bid Results'],
   ['/procurement/contracts', 'Browse Contracts and Awards'],
   ['/statistics/projects', 'View overall Project Statistics'],
-  ['/projects', 'Browse City Projects'],
+  ['/projects/city-projects', 'Browse City Projects'],
   ['/projects/sources', 'Review Project Evidence Sources'],
   ['/projects/methodology', 'Read the Project Methodology'],
   ['/transparency/sources', 'Review Published Data Sources'],

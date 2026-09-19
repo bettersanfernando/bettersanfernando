@@ -100,7 +100,7 @@ export default function ProjectSources() {
         <Breadcrumbs
           items={[
             { label: 'Home', href: '/' },
-            { label: 'City Projects', href: '/projects' },
+            { label: 'Projects', href: '/projects' },
             { label: 'Sources' },
           ]}
           className="mb-8"

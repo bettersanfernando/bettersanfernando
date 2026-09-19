@@ -255,6 +255,7 @@ const knownRealDestinations = new Set([
   '/services/environment',
   '/services/civil-registry',
   '/projects',
+  '/projects/city-projects',
   '/projects/map',
   '/projects/sources',
   '/projects/methodology',

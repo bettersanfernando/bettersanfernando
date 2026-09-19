@@ -144,7 +144,7 @@ export default function ProjectMethodology() {
         <Breadcrumbs
           items={[
             { label: 'Home', href: '/' },
-            { label: 'City Projects', href: '/projects' },
+            { label: 'Projects', href: '/projects' },
             { label: 'Methodology' },
           ]}
           className="mb-8"

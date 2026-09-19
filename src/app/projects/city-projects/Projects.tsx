@@ -4,19 +4,19 @@ import { useMemo } from 'react';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 import { Search as SearchIcon } from 'lucide-react';
-import Section from '../../components/ui/Section';
-import { Heading } from '../../components/ui/Heading';
-import { Text } from '../../components/ui/Text';
-import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import Section from '../../../components/ui/Section';
+import { Heading } from '../../../components/ui/Heading';
+import { Text } from '../../../components/ui/Text';
+import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import { Card, CardContent } from '@bettergov/kapwa/card';
 import {
   getProjects,
   ProjectLifecycleStatus,
   ProjectCategory,
   type Project,
-} from '../../data/civic/projects';
-import { getBarangays } from '../../data/civic/demographics';
-import { formatPeso, titleCaseEnum } from '../../lib/utils';
+} from '../../../data/civic/projects';
+import { getBarangays } from '../../../data/civic/demographics';
+import { formatPeso, titleCaseEnum } from '../../../lib/utils';
 
 const LIFECYCLE_OPTIONS = ProjectLifecycleStatus.options;
 const CATEGORY_OPTIONS = ProjectCategory.options;

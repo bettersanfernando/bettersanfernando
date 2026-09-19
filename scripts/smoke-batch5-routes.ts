@@ -24,8 +24,8 @@ const routes: Record<
     component: 'Search',
     queryParams: ['q', 'domain'],
   },
-  '/projects': {
-    dir: 'src/app/projects',
+  '/projects/city-projects': {
+    dir: 'src/app/projects/city-projects',
     component: 'Projects',
     queryParams: ['q', 'status', 'barangay', 'category'],
   },

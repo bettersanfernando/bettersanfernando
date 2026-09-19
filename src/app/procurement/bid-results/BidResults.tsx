@@ -24,7 +24,7 @@ import { formatIsoDate, formatPeso } from '../../../lib/utils';
 const PAGE_SIZE = 25;
 
 const RELATED_PAGES = [
-  { label: 'City Projects', href: '/projects' },
+  { label: 'City Projects', href: '/projects/city-projects' },
   { label: 'Project evidence sources', href: '/projects/sources' },
   { label: 'Project methodology', href: '/projects/methodology' },
   { label: 'Project statistics', href: '/statistics/projects' },
@@ -85,7 +85,7 @@ export default function BidResults() {
             className="mb-8"
             items={[
               { label: 'Home', href: '/' },
-              { label: 'City Projects', href: '/projects' },
+              { label: 'Projects', href: '/projects' },
               { label: 'Bid Results' },
             ]}
           />

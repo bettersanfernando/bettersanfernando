@@ -249,7 +249,7 @@ export default function ProjectSpendingStatistics() {
                   BetterSanFernando.
                 </p>
                 <Link
-                  href="/projects"
+                  href="/projects/city-projects"
                   className="mt-4 inline-flex items-center gap-2 rounded-lg border border-primary-300 px-4 py-2 text-sm font-semibold text-primary-700 hover:bg-primary-50"
                 >
                   <FolderKanban className="h-4 w-4" aria-hidden="true" />
@@ -766,7 +766,7 @@ export default function ProjectSpendingStatistics() {
             </Link>
             {' · '}
             <Link
-              href="/projects"
+              href="/projects/city-projects"
               className="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
             >
               Browse City Projects

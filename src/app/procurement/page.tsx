@@ -312,7 +312,7 @@ export default function Procurement() {
             </h2>
             <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
               {[
-                ['/projects', 'City Projects'],
+                ['/projects/city-projects', 'City Projects'],
                 ['/statistics/projects', 'Project Statistics'],
                 ['/projects/sources', 'Project Evidence Sources'],
                 ['/projects/methodology', 'Project Methodology'],

@@ -41,6 +41,7 @@ const STATIC_ROUTES: readonly string[] = [
   // Batch 5 (10)
   '/search',
   '/projects',
+  '/projects/city-projects',
   '/projects/map',
   '/projects/sources',
   '/barangays',

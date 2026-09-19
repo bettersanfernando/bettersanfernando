@@ -220,7 +220,7 @@ const navigationStructure = [
         items: [
           {
             labelKey: 'navigation.items.allCityProjects',
-            href: '/projects',
+            href: '/projects/city-projects',
             kind: 'real',
           },
           {
@@ -451,7 +451,7 @@ const navigationStructure = [
         items: [
           {
             labelKey: 'navigation.items.cityProjects',
-            href: '/projects',
+            href: '/projects/city-projects',
             kind: 'real',
           },
           {

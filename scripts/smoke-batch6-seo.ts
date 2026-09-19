@@ -208,14 +208,15 @@ const categoryCount = new Set(services.map(getServiceCategory)).size;
 const expectedTotal =
   28 /* Batch 3 */ +
   10 /* Batch 5 */ +
+  1 /* /projects/city-projects — City Projects listing split from the /projects hub */ +
   categoryCount +
   services.length +
   getProjects().length +
   getCityOffices().length;
 assert.equal(
   expectedTotal,
-  599,
-  'independently recomputed sitemap count must be 599'
+  600,
+  'independently recomputed sitemap count must be 600'
 );
 
 const sitemapSource = readFileSync('src/app/sitemap.ts', 'utf8');
@@ -229,8 +230,8 @@ assert.equal(
 );
 assert.equal(
   staticRouteMatches.length,
-  38,
-  'sitemap.ts must list exactly the 28 Batch 3 + 10 Batch 5 static routes'
+  39,
+  'sitemap.ts must list exactly the 28 Batch 3 + 10 Batch 5 static routes, plus the /projects/city-projects split'
 );
 for (const excluded of [
   '/contact',

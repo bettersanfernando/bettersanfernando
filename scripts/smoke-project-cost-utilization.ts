@@ -295,12 +295,12 @@ assert.match(pageSource, />\s*Next\s*</);
 assert.match(
   pageSource,
   /Browse all \{metadata\.canonicalProjectCount\} projects/,
-  'the page must link to /projects labeled to browse all 324 projects'
+  'the page must link to /projects/city-projects labeled to browse all 324 projects'
 );
 assert.match(
   pageSource,
-  /href="\/projects"[\s\S]{0,300}Browse all/,
-  'the Browse-all-324 control must link to /projects'
+  /href="\/projects\/city-projects"[\s\S]{0,300}Browse all/,
+  'the Browse-all-324 control must link to /projects/city-projects'
 );
 assert.match(
   pageSource,

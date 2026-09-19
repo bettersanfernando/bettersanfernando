@@ -49,7 +49,7 @@ const exploreLinks = [
     description: 'Search verified PSGC, population, and classification facts.',
   },
   {
-    href: '/projects',
+    href: '/projects/city-projects',
     title: 'Published projects',
     description: 'Browse BetterSanFernando’s bounded public-works dataset.',
   },

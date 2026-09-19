@@ -284,6 +284,14 @@ source for this application.
   readiness and publication status.
 - [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) — what has
   shipped and what is planned next.
+- [`docs/FRONTEND-DESIGN-SYSTEM.md`](docs/FRONTEND-DESIGN-SYSTEM.md) — the
+  current frontend visual direction, established by the Population
+  Statistics (`/statistics/population`) and Services (`/services`) pages.
+  Population is the primary reference for data-heavy/statistical
+  experiences, while Services establishes the pattern for civic discovery,
+  search, and directory-style hubs. Future pages should follow their shared
+  typography, color, spacing, interaction, accessibility, and provenance
+  language without copying either page's exact layout.
 - In the running application, `/transparency/methodology` and
   `/projects/methodology` explain verification, lifecycle, and data-quality
   rules for the published domains, and `/transparency/sources` inventories the

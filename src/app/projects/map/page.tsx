@@ -36,7 +36,7 @@ export default function ProjectMapPage() {
           items={[
             { label: 'Home', href: '/' },
             { label: 'Projects', href: '/projects' },
-            { label: 'Map' },
+            { label: 'Project Map' },
           ]}
           className="mb-8"
         />

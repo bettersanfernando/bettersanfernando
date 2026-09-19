@@ -206,7 +206,7 @@ export function getTransparencySourceInventory() {
       links: [
         {
           label: 'Browse published projects',
-          url: '/projects',
+          url: '/projects/city-projects',
           type: 'internal',
         },
       ],

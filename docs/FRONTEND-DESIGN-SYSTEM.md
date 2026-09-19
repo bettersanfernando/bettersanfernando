@@ -4,28 +4,61 @@ Practical visual reference for implementing and redesigning BetterSanFernando
 pages. This document describes what is **actually implemented and approved**
 today — it does not invent aspirational styles.
 
-## Canonical Reference Implementation
+## Canonical Reference Implementations
 
-**`/statistics/population`** (`src/app/statistics/population/page.tsx` +
+BetterSanFernando currently has **two** approved design-standard reference
+pages. Together they establish the current visual direction; which one to
+lean on depends on what kind of page you're building.
+
+### `/statistics/population`
+
+(`src/app/statistics/population/page.tsx` +
 `src/app/statistics/population/BarangayTable.tsx`)
 
-This page establishes the current visual direction for BetterSanFernando.
-Future pages should match its:
+Use this as the main reference for **data-heavy/statistical pages**:
 
-- visual tone
-- typography hierarchy
-- color restraint
-- spacing discipline
-- borders and radii
-- information density
-- interaction quality
-- data presentation
-- provenance treatment
+- strong data hierarchy and KPI presentation
+- simple, real-data visualization (proportional bars, not decorative charts)
+- searchable/sortable data tables
+- provenance/source sections
+- structured civic-data presentation generally
 
-**Do not require future pages to copy the Population page's exact section
-layout.** Different content should use the layout appropriate to that
-content. This document governs visual language, not identical page
-composition.
+### `/services`
+
+(`src/app/services/page.tsx` + `src/app/services/service-search.tsx`)
+
+Use this as the main reference for **civic hub / directory pages**:
+
+- civic hub and service-discovery UX
+- search-first interaction
+- a two-column hero composition (editorial copy + a functional tool)
+- responsive search behavior that changes presentation by breakpoint, not
+  just by shrinking
+- category/directory navigation
+- restrained Lucide icon use
+- a unified directory/list surface instead of a wall of separate cards
+
+See §20 for the Services-specific patterns in more detail.
+
+### Shared visual language
+
+Both pages share the same overall BetterSanFernando system, documented in
+full below: Inter as the primary UI font, Roboto Mono for selective
+editorial eyebrows, the deep civic blue / interactive blue / soft blue
+palette, restrained neutral surfaces, thin borders, controlled radii,
+minimal shadows, intentional spacing, editorial (not dashboard-heavy)
+presentation, useful Lucide icons only, real functional controls,
+responsive layouts designed intentionally for mobile, integrated
+provenance/source transparency, and consistent accessibility and
+keyboard-focus treatment.
+
+**These are design standards and reference implementations, not layout
+templates.** Do not require a future page to copy Population's exact
+hero/KPI/table structure, and do not require it to copy Services' exact
+two-column hero/search/directory structure. A future page should use
+whichever patterns fit its own information hierarchy — a page can (and
+often should) borrow from both, or from neither's exact composition. This
+document governs visual language, not identical page composition.
 
 ---
 
@@ -97,8 +130,9 @@ Combine with normal Tailwind classes for size, weight, and color, e.g.
 - **Editorial eyebrows** — Roboto Mono via `text-eyebrow`. Small, uppercase,
   moderately expanded tracking. Not required on every section or page.
   Examples in use today: `Population`, `Distribution`, `Context`,
-  `Barangay Data`, `Data Provenance` (source text is Title Case; the
-  utility renders it uppercase).
+  `Barangay Data`, `Data Provenance`, `Services`, `Browse By Need`,
+  `Search Results` (source text is Title Case; the utility renders it
+  uppercase).
 
 ---
 
@@ -192,6 +226,12 @@ Future pages may use a light hero, a compact header, or no hero at all if
 their content calls for it. What must stay consistent: strong hierarchy,
 intentional spacing, restrained decoration, and a clear content purpose —
 not the literal deep-blue treatment.
+
+`/services` uses a second approved hero variant, built for a discovery
+page rather than a statistic: the same deep civic blue and restrained
+decoration philosophy, but a two-column desktop composition (editorial
+copy on the left, a functional service finder on the right) instead of a
+single-column stat-first layout. See §20 for details.
 
 ---
 
@@ -467,13 +507,15 @@ Before redesigning or building a page:
 
 1. Inspect the existing page and its data/helper functions.
 2. Read this document (`docs/FRONTEND-DESIGN-SYSTEM.md`).
-3. Inspect `/statistics/population` as the live visual reference.
+3. Inspect `/statistics/population` and `/services` as the live visual
+   references, leaning on whichever is closer to your page's nature
+   (data-heavy/statistical vs. discovery/directory) — or draw from both.
 4. Identify the page's actual information hierarchy — don't assume it
-   matches the Population page's.
+   matches either reference page's.
 5. Preserve canonical data and functionality; never invent or duplicate
    data to fill a layout.
-6. Design the page for its own content rather than copying the Population
-   page's section layout.
+6. Design the page for its own content rather than copying either
+   reference page's section layout.
 7. Reuse the established typography utilities, colors, spacing units,
    interaction patterns, and provenance style described here.
 8. Avoid unrelated global changes (header, footer, navigation, tokens).
@@ -483,11 +525,56 @@ Before redesigning or building a page:
 
 ---
 
+## 20. Services Hub Patterns
+
+`/services` is the reference for civic hub / directory pages. The patterns
+below are specific to that page and its search component
+(`service-search.tsx`) — apply them where a future page is genuinely a
+discovery/directory experience, not mechanically everywhere.
+
+- **Two-column civic-blue hero on desktop** — the same deep civic blue as
+  Population, but editorial copy on the left and a functional white service
+  finder card on the right, instead of a single centered stat.
+- **Desktop search is a compact floating autocomplete** — results appear in
+  an absolutely-positioned overlay below the input, capped to a handful of
+  matches, so the hero never grows while the user types.
+- **Mobile search stays compact, results move below the hero** — the finder
+  in the hero renders only the input (and helper text) on mobile; matching
+  results render in a separate section directly below the hero, in normal
+  document flow. This is deliberate: it avoids a tall white finder card
+  fighting for space inside the hero, avoids floating overlays clipping or
+  sitting under/over the sticky header, and avoids nested scroll areas on
+  small screens.
+- **Search results never enlarge the desktop hero** — the hero's height is
+  independent of query state on desktop; only the floating panel changes.
+- **A unified category directory, not a wall of cards** — the "Browse by
+  Need" directory is one bordered surface with internal dividers, not one
+  card per category.
+- **Restrained, semantic Lucide icons** — one small icon per category/
+  concept, not decoration.
+- **Real, derived counts** — category and result counts are computed from
+  the canonical service data (`getServiceCategory`, `getServices`), never
+  hardcoded.
+- **No repeated, meaningless status pills** — a "Published" badge on every
+  category was removed once every category _was_ published, because it had
+  stopped communicating anything.
+- **Search results carry real context** — each result shows the service
+  title plus its category and office acronym, using existing data and
+  helpers (`getServiceCategory`, `getServiceHref`) — never an invented
+  label.
+- **Visual interest comes from hierarchy and layout**, not decorative
+  effects — no gradients, illustrations, or oversized icon blocks.
+
+---
+
 ## Reference Implementation Note
 
-> The Population Statistics page is the current reference implementation
-> for BetterSanFernando's frontend visual direction. It should be used to
-> understand the product's visual language, not as a template to copy
-> section-for-section. Future pages should preserve the same level of
-> hierarchy, restraint, clarity, interaction quality, and source
-> transparency while selecting layouts appropriate to their own content.
+> BetterSanFernando currently has two reference implementations for its
+> frontend visual direction: the Population Statistics page
+> (`/statistics/population`) for data-heavy/statistical experiences, and
+> the Services hub (`/services`) for civic discovery, search, and
+> directory-style pages. Neither is a template to copy section-for-section.
+> Future pages should preserve the same level of hierarchy, restraint,
+> clarity, interaction quality, and source transparency demonstrated by
+> whichever reference fits their content, while selecting the layout
+> appropriate to that content.

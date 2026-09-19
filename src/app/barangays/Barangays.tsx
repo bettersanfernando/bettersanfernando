@@ -249,7 +249,7 @@ export default function Barangays() {
                         {barangay.rank}
                       </p>
                       <Link
-                        href={`/projects?barangay=${encodeURIComponent(barangay.psgc_code)}`}
+                        href={`/projects/city-projects?barangay=${encodeURIComponent(barangay.psgc_code)}`}
                         className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
                       >
                         Browse projects for {barangay.name}

@@ -73,14 +73,14 @@ const dynamicPaths = [
   ...getCityOffices().map(office => `/government/offices/${office.office_id}`),
 ];
 const canonicalPaths = [...staticPaths, ...dynamicPaths];
-assert.equal(staticPaths.length, 38);
+assert.equal(staticPaths.length, 39);
 assert.equal(dynamicPaths.length, 561);
-assert.equal(canonicalPaths.length, 599);
-assert.equal(new Set(canonicalPaths).size, 599);
+assert.equal(canonicalPaths.length, 600);
+assert.equal(new Set(canonicalPaths).size, 600);
 
 const queryRoutes = [
   '/search',
-  '/projects',
+  '/projects/city-projects',
   '/projects/sources',
   '/barangays',
   '/procurement/bid-results',
@@ -119,5 +119,5 @@ assert.match(serviceCategorySource, /categoryServices\.filter/);
 assert.match(serviceCategorySource, /aria-live="polite"/);
 
 console.log(
-  'Batch 7 parity smoke passed: protected data and 599 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
+  'Batch 7 parity smoke passed: protected data and 600 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
 );
