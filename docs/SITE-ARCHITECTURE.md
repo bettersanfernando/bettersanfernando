@@ -7,12 +7,11 @@ BetterSanFernando website. It defines the site's major sections, canonical
 route hierarchy, route ownership, overlap decisions, and publication rules.
 It does not claim that every route described here is implemented.
 
-The current application still contains a mixture of implemented pages,
-generic planned-page placeholders, and older starter-kit content routes.
-`src/App.tsx`, `src/data/navigation.ts`, and `src/data/plannedPages.ts` must be
-brought into alignment with this document through separate implementation
-work. Redirects described below are architecture decisions; their
-implementation state is tracked in `IMPLEMENTATION-ROADMAP.md`.
+The Next.js App Router application is the sole implementation: 599 canonical
+URLs, 16 permanent aliases, and zero planned routes passed the Batch 7 parity
+audit, and the legacy Vite/React Router application has been retired. Redirect
+implementation state is tracked in `NEXTJS-MIGRATION-SPEC.md` and
+`IMPLEMENTATION-ROADMAP.md`.
 
 ## Product purpose and position
 

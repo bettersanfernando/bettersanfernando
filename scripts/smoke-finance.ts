@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getFinanceMetadata,
   getFinanceObservations,
@@ -64,13 +64,7 @@ assert.ok(
   '/transparency/finance must no longer be a planned page'
 );
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/transparency\/finance"[\s\S]{0,40}element={<CityFinances \/>}/
-);
-
-const pageSource = readFileSync('src/pages/CityFinances.tsx', 'utf8');
+const pageSource = readNextRoute('/transparency/finance');
 assert.match(pageSource, /City Finances/);
 assert.doesNotMatch(pageSource, /City Spending/);
 assert.match(

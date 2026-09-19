@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import { getTransparencySourceInventory } from '../src/data/civic/transparencySources.ts';
 
 const inventory = getTransparencySourceInventory();
@@ -65,7 +65,7 @@ assert.deepEqual(
   [['person-directories', 'NOT_EXPORTED']]
 );
 
-const pageSource = readFileSync('src/pages/TransparencySources.tsx', 'utf8');
+const pageSource = readNextRoute('/transparency/sources');
 for (const privateField of [
   'sha256',
   'source_commit',
@@ -78,9 +78,6 @@ for (const privateField of [
     `${privateField} must not be surfaced by the page`
   );
 }
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/transparency\/sources"/);
 
 console.log('[smoke-transparency-sources] OK');
 console.log(

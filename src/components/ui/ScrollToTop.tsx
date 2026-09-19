@@ -1,10 +1,17 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router';
+'use client';
 
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
+// Next.js port of ScrollToTop.tsx. next/navigation has no hash-tracking
+// hook (usePathname() only returns the path), so the hash is read directly
+// from window.location on each pathname change instead of from a router
+// state field. Behavior is otherwise identical to the react-router version.
 export default function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
+    const hash = window.location.hash;
     if (!hash) {
       window.scrollTo(0, 0);
       return;
@@ -25,7 +32,7 @@ export default function ScrollToTop() {
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => observer.disconnect();
-  }, [pathname, hash]);
+  }, [pathname]);
 
   return null;
 }

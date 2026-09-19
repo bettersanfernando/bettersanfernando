@@ -1,18 +1,13 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 import { getStatisticsSummary } from '../src/data/civic/statisticsSummary.ts';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 
 const summary = getStatisticsSummary();
-const appSource = readFileSync('src/App.tsx', 'utf8');
-const pageSource = readFileSync('src/pages/Statistics.tsx', 'utf8');
+const pageSource = readNextRoute('/statistics');
 
-assert.match(appSource, /path="\/statistics" element={<Statistics \/>}/);
-assert.match(
-  appSource,
-  /path="\/government\/reports-and-statistics"[\s\S]*?<Navigate to="\/statistics" replace \/>/
-);
+await assertNextRedirect('/government/reports-and-statistics', '/statistics');
 assert.ok(!plannedPages.some(page => page.path === '/statistics'));
 assert.equal(mainNavigation.length, 7);
 

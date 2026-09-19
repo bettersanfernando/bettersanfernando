@@ -12,9 +12,16 @@ export const civicUtilityBar = {
   portalStatusKey: 'navigation.civicUtility.portalStatus',
   betterGovHref: 'https://bettergov.ph',
   betterGovLabelKey: 'navigation.civicUtility.betterGovLink',
-  // ponytail: static "—" placeholders until a live rate/weather provider is wired up
   currencyLabelKey: 'navigation.civicUtility.currencyLabel',
   weatherLabelKey: 'navigation.civicUtility.weatherLabel',
+} as const;
+
+// No canonical San Fernando, Pampanga coordinate exists elsewhere in the
+// repo (geographyMetadata.ts only carries jurisdiction/PSGC identity, not
+// lat/lng) — this is City Hall's approximate location.
+export const SAN_FERNANDO_COORDINATES = {
+  latitude: 15.0344,
+  longitude: 120.689,
 } as const;
 
 const PHT_TIME_ZONE = 'Asia/Manila';

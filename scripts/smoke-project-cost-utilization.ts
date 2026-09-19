@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readNextRoute } from './smoke-next-route.ts';
 import { readFileSync } from 'node:fs';
 import {
   getCoveredProjectIds,
@@ -126,12 +127,7 @@ assert.ok(
   !plannedPages.some(page => page.path === '/statistics/project-spending'),
   '/statistics/project-spending must no longer be registered as a planned page'
 );
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/statistics\/project-spending"[\s\S]{0,80}element={<ProjectSpendingStatistics \/>}/,
-  '/statistics/project-spending must be a real <Route>'
-);
+readNextRoute('/statistics/project-spending');
 
 const megaMenus = mainNavigation.filter(item => item.sections);
 const spendingDestinations = megaMenus
@@ -145,7 +141,7 @@ assert.equal(
 assert.equal(spendingDestinations[0]?.kind, 'real');
 
 // 8. Project-detail sections limited to exactly the 19 matched projects.
-const projectDetailSource = readFileSync('src/pages/ProjectDetail.tsx', 'utf8');
+const projectDetailSource = readNextRoute('/projects/[projectId]');
 assert.match(
   projectDetailSource,
   /getObservationsForProject/,
@@ -179,10 +175,7 @@ assert.equal(
 
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
 // currency formatting, across the data module, page, and detail integration.
-const pageSource = readFileSync(
-  'src/pages/ProjectSpendingStatistics.tsx',
-  'utf8'
-);
+const pageSource = readNextRoute('/statistics/project-spending');
 for (const source of [pageSource, projectDetailSource]) {
   for (const forbidden of [
     'formatPeso(observation',
@@ -279,7 +272,7 @@ assert.match(
 );
 assert.match(
   pageSource,
-  /to="\/projects"[\s\S]{0,300}Browse all/,
+  /href="\/projects"[\s\S]{0,300}Browse all/,
   'the Browse-all-324 control must link to /projects'
 );
 assert.match(

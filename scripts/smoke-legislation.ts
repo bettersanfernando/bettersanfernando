@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import {
   getExecutiveOrders,
   getOrdinances,
@@ -8,6 +7,7 @@ import {
 } from '../src/data/civic/legislation.ts';
 import { getLegislationSummary } from '../src/data/civic/legislationSummary.ts';
 import { mainNavigation } from '../src/data/navigation.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
 const summary = getLegislationSummary();
 const executiveOrders = getExecutiveOrders();
@@ -60,7 +60,7 @@ for (const record of [
 
 assert.equal(mainNavigation.length, 7);
 
-const pageSource = readFileSync('src/pages/Legislation.tsx', 'utf8');
+const pageSource = readNextRoute('/legislation');
 assert.doesNotMatch(pageSource, /17 total laws|total laws/i);
 assert.doesNotMatch(pageSource, /no resolutions exist|City Council passed no/i);
 assert.match(pageSource, /legislation\/resolutions/);
@@ -76,9 +76,6 @@ for (const privateTerm of [
 assert.match(pageSource, /View all Executive Orders/);
 assert.match(pageSource, /View all Ordinances/);
 assert.match(pageSource, /View all Resolutions/);
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/legislation"/);
 
 console.log('[smoke-legislation] OK');
 console.log(

@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import { getAllProjectEvidence } from '../src/data/civic/projects.ts';
 import {
   BID_RESULT_SORTS,
@@ -66,7 +66,7 @@ assert.equal(
   records.length
 );
 
-const pageSource = readFileSync('src/pages/BidResults.tsx', 'utf8');
+const pageSource = readNextRoute('/procurement/bid-results');
 for (const privateField of [
   'source_sha256',
   'retrieval_status',
@@ -84,9 +84,6 @@ assert.ok(!pageSource.includes('evidence.facts'));
 assert.match(pageSource, /Approved Budget for the Contract \(ABC\)/);
 assert.match(pageSource, /Winning bid amount/);
 assert.match(pageSource, /slice\(0, visibleCount\)/);
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/procurement\/bid-results"/);
 
 console.log('[smoke-bid-results] OK');
 console.log(

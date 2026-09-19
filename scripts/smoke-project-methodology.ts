@@ -1,5 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
+import { readNextRoute } from './smoke-next-route.ts';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { mainNavigation } from '../src/data/navigation.ts';
@@ -69,7 +70,7 @@ assert.ok(
   'project methodology must not remain a planned page'
 );
 
-const pageSource = readFileSync('src/pages/ProjectMethodology.tsx', 'utf8');
+const pageSource = readNextRoute('/projects/methodology');
 for (const privateTerm of [
   'source_sha256',
   'recovery_queue',

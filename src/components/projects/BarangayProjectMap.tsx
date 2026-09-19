@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import {
   FullscreenControl,
@@ -10,16 +12,25 @@ import {
   type MapLayerMouseEvent,
 } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import mapLibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
 import type { BarangayProjectSummary } from '../../data/civic/projectMap';
+
+// Next.js port of BarangayProjectMap.tsx. Identical MapLibre setup and
+// event handling; the only change is the worker asset import — Vite's
+// `?url` suffix has no Next.js/webpack equivalent, so this uses the
+// standard `new URL(..., import.meta.url)` asset-URL pattern instead
+// (see docs/NEXTJS-MIGRATION-SPEC.md §10). Rendered only via a client-only
+// dynamic import (see ../../app/projects/map/project-map-view.tsx) so
+// this file — and the maplibre-gl bundle it pulls in — never loads on any
+// other route.
+setWorkerUrl(
+  new URL('maplibre-gl/dist/maplibre-gl-worker.mjs', import.meta.url).href
+);
 
 const SOURCE_ID = 'barangay-project-distribution';
 const FILL_LAYER_ID = 'barangay-project-fill';
 const OUTLINE_LAYER_ID = 'barangay-project-outline';
 const SELECTED_LAYER_ID = 'barangay-project-selected';
-
-setWorkerUrl(mapLibreWorkerUrl);
 
 interface BarangayProjectMapProps {
   boundaries: readonly BarangayFeature[];

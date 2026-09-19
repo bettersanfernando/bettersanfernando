@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 import { getProjects } from '../src/data/civic/projects.ts';
 import {
   CONTRACT_RECORD_SORTS,
@@ -87,7 +87,7 @@ assert.ok(
     .every(record => record.project.contract_amount === null)
 );
 
-const pageSource = readFileSync('src/pages/Contracts.tsx', 'utf8');
+const pageSource = readNextRoute('/procurement/contracts');
 for (const privateField of [
   'source_sha256',
   'retrieval_status',
@@ -107,12 +107,7 @@ assert.match(pageSource, /Winning bid amount/);
 assert.match(pageSource, /Contract amount/);
 assert.match(pageSource, /slice\(0, visibleCount\)/);
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/procurement\/contracts"/);
-assert.match(
-  appSource,
-  /path="\/transparency\/contracts"[\s\S]*to="\/procurement\/contracts"/
-);
+await assertNextRedirect('/transparency/contracts', '/procurement/contracts');
 
 console.log('[smoke-contracts] OK');
 console.log(

@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getLegislationSourceUrl,
   getOrdinances,
@@ -31,7 +31,7 @@ for (const ordinance of ordinances) {
   );
 }
 
-const pageSource = readFileSync('src/pages/Ordinances.tsx', 'utf8');
+const pageSource = readNextRoute('/legislation/ordinances');
 for (const privateField of [
   'sha256',
   'source_commit',
@@ -46,9 +46,6 @@ for (const privateField of [
 }
 assert.match(pageSource, /getOrdinances\(\)/);
 assert.match(pageSource, /Reference record only/);
-
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/legislation\/ordinances"/);
 
 console.log('[smoke-ordinances] OK');
 console.log(

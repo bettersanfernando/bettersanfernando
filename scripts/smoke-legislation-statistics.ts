@@ -1,6 +1,5 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import {
   getExecutiveOrders,
   getOrdinances,
@@ -8,6 +7,7 @@ import {
 } from '../src/data/civic/legislation.ts';
 import { getPublicRecordsArchiveCoverage } from '../src/data/civic/publicRecordsCoverage.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
 assert.equal(getExecutiveOrders().length, 13);
 assert.equal(getOrdinances().length, 11);
@@ -32,13 +32,7 @@ assert.ok(
   '/statistics/legislation must no longer be a planned page'
 );
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/statistics\/legislation"[\s\S]{0,40}element={<LegislationStatistics \/>}/
-);
-
-const pageSource = readFileSync('src/pages/LegislationStatistics.tsx', 'utf8');
+const pageSource = readNextRoute('/statistics/legislation');
 assert.match(pageSource, /getExecutiveOrders\(\)/);
 assert.match(pageSource, /getOrdinances\(\)/);
 assert.match(pageSource, /getResolutions\(\)/);

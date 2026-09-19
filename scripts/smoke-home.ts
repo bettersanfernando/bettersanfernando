@@ -1,18 +1,16 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { getGovernmentSummary } from '../src/data/civic/governmentSummary.ts';
 import { getHomeSummary } from '../src/data/civic/homeSummary.ts';
 import { getStatisticsSummary } from '../src/data/civic/statisticsSummary.ts';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-const pageSource = readFileSync('src/pages/Home.tsx', 'utf8');
+const pageSource = readNextRoute('/');
 const summary = getHomeSummary();
 const statistics = getStatisticsSummary();
 const government = getGovernmentSummary();
 
-assert.match(appSource, /path="\/" element={<Home \/>}/);
 assert.ok(!plannedPages.some(page => page.path === '/'));
 assert.equal(mainNavigation.length, 7);
 

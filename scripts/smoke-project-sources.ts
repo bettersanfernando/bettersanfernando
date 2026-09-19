@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 import {
   getAllProjectEvidence,
   getProjectById,
@@ -64,7 +64,7 @@ assert.deepEqual(
   'sorting must be deterministic'
 );
 
-const pageSource = readFileSync('src/pages/ProjectSources.tsx', 'utf8');
+const pageSource = readNextRoute('/projects/sources');
 for (const privateField of [
   'source_sha256',
   'retrieval_status',
@@ -78,12 +78,7 @@ for (const privateField of [
 }
 assert.ok(!/\b(?:item|evidence)\.facts\b/.test(pageSource));
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/projects\/sources"/);
-assert.match(
-  appSource,
-  /path="\/projects\/data-sources"[\s\S]*to="\/projects\/sources"/
-);
+await assertNextRedirect('/projects/data-sources', '/projects/sources');
 
 console.log('[smoke-project-sources] OK');
 console.log(`  evidence: ${evidence.length}; projects: ${projects.length}`);

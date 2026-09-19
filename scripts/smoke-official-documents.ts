@@ -1,5 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 import { readFileSync } from 'node:fs';
 import {
   getOfficialDocuments,
@@ -131,7 +132,7 @@ for (const forbidden of [
     `${forbidden} must remain unpublished`
   );
 
-const pageSource = readFileSync('src/pages/OfficialDocuments.tsx', 'utf8');
+const pageSource = readNextRoute('/transparency/documents');
 assert.match(pageSource, /overallPublicLimitation/);
 assert.match(pageSource, /target="_blank"/);
 assert.match(pageSource, /rel="noopener noreferrer"/);
@@ -167,15 +168,7 @@ const english = JSON.parse(
 assert.equal(english.plannedPages?.pages?.transparencyDocuments, undefined);
 assert.equal(english.navigation.items.officialDocuments, 'Official Documents');
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/transparency\/documents"[\s\S]{0,80}element={<OfficialDocuments \/>}/
-);
-assert.match(
-  appSource,
-  /path="\/government\/documents"[\s\S]{0,80}to="\/transparency\/documents"[\s\S]{0,40}replace/
-);
+await assertNextRedirect('/government/documents', '/transparency/documents');
 
 console.log('[smoke-official-documents] OK');
 console.log('  records: 9; current: 7; superseded: 2; groups: 3');

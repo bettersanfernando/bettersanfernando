@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 import { getCityDemographicsSource } from '../src/data/civic/demographics.ts';
 import { ProjectLifecycleStatus } from '../src/data/civic/projects.ts';
 import { getTransparencySourceInventory } from '../src/data/civic/transparencySources.ts';
@@ -49,21 +49,16 @@ for (const path of [
   );
 }
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(appSource, /path="\/transparency\/methodology"/);
-assert.match(
-  appSource,
-  /path="\/transparency\/verification"[\s\S]*to="\/transparency\/methodology#verification"[\s\S]*replace/
+await assertNextRedirect(
+  '/transparency/verification',
+  '/transparency/methodology#verification'
 );
-assert.match(
-  appSource,
-  /path="\/transparency\/limitations"[\s\S]*to="\/transparency\/methodology#limitations"[\s\S]*replace/
+await assertNextRedirect(
+  '/transparency/limitations',
+  '/transparency/methodology#limitations'
 );
 
-const pageSource = readFileSync(
-  'src/pages/TransparencyMethodology.tsx',
-  'utf8'
-);
+const pageSource = readNextRoute('/transparency/methodology');
 assert.match(pageSource, /id="verification"/);
 assert.match(pageSource, /id="limitations"/);
 assert.match(pageSource, /getTransparencySourceInventory/);

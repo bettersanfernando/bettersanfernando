@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getBarangayContactGroups,
   getBarangayContactsMetadata,
@@ -174,19 +174,9 @@ assert.ok(
 );
 assert.equal(barangayContactsDestination?.kind, 'real');
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/government\/barangay-contacts"[\s\S]{0,80}element={<GovernmentBarangayContacts \/>}/,
-  '/government/barangay-contacts must be a real <Route>'
-);
-
 // 11. The page renders search/filter, fallback text, and no call links for
 // missing numbers, without hardcoding hidden dataset internals.
-const pageSource = readFileSync(
-  'src/pages/GovernmentBarangayContacts.tsx',
-  'utf8'
-);
+const pageSource = readNextRoute('/government/barangay-contacts');
 assert.match(
   pageSource,
   /useQueryState/,

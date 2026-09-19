@@ -1,7 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 import { getUtilitiesWaterResources } from '../src/data/civic/utilitiesWaterResources.ts';
@@ -11,6 +10,7 @@ import {
   getServiceHref,
   getServices,
 } from '../src/data/civic/services.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
 const services = getServices();
 const blpd = services.filter(service => service.office.acronym === 'BLPD');
@@ -26,9 +26,9 @@ const pwdServices = cswdo.filter(
 const soloParentServices = cswdo.filter(
   service => getServiceCategory(service) === 'social-welfare'
 );
-const appSource = readFileSync('src/App.tsx', 'utf8');
-const servicesPageSource = readFileSync('src/pages/Services.tsx', 'utf8');
-const detailPageSource = readFileSync('src/pages/ServiceDetail.tsx', 'utf8');
+const servicesPageSource = readNextRoute('/services');
+const categoryPageSource = readNextRoute('/services/[category]');
+const detailPageSource = readNextRoute('/services/[category]/[serviceSlug]');
 
 // Order matches the balanced Business & Opportunity / Health & Community
 // Support / People & Civic Services / Infrastructure & Environment mega-menu
@@ -82,14 +82,11 @@ assert.deepEqual(
     .map(page => page.path.replace('/services/', '')),
   plannedCategorySlugs
 );
-assert.match(appSource, /path="\/services\/assistance-programs"/);
-assert.match(appSource, /path="\/services\/health-services"/);
-assert.match(appSource, /path="\/services\/:category\/:serviceSlug"/);
-assert.match(appSource, /path="\/services\/:slug"/);
 assert.match(
-  detailPageSource,
-  /<Navigate to={getServiceHref\(service\)} replace/
+  categoryPageSource,
+  /permanentRedirect\(getServiceHref\(service\)\)/
 );
+assert.match(detailPageSource, /generateStaticParams/);
 for (const slug of canonicalCategories) {
   assert.ok(
     servicesPageSource.includes(`'${slug}'`),
@@ -101,11 +98,6 @@ assert.ok(
     'livelihood' as (typeof canonicalCategories)[number]
   ),
   'livelihood must no longer be a canonical service category'
-);
-assert.doesNotMatch(
-  appSource,
-  /\/services\/livelihood/,
-  'the Livelihood route must no longer appear in App.tsx'
 );
 assert.doesNotMatch(
   servicesPageSource,

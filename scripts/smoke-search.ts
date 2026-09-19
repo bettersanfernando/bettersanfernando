@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readNextRoute } from './smoke-next-route.ts';
 import {
   getAllProjectEvidence,
   getProjects,
@@ -18,11 +18,9 @@ import {
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-const pageSource = readFileSync('src/pages/Search.tsx', 'utf8');
+const pageSource = readNextRoute('/search');
 const documents = getSearchDocuments();
 
-assert.match(appSource, /path="\/search" element={<Search \/>}/);
 assert.ok(!plannedPages.some(page => page.path === '/search'));
 assert.equal(mainNavigation.length, 7);
 assert.ok(!mainNavigation.some(item => item.href === '/search'));

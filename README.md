@@ -82,9 +82,9 @@ Published service categories:
 | Utilities & Water             |       9 | `/services/utilities-water`             |
 | Property & Taxes              |      11 | `/services/property-taxes`              |
 
-[`/government/hotlines`](src/pages/GovernmentHotlines.tsx),
-[`/government/barangay-contacts`](src/pages/GovernmentBarangayContacts.tsx),
-and [`/government/links`](src/pages/GovernmentOfficialLinks.tsx) are all
+[`/government/hotlines`](src/app/government/hotlines/page.tsx),
+[`/government/barangay-contacts`](src/app/government/barangay-contacts/GovernmentBarangayContacts.tsx),
+and [`/government/links`](src/app/government/links/GovernmentOfficialLinks.tsx) are all
 `PARTIAL`, not `READY`, and are deliberately separate directories: Government
 Hotlines is the citywide emergency/institutional contact list (11 contacts),
 Barangay Contacts is a barangay-scoped Barangay Secretary/BHERT directory (324
@@ -211,8 +211,7 @@ exact rules agents and contributors must follow.
 
 ## Technology
 
-- React 19, TypeScript, Vite
-- React Router, Tailwind CSS
+- Next.js App Router, React 19, TypeScript, Tailwind CSS
 - i18next for multilingual support
 - Zod-validated typed data access layer
 - pnpm as the package manager (`packageManager: pnpm@11.9.0`)
@@ -221,8 +220,8 @@ exact rules agents and contributors must follow.
 
 ```bash
 pnpm install       # Install dependencies
-pnpm dev           # Start the development server (localhost:5173)
-pnpm build         # TypeScript check + production build
+pnpm dev           # Start Next.js development (localhost:3000)
+pnpm build         # Next.js production build
 pnpm lint          # Run ESLint
 ```
 
@@ -247,14 +246,14 @@ transparency, statistics, government, search, and more) are listed in
 
 ```
 src/
-├── pages/                    # Route-level page components
-├── components/                # Reusable UI and layout components
+├── app/                        # Next.js App Router routes, layouts, and metadata
+├── components/                 # Reusable UI and layout components
 ├── data/
-│   ├── civic/                 # Typed, validated access layer for civic data
+│   ├── civic/                  # Typed, validated access layer for civic data
 │   │                            (the only sanctioned way to read civic data)
-│   └── generated/civic/       # Vendored frontend-safe export (never hand-edited)
-├── lib/                       # Utility functions (markdown/YAML loaders, etc.)
-└── i18n/                      # Internationalization setup
+│   └── generated/civic/        # Vendored frontend-safe export (never hand-edited)
+├── lib/                        # Utility functions (YAML loaders, metadata, etc.)
+└── i18n/                       # Internationalization setup
 
 scripts/                      # Data sync, validation, and smoke-test scripts
 docs/                         # Architecture, data-readiness, and roadmap docs

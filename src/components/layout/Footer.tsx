@@ -1,10 +1,14 @@
-import React from 'react';
+'use client';
+
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import { footerNavigation } from '../../data/navigation';
-import { Link } from 'react-router';
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-const Footer: React.FC = () => {
+// Next.js port of Footer.tsx — identical markup, next/link instead of
+// react-router's Link. Consumes the same ../../data/navigation source as
+// the Vite version; no navigation data is duplicated.
+export default function Footer() {
   const { t } = useTranslation('common');
 
   const getSocialIcon = (label: string) => {
@@ -47,7 +51,7 @@ const Footer: React.FC = () => {
               {footerNavigation.socialLinks.map(link => (
                 <Link
                   key={link.label}
-                  to={link.href}
+                  href={link.href}
                   className="text-gray-400 hover:text-white transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -65,7 +69,7 @@ const Footer: React.FC = () => {
                 {section.links.map(link => (
                   <li key={link.label}>
                     <Link
-                      to={link.href}
+                      href={link.href}
                       className="text-gray-400 hover:text-white text-sm transition-colors"
                     >
                       {link.label}
@@ -80,29 +84,25 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              {t('footer.copyright')}
+              {t('footer.copyright')}{' '}
+              <a
+                href="https://open-meteo.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Weather data by Open-Meteo.com
+              </a>
             </p>
             <div className="flex space-x-6">
-              {/* <a
-                href="/privacy"
-                className="text-gray-400 hover:text-white text-sm transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="/terms"
-                className="text-gray-400 hover:text-white text-sm transition-colors"
-              >
-                Terms of Use
-              </a> */}
               <Link
-                to="https://github.com/bettergovph/bettergov"
+                href="https://github.com/bettergovph/bettergov"
                 className="text-gray-400 hover:text-white text-sm transition-colors"
               >
                 Contribute at GitHub
               </Link>
               <Link
-                to="/sitemap"
+                href="/sitemap"
                 className="text-gray-400 hover:text-white text-sm transition-colors"
               >
                 Sitemap
@@ -119,6 +119,4 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

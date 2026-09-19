@@ -1,16 +1,14 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 import { getTransparencySummary } from '../src/data/civic/transparencySummary.ts';
 import { getTransparencySourceInventory } from '../src/data/civic/transparencySources.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
 const summary = getTransparencySummary();
 const inventory = getTransparencySourceInventory();
-const appSource = readFileSync('src/App.tsx', 'utf8');
-const pageSource = readFileSync('src/pages/Transparency.tsx', 'utf8');
+const pageSource = readNextRoute('/transparency');
 
-assert.match(appSource, /path="\/transparency" element={<Transparency \/>}/);
 assert.ok(!plannedPages.some(page => page.path === '/transparency'));
 assert.equal(mainNavigation.length, 7);
 

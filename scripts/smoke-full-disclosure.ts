@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { assertNextRedirect, readNextRoute } from './smoke-next-route.ts';
 import {
   getFullDisclosureMetadata,
   getFullDisclosureRecords,
@@ -154,20 +154,13 @@ assert.equal(
   'Transparency Documents must be implemented'
 );
 
-const appSource = readFileSync('src/App.tsx', 'utf8');
-assert.match(
-  appSource,
-  /path="\/transparency\/full-disclosure"[\s\S]{0,80}element={<FullDisclosure \/>}/,
-  '/transparency/full-disclosure must be a real <Route>'
-);
-assert.match(
-  appSource,
-  /path="\/transparency\/archive"[\s\S]{0,80}to="\/transparency\/full-disclosure"[\s\S]{0,40}replace/,
-  '/transparency/archive must permanently redirect to /transparency/full-disclosure'
+await assertNextRedirect(
+  '/transparency/archive',
+  '/transparency/full-disclosure'
 );
 
 // 10. External-link safety and filter/grouping behavior on the page.
-const pageSource = readFileSync('src/pages/FullDisclosure.tsx', 'utf8');
+const pageSource = readNextRoute('/transparency/full-disclosure');
 assert.match(
   pageSource,
   /target="_blank"/,

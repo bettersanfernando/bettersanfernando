@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import {
   CityOfficesFileSchema,
   getCityOfficeById,
@@ -13,12 +12,12 @@ import {
 } from '../src/data/civic/legislation.ts';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
+import { readNextRoute } from './smoke-next-route.ts';
 
 const offices = getCityOffices();
 const summary = getGovernmentSummary();
-const pageSource = readFileSync('src/pages/Government.tsx', 'utf8');
+const pageSource = readNextRoute('/government');
 const normalizedPageSource = pageSource.replace(/\s+/g, ' ');
-const appSource = readFileSync('src/App.tsx', 'utf8');
 
 assert.equal(summary.officeRecords, offices.length);
 assert.equal(summary.executiveOrders, getExecutiveOrders().length);
@@ -129,11 +128,7 @@ for (const officeId of ['city-information-office', 'cicto']) {
   );
 }
 
-assert.match(appSource, /path="\/government" element={<Government \/>}/);
-assert.match(
-  appSource,
-  /path="\/government\/offices\/:officeId"[\s\S]*element={<GovernmentOfficeDetail \/>}/
-);
+readNextRoute('/government/offices/[officeId]');
 assert.ok(!plannedPages.some(page => page.path === '/government'));
 assert.ok(!plannedPages.some(page => page.path === '/government/structure'));
 assert.equal(mainNavigation.length, 7);
@@ -149,10 +144,10 @@ for (const href of [
 }
 
 for (const href of ['/transparency/sources', '/transparency/methodology']) {
-  assert.match(pageSource, new RegExp(`to=["']${href}["']`));
+  assert.match(pageSource, new RegExp(`href=["']${href}["']`));
 }
 
-assert.doesNotMatch(pageSource, /to=["']\/government\/structure["']/);
+assert.doesNotMatch(pageSource, /href=["']\/government\/structure["']/);
 assert.doesNotMatch(pageSource, /22 City Government offices/i);
 assert.match(pageSource, /published office records/i);
 assert.match(pageSource, /not (?:an|the) official City\s+Government website/i);

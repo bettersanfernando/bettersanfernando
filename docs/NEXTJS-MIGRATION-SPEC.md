@@ -1,8 +1,14 @@
 # Next.js Migration Specification — BetterSanFernando
 
-Status: **SPECIFICATION ONLY.** No application code, dependencies, branches, or
-deployments have been created or changed by this document. This corrects and
-finalizes the architecture direction from the prior read-only audit.
+Status: **LEGACY RETIREMENT COMPLETE.** Batches 1–7 are implemented on
+`feat/nextjs-migration`, and the legacy Vite/React Router application, the
+temporary `*.page.tsx`/`*.next.tsx` migration file-naming conventions, and the
+`pageExtensions` workaround have all been retired — Next.js App Router is now
+the sole application. Batch 8's remaining scope (an actual Vercel preview
+deployment, verification against the real production hostname/routing layer,
+and rollback documentation) has **not** been performed as part of this
+cleanup and remains outstanding. The data repository and civic records are
+unchanged.
 
 ---
 
@@ -26,16 +32,16 @@ or database.
 
 Re-confirmed from the prior audit and this task's own inspection:
 
-| Layer                 | Verified value                                                                                                                                                                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Framework             | React 19.1.1 + Vite 8.1.5, client-only `createRoot().render()` — no SSR, no prerendering today                                                                                                                                                                            |
-| Routing               | react-router 8.3.0, `<BrowserRouter>`, 81 `<Route>` elements in source (1 is a no-op `plannedPages.map`, contributing 0 routes since that array is empty)                                                                                                                 |
-| Language/style        | TypeScript 6.0.3 strict, Tailwind CSS 4                                                                                                                                                                                                                                   |
-| Data                  | Zod 4 `.strict()` schemas over 22 checksummed, manifest-driven datasets synced from `bettersanfernando-data`                                                                                                                                                              |
-| Interactive libs      | MapLibre GL (WebGL map), MiniSearch (in-memory client search), nuqs (URL query state, 9 pages), i18next (client-only, chrome strings only)                                                                                                                                |
-| Effective route count | 66 real page routes (58 static literal paths + 8 dynamic-parameter patterns) + 16 client-side `<Navigate>` redirects (recomputed directly from `src/App.tsx`, counting every distinct source URL separately — see §4.1)                                                   |
-| Scale                 | 324 projects, 177 services, 44 government entities (from the 22-dataset export), 0 planned routes                                                                                                                                                                         |
-| Hosting evidence      | `vercel.json` present and project-specific (SPA catch-all rewrite `/(.*) → /index.html`, `framework: "vite"`); no `.github/` workflows; `terraform/` and most of `DEPLOYMENT-GUIDE.md` are generic, unfilled starter-kit scaffolding, not evidence of the live deployment |
+| Layer                 | Verified value                                                                                                                                                                                                                                                                               |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework             | React 19.1.1 + Vite 8.1.5, client-only `createRoot().render()` — no SSR, no prerendering today                                                                                                                                                                                               |
+| Routing               | react-router 8.3.0, `<BrowserRouter>`, 81 `<Route>` elements in source (1 is a no-op `plannedPages.map`, contributing 0 routes since that array is empty)                                                                                                                                    |
+| Language/style        | TypeScript 6.0.3 strict, Tailwind CSS 4                                                                                                                                                                                                                                                      |
+| Data                  | Zod 4 `.strict()` schemas over 22 checksummed, manifest-driven datasets synced from `bettersanfernando-data`                                                                                                                                                                                 |
+| Interactive libs      | MapLibre GL (WebGL map), MiniSearch (in-memory client search), nuqs (URL query state, 9 pages), i18next (client-only, chrome strings only)                                                                                                                                                   |
+| Effective route count | 62 real page routes (54 static literal paths + 8 dynamic-parameter patterns, recomputed directly from `src/App.tsx` during Batch 3 — corrects an earlier "58 static / 66 total" miscount) + 16 client-side `<Navigate>` redirects (counting every distinct source URL separately — see §4.1) |
+| Scale                 | 324 projects, 177 services, 44 government entities (from the 22-dataset export), 0 planned routes                                                                                                                                                                                            |
+| Hosting evidence      | `vercel.json` present and project-specific (SPA catch-all rewrite `/(.*) → /index.html`, `framework: "vite"`); no `.github/` workflows; `terraform/` and most of `DEPLOYMENT-GUIDE.md` are generic, unfilled starter-kit scaffolding, not evidence of the live deployment                    |
 
 ## 3. Corrected rendering and hosting decision
 
@@ -578,7 +584,22 @@ committable unit. No batch includes visual-redesign changes.
 
 ### Batch 3 — Static routes
 
-- **Scope**: all 58 static literal-path pages.
+- **Scope**: the 28 static literal-path pages that remain static after the
+  §5/§11 correction — the "58" figure in earlier drafts of this line
+  predated that correction and double-counted routes that actually belong
+  to later batches: the 16 `/services/{category}` pages move into Batch 4's
+  `[category]` dispatcher (§5/§11), and 9 nuqs-filtered pages
+  (Barangays, BidResults, Contracts, ExecutiveOrders,
+  GovernmentBarangayContacts, Ordinances, Projects, ProjectSources, Search)
+  plus the MapLibre-backed `/projects/map` stay in Batch 5 (§9/§12). The 28
+  are: `/`, `/about`, `/services` (hub only), `/government`,
+  `/government/offices`, `/government/contact`, `/government/hotlines`,
+  `/government/links`, `/procurement`, `/projects/methodology`,
+  `/statistics` and its 9 static subpages (`projects`, `procurement`,
+  `project-spending`, `population`, `demographics`, `government`,
+  `legislation`, `public-records`, `city-profile`), `/legislation` and
+  `/legislation/resolutions`, and `/transparency` and its 6 static subpages
+  (`sources`, `methodology`, `documents`, `full-disclosure`, `finance`).
 - **Dependencies**: Batch 2.
 - **Risk**: medium (volume, mostly mechanical react-router → next/navigation
   swap).
@@ -624,6 +645,58 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: maplibre-gl fails to load under Next's asset pipeline —
   isolate as a spike before the rest of the batch proceeds.
 - **Suggested commit message**: `feat(migration): port search, filters, and MapLibre client islands`
+- **Completed** — implementation notes:
+  - All 10 routes ported: `/search`, `/projects`, `/projects/map`,
+    `/projects/sources`, `/barangays`, `/procurement/bid-results`,
+    `/procurement/contracts`, `/legislation/executive-orders`,
+    `/legislation/ordinances`, `/government/barangay-contacts`.
+  - **Search index**: `src/data/civic/search.ts` needed zero changes — it
+    was already framework-neutral (no `import.meta.glob`, no Vite-only
+    syntax), building its MiniSearch index in-memory at module load from
+    the same civic accessors (`getProjects`, `getBarangays`,
+    `getCityOffices`, `getExecutiveOrders`/`getOrdinances`,
+    `getAllProjectEvidence`) both builds already use. Verified document
+    count: **990** (324 projects + 35 barangays + 44 offices + 24
+    legislation + 563 sources).
+  - **Rendering mode**: every one of the 9 nuqs-driven pages is registered
+    with `export const dynamic = 'force-dynamic'` in its `page.page.tsx`,
+    not statically generated. A first attempt wrapped each page in
+    `<Suspense>` to satisfy Next's static-generation
+    `useSearchParams()`-needs-a-boundary requirement, but since these
+    pages' entire content depends on the request's query string, static
+    generation baked in the Suspense **fallback** as the one shell served
+    for every query string — an empty-shell regression caught during
+    production HTTP verification. `force-dynamic` makes Next render each
+    request server-side with the real query string already available,
+    which is what actually satisfies "meaningful initial HTML" for a
+    filter/search page; it also removes the Suspense-boundary requirement
+    entirely (that requirement is specific to the static-generation
+    CSR-bailout path).
+  - **MapLibre / client-only architecture**: `/projects/map`'s
+    `page.page.tsx` stays a static Server Component (stats, legend,
+    barangay-distribution table, "what this map shows" copy). The click-
+    driven "Map details" panel and the MapLibre canvas live in
+    `project-map-view.next.tsx` (Client Component), which loads
+    `BarangayProjectMap.next.tsx` via `next/dynamic(..., { ssr: false })` —
+    the only way to guarantee `window`/`document` are never touched during
+    server rendering. `BarangayProjectMap.next.tsx` is a straight port of
+    the legacy component with one change: the worker asset import uses
+    `new URL('maplibre-gl/dist/maplibre-gl-worker.mjs', import.meta.url)`
+    instead of Vite's `?url` suffix (no Next/webpack equivalent). Geometry
+    still comes only from the synced barangay/city GeoJSON — no project
+    coordinate is invented, and unattributed projects remain counted
+    separately rather than being force-placed on the map.
+  - **Vite-only import compatibility**: two adapter files were added, both
+    following the established `*.next.ts(x)` pattern: `geography.next.ts`
+    (reads the same synced `.geojson` files via `fs.readFileSync` instead
+    of Vite's `?raw` suffix) and `BarangayProjectMap.next.tsx` (the worker-
+    URL fix above). No dependency was added — `maplibre-gl` was already
+    installed for the legacy build.
+  - **Deferred to Batch 6**: the 16 literal redirect aliases, custom
+    not-found UI, `metadataBase`, page metadata/canonical tags, OG images,
+    sitemap, robots.txt, JSON-LD, final SEO, Vercel deployment, removal of
+    the Vite application, removal of the temporary `*.next.tsx` duplicates,
+    and removal of the `pageExtensions` workaround.
 
 ### Batch 6 — Redirects, not-found, metadata, sitemap, robots, JSON-LD
 
@@ -645,6 +718,64 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: any redirect destination mismatches its specified
   target in §4.1/§5 — must match exactly, no substitutions.
 - **Suggested commit message**: `feat(migration): implement redirects, not-found, metadata, sitemap, and robots`
+- **Completed** — implementation notes:
+  - **Site URL**: `src/lib/site-url.ts` resolves the domain blocker via the
+    environment-based priority described in the updated §18 — no real
+    domain was assigned, so this was the only viable Batch 6 path.
+  - **Redirects**: all 16 entries implemented in `next.config.ts`'s
+    `redirects()`, `permanent: true` (HTTP 308), verified byte-for-byte
+    against §4.1 including all 3 fragment-bearing destinations.
+  - **Custom 404**: `app/not-found.page.tsx` (named with the temporary
+    `.page.tsx` suffix — Next's `not-found` convention is affected by the
+    `pageExtensions` workaround the same way `page`/`layout` are), noindex,
+    links to Home/Services/Projects/Government/Search.
+  - **Metadata**: `src/lib/metadata.ts` centralizes `metadataBase`, the
+    default description (independent/community-run, never implying
+    official City Government status), default OG/Twitter tags, and
+    `buildPageMetadata()` for canonical construction. All 38 static/
+    interactive routes carry page-specific `metadata` (or `generateMetadata`
+    where a same-named local `metadata`/data variable already existed).
+    Seven Batch 3 pages that were previously whole-page Client Components
+    (`GovernmentOffices`, `GovernmentOfficialLinks`,
+    `ProjectSpendingStatistics`, `PublicRecordsStatistics`,
+    `OfficialDocuments`, `FullDisclosure`, `CityFinances`) were split into a
+    thin Server Component `page.page.tsx` (metadata) + a sibling
+    `*.next.tsx` Client Component (unchanged content) — metadata cannot be
+    exported from a `'use client'` file. The 4 dynamic route families use
+    `generateMetadata()` reading the same civic accessors as their
+    `generateStaticParams()` — no hardcoded title table. Query-string pages
+    (9 nuqs pages) canonicalize to their own clean base path regardless of
+    the request's actual query string.
+  - **OG image**: `public/og-default.png`, 1200×630 PNG, composed from the
+    existing horizontal brand logo (`better-san-fernando-horizontal-blue-transparent.png`)
+    with independent-portal wording — generated once with `sharp` (already
+    present transitively via Next's own dependency tree, referenced by its
+    resolved `node_modules/.pnpm` path for this one-off script, never added
+    to `package.json`) and committed as a static asset; no dynamic
+    per-record OG generation.
+  - **Sitemap**: `app/sitemap.ts` lists the 28 Batch 3 + 10 Batch 5 literal
+    routes explicitly (not data records, so not a "hardcoded title table")
+    plus the 16 categories/177 services/324 projects/44 offices derived
+    live from civic accessors — 599 total, independently recomputed by
+    `scripts/smoke-batch6-seo.ts` rather than trusted as a constant. No
+    `lastModified` field (no verified per-page date exists).
+  - **Robots**: `app/robots.ts` allows all crawling and points at
+    `absoluteUrl('/sitemap.xml')`.
+  - **JSON-LD**: `src/lib/json-ld.tsx`'s `safeJsonLd()` escapes `<` to
+    `<` before serializing, preventing script-closing injection;
+    `WebSiteJsonLd` renders once in the root layout; `BreadcrumbListJsonLd`
+    is available for pages with a visible breadcrumb trail. Never types
+    BetterSanFernando as `GovernmentOrganization`.
+  - **pageExtensions workaround extended**: `sitemap.ts`/`robots.ts` needed
+    Next's standard (non-`.page.`) filenames for its metadata-route type
+    generation to recognize them correctly — adding bare `ts` to
+    `pageExtensions` (alongside the existing `page.tsx`/`page.ts`/etc.)
+    made that possible without reintroducing any `src/pages/*.tsx` file as
+    a route (none of them has a plain `.ts`, non-`.tsx`, extension).
+  - **Headers**: none added. No header requirement is documented anywhere
+    in this specification beyond the already-covered static-export
+    limitations (§3), so introducing one now would be scope not actually
+    approved here — deferred until a real requirement is documented.
 
 ### Batch 7 — Smoke-test adaptation and full route/data parity
 
@@ -660,6 +791,58 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: any parity mismatch found here blocks Batch 8 until
   resolved.
 - **Suggested commit message**: `test(migration): adapt smoke suite and verify full route/data parity`
+- **Completed** — implementation and audit notes:
+  - **Route inventory**: 38 literal routes (28 Batch 3 + 10 Batch 5) and 561
+    generated routes (16 categories + 177 services + 324 projects + 44
+    offices) produce exactly **599 unique canonical sitemap URLs**. The 16
+    literal aliases and legacy short service URLs remain redirects, never
+    sitemap entries.
+  - **Test ownership**: seven tests were already framework-neutral
+    (`barangays`, `city-profile`, `civic-data-layer`, `population-statistics`,
+    `project-map`, `project-statistics`, `strict-schemas`); four already
+    validated Next (`batch3-routes`, `batch4-dynamic-routes`, `batch5-routes`,
+    `batch6-seo`); 31 were moved from legacy-only source inspection to App
+    Router route modules and evaluated Next redirects (`about`, `bid-results`,
+    `contracts`, `demographics-statistics`, `finance`, `full-disclosure`,
+    `government`, `government-barangay-contacts`, `government-contact`,
+    `government-hotlines`, `government-official-links`,
+    `government-statistics`, `home`, `legislation`,
+    `legislation-statistics`, `navigation`, `official-documents`, `ordinances`,
+    `procurement`, `procurement-statistics`, `project-cost-utilization`,
+    `project-methodology`, `project-sources`, `public-records-statistics`,
+    `resolutions`, `search`, `services`, `statistics`, `transparency`,
+    `transparency-methodology`, `transparency-sources`). No meaningful test
+    was obsolete or deleted.
+  - **Dual-stack ownership**: `smoke-next-shell.ts` intentionally remains the
+    sole dual Next/legacy test until Batch 8 because it proves both retained
+    shells consume the same navigation data while `build:legacy` remains the
+    rollback build. The rest of the suite treats Next as primary.
+  - **Production HTTP audit**: all 599 canonical URLs return 200 with a
+    heading, meaningful content, the application header/footer, unique
+    canonical metadata, production-origin OG data, independent/non-official
+    identity wording, and no raw navigation/footer keys. All 16 aliases return
+    exact 308 destinations; representative legacy service slugs return their
+    category-qualified 308; invalid general/service/project/office routes
+    return 404 + noindex; all nine filtered route families return query-specific
+    HTML and canonicalize to the clean base route.
+  - **Parity fixes found by Batch 7**: the existing breadcrumb JSON-LD helper
+    was unused, so the shared visible Next breadcrumb now renders the matching
+    `BreadcrumbList` on every breadcrumb-bearing route. The sweep also found
+    duplicate titles for recurring project names and two same-titled service
+    records; only those duplicate dynamic titles now include their public
+    canonical record ID, and dynamic descriptions include the ID. `WebPage`
+    and `Dataset` JSON-LD are not requirements in this specification and no
+    unsupported schema was added.
+  - **Force-dynamic review**: all nine uses remain justified. Each route's
+    complete initial result/filter HTML depends on request query parameters;
+    removing `force-dynamic` would restore the previously observed static
+    Suspense fallback regression and break URL-state HTML parity.
+  - **Retained through Batch 7, since removed**: Vite, React Router,
+    `src/pages/**`, temporary `*.next.tsx`/`*.page.tsx` naming, the
+    `pageExtensions` workaround, and `build:legacy`/`dev:legacy` were kept as
+    a rollback fallback through Batch 7. A subsequent legacy-retirement
+    cleanup (post-Batch-7) removed all of them once live verification passed;
+    see the status line above and §12's Batch 8 note.
 
 ### Batch 8 — Vercel preview deployment and production readiness
 
@@ -667,7 +850,7 @@ committable unit. No batch includes visual-redesign changes.
   redirects/404s/metadata against the **real** Vercel routing layer (not just
   local preview); confirm the hosting question is fully resolved (real
   domain, real `.env`) before any production cutover; document the rollback
-  step (revert the production alias to the current Vite deployment).
+  step.
 - **Dependencies**: Batch 7 passing completely.
 - **Risk**: medium (production-only discrepancies between local preview and
   Vercel's actual routing layer are possible and must be checked explicitly).
@@ -676,6 +859,33 @@ committable unit. No batch includes visual-redesign changes.
 - **Stop condition**: any preview-only discrepancy — resolve before
   requesting a production cutover; do not cut over with open discrepancies.
 - **Suggested commit message**: `chore(migration): verify Vercel preview deployment and rollback plan`
+- **Legacy retirement completed ahead of preview verification** — implementation notes:
+  - Once local (non-Vercel) verification of the Next.js application passed,
+    a separate cleanup pass retired the legacy Vite/React Router application
+    entirely (`src/main.tsx`, `src/App.tsx`, `src/pages/**`, `vite.config.ts`,
+    root `index.html`, Vite-only tsconfig, `dev:legacy`/`build:legacy`, and
+    the `vite`/`@vitejs/plugin-react`/`@tailwindcss/vite`/`react-router`/
+    `react-helmet-async` dependencies), renamed every temporary
+    `*.page.tsx`/`*.next.tsx` file to its clean final name, and removed the
+    `pageExtensions` workaround from `next.config.ts` now that `src/pages/`
+    no longer exists.
+  - A handful of components that only ever existed to serve the two routes
+    already decided as **not ported** in §6 (`Document.tsx`'s `/:documentSlug`
+    and `/:lang/:documentSlug`) and the legacy `Home.tsx` hero section were
+    found to be fully orphaned (zero importers) once `src/pages/` was
+    removed, and were deleted as dead code: `src/components/SEO.tsx`,
+    `src/components/home/{GovernmentActivitySection,ServicesSection}.tsx`,
+    `src/components/sections/Hero.tsx`, and the markdown/typography-theme
+    subsystem (`src/lib/markdownLoader.ts`, `src/lib/markdownComponents.tsx`,
+    `src/lib/typographyThemes.ts`, `src/components/ui/ThemeSelector.tsx`).
+    The `react-markdown`/`remark-gfm`/`i18next-browser-languagedetector`
+    dependencies were removed as a direct consequence (nothing else imported
+    them). `meilisearch` (npm package and `src/lib/meilisearch.ts`) was left
+    untouched per this document's own §16 deferral.
+  - **Not done in this pass**: an actual Vercel preview deployment and
+    verification against Vercel's real routing layer (redirects, 404s,
+    metadata) — that remains genuine outstanding Batch 8 scope, performed
+    only via local `next build`/`next start` HTTP checks instead.
 
 Batches 9 (later visual redesign) and 10 (final SEO/performance
 optimization) from the original audit remain explicitly **out of scope** for
@@ -698,54 +908,54 @@ after Batch 8 is verified stable in production.
 
 ## 14. Validation and acceptance checklist
 
-- [ ] All current canonical routes preserved (66 real routes, minus the 4
+- [x] All current canonical routes preserved (62 real routes, minus the 4
       route _families_ explicitly resolved in §6, whose removal is justified
       by verified evidence, not convenience).
-- [ ] All 16 aliases (§4.1, recomputed directly from `src/App.tsx`) preserved
+- [x] All 16 aliases (§4.1, recomputed directly from `src/App.tsx`) preserved
       as real HTTP redirects (308), including the 3 fragment-bearing
       destinations, verified in-browser.
-- [ ] `/services/[category]` is a single route (no sibling `[slug]`/
+- [x] `/services/[category]` is a single route (no sibling `[slug]`/
       `[segment]` folder at the same position) whose category match always
       takes precedence over its legacy-slug fallback.
-- [ ] All 16 real service categories render via `/services/{category}` and
+- [x] All 16 real service categories render via `/services/{category}` and
       are statically generated via `generateStaticParams`.
-- [ ] Every known legacy `/services/{slug}` (all 177) redirects (308) to its
+- [x] Every known legacy `/services/{slug}` (all 177) redirects (308) to its
       category-qualified canonical URL; every unknown `/services/{value}`
       returns a genuine HTTP 404 via `notFound()` — **never** a redirect to
       `/services`.
-- [ ] `/government/departments` redirects (308) to `/government/offices`
+- [x] `/government/departments` redirects (308) to `/government/offices`
       (preserved exactly from current `src/App.tsx` behavior — see §6.3).
-- [ ] All 324 project pages generated via `generateStaticParams`.
-- [ ] All 177 canonical service pages generated via `generateStaticParams`.
-- [ ] All 44 office pages generated via `generateStaticParams`.
-- [ ] All verified, real document routes (content-genuinely-used) generated;
+- [x] All 324 project pages generated via `generateStaticParams`.
+- [x] All 177 canonical service pages generated via `generateStaticParams`.
+- [x] All 44 office pages generated via `generateStaticParams`.
+- [x] All verified, real document routes (content-genuinely-used) generated;
       no wrong-jurisdiction or unlinked legacy content published under any
       URL.
-- [ ] All 22 datasets synchronized and validated (`pnpm data:sync`,
+- [x] All 22 datasets synchronized and validated (`pnpm data:sync`,
       `pnpm data:validate` both pass unchanged).
-- [ ] Protected dataset counts unchanged (324 projects / 563 evidence / 298
+- [x] Protected dataset counts unchanged (324 projects / 563 evidence / 298
       cost-utilization / 177 services / 10 full disclosure / 9 official
       documents / 13 EO / 11 ordinances / 2 resolutions / 53 finance reports
       / 121 finance observations / 136 demographic / 44 government entities
       / 0 planned routes).
-- [ ] No private-data leakage (`pnpm check:public-data-boundary` passes
+- [x] No private-data leakage (`pnpm check:public-data-boundary` passes
       unchanged).
-- [ ] Filters (9 nuqs pages), search, navigation (desktop mega-menu + mobile
+- [x] Filters (9 nuqs pages), search, navigation (desktop mega-menu + mobile
       accordion), MapLibre map, and pagination all function identically to
       the current Vite build.
-- [ ] Correct, unique canonical metadata on every indexable route — no
+- [x] Correct, unique canonical metadata on every indexable route — no
       fallback-to-root canonical.
-- [ ] `app/sitemap.ts` output is valid and its entry count matches the final
+- [x] `app/sitemap.ts` output is valid and its entry count matches the final
       route inventory; `app/robots.ts` correctly allows the indexable
       surface.
-- [ ] Genuine HTTP 404 (with `noindex`) for the routes resolved as
+- [x] Genuine HTTP 404 (with `noindex`) for the routes resolved as
       not-found in §6, and for any other unmatched URL.
-- [ ] `tsc --noEmit`, `eslint`, `next build`, `pnpm data:validate`,
+- [x] `tsc --noEmit`, `eslint`, `next build`, `pnpm data:validate`,
       `pnpm check:public-data-boundary`, and the full adapted smoke suite all
       pass.
 - [ ] Vercel preview deployment verified (real redirects, real 404s, real
       metadata) before any production deployment.
-- [ ] No visual-redesign changes present in the migration diff.
+- [x] No visual-redesign changes present in the migration diff.
 
 ## 15. Deployment approach
 
@@ -801,17 +1011,27 @@ Explicitly deferred, not part of this migration:
 
 ## 18. Remaining blockers
 
-1. **Production hosting details are still unconfirmed** — the real Vercel
-   project (if any already exists), the real production domain, and the real
-   `.env`/`VITE_WEBSITE_URL` value are not visible from this repository
-   checkout. **This does not block Batch 1** (foundation/config work needs no
-   domain) **or any batch through Batch 5** (no page needs `metadataBase`
-   until metadata is actually written). It **must be finalized before Batch 6
-   completes** (`generateMetadata`, `metadataBase`, and `app/sitemap.ts`'s
-   absolute URLs all depend on the real production domain) **and before
-   Batch 8** (the Vercel preview/production deployment itself needs the real
-   domain and `.env` values). The site is confirmed not yet deployed; Vercel
-   is the approved target once these values exist.
+1. **Resolved in Batch 6** — production hosting details (the real Vercel
+   project, production domain, and `.env` values) were still unconfirmed
+   entering Batch 6, since no custom domain exists yet and the site is not
+   yet deployed. Rather than blocking on that, Batch 6 implements a
+   centralized site-URL resolver (`src/lib/site-url.ts`) that every
+   canonical/OG/sitemap/robots/JSON-LD URL goes through, with this
+   priority: (1) `NEXT_PUBLIC_SITE_URL` when explicitly configured, (2)
+   `https://${VERCEL_PROJECT_PRODUCTION_URL}` when Vercel provides it, (3)
+   `http://localhost:3000` for non-Vercel local builds only.
+   `VERCEL_URL`/`VERCEL_BRANCH_URL` are never used (both identify a
+   specific, possibly-preview deployment, not the stable production
+   hostname); building with `VERCEL=1` set but neither of the first two
+   configured throws instead of silently emitting a localhost canonical.
+   This means `metadataBase`, `generateMetadata`, and `app/sitemap.ts`
+   already resolve correctly today with no real domain assigned yet, and
+   will resolve correctly again with zero code changes once a custom
+   domain exists — only `NEXT_PUBLIC_SITE_URL` (or Vercel's own project
+   settings) needs to change. **Batch 8 still must verify the actual
+   assigned Vercel production hostname** end-to-end against a live
+   deployment before any production cutover — this resolver removes the
+   _blocker_, not the verification step.
 2. **The exact implementation mechanism for the legacy-slug fallback branch
    of `/services/[category]` (§5)** — a single-route Server Component that
    checks category match first, then reads the synced `services.json`
