@@ -1,73 +1,140 @@
 # BetterSanFernando Frontend Design System
 
-Practical visual reference for implementing and redesigning BetterSanFernando
-pages. This document describes what is **actually implemented and approved**
-today — it does not invent aspirational styles.
+This is the single authoritative frontend design guide for BetterSanFernando.
+It documents the current, live visual direction: an editorial, information-first
+civic design built on typography, borders, and whitespace rather than blue
+hero backgrounds and card grids.
 
-## Canonical Reference Implementations
+**[`/transparency`](../src/app/transparency/page.tsx) is the first reference
+implementation of this direction** — editorial hierarchy, pure-white canvas,
+Inter typography, sharp borders, restrained blue accents, minimal
+radius/shadows, and information-first layouts. Read it alongside this
+document to see the rules applied, but **follow the system described here
+for new work, not `/transparency`'s exact composition.** A future page
+should use whichever patterns in this document fit its own information
+hierarchy, not copy `/transparency`'s section-by-section layout.
 
-BetterSanFernando currently has **two** approved design-standard reference
-pages. Together they establish the current visual direction; which one to
-lean on depends on what kind of page you're building.
+Other routes (Services, Projects, Government, the population/statistics
+pages, and the rest of the site) predate this direction and still use an
+earlier, more decorative pattern set — full-width blue heroes by default,
+soft-blue icon badges on every row, heavily rounded shadowed cards. They are
+not currently held to this document and will be migrated to it
+progressively, page by page, as they're redesigned. When redesigning any
+existing page, or building a new one, follow this document.
 
-### `/statistics/population`
+## Why This Direction
 
-(`src/app/statistics/population/page.tsx` +
-`src/app/statistics/population/BarangayTable.tsx`)
+The earlier pattern set leaned on a strong, repeated formula: a full-width
+deep-blue hero on nearly every page, soft-blue rounded icon badges on every
+row, and white bordered/shadowed cards as the default building block. That
+pattern works, but applied everywhere it starts to read as decorative rather
+than informational — every page announces itself the same way regardless of
+what it actually contains.
 
-Use this as the main reference for **data-heavy/statistical pages**:
+This direction is a course-correction, not a rebrand: same brand blue, same
+Inter/Roboto Mono type system, same civic-trust content model (sources,
+provenance, limitations). What changed is **emphasis** — from "blue
+container + icon badge" as the default surface, to typography, borders, and
+whitespace doing most of the structural work, with blue reserved for things
+that are actually interactive or actually need emphasis.
 
-- strong data hierarchy and KPI presentation
-- simple, real-data visualization (proportional bars, not decorative charts)
-- searchable/sortable data tables
-- provenance/source sections
-- structured civic-data presentation generally
-
-### `/services`
-
-(`src/app/services/page.tsx` + `src/app/services/service-search.tsx`)
-
-Use this as the main reference for **civic hub / directory pages**:
-
-- civic hub and service-discovery UX
-- search-first interaction
-- a two-column hero composition (editorial copy + a functional tool)
-- responsive search behavior that changes presentation by breakpoint, not
-  just by shrinking
-- category/directory navigation
-- restrained Lucide icon use
-- a unified directory/list surface instead of a wall of separate cards
-
-See §20 for the Services-specific patterns in more detail.
-
-### Shared visual language
-
-Both pages share the same overall BetterSanFernando system, documented in
-full below: Inter as the primary UI font, Roboto Mono for selective
-editorial eyebrows, the deep civic blue / interactive blue / soft blue
-palette, restrained neutral surfaces, thin borders, controlled radii,
-minimal shadows, intentional spacing, editorial (not dashboard-heavy)
-presentation, useful Lucide icons only, real functional controls,
-responsive layouts designed intentionally for mobile, integrated
-provenance/source transparency, and consistent accessibility and
-keyboard-focus treatment.
-
-**These are design standards and reference implementations, not layout
-templates.** Do not require a future page to copy Population's exact
-hero/KPI/table structure, and do not require it to copy Services' exact
-two-column hero/search/directory structure. A future page should use
-whichever patterns fit its own information hierarchy — a page can (and
-often should) borrow from both, or from neither's exact composition. This
-document governs visual language, not identical page composition.
+**Primary visual benchmark:**
+[statistics.bettergov.ph](https://statistics.bettergov.ph/) (the Philippine
+Statistics Explorer) is this system's primary visual benchmark — the
+composition, type-led hierarchy, border treatment, and sharpness described
+throughout this document are calibrated against it, and §8 (Reference
+Composition Patterns) documents the specific patterns it uses. **This means
+adopting its visual system and composition principles, not its branding,
+logo, content, or product identity.** BetterSanFernando keeps its own name,
+blue brand color, civic content model, and voice (§2) in full — nothing in
+this document replaces any of that. When in doubt: if a change would make
+BetterSanFernando look like a different product, it has gone too far; if it
+would make BetterSanFernando read as calmer, sharper, and more
+typography-led while remaining unmistakably BetterSanFernando, it's on
+target.
 
 ---
 
-## 1. Typography
+## 1. Design Principles
 
-### Primary UI font — Inter
+1. **Information before decoration.** Every visual element should help a
+   resident find or understand something. If a gradient, icon badge, or
+   card doesn't carry information, cut it.
+2. **Typography creates hierarchy.** Weight, size, and spacing — not color
+   or containers — are the primary tools for showing what matters most on
+   a page.
+3. **Borders define structure.** Thin, neutral borders and dividers replace
+   most of what shadows and nested cards used to do.
+4. **Blue is an accent, not a required page background.** Reserve full-color
+   blue surfaces for moments that earn it. Most pages should read as
+   white/near-black editorial content with blue links and controls, not a
+   blue page with white content floating on top.
+5. **Use cards only when the content is genuinely a card** — a bounded,
+   self-contained unit (a stat block, a single actionable panel). A list of
+   directory items, catalog entries, or table rows is not a card grid.
+6. **Prefer rows/dividers for directories and catalogs.** One bordered
+   surface with internal `divide-y`, not N floating cards with N shadows.
+7. **Avoid unnecessary shadows.** Flat, bordered surfaces are the default.
+   Shadow is a signal reserved for things that visually float above the
+   page (see §5).
+8. **Use restrained radius.** Sharp-ish, quiet geometry over heavily
+   rounded "friendly" shapes everywhere.
+9. **Mobile layouts should be intentionally redesigned, not squeezed.**
+   A mobile layout is a distinct composition of the same content and
+   hierarchy, not a shrunk desktop grid.
+10. **Sources, provenance, and limitations are part of the interface** —
+    not a footnote. Every data-backed page states where its data comes
+    from and what it doesn't yet cover, presented with the same visual
+    care as the primary content.
 
-Used for everything: page titles, headings, body copy, navigation, buttons,
-cards, tables, statistics, interface labels.
+---
+
+## 2. Brand Voice / Statement
+
+**Primary product statement** (use on the homepage and in top-level
+about/meta copy):
+
+> BetterSanFernando makes public information about the City of San
+> Fernando easier to find, understand, and verify.
+
+**Supporting statement:**
+
+> An independent civic portal organizing public services, projects,
+> government information, records, and official-source data in one place.
+
+**Independence statement** (use wherever trust/provenance needs a short,
+consistent line — trust panels, about sections, footers):
+
+> Independent and community-run. Not an official City Government website.
+
+**Optional short brand line** (tight spaces, meta descriptions, social
+cards):
+
+> Local public information, made easier to use.
+
+**Copy rules:**
+
+- Keep sentences short and resident-facing — plain language over
+  institutional/technical phrasing wherever the meaning survives.
+- Lead with what the page does for the reader, not with BetterSanFernando's
+  internal process.
+- Technical caveats (export versions, dataset mechanics, methodology
+  detail) are accurate and available, but never the first thing a resident
+  reads — see §10.
+
+**Casing rules:** Title Case for page titles, major section headings, and
+KPI/metric labels; sentence case for body copy (never Title Case for
+prose); uppercase for editorial eyebrows via the `text-eyebrow` utility;
+readable UI casing (not all-caps) for table headers. Do not rewrite
+existing terminology or content merely to satisfy casing.
+
+---
+
+## 3. Typography
+
+### Primary — Inter
+
+Used for everything: headings, body, navigation, buttons, tables, data.
 
 ```css
 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -75,506 +142,543 @@ cards, tables, statistics, interface labels.
 ```
 
 Configured once in `src/fonts.css` as `--font-kapwa-sans`, loaded via a
-Google Fonts `@import` (weights 400/500/600/700), and wired into Tailwind's
-`font-sans` via `--font-sans: var(--font-kapwa-sans)` in `src/index.css`.
-`body` sets `font-family: var(--font-kapwa-sans)` directly. **Do not use
-Figtree** — it was migrated away from. Do not introduce another display
-font without an intentional design review.
+Google Fonts `@import`, and wired into Tailwind's `font-sans`. `body` sets
+`font-family: var(--font-kapwa-sans)` directly.
 
-### Monospace font — Roboto Mono
+### Secondary/editorial — Roboto Mono
 
-Used selectively for small editorial eyebrows, technical/data labels, and
-`code`/`pre`.
+Reserved for eyebrows, small technical/data labels, and `code`/`pre`. Do
+not expand its use beyond that — mono text is a seasoning, not a body
+font.
 
-```css
-'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace
-```
+### Practical type roles
 
-Configured as `--font-kapwa-mono` in the same file, mapped to Tailwind's
-`font-mono`.
+| Role                          | Weight  | Notes                                                                                                                                     |
+| ----------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Display / landing H1          | 800     | Largest text on the site. Reserved for the homepage and other true landing moments. `text-display` (tight line-height, `-0.02em`).        |
+| Page H1                       | 700–800 | One per page. Should clearly dominate its page without needing a color block behind it.                                                   |
+| Section H2                    | 700     | `text-section-title`. Visibly smaller than the page H1; carries most of a page's internal hierarchy.                                      |
+| Component title (H3/card/row) | 600–700 | Not every heading needs to be 800/ExtraBold — reserve the heaviest weight for the top of the page.                                        |
+| Body                          | 400     | Sentence case, comfortable line-height (`leading-6`/`leading-7`), near-black (`text-gray-950`/`text-gray-900`), never pure `#000`.        |
+| Metadata / supporting text    | 400–500 | Visually quieter — `text-gray-600`/`text-gray-500`.                                                                                       |
+| Eyebrow                       | 500     | `text-eyebrow` (Roboto Mono, uppercase, restrained positive tracking). Compact, small, used to label a section or panel, not decorate it. |
 
-### Shared typography utilities (`src/index.css`)
-
-A small set of `@utility` classes standardize the properties that tend to
-drift across pages — tracking and line-height — without touching weight,
-size, or color (those stay ordinary Tailwind utilities you combine
-alongside):
-
-| Utility                | Effect                                                       | Use for                  |
-| ---------------------- | ------------------------------------------------------------ | ------------------------ |
-| `text-eyebrow`         | `font-mono`, 11px, weight 500, uppercase, `tracking: 0.18em` | editorial eyebrows       |
-| `text-display`         | `tracking: -0.02em`, `line-height: 1.05`                     | page/hero titles         |
-| `text-section-title`   | `tracking: -0.02em`, `line-height: 1.2`                      | major section headings   |
-| `text-component-title` | `tracking: 0`, `line-height: 1.3`                            | card/component headings  |
-| `text-stat-value`      | `tracking: -0.025em`, `tabular-nums`                         | large/KPI numeric values |
-
-Combine with normal Tailwind classes for size, weight, and color, e.g.
-`className="text-4xl font-extrabold text-display text-white"`.
-
-### Hierarchy principles
-
-- **Page / hero title** — Inter, 700–800, `text-display`, compact
-  line-height, should clearly dominate the page. Avoid exaggerated negative
-  tracking (nothing tighter than about `-0.02em`).
-- **Major section heading** — Inter, usually 700, `text-section-title`,
-  visibly smaller than the page title.
-- **Component / card heading** — Inter, 600–700. Not every heading needs to
-  be ExtraBold.
-- **Body copy** — Inter 400, normal tracking, comfortable line-height,
-  sentence case.
-- **Supporting metadata** — Inter 400–500, visually quieter (`text-gray-500`
-  or similar) than primary content.
-- **Data / numeric values** — Inter 700–800, `text-stat-value` (tabular
-  numerals, restrained tracking). Reserve the heaviest weight/size for the
-  single most important number in a section.
-- **Editorial eyebrows** — Roboto Mono via `text-eyebrow`. Small, uppercase,
-  moderately expanded tracking. Not required on every section or page.
-  Examples in use today: `Population`, `Distribution`, `Context`,
-  `Barangay Data`, `Data Provenance`, `Services`, `Browse By Need`,
-  `Search Results` (source text is Title Case; the utility renders it
-  uppercase).
+Favor strong headings (700–800) paired with genuinely readable body copy
+(16px/`text-base` minimum for primary reading content) — the contrast
+between "confident heading" and "quiet, readable body" is itself part of
+the editorial feel. Headings use tight tracking (around `-0.02em`, via the
+`text-display`/`text-section-title` utilities); body and link/button text
+use normal tracking; only the eyebrow uses positive tracking, and it
+should stay restrained — if an eyebrow's default tracking reads as too
+wide for a given page's feel, a page-local override is preferable to
+loosening the shared default site-wide.
 
 ---
 
-## 2. Casing Rules
+## 4. Color System
 
-| Context                | Rule                             | Examples                                                                                               |
-| ---------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Page titles            | Title Case                       | `Population Statistics`, `Government Statistics`                                                       |
-| Major section headings | Title Case                       | `All Barangays`, `Population Insights`, `How Population Is Distributed`, `Source and Reference Period` |
-| KPI labels             | Title Case                       | `Total Population`, `Largest Barangay`, `Smallest Barangay`                                            |
-| Editorial eyebrows     | Uppercase (via `text-eyebrow`)   | `POPULATION`, `DISTRIBUTION`, `CONTEXT`                                                                |
-| Body copy              | Sentence case                    | normal prose, never Title Case                                                                         |
-| Table headers          | Readable UI casing, not all caps | `Rank`, `Barangay`, `Relative population`, `Population`, `City share`, `Classification`                |
+Existing brand blue and token values — no new palette. Neutral/white is
+the default page surface everywhere, and blue is something you reach for
+deliberately, not a default background.
 
-Do not rewrite existing terminology or content merely to satisfy casing.
+| Token                                     | Value                                              | Use for                                                                                                                                                                                                                                   |
+| ----------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ink (primary text)                        | `gray-950`/`gray-900`                              | Primary text everywhere, including page/hero titles — no white-on-blue by default.                                                                                                                                                        |
+| Muted text                                | `gray-600`/`gray-500`                              | Supporting/metadata text.                                                                                                                                                                                                                 |
+| Primary blue                              | `#0066EB` (`primary-500`)                          | Links, buttons, active controls, focus rings, small accents — **not** a default large background.                                                                                                                                         |
+| Hover blue                                | `#0052BC` (`primary-600`)                          | Hover state for the interactive blue.                                                                                                                                                                                                     |
+| Soft blue                                 | `#E6F0FD` (`primary-50`)                           | Reserved for genuinely "selected/informational" moments (an active filter, a highlighted row, a callout) — not a default icon-badge treatment on every row.                                                                               |
+| Selected/feature surface (pale blue-gray) | `#EEF1F5`-ish (slightly desaturated vs. Soft blue) | Background for a genuinely selected or featured _panel_, as piloted on `/transparency`'s Publication Gaps section. Use sparingly — one such panel per page at most, and prefer a rule/border over a filled panel where either would work. |
+| Canvas                                    | `#FFFFFF` / `#FAFAFA`                              | **Primary** page background on virtually every page.                                                                                                                                                                                      |
+| Surface                                   | `#FFFFFF`                                          | Card/panel backgrounds, sitting directly on canvas with a border, rarely with a shadow.                                                                                                                                                   |
+| Border                                    | `gray-200` (`#E9ECEF`)                             | The primary structural tool — dividers between rows, section separators, table rules, default card edges.                                                                                                                                 |
+| Stronger border                           | `gray-300` (`#DEE2E6`)                             | Where a divider needs to read a little stronger (a header/body separator, a table's outer rule).                                                                                                                                          |
+| Deep civic blue                           | `#002EAC`                                          | Reserved for a small number of intentional full-color moments (see §7) — not a default.                                                                                                                                                   |
+| Dark/navy section                         | `primary-900`/`primary-800`                        | A quiet, sparing way to mark a trust/sourcing section — not required, and not a default two-tile "dashboard" treatment (see §9's Methodology guidance).                                                                                   |
 
----
-
-## 3. Color
-
-### Civic blue palette
-
-| Role              | Value                             | Use for                                                                       |
-| ----------------- | --------------------------------- | ----------------------------------------------------------------------------- |
-| Deep civic blue   | `#002EAC`                         | major hero/background surfaces where strong civic identity is appropriate     |
-| Interactive blue  | `#0066EB` (= theme `primary-500`) | links, buttons, active controls, data bars, focus rings, interactive emphasis |
-| Interactive hover | `#0052BC` (= theme `primary-600`) | hover state for the interactive blue                                          |
-| Soft blue         | `#E6F0FD` (= theme `primary-50`)  | light callouts, subtle icon backgrounds, selected/supporting surfaces         |
-| Canvas            | `#F7F8FA`                         | page background                                                               |
-
-The interactive blue and its hover state already correspond to the
-`primary-500` / `primary-600` tokens defined in `src/index.css`'s `@theme`
-block — prefer `text-primary-600` / `bg-primary-600` etc. where practical.
-The deep civic blue (`#002EAC`) is **not yet a formal token**; it is used as
-a literal hex value on the Population hero. Treat it as an approved but
-un-tokenized value until a future pass formalizes it.
-
-### Neutrals
-
-- White or very-light-neutral primary surfaces.
-- `gray-950`/`gray-900` for primary text, `gray-600`/`gray-500` for
-  supporting text, `gray-200` for borders (the existing `gray-*` scale in
-  `src/index.css`).
-- Semantic colors (`success`/`error`/`warning`/`accent`, or ad hoc
-  `emerald`/`rose`) exist and may be used, but only when they carry real
-  meaning (e.g., Urban/Rural badges, largest/smallest KPI accents) — not as
-  decoration.
-
-### Philosophy
-
-BetterSanFernando should feel civic, trustworthy, modern, calm,
-data-oriented, and readable. Blue is intentional, not everywhere:
-
-- Large surfaces **may** use the deep civic blue — this is not mandatory for
-  every page.
-- Interactive elements use the brighter interactive blue.
-- Most content surfaces stay white or neutral.
-- Avoid turning the site into an all-blue dashboard.
+**Rule of thumb:** if you're about to set a background to blue, ask
+whether the content is (a) the page's single hero/identity moment, or (b)
+a genuinely dark, closing "trust" panel. If it's neither, use canvas +
+border instead.
 
 ---
 
-## 4. Page Canvas and Containers
+## 5. Borders, Radius, Shadows
 
-- Use the site's existing `container mx-auto px-4` convention for every
-  section; keep left/right alignment consistent within a page.
-- Generous but controlled vertical spacing between sections (the Population
-  page uses `space-y-16` for its main content stack, `py-12`–`py-16` for
-  the hero).
-- Avoid giant empty areas and sections that feel disconnected from their
-  neighbors — content should have a clear beginning, middle, and end.
-- Align major sections to the same underlying grid/container width.
-- Prefer editorial spacing over dashboard density, but don't manufacture
-  whitespace for its own sake.
+### Borders — the primary structural tool
 
----
+- Thin, neutral (`border-gray-200`) for internal dividers and default card
+  edges.
+- `border-gray-300` where a divider needs to read a little stronger (a
+  header/body separator, a table's outer rule).
+- Borders do the job cards' shadows used to do: separating one row/section
+  from the next inside one continuous surface.
 
-## 5. Hero Pattern
+### Radius
 
-The Population page hero is one approved pattern, not the only one:
+The reference benchmark ("Why This Direction," above) reads as
+essentially square — match that closely, not "moderate rounding."
 
-- Strong single-color background (`#002EAC`) with subtle geometric
-  decoration only (two faint outlined circles at ~5% opacity) — **no**
-  stock photography, AI-generated imagery, gradients, or glassmorphism.
-- Compact but substantial vertical height (`py-12` → `py-16` across
-  breakpoints), not an oversized marketing hero.
-- Clear hierarchy: eyebrow → title → description → primary statistic.
-- Supporting metadata (a short `dl` of 2–3 facts) integrated into the same
-  composition, typically as a second column on desktop.
+- **Default for surfaces** (cards, panels, table/catalog containers, the
+  outer edge of a statistics strip): `rounded-none` or `rounded-sm`
+  (0–2px) — square or almost-square corners, not a softened "friendly"
+  rectangle.
+- `rounded-md` (6px) is the **occasional** exception, not the default —
+  reach for it only where a slightly softened corner genuinely helps (a
+  small standalone callout, a compact button/input, an autocomplete
+  panel). Don't apply it reflexively to every container.
+- **Avoid `rounded-lg`/`rounded-xl`/`rounded-2xl` as default UI.** These
+  read as the older "friendly card" language this system moves away
+  from.
+- Buttons and inputs: `rounded-sm` by default; `rounded-md` is acceptable
+  for a primary CTA-style button where a touch more softness is wanted —
+  never pill-shaped.
+- Fully-rounded (`rounded-full`) stays reserved for small status
+  tags/badges and avatar-style elements — don't expand it.
 
-Future pages may use a light hero, a compact header, or no hero at all if
-their content calls for it. What must stay consistent: strong hierarchy,
-intentional spacing, restrained decoration, and a clear content purpose —
-not the literal deep-blue treatment.
+### Shadows
 
-`/services` uses a second approved hero variant, built for a discovery
-page rather than a statistic: the same deep civic blue and restrained
-decoration philosophy, but a two-column desktop composition (editorial
-copy on the left, a functional service finder on the right) instead of a
-single-column stat-first layout. See §20 for details.
-
----
-
-## 6. KPI / Summary Surfaces
-
-Reference: the Population page's three-stat surface (`grid sm:grid-cols-3`
-inside one bordered, rounded, lightly-shadowed container, with a
-`sm:divide` border between cells rather than three separate floating
-cards).
-
-- Keep the number of summary metrics meaningful — don't add a metric just
-  to fill a grid slot.
-- One unified surface for related KPIs, divided internally, rather than N
-  separate card shadows.
-- Soft surface, thin border, restrained shadow (`shadow-[0_16px_40px_rgba(15,23,42,0.08)]`
-  is the current treatment — subtle, not a floating dashboard tile).
-- Compact icon per stat (`h-9 w-9` rounded badge), consistent internal
-  padding, clear value hierarchy (label → value → supporting detail).
+- **No default shadow** on cards, panels, statistics strips, or catalog
+  rows. A border is sufficient separation from the canvas.
+- Reserve `shadow-*` for layers that are genuinely floating above the page
+  and need a depth cue independent of z-order: dropdown menus, autocomplete
+  result panels, modals/dialogs, popovers/tooltips. In those cases a
+  moderate shadow (`shadow-lg`/`shadow-xl`) is appropriate and expected.
 
 ---
 
-## 7. Cards and Surfaces
+## 6. Layout
 
-Avoid over-cardification — not every paragraph or statistic needs its own
-rounded rectangle.
-
-**Approved surface characteristics:**
-
-- Subtle `border-gray-200` border.
-- White (or very-light-neutral, e.g. `#f8fafc`) background.
-- Restrained radius (see §9).
-- Minimal or no shadow.
-- Meaningful padding (`p-5`–`p-8` depending on density).
-
-**Avoid:** glassmorphism, glowing borders, large floating shadows,
-gradients, random colored cards, excessive nested cards. Prefer typography,
-alignment, rules (`border-t`/`divide-y`), and whitespace before reaching for
-another card.
+- **Content max-width:** the existing `container mx-auto px-4` convention
+  for every section; keep left/right alignment consistent within a page.
+  For dense editorial/data content, an internal `max-w-4xl`/`max-w-5xl`
+  reading measure on body copy keeps long-form and tabular content
+  legible even inside a wider container.
+- **Editorial two-column layouts:** a wide content column plus a narrower
+  supporting column (`lg:grid-cols-[minmax(0,1fr)_20rem]`-style ratios)
+  is the standard pattern for a page intro + supporting module, or body
+  copy + metadata/actions. Reserve it for genuinely asymmetric content —
+  don't force two equal columns just to fill width.
+- **Catalog rows:** default to a single bordered surface with `divide-y`/
+  `border-t` internal rows, each row a flex/grid layout (an optional
+  leading element, title + description, trailing action). This replaces
+  "one card per catalog item" as the default.
+- **Table/data layouts:** real `<table>` semantics for genuinely tabular
+  data (see §9 Tables); a row-based `dl`/list pattern for summary-style
+  key/value data that isn't a full table.
+- **Grid columns:** 2-column grids are appropriate for paired, comparable
+  content (two supporting panels of similar weight, a two-up stat split).
+  3-column grids are appropriate for short, genuinely parallel items
+  (a "what you'll find" feature strip). Don't reach for a grid when a
+  single-column stack with dividers communicates the same hierarchy more
+  clearly.
+- **Don't force equal-height cards** when the underlying content differs
+  in length — let each card/row size to its own content; use alignment
+  (`items-start`) rather than stretch when content lengths vary
+  meaningfully.
+- **Generous whitespace between major sections, compact interiors within
+  them.** The editorial feel comes from _both_ halves of that pair — a
+  page with `space-y-14`–`space-y-20` between sections but tight,
+  efficient padding inside each row/panel (`p-4`–`p-6`, not `p-8`+ by
+  default) reads as considered; a page that's spacious everywhere reads as
+  empty, and a page that's compact everywhere reads as cramped.
+- **Reduce, don't pad:** avoid redundant descriptions of the same fact,
+  duplicated statistics shown in more than one place without new context,
+  giant whitespace that isn't doing hierarchy work, unnecessary cards
+  (§1 principle 5), repeated source/provenance text across sections, and
+  visual filler added only to make a section "feel" more complete. Each
+  section should have a clear reason to exist.
 
 ---
 
-## 8. Data Visualization
+## 7. Hero / Page-Header System
 
-Reference: the horizontal population bars used both in the top-5
-distribution list and the full barangay table.
+A full-width deep-blue hero on every page is the **exception**, not the
+default.
 
-- Simple horizontal bars only — soft gray track (`bg-gray-100`), blue fill
-  (`bg-[#0066EB]` / `primary-500`), width proportional to a real value.
-- Always pair a bar with its exact numeric value; the bar is a visual aid,
-  not the only source of the number.
-- Bars get an `role="img"` + `aria-label` with the concrete value (e.g.
-  `"Calulut: 44,659 residents"`) since the visual fill alone isn't
-  accessible.
-- Use `tabular-nums` for numeric alignment.
-- Don't invent charts to make a page "look more visual" — every
-  visualization must answer a real question the data supports.
+### Default page header (editorial, white/light — use for the large majority of pages)
+
+- **Eyebrow** — small, mono, uppercase (`text-eyebrow`), names the section.
+- **Large title** — bold (700–800), near-black, `text-display`/
+  `text-section-title` depending on scale. No white-on-blue requirement.
+- **Concise description** — one to two sentences, `text-gray-600`/`700`.
+- **Optional metadata/actions row** — real counts, a primary action, or
+  both, presented as plain text/inline controls rather than a stat-card
+  block.
+- **Optional right-side module** — a genuinely useful functional or
+  supporting element (search, a short quick-link list, key actions, trust
+  copy) separated by a thin border/rule, _not_ a filled card floating on
+  a color field, since there's no color field to float on.
+- Background stays canvas (white/near-white). A hairline `border-b` can
+  separate the header from the content below it in place of a color
+  change.
+- The breadcrumb belongs inside this same content container, above the
+  eyebrow/title, aligned to the page's left content edge — not in its
+  own full-width bordered strip directly under the navbar. Keep it small
+  (`text-xs`) and quiet (muted color for prior levels; the current page
+  can read darker).
+
+### Blue full-width hero (exception, not default)
+
+Reserve for pages that are genuinely top-level "front doors" to a major
+section of the site (e.g. the homepage, and at most one or two hub pages
+where a strong identity moment is earned) — not every page under that
+hub. When used:
+
+- Same civic-blue value (`#002EAC`), same restraint: no gradients, no
+  stock imagery, no glassmorphism.
+- **Decoration is off by default, even here.** The reference benchmark's
+  header has no background decoration at all — bold type carries it. Ship
+  the blue hero with a flat, undecorated background first; add a handful
+  of low-opacity geometric accents only if the page genuinely needs the
+  extra visual signal, confined to an `aria-hidden`, `pointer-events-none`,
+  `overflow-hidden` layer, and reduced/hidden below `lg` rather than
+  compressed. The bar for using decoration at all is high, not just its
+  restraint once used.
+- Still follows the same content hierarchy (eyebrow → title → description
+  → optional supporting module) as the editorial header — the blue
+  background doesn't change what content goes where, only how much visual
+  weight the page opens with.
 
 ---
 
-## 9. Data Tables
+## 8. Reference Composition Patterns
 
-Reference: `BarangayTable.tsx`. Real, working functionality only — this
-component genuinely implements every control it displays:
+These are the structural patterns visible on
+[statistics.bettergov.ph](https://statistics.bettergov.ph/), this
+system's primary visual benchmark (Why This Direction, above). They
+describe **structure and visual treatment only** — no copy, branding,
+logo, or product identity from the reference site is adopted. Each
+pattern below is translated into a general, reusable BetterSanFernando
+pattern; apply the structure to our own civic content, not the reference
+site's content.
+
+**BetterSanFernando should feel like the same design family as the
+reference site in terms of typography, spacing, border treatment,
+sharpness, and information hierarchy — while retaining BetterSanFernando's
+own civic blue branding and content.** The goal is a shared visual
+language, not a shared identity.
+
+1. **Editorial page introduction.** An eyebrow label, one large confident
+   heading, one to two lines of plain-language supporting copy, and
+   generous top/bottom whitespace — on a plain white/light background,
+   with no color block or decoration behind it. This is exactly §7's
+   default page header.
+2. **Flat statistics row.** A small number (2–4) of headline metrics
+   shown as plain typography — a large tabular-numeral value with a small
+   label underneath or beside it — arranged in one horizontal row,
+   separated by whitespace or a single hairline rule. No stat cards, no
+   icon badges, no colored backgrounds. See §9 Statistics strips.
+3. **Sharp bordered feature panels.** A small number of standalone
+   highlighted panels (e.g. a ranked list of topics, a single callout),
+   each with a thin neutral border, `rounded-none`/`rounded-sm` corners,
+   no shadow, and a white or very-light background. Panels are
+   distinguished by a small numeral/label and typography, not by icon
+   badges or color.
+4. **Two-up feature/data cards.** Exactly two roughly-equal-weight panels
+   placed side by side on desktop (stacked on mobile), each illustrating
+   one related dataset/feature with a title, one line of description, and
+   a labeled metric or source. This is a deliberate single pairing, not a
+   repeating card grid — use it where a page genuinely has two comparable
+   featured items, not as a general-purpose layout.
+5. **Data/catalog grids.** A grid or list of topic/dataset entries, each
+   compact (title + a short descriptor or count), sharp corners, thin
+   borders or dividers between entries, no drop shadow, and consistent
+   internal padding. This is the grid-shaped sibling of the catalog-row
+   pattern in §6/§9 — use rows for a small number of substantial entries,
+   this denser grid form for a larger number of short entries.
+6. **Split editorial trust/provenance section.** A clearly-labeled section
+   stating where the data comes from and how it's verified, written as
+   plain editorial copy with one clear link/action — not two separately
+   backgrounded "cards" side by side, and not necessarily boxed at all; a
+   thin left rule or top/bottom rule is enough separation. See §9's
+   Methodology guidance to unify a Sources/Methodology-style section into
+   one coherent, open layout rather than two dashboard tiles.
+7. **Dense but readable filters/tables.** List/table UI that stays
+   information-dense — tight row height, real columns, no wasted chrome —
+   while remaining legible through consistent alignment, clear column
+   headers, and adequate (not excessive) internal padding. Density lives
+   in the data itself, not in decorative spacing around it.
+8. **Simple footer/navigation treatment.** A multi-column link footer with
+   a darker or otherwise clearly-differentiated background, sharp
+   corners, tight vertical rhythm within each link group, and generous
+   horizontal gutters between groups. (BetterSanFernando's existing footer
+   is out of scope for the current rollout — noted here for when footer
+   work is eventually considered.)
+
+---
+
+## 9. Components
+
+### Navigation / directory rows
+
+One bordered surface, `divide-y` internal rows. Each row: small leading
+icon (optional — not every row needs one), title, one-line description,
+trailing chevron. No per-row icon badge background by default; reserve a
+tinted icon background for a row that's genuinely being highlighted
+(active/selected/featured), not as a blanket treatment.
+
+### Data catalog rows
+
+Same row pattern as navigation, scaled up slightly for an optional
+leading icon/title pair, a description, and a set of destination
+links/actions below or beside it. Prefer a vertical list of actions on
+narrow viewports (§11) over a wrapped inline row of links.
+
+### Statistics strips
+
+A single, typography-led horizontal strip (`flex`/`grid` with internal
+dividers or plain whitespace) — not N separate stat cards with N shadows,
+and not every real metric competing at equal weight. Prefer a small
+number (2–4) of primary metrics carried by size/weight of the number
+itself, with any remaining real counts demoted to a quieter supporting
+line (plain text, smaller, muted color) rather than added as more stat
+cells. Icon is optional and small if used at all — the value's typography
+does the work, not a colored icon background. See §8 pattern 2.
+
+### Buttons
+
+- Primary: solid `primary-500` background, white text, compact and
+  rectangular — `rounded-sm` by default (`rounded-md` acceptable for a
+  prominent CTA-style button), compact height (`h-10`–`h-11`), no shadow.
+- Secondary: white background, thin border (`border-gray-300` or
+  `border-primary-500/30`), same compact rectangular radius, no shadow —
+  not a soft-blue-tinted secondary.
+- Hover/active states are color/border shifts — never color alone.
+
+### Inputs / search
+
+White background, `border-gray-300`, `rounded-sm`, visible
+`focus-visible:ring`. Autocomplete/results panels are the shadow
+exception (§5) — a floating panel below the input with `shadow-lg` is
+correct here.
+
+### Cards
+
+Used only for genuinely card-like content: a single self-contained stat,
+a highlighted callout, a standalone action panel. Thin border, minimal
+radius, no shadow, meaningful padding. If you find yourself repeating the
+same card N times in a row for list-like content, switch to a divided row
+list instead (§6).
+
+### Tables
+
+Reference: `BarangayTable.tsx` (`src/app/statistics/population/BarangayTable.tsx`).
+Real, working functionality only — every visible control must actually
+work:
 
 - **Search** — a real `<input type="search">` filtering by name, with a
-  visible clear (`×`) affordance and an "N barangays" live count
-  (`aria-live="polite"`).
-- **Sorting** — every column header is a clickable button
-  (`renderSortableHeader`) with a visible sort icon (`ArrowUpDown` when
-  inactive, `ArrowUp`/`ArrowDown` in the interactive blue when active) and
-  an `aria-label` describing the current state (e.g. "Sort by Population,
-  currently descending").
-- **Pagination** — real client-side pagination (10 rows/page), numbered
-  page buttons, `aria-current="page"` on the active page, disabled
-  Previous/Next at the boundaries, and a "Showing X–Y of Z barangays"
-  status line.
-- Search, sort, and pagination all compose together (sorting/searching
-  resets to page 1).
+  visible clear affordance and a live result count (`aria-live="polite"`).
+- **Sorting** — every column header is a clickable button with a visible
+  sort icon (inactive vs. ascending/descending) and an `aria-label`
+  describing the current state.
+- **Pagination** — real client-side pagination, numbered page buttons,
+  `aria-current="page"` on the active page, disabled Previous/Next at the
+  boundaries, and a "Showing X–Y of Z" status line. Search, sort, and
+  pagination compose together (sorting/searching resets to page 1).
+- Never ship a fake search box, fake sort arrows, or fake pagination.
 
-**Visual treatment:**
+Visual treatment shifts toward this system's restraint: thin borders over
+shadowed containers, minimal row radius (a table's outer container can
+keep a small `rounded-sm` for the overall surface; individual rows don't
+need one), a light neutral header, `divide-y` row separators, subtle row
+hover, numeric columns right-aligned with `tabular-nums`, and
+classification/status shown as a small restrained pill, not a loud tag.
+Mobile gets a compact list (not a horizontally-scrolled desktop table),
+while keeping the same search/sort/pagination data.
 
-- White surface, thin `border-gray-200`, rounded outer container
-  (`rounded-2xl`), `overflow-hidden`.
-- Light neutral header (`bg-[#f8fafc]` or `bg-gray-50/80`).
-- Comfortable row height, `divide-y divide-gray-100` separators, subtle row
-  hover (`hover:bg-[#0066EB]/[0.025]`).
-- Numeric columns right-aligned with `tabular-nums`.
-- Classification shown as a small, restrained pill badge (not a loud,
-  oversized tag).
-- `cursor-pointer` on every interactive control; visible `disabled` styling
-  on boundary pagination buttons; `focus-visible:ring` on every control.
-- Mobile gets a compact list (`<ol>` of cards inside one bordered
-  container), not a horizontally-scrolled version of the desktop table,
-  while keeping the same search/sort*/pagination data.
+### Status tags
 
-**Never ship a fake search box, fake sort arrows, or fake pagination.**
-Every visible control on a table must work.
+Small, `rounded-full` (this is one of the retained pill uses), restrained
+color only where the status is meaningful (e.g. "Partial", "Not currently
+exported"). Not used decoratively, and not applied to content that has no
+real status to communicate — a "Published" badge on every item once
+every item is published communicates nothing (see §12).
 
----
+### Source / provenance blocks
 
-## 10. Search, Sorting, and Pagination — Interaction Details
+A provenance section should clearly communicate: the official source/
+publisher, the reference period, a last-verification date, a link to the
+official source (paired with an `ExternalLink` icon), and any relevant
+limitations — presented with this system's visual restraint: a bordered
+block, a thin left/top rule, or a simple two-column layout (explanatory
+copy + a metadata list) rather than a heavily card-ified callout.
 
-- **Search**: clear input, visible focus ring, a clear/reset affordance
-  once there's a query, and immediate visual feedback (row count, empty
-  state).
-- **Sorting**: clickable headers, one active column at a time, and a
-  distinct ascending/descending icon — never color alone to indicate
-  direction.
-- **Filters**: only add a filter control when it genuinely helps users
-  narrow the dataset. Don't add filter pills just because dashboards
-  usually have them — the current table relies on sortable columns instead
-  of a separate classification filter, which is a valid, simpler choice.
-- **Pagination**: obvious active page, visible hover state, working
-  Previous/Next, a real disabled state at both ends, pointer cursor on
-  enabled controls, and full keyboard operability.
+### Methodology / limitations sections
 
----
+Plain, readable prose sections, typically at or near the end of a page —
+see §10 for placement guidance. A quiet dark section (`primary-900`) is an
+acceptable, sparing way to visually mark "this is the trust/sourcing part
+of the page," but isn't required for every page — an open editorial
+section on the plain canvas, separated by a thin rule, is equally valid
+and is now the default. When a Sources/Methodology section has more than
+one sub-area, present them as one coherent layout divided by a rule, not
+as separately backgrounded tiles (§8 pattern 6).
 
-## 11. Source and Data Provenance
+### Icon direction
 
-Reference: the Population page's closing "Source and Reference Period"
-section.
-
-A provenance section should clearly communicate:
-
-- Official source / publisher.
-- Reference period.
-- Last verification date.
-- A link to the official source (paired with an `ExternalLink` icon).
-- Any relevant limitations (e.g. "this page uses one baseline only; it does
-  not combine estimates or projections").
-
-**Design principles:**
-
-- Compact — a two-column layout on desktop (explanatory copy + a `dl` of
-  metadata), stacked on mobile.
-- Visually closes the page; doesn't create a large empty section.
-- Metadata (`Publisher` / `Reference` / `Last verified`) is separated from
-  explanatory prose.
-- The official-source action is an obvious, styled link or button, not
-  buried in a paragraph.
-- A short, restrained verification note (light-blue background, small
-  `ShieldCheck` icon) can reinforce trust without dominating the section.
-
-Data provenance is part of the product experience, not an afterthought —
-every data-backed page should have one.
+- `ChevronRight` — normal drill-down/navigation within the site (a
+  directory row, a catalog row, "see more" within the same context).
+- `ArrowUpRight` — a larger action, an external destination, or a
+  "go explore this in depth" action (e.g. "Explore published data
+  sources," a link to an external official source).
+- Icons are small (`h-4 w-4`–`h-5 w-5`), one per concept, Lucide only.
+  Don't add an arrow to every link by reflex — a plain text link is
+  sometimes correct, especially inline in body copy.
+- **Icons — including leading row/catalog icons, not just arrows — appear
+  only when they improve comprehension**, not as default decoration. A
+  catalog row or directory row does not need a leading icon just because
+  the older pattern always had one; add it only where it genuinely helps
+  a reader scan or recognize the row faster. When an icon is used, render
+  it plain (`text-gray-400`/`text-gray-500` or the accent blue) rather
+  than inside a tinted badge — icon badges are no longer the default row
+  treatment (§4's Soft blue row).
 
 ---
 
-## 12. Icons
+## 10. Content Style
 
-Lucide icons only (already the project's dependency — don't add another
-icon set).
+Prefer short, direct headings and copy over institutional phrasing.
 
-- Small (`h-4 w-4` to `h-6 w-6` typical), restrained, one icon per concept.
-- Don't decorate every heading — an eyebrow + heading pair rarely needs an
-  icon; a KPI card or provenance block benefits from one.
-- No emoji as interface icons.
+**Example:**
 
----
+Heading:
 
-## 13. Borders, Radius, and Shadows
+> Find the information you need.
 
-- **Borders**: thin, neutral (`border-gray-200` / `border-gray-300`).
-- **Radius**: moderate — roughly 12–16px (`rounded-xl`/`rounded-2xl`) for
-  major surfaces (cards, tables, callouts). Small pills (badges, buttons)
-  can be fully rounded; don't make every element pill-shaped.
-- **Shadows**: very subtle, only where they improve depth or hierarchy
-  (e.g. the KPI surface floating slightly over the hero). Avoid strong
-  floating shadows or shadow-as-decoration.
+Supporting:
 
----
+> Browse City services, projects, records, government information, and
+> official sources.
 
-## 14. Interaction States
+**Guidance:**
 
-Every interactive element must visibly communicate state using more than
-color alone where practical:
-
-- **Hover** — background/border/text color shift (e.g.
-  `hover:bg-[#E6F0FD] hover:text-[#0052BC]`).
-- **Active** — for pagination/sort, a filled or bordered "current" style
-  plus `aria-current`/an active icon, not color alone.
-- **Focus-visible** — a visible ring (`focus-visible:ring-2
-focus-visible:ring-[#0066EB]`) on every button, link, and input.
-- **Disabled** — visually muted (`disabled:text-gray-300
-disabled:bg-gray-50`) and `cursor-not-allowed`; enabled controls use
-  `cursor-pointer`.
+- Lead with the plain-language version of what a page does. A resident
+  should understand the page's purpose from the H1 + one sentence, without
+  reading a methodology paragraph first.
+- Move technical caveats (dataset mechanics, export/versioning detail,
+  precise definitional distinctions between record types) lower on the
+  page — typically their own section near the end — unless the caveat is
+  essential to correctly interpreting the number the reader is looking at
+  right now (in which case it stays adjacent to that number, kept short).
+- Avoid restating the same disclaimer in multiple sections of the same
+  page.
+- Casing rules are as described in §2 (Title Case headings, sentence-case
+  body, uppercase eyebrows via `text-eyebrow`).
 
 ---
 
-## 15. Responsive Design
+## 11. Accessibility and Responsive Rules
 
-Desktop layouts should not simply shrink onto mobile:
-
-- Multi-column sections (hero, distribution + insights, KPI grid) stack to
-  a single column.
-- Wide desktop tables become a compact mobile list (see §9), not a
-  horizontally scrollable table.
-- Metadata simplifies (e.g. hiding a secondary column on narrow screens)
-  rather than wrapping awkwardly.
-- Controls (search, pagination buttons) stay touch-friendly at mobile
-  widths.
-- Preserve information hierarchy — the mobile view should tell the same
-  story as desktop, just recomposed, not truncated.
-
----
-
-## 16. Accessibility
-
-Preserve or improve, on every page:
-
-- Semantic heading hierarchy (`h1` → `h2` → `h3`, referenced by
-  `aria-labelledby` where a heading labels a `section`/`aside`).
-- Proper table semantics — `<caption>` (can be `sr-only`), `scope="col"` /
+- Semantic heading hierarchy (`h1`→`h2`→`h3`), `aria-labelledby` linking a
+  heading to the `section`/`aside` it labels.
+- Proper table semantics — `<caption>` (can be `sr-only`), `scope="col"`/
   `scope="row"`, real `<thead>`/`<tbody>`/`<tfoot>`.
-- Real `<button>`/`<a>` semantics for interactive controls — never a `div`
-  with an `onClick`.
-- Full keyboard operability and visible `focus-visible` treatment.
-- Sufficient color contrast (dark neutral text on white/light surfaces,
-  white text on the deep civic blue).
-- Screen-reader labels for icon-only or visually-encoded content (e.g. the
-  `aria-label` on population bars, `aria-label` on sort buttons describing
-  current direction).
-- Correct disabled-state semantics (`disabled` attribute, not just a
-  visual style).
-- Never encode meaning (classification, sort direction, active state) with
-  color alone — pair it with text, an icon, or an `aria-*` attribute.
+- Real `<a>`/`<button>` semantics for every interactive element — never a
+  `div` with an `onClick`.
+- Visible `focus-visible:ring` on every interactive control, including
+  plain text links (not just buttons).
+- Sufficient contrast — near-black ink on white/canvas easily clears
+  standard contrast targets; when blue is used as a small accent, verify
+  it against its actual background (white vs. a soft-blue tint) rather
+  than assuming the token is always compliant.
+- Touch-friendly control sizing (comfortable tap targets) on every
+  row/button, even in denser row-list patterns.
+- No horizontal scrolling — wide tables/catalogs recompose into a mobile
+  list (§9 Tables), not a horizontally-scrollable version of the desktop
+  layout.
+- **Responsive recomposition, not compression:** a multi-column
+  editorial layout, a statistics strip, or a catalog-row layout should
+  each have a deliberately designed mobile arrangement (stacked sections,
+  2-column stat grids instead of an awkward wrapped row, one action per
+  line instead of wrapped inline links) — not the same desktop DOM simply
+  narrowed.
+- Never encode meaning (classification, sort direction, active state)
+  with color alone — pair it with text, an icon, or an `aria-*` attribute.
+- Decorative elements (hero geometry, background accents) are
+  `aria-hidden="true"` and `pointer-events-none`, confined to their own
+  layer so they never affect layout or tab order.
 
 ---
 
-## 17. Content Density
+## 12. Anti-Patterns
 
-Aim for an editorial civic-data density — neither a cramped admin
-dashboard nor an empty marketing landing page. Each section should have a
-clear reason to exist. Reduce:
+Explicitly avoid:
 
-- Redundant descriptions of the same fact.
-- Duplicated statistics shown in more than one place without new context.
-- Giant whitespace that isn't doing hierarchy work.
-- Unnecessary cards (see §7).
-- Repeated source/provenance text across sections.
-- Visual filler added only to make a section "feel" more complete.
-
----
-
-## 18. What to Avoid
-
-- Generic dashboard patterns (traffic-light everything, widget grids).
-- Excessive card grids.
-- Giant empty hero whitespace.
-- Gradients, glassmorphism.
-- Decorative AI-generated or stock imagery.
-- Charts that don't answer a real question.
-- Fake search, filters, sort, or pagination controls.
-- Excessive rounded-pill shapes.
-- Oversized icons.
-- Excessive shadows.
-- Too many unrelated colors.
-- Inconsistent casing.
+- Generic dashboard patterns (widget grids, traffic-light-everything).
+- Excessive card grids for list-like content (see §6/§9 — use divided
+  rows instead).
+- A large, saturated hero background on every page by default (§7 — it's
+  an exception), and decoration inside that hero by default even when the
+  hero itself is used (§7 — decoration is opt-in, not automatic).
+- Gradients.
+- Glassmorphism.
+- Rounding surfaces above `rounded-md` by default — `rounded-lg`,
+  `rounded-xl`, and `rounded-2xl` all read as the older, softened
+  "friendly card" language and should not appear on new surfaces (§5).
+- Unnecessary shadows outside the floating-layer exception in §5.
+- Fake charts — any visualization must answer a real question the
+  underlying data supports (e.g. a proportional bar paired with its exact
+  value and a real `aria-label`, never decoration alone).
+- Decorative UI with no information value (icon badges on every row
+  regardless of meaning, ornamental dividers, filler illustration).
+- Pills/badges applied everywhere rather than to genuinely meaningful
+  status.
+- Squeezed desktop layouts on mobile — any layout that is visibly "the
+  desktop grid, just narrower" rather than a considered mobile
+  composition.
 - Extreme negative letter-spacing (tighter than about `-0.025em` on
-  numbers, `-0.02em` on headings).
-- Making every heading ExtraBold.
-- Putting every paragraph in its own card.
-- Duplicating data just to fill a layout.
-- Changing global navigation/header/footer as part of an unrelated page
-  redesign.
+  numbers, `-0.02em` on headings) and making every heading ExtraBold.
 
 ---
 
-## 19. Future Page Redesign Workflow
+## 13. Reference Implementation & Rollout
 
-Before redesigning or building a page:
+The current BetterSanFernando frontend design system is documented in this
+file. **The `/transparency` route is the first reference implementation of
+this direction**, emphasizing editorial hierarchy, pure-white canvas,
+Inter typography, sharp borders, restrained blue accents, minimal
+radius/shadows, and information-first layouts.
 
-1. Inspect the existing page and its data/helper functions.
-2. Read this document (`docs/FRONTEND-DESIGN-SYSTEM.md`).
-3. Inspect `/statistics/population` and `/services` as the live visual
-   references, leaning on whichever is closer to your page's nature
-   (data-heavy/statistical vs. discovery/directory) — or draw from both.
-4. Identify the page's actual information hierarchy — don't assume it
-   matches either reference page's.
-5. Preserve canonical data and functionality; never invent or duplicate
-   data to fill a layout.
-6. Design the page for its own content rather than copying either
-   reference page's section layout.
-7. Reuse the established typography utilities, colors, spacing units,
-   interaction patterns, and provenance style described here.
-8. Avoid unrelated global changes (header, footer, navigation, tokens).
-9. Verify responsive and accessible behavior.
-10. Do not introduce fake functionality (search/filter/sort/pagination)
-    purely for visual appearance — every visible control must work.
-
----
-
-## 20. Services Hub Patterns
-
-`/services` is the reference for civic hub / directory pages. The patterns
-below are specific to that page and its search component
-(`service-search.tsx`) — apply them where a future page is genuinely a
-discovery/directory experience, not mechanically everywhere.
-
-- **Two-column civic-blue hero on desktop** — the same deep civic blue as
-  Population, but editorial copy on the left and a functional white service
-  finder card on the right, instead of a single centered stat.
-- **Desktop search is a compact floating autocomplete** — results appear in
-  an absolutely-positioned overlay below the input, capped to a handful of
-  matches, so the hero never grows while the user types.
-- **Mobile search stays compact, results move below the hero** — the finder
-  in the hero renders only the input (and helper text) on mobile; matching
-  results render in a separate section directly below the hero, in normal
-  document flow. This is deliberate: it avoids a tall white finder card
-  fighting for space inside the hero, avoids floating overlays clipping or
-  sitting under/over the sticky header, and avoids nested scroll areas on
-  small screens.
-- **Search results never enlarge the desktop hero** — the hero's height is
-  independent of query state on desktop; only the floating panel changes.
-- **A unified category directory, not a wall of cards** — the "Browse by
-  Need" directory is one bordered surface with internal dividers, not one
-  card per category.
-- **Restrained, semantic Lucide icons** — one small icon per category/
-  concept, not decoration.
-- **Real, derived counts** — category and result counts are computed from
-  the canonical service data (`getServiceCategory`, `getServices`), never
-  hardcoded.
-- **No repeated, meaningless status pills** — a "Published" badge on every
-  category was removed once every category _was_ published, because it had
-  stopped communicating anything.
-- **Search results carry real context** — each result shows the service
-  title plus its category and office acronym, using existing data and
-  helpers (`getServiceCategory`, `getServiceHref`) — never an invented
-  label.
-- **Visual interest comes from hierarchy and layout**, not decorative
-  effects — no gradients, illustrations, or oversized icon blocks.
+- **Follow the system, don't copy `/transparency`.** This document governs
+  visual language and principles, not a page-by-page template. A future
+  page should use whichever patterns fit its own information hierarchy —
+  it can (and often should) draw on several patterns from §8/§9 rather
+  than reproducing `/transparency`'s exact section order or composition.
+- **New and redesigned pages follow this document.** Any page being built
+  from scratch, or substantially redesigned, should be built to this
+  system.
+- **Existing pages migrate progressively.** Services, Projects,
+  Government, the population/statistics pages, and the rest of the site
+  currently use the earlier, more decorative pattern set described in
+  "Why This Direction" above. They are not retroactively out of spec —
+  they simply haven't been migrated yet — and should move to this system
+  page by page as they're next redesigned, not in one site-wide rewrite.
+- **Validate real usage before generalizing further.** When migrating a
+  page, check its desktop/tablet/mobile behavior against §11 before
+  considering it done, and feed anything genuinely new that a page's
+  content requires back into this document rather than treating it as a
+  one-off exception.
 
 ---
 
-## Reference Implementation Note
+## Reference Note
 
-> BetterSanFernando currently has two reference implementations for its
-> frontend visual direction: the Population Statistics page
-> (`/statistics/population`) for data-heavy/statistical experiences, and
-> the Services hub (`/services`) for civic discovery, search, and
-> directory-style pages. Neither is a template to copy section-for-section.
-> Future pages should preserve the same level of hierarchy, restraint,
-> clarity, interaction quality, and source transparency demonstrated by
-> whichever reference fits their content, while selecting the layout
-> appropriate to that content.
+This system does not introduce a new brand, new fonts, or new color
+tokens — it redistributes emphasis within the existing BetterSanFernando
+system (Inter, Roboto Mono, the existing civic-blue palette) toward
+typography, borders, and whitespace as the primary structural tools, with
+blue, cards, and shadows used narrowly and intentionally rather than as
+page-wide defaults.
+
+[statistics.bettergov.ph](https://statistics.bettergov.ph/) is this
+system's **primary visual benchmark**, not a loose inspiration — its
+composition patterns are catalogued in §8, and its near-zero radius,
+no-default-shadow, typography-led approach is the explicit default
+throughout this document (§5, §9). What is adopted from it is strictly
+the visual system and composition principles: typography, spacing, border
+treatment, sharpness, and information hierarchy. Its branding, logo,
+content, and product identity are not adopted. BetterSanFernando's own
+branding, voice, and content model (§2) are unchanged and are not
+replaced by that reference — the goal is the same design family, not the
+same product.

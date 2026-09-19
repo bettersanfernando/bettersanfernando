@@ -1,16 +1,6 @@
-import {
-  ArrowRight,
-  Building2,
-  Database,
-  FileSearch,
-  Landmark,
-  Map,
-  Scale,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
-import Section from '../../components/ui/Section';
 import { getTransparencySummary } from '../../data/civic/transparencySummary';
 
 import { buildPageMetadata } from '../../lib/metadata';
@@ -24,11 +14,23 @@ export const metadata = buildPageMetadata({
 
 const summary = getTransparencySummary();
 
-const domains = [
+// The shared `text-eyebrow` utility (src/index.css) sets a fairly wide
+// 0.18em tracking used site-wide; here we tighten it locally with an
+// inline override rather than editing the shared utility, so this
+// page's eyebrows read closer to the Statistics Explorer benchmark
+// without changing eyebrow rendering on any other page.
+const eyebrowTracking = { letterSpacing: '0.08em' } as const;
+
+interface CatalogRow {
+  title: string;
+  description: string;
+  links: readonly (readonly [string, string])[];
+}
+
+const catalog: CatalogRow[] = [
   {
-    title: 'Projects and procurement',
-    icon: FileSearch,
-    description: `${summary.projects.total} published project records connect to ${summary.projects.evidence} evidence records, including ${summary.projects.bidResults} BID_RESULTS records.`,
+    title: 'Projects & Procurement',
+    description: `${summary.projects.total} published project records, backed by ${summary.projects.evidence} evidence records including ${summary.projects.bidResults} bid results.`,
     links: [
       ['/projects', 'Browse projects'],
       ['/procurement', 'Explore procurement'],
@@ -37,9 +39,8 @@ const domains = [
     ],
   },
   {
-    title: 'Government directory',
-    icon: Building2,
-    description: `${summary.government.officeRecords} office records are represented in the frontend-safe institutional directory. This is not a complete organizational chart.`,
+    title: 'Government Directory',
+    description: `Published City office and contact information available on BetterSanFernando (${summary.government.officeRecords} office records). This is not a complete organizational chart.`,
     links: [
       ['/government/offices', 'Browse City offices'],
       ['/government/contact', 'Find institutional contacts'],
@@ -47,8 +48,7 @@ const domains = [
   },
   {
     title: 'Legislation',
-    icon: Scale,
-    description: `${summary.legislation.executiveOrders} Executive Orders, ${summary.legislation.ordinances} ordinances, and ${summary.legislation.resolutions} resolutions are published as separate record classes.`,
+    description: `${summary.legislation.executiveOrders} Executive Orders, ${summary.legislation.ordinances} ordinances, and ${summary.legislation.resolutions} resolutions, published as separate record types.`,
     links: [
       ['/legislation', 'Explore legislation'],
       ['/legislation/executive-orders', 'View Executive Orders'],
@@ -58,15 +58,13 @@ const domains = [
   },
   {
     title: 'City Finances',
-    icon: Landmark,
     description:
-      'Selected official aggregate finance reports and their non-additive, source-reported observations.',
+      'Selected official aggregate finance reports, shown as reported by their source rather than combined into one total.',
     links: [['/transparency/finance', 'Explore City Finances']],
   },
   {
-    title: 'Population and geography',
-    icon: Map,
-    description: `${summary.population.total.toLocaleString()} residents in the ${summary.population.census} baseline across ${summary.population.barangays} barangays, with one city boundary and ${summary.geography.barangayBoundaries} barangay polygons.`,
+    title: 'Population & Geography',
+    description: `${summary.population.total.toLocaleString()} residents in the ${summary.population.census} baseline across ${summary.population.barangays} barangays, with city and barangay boundary maps.`,
     links: [
       ['/statistics/population', 'View population statistics'],
       ['/statistics/city-profile', 'View the city profile'],
@@ -81,271 +79,317 @@ const unavailableLabels = {
   NOT_VERIFIED: 'Not verified for publication',
 } as const;
 
+// Three headline metrics carry the release summary; published domains and
+// office records are real but secondary, so they read as supporting text
+// rather than competing for the same visual weight (Design System v2 §9).
+const primaryStats = [
+  { label: 'Dataset files', value: summary.release.datasetFiles },
+  { label: 'Project records', value: summary.projects.total },
+  { label: 'Evidence records', value: summary.projects.evidence },
+] as const;
+
 export default function Transparency() {
   return (
-    <>
-      <main className="bg-[#f7f8fa] pb-16 md:pb-24">
-        <Section className="p-3">
+    <main className="bg-white pb-16 md:pb-24">
+      {/* Editorial page header — white canvas, breadcrumb inline above the intro */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-14">
           <Breadcrumbs
+            className="text-xs text-gray-500"
             items={[{ label: 'Home', href: '/' }, { label: 'Transparency' }]}
-            className="mb-8"
           />
 
-          <header className="grid gap-8 border-b border-gray-300 pb-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl font-bold text-display text-gray-950 sm:text-5xl">
+          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-12">
+            <div className="max-w-2xl">
+              <p
+                className="text-eyebrow text-[#0066EB]"
+                style={eyebrowTracking}
+              >
                 Transparency
+              </p>
+
+              <h1 className="mt-3 text-3xl font-extrabold text-display text-gray-950 sm:text-4xl lg:text-5xl">
+                Public data you can trace.
               </h1>
-              <p className="mt-5 max-w-[70ch] text-lg leading-8 text-gray-700">
-                Explore the civic datasets BetterSanFernando currently
-                publishes, inspect the records and sources behind them, and see
-                important areas that are not yet part of the public frontend
-                release.
+
+              <p className="mt-4 text-lg font-medium leading-7 text-gray-800 sm:text-xl">
+                BetterSanFernando makes public information about the City of San
+                Fernando easier to find, understand, and verify.
+              </p>
+
+              <p className="mt-3 text-base leading-7 text-gray-600 md:text-[17px]">
+                Explore published records, see where the information comes from,
+                and understand what is not yet available.
               </p>
             </div>
-            <aside className="border-t border-primary-200 pt-5 text-sm leading-6 text-gray-700 lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
-              <p className="font-bold text-gray-950">
-                Independent and community-run
-              </p>
-              <p className="mt-1">
-                BetterSanFernando is not the official City Government website.
-                It publishes bounded, verified records with their provenance and
-                limitations.
-              </p>
-            </aside>
-          </header>
 
-          <section aria-labelledby="summary-heading" className="mt-10">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <h2
-                  id="summary-heading"
-                  className="text-2xl font-bold text-gray-950"
-                >
-                  Current public release
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Representative counts from frontend-safe typed data, not
-                  citywide totals.
-                </p>
-              </div>
-              <p className="text-xs font-semibold text-gray-600">
-                Export {summary.release.exportVersion}
+            {/* Trust / info module — flat editorial supporting copy, no card */}
+            <div className="mt-8 border-t border-gray-200 pt-5 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+              <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
+                Independent civic portal
+              </p>
+              <p className="mt-2 text-sm font-bold leading-6 text-gray-950">
+                Independent and community-run. Not an official City Government
+                website.
+              </p>
+              <p className="mt-2 text-sm leading-6 text-gray-600">
+                BetterSanFernando organizes public services, projects,
+                government information, records, and official-source data in one
+                place.
+              </p>
+              <p className="mt-2 text-xs text-gray-500">
+                Local public information, made easier to use.
               </p>
             </div>
-            <dl className="mt-5 grid grid-cols-2 overflow-hidden rounded-xl border border-gray-200 bg-white sm:grid-cols-3 lg:grid-cols-5">
-              {[
-                ['Manifest dataset files', summary.release.datasetFiles],
-                ['Published domains', summary.release.publishedDomains],
-                ['Published projects', summary.projects.total],
-                ['Project evidence', summary.projects.evidence],
-                ['Published office records', summary.government.officeRecords],
-              ].map(([label, value], index) => (
-                <div
-                  key={label}
-                  className={`min-w-0 p-4 sm:p-5 ${index > 0 ? 'border-l border-gray-200' : ''} ${index > 1 ? 'max-sm:border-t' : ''}`}
-                >
-                  <dt className="text-sm leading-5 text-gray-600">{label}</dt>
-                  <dd className="mt-1 text-3xl font-bold tabular-nums text-gray-950">
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </section>
+          </div>
+        </div>
+      </section>
 
-          <section aria-labelledby="explore-heading" className="mt-14">
-            <h2
-              id="explore-heading"
-              className="text-3xl font-bold tracking-[-0.025em] text-gray-950"
-            >
-              Explore published data
-            </h2>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-gray-700">
-              Each area has a distinct scope. Follow the detailed destinations
-              for record-level evidence, dates, denominators, and source
-              actions.
-            </p>
-            <div className="mt-7 grid gap-px overflow-hidden rounded-xl bg-gray-200 shadow-[0_10px_32px_rgba(0,41,94,0.08)] lg:grid-cols-2">
-              {domains.map(domain => {
-                const Icon = domain.icon;
-                return (
-                  <article
-                    key={domain.title}
-                    className="min-w-0 bg-white p-6 md:p-7"
-                  >
-                    <Icon
-                      className="h-6 w-6 text-primary-700"
-                      aria-hidden="true"
-                    />
-                    <h3 className="mt-4 text-xl font-bold text-gray-950">
-                      {domain.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-gray-700">
-                      {domain.description}
-                    </p>
-                    <div className="mt-5 flex flex-col items-start gap-2">
-                      {domain.links.map(([href, label]) => (
-                        <Link
-                          key={href}
-                          href={href}
-                          className="inline-flex min-h-10 items-center gap-2 text-sm font-bold text-primary-700 underline decoration-primary-200 underline-offset-4 hover:text-primary-900"
-                        >
-                          {label}
-                          <ArrowRight
-                            className="h-4 w-4 shrink-0"
-                            aria-hidden="true"
-                          />
-                        </Link>
-                      ))}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
-
-          <section
-            aria-labelledby="sources-heading"
-            className="mt-14 grid overflow-hidden rounded-xl bg-primary-900 text-white lg:grid-cols-2"
+      <div className="container mx-auto space-y-8 px-4 py-8 sm:space-y-12 sm:py-12 lg:space-y-20 lg:py-20">
+        {/* Current public release */}
+        <section aria-labelledby="summary-heading">
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            Current Public Release
+          </p>
+          <h2
+            id="summary-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            <div className="p-6 md:p-8">
-              <Database
-                className="h-6 w-6 text-primary-200"
-                aria-hidden="true"
-              />
-              <h2 id="sources-heading" className="mt-4 text-2xl font-bold">
-                Sources
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-primary-100">
-                The source inventory identifies dataset coverage, publishers and
-                authorities, release versions, reference periods, and public
-                links. The model is Fact → Source → Public link; an official
-                label is used only where the authority supports it.
+            What BetterSanFernando publishes today
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
+            Representative counts from the current frontend-safe data release,
+            not citywide totals.
+          </p>
+
+          <dl className="mt-6 grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {primaryStats.map(stat => (
+              <div
+                key={stat.label}
+                className="flex items-baseline justify-between gap-4 py-4 sm:block sm:px-6 sm:py-5 sm:first:pl-0"
+              >
+                <dt className="text-sm text-gray-600 sm:text-xs sm:font-medium sm:uppercase sm:tracking-wide sm:text-gray-500">
+                  {stat.label}
+                </dt>
+                <dd className="text-2xl font-extrabold tabular-nums text-stat-value text-gray-950 sm:mt-2 sm:text-4xl">
+                  {stat.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <p className="mt-4 text-sm text-gray-500">
+            {summary.release.publishedDomains} published domains ·{' '}
+            {summary.government.officeRecords} office records
+          </p>
+        </section>
+
+        {/* Published data catalog */}
+        <section aria-labelledby="explore-heading">
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            Explore Published Data
+          </p>
+          <h2
+            id="explore-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
+          >
+            Find the information you need.
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
+            Each area covers a distinct part of the City. Follow a link for
+            record-level detail, sources, and dates.
+          </p>
+
+          <div className="mt-7 overflow-hidden rounded-sm border border-gray-200 bg-white">
+            {catalog.map((domain, index) => (
+              <div
+                key={domain.title}
+                className={`flex flex-col gap-3 p-5 sm:p-6 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8 lg:p-7 ${index > 0 ? 'border-t border-gray-200' : ''}`}
+              >
+                <h3 className="text-base font-bold text-gray-950">
+                  {domain.title}
+                </h3>
+
+                <div>
+                  <p className="max-w-2xl text-sm leading-6 text-gray-700">
+                    {domain.description}
+                  </p>
+                  <div className="mt-3 flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-x-6 lg:gap-y-2">
+                    {domain.links.map(([href, label]) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        className="group inline-flex min-h-8 items-center gap-1 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                      >
+                        {label}
+                        <ArrowUpRight
+                          className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          aria-hidden="true"
+                        />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Sources & Methodology — open editorial section, no outer card */}
+        <section
+          aria-labelledby="sources-heading"
+          className="border-l-2 border-[#0066EB] pl-5 sm:pl-6"
+        >
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            Sources &amp; Methodology
+          </p>
+          <h2
+            id="sources-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
+          >
+            Know where the data comes from.
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-600">
+            See how records are sourced, reviewed, and presented, and understand
+            the limitations behind the public release.
+          </p>
+
+          <div className="mt-7 grid gap-8 border-t border-gray-200 pt-7 sm:grid-cols-2 sm:gap-10 sm:divide-x sm:divide-gray-200">
+            <div className="sm:pr-8">
+              <h3 className="text-base font-bold text-gray-950">Sources</h3>
+              <p className="mt-2 text-sm leading-6 text-gray-600">
+                See what each dataset covers, who publishes it, and where the
+                original public record lives.
               </p>
               <Link
                 href="/transparency/sources"
-                className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-white underline decoration-primary-300 underline-offset-4"
+                className="mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
-                Explore Published Data Sources
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Explore published data sources
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
-            <div className="border-t border-primary-700 bg-primary-800 p-6 md:p-8 lg:border-l lg:border-t-0">
-              <ShieldCheck
-                className="h-6 w-6 text-primary-200"
-                aria-hidden="true"
-              />
-              <h2 className="mt-4 text-2xl font-bold">Methodology</h2>
-              <p className="mt-3 text-sm leading-6 text-primary-100">
-                Read how sources are evaluated, records are normalized, missing
-                values remain unknown, privacy boundaries are enforced, releases
-                are versioned, and limitations are presented.
+
+            <div className="sm:pl-8">
+              <h3 className="text-base font-bold text-gray-950">Methodology</h3>
+              <p className="mt-2 text-sm leading-6 text-gray-600">
+                Read how records are reviewed and normalized, and how missing
+                values and limitations are handled.
               </p>
               <Link
                 href="/transparency/methodology"
-                className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-white underline decoration-primary-300 underline-offset-4"
+                className="mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
-                Read Transparency Methodology
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Read the transparency methodology
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section
-            aria-labelledby="availability-heading"
-            className="mt-14 grid gap-8 lg:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.3fr)]"
-          >
-            <div>
-              <Landmark className="h-6 w-6 text-gray-600" aria-hidden="true" />
-              <h2
-                id="availability-heading"
-                className="mt-4 text-3xl font-bold tracking-[-0.025em] text-gray-950"
-              >
-                Important publication gaps
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-gray-700">
-                These states describe BetterSanFernando&apos;s public frontend
-                release. They do not say that the City has no records or that an
-                activity did not occur.
-              </p>
-            </div>
-            <ul className="divide-y divide-gray-300 border-y border-gray-300">
-              {summary.unavailable.map(domain => (
-                <li key={domain.id} className="py-5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-bold text-gray-950">{domain.name}</h3>
-                    <span className="rounded-full bg-gray-200 px-2.5 py-1 text-xs font-bold text-gray-700">
-                      {unavailableLabels[domain.status]}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-gray-700">
-                    {domain.note}
-                  </p>
-                </li>
-              ))}
-              <li className="py-5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-bold text-gray-950">
-                    Unified transparency documents
-                  </h3>
-                  <span className="rounded-full bg-gray-200 px-2.5 py-1 text-xs font-bold text-gray-700">
-                    Not currently exported
-                  </span>
-                </div>
-                <p className="mt-2 text-sm leading-6 text-gray-700">
-                  A unified, frontend-safe document projection is not currently
-                  part of the public release. Published record-specific
-                  documents remain available through their existing archives.
-                </p>
-              </li>
-              <li className="py-5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-bold text-gray-950">
-                    Broader demographics
-                  </h3>
-                  <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-900">
-                    Partial
-                  </span>
-                </div>
-                <p className="mt-2 text-sm leading-6 text-gray-700">
-                  The public release currently supports the population baseline
-                  and barangay classifications, not broader age, sex, household,
-                  or density measures.
-                </p>
-              </li>
-            </ul>
-          </section>
-
-          <section
-            aria-labelledby="limits-heading"
-            className="mt-14 border-t border-gray-300 pt-9"
-          >
+        {/* Publication gaps — open editorial section, no outer card */}
+        <section aria-labelledby="availability-heading">
+          <div className="max-w-2xl">
+            <p className="text-eyebrow text-gray-600" style={eyebrowTracking}>
+              Publication Gaps
+            </p>
             <h2
-              id="limits-heading"
-              className="text-2xl font-bold text-gray-950"
+              id="availability-heading"
+              className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
             >
-              How to read this coverage
+              Important publication gaps
             </h2>
-            <div className="mt-4 grid gap-5 text-sm leading-6 text-gray-700 md:grid-cols-2">
-              <p>
-                These records describe bounded BetterSanFernando datasets, not
-                every City Government record. Documentary lifecycle does not
-                equal physical progress. Award evidence does not establish
-                contract execution, and contract evidence does not establish
-                Notice to Proceed, completion, payment, or expenditure.
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              These notes describe what is and is not currently available on
+              BetterSanFernando. They do not mean the City has no records for
+              these areas.
+            </p>
+          </div>
+
+          <ul className="mt-7 divide-y divide-gray-200 border-t border-gray-200">
+            {summary.unavailable.map(domain => (
+              <li key={domain.id} className="py-5">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="font-bold text-gray-950">{domain.name}</h3>
+                  <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
+                    {unavailableLabels[domain.status]}
+                  </span>
+                </div>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
+                  {domain.note}
+                </p>
+              </li>
+            ))}
+            <li className="py-5">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="font-bold text-gray-950">
+                  Unified transparency documents
+                </h3>
+                <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
+                  Not currently exported
+                </span>
+              </div>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
+                A unified, frontend-safe document projection is not currently
+                part of the public release. Published record-specific documents
+                remain available through their existing archives.
               </p>
-              <p>
-                Approved Budget for the Contract, winning bid amount, and
-                contract amount are distinct fields; none is treated as actual
-                expenditure. Missing fields remain unknown, and absence from the
-                public dataset does not prove that a record or activity does not
-                exist.
+            </li>
+            <li className="py-5">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="font-bold text-gray-950">
+                  Broader demographics
+                </h3>
+                <span className="shrink-0 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-900">
+                  Partial
+                </span>
+              </div>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
+                The public release currently supports the population baseline
+                and barangay classifications, not broader age, sex, household,
+                or density measures.
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        {/* How to read this coverage */}
+        <section
+          aria-labelledby="limits-heading"
+          className="border-t border-gray-200 pt-8 sm:pt-9 lg:pt-10"
+        >
+          <h2
+            id="limits-heading"
+            className="text-xl font-bold text-section-title text-gray-950"
+          >
+            How to read this coverage
+          </h2>
+          <div className="mt-5 grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 className="text-sm font-bold text-gray-950">
+                Published does not mean complete.
+              </h3>
+              <p className="mt-1.5 text-sm leading-6 text-gray-600">
+                BetterSanFernando publishes bounded datasets, not every City
+                Government record. A document moving through its lifecycle — an
+                award, a contract — does not by itself establish completion,
+                payment, or physical progress.
               </p>
             </div>
-          </section>
-        </Section>
-      </main>
-    </>
+            <div>
+              <h3 className="text-sm font-bold text-gray-950">
+                Records are not interchangeable.
+              </h3>
+              <p className="mt-1.5 text-sm leading-6 text-gray-600">
+                Project, procurement, contract, and spending records describe
+                different things and should not be treated as equivalent.
+                Missing fields remain unknown, and an item&rsquo;s absence from
+                a dataset does not prove it doesn&rsquo;t exist.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }

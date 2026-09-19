@@ -17,7 +17,6 @@ import { readNextRoute } from './smoke-next-route.ts';
 const offices = getCityOffices();
 const summary = getGovernmentSummary();
 const pageSource = readNextRoute('/government');
-const normalizedPageSource = pageSource.replace(/\s+/g, ' ');
 
 assert.equal(summary.officeRecords, offices.length);
 assert.equal(summary.executiveOrders, getExecutiveOrders().length);
@@ -133,29 +132,30 @@ assert.ok(!plannedPages.some(page => page.path === '/government'));
 assert.ok(!plannedPages.some(page => page.path === '/government/structure'));
 assert.equal(mainNavigation.length, 7);
 
+// /government is now the Government hub (Hero → grouped directory →
+// closing section), mirroring the approved Services/Projects hub pattern.
+// It links directly to City Government, Legislation, and Public
+// Information destinations rather than to the standalone /legislation,
+// /statistics, or /transparency hubs.
 for (const href of [
   '/government/offices',
   '/government/contact',
-  '/legislation',
-  '/statistics',
-  '/transparency',
+  '/government/barangay-contacts',
+  '/legislation/executive-orders',
+  '/legislation/ordinances',
+  '/legislation/resolutions',
+  '/government/hotlines',
+  '/government/links',
 ]) {
   assert.match(pageSource, new RegExp(`href: ["']${href}["']`));
 }
 
-for (const href of ['/transparency/sources', '/transparency/methodology']) {
-  assert.match(pageSource, new RegExp(`href=["']${href}["']`));
-}
-
 assert.doesNotMatch(pageSource, /href=["']\/government\/structure["']/);
 assert.doesNotMatch(pageSource, /22 City Government offices/i);
-assert.match(pageSource, /published office records/i);
-assert.match(pageSource, /not (?:an|the) official City\s+Government website/i);
 assert.match(
-  normalizedPageSource,
-  /not asserted to represent the complete City organizational structure/i
+  pageSource,
+  /not (?:an|the) official City\s+Government\s+website/i
 );
-assert.match(pageSource, /not a\s+complete City legislative archive/i);
 
 const governmentNavigation = mainNavigation.find(
   item => item.id === 'government'

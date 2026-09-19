@@ -285,13 +285,14 @@ source for this application.
 - [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) — what has
   shipped and what is planned next.
 - [`docs/FRONTEND-DESIGN-SYSTEM.md`](docs/FRONTEND-DESIGN-SYSTEM.md) — the
-  current frontend visual direction, established by the Population
-  Statistics (`/statistics/population`) and Services (`/services`) pages.
-  Population is the primary reference for data-heavy/statistical
-  experiences, while Services establishes the pattern for civic discovery,
-  search, and directory-style hubs. Future pages should follow their shared
-  typography, color, spacing, interaction, accessibility, and provenance
-  language without copying either page's exact layout.
+  current BetterSanFernando frontend design system. The
+  [`/transparency`](src/app/transparency/page.tsx) route is the first
+  reference implementation of this direction, emphasizing editorial
+  hierarchy, pure-white canvas, Inter typography, sharp borders, restrained
+  blue accents, minimal radius/shadows, and information-first layouts.
+  Future pages should follow the documented system rather than copy
+  `/transparency`'s layout literally; other existing routes predate this
+  direction and will be migrated to it progressively.
 - In the running application, `/transparency/methodology` and
   `/projects/methodology` explain verification, lifecycle, and data-quality
   rules for the published domains, and `/transparency/sources` inventories the

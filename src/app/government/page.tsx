@@ -1,231 +1,440 @@
 import Link from 'next/link';
 import {
-  ArrowRight,
-  BarChart3,
   Building2,
-  Database,
+  ChevronRight,
+  ExternalLink,
+  FileCheck2,
+  FileText,
+  Info,
   Landmark,
   Phone,
   Scale,
-  ShieldCheck,
+  UsersRound,
+  type LucideIcon,
 } from 'lucide-react';
-import Breadcrumbs from '../../components/ui/Breadcrumbs';
-import { getGovernmentSummary } from '../../data/civic/governmentSummary';
 
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import { getBarangays } from '../../data/civic/demographics';
+import { getGovernmentSummary } from '../../data/civic/governmentSummary';
+import { getOfficialLinks } from '../../data/civic/governmentOfficialLinks';
 import { buildPageMetadata } from '../../lib/metadata';
 
 export const metadata = buildPageMetadata({
   title: 'Government',
   description:
-    'Find currently published government office, contact, legislation, statistics, and transparency information for the City of San Fernando, Pampanga.',
+    'Find currently published government office, contact, legislation, and public-information resources for the City of San Fernando, Pampanga.',
   path: '/government',
 });
 
 const summary = getGovernmentSummary();
+const barangayCount = getBarangays().length;
+const officialLinkCount = getOfficialLinks().length;
 
-const destinations = [
-  {
-    title: 'Offices',
-    description:
-      'Browse verified office identities, locations, contact availability, and source details in the published directory.',
-    href: '/government/offices',
-    action: 'Browse published offices',
-    icon: Building2,
-  },
-  {
-    title: 'Contact Directory',
-    description:
-      'Find currently published institutional phone numbers, email addresses, and office locations.',
-    href: '/government/contact',
-    action: 'Find office contacts',
-    icon: Phone,
-  },
+interface HubDestination {
+  title: string;
+  href: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+interface HubGroup {
+  title: string;
+  blurb: string;
+  icon: LucideIcon;
+  destinations: HubDestination[];
+}
+
+const cityGovernmentGroup: HubGroup = {
+  title: 'City Government',
+  blurb: 'Verified office identities and how to reach them.',
+  icon: Landmark,
+  destinations: [
+    {
+      title: 'City Offices',
+      href: '/government/offices',
+      description: 'Find city departments, offices, and available information.',
+      icon: Building2,
+    },
+    {
+      title: 'Contact the City',
+      href: '/government/contact',
+      description: 'Find verified official City Government contact channels.',
+      icon: Phone,
+    },
+  ],
+};
+
+const sideGroups: HubGroup[] = [
   {
     title: 'Legislation',
-    description:
-      'Explore the bounded Executive Order and Ordinance collections currently available in BetterSanFernando.',
-    href: '/legislation',
-    action: 'Explore legislation',
+    blurb: 'Bounded executive-order, ordinance, and resolution archives.',
     icon: Scale,
+    destinations: [
+      {
+        title: 'Executive Orders',
+        href: '/legislation/executive-orders',
+        description: 'Browse verified executive-order records.',
+        icon: FileText,
+      },
+      {
+        title: 'Ordinances',
+        href: '/legislation/ordinances',
+        description: 'Browse verified city ordinance records.',
+        icon: FileText,
+      },
+      {
+        title: 'Resolutions',
+        href: '/legislation/resolutions',
+        description: 'Browse verified city resolution records.',
+        icon: FileCheck2,
+      },
+    ],
   },
   {
-    title: 'Statistics',
-    description:
-      'See published population, project, procurement, geography, and directory data in context.',
-    href: '/statistics',
-    action: 'View city statistics',
-    icon: BarChart3,
+    title: 'Public Information',
+    blurb: 'Hotlines, barangay contacts, and official government links.',
+    icon: Info,
+    destinations: [
+      {
+        title: 'Hotlines & Contacts',
+        href: '/government/hotlines',
+        description: 'Access verified official hotlines and public contacts.',
+        icon: Phone,
+      },
+      {
+        title: 'Barangay Contacts',
+        href: '/government/barangay-contacts',
+        description:
+          'Find published Barangay Secretary and BHERT contacts by barangay.',
+        icon: UsersRound,
+      },
+      {
+        title: 'Official Government Links',
+        href: '/government/links',
+        description:
+          'Visit verified official government websites and resources.',
+        icon: ExternalLink,
+      },
+    ],
   },
-  {
-    title: 'Transparency',
-    description:
-      'Understand the portal’s sources, verification approach, limitations, and published public-record collections.',
-    href: '/transparency',
-    action: 'Open transparency hub',
-    icon: ShieldCheck,
-  },
-] as const;
+];
 
-export default function Government() {
+export default function GovernmentHubPage() {
   return (
-    <>
-      <main className="flex-grow bg-gray-50">
-        <section className="border-b border-primary-100 bg-white">
-          <div className="container mx-auto px-4 py-10 md:py-14">
-            <Breadcrumbs
-              className="mb-8"
-              items={[{ label: 'Home', href: '/' }, { label: 'Government' }]}
-            />
-            <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
-              <div className="max-w-3xl">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-700 text-white">
-                  <Landmark className="h-6 w-6" aria-hidden="true" />
-                </div>
-                <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
-                  Government
-                </h1>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
-                  Find the institutional, contact, legislative, statistical, and
-                  transparency information that BetterSanFernando currently
-                  publishes for the City of San Fernando, Pampanga.
-                </p>
+    <main className="flex-grow bg-[#f7f8fa]">
+      {/* Breadcrumb */}
+      <div className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs
+            className="text-xs text-gray-500"
+            items={[{ label: 'Home', href: '/' }, { label: 'Government' }]}
+          />
+        </div>
+      </div>
+
+      {/* Hero */}
+      <section className="relative bg-[#002EAC] text-white">
+        {/* Decorative, civic-institution-themed geometry — restrained arcs
+            and a thin column motif suggesting public architecture, never a
+            literal seal or building. Confined to its own absolutely
+            positioned, overflow-hidden layer so it never affects layout. */}
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <div className="absolute -right-28 -top-28 hidden h-[28rem] w-[28rem] rounded-full border border-white/10 sm:block" />
+          <div className="absolute -bottom-20 -left-16 hidden h-64 w-64 rounded-full border border-white/10 sm:block" />
+          <div className="absolute left-8 top-8 hidden h-14 w-14 border-l border-t border-white/15 lg:block" />
+          <div className="pointer-events-none absolute bottom-0 right-16 hidden gap-3 sm:flex lg:right-24">
+            <div className="h-24 w-px bg-white/15" />
+            <div className="h-32 w-px bg-white/15" />
+            <div className="h-24 w-px bg-white/15" />
+            <div className="h-32 w-px bg-white/15" />
+          </div>
+        </div>
+
+        <div className="container relative mx-auto px-4 py-12 md:py-14">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start lg:gap-12">
+            <div className="max-w-2xl">
+              <p className="text-eyebrow text-blue-100">Government</p>
+
+              <h1 className="mt-3 text-4xl font-extrabold text-display text-white sm:text-5xl">
+                Understand your City Government
+              </h1>
+
+              <p className="mt-4 text-base leading-7 text-blue-100 md:text-[17px]">
+                BetterSanFernando organizes public information about City
+                offices, contacts, legislation, and barangay and official
+                government resources. It is not the official City Government
+                website — follow linked sources to confirm information directly
+                with the City.
+              </p>
+
+              <div className="mt-5 flex flex-wrap items-center divide-x divide-white/20 text-sm font-medium text-blue-100">
+                <span className="pr-3">
+                  {summary.officeRecords} city offices
+                </span>
+                <span className="px-3">{barangayCount} barangays</span>
+                <span className="pl-3">
+                  {officialLinkCount} official government links
+                </span>
               </div>
-              <aside className="rounded-xl bg-primary-50 p-5 text-sm leading-relaxed text-primary-900">
-                <p className="font-semibold">Independent civic portal</p>
-                <p className="mt-1">
-                  BetterSanFernando is independent and not an official City
-                  Government website. Follow linked sources when you need to
-                  confirm information with the City.
-                </p>
-              </aside>
             </div>
 
-            <dl className="mt-9 grid border-y border-gray-200 sm:grid-cols-3">
-              {[
-                ['Published office records', summary.officeRecords],
-                ['Executive Orders published', summary.executiveOrders],
-                ['Ordinance records published', summary.ordinances],
-              ].map(([label, value], index) => (
-                <div
-                  key={label}
-                  className={`p-5 ${index > 0 ? 'border-t border-gray-200 sm:border-l sm:border-t-0' : ''}`}
+            <div className="rounded-2xl bg-white p-5 md:p-6">
+              <h2 className="text-lg font-bold text-gray-950">
+                Start exploring
+              </h2>
+
+              <div className="mt-4 space-y-1">
+                <Link
+                  href="/government/offices"
+                  className="group flex items-center gap-3 rounded-lg px-3 py-3 transition-colors hover:bg-[#E6F0FD]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
                 >
-                  <dt className="text-sm leading-5 text-gray-600">{label}</dt>
-                  <dd className="mt-1 text-3xl font-bold tabular-nums text-gray-900">
-                    {value}
-                  </dd>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
+                    <Building2 className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold text-gray-950">
+                      City Offices
+                    </span>
+                    <span className="mt-0.5 block text-sm text-gray-600">
+                      Browse departments and office information.
+                    </span>
+                  </span>
+                  <ChevronRight
+                    className="ml-3 h-4 w-4 shrink-0 self-center text-gray-400 transition-[color,transform] group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
+                    aria-hidden="true"
+                  />
+                </Link>
+
+                <Link
+                  href="/government/contact"
+                  className="group flex items-center gap-3 rounded-lg px-3 py-3 transition-colors hover:bg-[#E6F0FD]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
+                    <Phone className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold text-gray-950">
+                      Contact the City
+                    </span>
+                    <span className="mt-0.5 block text-sm text-gray-600">
+                      Find verified official contact channels.
+                    </span>
+                  </span>
+                  <ChevronRight
+                    className="ml-3 h-4 w-4 shrink-0 self-center text-gray-400 transition-[color,transform] group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
+                    aria-hidden="true"
+                  />
+                </Link>
+
+                <Link
+                  href="/government/barangay-contacts"
+                  className="group flex items-center gap-3 rounded-lg px-3 py-3 transition-colors hover:bg-[#E6F0FD]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
+                    <UsersRound className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold text-gray-950">
+                      Barangay Contacts
+                    </span>
+                    <span className="mt-0.5 block text-sm text-gray-600">
+                      Find Barangay Secretary and BHERT contacts.
+                    </span>
+                  </span>
+                  <ChevronRight
+                    className="ml-3 h-4 w-4 shrink-0 self-center text-gray-400 transition-[color,transform] group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="container mx-auto space-y-14 px-4 py-12 md:py-16">
+        {/* Main directory */}
+        <section aria-labelledby="government-hub-heading">
+          <p className="text-eyebrow text-[#0066EB]">Explore Government</p>
+
+          <h2
+            id="government-hub-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
+          >
+            Government Information &amp; Public Access
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-700">
+            Browse City offices, legislation, and public-information resources
+            currently published by BetterSanFernando.
+          </p>
+
+          {/* City Government — full-width feature band */}
+          <div className="mt-7 rounded-2xl border border-gray-200 bg-white p-6 md:p-7">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:items-center lg:gap-8">
+              <div className="flex items-start gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E6F0FD] text-[#0066EB]">
+                  <cityGovernmentGroup.icon
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-lg font-bold text-gray-950">
+                    {cityGovernmentGroup.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    {cityGovernmentGroup.blurb}
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center rounded-full bg-[#E6F0FD] px-2.5 py-0.5 text-xs font-semibold text-[#0066EB]">
+                      {summary.officeRecords} City Offices
+                    </span>
+                    <span className="inline-flex items-center rounded-full bg-[#E6F0FD] px-2.5 py-0.5 text-xs font-semibold text-[#0066EB]">
+                      {barangayCount} Barangays
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </dl>
-            <p className="mt-3 text-xs leading-5 text-gray-600">
-              Counts describe records in the portal’s current bounded
-              collections, not complete City inventories or archives.
-            </p>
-          </div>
-        </section>
+              </div>
 
-        <section
-          className="container mx-auto px-4 py-10 md:py-14"
-          aria-labelledby="government-destinations-heading"
-        >
-          <div className="max-w-3xl">
-            <h2
-              id="government-destinations-heading"
-              className="text-2xl font-bold text-gray-900 md:text-3xl"
-            >
-              Find government information
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-gray-700">
-              Start with the directory or collection that matches what you need.
-              Every destination below is currently published.
-            </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {cityGovernmentGroup.destinations.map(destination => {
+                  const Icon = destination.icon;
+                  return (
+                    <Link
+                      key={destination.href}
+                      href={destination.href}
+                      className="group flex items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 transition-colors hover:border-[#0066EB]/30 hover:bg-[#E6F0FD]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#E6F0FD] text-[#0066EB]">
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold leading-5 text-gray-900">
+                          {destination.title}
+                        </span>
+                        <span className="mt-0.5 block text-xs leading-5 text-gray-500">
+                          {destination.description}
+                        </span>
+                      </span>
+                      <ChevronRight
+                        className="ml-2 h-4 w-4 shrink-0 self-center text-gray-400 transition-[color,transform] group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
-          <div className="mt-7 overflow-hidden rounded-xl bg-white shadow-[0_8px_28px_rgba(0,41,94,0.08)]">
-            {destinations.map((destination, index) => {
-              const Icon = destination.icon;
+          {/* Legislation + Public Information — equal-weight supporting cards */}
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            {sideGroups.map(group => {
+              const GroupIcon = group.icon;
               return (
-                <article
-                  key={destination.href}
-                  className={`grid gap-5 p-6 md:grid-cols-[3rem_minmax(0,1fr)_auto] md:items-center md:p-7 ${index > 0 ? 'border-t border-gray-200' : ''}`}
+                <div
+                  key={group.title}
+                  className="rounded-2xl border border-gray-200 bg-white p-6"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-800">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
+                      <GroupIcon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base font-bold text-gray-950">
+                        {group.title}
+                      </h3>
+                      <p className="mt-0.5 text-sm text-gray-600">
+                        {group.blurb}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900">
-                      {destination.title}
-                    </h3>
-                    <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-700">
-                      {destination.description}
-                    </p>
+
+                  <div className="mt-4 space-y-1">
+                    {group.destinations.map(destination => {
+                      const Icon = destination.icon;
+                      return (
+                        <Link
+                          key={destination.href}
+                          href={destination.href}
+                          className="group flex items-center gap-3 rounded-lg px-3 py-3 transition-colors hover:bg-[#E6F0FD]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
+                        >
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#E6F0FD] text-[#0066EB]">
+                            <Icon className="h-4 w-4" aria-hidden="true" />
+                          </span>
+                          <span className="min-w-0 flex-1">
+                            <span className="block text-sm font-semibold leading-5 text-gray-900">
+                              {destination.title}
+                            </span>
+                            <span className="mt-0.5 block text-xs leading-5 text-gray-500">
+                              {destination.description}
+                            </span>
+                          </span>
+                          <ChevronRight
+                            className="ml-3 h-4 w-4 shrink-0 self-center text-gray-400 transition-[color,transform] group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      );
+                    })}
                   </div>
-                  <Link
-                    href={destination.href}
-                    className="inline-flex items-center gap-2 justify-self-start text-sm font-bold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2 md:justify-self-end"
-                  >
-                    {destination.action}
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </article>
+                </div>
               );
             })}
           </div>
         </section>
 
-        <section className="border-y border-gray-200 bg-white">
-          <div className="container mx-auto grid gap-8 px-4 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.55fr)] lg:items-start md:py-12">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">
-                How to interpret coverage
-              </h2>
-              <div className="mt-3 max-w-3xl space-y-3 text-sm leading-6 text-gray-700">
-                <p>
-                  BetterSanFernando publishes only records supported by verified
-                  or public provenance. The published office records are not
-                  asserted to represent the complete City organizational
-                  structure, and government-structure research remains
-                  incomplete.
-                </p>
-                <p>
-                  The legislative collections are bounded archives, not a
-                  complete City legislative archive. Missing content does not
-                  mean that an office or document does not exist.
-                </p>
-              </div>
-            </div>
-            <aside className="rounded-xl bg-primary-50 p-5 text-sm leading-6 text-primary-900">
-              <div className="flex items-start gap-3">
-                <Database
-                  className="mt-0.5 h-5 w-5 shrink-0"
-                  aria-hidden="true"
-                />
-                <div>
-                  <p className="font-semibold">Sources and methods</p>
-                  <p className="mt-1">
-                    Review where published data comes from and how the portal
-                    verifies, scopes, and describes it.
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-semibold">
-                <Link
-                  href="/transparency/sources"
-                  className="underline decoration-primary-300 underline-offset-4 hover:text-primary-800"
-                >
-                  Data sources
-                </Link>
-                <Link
-                  href="/transparency/methodology"
-                  className="underline decoration-primary-300 underline-offset-4 hover:text-primary-800"
-                >
-                  Methodology
-                </Link>
-              </div>
-            </aside>
+        {/* Official Channels — soft-blue action strip */}
+        <section
+          aria-labelledby="government-closing-heading"
+          className="flex flex-col gap-6 rounded-2xl bg-[#E6F0FD] p-6 md:flex-row md:items-center md:justify-between md:gap-8 md:p-7"
+        >
+          <div className="max-w-xl">
+            <p className="text-eyebrow text-[#0066EB]">Official Channels</p>
+
+            <h2
+              id="government-closing-heading"
+              className="mt-1 text-xl font-bold text-section-title text-gray-950 md:text-2xl"
+            >
+              Use the City&rsquo;s official channels when it matters
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-gray-700">
+              For formal transactions, requests, and urgent concerns, use the
+              appropriate official City or government channel.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/government/contact"
+              className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#0066EB] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Contact the City
+            </Link>
+
+            <Link
+              href="/government/links"
+              className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#0066EB]/20 bg-white px-4 text-sm font-semibold text-gray-900 transition-colors hover:border-[#0066EB]/40 hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+            >
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              Official Government Links
+            </Link>
+
+            <Link
+              href="/government/hotlines"
+              className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#0066EB]/20 bg-white px-4 text-sm font-semibold text-gray-900 transition-colors hover:border-[#0066EB]/40 hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Emergency Hotlines
+            </Link>
           </div>
         </section>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
