@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {
   Accessibility,
-  ArrowRight,
+  ArrowUpRight,
   BriefcaseBusiness,
   Briefcase,
   ClipboardList,
@@ -67,12 +67,6 @@ const categoryIcons: Record<string, LucideIcon> = {
   'disaster-preparedness': ShieldAlert,
 };
 
-const halfway = Math.ceil(categories.length / 2);
-const categoryColumns = [
-  categories.slice(0, halfway),
-  categories.slice(halfway),
-] as const;
-
 const whatYoullFind = [
   {
     icon: ListChecks,
@@ -98,54 +92,49 @@ const whatYoullFind = [
 
 export default function ServicesHubPage() {
   return (
-    <main className="flex-grow bg-[#f7f8fa]">
-      {/* Breadcrumb */}
-      <div className="border-b border-gray-200 bg-white">
-        <div className="container mx-auto px-4 py-4">
-          <Breadcrumbs
-            className="text-xs text-gray-500"
-            items={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
-          />
-        </div>
-      </div>
-
+    <main className="flex-grow bg-white pb-16 md:pb-24">
       <ServiceSearchProvider>
-        {/* Hero */}
-        <section className="bg-[#002EAC] text-white">
-          <div className="container mx-auto px-4 py-12 md:py-14">
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-start lg:gap-12">
-              <div className="max-w-2xl">
-                <p className="text-eyebrow text-blue-100">Services</p>
+        <section className="border-b border-gray-200 bg-white">
+          <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-14">
+            <Breadcrumbs
+              className="text-xs text-gray-500"
+              items={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
+            />
 
-                <h1 className="mt-3 text-4xl font-extrabold text-display text-white sm:text-5xl">
-                  Find the City service you need
+            <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_32rem] lg:items-start lg:gap-12">
+              <div className="max-w-2xl">
+                <p className="text-eyebrow text-[#0066EB]">Services</p>
+
+                <h1 className="mt-3 text-3xl font-extrabold text-display text-gray-950 sm:text-4xl lg:text-5xl">
+                  Find the City service you need.
                 </h1>
 
-                <p className="mt-4 text-base leading-7 text-blue-100 md:text-[17px]">
+                <p className="mt-4 text-lg font-medium leading-7 text-gray-800 sm:text-xl">
                   Browse reviewed guidance for permits, health, records,
                   assistance, taxes, utilities, and other local services.
-                  BetterSanFernando progressively publishes reviewed guidance
-                  and does not yet represent every service the City offers.
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center divide-x divide-white/20 text-sm font-medium text-blue-100">
-                  <span className="pr-3">
-                    {services.length} reviewed services
-                  </span>
-                  <span className="px-3">{categories.length} categories</span>
-                  <span className="pl-3">Official-source guidance</span>
+                <p className="mt-3 text-base leading-7 text-gray-600 md:text-[17px]">
+                  BetterSanFernando progressively publishes reviewed guidance
+                  and does not yet represent every City service.
+                </p>
+
+                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-gray-600">
+                  <span>{services.length} reviewed services</span>
+                  <span>{categories.length} categories</span>
+                  <span>Official-source guidance</span>
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-white p-5 md:p-6">
+              <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
                 <h2
                   id="service-finder-heading"
-                  className="text-lg font-bold text-gray-950"
+                  className="text-sm font-bold text-gray-950"
                 >
                   Find a service
                 </h2>
 
-                <div className="mt-4">
+                <div className="mt-3">
                   <ServiceSearchInput />
                 </div>
               </div>
@@ -156,11 +145,10 @@ export default function ServicesHubPage() {
         <MobileSearchResults />
       </ServiceSearchProvider>
 
-      <div className="container mx-auto space-y-16 px-4 py-12 md:py-16">
-        {/* Browse by need */}
+      <div className="container mx-auto space-y-8 px-4 py-8 sm:space-y-12 sm:py-12 lg:space-y-20 lg:py-20">
         <section id="categories" aria-labelledby="categories-heading">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">Browse By Need</p>
+            <p className="text-eyebrow text-[#0066EB]">Browse by Need</p>
 
             <h2
               id="categories-heading"
@@ -175,53 +163,44 @@ export default function ServicesHubPage() {
             </p>
           </div>
 
-          <div className="mt-7 overflow-hidden rounded-2xl border border-gray-200 bg-white lg:grid lg:grid-cols-2 lg:divide-x lg:divide-gray-200">
-            {categoryColumns.map((column, columnIndex) => (
-              <div
-                key={columnIndex}
-                className={
-                  columnIndex === 0
-                    ? 'divide-y divide-gray-200'
-                    : 'divide-y divide-gray-200 border-t border-gray-200 lg:border-t-0'
-                }
-              >
-                {column.map(([name, slug, description]) => {
-                  const Icon = categoryIcons[slug] ?? BriefcaseBusiness;
-                  const count = categoryCounts.get(slug) ?? 0;
+          <div className="mt-7 grid border-l border-t border-gray-200 sm:grid-cols-2">
+            {categories.map(([name, slug, description]) => {
+              const Icon = categoryIcons[slug] ?? BriefcaseBusiness;
+              const count = categoryCounts.get(slug) ?? 0;
 
-                  return (
-                    <Link
-                      key={slug}
-                      href={`/services/${slug}`}
-                      className="flex items-center gap-4 p-4 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB] md:p-5"
-                    >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
-                        <Icon className="h-4 w-4" aria-hidden="true" />
-                      </span>
+              return (
+                <Link
+                  key={slug}
+                  href={`/services/${slug}`}
+                  className="group flex min-w-0 items-start gap-3 border-b border-r border-gray-200 p-4 transition-colors hover:bg-[#F3F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB] md:p-5"
+                >
+                  <Icon
+                    className="mt-0.5 h-4 w-4 shrink-0 text-[#0066EB]"
+                    aria-hidden="true"
+                  />
 
-                      <span className="min-w-0 flex-1">
-                        <h3 className="font-semibold text-gray-950">{name}</h3>
-                        <p className="mt-0.5 truncate text-sm text-gray-600">
-                          {description}
-                        </p>
-                        <p className="mt-1 text-xs text-gray-500">
-                          {count} {count === 1 ? 'service' : 'services'}
-                        </p>
-                      </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold text-gray-950">
+                      {name}
+                    </span>
+                    <span className="mt-1 block text-sm leading-6 text-gray-600">
+                      {description}
+                    </span>
+                    <span className="mt-2 block text-xs text-gray-500">
+                      {count} {count === 1 ? 'service' : 'services'}
+                    </span>
+                  </span>
 
-                      <ArrowRight
-                        className="h-4 w-4 shrink-0 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </Link>
-                  );
-                })}
-              </div>
-            ))}
+                  <ArrowUpRight
+                    className="mt-0.5 h-4 w-4 shrink-0 text-gray-400 transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
+                    aria-hidden="true"
+                  />
+                </Link>
+              );
+            })}
           </div>
         </section>
 
-        {/* What you'll find */}
         <section aria-labelledby="what-youll-find-heading">
           <h2
             id="what-youll-find-heading"
@@ -234,26 +213,28 @@ export default function ServicesHubPage() {
             directly from the official service record.
           </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 sm:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 border-y border-gray-200 sm:grid-cols-4">
             {whatYoullFind.map(item => (
               <div
                 key={item.title}
-                className="flex flex-col items-start gap-2 bg-white p-5"
+                className="border-b border-gray-200 px-4 py-5 odd:border-r [&:nth-child(n+3)]:border-b-0 sm:border-b-0 sm:px-5 sm:[&:not(:last-child)]:border-r"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
-                  <item.icon className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <p className="font-semibold text-gray-950">{item.title}</p>
-                <p className="text-sm text-gray-600">{item.description}</p>
+                <item.icon
+                  className="h-4 w-4 text-[#0066EB]"
+                  aria-hidden="true"
+                />
+                <p className="mt-3 font-semibold text-gray-950">{item.title}</p>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Coverage / provenance */}
         <section
           aria-labelledby="coverage-heading"
-          className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8"
+          className="border-t border-gray-200 pt-8 sm:pt-9 lg:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]">Data Provenance</p>
 
@@ -264,7 +245,7 @@ export default function ServicesHubPage() {
             About This Service Directory
           </h2>
 
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-gray-600">
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-600">
             BetterSanFernando is an independent civic transparency portal, not
             an official City Government website. Each service record here is
             reviewed from official City or agency sources and organized by
@@ -275,10 +256,13 @@ export default function ServicesHubPage() {
 
           <Link
             href="/transparency/methodology"
-            className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+            className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
           >
             Read our data methodology
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowUpRight
+              className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
           </Link>
         </section>
       </div>

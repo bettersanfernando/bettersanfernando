@@ -23,12 +23,12 @@ import { getProjects, type Project } from '../../data/civic/projects';
 // presentations mounted in different parts of the page tree, mirroring the
 // approved Services search:
 //   - lg and up: ProjectSearchInput renders the input plus an absolutely
-//     positioned overlay below it, inside the hero's white panel. The hero
-//     never grows.
+//     positioned overlay below it, inside the page header's "Find a
+//     project" panel. The header never grows.
 //   - below lg: ProjectSearchInput renders only the input, while
 //     MobileProjectSearchResults renders the matching rows in a dedicated
-//     white section below the hero, in normal document flow, so results can
-//     never float over the sticky site header or bloat the hero card.
+//     white section below the header, in normal document flow, so results
+//     can never float over the sticky site header or bloat the panel.
 
 const projects = getProjects();
 
@@ -138,7 +138,7 @@ function NoMatches() {
   );
 }
 
-// Rendered inside the hero's white "Start exploring" panel. Below `lg` it
+// Rendered inside the page header's "Find a project" panel. Below `lg` it
 // only ever shows the input — no result rows — so the panel stays compact;
 // matching projects on mobile render in <MobileProjectSearchResults/>
 // instead, mounted separately by page.tsx.
@@ -222,9 +222,9 @@ export default function ProjectSearchInput() {
   );
 }
 
-// Dedicated below-hero results section for mobile/tablet (< lg), mounted by
-// page.tsx as a sibling right after the hero. Renders nothing while the
-// query is empty.
+// Dedicated below-header results section for mobile/tablet (< lg), mounted
+// by page.tsx as a sibling right after the page header. Renders nothing
+// while the query is empty.
 export function MobileProjectSearchResults() {
   const { query, results } = useProjectSearchState();
   const hasQuery = query.trim().length > 0;

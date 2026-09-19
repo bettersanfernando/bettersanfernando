@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Search, X } from 'lucide-react';
+import { ArrowUpRight, Search, X } from 'lucide-react';
 import {
   getServiceCategory,
   getServiceHref,
@@ -25,8 +25,8 @@ import { categories } from './categories';
 // One query/ranked-results state (held in ServiceSearchProvider) drives two
 // separate presentations that live in different parts of the page tree:
 //   - lg and up: ServiceSearchInput renders the input plus an absolutely
-//     positioned overlay below it, inside the hero's white finder card. The
-//     finder — and the blue hero around it — never grows.
+//     positioned overlay below it, inside the editorial header's finder panel.
+//     The finder never grows.
 //   - below lg: ServiceSearchInput renders only the input/helper text (kept
 //     compact), while MobileSearchResults renders the matching rows in a
 //     dedicated white section below the hero, in normal document flow, so
@@ -148,7 +148,7 @@ function ResultsPanelContent({
           <li key={service.slug}>
             <Link
               href={getServiceHref(service)}
-              className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
+              className="group flex items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#F3F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
             >
               <span className="min-w-0">
                 <span
@@ -161,8 +161,8 @@ function ResultsPanelContent({
                   {service.office.acronym}
                 </span>
               </span>
-              <ArrowRight
-                className="h-4 w-4 shrink-0 text-gray-400"
+              <ArrowUpRight
+                className="h-4 w-4 shrink-0 text-gray-400 transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#0066EB] group-focus-visible:text-[#0066EB]"
                 aria-hidden="true"
               />
             </Link>
@@ -179,7 +179,7 @@ function ResultsPanelContent({
   );
 }
 
-// Rendered inside the hero's white finder card. Below `lg` it only ever
+// Rendered inside the editorial header's finder panel. Below `lg` it only ever
 // shows the input and helper text — no result rows — so the finder stays
 // compact; matching services on mobile render in <MobileSearchResults/>
 // instead, mounted separately by page.tsx.
@@ -208,7 +208,7 @@ export default function ServiceSearchInput() {
           }}
           aria-labelledby="service-finder-heading"
           placeholder="Search permits, certificates, health services, taxes..."
-          className="h-14 w-full rounded-xl border border-gray-200 bg-white pl-12 pr-12 text-base text-gray-900 outline-none placeholder:text-gray-500 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
+          className="h-12 w-full rounded-sm border border-gray-300 bg-white pl-12 pr-12 text-base text-gray-900 outline-none placeholder:text-gray-500 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
         />
 
         {hasQuery && (
@@ -216,7 +216,7 @@ export default function ServiceSearchInput() {
             type="button"
             onClick={() => setQuery('')}
             aria-label="Clear search"
-            className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+            className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-sm text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -226,7 +226,7 @@ export default function ServiceSearchInput() {
             below the sticky site header's z-50 so the header always wins. */}
         {hasQuery && (
           <div
-            className="absolute left-0 right-0 top-full z-40 mt-2 hidden max-h-[20rem] overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-lg lg:block"
+            className="absolute left-0 right-0 top-full z-40 mt-2 hidden max-h-[20rem] overflow-y-auto rounded-sm border border-gray-200 bg-white shadow-lg lg:block"
             role="region"
             aria-label="Search results"
           >

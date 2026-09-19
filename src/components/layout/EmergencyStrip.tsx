@@ -14,7 +14,7 @@ import {
 import { getGovernmentHotlines } from '../../data/civic/governmentHotlines';
 
 const focusStyles =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red-700 rounded-sm';
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#002EAC] rounded-sm';
 
 interface HotlineItem {
   id: string;
@@ -103,11 +103,14 @@ function phoneHref(value: string) {
 
 export default function EmergencyStrip() {
   return (
-    <section aria-label="Emergency hotlines" className="bg-red-700 text-white">
+    <section
+      aria-label="Emergency hotlines"
+      className="bg-[#002EAC] text-white"
+    >
       <div className="container mx-auto flex h-9.5 items-center justify-between gap-2 px-4 text-xs sm:h-10 sm:gap-3 sm:px-6 lg:px-8">
         <div className="flex shrink-0 items-center gap-1.5 font-semibold text-white">
           <TriangleAlert
-            className="h-3.5 w-3.5 shrink-0 text-red-200"
+            className="h-3.5 w-3.5 shrink-0 text-blue-200"
             aria-hidden="true"
           />
           <span>Emergency</span>
@@ -145,15 +148,15 @@ export default function EmergencyStrip() {
                     <a
                       href={phoneHref(contact.number)}
                       aria-label={`${accessibleName}: ${contact.number}`}
-                      className={`group items-center gap-1 whitespace-nowrap text-red-100 transition-colors hover:text-white hover:underline decoration-white/40 underline-offset-2 xl:gap-1.5 ${focusStyles} ${wrapperClassName}`}
+                      className={`group items-center gap-1 whitespace-nowrap text-white transition-colors hover:text-white hover:underline decoration-white/40 underline-offset-2 xl:gap-1.5 ${focusStyles} ${wrapperClassName}`}
                     >
                       <Icon
-                        className="h-3.5 w-3.5 shrink-0 text-red-200 transition-colors group-hover:text-white"
+                        className="h-3.5 w-3.5 shrink-0 text-blue-200 transition-colors group-hover:text-white"
                         aria-hidden="true"
                       />
                       <span className="font-medium text-white">{label}</span>
                       {!is911 && (
-                        <span className="tabular-nums text-red-100 transition-colors group-hover:text-white">
+                        <span className="tabular-nums text-white transition-colors group-hover:text-white">
                           {contact.number}
                         </span>
                       )}
@@ -168,7 +171,7 @@ export default function EmergencyStrip() {
         <div className="flex shrink-0 items-center">
           <Link
             href="/government/hotlines"
-            className={`inline-flex items-center gap-1 font-medium text-red-100 transition-colors hover:text-white hover:underline decoration-white/40 underline-offset-2 ${focusStyles}`}
+            className={`inline-flex items-center gap-1 font-medium text-white transition-colors hover:text-white hover:underline decoration-white/40 underline-offset-2 ${focusStyles}`}
           >
             <span className="hidden xl:inline">View all hotlines</span>
             <span className="hidden sm:inline xl:hidden">Hotlines</span>

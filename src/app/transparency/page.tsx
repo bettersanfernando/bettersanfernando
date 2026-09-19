@@ -1,4 +1,16 @@
-import { ArrowUpRight } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Building2,
+  Database,
+  FileSearch,
+  Info,
+  Landmark,
+  Layers,
+  Map,
+  Scale,
+  ShieldCheck,
+  type LucideIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { getTransparencySummary } from '../../data/civic/transparencySummary';
@@ -23,6 +35,7 @@ const eyebrowTracking = { letterSpacing: '0.08em' } as const;
 
 interface CatalogRow {
   title: string;
+  icon: LucideIcon;
   description: string;
   links: readonly (readonly [string, string])[];
 }
@@ -30,6 +43,7 @@ interface CatalogRow {
 const catalog: CatalogRow[] = [
   {
     title: 'Projects & Procurement',
+    icon: FileSearch,
     description: `${summary.projects.total} published project records, backed by ${summary.projects.evidence} evidence records including ${summary.projects.bidResults} bid results.`,
     links: [
       ['/projects', 'Browse projects'],
@@ -40,6 +54,7 @@ const catalog: CatalogRow[] = [
   },
   {
     title: 'Government Directory',
+    icon: Building2,
     description: `Published City office and contact information available on BetterSanFernando (${summary.government.officeRecords} office records). This is not a complete organizational chart.`,
     links: [
       ['/government/offices', 'Browse City offices'],
@@ -48,6 +63,7 @@ const catalog: CatalogRow[] = [
   },
   {
     title: 'Legislation',
+    icon: Scale,
     description: `${summary.legislation.executiveOrders} Executive Orders, ${summary.legislation.ordinances} ordinances, and ${summary.legislation.resolutions} resolutions, published as separate record types.`,
     links: [
       ['/legislation', 'Explore legislation'],
@@ -58,12 +74,14 @@ const catalog: CatalogRow[] = [
   },
   {
     title: 'City Finances',
+    icon: Landmark,
     description:
       'Selected official aggregate finance reports, shown as reported by their source rather than combined into one total.',
     links: [['/transparency/finance', 'Explore City Finances']],
   },
   {
     title: 'Population & Geography',
+    icon: Map,
     description: `${summary.population.total.toLocaleString()} residents in the ${summary.population.census} baseline across ${summary.population.barangays} barangays, with city and barangay boundary maps.`,
     links: [
       ['/statistics/population', 'View population statistics'],
@@ -123,8 +141,8 @@ export default function Transparency() {
               </p>
             </div>
 
-            {/* Trust / info module — flat editorial supporting copy, no card */}
-            <div className="mt-8 border-t border-gray-200 pt-5 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+            {/* Trust / info module — pale blue-gray feature panel, thin blue left rule, no shadow */}
+            <div className="mt-8 rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5 lg:mt-0">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
                 Independent civic portal
               </p>
@@ -201,45 +219,49 @@ export default function Transparency() {
           </p>
 
           <div className="mt-7 overflow-hidden rounded-sm border border-gray-200 bg-white">
-            {catalog.map((domain, index) => (
-              <div
-                key={domain.title}
-                className={`flex flex-col gap-3 p-5 sm:p-6 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8 lg:p-7 ${index > 0 ? 'border-t border-gray-200' : ''}`}
-              >
-                <h3 className="text-base font-bold text-gray-950">
-                  {domain.title}
-                </h3>
+            {catalog.map((domain, index) => {
+              const Icon = domain.icon;
+              return (
+                <div
+                  key={domain.title}
+                  className={`flex flex-col gap-3 p-5 transition-colors hover:bg-[#F3F6FB] sm:p-6 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-8 lg:p-7 ${index > 0 ? 'border-t border-gray-200' : ''}`}
+                >
+                  <h3 className="flex items-start gap-2 text-base font-bold text-gray-950">
+                    <Icon
+                      className="mt-0.5 h-4 w-4 shrink-0 text-[#0066EB]"
+                      aria-hidden="true"
+                    />
+                    {domain.title}
+                  </h3>
 
-                <div>
-                  <p className="max-w-2xl text-sm leading-6 text-gray-700">
-                    {domain.description}
-                  </p>
-                  <div className="mt-3 flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-x-6 lg:gap-y-2">
-                    {domain.links.map(([href, label]) => (
-                      <Link
-                        key={href}
-                        href={href}
-                        className="group inline-flex min-h-8 items-center gap-1 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
-                      >
-                        {label}
-                        <ArrowUpRight
-                          className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                          aria-hidden="true"
-                        />
-                      </Link>
-                    ))}
+                  <div>
+                    <p className="max-w-2xl text-sm leading-6 text-gray-700">
+                      {domain.description}
+                    </p>
+                    <div className="mt-3 flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-x-7 lg:gap-y-2">
+                      {domain.links.map(([href, label]) => (
+                        <Link
+                          key={href}
+                          href={href}
+                          className="group inline-flex min-h-8 items-center gap-1 text-sm font-semibold text-[#0066EB] underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:text-[#0052BC] hover:decoration-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                        >
+                          {label}
+                          <ArrowUpRight
+                            className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
         {/* Sources & Methodology — open editorial section, no outer card */}
-        <section
-          aria-labelledby="sources-heading"
-          className="border-l-2 border-[#0066EB] pl-5 sm:pl-6"
-        >
+        <section aria-labelledby="sources-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
             Sources &amp; Methodology
           </p>
@@ -256,32 +278,50 @@ export default function Transparency() {
 
           <div className="mt-7 grid gap-8 border-t border-gray-200 pt-7 sm:grid-cols-2 sm:gap-10 sm:divide-x sm:divide-gray-200">
             <div className="sm:pr-8">
-              <h3 className="text-base font-bold text-gray-950">Sources</h3>
+              <h3 className="flex items-center gap-2 text-base font-bold text-gray-950">
+                <Database
+                  className="h-4 w-4 shrink-0 text-[#0066EB]"
+                  aria-hidden="true"
+                />
+                Sources
+              </h3>
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 See what each dataset covers, who publishes it, and where the
                 original public record lives.
               </p>
               <Link
                 href="/transparency/sources"
-                className="mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                className="group mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:text-[#0052BC] hover:decoration-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
                 Explore published data sources
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                <ArrowUpRight
+                  className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
               </Link>
             </div>
 
             <div className="sm:pl-8">
-              <h3 className="text-base font-bold text-gray-950">Methodology</h3>
+              <h3 className="flex items-center gap-2 text-base font-bold text-gray-950">
+                <ShieldCheck
+                  className="h-4 w-4 shrink-0 text-[#0066EB]"
+                  aria-hidden="true"
+                />
+                Methodology
+              </h3>
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 Read how records are reviewed and normalized, and how missing
                 values and limitations are handled.
               </p>
               <Link
                 href="/transparency/methodology"
-                className="mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                className="group mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:text-[#0052BC] hover:decoration-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
                 Read the transparency methodology
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                <ArrowUpRight
+                  className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
               </Link>
             </div>
           </div>
@@ -366,7 +406,11 @@ export default function Transparency() {
           </h2>
           <div className="mt-5 grid gap-6 md:grid-cols-2">
             <div>
-              <h3 className="text-sm font-bold text-gray-950">
+              <h3 className="flex items-center gap-2 text-sm font-bold text-gray-950">
+                <Info
+                  className="h-4 w-4 shrink-0 text-[#0066EB]"
+                  aria-hidden="true"
+                />
                 Published does not mean complete.
               </h3>
               <p className="mt-1.5 text-sm leading-6 text-gray-600">
@@ -377,7 +421,11 @@ export default function Transparency() {
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-bold text-gray-950">
+              <h3 className="flex items-center gap-2 text-sm font-bold text-gray-950">
+                <Layers
+                  className="h-4 w-4 shrink-0 text-[#0066EB]"
+                  aria-hidden="true"
+                />
                 Records are not interchangeable.
               </h3>
               <p className="mt-1.5 text-sm leading-6 text-gray-600">

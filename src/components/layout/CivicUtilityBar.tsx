@@ -90,7 +90,7 @@ export default function CivicUtilityBar({
   return (
     <div
       data-current-language={currentLanguage}
-      className="border-b border-slate-200 bg-slate-50 text-slate-700"
+      className="border-b border-slate-200 bg-white text-slate-700"
     >
       <div className="container mx-auto flex h-10 items-center justify-between gap-3 px-4 text-xs">
         <div className="flex min-w-0 items-center gap-3">
