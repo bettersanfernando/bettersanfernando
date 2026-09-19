@@ -530,44 +530,30 @@ export function getActiveNavigationId(pathname: string): NavigationId | null {
 export const footerNavigation = {
   mainSections: [
     {
-      title: 'About',
+      title: 'Explore',
       links: [
-        { label: 'About the Portal', href: '/about' },
-        // { label: 'Privacy Policy', href: '/privacy' },
-        // { label: 'Terms of Use', href: '/terms' },
-        { label: 'Accessibility', href: '/accessibility' },
-        { label: 'Contact Us', href: '/contact' },
-        { label: 'Community Discord', href: '/discord' },
+        { label: 'Services', href: '/services' },
+        { label: 'Projects', href: '/projects' },
+        { label: 'Government', href: '/government' },
+        { label: 'Transparency', href: '/transparency' },
+        { label: 'Statistics', href: '/statistics' },
       ],
     },
     {
-      title: 'Services',
+      title: 'Public Information',
       links: [
-        { label: 'All Services', href: '/services' },
-        { label: 'Hotlines', href: '/philippines/hotlines' },
-        { label: 'Holidays', href: '/philippines/holidays' },
-      ],
-    },
-    {
-      title: 'Government',
-      links: [
-        { label: 'Open Data', href: 'https://data.gov.ph' },
-        { label: 'Freedom of Information', href: 'https://www.foi.gov.ph' },
-        {
-          label: 'Contact Center',
-          href: 'https://contactcenterngbayan.gov.ph',
-        },
-        {
-          label: 'Official Gazette',
-          href: 'https://www.officialgazette.gov.ph',
-        },
+        { label: 'City Offices', href: '/government/offices' },
+        { label: 'Contact the City', href: '/government/contact' },
+        { label: 'Emergency Hotlines', href: '/government/hotlines' },
+        { label: 'Official Government Links', href: '/government/links' },
+        { label: 'Barangays', href: '/barangays' },
       ],
     },
   ],
   socialLinks: [
-    { label: 'Facebook', href: 'https://facebook.com/govph' },
-    { label: 'Twitter', href: 'https://twitter.com/govph' },
-    { label: 'Instagram', href: 'https://instagram.com/govph' },
-    { label: 'YouTube', href: 'https://youtube.com/govph' },
+    {
+      label: 'GitHub',
+      href: 'https://github.com/bettersanfernando/bettersanfernando',
+    },
   ],
 };

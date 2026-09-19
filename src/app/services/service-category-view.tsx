@@ -240,8 +240,6 @@ export default function ServiceCategoryView({
                     "Two publication-reviewed Citizen's Charter certificate procedures currently published from the Office of the City Building Official (OCBO)."}
                   {category === 'utilities-water' &&
                     "Nine publication-reviewed Citizen's Charter transactions currently published from the City of San Fernando Water District (CSFWD), a distinct Water District organized under Presidential Decree 198 — not a City Government office or City Engineer division."}
-                  {category === 'property-taxes' &&
-                    "Eleven publication-reviewed Citizen's Charter records currently published from two offices with distinct responsibilities. The City Assessor's Office handles appraisal, assessment, tax declarations, ownership-record updates, tax mapping, and assessment documents. The City Treasurer's Office handles tax computation, collection, payment records, receipts, transfer tax, RPT/Amilyar, and individual Community Tax Certificates. A Treasurer payment window inside an Assessor procedure does not make that Assessor service Treasurer-owned. Land-title registration remains with the Registry of Deeds/LRA; applicable national tax requirements remain with the BIR; building, occupancy, zoning, and locational responsibilities remain with OCBO and CPDCO."}
                 </p>
               )}
               {category !== 'property-taxes' && (
@@ -268,9 +266,7 @@ export default function ServiceCategoryView({
                                     ? 'This is a bounded collection of two OCBO certificate procedures, not a complete inventory of building, zoning, or land-use services. Building permits, certificates of occupancy, zoning clearances, and other building/zoning transactions remain unpublished pending source clarification. Fees follow the PD 1096 Schedule of Fees and applicable regulatory or ordinance charges; no fixed peso amount is shown, and the physical inspection itself is excluded from the published certificate-processing time.'
                                     : category === 'utilities-water'
                                       ? 'This is a bounded collection of nine CSFWD Charter transactions, not a complete inventory of water-utility services. Service availability applies only within CSFWD/PW-CSF coverage — not every San Fernando barangay or property is served. No universal flat new-connection fee, online payment, online application, or 24/7 hotline or office is published; two separate reconnection procedures and one maintenance procedure covering eight technical subtypes are preserved as reviewed.'
-                                      : category === 'property-taxes'
-                                        ? 'This is a bounded collection of eight Assessor and three Treasurer records, not a complete inventory of property or tax procedures. Six additional Assessor services, Market Stall Rental, and a standalone RPT Clearance service remain held pending further review. No online RPT, transfer-tax, or CTC payment/application channel is published, no universal barangay CTC availability is claimed, and no current Schedule of Market Values table is included. RPT account inquiry and statement-of-account information stays integrated within the RPT record as exported, not as a separate service.'
-                                        : 'This is a bounded collection, not a complete inventory of City Government services.'}
+                                      : 'This is a bounded collection, not a complete inventory of City Government services.'}
                 </p>
               )}
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-gray-600">
