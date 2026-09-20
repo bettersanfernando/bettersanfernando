@@ -96,8 +96,10 @@ const ResolutionsFileSchema = z
   })
   .strict();
 
+const executiveOrdersFile =
+  ExecutiveOrdersFileSchema.parse(executiveOrdersJson);
 const executiveOrders: readonly LegislationRecord[] = Object.freeze(
-  ExecutiveOrdersFileSchema.parse(executiveOrdersJson).executive_orders
+  executiveOrdersFile.executive_orders
 );
 const ordinances: readonly LegislationRecord[] = Object.freeze(
   OrdinancesFileSchema.parse(ordinancesJson).ordinances
@@ -106,8 +108,36 @@ const resolutions: readonly LegislationRecord[] = Object.freeze(
   ResolutionsFileSchema.parse(resolutionsJson).resolutions
 );
 
+export type ExecutiveOrdersMetadata = Readonly<{
+  description: string;
+  documentType: string;
+  jurisdictionName: string;
+  jurisdictionPsgc: string;
+  lastVerified: string;
+  province: string;
+  recordCount: number;
+  sourceArchiveUrl: string;
+  sourceRetrievedAt: string;
+}>;
+
+const executiveOrdersMetadata: ExecutiveOrdersMetadata = Object.freeze({
+  description: executiveOrdersFile.description,
+  documentType: executiveOrdersFile.document_type,
+  jurisdictionName: executiveOrdersFile.jurisdiction_name,
+  jurisdictionPsgc: executiveOrdersFile.jurisdiction_psgc,
+  lastVerified: executiveOrdersFile.last_verified,
+  province: executiveOrdersFile.province,
+  recordCount: executiveOrdersFile.record_count,
+  sourceArchiveUrl: executiveOrdersFile.source_archive_url,
+  sourceRetrievedAt: executiveOrdersFile.source_retrieved_at,
+});
+
 export function getExecutiveOrders(): readonly LegislationRecord[] {
   return executiveOrders;
+}
+
+export function getExecutiveOrdersMetadata(): ExecutiveOrdersMetadata {
+  return executiveOrdersMetadata;
 }
 
 export function getOrdinances(): readonly LegislationRecord[] {

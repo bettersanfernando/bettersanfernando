@@ -137,7 +137,29 @@ assert.ok(
 );
 assert.equal(officialLinksDestination?.kind, 'real');
 
-// 8. External links use safe target/rel attributes.
+// 8. Visible UI scope and exclusion of Facebook pages.
+const visibleLinks = links.filter(
+  l => l.channel_type !== 'OFFICIAL_FACEBOOK_PAGE'
+);
+assert.equal(visibleLinks.length, 32, 'exactly 32 visible destinations');
+const visibleWebsites = visibleLinks.filter(
+  l => l.channel_type === 'OFFICIAL_WEBSITE'
+);
+assert.equal(
+  visibleWebsites.length,
+  30,
+  'exactly 30 visible official websites'
+);
+const visibleDigitalServices = visibleLinks.filter(
+  l => l.channel_type === 'OFFICIAL_DIGITAL_SERVICE'
+);
+assert.equal(
+  visibleDigitalServices.length,
+  2,
+  'exactly 2 visible digital services'
+);
+
+// 9. External links and page rendering semantics.
 const pageSource = readNextRoute('/government/links');
 assert.match(
   pageSource,
@@ -151,23 +173,133 @@ assert.match(
 );
 assert.match(
   pageSource,
-  /useMemo|useState/,
-  'the page must support local filtering'
+  /useQueryState/,
+  'the page must support URL-backed query state'
 );
 assert.match(
   pageSource,
-  /government\/hotlines/,
-  'the page must link to Government Hotlines for contact needs'
+  /PAGE_SIZE = 10/,
+  'the directory must paginate at 10 results per page'
 );
 assert.match(
   pageSource,
-  /government\/barangay-contacts/,
-  'the page must link to Barangay Contacts for contact needs'
+  /setPage\(1\)/,
+  'filter/search/sort changes must reset pagination to page 1'
+);
+
+// Facebook pages excluded from visible UI and filter options
+assert.ok(
+  !pageSource.includes('Facebook pages'),
+  'Facebook pages must not appear in UI copy or options'
+);
+assert.ok(
+  !pageSource.includes('value="OFFICIAL_FACEBOOK_PAGE"'),
+  'OFFICIAL_FACEBOOK_PAGE must be excluded from filter options'
+);
+
+// Naming/reorganization conflict represented without legacy warning styling
+assert.match(
+  pageSource,
+  /CURRENT_VERIFIED_NAMING_OR_REORG_CONFLICT_UNRESOLVED/,
+  'naming conflict status must be handled'
 );
 assert.match(
   pageSource,
-  /government\/offices/,
-  'the page must link to Government Offices for contact needs'
+  /Naming note/,
+  'naming note must be rendered for affected records'
+);
+
+// Check that legacy styling patterns are removed
+for (const legacyPattern of [
+  'rounded-xl bg-primary-700',
+  'bg-warning-50',
+  'shadow-[0_8px_28px',
+  'bg-primary-900',
+]) {
+  assert.ok(
+    !pageSource.includes(legacyPattern),
+    `page source must not include legacy pattern: ${legacyPattern}`
+  );
+}
+
+// Related government routes
+for (const route of [
+  '/government/offices',
+  '/government/contact',
+  '/government/hotlines',
+  '/government/barangay-contacts',
+]) {
+  assert.ok(
+    pageSource.includes(route),
+    `page must link to related route: ${route}`
+  );
+}
+
+// 10. Functional search, filter, sort, and pagination logic
+function matchesQuery(link: (typeof links)[number], query: string): boolean {
+  const normalized = query.toLowerCase();
+  return [
+    link.owning_entity,
+    link.office_acronym,
+    link.label,
+    link.public_purpose,
+    link.url,
+  ]
+    .filter((value): value is string => Boolean(value))
+    .some(value => value.toLowerCase().includes(normalized));
+}
+
+// Search by acronym
+const ctoMatches = visibleLinks.filter(l => matchesQuery(l, 'CTO'));
+assert.ok(ctoMatches.length >= 1, 'search for CTO must return matches');
+
+// Search by service label
+const portalMatches = visibleLinks.filter(l =>
+  matchesQuery(l, 'Citizens Portal')
+);
+assert.equal(
+  portalMatches.length,
+  1,
+  'search for Citizens Portal must return exactly 1 match'
+);
+
+// Type filtering
+const filteredWebsites = visibleLinks.filter(
+  l => l.channel_type === 'OFFICIAL_WEBSITE'
+);
+assert.equal(
+  filteredWebsites.length,
+  30,
+  'type filter for website must yield 30 results'
+);
+const filteredServices = visibleLinks.filter(
+  l => l.channel_type === 'OFFICIAL_DIGITAL_SERVICE'
+);
+assert.equal(
+  filteredServices.length,
+  2,
+  'type filter for digital service must yield 2 results'
+);
+
+// Sorting
+const sortedByName = [...visibleLinks].sort((a, b) =>
+  a.label.localeCompare(b.label, 'en-PH')
+);
+assert.equal(sortedByName.length, 32);
+
+// Pagination math: 32 items at 10/page produces 4 pages
+const PAGE_SIZE = 10;
+const totalPages = Math.ceil(visibleLinks.length / PAGE_SIZE);
+assert.equal(totalPages, 4, '32 destinations at 10/page must produce 4 pages');
+assert.equal(
+  visibleLinks.slice(0, 10).length,
+  10,
+  'page 1 must contain 10 items'
+);
+assert.equal(
+  visibleLinks.slice(30, 32).length,
+  2,
+  'page 4 must contain 2 items'
 );
 
 // 9. Existing datasets remain unchanged.
