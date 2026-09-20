@@ -14,11 +14,9 @@ import { buildPageMetadata } from '../../../lib/metadata';
 // next/link. Unknown IDs call notFound() (a real HTTP 404) instead of
 // rendering an inline "Project not found" banner.
 //
-// Rendering (ProjectDetailView) is a client component because
-// @bettergov/kapwa's Card/Banner ship without a 'use client' directive and
-// crash when executed under React's react-server condition (no
-// __CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE). This
-// page stays a Server Component only for data fetching and metadata.
+// ProjectDetailView is a plain Server Component — it no longer depends on
+// @bettergov/kapwa (which forced a client boundary) and has no interactive
+// state of its own.
 
 export function generateStaticParams() {
   return getProjects().map(project => ({ projectId: project.id }));

@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
+    "postinstall": "node scripts/sync-maplibre-worker.mjs",
     "convert-yaml": "node scripts/yaml-to-json.js",
     "dev:yaml": "pnpm run convert-yaml && pnpm run dev",
     "setup": "node scripts/setup-starter-kit.js",

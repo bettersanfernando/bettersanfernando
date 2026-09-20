@@ -47,8 +47,6 @@ const destinationPresentation = {
   barangayContacts: ['users', 'barangayContacts'],
   officialGovernmentLinks: ['external-link', 'officialGovernmentLinks'],
   fullDisclosureReports: ['file-check', 'fullDisclosureReports'],
-  cityProjects: ['list-checks', 'cityProjects'],
-  procurementRecords: ['shopping-cart', 'procurementRecords'],
   financialTransparency: ['wallet', 'financialTransparency'],
   dataSources: ['database', 'dataSources'],
   methodology: ['file-text', 'methodology'],
@@ -213,7 +211,13 @@ const navigationStructure = [
     id: 'projects',
     labelKey: 'navigation.topLevel.projects',
     href: '/projects',
-    activePathPrefixes: ['/projects', '/procurement'],
+    activePathPrefixes: [
+      '/projects',
+      '/procurement',
+      '/statistics/project-spending',
+      '/statistics/projects',
+      '/statistics/procurement',
+    ],
     sections: [
       {
         labelKey: 'navigation.sections.cityProjects',
@@ -446,31 +450,6 @@ const navigationStructure = [
           },
         ],
       },
-      {
-        labelKey: 'navigation.sections.projectsProcurement',
-        items: [
-          {
-            labelKey: 'navigation.items.cityProjects',
-            href: '/projects/city-projects',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.procurementRecords',
-            href: '/procurement',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.contractsAwards',
-            href: '/procurement/contracts',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.projectStatistics',
-            href: '/statistics/projects',
-            kind: 'real',
-          },
-        ],
-      },
     ],
   },
   {
@@ -513,18 +492,34 @@ export function getSearchHref(query: string) {
     : searchNavigation.href;
 }
 
+// Picks the most specific (longest) matching prefix across every top-level
+// item, rather than the first item whose prefix matches in declaration
+// order. Ownership of overlapping route families (e.g. Projects owning
+// `/statistics/project-spending` while Transparency owns the broader
+// `/statistics` prefix) must not depend on array order.
 export function getActiveNavigationId(pathname: string): NavigationId | null {
   const normalizedPath = pathname.replace(/\/+$/, '') || '/';
 
-  return (
-    mainNavigation.find(item =>
-      item.activePathPrefixes.some(prefix =>
+  let bestId: NavigationId | null = null;
+  let bestPrefixLength = -1;
+
+  for (const item of mainNavigation) {
+    for (const prefix of item.activePathPrefixes) {
+      const matches =
         prefix === '/'
           ? normalizedPath === '/'
-          : normalizedPath === prefix || normalizedPath.startsWith(`${prefix}/`)
-      )
-    )?.id ?? null
-  );
+          : normalizedPath === prefix ||
+            normalizedPath.startsWith(`${prefix}/`);
+      if (!matches) continue;
+
+      if (prefix.length > bestPrefixLength) {
+        bestPrefixLength = prefix.length;
+        bestId = item.id;
+      }
+    }
+  }
+
+  return bestId;
 }
 
 export const footerNavigation = {

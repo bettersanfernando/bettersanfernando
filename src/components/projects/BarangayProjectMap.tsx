@@ -3,9 +3,11 @@
 import { useEffect, useRef } from 'react';
 import {
   FullscreenControl,
+  GeoJSONSource,
   LngLatBounds,
   Map as MapLibreMap,
   NavigationControl,
+  Popup,
   ScaleControl,
   setWorkerUrl,
   type LngLatBoundsLike,
@@ -14,18 +16,25 @@ import {
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
 import type { BarangayProjectSummary } from '../../data/civic/projectMap';
+import type { ProjectLifecycleStatus } from '../../data/civic/projects';
+import { titleCaseEnum } from '../../lib/utils';
 
-// Next.js port of BarangayProjectMap.tsx. Identical MapLibre setup and
-// event handling; the only change is the worker asset import — Vite's
-// `?url` suffix has no Next.js/webpack equivalent, so this uses the
-// standard `new URL(..., import.meta.url)` asset-URL pattern instead
-// (see docs/NEXTJS-MIGRATION-SPEC.md §10). Rendered only via a client-only
+// Next.js port of BarangayProjectMap.tsx. Rendered only via a client-only
 // dynamic import (see ../../app/projects/map/project-map-view.tsx) so
 // this file — and the maplibre-gl bundle it pulls in — never loads on any
 // other route.
-setWorkerUrl(
-  new URL('maplibre-gl/dist/maplibre-gl-worker.mjs', import.meta.url).href
-);
+//
+// The worker script is referenced by a plain, stable string path rather
+// than `new URL('maplibre-gl/dist/...', import.meta.url)` (a webpack Asset
+// Modules idiom for bare, cross-package specifiers that Turbopack does not
+// reliably rewrite into a real servable URL). Getting this wrong is why the
+// map used to render its controls/background but never any barangay
+// polygons: GeoJSON tiling happens in the worker, so if the worker never
+// starts, the fill/outline layers stay permanently empty with no error.
+// `public/maplibre-gl-worker.mjs` is kept in sync with the installed
+// maplibre-gl version by `scripts/sync-maplibre-worker.mjs` (wired to
+// `postinstall`), so this path is always valid regardless of bundler.
+setWorkerUrl('/maplibre-gl-worker.mjs');
 
 const SOURCE_ID = 'barangay-project-distribution';
 const FILL_LAYER_ID = 'barangay-project-fill';
@@ -38,14 +47,59 @@ interface BarangayProjectMapProps {
   summaries: readonly BarangayProjectSummary[];
   selectedPsgc: string | null;
   onSelect: (psgc: string) => void;
+  lifecycleFilter: ProjectLifecycleStatus | null;
 }
 
-function getBounds(feature: CityFeature): LngLatBoundsLike {
+function metricFor(
+  summary: BarangayProjectSummary | undefined,
+  lifecycleFilter: ProjectLifecycleStatus | null
+): number {
+  if (!summary) return 0;
+  return lifecycleFilter
+    ? summary.lifecycleCounts[lifecycleFilter]
+    : summary.projectCount;
+}
+
+function metricLabel(
+  count: number,
+  lifecycleFilter: ProjectLifecycleStatus | null
+): string {
+  const noun = lifecycleFilter
+    ? `${titleCaseEnum(lifecycleFilter).toLowerCase()} record`
+    : 'project record';
+  return `${count} ${noun}${count === 1 ? '' : 's'}`;
+}
+
+function boundsFromRings(
+  rings: readonly (readonly [number, number])[][]
+): LngLatBoundsLike {
   const bounds = new LngLatBounds();
-  for (const ring of feature.geometry.coordinates) {
-    for (const coordinate of ring) bounds.extend(coordinate);
+  for (const ring of rings) {
+    for (const coordinate of ring)
+      bounds.extend(coordinate as [number, number]);
   }
   return bounds;
+}
+
+function buildCollection(
+  boundaries: readonly BarangayFeature[],
+  summaries: readonly BarangayProjectSummary[],
+  lifecycleFilter: ProjectLifecycleStatus | null
+) {
+  const byPsgc = new Map(summaries.map(item => [item.psgcCode, item]));
+  return {
+    type: 'FeatureCollection' as const,
+    features: boundaries.map(boundary => ({
+      ...boundary,
+      properties: {
+        ...boundary.properties,
+        metric_count: metricFor(
+          byPsgc.get(boundary.properties.psgc_code),
+          lifecycleFilter
+        ),
+      },
+    })),
+  };
 }
 
 export default function BarangayProjectMap({
@@ -54,30 +108,28 @@ export default function BarangayProjectMap({
   summaries,
   selectedPsgc,
   onSelect,
+  lifecycleFilter,
 }: BarangayProjectMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const onSelectRef = useRef(onSelect);
+  const summariesRef = useRef(summaries);
+  const lifecycleFilterRef = useRef(lifecycleFilter);
+  const hoveredIdRef = useRef<string | number | null>(null);
 
   useEffect(() => {
     onSelectRef.current = onSelect;
   }, [onSelect]);
+  useEffect(() => {
+    summariesRef.current = summaries;
+  }, [summaries]);
+  useEffect(() => {
+    lifecycleFilterRef.current = lifecycleFilter;
+  }, [lifecycleFilter]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    const counts = new Map(summaries.map(item => [item.psgcCode, item]));
-    const collection = {
-      type: 'FeatureCollection' as const,
-      features: boundaries.map(boundary => ({
-        ...boundary,
-        properties: {
-          ...boundary.properties,
-          project_count:
-            counts.get(boundary.properties.psgc_code)?.projectCount ?? 0,
-        },
-      })),
-    };
     const map = new MapLibreMap({
       container: containerRef.current,
       style: {
@@ -91,7 +143,7 @@ export default function BarangayProjectMap({
           },
         ],
       },
-      bounds: getBounds(cityBoundary),
+      bounds: boundsFromRings(cityBoundary.geometry.coordinates),
       fitBoundsOptions: { padding: 28 },
       attributionControl: false,
       dragRotate: false,
@@ -103,8 +155,23 @@ export default function BarangayProjectMap({
     map.addControl(new FullscreenControl());
     map.addControl(new ScaleControl({ unit: 'metric' }), 'bottom-left');
 
+    const popup = new Popup({
+      closeButton: false,
+      closeOnClick: false,
+      maxWidth: '220px',
+    });
+
     map.on('load', () => {
-      map.addSource(SOURCE_ID, { type: 'geojson', data: collection });
+      const collection = buildCollection(
+        boundaries,
+        summariesRef.current,
+        lifecycleFilterRef.current
+      );
+      map.addSource(SOURCE_ID, {
+        type: 'geojson',
+        data: collection,
+        promoteId: 'psgc_code',
+      });
       map.addLayer({
         id: FILL_LAYER_ID,
         type: 'fill',
@@ -112,7 +179,7 @@ export default function BarangayProjectMap({
         paint: {
           'fill-color': [
             'step',
-            ['get', 'project_count'],
+            ['get', 'metric_count'],
             '#e9ecef',
             1,
             '#cce0fb',
@@ -123,7 +190,12 @@ export default function BarangayProjectMap({
             20,
             '#003d8d',
           ],
-          'fill-opacity': 0.86,
+          'fill-opacity': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            0.96,
+            0.82,
+          ],
         },
       });
       map.addLayer({
@@ -137,24 +209,57 @@ export default function BarangayProjectMap({
         type: 'line',
         source: SOURCE_ID,
         filter: ['==', ['get', 'psgc_code'], ''],
-        paint: { 'line-color': '#ff4d00', 'line-width': 4 },
+        paint: { 'line-color': '#0066EB', 'line-width': 3 },
       });
 
       map.on('mousemove', FILL_LAYER_ID, (event: MapLayerMouseEvent) => {
         map.getCanvas().style.cursor = 'pointer';
         const feature = event.features?.[0];
         if (!feature) return;
-        const name = String(feature.properties?.name ?? 'Barangay');
-        const count = Number(feature.properties?.project_count ?? 0);
-        map
-          .getCanvas()
-          .setAttribute(
-            'aria-label',
-            `${name}: ${count} project${count === 1 ? '' : 's'}`
+
+        if (
+          hoveredIdRef.current !== null &&
+          hoveredIdRef.current !== feature.id
+        ) {
+          map.setFeatureState(
+            { source: SOURCE_ID, id: hoveredIdRef.current },
+            { hover: false }
           );
+        }
+        if (feature.id !== undefined) {
+          hoveredIdRef.current = feature.id;
+          map.setFeatureState(
+            { source: SOURCE_ID, id: feature.id },
+            { hover: true }
+          );
+        }
+
+        const name = String(feature.properties?.name ?? 'Barangay');
+        const count = Number(feature.properties?.metric_count ?? 0);
+        const label = metricLabel(count, lifecycleFilterRef.current);
+
+        const nameEl = document.createElement('p');
+        nameEl.className = 'text-sm font-bold text-gray-900';
+        nameEl.textContent = name;
+        const countEl = document.createElement('p');
+        countEl.className = 'mt-0.5 text-xs text-gray-600';
+        countEl.textContent = label;
+        const wrapper = document.createElement('div');
+        wrapper.append(nameEl, countEl);
+
+        popup.setLngLat(event.lngLat).setDOMContent(wrapper).addTo(map);
+        map.getCanvas().setAttribute('aria-label', `${name}: ${label}`);
       });
       map.on('mouseleave', FILL_LAYER_ID, () => {
         map.getCanvas().style.cursor = '';
+        popup.remove();
+        if (hoveredIdRef.current !== null) {
+          map.setFeatureState(
+            { source: SOURCE_ID, id: hoveredIdRef.current },
+            { hover: false }
+          );
+          hoveredIdRef.current = null;
+        }
         map
           .getCanvas()
           .setAttribute(
@@ -169,12 +274,32 @@ export default function BarangayProjectMap({
     });
 
     mapRef.current = map;
+
+    // Defensive against zero-size-at-construction timing issues (the map
+    // canvas can end up mis-sized if the grid layout finishes computing
+    // after MapLibre reads the container's initial bounding box).
+    const resizeObserver = new ResizeObserver(() => map.resize());
+    resizeObserver.observe(containerRef.current);
+
     return () => {
+      resizeObserver.disconnect();
+      popup.remove();
       map.remove();
       mapRef.current = null;
     };
-  }, [boundaries, cityBoundary, summaries]);
+  }, [boundaries, cityBoundary]);
 
+  // Recolor/re-tooltip in place when the lifecycle filter or underlying
+  // counts change, without tearing down the map.
+  useEffect(() => {
+    const map = mapRef.current;
+    const source = map?.getSource(SOURCE_ID);
+    if (!map || !(source instanceof GeoJSONSource)) return;
+    source.setData(buildCollection(boundaries, summaries, lifecycleFilter));
+  }, [boundaries, summaries, lifecycleFilter]);
+
+  // Selecting (or clearing) a barangay reframes the camera: to that
+  // boundary's extent when selected, back to the full city when cleared.
   useEffect(() => {
     const map = mapRef.current;
     if (!map?.getLayer(SELECTED_LAYER_ID)) return;
@@ -183,12 +308,30 @@ export default function BarangayProjectMap({
       ['get', 'psgc_code'],
       selectedPsgc ?? '',
     ]);
-  }, [selectedPsgc]);
+
+    if (selectedPsgc === null) {
+      map.fitBounds(boundsFromRings(cityBoundary.geometry.coordinates), {
+        padding: 28,
+        duration: 500,
+      });
+      return;
+    }
+    const boundary = boundaries.find(
+      b => b.properties.psgc_code === selectedPsgc
+    );
+    if (boundary) {
+      map.fitBounds(boundsFromRings(boundary.geometry.coordinates), {
+        padding: 60,
+        maxZoom: 15,
+        duration: 500,
+      });
+    }
+  }, [selectedPsgc, boundaries, cityBoundary]);
 
   return (
     <div
       ref={containerRef}
-      className="h-[28rem] w-full bg-gray-100 sm:h-[36rem]"
+      className="h-[26rem] w-full bg-gray-100 sm:h-[32rem] lg:h-full lg:min-h-[36rem]"
       aria-label="Interactive barangay project distribution map"
     />
   );

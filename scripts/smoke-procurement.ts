@@ -34,6 +34,21 @@ for (const href of [
 ]) {
   assert.ok(pageSource.includes(href), `${href} must be a hub destination`);
 }
+assert.match(
+  pageSource,
+  /Four types of procurement records you may encounter/,
+  'the hub must explain documentary relationships before destinations'
+);
+assert.match(
+  pageSource,
+  /Project record[\s\S]{0,1000}Bid-result evidence[\s\S]{0,1000}Award evidence[\s\S]{0,1000}Contract evidence/,
+  'the relationship flow must retain the documented project-to-contract record concepts'
+);
+assert.match(
+  pageSource,
+  /A winning bid[\s\S]{0,500}does not by itself establish contract execution/i,
+  'the flow must not imply that bid evidence proves a contract'
+);
 assert.doesNotMatch(pageSource, /228 contracts|Awarded contracts/i);
 assert.doesNotMatch(
   pageSource,

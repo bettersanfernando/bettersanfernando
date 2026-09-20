@@ -201,7 +201,7 @@ const activeRouteCases = [
   ['/procurement/contracts', 'projects'],
   ['/procurement', 'projects'],
   ['/government/offices', 'government'],
-  ['/government/contact', 'government'],
+  ['/government/contact', 'contact'],
   ['/legislation/ordinances', 'government'],
   ['/legislation/resolutions', 'government'],
   ['/legislation', 'government'],
@@ -212,11 +212,15 @@ const activeRouteCases = [
   ['/statistics/demographics', 'transparency'],
   ['/statistics/government', 'transparency'],
   ['/statistics/city-profile', 'transparency'],
-  ['/statistics/projects', 'transparency'],
-  ['/statistics/project-spending', 'transparency'],
-  ['/statistics/legislation', 'transparency'],
   ['/statistics/public-records', 'transparency'],
+  ['/statistics/legislation', 'transparency'],
   ['/barangays', 'transparency'],
+  // Owned by Projects even though the URL sits under /statistics: these are
+  // project/procurement analytics, not general civic statistics — see
+  // navigation.ts's most-specific-prefix resolver.
+  ['/statistics/projects', 'projects'],
+  ['/statistics/project-spending', 'projects'],
+  ['/statistics/procurement', 'projects'],
   ['/about', 'about'],
 ] as const;
 
@@ -361,14 +365,13 @@ assert.deepEqual(menuSectionHeadingKeys('government'), [
 
 assert.deepEqual(
   menuSectionCounts('transparency'),
-  [5, 5, 5, 4],
-  'Transparency mega menu must be balanced 5/5/5/4, with the smaller group last'
+  [5, 5, 5],
+  'Transparency mega menu must be balanced 5/5/5 now that the duplicate Projects & Procurement section has been removed'
 );
 assert.deepEqual(menuSectionHeadingKeys('transparency'), [
   'navigation.sections.publicRecordsFinance',
   'navigation.sections.dataVerification',
   'navigation.sections.cityCommunity',
-  'navigation.sections.projectsProcurement',
 ]);
 
 for (const menu of megaMenus) {
@@ -390,13 +393,20 @@ assert.equal(
   1,
   'Project Statistics must appear exactly once inside the Projects mega menu'
 );
-assert.ok(
-  megaMenus
-    .find(menu => menu.id === 'transparency')!
-    .sections!.flatMap(section => section.items.map(item => item.href))
-    .includes('/statistics/projects'),
-  'Transparency may still intentionally cross-link Project Statistics — uniqueness is per-menu, not site-wide'
-);
+const transparencyMenuHrefs = megaMenus
+  .find(menu => menu.id === 'transparency')!
+  .sections!.flatMap(section => section.items.map(item => item.href));
+for (const href of [
+  '/projects/city-projects',
+  '/procurement',
+  '/procurement/contracts',
+  '/statistics/projects',
+]) {
+  assert.ok(
+    !transparencyMenuHrefs.includes(href),
+    `Transparency must no longer duplicate the Projects-owned destination ${href} (removed Projects & Procurement section)`
+  );
+}
 
 const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
 assert.match(

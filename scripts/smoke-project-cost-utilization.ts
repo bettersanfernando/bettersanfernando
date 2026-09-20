@@ -157,22 +157,40 @@ assert.match(
 assert.match(
   projectDetailSource,
   /ProjectDetailView/,
-  'the Server Component must delegate Kapwa rendering to the project-detail client boundary'
+  'the Server Component must delegate presentation to ProjectDetailView'
 );
 assert.doesNotMatch(
   projectDetailSource,
   /@bettergov\/kapwa\/(card|banner)/,
   'the Server Component must not import Kapwa Card or Banner directly'
 );
-assert.match(
+// ProjectDetailView was redesigned off @bettergov/kapwa onto the current
+// design system and is now a plain presentational Server Component — no
+// 'use client' directive and no Kapwa import anywhere in the boundary.
+assert.doesNotMatch(
   projectDetailViewSource,
   /^'use client';/,
-  'the Kapwa-rendering project-detail view must be a Client Component'
+  'ProjectDetailView no longer needs a client boundary now that it has no Kapwa dependency'
+);
+assert.doesNotMatch(
+  projectDetailViewSource,
+  /@bettergov\/kapwa\/(card|banner)/,
+  'ProjectDetailView must not import Kapwa Card or Banner'
 );
 assert.match(
   projectDetailViewSource,
-  /@bettergov\/kapwa\/(card|banner)/,
-  'the client boundary must own the Kapwa Card/Banner imports'
+  /Project utilization history/,
+  'project details must present repeated utilization snapshots as history'
+);
+assert.doesNotMatch(
+  projectDetailViewSource,
+  /UtilizationTrendChart|Utilization trend|Previous observations/,
+  'project details must not render a misleading utilization trend chart'
+);
+assert.match(
+  projectDetailViewSource,
+  /Only one verified utilization observation is currently available/,
+  'single-observation projects must have a concise project-detail fallback'
 );
 for (const project of getProjects()) {
   const list = getObservationsForProject(project.id);
@@ -202,7 +220,10 @@ assert.equal(
 
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
 // currency formatting, across the data module, page, and detail integration.
-const pageSource = readNextRoute('/statistics/project-spending');
+const pageSource = `${readNextRoute('/statistics/project-spending')}\n${readFileSync(
+  'src/app/statistics/project-spending/ProjectSpendingStatistics.tsx',
+  'utf8'
+)}`;
 for (const source of [pageSource, projectDetailPresentationSource]) {
   for (const forbidden of [
     'formatPeso(observation',
@@ -241,7 +262,7 @@ assert.match(
 );
 assert.match(
   moduleSource + pageSource,
-  /not proof of cash payment/i,
+  /does not\s+confirm that a payment or disbursement was made/i,
   'the non-payment limitation must be present'
 );
 
@@ -251,29 +272,40 @@ for (const source of [pageSource, projectDetailPresentationSource]) {
   assert.match(source, /rel="noopener noreferrer"/);
 }
 
-// 12. UI presentation: compact initial comparison view, View all/Show fewer
-// toggle, all 109 projects still reachable, pagination, and a Browse-all-324
-// link — the smaller-footprint redesign must not drop any underlying data.
-assert.match(
-  pageSource,
-  /COMPARISON_PREVIEW_COUNT\s*=\s*6/,
-  'the comparison section must initially show exactly 6 projects'
-);
-assert.match(
-  pageSource,
-  /showAllComparisons/,
-  'the page must track a show-all/show-fewer toggle for the comparison section'
-);
-assert.match(
-  pageSource,
-  /View all \$\{latestByProject\.length\} projects/,
-  'the toggle must offer to reveal all 19 projects, derived from the data, not hardcoded'
-);
-assert.match(pageSource, /Show fewer/);
+// 12. UI presentation: the analytical redesign replaced the compact
+// preview/show-all toggle with a searchable, sortable, paginated "Latest
+// project snapshots" directory — all 109 projects must remain reachable via
+// pagination, and the full list must stay in memory, not truncated at the
+// source.
 assert.match(
   pageSource,
   /latestByProject/,
-  'the full 109-project comparison list must remain in memory, not truncated at the source'
+  'the full 109-project snapshot list must remain in memory, not truncated at the source'
+);
+assert.match(
+  pageSource,
+  /SNAPSHOTS_PER_PAGE\s*=\s*10/,
+  'the latest-project-snapshots directory must paginate at 10 rows per page'
+);
+assert.match(
+  pageSource,
+  /sortedSnapshots\.slice/,
+  'the snapshot directory must paginate its sorted/filtered results, not drop rows'
+);
+assert.match(
+  pageSource,
+  /aria-label="Project utilization data pagination"/,
+  'the project-browsing pagination must be in an accessible landmark'
+);
+assert.match(
+  pageSource,
+  /Search projects/,
+  'the snapshot directory must offer a project search control'
+);
+assert.match(
+  pageSource,
+  /Sort: \{option\.label\}/,
+  'the snapshot directory must offer a sort control'
 );
 assert.match(
   pageSource,
@@ -302,10 +334,72 @@ assert.match(
   /href="\/projects\/city-projects"[\s\S]{0,300}Browse all/,
   'the Browse-all-324 control must link to /projects/city-projects'
 );
+// Coverage must remain derived from metadata, include both sides of the
+// represented-project count, and avoid treating the subset as citywide data.
 assert.match(
   pageSource,
-  /projects with verified\s+utilization observations out of/i,
-  'the coverage clarifier sentence must state 109 of 324 explicitly'
+  /\{metadata\.uniqueProjectCount\}\s+of\s+\{metadata\.canonicalProjectCount\}/,
+  'the coverage stat must state uniqueProjectCount of canonicalProjectCount, derived from metadata'
+);
+assert.match(
+  pageSource,
+  /metadata\.canonicalProjectCount - metadata\.uniqueProjectCount/,
+  'the coverage panel must derive the not-represented count'
+);
+assert.match(
+  pageSource,
+  /Projects without a verified cost-utilization observation[\s\S]{0,250}not\s+included\s+in\s+the\s+analysis on this page/,
+  'the coverage panel must explain the bounded subset'
+);
+assert.match(
+  pageSource,
+  /Project observation history/,
+  'the page must provide a per-project reporting-period comparison'
+);
+assert.match(
+  pageSource,
+  /Browse projects with utilization data/,
+  'the primary directory must make its one-project-per-latest-observation scope clear'
+);
+assert.match(
+  pageSource,
+  /Detailed source observations/,
+  'the source-level audit data must be clearly distinct from the project directory'
+);
+assert.match(
+  pageSource,
+  /View all \{metadata\.recordCount\} source observations/,
+  'the detailed-data disclosure must derive its observation count from metadata'
+);
+assert.match(
+  pageSource,
+  /role="combobox"/,
+  'project history must use a searchable combobox rather than a giant native select'
+);
+assert.match(
+  pageSource,
+  /aria-activedescendant/,
+  'the project picker must expose its active option to assistive technology'
+);
+assert.doesNotMatch(
+  pageSource,
+  /<select[\s\S]{0,200}selectedProjectId/,
+  'project history must not render the represented-project list as a native select'
+);
+assert.match(
+  pageSource,
+  /Available reporting periods/,
+  'project history must label its reporting-period list'
+);
+assert.match(
+  pageSource,
+  /Only one verified observation is currently available for\s+this project/,
+  'single-observation projects must have a clear fallback'
+);
+assert.doesNotMatch(
+  pageSource,
+  /Since the previous observation/,
+  'project history must not invent a change narrative between source snapshots'
 );
 assert.doesNotMatch(
   pageSource,
@@ -313,8 +407,8 @@ assert.doesNotMatch(
   'the comparison section must not rank projects'
 );
 
-// The redesign must not drop or paginate away any of the 54 underlying
-// observations or 19 projects — only the rendered slice per page/view.
+// The redesign must not drop or paginate away any of the 298 underlying
+// observations or 109 projects — only the rendered slice per page/view.
 assert.match(pageSource, /filteredObservations\.slice/);
 assert.match(pageSource, /pagedObservations/);
 assert.equal(

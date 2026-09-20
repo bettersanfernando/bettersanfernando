@@ -1,4 +1,4 @@
-import { ExternalLink, FileText } from 'lucide-react';
+import { ExternalLink, FileText, Link2 } from 'lucide-react';
 import type { ProjectEvidence } from '../../data/civic/projects';
 import { getEvidenceSourceUrl, hasAttachment } from '../../data/civic/sources';
 
@@ -39,10 +39,12 @@ export default function EvidenceSourceLinks({
           href={evidence.page_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-700 underline decoration-gray-300 underline-offset-4 hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+          className="inline-flex items-center gap-1.5 text-gray-700 underline decoration-gray-300 underline-offset-4 hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           aria-label={`Open source page for ${evidence.source_identifier} (opens in a new tab)`}
         >
+          <Link2 className="h-3.5 w-3.5" aria-hidden="true" />
           Source page
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
         </a>
       )}
     </div>
