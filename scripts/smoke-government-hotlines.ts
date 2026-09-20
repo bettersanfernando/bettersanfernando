@@ -222,6 +222,11 @@ for (const group of groups) {
 const emergencyNumbersGroup = groups.find(
   group => group.groupId === 'EMERGENCY_NUMBERS'
 );
+assert.equal(
+  contacts.filter(contact => contact.contact_type === 'EMERGENCY').length,
+  4,
+  'the resident-facing emergency-dispatch metric must derive from the four real EMERGENCY records'
+);
 assert.deepEqual(
   emergencyNumbersGroup?.contacts.map(contact => contact.number).sort(),
   ['0939-936-2423', '911', '961-4357'].sort(),
@@ -229,6 +234,34 @@ assert.deepEqual(
 );
 const relatedGroup = groups.find(
   group => group.groupId === 'RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS'
+);
+for (const [number, organization] of [
+  ['911', /National Emergency Hotline/],
+  ['961-4357', /CDRRMO/],
+  ['0939-936-2423', /SAFRU/],
+  ['0998-598-5465', /Police/],
+  ['0923-235-9725', /Fire/],
+] as const) {
+  const contact = contacts.find(candidate => candidate.number === number);
+  assert.match(contact?.organization ?? '', organization);
+  assert.match(
+    `tel:${number.replace(/[^+\d]/g, '')}`,
+    /^tel:\+?\d+$/,
+    `${number} has a valid sanitized tel target`
+  );
+  assert.ok(contact?.sources.length, `${number} retains official source links`);
+}
+assert.equal(
+  contacts.find(contact => contact.number === '649-6076')?.contact_type,
+  'OFFICE_AND_EMERGENCY_LISTED_TOGETHER'
+);
+assert.equal(
+  contacts.find(contact => contact.number === '649-8080')?.contact_type,
+  'OFFICE'
+);
+assert.equal(
+  contacts.find(contact => contact.number === '0998-598-5465')?.contact_type,
+  'OFFICE_AND_PUBLIC_SAFETY'
 );
 assert.deepEqual(
   relatedGroup?.contacts.map(contact => contact.number).sort(),
@@ -368,6 +401,31 @@ assert.match(
   pageSource,
   /not independently call-tested|overallPublicLimitation/
 );
+for (const requiredText of [
+  'Reviewed contacts',
+  'Contact groups',
+  'Last verified',
+  'CDRRMO_COMMAND_CENTER_CONTACTS',
+  'RELATED_EMERGENCY_SERVICE_OFFICE_CONTACTS',
+  'Emergency dispatch',
+  'Listed with Command Center contacts',
+  'NEED HELP NOW?',
+  '911 National',
+  'Local emergency response',
+  "tel:${value.replace(/[^+\\d]/g, '')}",
+  'Before you call',
+  'Held unresolved contacts',
+  "'/government/contact'",
+  "'/government/offices'",
+  "'/government/barangay-contacts'",
+  "'/government/links'",
+  "'/services/disaster-preparedness'",
+]) {
+  assert.ok(
+    pageSource.includes(requiredText),
+    `redesigned page must retain ${requiredText}`
+  );
+}
 
 console.log('[smoke-government-hotlines] OK');
 console.log(

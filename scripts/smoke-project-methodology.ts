@@ -84,6 +84,60 @@ for (const privateTerm of [
   );
 }
 
+// No stale "only the four states" claim — the schema has five.
+assert.ok(
+  !/only the four states/i.test(pageSource),
+  'stale four-states claim must not remain on the methodology page'
+);
+// The page renders every lifecycle status by iterating the schema (via
+// titleCaseEnum), so check the five keys are covered in LIFECYCLE_MEANINGS
+// rather than the (runtime-only) rendered labels.
+for (const status of ProjectLifecycleStatus.options) {
+  assert.ok(
+    pageSource.includes(`${status}:`),
+    `lifecycle status "${status}" must have methodology copy on the page`
+  );
+}
+assert.ok(
+  pageSource.includes('ProjectLifecycleStatus.options.map'),
+  'the page must render lifecycle statuses from the schema, not a hardcoded list'
+);
+
+// Financial-field terminology stays distinct.
+for (const term of [
+  'Estimated budget',
+  'Approved Budget for the Contract (ABC)',
+  'Winning bid amount',
+  'Contract amount',
+  'Fund utilization amount',
+  'Actual expenditure',
+]) {
+  assert.ok(
+    pageSource.includes(term),
+    `financial field "${term}" must be represented on the methodology page`
+  );
+}
+
+// Missing-data wording must not imply zero, and geography wording must not
+// imply exact coordinates.
+assert.ok(pageSource.includes('stays missing'));
+assert.ok(pageSource.includes('not an exact project-location map'));
+
+// Related-resource links resolve to real routes.
+for (const href of [
+  '/projects/map',
+  '/procurement',
+  '/statistics/projects',
+  '/transparency/methodology',
+  '/projects/sources',
+  '/projects/city-projects',
+]) {
+  assert.ok(
+    pageSource.includes(`href="${href}"`) || pageSource.includes(href),
+    `related resource link "${href}" must appear on the methodology page`
+  );
+}
+
 console.log('[smoke-project-methodology] OK');
 console.log(
   `  public dataset: ${projects.length} projects, ${evidence.length} evidence records`

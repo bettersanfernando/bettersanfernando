@@ -1,4 +1,5 @@
 import {
+  ProjectCategory,
   ProjectLifecycleStatus,
   ProjectType,
   type Project,
@@ -17,6 +18,7 @@ export interface ProjectAmountCoverage {
   field: ProjectAmountField;
   count: number;
   percentage: number;
+  unavailableCount: number;
 }
 
 export interface ProjectStatistics {
@@ -24,6 +26,7 @@ export interface ProjectStatistics {
   statusAsOf: string;
   lifecycle: ProjectDistributionItem<ProjectLifecycleStatus>[];
   projectTypes: ProjectDistributionItem<Project['project_type']>[];
+  projectCategories: ProjectDistributionItem<Project['project_category']>[];
   years: ProjectDistributionItem<number>[];
   barangayAttribution: {
     attributed: number;
@@ -51,6 +54,7 @@ export function aggregateProjectStatistics(
   const totalProjects = projects.length;
   const lifecycleCounts = countBy(projects.map(p => p.lifecycle_status));
   const typeCounts = countBy(projects.map(p => p.project_type));
+  const categoryCounts = countBy(projects.map(p => p.project_category));
   const yearCounts = countBy(projects.map(p => p.year));
   const attributed = projects.filter(p => p.barangay_psgc !== null).length;
 
@@ -72,6 +76,12 @@ export function aggregateProjectStatistics(
       })
       .filter(item => item.count > 0)
       .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key)),
+    projectCategories: ProjectCategory.options
+      .map(key => {
+        const count = categoryCounts.get(key) ?? 0;
+        return { key, count, percentage: percentage(count, totalProjects) };
+      })
+      .sort((a, b) => b.count - a.count),
     years: [...yearCounts.entries()]
       .sort(([a], [b]) => a - b)
       .map(([key, count]) => ({
@@ -90,7 +100,12 @@ export function aggregateProjectStatistics(
       ['approved_budget_abc', 'winning_bid_amount', 'contract_amount'] as const
     ).map(field => {
       const count = projects.filter(project => project[field] !== null).length;
-      return { field, count, percentage: percentage(count, totalProjects) };
+      return {
+        field,
+        count,
+        percentage: percentage(count, totalProjects),
+        unavailableCount: totalProjects - count,
+      };
     }),
   };
 }

@@ -154,7 +154,7 @@ assert.doesNotMatch(pageSource, /href=["']\/government\/structure["']/);
 assert.doesNotMatch(pageSource, /22 City Government offices/i);
 assert.match(
   pageSource,
-  /not (?:an|the) official City\s+Government\s+website/i
+  /not (?:an|the)\s+official City\s+Government\s+website/i
 );
 
 const governmentNavigation = mainNavigation.find(

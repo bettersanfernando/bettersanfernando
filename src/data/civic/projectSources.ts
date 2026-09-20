@@ -7,6 +7,8 @@ import {
 export const PROJECT_EVIDENCE_SORTS = [
   'date-desc',
   'date-asc',
+  'project-asc',
+  'type-asc',
   'identifier-asc',
 ] as const;
 
@@ -16,6 +18,8 @@ export interface ProjectEvidenceFilters {
   query?: string;
   stage?: ProjectEvidence['stage'] | '';
   authority?: ProjectEvidence['source_authority'] | '';
+  document?: 'all' | 'attachment' | 'page-only' | '';
+  year?: string;
   projectId?: string;
   sort?: ProjectEvidenceSort;
 }
@@ -24,6 +28,52 @@ export interface ProjectEvidenceRecord {
   evidence: ProjectEvidence;
   project: Project;
 }
+
+export const EVIDENCE_STAGE_METADATA: Record<
+  ProjectEvidence['stage'],
+  {
+    label: string;
+    shortLabel: string;
+    description: string;
+  }
+> = {
+  BID_RESULTS: {
+    label: 'Bid Results',
+    shortLabel: 'Bid Results',
+    description:
+      'Official record of bidders, winning bid amounts, and ABC comparison.',
+  },
+  NTA_UTILIZATION_REPORT: {
+    label: 'NTA Utilization Reports',
+    shortLabel: 'NTA Utilization Report',
+    description:
+      'Reports tracking National Tax Allotment fund utilization across project lines.',
+  },
+  PROCUREMENT_MONITORING_REPORT: {
+    label: 'Procurement Monitoring Reports',
+    shortLabel: 'Procurement Monitoring Report',
+    description:
+      'Periodic procurement monitoring reports submitted to oversight bodies.',
+  },
+  NOTICE_OF_AWARD: {
+    label: 'Notice of Award',
+    shortLabel: 'Notice of Award',
+    description:
+      'Published notices communicating official contract award decisions.',
+  },
+  ITB: {
+    label: 'Invitation to Bid (ITB)',
+    shortLabel: 'Invitation to Bid (ITB)',
+    description:
+      'Public invitations soliciting competitive bids for city infrastructure.',
+  },
+  APP: {
+    label: 'Annual Procurement Plan (APP)',
+    shortLabel: 'Annual Procurement Plan (APP)',
+    description:
+      'Annual procurement plans establishing budgeted public works programs.',
+  },
+};
 
 export function resolveProjectEvidence(
   evidence: readonly ProjectEvidence[]
@@ -39,13 +89,18 @@ function matchesQuery(record: ProjectEvidenceRecord, query: string): boolean {
   if (!normalizedQuery) return true;
 
   const { evidence, project } = record;
+  const stageMeta = EVIDENCE_STAGE_METADATA[evidence.stage];
   return [
+    evidence.id,
     evidence.source_identifier,
     evidence.stage,
+    stageMeta?.label,
+    stageMeta?.shortLabel,
     evidence.source_authority,
     ...evidence.fields_established,
     project.id,
     project.project_name,
+    project.barangay,
     project.identifiers.app_code,
     project.identifiers.bid_reference,
     project.identifiers.contract_number,
@@ -59,18 +114,65 @@ export function filterProjectEvidence(
 ): ProjectEvidenceRecord[] {
   const filtered = records.filter(record => {
     const { evidence } = record;
-    return (
-      matchesQuery(record, filters.query ?? '') &&
-      (!filters.stage || evidence.stage === filters.stage) &&
-      (!filters.authority || evidence.source_authority === filters.authority) &&
-      (!filters.projectId || evidence.project_id === filters.projectId)
-    );
+
+    if (!matchesQuery(record, filters.query ?? '')) {
+      return false;
+    }
+    if (filters.stage && evidence.stage !== filters.stage) {
+      return false;
+    }
+    if (filters.authority && evidence.source_authority !== filters.authority) {
+      return false;
+    }
+    if (filters.projectId && evidence.project_id !== filters.projectId) {
+      return false;
+    }
+    if (filters.document === 'attachment' && evidence.attachment_url === null) {
+      return false;
+    }
+    if (filters.document === 'page-only' && evidence.attachment_url !== null) {
+      return false;
+    }
+    if (filters.year) {
+      if (filters.year === 'undated') {
+        if (evidence.document_date !== null) return false;
+      } else if (!evidence.document_date?.startsWith(filters.year)) {
+        return false;
+      }
+    }
+    return true;
   });
 
   return filtered.sort((a, b) => {
     if (filters.sort === 'identifier-asc') {
-      return a.evidence.source_identifier.localeCompare(
-        b.evidence.source_identifier
+      return (
+        a.evidence.source_identifier.localeCompare(
+          b.evidence.source_identifier
+        ) || a.evidence.id.localeCompare(b.evidence.id)
+      );
+    }
+
+    if (filters.sort === 'project-asc') {
+      return (
+        a.project.project_name.localeCompare(b.project.project_name) ||
+        a.evidence.source_identifier.localeCompare(
+          b.evidence.source_identifier
+        ) ||
+        a.evidence.id.localeCompare(b.evidence.id)
+      );
+    }
+
+    if (filters.sort === 'type-asc') {
+      const typeComparison = a.evidence.stage.localeCompare(b.evidence.stage);
+      if (typeComparison !== 0) return typeComparison;
+      const dateOrder = (b.evidence.document_date ?? '').localeCompare(
+        a.evidence.document_date ?? ''
+      );
+      if (dateOrder !== 0) return dateOrder;
+      return (
+        a.evidence.source_identifier.localeCompare(
+          b.evidence.source_identifier
+        ) || a.evidence.id.localeCompare(b.evidence.id)
       );
     }
 
@@ -80,8 +182,10 @@ export function filterProjectEvidence(
     if (dateOrder !== 0) {
       return filters.sort === 'date-asc' ? dateOrder : -dateOrder;
     }
-    return a.evidence.source_identifier.localeCompare(
-      b.evidence.source_identifier
+    return (
+      a.evidence.source_identifier.localeCompare(
+        b.evidence.source_identifier
+      ) || a.evidence.id.localeCompare(b.evidence.id)
     );
   });
 }

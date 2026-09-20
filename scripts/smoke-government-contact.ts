@@ -169,16 +169,21 @@ for (const requiredText of [
   'san-fernando-fire-station-hotline',
   'city-government-main',
   'city-mayors-office',
+  "'/government/offices'",
   "'/government/hotlines'",
   "'/government/barangay-contacts'",
   "'/government/links'",
-  "'/services'",
 ]) {
   assert.ok(
     pageSource.includes(requiredText),
     `page must reference ${requiredText}`
   );
 }
+
+assert.ok(
+  !pageSource.includes("'/services'"),
+  'page must no longer use /services in contact routing'
+);
 
 for (const forbidden of [
   '<form',

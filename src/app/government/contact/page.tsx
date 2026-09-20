@@ -1,13 +1,5 @@
 import Link from 'next/link';
-import {
-  Building2,
-  FileText,
-  MapPin,
-  Phone,
-  ShieldAlert,
-  Siren,
-  Users,
-} from 'lucide-react';
+import { ChevronRight, Flame, Radio, Shield, Siren } from 'lucide-react';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getGovernmentHotlines,
@@ -18,18 +10,16 @@ import {
   getCityOfficeById,
   type CityOffice,
 } from '../../../data/civic/government';
-
 import { buildPageMetadata } from '../../../lib/metadata';
 
 export const metadata = buildPageMetadata({
   title: 'Government Contact',
   description:
-    'Quickly find the right verified City Government of San Fernando, Pampanga contact channel — emergency hotlines, general offices, and related directories.',
+    'A quick, verified starting point for reaching the right City Government of San Fernando, Pampanga contact channel — emergency hotlines, general offices, and related directories.',
   path: '/government/contact',
 });
 
-// Stable dataset IDs, not hardcoded numbers — resolved against the reviewed
-// government/hotlines.json export so this panel never drifts from it.
+// Stable dataset IDs resolved against reviewed datasets so contacts never drift
 const EMERGENCY_CONTACT_IDS = [
   'national-911',
   'cdrrmo-command-center-help-line',
@@ -41,6 +31,8 @@ const GENERAL_OFFICE_IDS = [
   { building: 'City Hall', officeId: 'city-government-main' },
   { building: 'Heroes Hall', officeId: 'city-mayors-office' },
 ] as const;
+
+const eyebrowTracking = { letterSpacing: '0.08em' };
 
 const hotlines = getGovernmentHotlines();
 const hotlinesMetadata = getGovernmentHotlinesMetadata();
@@ -76,269 +68,421 @@ function isPositiveTwentyFourSeven(contact: HotlineContact) {
   return /^24\/7\b/.test(contact.operating_scope);
 }
 
-function twentyFourSevenLabel(contact: HotlineContact) {
-  return contact.operating_scope.split(';')[0]?.trim();
-}
+const EMERGENCY_ICONS: Record<string, typeof Siren> = {
+  'national-911': Siren,
+  'cdrrmo-command-center-help-line': Radio,
+  'san-fernando-police-station-primary-hotline': Shield,
+  'san-fernando-fire-station-hotline': Flame,
+};
 
-function EmergencyCard({ contact }: { contact: HotlineContact }) {
-  const displayName = contact.alternate_official_label ?? contact.organization;
-
-  return (
-    <article className="rounded-xl border border-error-200 bg-error-50 p-5">
-      <h3 className="text-sm font-bold leading-snug text-gray-900">
-        {displayName}
-      </h3>
-      <p className="mt-1 text-xs leading-relaxed text-gray-700">
-        {contact.public_purpose}
-      </p>
-      <a
-        className="mt-3 inline-flex items-center gap-2 rounded-lg bg-error-100 px-3 py-2 text-lg font-bold text-error-900 underline-offset-4 hover:underline"
-        href={phoneHref(contact.number)}
-        aria-label={`Call ${displayName} at ${contact.number}`}
-      >
-        <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-        {contact.number}
-      </a>
-      {isPositiveTwentyFourSeven(contact) && (
-        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-success-100 px-2.5 py-1 text-xs font-bold text-success-800">
-          {twentyFourSevenLabel(contact)}
-        </span>
-      )}
-    </article>
-  );
-}
-
-function GeneralOfficeCard({
-  building,
-  office,
-}: {
-  building: string;
-  office: CityOffice;
-}) {
-  return (
-    <article className="rounded-xl border border-gray-200 bg-white p-5">
-      <p className="text-xs font-bold uppercase tracking-wide text-primary-700">
-        {building}
-      </p>
-      <h3 className="mt-1 text-base font-bold text-gray-900">
-        {office.office_name}
-      </h3>
-      {office.physical_address && (
-        <div className="mt-2 flex items-start gap-2 text-sm text-gray-700">
-          <MapPin
-            className="mt-0.5 h-4 w-4 shrink-0 text-gray-500"
-            aria-hidden="true"
-          />
-          <span>{office.physical_address}</span>
-        </div>
-      )}
-      {office.primary_phone && (
-        <a
-          className="mt-3 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-3 py-2 text-base font-semibold text-primary-800 underline-offset-4 hover:underline"
-          href={phoneHref(office.primary_phone)}
-          aria-label={`Call ${office.office_name} at ${office.primary_phone}`}
-        >
-          <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-          {office.primary_phone}
-          {office.phone_extensions && office.phone_extensions.length > 0 && (
-            <span className="text-sm font-normal opacity-80">
-              ext. {office.phone_extensions.join(', ')}
-            </span>
-          )}
-        </a>
-      )}
-    </article>
-  );
-}
-
-const relatedDestinations = [
+const CONTACT_ROUTING_ITEMS = [
   {
-    href: '/government/hotlines',
-    icon: ShieldAlert,
-    label: 'Government Hotlines',
-    description: 'All 11 verified emergency and institutional hotlines.',
+    title: 'A specific City office',
+    description:
+      'Find office phone numbers, email addresses, locations, and official pages.',
+    cta: 'Browse City Offices →',
+    href: '/government/offices',
   },
   {
+    title: 'A barangay contact',
+    description:
+      "Find published contact information for San Fernando's barangays.",
+    cta: 'Browse Barangay Contacts →',
     href: '/government/barangay-contacts',
-    icon: Users,
-    label: 'Barangay Contacts',
-    description: 'Barangay Secretary and BHERT contacts by barangay.',
   },
   {
+    title: 'Emergency or institutional numbers',
+    description:
+      'Review the full set of verified emergency and institutional hotlines.',
+    cta: 'View Government Hotlines →',
+    href: '/government/hotlines',
+  },
+  {
+    title: 'An official website or online channel',
+    description:
+      'Open verified City Government websites, portals, and official public channels.',
+    cta: 'Browse Official Government Links →',
     href: '/government/links',
-    icon: FileText,
-    label: 'Official Government Links',
-    description: 'Verified official websites, e-services, and Facebook pages.',
   },
-  {
-    href: '/services',
-    icon: Building2,
-    label: 'City Services',
-    description: 'Browse published city services by category.',
-  },
-] as const;
+];
 
 export default function GovernmentContact() {
   return (
-    <>
-      <main className="flex-grow bg-gray-50">
-        <section className="border-b border-primary-100 bg-white">
-          <div className="container mx-auto px-4 py-10 md:py-14">
-            <Breadcrumbs
-              className="mb-8"
-              items={[
-                { label: 'Home', href: '/' },
-                { label: 'Government', href: '/government' },
-                { label: 'Contact' },
-              ]}
-            />
-            <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
-              <div className="max-w-3xl">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-700 text-white">
-                  <Phone className="h-6 w-6" aria-hidden="true" />
-                </div>
-                <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
-                  Government Contact
-                </h1>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
-                  A quick, verified starting point for reaching the right City
-                  Government office — emergencies, general offices, and where to
-                  find more.
-                </p>
-              </div>
-              <aside className="rounded-xl bg-primary-50 p-5 text-sm leading-relaxed text-primary-900">
-                <p className="font-semibold">Independent civic portal</p>
-                <p className="mt-1">
-                  BetterSanFernando is community-run and not the official City
-                  Government website. This page lists official City Government
-                  contact channels; BetterSanFernando does not receive or
-                  forward messages sent to them.
-                </p>
-              </aside>
-            </div>
-          </div>
-        </section>
+    <main className="bg-white text-gray-900">
+      {/* 1. Header / Editorial Intro */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Government', href: '/government' },
+              { label: 'Contact' },
+            ]}
+          />
 
-        <section
-          className="container mx-auto px-4 py-8 md:py-10"
-          aria-labelledby="emergency-heading"
-        >
-          <h2
-            id="emergency-heading"
-            className="flex items-center gap-2 text-2xl font-bold text-gray-900"
-          >
-            <Siren className="h-6 w-6 text-error-700" aria-hidden="true" />
+          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-12">
+            <div>
+              <p
+                className="text-eyebrow text-[#0066EB]"
+                style={eyebrowTracking}
+              >
+                CONTACT THE CITY
+              </p>
+              <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
+                Find the right City Government contact
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
+                Start with emergency numbers, general City Government contacts,
+                or the directory that matches what you need.
+              </p>
+            </div>
+
+            <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
+              <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
+                ABOUT THIS PAGE
+              </p>
+              <h2 className="mt-1 text-sm font-bold text-gray-950">
+                A starting point for public contact
+              </h2>
+              <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
+                BetterSanFernando organizes official public contact channels for
+                easier access. It does not receive, answer, or forward calls,
+                emails, requests, complaints, or emergency messages.
+              </p>
+              <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
+                Independent and community-run, not the official City Government
+                website.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <div className="container mx-auto space-y-12 px-4 pb-16 sm:space-y-16">
+        {/* 2. Emergency Contacts */}
+        <section id="emergency-contacts" className="scroll-mt-24 pt-8 sm:pt-10">
+          <p className="text-eyebrow text-red-600" style={eyebrowTracking}>
+            NEED HELP NOW?
+          </p>
+          <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
             Emergency contacts
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-700">
-            In a life-threatening emergency, call 911 or the numbers below
-            directly.
+          <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
+            For an immediate emergency, call 911 or the appropriate local
+            response number directly.
           </p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {emergencyContacts.map(contact => (
-              <EmergencyCard key={contact.id} contact={contact} />
-            ))}
+
+          {/* Coordinated emergency surface */}
+          <div className="mt-6 overflow-hidden rounded-sm border border-red-200 bg-red-50/40">
+            <div className="grid grid-cols-1 divide-y divide-red-200 sm:grid-cols-2 sm:divide-y-0 sm:divide-x lg:grid-cols-4">
+              {emergencyContacts.map((contact, idx) => {
+                const displayName =
+                  contact.alternate_official_label ?? contact.organization;
+                const Icon = EMERGENCY_ICONS[contact.id] ?? Siren;
+
+                return (
+                  <article
+                    key={contact.id}
+                    className={`flex flex-col justify-between p-5 ${
+                      idx >= 2
+                        ? 'sm:border-t sm:border-red-200 lg:border-t-0'
+                        : ''
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-red-700">
+                          {contact.id === 'national-911'
+                            ? '911 National'
+                            : contact.id === 'cdrrmo-command-center-help-line'
+                              ? 'CDRRMO'
+                              : contact.id ===
+                                  'san-fernando-police-station-primary-hotline'
+                                ? 'Police'
+                                : 'Fire'}
+                        </p>
+                        <Icon
+                          className="h-4 w-4 shrink-0 text-red-600"
+                          aria-hidden="true"
+                        />
+                      </div>
+
+                      <h3 className="mt-1.5 text-sm font-bold text-gray-950">
+                        {displayName}
+                      </h3>
+                      <p className="mt-0.5 text-xs text-gray-600">
+                        {contact.public_purpose}
+                      </p>
+
+                      <p className="mt-3 text-2xl font-extrabold tabular-nums tracking-tight text-red-950 sm:text-3xl">
+                        {contact.number}
+                      </p>
+
+                      {isPositiveTwentyFourSeven(contact) && (
+                        <span className="mt-2 inline-block rounded-sm bg-red-100/80 px-1.5 py-0.5 text-[11px] font-semibold text-red-800">
+                          24/7 emergency dispatch
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="mt-4 border-t border-red-200/60 pt-3">
+                      <a
+                        href={phoneHref(contact.number)}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-red-700 hover:text-red-900 sm:text-sm"
+                        aria-label={`Call ${displayName} at ${contact.number}`}
+                      >
+                        Call →
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
-          <p className="mt-4 max-w-3xl text-xs leading-relaxed text-gray-600">
-            {hotlinesMetadata.overallPublicLimitation}
-          </p>
-          <p className="mt-3 text-sm">
+
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs leading-relaxed text-gray-500">
+              {hotlinesMetadata.overallPublicLimitation}
+            </p>
             <Link
               href="/government/hotlines"
-              className="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
+              className="shrink-0 text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
             >
-              View all 11 verified hotlines
+              View all verified hotlines →
             </Link>
-          </p>
+          </div>
         </section>
 
+        {/* 3. General City Contacts */}
         <section
-          className="border-y border-gray-200 bg-white"
-          aria-labelledby="general-offices-heading"
+          id="general-city-contacts"
+          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
-          <div className="container mx-auto px-4 py-8 md:py-10">
-            <h2
-              id="general-offices-heading"
-              className="flex items-center gap-2 text-2xl font-bold text-gray-900"
-            >
-              <Building2
-                className="h-6 w-6 text-primary-700"
-                aria-hidden="true"
-              />
-              General government contacts
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-700">
-              General trunk lines for the City's two main office buildings.
-            </p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            GENERAL CITY CONTACTS
+          </p>
+          <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
+            Start with a main City office
+          </h2>
+          <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
+            For general City Government inquiries, these two published contacts
+            are useful starting points.
+          </p>
+
+          {/* Shared two-column white editorial surface */}
+          <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
+            <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-x md:divide-y-0">
               {generalOffices.map(({ building, office }) => (
-                <GeneralOfficeCard
+                <article
                   key={office.office_id}
-                  building={building}
-                  office={office}
-                />
+                  className="flex flex-col justify-between p-5 sm:p-6"
+                >
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#0066EB]">
+                      {building.toUpperCase()}
+                    </p>
+                    <h3 className="mt-1 text-base font-bold text-gray-950 sm:text-lg">
+                      {office.office_name}
+                    </h3>
+
+                    {office.physical_address && (
+                      <p className="mt-2 text-xs text-gray-600 sm:text-sm">
+                        {office.physical_address}
+                      </p>
+                    )}
+
+                    {office.primary_phone && (
+                      <p className="mt-3 text-lg font-bold tabular-nums text-gray-950 sm:text-xl">
+                        {office.primary_phone}
+                        {office.phone_extensions &&
+                          office.phone_extensions.length > 0 && (
+                            <span className="text-xs font-normal text-gray-500 sm:text-sm">
+                              {' '}
+                              · Ext. {office.phone_extensions.join(', ')}
+                            </span>
+                          )}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+                    {office.primary_phone ? (
+                      <a
+                        href={phoneHref(office.primary_phone)}
+                        className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
+                        aria-label={`Call ${building} at ${office.primary_phone}`}
+                      >
+                        Call {building} →
+                      </a>
+                    ) : null}
+                    <Link
+                      href={`/government/offices/${office.office_id}`}
+                      className="text-xs text-gray-500 underline underline-offset-2 hover:text-gray-900"
+                    >
+                      Office details
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-baseline gap-2 text-xs sm:text-sm">
+            <span className="text-gray-600">Need a specific department?</span>
+            <Link
+              href="/government/offices"
+              className="font-bold text-[#0066EB] hover:text-[#0052BC]"
+            >
+              Browse all City Offices →
+            </Link>
+          </div>
+        </section>
+
+        {/* 4. Find the Right Contact (What are you looking for?) */}
+        <section
+          id="contact-routing"
+          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
+        >
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            FIND THE RIGHT CONTACT
+          </p>
+          <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
+            What are you looking for?
+          </h2>
+          <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
+            Choose the directory that best matches who or what you need to
+            reach.
+          </p>
+
+          {/* Unified 2x2 editorial directory */}
+          <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
+            <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
+              {CONTACT_ROUTING_ITEMS.map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-[#F3F6FB] sm:p-6 ${
+                    index % 2 === 1 ? 'md:border-l md:border-gray-200' : ''
+                  } ${index >= 2 ? 'md:border-t md:border-gray-200' : ''}`}
+                >
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB] sm:text-base">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
+                      {item.description}
+                    </p>
+                    <p className="mt-2 text-xs font-bold text-[#0066EB]">
+                      {item.cta}
+                    </p>
+                  </div>
+                  <ChevronRight
+                    className="h-4 w-4 shrink-0 text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-[#0066EB]"
+                    aria-hidden="true"
+                  />
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
+        {/* 5. Before You Contact the City */}
         <section
-          className="container mx-auto px-4 py-8 md:py-10"
-          aria-labelledby="find-contact-heading"
+          id="before-you-contact"
+          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
-          <h2
-            id="find-contact-heading"
-            className="text-2xl font-bold text-gray-900"
-          >
-            Find the right contact
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-700">
-            Looking for something more specific? These directories cover the
-            full published detail for each category.
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            BEFORE YOU CONTACT THE CITY
           </p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {relatedDestinations.map(destination => (
-              <Link
-                key={destination.href}
-                href={destination.href}
-                className="block rounded-xl border border-gray-200 bg-white p-5 transition hover:border-primary-300 hover:shadow-[0_8px_28px_rgba(0,41,94,0.08)]"
-              >
-                <destination.icon
-                  className="h-6 w-6 text-primary-700"
-                  aria-hidden="true"
-                />
-                <p className="mt-3 text-sm font-bold text-gray-900">
-                  {destination.label}
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  {destination.description}
-                </p>
-              </Link>
-            ))}
+          <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
+            What to know before reaching out
+          </h2>
+
+          {/* Coordinated 3-column editorial strip */}
+          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="rounded-sm border border-gray-200 bg-white p-5">
+              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
+                Use the direct channel
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                BetterSanFernando does not receive or forward messages sent to
+                City offices.
+              </p>
+            </div>
+
+            <div className="rounded-sm border border-gray-200 bg-white p-5">
+              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
+                Check the office directory
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                For a specific department, verify its currently published phone,
+                email, or official page before contacting it.
+              </p>
+            </div>
+
+            <div className="rounded-sm border border-gray-200 bg-white p-5">
+              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
+                Published details can change
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                Contact information reflects the official sources currently
+                available to BetterSanFernando.
+              </p>
+            </div>
           </div>
         </section>
 
-        <section className="border-t border-gray-200 bg-white">
-          <div className="container mx-auto px-4 py-8 md:py-10">
-            <h2 className="text-lg font-bold text-gray-900">
-              Verification and coverage
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-700">
-              Numbers on this page are officially listed by the City Government
-              but have not been independently call-tested by BetterSanFernando.
-              This is a concise starting point, not a complete office directory
-              —{' '}
-              <Link
-                href="/government/offices"
-                className="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
-              >
-                browse the full City Offices directory
-              </Link>{' '}
-              for every published office record.
+        {/* 6. About These Contact Details */}
+        <section
+          id="about-contact-details"
+          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10 lg:pb-12"
+        >
+          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+            ABOUT THESE CONTACT DETAILS
+          </p>
+          <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
+            What “verified” means here
+          </h2>
+
+          {/* Balanced two-column editorial layout */}
+          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
+              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
+                Verified from official sources
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                The contact number or office information appears in the official
+                public sources recorded by BetterSanFernando.
+              </p>
+            </div>
+
+            <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
+              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
+                Not independently call-tested
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                Numbers on this page are officially listed by the City
+                Government but have not been independently call-tested by
+                BetterSanFernando. A listing here does not guarantee that a
+                given line is presently staffed or reachable at all times.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col items-start justify-between gap-3 border-t border-gray-200 pt-4 sm:flex-row sm:items-center">
+            <p className="text-xs text-gray-600 sm:text-sm">
+              This page is a concise starting point. For office-specific
+              details, browse the full City Offices directory.
             </p>
+            <Link
+              href="/government/offices"
+              className="shrink-0 text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
+            >
+              Browse City Offices →
+            </Link>
           </div>
         </section>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
