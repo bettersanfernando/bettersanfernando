@@ -9,6 +9,7 @@ import {
   FileText,
   FolderKanban,
   Landmark,
+  LayoutGrid,
   Link2,
   ShieldCheck,
 } from 'lucide-react';
@@ -31,6 +32,14 @@ const summary = getHomeSummary();
 const numberFormatter = new Intl.NumberFormat('en-PH');
 
 const destinations = [
+  {
+    title: 'Services',
+    description:
+      'Find City service guidance by need, from permits to social welfare.',
+    href: '/services',
+    action: 'Browse services',
+    icon: LayoutGrid,
+  },
   {
     title: 'Projects',
     description:
@@ -181,7 +190,7 @@ export default function Home() {
               return (
                 <article
                   key={destination.href}
-                  className={`grid gap-4 bg-white p-6 sm:grid-cols-[3rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-gray-200' : ''} ${index % 2 === 1 ? 'lg:border-l' : ''} ${index === 2 ? 'lg:border-t' : ''}`}
+                  className={`grid gap-4 bg-white p-6 sm:grid-cols-[3rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-gray-200' : ''} ${index % 2 === 1 ? 'lg:border-l' : ''} ${index % 2 === 0 && index > 0 ? 'lg:border-t' : ''}`}
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-800">
                     <Icon className="h-6 w-6" aria-hidden="true" />

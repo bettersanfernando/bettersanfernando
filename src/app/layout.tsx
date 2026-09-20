@@ -6,7 +6,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import ScrollToTop from '../components/ui/ScrollToTop';
 import { getRootMetadata } from '../lib/metadata';
-import { WebSiteJsonLd } from '../lib/json-ld';
+import { OrganizationWebSiteJsonLd } from '../lib/json-ld';
 
 export const metadata = getRootMetadata();
 
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <WebSiteJsonLd />
+        <OrganizationWebSiteJsonLd />
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Navbar />

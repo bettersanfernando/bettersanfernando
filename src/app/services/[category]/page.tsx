@@ -38,7 +38,11 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }) {
   const { category: segment } = await params;
-  if (!isValidCategory(segment)) return {};
+  // Guards against an unexpected render path ever inheriting the
+  // indexable root metadata with no canonical of its own — the real
+  // legacy-slug/unknown-segment responses redirect/404 before this would
+  // matter, and notFound()'s own metadata (noindex) takes over then.
+  if (!isValidCategory(segment)) return { robots: { index: false } };
 
   const [name, , description] = categories.find(item => item[1] === segment)!;
   return buildPageMetadata({

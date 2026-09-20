@@ -17,6 +17,7 @@ export type NavigationId =
   | 'services'
   | 'projects'
   | 'government'
+  | 'statistics'
   | 'transparency'
   | 'about'
   | 'contact';

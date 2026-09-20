@@ -14,6 +14,7 @@ const expectedTopLevelIds = [
   'services',
   'projects',
   'government',
+  'statistics',
   'transparency',
   'about',
   'contact',
@@ -22,14 +23,14 @@ const expectedTopLevelIds = [
 assert.deepEqual(
   mainNavigation.map(item => item.id),
   expectedTopLevelIds,
-  'the header must expose exactly the approved seven top-level entries'
+  'the header must expose exactly the approved eight top-level entries (Statistics promoted in Batch 9)'
 );
 
 const megaMenus = mainNavigation.filter(item => item.sections);
 assert.deepEqual(
   megaMenus.map(item => item.id),
-  ['services', 'projects', 'government', 'transparency'],
-  'only the four approved entries may use mega menus'
+  ['services', 'projects', 'government', 'statistics', 'transparency'],
+  'only the five approved entries may use mega menus'
 );
 
 for (const menu of megaMenus) {
@@ -207,14 +208,16 @@ const activeRouteCases = [
   ['/legislation', 'government'],
   ['/transparency/full-disclosure', 'transparency'],
   ['/transparency/finance', 'transparency'],
-  ['/statistics', 'transparency'],
-  ['/statistics/population', 'transparency'],
-  ['/statistics/demographics', 'transparency'],
-  ['/statistics/government', 'transparency'],
-  ['/statistics/city-profile', 'transparency'],
-  ['/statistics/public-records', 'transparency'],
-  ['/statistics/legislation', 'transparency'],
-  ['/barangays', 'transparency'],
+  // Statistics owns the broad /statistics and /barangays prefixes as of
+  // Batch 9 (promoted out of Transparency's mega-menu).
+  ['/statistics', 'statistics'],
+  ['/statistics/population', 'statistics'],
+  ['/statistics/demographics', 'statistics'],
+  ['/statistics/government', 'statistics'],
+  ['/statistics/city-profile', 'statistics'],
+  ['/statistics/public-records', 'statistics'],
+  ['/statistics/legislation', 'statistics'],
+  ['/barangays', 'statistics'],
   // Owned by Projects even though the URL sits under /statistics: these are
   // project/procurement analytics, not general civic statistics — see
   // navigation.ts's most-specific-prefix resolver.
@@ -291,8 +294,12 @@ const knownRealDestinations = new Set([
   '/transparency',
   '/transparency/sources',
   '/transparency/methodology',
-  '/transparency/verification',
-  '/transparency/limitations',
+  // Repointed in Batch 9 to their redirect destinations (next.config.ts's
+  // LEGACY_ALIASES) rather than the /transparency/verification and
+  // /transparency/limitations sources — internal links should never route
+  // through a redirect hop.
+  '/transparency/methodology#verification',
+  '/transparency/methodology#limitations',
   '/statistics/legislation',
   '/statistics/public-records',
 ]);
@@ -365,12 +372,20 @@ assert.deepEqual(menuSectionHeadingKeys('government'), [
 
 assert.deepEqual(
   menuSectionCounts('transparency'),
-  [5, 5, 5],
-  'Transparency mega menu must be balanced 5/5/5 now that the duplicate Projects & Procurement section has been removed'
+  [5, 4],
+  'Transparency mega menu is 5/4 as of Batch 9: cityCommunity moved out to the new Statistics top-level item, and the redundant statisticsOverview (/statistics) link was dropped from dataVerification now that Statistics has its own adjacent top-level tab'
 );
 assert.deepEqual(menuSectionHeadingKeys('transparency'), [
   'navigation.sections.publicRecordsFinance',
   'navigation.sections.dataVerification',
+]);
+
+assert.deepEqual(
+  menuSectionCounts('statistics'),
+  [5],
+  'Statistics mega menu holds the cityCommunity section promoted out of Transparency in Batch 9'
+);
+assert.deepEqual(menuSectionHeadingKeys('statistics'), [
   'navigation.sections.cityCommunity',
 ]);
 

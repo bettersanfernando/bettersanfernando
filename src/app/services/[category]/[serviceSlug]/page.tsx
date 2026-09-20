@@ -205,7 +205,12 @@ export async function generateMetadata({
 
   return buildPageMetadata({
     title,
-    description: `${service.description} Record ${service.id}.`,
+    // Leads with the page's own (guaranteed-unique) title: several distinct
+    // service records share identical `description` text (e.g. multiple
+    // Solo Parent ID circumstances issued by the same office under the same
+    // explanation), so the raw description alone is not always unique
+    // across pages — every page's meta description must be.
+    description: `${title} — ${service.description}`,
     path: getServiceHref(service),
   });
 }

@@ -3,6 +3,12 @@
 // resolution, metadata/canonical construction, the default OG image,
 // sitemap/robots, and JSON-LD safety. Full route/content parity sweeps are
 // Batch 7's job — this only checks what's new in this batch.
+//
+// Extended in Batch 9 (SEO/search-identity pass) with: /search noindex and
+// excluded from the sitemap, /sitemap + /accessibility included, the
+// per-agent robots rules (OAI-SearchBot allowed, GPTBot disallowed), the
+// Organization/WebSite JSON-LD @graph, and the favicon/icon/apple-icon/
+// logo-512 file set.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
@@ -205,18 +211,22 @@ assert.match(
 // uniqueness/exclusions.
 const services = getServices();
 const categoryCount = new Set(services.map(getServiceCategory)).size;
-const expectedTotal =
+const expectedStaticRouteCount =
   28 /* Batch 3 */ +
-  10 /* Batch 5 */ +
-  1 /* /projects/city-projects — City Projects listing split from the /projects hub */ +
+  10 /* Batch 5 (historical label) */ +
+  1 /* /projects/city-projects — City Projects listing split from the /projects hub */ -
+  1 /* /search removed in Batch 9 — noindex, thin query-only surface */ +
+  2; /* Batch 9: /sitemap, /accessibility */
+const expectedTotal =
+  expectedStaticRouteCount +
   categoryCount +
   services.length +
   getProjects().length +
   getCityOffices().length;
 assert.equal(
   expectedTotal,
-  600,
-  'independently recomputed sitemap count must be 600'
+  601,
+  'independently recomputed sitemap count must be 601'
 );
 
 const sitemapSource = readFileSync('src/app/sitemap.ts', 'utf8');
@@ -230,18 +240,26 @@ assert.equal(
 );
 assert.equal(
   staticRouteMatches.length,
-  39,
-  'sitemap.ts must list exactly the 28 Batch 3 + 10 Batch 5 static routes, plus the /projects/city-projects split'
+  expectedStaticRouteCount,
+  'sitemap.ts must list exactly the 28 Batch 3 + 10 Batch 5 (historical) static routes, plus the /projects/city-projects split, minus /search, plus the two Batch 9 routes'
 );
+assert.ok(
+  !staticRouteMatches.includes('/search'),
+  '/search must not appear in the sitemap (Batch 9: noindex, thin query-only surface)'
+);
+for (const included of ['/sitemap', '/accessibility']) {
+  assert.ok(
+    staticRouteMatches.includes(included),
+    `${included} must appear in the sitemap's static route list (Batch 9)`
+  );
+}
 for (const excluded of [
   '/contact',
   '/philippines/hotlines',
   '/government/directory',
   '/government/documents',
-  '/accessibility',
   '/discord',
   '/philippines/holidays',
-  '/sitemap',
 ]) {
   assert.ok(
     !staticRouteMatches.includes(excluded),
@@ -266,7 +284,8 @@ assert.ok(
   'sitemap.ts omits a lastModified field entirely (no verified per-page date is available)'
 );
 
-// 12. Robots references the sitemap via the centralized site URL.
+// 12. Robots: sitemap reference, per-agent rules (OAI-SearchBot allowed,
+// GPTBot disallowed), and /search kept out of general crawling.
 const robotsSource = readFileSync('src/app/robots.ts', 'utf8');
 assert.match(
   robotsSource,
@@ -275,11 +294,27 @@ assert.match(
 );
 assert.match(
   robotsSource,
-  /allow:\s*'\/'/,
-  'robots.ts must allow normal public crawling'
+  /userAgent:\s*'\*'[\s\S]*?allow:\s*'\/'/,
+  'robots.ts must allow normal public crawling for all agents'
+);
+assert.match(
+  robotsSource,
+  /disallow:\s*'\/search'/,
+  'robots.ts must disallow /search for general crawlers'
+);
+assert.match(
+  robotsSource,
+  /userAgent:\s*'OAI-SearchBot',\s*allow:\s*'\/'/,
+  'robots.ts must explicitly allow OAI-SearchBot (ChatGPT Search discovery)'
+);
+assert.match(
+  robotsSource,
+  /userAgent:\s*'GPTBot',\s*disallow:\s*'\/'/,
+  'robots.ts must explicitly disallow GPTBot (training-corpus crawler)'
 );
 
-// 13. JSON-LD safety and independent-portal identity.
+// 13. JSON-LD safety and independent-portal identity: Organization + WebSite
+// @graph, alternateName present, never GovernmentOrganization.
 const jsonLdSource = readFileSync('src/lib/json-ld.tsx', 'utf8');
 assert.match(
   jsonLdSource,
@@ -287,8 +322,31 @@ assert.match(
   'json-ld.tsx must escape "<" to prevent script-closing injection'
 );
 assert.ok(
-  !/GovernmentOrganization/.test(jsonLdSource),
+  // Matches an actual quoted type value (e.g. '@type': 'GovernmentOrganization'),
+  // not prose — json-ld.tsx's own comment explains *why* Organization is used
+  // instead, which legitimately mentions the word without quotes.
+  !/['"]GovernmentOrganization['"]/.test(jsonLdSource),
   'JSON-LD must never type BetterSanFernando as a GovernmentOrganization'
+);
+assert.match(
+  jsonLdSource,
+  /'@type':\s*'Organization'/,
+  'json-ld.tsx must define an Organization node'
+);
+assert.match(
+  jsonLdSource,
+  /'@type':\s*'WebSite'/,
+  'json-ld.tsx must define a WebSite node'
+);
+assert.match(
+  jsonLdSource,
+  /alternateName:\s*SITE_ALTERNATE_NAME/,
+  'the Organization/WebSite nodes must set alternateName'
+);
+assert.match(
+  metadataLibSource,
+  /SITE_ALTERNATE_NAME = 'Better San Fernando'/,
+  "the alternate site name must be exactly 'Better San Fernando'"
 );
 assert.match(
   metadataLibSource,
@@ -299,6 +357,54 @@ assert.ok(
   !/official City Government/i.test(metadataLibSource) ||
     /not the official City Government/i.test(metadataLibSource),
   'any mention of "official City Government" in shared metadata must be a denial, not a claim'
+);
+
+// 14. Icon files: favicon.ico, icon.png, apple-icon.png (App Router file
+// convention) and public/logo-512.png (Organization.logo target) exist and
+// have the expected dimensions. No `icons` entry remains in metadata.ts —
+// the file convention takes over.
+assert.ok(
+  !/icons:\s*\{/.test(metadataLibSource),
+  'metadata.ts must not set an `icons` entry — favicon.ico/icon.png/apple-icon.png take over via the file convention'
+);
+function readPngDimensions(path: string): [number, number] {
+  const buf = readFileSync(path);
+  assert.equal(
+    buf.subarray(0, 8).toString('hex'),
+    '89504e470d0a1a0a',
+    `${path} must be a valid PNG (correct signature)`
+  );
+  return [buf.readUInt32BE(16), buf.readUInt32BE(20)];
+}
+assert.ok(existsSync('src/app/favicon.ico'), 'src/app/favicon.ico must exist');
+assert.ok(existsSync('src/app/icon.png'), 'src/app/icon.png must exist');
+assert.deepEqual(
+  readPngDimensions('src/app/icon.png'),
+  [512, 512],
+  'src/app/icon.png must be 512x512'
+);
+assert.ok(
+  existsSync('src/app/apple-icon.png'),
+  'src/app/apple-icon.png must exist'
+);
+assert.deepEqual(
+  readPngDimensions('src/app/apple-icon.png'),
+  [180, 180],
+  'src/app/apple-icon.png must be 180x180'
+);
+assert.ok(existsSync('public/logo-512.png'), 'public/logo-512.png must exist');
+assert.deepEqual(
+  readPngDimensions('public/logo-512.png'),
+  [512, 512],
+  'public/logo-512.png must be 512x512'
+);
+
+// 15. /search is set to noindex (thin query-only surface).
+const searchPageSource = readFileSync('src/app/search/page.tsx', 'utf8');
+assert.match(
+  searchPageSource,
+  /robots:\s*\{\s*index:\s*false,\s*follow:\s*true\s*\}/,
+  '/search must be set to noindex (follow: true) — see src/app/search/page.tsx'
 );
 
 // 14. Custom 404: presence, noindex, and useful links.
@@ -316,5 +422,5 @@ for (const href of ['/', '/services', '/projects', '/government', '/search']) {
 }
 
 console.log(
-  `Batch 6 SEO smoke passed: 16 redirects verified exactly, site-URL resolver honors its 3-tier priority (and fails loudly on Vercel with none configured), metadataBase/canonical/OG/sitemap (${expectedTotal} URLs)/robots/JSON-LD/404-noindex all present and safe.`
+  `Batch 6/9 SEO smoke passed: 16 redirects verified exactly, site-URL resolver honors its 3-tier priority (and fails loudly on Vercel with none configured), metadataBase/canonical/OG/sitemap (${expectedTotal} URLs)/robots (OAI-SearchBot allowed, GPTBot disallowed)/JSON-LD (Organization+WebSite @graph)/icons (favicon/icon/apple-icon/logo-512)/404-noindex/search-noindex all present and safe.`
 );

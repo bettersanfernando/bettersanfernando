@@ -355,10 +355,48 @@ const navigationStructure = [
     ],
   },
   {
+    id: 'statistics',
+    labelKey: 'navigation.topLevel.statistics',
+    href: '/statistics',
+    activePathPrefixes: ['/statistics', '/barangays'],
+    sections: [
+      {
+        labelKey: 'navigation.sections.cityCommunity',
+        items: [
+          {
+            labelKey: 'navigation.items.cityProfile',
+            href: '/statistics/city-profile',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.populationDemographics',
+            href: '/statistics/population',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.demographicsStatistics',
+            href: '/statistics/demographics',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.governmentStatisticsPage',
+            href: '/statistics/government',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.barangayDirectory',
+            href: '/barangays',
+            kind: 'real',
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 'transparency',
     labelKey: 'navigation.topLevel.transparency',
     href: '/transparency',
-    activePathPrefixes: ['/transparency', '/statistics', '/barangays'],
+    activePathPrefixes: ['/transparency'],
     sections: [
       {
         labelKey: 'navigation.sections.publicRecordsFinance',
@@ -404,48 +442,17 @@ const navigationStructure = [
             kind: 'real',
           },
           {
+            // Points at the redirect's own destination (see next.config.ts'
+            // LEGACY_ALIASES) rather than the /transparency/verification
+            // source — internal links should never route crawlers through
+            // a redirect hop.
             labelKey: 'navigation.items.howWeVerify',
-            href: '/transparency/verification',
+            href: '/transparency/methodology#verification',
             kind: 'real',
           },
           {
             labelKey: 'navigation.items.dataLimitations',
-            href: '/transparency/limitations',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.statisticsOverview',
-            href: '/statistics',
-            kind: 'real',
-          },
-        ],
-      },
-      {
-        labelKey: 'navigation.sections.cityCommunity',
-        items: [
-          {
-            labelKey: 'navigation.items.cityProfile',
-            href: '/statistics/city-profile',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.populationDemographics',
-            href: '/statistics/population',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.demographicsStatistics',
-            href: '/statistics/demographics',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.governmentStatisticsPage',
-            href: '/statistics/government',
-            kind: 'real',
-          },
-          {
-            labelKey: 'navigation.items.barangayDirectory',
-            href: '/barangays',
+            href: '/transparency/methodology#limitations',
             kind: 'real',
           },
         ],
@@ -495,7 +502,7 @@ export function getSearchHref(query: string) {
 // Picks the most specific (longest) matching prefix across every top-level
 // item, rather than the first item whose prefix matches in declaration
 // order. Ownership of overlapping route families (e.g. Projects owning
-// `/statistics/project-spending` while Transparency owns the broader
+// `/statistics/project-spending` while Statistics owns the broader
 // `/statistics` prefix) must not depend on array order.
 export function getActiveNavigationId(pathname: string): NavigationId | null {
   const normalizedPath = pathname.replace(/\/+$/, '') || '/';

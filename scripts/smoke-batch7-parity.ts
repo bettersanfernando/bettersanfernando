@@ -73,10 +73,15 @@ const dynamicPaths = [
   ...getCityOffices().map(office => `/government/offices/${office.office_id}`),
 ];
 const canonicalPaths = [...staticPaths, ...dynamicPaths];
-assert.equal(staticPaths.length, 39);
+// 41 = 39 (pre-Batch-9) + /sitemap + /accessibility (both added in Batch 9).
+// This filesystem scan counts every literal page.tsx, including /search —
+// unlike sitemap.ts's STATIC_ROUTES, which deliberately excludes /search
+// (noindex; see src/app/search/page.tsx) — so it stays at 41 even though
+// the sitemap itself lists one fewer static route.
+assert.equal(staticPaths.length, 41);
 assert.equal(dynamicPaths.length, 561);
-assert.equal(canonicalPaths.length, 600);
-assert.equal(new Set(canonicalPaths).size, 600);
+assert.equal(canonicalPaths.length, 602);
+assert.equal(new Set(canonicalPaths).size, 602);
 
 const queryRoutes = [
   '/search',
@@ -119,5 +124,5 @@ assert.match(serviceCategorySource, /categoryServices\.filter/);
 assert.match(serviceCategorySource, /aria-live="polite"/);
 
 console.log(
-  'Batch 7 parity smoke passed: protected data and 600 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
+  'Batch 7 parity smoke passed: protected data and 602 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
 );

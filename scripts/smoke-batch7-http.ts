@@ -21,8 +21,8 @@ const sitemapXml = await sitemapResponse.text();
 const sitemapUrls = [...sitemapXml.matchAll(/<loc>(.*?)<\/loc>/g)].map(
   match => match[1]
 );
-assert.equal(sitemapUrls.length, 599);
-assert.equal(new Set(sitemapUrls).size, 599);
+assert.equal(sitemapUrls.length, 601);
+assert.equal(new Set(sitemapUrls).size, 601);
 assert.ok(sitemapUrls.every(url => url.startsWith(`${productionOrigin}/`)));
 assert.doesNotMatch(sitemapXml, /localhost|127\.0\.0\.1/i);
 
@@ -181,5 +181,5 @@ assert.match(
 );
 
 console.log(
-  'Batch 7 HTTP smoke passed: 599 content-bearing shell pages, 16 exact aliases, legacy service redirects, genuine noindex 404s, query-state SSR/canonicals, production-origin SEO, and rendered breadcrumb JSON-LD.'
+  'Batch 7 HTTP smoke passed: 601 content-bearing shell pages, 16 exact aliases, legacy service redirects, genuine noindex 404s, query-state SSR/canonicals, production-origin SEO, and rendered breadcrumb JSON-LD.'
 );

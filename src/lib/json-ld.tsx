@@ -1,5 +1,9 @@
 import { absoluteUrl } from './site-url';
-import { SITE_NAME, DEFAULT_DESCRIPTION } from './metadata';
+import {
+  SITE_NAME,
+  SITE_ALTERNATE_NAME,
+  DEFAULT_DESCRIPTION,
+} from './metadata';
 
 // Safe JSON-LD serialization: JSON.stringify can legally produce a
 // `</script>` (or `<!--`) substring if a source field contains one, which
@@ -22,16 +26,48 @@ export function JsonLd({ data }: { data: object }) {
   );
 }
 
-/** Site-wide WebSite structured data, rendered once in the root layout. */
-export function WebSiteJsonLd() {
+/**
+ * Site-wide Organization + WebSite structured data, rendered once in the
+ * root layout as a single `@graph`. Organization is used deliberately —
+ * never GovernmentOrganization — because BetterSanFernando is an
+ * independent community project, not the City Government. `sameAs` lists
+ * only verified BetterSanFernando profiles (currently just the GitHub
+ * repository); the footer's Facebook/LinkedIn links have no href yet and
+ * must not be guessed into this list.
+ */
+export function OrganizationWebSiteJsonLd() {
+  const organizationId = absoluteUrl('/#organization');
   return (
     <JsonLd
       data={{
         '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: SITE_NAME,
-        url: absoluteUrl('/'),
-        description: DEFAULT_DESCRIPTION,
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': organizationId,
+            name: SITE_NAME,
+            alternateName: SITE_ALTERNATE_NAME,
+            url: absoluteUrl('/'),
+            logo: {
+              '@type': 'ImageObject',
+              url: absoluteUrl('/logo-512.png'),
+              width: 512,
+              height: 512,
+            },
+            description: DEFAULT_DESCRIPTION,
+            sameAs: ['https://github.com/bettersanfernando/bettersanfernando'],
+          },
+          {
+            '@type': 'WebSite',
+            '@id': absoluteUrl('/#website'),
+            name: SITE_NAME,
+            alternateName: SITE_ALTERNATE_NAME,
+            url: absoluteUrl('/'),
+            description: DEFAULT_DESCRIPTION,
+            inLanguage: 'en',
+            publisher: { '@id': organizationId },
+          },
+        ],
       }}
     />
   );

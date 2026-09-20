@@ -2,12 +2,19 @@ import SearchView from './Search';
 
 import { buildPageMetadata } from '../../lib/metadata';
 
-export const metadata = buildPageMetadata({
-  title: 'Search BetterSanFernando',
-  description:
-    'Search currently published BetterSanFernando projects, barangays, government offices, legislation, and project-source records.',
-  path: '/search',
-});
+// NOINDEX: this page's content is entirely a function of the request's own
+// ?q=/?domain= query string, so an empty /search is a bare input box with
+// no indexable content — a thin/duplicate search-results surface. `follow`
+// stays true so link equity still flows through any result links.
+export const metadata = {
+  ...buildPageMetadata({
+    title: 'Search BetterSanFernando',
+    description:
+      'Search currently published BetterSanFernando projects, barangays, government offices, legislation, and project-source records.',
+    path: '/search',
+  }),
+  robots: { index: false, follow: true },
+};
 
 // This page's entire content depends on the request's own query string
 // (?q=, ?domain=), so it is rendered per request rather than statically

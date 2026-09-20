@@ -81,6 +81,7 @@ const mobileNavigationIcons: Record<NavigationId, LucideIcon> = {
   services: LayoutGrid,
   projects: FolderKanban,
   government: Landmark,
+  statistics: ChartNoAxesCombined,
   transparency: FileSearch,
   about: Info,
   contact: Mail,

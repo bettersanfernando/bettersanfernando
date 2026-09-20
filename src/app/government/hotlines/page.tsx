@@ -21,7 +21,7 @@ import { buildPageMetadata } from '../../../lib/metadata';
 
 export function generateMetadata() {
   return buildPageMetadata({
-    title: 'Government Hotlines',
+    title: 'Emergency Hotlines',
     description:
       'Review published emergency, disaster-response, public-safety, and related institutional contact numbers for the City of San Fernando, Pampanga.',
     path: '/government/hotlines',

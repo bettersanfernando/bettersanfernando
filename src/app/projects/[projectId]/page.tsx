@@ -38,9 +38,15 @@ export async function generateMetadata({
     ? `${project.project_name} (${project.id})`
     : project.project_name;
 
+  const status = titleCaseEnum(project.lifecycle_status);
+  // Leads with the page's own (guaranteed-unique) title: type/barangay/
+  // status alone collide constantly (243 of 324 projects share a
+  // type+barangay+status tuple with at least one other project), so every
+  // page's meta description must include something that actually
+  // distinguishes it — the project's own name does that naturally.
   return buildPageMetadata({
     title,
-    description: `${titleCaseEnum(project.project_type)} project ${project.id} in ${project.barangay ?? 'the City of San Fernando, Pampanga'} — ${titleCaseEnum(project.lifecycle_status)}.`,
+    description: `${title} — a ${titleCaseEnum(project.project_type)} project in ${project.barangay ?? 'the City of San Fernando, Pampanga'}, currently ${status.charAt(0).toLowerCase()}${status.slice(1)}.`,
     path: `/projects/${project.id}`,
   });
 }

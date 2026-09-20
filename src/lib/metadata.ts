@@ -7,6 +7,14 @@ import { absoluteUrl, getSiteUrl } from './site-url';
 // re-deriving canonical URLs by hand.
 
 export const SITE_NAME = 'BetterSanFernando';
+export const SITE_ALTERNATE_NAME = 'Better San Fernando';
+
+// The homepage's own title — distinct from SITE_NAME, which is the title
+// template's brand suffix for every other page (`%s | BetterSanFernando`).
+// A bare brand token gives search engines nothing to bind the brand to a
+// place or subject, so the homepage states both explicitly.
+export const HOME_TITLE =
+  'BetterSanFernando — Civic Information for San Fernando, Pampanga';
 
 // Truthful identity, repeated verbatim everywhere the portal describes
 // itself: independent and community-run, never implying it is the official
@@ -26,25 +34,24 @@ export function getRootMetadata(): Metadata {
   return {
     metadataBase: new URL(getSiteUrl()),
     title: {
-      default: SITE_NAME,
+      default: HOME_TITLE,
       template: `%s | ${SITE_NAME}`,
     },
     description: DEFAULT_DESCRIPTION,
     applicationName: SITE_NAME,
-    icons: {
-      icon: '/assets/brand/symbols/better-san-fernando-symbol-blue-transparent.png',
-    },
+    // No `icons` entry: favicon.ico, icon.png, and apple-icon.png under
+    // src/app/ are picked up automatically by Next's file-convention icons.
     openGraph: {
       type: 'website',
       siteName: SITE_NAME,
-      title: SITE_NAME,
+      title: HOME_TITLE,
       description: DEFAULT_DESCRIPTION,
       url: absoluteUrl('/'),
       images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
-      title: SITE_NAME,
+      title: HOME_TITLE,
       description: DEFAULT_DESCRIPTION,
       images: [DEFAULT_OG_IMAGE_PATH],
     },

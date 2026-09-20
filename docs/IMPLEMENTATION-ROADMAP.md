@@ -17,6 +17,21 @@ the sole implementation. Batch 8 remains: deploy a Vercel preview, verify the
 assigned stable production hostname and platform routing, exercise the three
 fragment aliases in a real browser, and document rollback.
 
+Batch 9 (SEO / search-identity pass, ahead of Google Search Console
+submission on `bettersanfernando.org`) is implemented: homepage title,
+Organization + WebSite JSON-LD `@graph` (Organization, never
+GovernmentOrganization), a real favicon/apple-icon/icon set derived from the
+opaque brand symbol, `/search` set to noindex and dropped from the sitemap,
+`/llms.txt`, an explicit robots.ts rule set (OAI-SearchBot allowed, GPTBot
+disallowed), the `/sitemap` and `/accessibility` pages that fix the
+footer's previously dead links, a homepage `/services` destination tile, and
+Statistics promoted to its own top-level navigation item (see
+`SITE-ARCHITECTURE.md`'s "Navigation model" and `PAGE-DATA-MATRIX.md`'s
+scope rules). Remaining: the post-deploy validation checks (Search Console
+verification, Rich Results Test, canonical/robots/sitemap spot checks) run
+once this ships to production — see the SEO audit plan for the full
+checklist.
+
 ## Phase 0 — Architecture / legacy alignment
 
 1. Implement the 15 agreed redirects in the matrix's Redirect / Alias
@@ -535,7 +550,7 @@ route or dataset without updating or reviewing these planning documents.
 
 After implementation establishes the actual public route and data behavior:
 
-- update `README.md` to describe the canonical sections, seven-item navigation,
+- update `README.md` to describe the canonical sections, eight-item navigation,
   bounded datasets, and public/private repository boundary;
 - update `CLAUDE.md` so implementation guidance matches canonical routes,
   redirects, typed civic-data access, and publication constraints; and
