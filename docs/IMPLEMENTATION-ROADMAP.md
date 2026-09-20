@@ -24,13 +24,18 @@ GovernmentOrganization), a real favicon/apple-icon/icon set derived from the
 opaque brand symbol, `/search` set to noindex and dropped from the sitemap,
 `/llms.txt`, an explicit robots.ts rule set (OAI-SearchBot allowed, GPTBot
 disallowed), the `/sitemap` and `/accessibility` pages that fix the
-footer's previously dead links, a homepage `/services` destination tile, and
-Statistics promoted to its own top-level navigation item (see
-`SITE-ARCHITECTURE.md`'s "Navigation model" and `PAGE-DATA-MATRIX.md`'s
-scope rules). Remaining: the post-deploy validation checks (Search Console
-verification, Rich Results Test, canonical/robots/sitemap spot checks) run
-once this ships to production — see the SEO audit plan for the full
-checklist.
+footer's previously dead links, and a homepage `/services` destination tile.
+Batch 9 originally also promoted Statistics to its own top-level navigation
+item; that specific change was reverted immediately after — it broke the
+Transparency/Statistics mega-menu balance and the site's seven-item
+navigation is unchanged (Statistics remains a Transparency-owned content
+area; see `SITE-ARCHITECTURE.md`'s "Navigation model" and
+`PAGE-DATA-MATRIX.md`'s scope rules). The Navbar.tsx mega-menu grid-column
+fix from that same attempt (supporting 1/2/3/4-section menus, not just
+3/4) was kept — it is a real, independently-valid bug fix. Remaining: the
+post-deploy validation checks (Search Console verification, Rich Results
+Test, canonical/robots/sitemap spot checks) run once this ships to
+production — see the SEO audit plan for the full checklist.
 
 ## Phase 0 — Architecture / legacy alignment
 
@@ -550,7 +555,7 @@ route or dataset without updating or reviewing these planning documents.
 
 After implementation establishes the actual public route and data behavior:
 
-- update `README.md` to describe the canonical sections, eight-item navigation,
+- update `README.md` to describe the canonical sections, seven-item navigation,
   bounded datasets, and public/private repository boundary;
 - update `CLAUDE.md` so implementation guidance matches canonical routes,
   redirects, typed civic-data access, and publication constraints; and

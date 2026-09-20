@@ -14,16 +14,16 @@ BetterSanFernando channel.
 
 ## Current public scope
 
-The site has exactly eight top-level navigation areas:
+The site has exactly seven top-level navigation areas:
 
 - **Home** — introduces the portal and surfaces high-value civic facts.
 - **Services** — resident-facing guidance on city services, organized by need.
 - **Projects** — a bounded, verified subset of city infrastructure/public-works
   projects and their evidence.
 - **Government** — offices, official contacts, and legislation.
-- **Statistics** — population, project, procurement, and city-profile
-  statistics derived from the site's bounded civic datasets.
 - **Transparency** — published-record inventory, sources, and methodology.
+  Statistics is a content area under Transparency, not a separate top-level
+  item.
 - **About** — the project's purpose, independence, and methodology.
 - **Contact** — `/government/contact`, a concise hub for verified official
   City Government contact channels. `/contact` permanently redirects here;

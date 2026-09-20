@@ -77,27 +77,19 @@ domains were intentionally excluded.
 
 ## Navigation model
 
-The top-level navigation has exactly eight items, in this order:
+The top-level navigation has exactly seven items, in this order:
 
 1. Home
 2. Services
 3. Projects
 4. Government
-5. Statistics
-6. Transparency
-7. About
-8. Contact
+5. Transparency
+6. About
+7. Contact
 
-Statistics was originally nested under Transparency; it was promoted to its
-own top-level item (Batch 9, the SEO/search-identity pass) because it had no
-homepage links of its own and sat at the weakest possible position — a child
-link inside another section's mega-menu — for a destination the site wants
-to structurally emphasize. Routes under `/statistics` and `/barangays` now
-activate the Statistics navigation state; Transparency's own mega-menu keeps
-a handful of statistics cross-links (e.g. public-records and legislation
-coverage stats) where they are contextually relevant to a transparency
-reader, but the routes above no longer belong to Transparency for
-navigation-highlighting purposes.
+Statistics is a real content area, but it is part of Transparency. It must not
+become an eighth top-level navigation item. Routes under `/statistics` and
+`/barangays` should activate the Transparency navigation state.
 
 Procurement is cross-linked from Projects and Transparency, but it is not a
 top-level navigation section. Legislation is owned by Government, even though
@@ -314,9 +306,8 @@ Project Cost & Utilization observations.
 ### Statistics
 
 Statistics provides careful summaries derived from verified public datasets.
-It is its own top-level navigation section using the clean `/statistics`
-namespace (see "Navigation model" above); it was promoted out of Transparency's
-mega-menu in Batch 9.
+It is a content area under Transparency, even though it uses the clean
+`/statistics` namespace.
 
 Statistics pages answer aggregate questions; they do not replace the
 underlying record lists. Every statistic must state its source dataset,

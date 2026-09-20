@@ -101,11 +101,13 @@ const executiveOrdersFile =
 const executiveOrders: readonly LegislationRecord[] = Object.freeze(
   executiveOrdersFile.executive_orders
 );
+const ordinancesFile = OrdinancesFileSchema.parse(ordinancesJson);
 const ordinances: readonly LegislationRecord[] = Object.freeze(
-  OrdinancesFileSchema.parse(ordinancesJson).ordinances
+  ordinancesFile.ordinances
 );
+const resolutionsFile = ResolutionsFileSchema.parse(resolutionsJson);
 const resolutions: readonly LegislationRecord[] = Object.freeze(
-  ResolutionsFileSchema.parse(resolutionsJson).resolutions
+  resolutionsFile.resolutions
 );
 
 export type ExecutiveOrdersMetadata = Readonly<{
@@ -120,6 +122,26 @@ export type ExecutiveOrdersMetadata = Readonly<{
   sourceRetrievedAt: string;
 }>;
 
+export type OrdinancesMetadata = Readonly<{
+  description: string;
+  documentType: string;
+  jurisdictionName: string;
+  jurisdictionPsgc: string;
+  lastVerified: string;
+  province: string;
+  recordCount: number;
+}>;
+
+export type ResolutionsMetadata = Readonly<{
+  description: string;
+  documentType: string;
+  jurisdictionName: string;
+  jurisdictionPsgc: string;
+  lastVerified: string;
+  province: string;
+  recordCount: number;
+}>;
+
 const executiveOrdersMetadata: ExecutiveOrdersMetadata = Object.freeze({
   description: executiveOrdersFile.description,
   documentType: executiveOrdersFile.document_type,
@@ -132,6 +154,26 @@ const executiveOrdersMetadata: ExecutiveOrdersMetadata = Object.freeze({
   sourceRetrievedAt: executiveOrdersFile.source_retrieved_at,
 });
 
+const ordinancesMetadata: OrdinancesMetadata = Object.freeze({
+  description: ordinancesFile.description,
+  documentType: ordinancesFile.document_type,
+  jurisdictionName: ordinancesFile.jurisdiction_name,
+  jurisdictionPsgc: ordinancesFile.jurisdiction_psgc,
+  lastVerified: ordinancesFile.last_verified,
+  province: ordinancesFile.province,
+  recordCount: ordinancesFile.record_count,
+});
+
+const resolutionsMetadata: ResolutionsMetadata = Object.freeze({
+  description: resolutionsFile.description,
+  documentType: resolutionsFile.document_type,
+  jurisdictionName: resolutionsFile.jurisdiction_name,
+  jurisdictionPsgc: resolutionsFile.jurisdiction_psgc,
+  lastVerified: resolutionsFile.last_verified,
+  province: resolutionsFile.province,
+  recordCount: resolutionsFile.record_count,
+});
+
 export function getExecutiveOrders(): readonly LegislationRecord[] {
   return executiveOrders;
 }
@@ -142,6 +184,10 @@ export function getExecutiveOrdersMetadata(): ExecutiveOrdersMetadata {
 
 export function getOrdinances(): readonly LegislationRecord[] {
   return ordinances;
+}
+
+export function getOrdinancesMetadata(): OrdinancesMetadata {
+  return ordinancesMetadata;
 }
 
 export function getLegislationSourceUrl(
@@ -166,4 +212,8 @@ export function getLegislationTitle(record: LegislationRecord): string | null {
 
 export function getResolutions(): readonly LegislationRecord[] {
   return resolutions;
+}
+
+export function getResolutionsMetadata(): ResolutionsMetadata {
+  return resolutionsMetadata;
 }

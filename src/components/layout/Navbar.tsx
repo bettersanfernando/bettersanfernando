@@ -72,7 +72,14 @@ import CivicUtilityBar from './CivicUtilityBar';
 const BRAND_LOGO =
   '/assets/brand/logos/horizontal/better-san-fernando-horizontal-blue-transparent-cropped.png';
 const DESKTOP_CLOSE_DELAY_MS = 160;
+// Every section count a mega menu can actually have must map to its own
+// column count — falling through to the 'grid-cols-4' default for an
+// unmapped count (e.g. a 1- or 2-section menu) leaves the container at
+// full width with mostly-empty columns, which is exactly the "content
+// disappeared" look a too-narrow mega menu produces.
 const DESKTOP_MEGA_MENU_GRID_COLS: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
   3: 'grid-cols-3',
   4: 'grid-cols-4',
 };
@@ -81,7 +88,6 @@ const mobileNavigationIcons: Record<NavigationId, LucideIcon> = {
   services: LayoutGrid,
   projects: FolderKanban,
   government: Landmark,
-  statistics: ChartNoAxesCombined,
   transparency: FileSearch,
   about: Info,
   contact: Mail,

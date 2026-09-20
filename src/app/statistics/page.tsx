@@ -1,28 +1,23 @@
 import {
+  ArrowDown,
   ArrowRight,
-  BarChart3,
-  Building2,
-  Database,
   FolderKanban,
   Landmark,
   Library,
   Scale,
-  ShieldCheck,
   UsersRound,
 } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
-import Section from '../../components/ui/Section';
 import { getStatisticsSummary } from '../../data/civic/statisticsSummary';
 import { getLegislationSummary } from '../../data/civic/legislationSummary';
 import { getPublicRecordsMetrics } from '../../data/civic/publicRecordsCoverage';
-
 import { buildPageMetadata } from '../../lib/metadata';
 
 export const metadata = buildPageMetadata({
   title: 'Statistics',
   description:
-    "Explore descriptive population, project, procurement, and city-profile statistics derived from BetterSanFernando's bounded frontend-safe civic datasets.",
+    'Explore BetterSanFernando’s published civic datasets through focused statistical views for population, projects, procurement, government, legislation, and public records.',
   path: '/statistics',
 });
 
@@ -31,338 +26,444 @@ const summary = getStatisticsSummary();
 const legislation = getLegislationSummary();
 const publicRecordsDatasetCount = getPublicRecordsMetrics().length;
 
-const statisticalViews = [
-  {
-    href: '/statistics/population',
-    action: 'View Population Statistics',
-    title: 'Population',
-    icon: UsersRound,
-    measure: `${numberFormatter.format(summary.population.total)} people`,
-    context: `${summary.population.census} baseline`,
-    description:
-      'Compare the current city baseline and barangay population values, rankings, shares, and urban or rural classifications.',
-  },
-  {
-    href: '/statistics/projects',
-    action: 'View Project Statistics',
-    title: 'Projects',
-    icon: FolderKanban,
-    measure: `${summary.projects.total} project records`,
-    context: 'Bounded published dataset',
-    description:
-      'Review documentary lifecycle, project type and year distribution, barangay attribution, and financial-field coverage.',
-  },
-  {
-    href: '/statistics/procurement',
-    action: 'View Procurement Statistics',
-    title: 'Procurement',
-    icon: Scale,
-    measure: `${summary.procurement.evidence} evidence records`,
-    context: 'Linked to the published project dataset',
-    description:
-      'Explore documentary lifecycle, field coverage, BID_RESULTS evidence, document years, and the award and contract distinction.',
-  },
-  {
-    href: '/statistics/city-profile',
-    action: 'View City Profile',
-    title: 'City Profile',
-    icon: Landmark,
-    measure: `${summary.population.barangays} barangays`,
-    context: `${summary.population.urbanBarangays} urban · ${summary.population.ruralBarangays} rural`,
-    description:
-      'See a concise cross-domain baseline for population, barangays, geographic coverage, and the published institutional directory.',
-  },
-  {
-    href: '/statistics/legislation',
-    action: 'View Legislation Statistics',
-    title: 'Legislation',
-    icon: Scale,
-    measure: `${legislation.executiveOrders.total} EO · ${legislation.ordinances.total} Ord · ${legislation.resolutions.total} Res`,
-    context: 'Bounded published holdings',
-    description:
-      'Compare BetterSanFernando’s verified Executive Order, Ordinance, and Resolution coverage by type and year.',
-  },
-  {
-    href: '/statistics/public-records',
-    action: 'View Public Records Statistics',
-    title: 'Public Records',
-    icon: Library,
-    measure: `${publicRecordsDatasetCount} tracked datasets`,
-    context: 'Each dataset keeps its own unit',
-    description:
-      'See collection coverage, publication status, and limits for every dataset BetterSanFernando currently publishes.',
-  },
-] as const;
+const scopeDescription = [
+  'These pages describe BetterSanFernando’s published datasets.',
+  'They are not a City',
+  'scorecard, performance ranking, or claim of complete City Government coverage.',
+].join(' ');
 
 const snapshot = [
   {
-    label: `${summary.population.census} population`,
+    label: `${summary.population.census} Population`,
     value: numberFormatter.format(summary.population.total),
   },
   { label: 'Barangays', value: summary.population.barangays },
-  { label: 'Published project records', value: summary.projects.total },
-  { label: 'Project evidence records', value: summary.procurement.evidence },
+  { label: 'Published Project Records', value: summary.projects.total },
+  { label: 'Project Evidence Records', value: summary.procurement.evidence },
   {
-    label: 'Published office records',
+    label: 'Published Office Records',
     value: summary.government.officeRecords,
+  },
+] as const;
+
+const topicThemes = [
+  {
+    theme: 'PEOPLE & PLACE',
+    views: [
+      {
+        href: '/statistics/population',
+        title: 'Population',
+        icon: UsersRound,
+        measure: `${numberFormatter.format(summary.population.total)} people`,
+        question:
+          'How many people live in San Fernando, and how is population distributed across its barangays?',
+        action: 'Explore Population',
+      },
+      {
+        href: '/statistics/city-profile',
+        title: 'City Profile',
+        icon: Landmark,
+        measure: `${summary.population.barangays} barangays`,
+        question:
+          'What are the City’s barangays, geographic coverage, and basic institutional statistics?',
+        action: 'Explore City Profile',
+      },
+    ],
+  },
+  {
+    theme: 'PROJECTS & PROCUREMENT',
+    views: [
+      {
+        href: '/statistics/projects',
+        title: 'Projects',
+        icon: FolderKanban,
+        measure: `${summary.projects.total} project records`,
+        question:
+          'What kinds of projects are published, where are they located, and what documentary stages and financial fields are represented?',
+        action: 'Explore Project Statistics',
+      },
+      {
+        href: '/statistics/procurement',
+        title: 'Procurement',
+        icon: Scale,
+        measure: `${summary.procurement.evidence} evidence records`,
+        question:
+          'What procurement evidence is linked to published projects, and what does that evidence establish?',
+        action: 'Explore Procurement Statistics',
+      },
+    ],
+  },
+  {
+    theme: 'GOVERNMENT & PUBLIC RECORDS',
+    views: [
+      {
+        href: '/statistics/legislation',
+        title: 'Legislation',
+        icon: Scale,
+        measure: `${legislation.executiveOrders.total} EO · ${legislation.ordinances.total} Ord · ${legislation.resolutions.total} Res`,
+        question:
+          'What Executive Orders, Ordinances, and Resolutions does BetterSanFernando currently publish?',
+        action: 'Explore Legislation Statistics',
+      },
+      {
+        href: '/statistics/public-records',
+        title: 'Public Records',
+        icon: Library,
+        measure: `${publicRecordsDatasetCount} tracked datasets`,
+        question:
+          'What datasets does BetterSanFernando publish, and what are the coverage limits of each?',
+        action: 'Explore Public Records Statistics',
+      },
+    ],
+  },
+] as const;
+
+const explorationLinks = [
+  {
+    href: '/transparency/sources',
+    title: 'Data Sources',
+    description:
+      'How BetterSanFernando’s public datasets connect back to original sources.',
+  },
+  {
+    href: '/transparency/methodology',
+    title: 'How We Publish Data',
+    description:
+      'How BetterSanFernando verifies, normalizes, limits, and publishes civic information.',
+  },
+  {
+    href: '/statistics/public-records',
+    title: 'Public Records Statistics',
+    description:
+      'See dataset coverage, publication status, and record-unit boundaries.',
+  },
+  {
+    href: '/transparency/finance',
+    title: 'City Finances',
+    description:
+      'Explore selected official aggregate finance reports and compatible observations.',
   },
 ] as const;
 
 export default function Statistics() {
   return (
-    <>
-      <main className="bg-[#f7f8fa] pb-16 md:pb-24">
-        <Section className="p-3">
+    <main className="flex-grow bg-white pb-16 md:pb-24">
+      {/* 1. EDITORIAL HERO */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
           <Breadcrumbs
+            className="text-xs text-gray-500"
             items={[
               { label: 'Home', href: '/' },
               { label: 'Transparency', href: '/transparency' },
               { label: 'Statistics' },
             ]}
-            className="mb-8"
           />
 
-          <header className="grid gap-8 border-b border-gray-300 pb-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end">
+          <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-700 text-white">
-                <BarChart3 className="h-6 w-6" aria-hidden="true" />
-              </div>
-              <h1 className="text-4xl font-bold text-display text-gray-950 sm:text-5xl">
+              <p className="text-eyebrow text-[#0066EB]">
+                STATISTICS · CIVIC DATA
+              </p>
+              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
                 Statistics
               </h1>
-              <p className="mt-5 max-w-[70ch] text-lg leading-8 text-gray-700">
-                BetterSanFernando publishes descriptive statistics from its
-                bounded, frontend-safe civic datasets. Each view states what it
-                measures and keeps its source period, denominator, and coverage
-                limits visible.
+              <p className="mt-4 max-w-[70ch] text-base leading-relaxed text-gray-700 sm:text-lg">
+                Explore BetterSanFernando’s published civic datasets through
+                focused statistical views for population, projects, procurement,
+                government, legislation, and public records.
               </p>
+
+              {/* CTA row */}
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <a
+                  href="#explore-by-topic"
+                  className="inline-flex h-10 items-center gap-2 rounded-sm bg-[#0066EB] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                >
+                  Explore Statistical Views
+                  <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <a
+                  href="#before-you-compare"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] underline decoration-primary-300 underline-offset-4 transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                >
+                  How to Read the Numbers
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
-            <aside className="border-t border-primary-200 pt-5 text-sm leading-6 text-gray-700 lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
-              <p className="font-bold text-gray-950">A statistical directory</p>
-              <p className="mt-1">
-                These summaries describe published records. They are not a city
-                scorecard, performance ranking, or claim of complete City
-                Government coverage.
+
+            {/* Right-side scope module */}
+            <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
+              <p className="text-eyebrow text-gray-600">
+                ABOUT THESE STATISTICS
+              </p>
+              <h2 className="mt-1.5 text-base font-bold text-gray-950">
+                A Civic Data Directory
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                {scopeDescription}
               </p>
             </aside>
-          </header>
+          </div>
+        </div>
+      </section>
 
-          <section aria-labelledby="snapshot-heading" className="mt-10">
-            <h2
-              id="snapshot-heading"
-              className="text-2xl font-bold text-gray-950"
-            >
-              Representative snapshot
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Selected measures from different published datasets; their
-              denominators are not interchangeable.
-            </p>
-            <dl className="mt-5 grid grid-cols-2 overflow-hidden rounded-xl border border-gray-200 bg-white sm:grid-cols-3 lg:grid-cols-5">
-              {snapshot.map((metric, index) => (
-                <div
-                  key={metric.label}
-                  className={`min-w-0 p-4 sm:p-5 ${index > 0 ? 'border-l border-gray-200' : ''} ${index > 1 ? 'max-sm:border-t' : ''}`}
-                >
-                  <dt className="text-sm leading-5 text-gray-600">
-                    {metric.label}
-                  </dt>
-                  <dd className="mt-1 break-words text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
-                    {metric.value}
-                  </dd>
+      <div className="container mx-auto px-4">
+        {/* 2. AT A GLANCE */}
+        <section aria-labelledby="snapshot-heading" className="mt-10 sm:mt-12">
+          <h2
+            id="snapshot-heading"
+            className="text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
+          >
+            At a Glance
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 sm:text-base">
+            Independent measures from different published datasets. These
+            numbers use different units and should not be added or ranked
+            against one another.
+          </p>
+
+          <dl className="mt-6 grid grid-cols-1 rounded-sm border border-gray-200 bg-white sm:grid-cols-2 lg:grid-cols-5">
+            {snapshot.map((metric, index) => (
+              <div
+                key={metric.label}
+                className={`flex min-w-0 flex-col justify-between p-4 sm:p-5 ${
+                  index !== 0 ? 'border-t border-gray-200' : ''
+                } ${index % 2 === 1 ? 'sm:border-l sm:border-gray-200' : ''} ${
+                  index > 1 ? 'sm:border-t sm:border-gray-200' : 'sm:border-t-0'
+                } ${
+                  index !== 0
+                    ? 'lg:border-l lg:border-t-0 lg:border-gray-200'
+                    : ''
+                }`}
+              >
+                <dt className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                  {metric.label}
+                </dt>
+                <dd className="mt-2 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {/* 3. MAIN SECTION — EXPLORE BY TOPIC */}
+        <section
+          id="explore-by-topic"
+          aria-labelledby="views-heading"
+          className="mt-14 sm:mt-16"
+        >
+          <p className="text-eyebrow text-[#0066EB]">STATISTICAL VIEWS</p>
+          <h2
+            id="views-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
+          >
+            Explore by Topic
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
+            Choose the question you want to answer. Each detailed view owns its
+            own comparisons, denominators, source periods, and limitations.
+          </p>
+
+          <div className="mt-8 space-y-8">
+            {topicThemes.map(topic => (
+              <div key={topic.theme}>
+                <div className="border-t border-gray-200 pb-2 pt-4">
+                  <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-gray-500">
+                    {topic.theme}
+                  </h3>
                 </div>
-              ))}
-            </dl>
-          </section>
 
-          <section aria-labelledby="views-heading" className="mt-14">
-            <h2
-              id="views-heading"
-              className="text-3xl font-bold tracking-[-0.025em] text-gray-950"
-            >
-              Statistical views
-            </h2>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-gray-700">
-              Open the detailed view that owns each comparison. This hub keeps
-              only enough context to make the destinations understandable.
-            </p>
-            <div className="mt-7 grid gap-px overflow-hidden rounded-xl bg-gray-200 shadow-[0_10px_32px_rgba(0,41,94,0.08)] lg:grid-cols-2">
-              {statisticalViews.map(view => {
-                const Icon = view.icon;
-                return (
-                  <article
-                    key={view.href}
-                    className="flex min-w-0 flex-col bg-white p-6 md:p-7"
-                  >
-                    <div className="flex items-start justify-between gap-5">
-                      <Icon
-                        className="h-6 w-6 shrink-0 text-primary-700"
-                        aria-hidden="true"
-                      />
-                      <p className="text-right text-xs font-bold uppercase tracking-wide text-gray-600">
-                        {view.context}
-                      </p>
-                    </div>
-                    <h3 className="mt-5 text-2xl font-bold text-gray-950">
-                      {view.title}
-                    </h3>
-                    <p className="mt-1 text-lg font-bold tabular-nums text-primary-800">
-                      {view.measure}
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-gray-700">
-                      {view.description}
-                    </p>
-                    <Link
-                      href={view.href}
-                      className="mt-6 inline-flex min-h-11 items-center gap-2 self-start text-sm font-bold text-primary-700 underline decoration-primary-200 underline-offset-4 hover:text-primary-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
-                    >
-                      {view.action}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
+                <div className="mt-2 grid grid-cols-1 divide-y divide-gray-200 rounded-sm border border-gray-200 bg-white md:grid-cols-2 md:divide-x md:divide-y-0">
+                  {topic.views.map(view => {
+                    const Icon = view.icon;
+                    return (
+                      <Link
+                        key={view.href}
+                        href={view.href}
+                        className="group flex flex-col justify-between p-5 transition-colors hover:bg-[#F3F6FB]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB] sm:p-6"
+                      >
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <Icon
+                              className="h-4 w-4 shrink-0 text-[#0066EB]"
+                              aria-hidden="true"
+                            />
+                            <h4 className="text-lg font-bold text-gray-950 transition-colors group-hover:text-[#0066EB] sm:text-xl">
+                              {view.title}
+                            </h4>
+                          </div>
+                          <p className="mt-2 text-base font-extrabold tabular-nums text-primary-800">
+                            {view.measure}
+                          </p>
+                          <p className="mt-2 text-sm leading-6 text-gray-600">
+                            {view.question}
+                          </p>
+                        </div>
+                        <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors group-hover:text-[#0052BC]">
+                          <span>{view.action}</span>
+                          <ArrowRight
+                            className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1"
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-          <section
-            aria-labelledby="interpret-heading"
-            className="mt-14 grid gap-8 border-y border-gray-300 py-10 lg:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.3fr)]"
+        {/* 4. BEFORE YOU COMPARE */}
+        <section
+          id="before-you-compare"
+          aria-labelledby="compare-heading"
+          className="mt-14 border-t border-gray-200 pt-10 sm:mt-16"
+        >
+          <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+          <h2
+            id="compare-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
           >
+            Before You Compare
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
+            Different statistical views describe different datasets, periods,
+            and units. Keep these rules in mind when reading across pages.
+          </p>
+
+          <dl className="mt-8 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
             <div>
-              <Database className="h-6 w-6 text-gray-600" aria-hidden="true" />
-              <h2
-                id="interpret-heading"
-                className="mt-4 text-3xl font-bold tracking-[-0.025em] text-gray-950"
-              >
-                How to interpret the numbers
-              </h2>
+              <dt className="text-base font-bold text-gray-950">
+                Coverage Is Bounded
+              </dt>
+              <dd className="mt-2 text-sm leading-6 text-gray-700">
+                A published dataset count describes BetterSanFernando’s current
+                coverage, not necessarily every City Government record or
+                activity.
+              </dd>
             </div>
-            <dl className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div>
-                <dt className="font-bold text-gray-950">Coverage is bounded</dt>
-                <dd className="mt-2 text-sm leading-6 text-gray-700">
-                  A published dataset count is not a citywide total. The 324
-                  project records describe BetterSanFernando&apos;s current
-                  bounded project dataset.
-                </dd>
-              </div>
-              <div>
-                <dt className="font-bold text-gray-950">
-                  Reference periods matter
-                </dt>
-                <dd className="mt-2 text-sm leading-6 text-gray-700">
-                  Population uses the {summary.population.census} reference.
-                  Project and procurement records use their own dates and
-                  evidence periods.
-                </dd>
-              </div>
-              <div>
-                <dt className="font-bold text-gray-950">
-                  States stay distinct
-                </dt>
-                <dd className="mt-2 text-sm leading-6 text-gray-700">
-                  Documentary lifecycle is not physical progress. AWARDED does
-                  not mean CONTRACTED, completed, paid, or operational.
-                </dd>
-              </div>
-              <div>
-                <dt className="font-bold text-gray-950">Missing is not zero</dt>
-                <dd className="mt-2 text-sm leading-6 text-gray-700">
-                  Missing and unavailable values remain unknown. Different
-                  statistical pages may use different, explicitly stated
-                  denominators.
-                </dd>
-              </div>
-            </dl>
-          </section>
-
-          <section
-            aria-labelledby="gaps-heading"
-            className="mt-14 grid gap-8 lg:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.3fr)]"
-          >
             <div>
-              <Building2 className="h-6 w-6 text-gray-600" aria-hidden="true" />
-              <h2
-                id="gaps-heading"
-                className="mt-4 text-3xl font-bold tracking-[-0.025em] text-gray-950"
-              >
-                Not yet included
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-gray-700">
-                These gaps describe the current public release, not an absence
-                of government activity or records.
-              </p>
+              <dt className="text-base font-bold text-gray-950">
+                Reference Periods Differ
+              </dt>
+              <dd className="mt-2 text-sm leading-6 text-gray-700">
+                Population uses the current census reference, while project,
+                procurement, legislation, and other datasets use their own
+                reporting or evidence periods.
+              </dd>
             </div>
-            <ul className="divide-y divide-gray-300 border-y border-gray-300">
-              <li className="py-5">
-                <h3 className="font-bold text-gray-950">
-                  Broader demographics
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-gray-700">
-                  Current public data supports population and barangay
-                  classification, but not a complete frontend-safe dataset for
-                  age, sex, households, or density.
-                </p>
-              </li>
-              <li className="py-5">
-                <h3 className="font-bold text-gray-950">Project spending</h3>
-                <p className="mt-2 text-sm leading-6 text-gray-700">
-                  Actual project expenditure is not established by the current
-                  published data. Approved budget, winning bid, and contract
-                  amount are separate procurement fields and are not treated as
-                  spending.
-                </p>
-              </li>
-            </ul>
-          </section>
+            <div>
+              <dt className="text-base font-bold text-gray-950">
+                States Have Specific Meanings
+              </dt>
+              <dd className="mt-2 text-sm leading-6 text-gray-700">
+                Documentary lifecycle is not physical progress. AWARDED does not
+                mean CONTRACTED, completed, paid, or operational.
+              </dd>
+            </div>
+            <div>
+              <dt className="text-base font-bold text-gray-950">
+                Missing Is Not Zero
+              </dt>
+              <dd className="mt-2 text-sm leading-6 text-gray-700">
+                Unavailable or unsupported values remain unknown rather than
+                being inferred or treated as zero.
+              </dd>
+            </div>
+          </dl>
+        </section>
 
-          <section
-            aria-labelledby="methods-heading"
-            className="mt-14 grid overflow-hidden rounded-xl bg-primary-900 text-white lg:grid-cols-2"
+        {/* 5. CURRENT COVERAGE GAPS */}
+        <section
+          aria-labelledby="gaps-heading"
+          className="mt-14 border-t border-gray-200 pt-10 sm:mt-16"
+        >
+          <p className="text-eyebrow text-[#0066EB]">CURRENT COVERAGE</p>
+          <h2
+            id="gaps-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
           >
-            <div className="p-6 md:p-8">
-              <ShieldCheck
-                className="h-6 w-6 text-primary-200"
-                aria-hidden="true"
-              />
-              <h2 id="methods-heading" className="mt-4 text-2xl font-bold">
-                Sources
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-primary-100">
-                Statistical values inherit the scope, reference period, and
-                limitations of their underlying records: fact → source → public
-                link.
+            Current Coverage Gaps
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
+            These gaps describe the current public release, not an absence of
+            City activity or records.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
+              <h3 className="text-base font-bold text-gray-950">
+                Broader Demographics
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-gray-700">
+                Current public data supports population and barangay
+                classification, but not a complete frontend-safe statistical
+                dataset for age, sex, households, or density.
               </p>
-              <Link
-                href="/transparency/sources"
-                className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-white underline decoration-primary-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                Explore Published Data Sources
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
             </div>
-            <div className="border-t border-primary-700 bg-primary-800 p-6 md:p-8 lg:border-l lg:border-t-0">
-              <Database
-                className="h-6 w-6 text-primary-200"
-                aria-hidden="true"
-              />
-              <h2 className="mt-4 text-2xl font-bold">Methodology</h2>
-              <p className="mt-3 text-sm leading-6 text-primary-100">
-                Read how records are accepted, normalized, linked, dated, and
-                presented when fields or coverage are incomplete.
+            <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
+              <h3 className="text-base font-bold text-gray-950">
+                Actual Project Spending
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-gray-700">
+                Current project finance fields do not establish actual
+                expenditure. Approved budget, winning bid, and contract amount
+                remain separate procurement fields and are not treated as
+                spending.
               </p>
-              <Link
-                href="/transparency/methodology"
-                className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-white underline decoration-primary-300 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                Read Transparency Methodology
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
             </div>
-          </section>
-        </Section>
-      </main>
-    </>
+          </div>
+        </section>
+
+        {/* 6. KEEP EXPLORING */}
+        <section
+          aria-labelledby="explore-heading"
+          className="mt-14 border-t border-gray-200 pt-10 sm:mt-16"
+        >
+          <p className="text-eyebrow text-[#0066EB]">KEEP EXPLORING</p>
+          <h2
+            id="explore-heading"
+            className="mt-2 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
+          >
+            Keep Exploring
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
+            Explore related transparency registers, publication standards, and
+            governance records.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {explorationLinks.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 transition-colors hover:bg-[#F3F6FB]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+              >
+                <div>
+                  <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors group-hover:text-[#0052BC]">
+                  <span>Explore</span>
+                  <ArrowRight
+                    className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }

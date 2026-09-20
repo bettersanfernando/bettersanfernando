@@ -14,7 +14,6 @@ const expectedTopLevelIds = [
   'services',
   'projects',
   'government',
-  'statistics',
   'transparency',
   'about',
   'contact',
@@ -23,14 +22,14 @@ const expectedTopLevelIds = [
 assert.deepEqual(
   mainNavigation.map(item => item.id),
   expectedTopLevelIds,
-  'the header must expose exactly the approved eight top-level entries (Statistics promoted in Batch 9)'
+  'the header must expose exactly the approved seven top-level entries'
 );
 
 const megaMenus = mainNavigation.filter(item => item.sections);
 assert.deepEqual(
   megaMenus.map(item => item.id),
-  ['services', 'projects', 'government', 'statistics', 'transparency'],
-  'only the five approved entries may use mega menus'
+  ['services', 'projects', 'government', 'transparency'],
+  'only the four approved entries may use mega menus'
 );
 
 for (const menu of megaMenus) {
@@ -208,16 +207,14 @@ const activeRouteCases = [
   ['/legislation', 'government'],
   ['/transparency/full-disclosure', 'transparency'],
   ['/transparency/finance', 'transparency'],
-  // Statistics owns the broad /statistics and /barangays prefixes as of
-  // Batch 9 (promoted out of Transparency's mega-menu).
-  ['/statistics', 'statistics'],
-  ['/statistics/population', 'statistics'],
-  ['/statistics/demographics', 'statistics'],
-  ['/statistics/government', 'statistics'],
-  ['/statistics/city-profile', 'statistics'],
-  ['/statistics/public-records', 'statistics'],
-  ['/statistics/legislation', 'statistics'],
-  ['/barangays', 'statistics'],
+  ['/statistics', 'transparency'],
+  ['/statistics/population', 'transparency'],
+  ['/statistics/demographics', 'transparency'],
+  ['/statistics/government', 'transparency'],
+  ['/statistics/city-profile', 'transparency'],
+  ['/statistics/public-records', 'transparency'],
+  ['/statistics/legislation', 'transparency'],
+  ['/barangays', 'transparency'],
   // Owned by Projects even though the URL sits under /statistics: these are
   // project/procurement analytics, not general civic statistics — see
   // navigation.ts's most-specific-prefix resolver.
@@ -372,20 +369,12 @@ assert.deepEqual(menuSectionHeadingKeys('government'), [
 
 assert.deepEqual(
   menuSectionCounts('transparency'),
-  [5, 4],
-  'Transparency mega menu is 5/4 as of Batch 9: cityCommunity moved out to the new Statistics top-level item, and the redundant statisticsOverview (/statistics) link was dropped from dataVerification now that Statistics has its own adjacent top-level tab'
+  [5, 5, 5],
+  'Transparency mega menu must be balanced 5/5/5 now that the duplicate Projects & Procurement section has been removed'
 );
 assert.deepEqual(menuSectionHeadingKeys('transparency'), [
   'navigation.sections.publicRecordsFinance',
   'navigation.sections.dataVerification',
-]);
-
-assert.deepEqual(
-  menuSectionCounts('statistics'),
-  [5],
-  'Statistics mega menu holds the cityCommunity section promoted out of Transparency in Batch 9'
-);
-assert.deepEqual(menuSectionHeadingKeys('statistics'), [
   'navigation.sections.cityCommunity',
 ]);
 
@@ -434,6 +423,31 @@ assert.match(
   /item\.sections\.map\(section =>/,
   'mobile navigation must render from the same item.sections structure, not a separate mobile-only data model'
 );
+
+// Regression guard for the exact bug this rebalance fixes: every mega
+// menu's section count must map to its own dedicated grid-cols-N class in
+// Navbar.tsx, never silently fall through to the 'grid-cols-4' default —
+// that fallback is what produced the huge-empty-space/"content
+// disappeared" look for the original 1-section Statistics and 2-section
+// Transparency menus.
+const gridColsMapMatch = navbarSource.match(
+  /DESKTOP_MEGA_MENU_GRID_COLS:\s*Record<number, string>\s*=\s*\{([\s\S]*?)\}/
+);
+assert.ok(
+  gridColsMapMatch,
+  'Navbar.tsx must define DESKTOP_MEGA_MENU_GRID_COLS'
+);
+const mappedGridColCounts = new Set(
+  [...gridColsMapMatch![1].matchAll(/(\d+):\s*'grid-cols-\d+'/g)].map(m =>
+    Number(m[1])
+  )
+);
+for (const menu of megaMenus) {
+  assert.ok(
+    mappedGridColCounts.has(menu.sections!.length),
+    `${menu.id} mega menu has ${menu.sections!.length} section(s), but DESKTOP_MEGA_MENU_GRID_COLS has no entry for that count — it would silently fall back to grid-cols-4 and leave empty columns`
+  );
+}
 
 const servicesMenu = megaMenus.find(menu => menu.id === 'services');
 assert.ok(

@@ -18,10 +18,9 @@ status. Its 56 rows are canonical page concepts only.
 
 ## Scope rules
 
-- The top-level navigation has exactly eight items: Home, Services, Projects,
-  Government, Statistics, Transparency, About, and Contact. Statistics was
-  promoted out of Transparency's mega-menu in Batch 9 (see
-  `SITE-ARCHITECTURE.md`'s "Navigation model").
+- The top-level navigation has exactly seven items: Home, Services, Projects,
+  Government, Transparency, About, and Contact. Statistics belongs under
+  Transparency and is not an eighth top-level item.
 - Projects are a bounded infrastructure/public-works subset, not a complete register of city projects or procurement. The existing list and detail pages use 324 verified project records and 563 evidence records.
 - `IMPLEMENTATION_REPORTED` means an official implementation or utilization report describes activity; it does not independently establish an award, signed contract, payment, disbursement, or physical verification. Award, contract, notice to proceed (`NTP`), and completion each require distinct evidence.
 - Approved Budget for the Contract (ABC), winning bid, contract amount, and actual expenditure are different measures and must never be collapsed into a generic cost or spending value.
