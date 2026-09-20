@@ -66,6 +66,23 @@ assert.equal(
   records.length
 );
 
+assert.equal(
+  filterAndSortBidResults(records, { approvedBudget: 'available' }).length,
+  225
+);
+assert.equal(
+  filterAndSortBidResults(records, { approvedBudget: 'unavailable' }).length,
+  8
+);
+const sampleBarangay = records.find(r => r.project.barangay)?.project.barangay;
+if (sampleBarangay) {
+  const filteredBarangay = filterAndSortBidResults(records, {
+    barangay: sampleBarangay,
+  });
+  assert.ok(filteredBarangay.length > 0);
+  assert.ok(filteredBarangay.every(r => r.project.barangay === sampleBarangay));
+}
+
 const pageSource = readNextRoute('/procurement/bid-results');
 for (const privateField of [
   'source_sha256',
@@ -82,8 +99,24 @@ for (const privateField of [
 }
 assert.ok(!pageSource.includes('evidence.facts'));
 assert.match(pageSource, /Approved Budget for the Contract \(ABC\)/);
-assert.match(pageSource, /Winning bid amount/);
-assert.match(pageSource, /slice\(0, visibleCount\)/);
+assert.match(pageSource, /Winning bid/);
+assert.match(pageSource, /Published bid-result evidence/);
+assert.match(pageSource, /Bid-result records by document year/);
+assert.match(pageSource, /How winning bids compare with ABC/);
+assert.match(pageSource, /PAGE_SIZE = 10/);
+assert.match(pageSource, /getPageWindow/);
+assert.match(
+  pageSource,
+  /does\s+not\s+represent\s+actual\s+expenditure\s+or\s+project\s+savings/
+);
+assert.ok(
+  !pageSource.match(/\b(total|estimated|projected|generated)\s+savings\b/i),
+  'Must not claim or label differences as savings'
+);
+assert.ok(
+  !pageSource.toLowerCase().includes('underspending'),
+  'Must not label ABC differences as underspending'
+);
 
 console.log('[smoke-bid-results] OK');
 console.log(

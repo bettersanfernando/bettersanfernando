@@ -38,6 +38,8 @@ export const BID_RESULT_SORTS = [
   'date-asc',
   'bid-desc',
   'bid-asc',
+  'name-asc',
+  'reference-asc',
   'identifier-asc',
 ] as const;
 export type BidResultSort = (typeof BID_RESULT_SORTS)[number];
@@ -45,6 +47,7 @@ export type BidResultSort = (typeof BID_RESULT_SORTS)[number];
 export interface BidResultFilters {
   query?: string;
   year?: string;
+  barangay?: string;
   approvedBudget?: 'available' | 'unavailable' | '';
   attachment?: 'available' | 'unavailable' | '';
   sort?: BidResultSort;
@@ -135,6 +138,7 @@ export function filterAndSortBidResults(
     return (
       matchesQuery(record, filters.query ?? '') &&
       (!filters.year || record.facts.reportYear.toString() === filters.year) &&
+      (!filters.barangay || record.project.barangay === filters.barangay) &&
       (!filters.approvedBudget ||
         (filters.approvedBudget === 'available') === hasApprovedBudget) &&
       (!filters.attachment ||
@@ -160,6 +164,16 @@ export function filterAndSortBidResults(
           (a, b) => (filters.sort === 'bid-asc' ? a - b : b - a)
         );
         break;
+      case 'name-asc':
+        result = left.project.project_name.localeCompare(
+          right.project.project_name
+        );
+        break;
+      case 'reference-asc':
+        result = left.facts.bacReference.localeCompare(
+          right.facts.bacReference
+        );
+        break;
       case 'identifier-asc':
         result = left.evidence.source_identifier.localeCompare(
           right.evidence.source_identifier
@@ -178,7 +192,8 @@ export function filterAndSortBidResults(
       result ||
       left.evidence.source_identifier.localeCompare(
         right.evidence.source_identifier
-      )
+      ) ||
+      left.evidence.id.localeCompare(right.evidence.id)
     );
   });
 }

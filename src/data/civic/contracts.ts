@@ -17,6 +17,8 @@ export const CONTRACT_RECORD_SORTS = [
   'date-asc',
   'contract-amount-desc',
   'contract-amount-asc',
+  'abc-desc',
+  'abc-asc',
   'winning-bid-desc',
   'title-asc',
   'contract-number-asc',
@@ -27,6 +29,8 @@ export interface ContractRecordFilters {
   query?: string;
   lifecycle?: 'AWARDED' | 'CONTRACTED' | '';
   year?: string;
+  barangay?: string;
+  funding?: string;
   contractNumber?: 'available' | 'unavailable' | '';
   contractAmount?: 'available' | 'unavailable' | '';
   sort?: ContractRecordSort;
@@ -111,6 +115,8 @@ export function filterAndSortContractRecords(
       matchesQuery(record, filters.query ?? '') &&
       (!filters.lifecycle || project.lifecycle_status === filters.lifecycle) &&
       (!filters.year || project.year.toString() === filters.year) &&
+      (!filters.barangay || project.barangay === filters.barangay) &&
+      (!filters.funding || project.funding_source === filters.funding) &&
       (!filters.contractNumber ||
         (filters.contractNumber === 'available') ===
           hasContractNumber(project)) &&
@@ -131,6 +137,14 @@ export function filterAndSortContractRecords(
           left.project.contract_amount,
           right.project.contract_amount,
           (a, b) => (filters.sort === 'contract-amount-asc' ? a - b : b - a)
+        );
+        break;
+      case 'abc-desc':
+      case 'abc-asc':
+        result = compareNullable(
+          left.project.approved_budget_abc,
+          right.project.approved_budget_abc,
+          (a, b) => (filters.sort === 'abc-asc' ? a - b : b - a)
         );
         break;
       case 'winning-bid-desc':

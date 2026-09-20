@@ -96,6 +96,15 @@ assert.match(
   pageSource,
   /Actual expenditure is not currently available in the\s+published\s+procurement dataset\./
 );
+assert.match(pageSource, /PROCUREMENT STATISTICS/);
+assert.match(pageSource, /Published procurement evidence and coverage/);
+assert.match(pageSource, /Two distinct denominators are used/);
+assert.match(pageSource, /Current documentary status distribution/);
+assert.match(pageSource, /What procurement fields are available\?/);
+assert.match(pageSource, /Bid-result evidence completeness and timeline/);
+assert.match(pageSource, /Award and contract evidence remain distinct/);
+assert.match(pageSource, /How to interpret these statistics/);
+assert.match(pageSource, /Explore procurement records and evidence/);
 
 console.log('[smoke-procurement-statistics] OK');
 console.log(

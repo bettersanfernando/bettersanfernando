@@ -46,7 +46,7 @@ assert.match(
 );
 assert.match(
   pageSource,
-  /A winning bid[\s\S]{0,500}does not by itself establish contract execution/i,
+  /A winning\s+bid\s+does\s+not\s+by\s+itself\s+establish\s+contract\s+execution/i,
   'the flow must not imply that bid evidence proves a contract'
 );
 assert.doesNotMatch(pageSource, /228 contracts|Awarded contracts/i);

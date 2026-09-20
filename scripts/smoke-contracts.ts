@@ -87,6 +87,27 @@ assert.ok(
     .every(record => record.project.contract_amount === null)
 );
 
+const sampleBarangay = records.find(r => r.project.barangay)?.project.barangay;
+if (sampleBarangay) {
+  const filteredBarangay = filterAndSortContractRecords(records, {
+    barangay: sampleBarangay,
+  });
+  assert.ok(filteredBarangay.length > 0);
+  assert.ok(filteredBarangay.every(r => r.project.barangay === sampleBarangay));
+}
+
+const sampleFunding = records.find(r => r.project.funding_source)?.project
+  .funding_source;
+if (sampleFunding) {
+  const filteredFunding = filterAndSortContractRecords(records, {
+    funding: sampleFunding,
+  });
+  assert.ok(filteredFunding.length > 0);
+  assert.ok(
+    filteredFunding.every(r => r.project.funding_source === sampleFunding)
+  );
+}
+
 const pageSource = readNextRoute('/procurement/contracts');
 for (const privateField of [
   'source_sha256',
@@ -105,7 +126,33 @@ assert.match(pageSource, /Award does not equal contract/);
 assert.match(pageSource, /Approved Budget for the Contract \(ABC\)/);
 assert.match(pageSource, /Winning bid amount/);
 assert.match(pageSource, /Contract amount/);
-assert.match(pageSource, /slice\(0, visibleCount\)/);
+assert.match(pageSource, /PAGE_SIZE = 10/);
+assert.match(pageSource, /getPageWindow/);
+assert.match(pageSource, /Award and contract evidence by document year/);
+assert.match(pageSource, /Current contract evidence snapshot/);
+assert.match(pageSource, /QUICK READ/);
+assert.match(pageSource, /What the documentary timeline shows/);
+assert.match(
+  pageSource,
+  /document\s+years\s+include\s+Contracted-status\s+records/
+);
+assert.match(pageSource, /EVIDENCE COVERAGE/);
+assert.match(pageSource, /What is available for the Contracted projects/);
+assert.match(pageSource, /include a published contract number/);
+assert.match(pageSource, /include a published contract amount/);
+assert.match(pageSource, /include contract-related official evidence/);
+assert.match(
+  pageSource,
+  /does\s+not\s+represent\s+actual\s+expenditure,\s+payment,\s+or\s+savings/
+);
+assert.ok(
+  !pageSource.match(/\b(total|estimated|projected|generated)\s+savings\b/i),
+  'Must not claim or label differences as savings'
+);
+assert.ok(
+  !pageSource.toLowerCase().includes('underspending'),
+  'Must not label differences as underspending'
+);
 
 await assertNextRedirect('/transparency/contracts', '/procurement/contracts');
 
