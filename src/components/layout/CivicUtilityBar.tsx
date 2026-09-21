@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowLeftRight,
   CalendarDays,
@@ -41,13 +41,26 @@ export default function CivicUtilityBar({
 }) {
   const { t } = useTranslation('common');
   void onChangeLanguage;
-  const phtTime = useMemo(() => formatPhilippineTime(new Date()), []);
+  // Server and client first render must produce identical HTML: `new Date()`
+  // evaluated at render time gives a different, format-precision-crossing
+  // wall-clock moment on the server than on the client (React error #418).
+  // Start with a stable placeholder and compute the real value only after
+  // mount, matching this file's already-loading weather/currency widgets.
+  const [phtTime, setPhtTime] = useState<string | null>(null);
   const [weather, setWeather] = useState<{
     temperature: number;
     code: number;
   } | null>(null);
   const [rates, setRates] = useState<Record<string, number> | null>(null);
   const [currencyIndex, setCurrencyIndex] = useState(0);
+
+  useEffect(() => {
+    setPhtTime(formatPhilippineTime(new Date()));
+    const timer = window.setInterval(() => {
+      setPhtTime(formatPhilippineTime(new Date()));
+    }, 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const { latitude, longitude } = SAN_FERNANDO_COORDINATES;
@@ -153,7 +166,7 @@ export default function CivicUtilityBar({
               className="h-3.5 w-3.5 text-slate-500"
               aria-hidden="true"
             />
-            {phtTime}
+            {phtTime ?? '—'}
           </span>
 
           <div className="flex items-center gap-1.5 border-l border-slate-200 pl-3">
