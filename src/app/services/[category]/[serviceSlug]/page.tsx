@@ -23,9 +23,7 @@ import {
 } from '../../../../data/civic/services';
 import { buildPageMetadata } from '../../../../lib/metadata';
 
-// Canonical service-detail route. Ported from src/pages/ServiceDetail.tsx:
-// identical content/markup; react-router's useParams()/Navigate/Link
-// replaced with Next's params prop, permanentRedirect(), and next/link.
+// Canonical service-detail route.
 // The legacy one-segment /services/{slug} shape is handled entirely by the
 // [category] dispatcher (page.tsx one level up) — this route never
 // renders it and is not included in that dispatcher's generateStaticParams.

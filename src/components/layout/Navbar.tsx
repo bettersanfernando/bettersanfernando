@@ -57,11 +57,7 @@ import type {
 import EmergencyStrip from './EmergencyStrip';
 import CivicUtilityBar from './CivicUtilityBar';
 
-// Next.js port of Navbar.tsx. Consumes the same ../../data/navigation
-// source as the Vite version (no navigation data is duplicated); only the
-// router bindings differ (next/link + next/navigation in place of
-// react-router). Keep both files in sync until src/pages/ + the Vite build
-// are retired and this becomes the only Navbar.
+// Shared App Router navigation, backed by the canonical navigation data.
 
 const BRAND_LOGO =
   '/assets/brand/logos/horizontal/better-san-fernando-horizontal-blue-transparent-cropped.png';

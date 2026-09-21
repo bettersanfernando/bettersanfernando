@@ -7,14 +7,8 @@ import {
   type BarangayFeature,
 } from './geography.schemas.ts';
 
-// Next.js equivalent of geography.ts. Vite's `?raw` raw-text-import suffix
-// (used there because Vite/Rolldown can't parse .geojson as JSON) has no
-// Next.js/webpack equivalent, so this reads the same already-synced files
-// directly from disk instead — safe because it only ever runs at build/
-// server-render time (via the Server Component page that calls
-// getCityBoundary()/getBarangayBoundaries()), never in the browser. Keep
-// both files in sync until geography.ts and the Vite build it serves are
-// retired.
+// Geography exports are read from the committed public-safe data at build or
+// server-render time, never in the browser.
 const GEOGRAPHY_DIR = path.join(
   process.cwd(),
   'src/data/generated/civic/geography'
