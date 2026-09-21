@@ -202,7 +202,7 @@ for (const forbidden of [
 
 assert.match(
   pageSource,
-  /does\s+not\s+receive\s+or\s+forward\s+messages/i,
+  /does\s+not\s+receive\s+or\s+forward/i,
   'the page must make clear BetterSanFernando does not receive or forward government messages'
 );
 assert.match(pageSource, /not\s+the\s+official\s+City\s+Government\s+website/i);

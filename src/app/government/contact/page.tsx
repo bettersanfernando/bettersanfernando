@@ -77,28 +77,28 @@ const EMERGENCY_ICONS: Record<string, typeof Siren> = {
 
 const CONTACT_ROUTING_ITEMS = [
   {
-    title: 'A specific City office',
+    title: 'A Specific City Office',
     description:
       'Find office phone numbers, email addresses, locations, and official pages.',
     cta: 'Browse City Offices →',
     href: '/government/offices',
   },
   {
-    title: 'A barangay contact',
+    title: 'A Barangay Contact',
     description:
       "Find published contact information for San Fernando's barangays.",
     cta: 'Browse Barangay Contacts →',
     href: '/government/barangay-contacts',
   },
   {
-    title: 'Emergency or institutional numbers',
+    title: 'Emergency or Institutional Numbers',
     description:
       'Review the full set of verified emergency and institutional hotlines.',
     cta: 'View Government Hotlines →',
     href: '/government/hotlines',
   },
   {
-    title: 'An official website or online channel',
+    title: 'An Official Website or Online Channel',
     description:
       'Open verified City Government websites, portals, and official public channels.',
     cta: 'Browse Official Government Links →',
@@ -389,96 +389,65 @@ export default function GovernmentContact() {
         {/* 5. Before You Contact the City */}
         <section
           id="before-you-contact"
-          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
+          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            BEFORE YOU CONTACT THE CITY
+            BEFORE YOU REACH OUT
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            What to know before reaching out
+            Before You Contact the City
           </h2>
 
-          {/* Coordinated 3-column editorial strip */}
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div className="rounded-sm border border-gray-200 bg-white p-5">
+          {/* 3 editorial columns - whitespace first, no card boxes */}
+          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <div className="space-y-1.5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Use the direct channel
+                Use the Direct Channel
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                BetterSanFernando does not receive or forward messages sent to
-                City offices.
+              <p className="text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                BetterSanFernando does not receive or forward calls, emails,
+                requests, complaints, or emergency messages.
               </p>
             </div>
 
-            <div className="rounded-sm border border-gray-200 bg-white p-5">
+            <div className="space-y-1.5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Check the office directory
+                Check the Office Directory
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                For a specific department, verify its currently published phone,
-                email, or official page before contacting it.
+              <p className="text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                For department-specific contact details, use the City Offices
+                directory to review the currently published phone, email,
+                location, or official page.
               </p>
             </div>
 
-            <div className="rounded-sm border border-gray-200 bg-white p-5">
+            <div className="space-y-1.5 sm:col-span-2 lg:col-span-1">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Published details can change
+                Published Details Can Change
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                Contact information reflects the official sources currently
-                available to BetterSanFernando.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* 6. About These Contact Details */}
-        <section
-          id="about-contact-details"
-          className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10 lg:pb-12"
-        >
-          <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            ABOUT THESE CONTACT DETAILS
-          </p>
-          <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            What “verified” means here
-          </h2>
-
-          {/* Balanced two-column editorial layout */}
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
-              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Verified from official sources
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                The contact number or office information appears in the official
-                public sources recorded by BetterSanFernando.
-              </p>
-            </div>
-
-            <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
-              <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Not independently call-tested
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                Numbers on this page are officially listed by the City
-                Government but have not been independently call-tested by
-                BetterSanFernando. A listing here does not guarantee that a
-                given line is presently staffed or reachable at all times.
+              <p className="text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
+                Contact information reflects the latest official public sources
+                currently verified by BetterSanFernando.
               </p>
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col items-start justify-between gap-3 border-t border-gray-200 pt-4 sm:flex-row sm:items-center">
-            <p className="text-xs text-gray-600 sm:text-sm">
-              This page is a concise starting point. For office-specific
-              details, browse the full City Offices directory.
+          {/* Provenance note directly beneath the three guidance items */}
+          <div className="mt-8 border-t border-gray-100 pt-4">
+            <p className="text-xs leading-relaxed text-gray-500 sm:text-sm">
+              Verified from official sources. Phone numbers and contact channels
+              are not independently call-tested, and a published listing does
+              not guarantee that a line is currently staffed or reachable.
             </p>
+          </div>
+
+          {/* One final directory action */}
+          <div className="mt-4">
             <Link
               href="/government/offices"
-              className="shrink-0 text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
+              className="inline-flex items-center gap-1 text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
             >
-              Browse City Offices →
+              <span>Browse City Offices →</span>
             </Link>
           </div>
         </section>

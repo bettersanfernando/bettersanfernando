@@ -48,6 +48,15 @@ interface BarangayProjectMapProps {
   selectedPsgc: string | null;
   onSelect: (psgc: string) => void;
   lifecycleFilter: ProjectLifecycleStatus | null;
+  lockedView?: boolean;
+  className?: string;
+}
+
+function getFitPadding(width: number, isLocked: boolean): number {
+  if (!isLocked) return 28;
+  if (width >= 1024) return 24;
+  if (width >= 640) return 16;
+  return 12;
 }
 
 function metricFor(
@@ -66,7 +75,7 @@ function metricLabel(
 ): string {
   const noun = lifecycleFilter
     ? `${titleCaseEnum(lifecycleFilter).toLowerCase()} record`
-    : 'project record';
+    : 'published project record';
   return `${count} ${noun}${count === 1 ? '' : 's'}`;
 }
 
@@ -109,6 +118,8 @@ export default function BarangayProjectMap({
   selectedPsgc,
   onSelect,
   lifecycleFilter,
+  lockedView = false,
+  className,
 }: BarangayProjectMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
@@ -130,6 +141,10 @@ export default function BarangayProjectMap({
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
+    const cityBounds = boundsFromRings(cityBoundary.geometry.coordinates);
+    const initialWidth = containerRef.current.clientWidth || 800;
+    const initialPadding = getFitPadding(initialWidth, lockedView);
+
     const map = new MapLibreMap({
       container: containerRef.current,
       style: {
@@ -143,17 +158,25 @@ export default function BarangayProjectMap({
           },
         ],
       },
-      bounds: boundsFromRings(cityBoundary.geometry.coordinates),
-      fitBoundsOptions: { padding: 28 },
+      bounds: cityBounds,
+      fitBoundsOptions: { padding: initialPadding },
       attributionControl: false,
       dragRotate: false,
       pitchWithRotate: false,
       maxPitch: 0,
+      dragPan: !lockedView,
+      scrollZoom: !lockedView,
+      boxZoom: !lockedView,
+      doubleClickZoom: !lockedView,
+      touchZoomRotate: !lockedView,
+      keyboard: !lockedView,
     });
 
-    map.addControl(new NavigationControl({ showCompass: false }));
-    map.addControl(new FullscreenControl());
-    map.addControl(new ScaleControl({ unit: 'metric' }), 'bottom-left');
+    if (!lockedView) {
+      map.addControl(new NavigationControl({ showCompass: false }));
+      map.addControl(new FullscreenControl());
+      map.addControl(new ScaleControl({ unit: 'metric' }), 'bottom-left');
+    }
 
     const popup = new Popup({
       closeButton: false,
@@ -267,18 +290,47 @@ export default function BarangayProjectMap({
             'Interactive barangay project distribution map'
           );
       });
+
       map.on('click', FILL_LAYER_ID, (event: MapLayerMouseEvent) => {
         const psgc = event.features?.[0]?.properties?.psgc_code;
         if (typeof psgc === 'string') onSelectRef.current(psgc);
       });
+
+      if (lockedView && containerRef.current) {
+        const width = containerRef.current.clientWidth;
+        const padding = getFitPadding(width, true);
+        map.fitBounds(cityBounds, { padding, duration: 0 });
+      }
     });
 
     mapRef.current = map;
 
-    // Defensive against zero-size-at-construction timing issues (the map
-    // canvas can end up mis-sized if the grid layout finishes computing
-    // after MapLibre reads the container's initial bounding box).
-    const resizeObserver = new ResizeObserver(() => map.resize());
+    // Handle container resize properly: invalidate map size and refit
+    // the full city bounds with responsive padding when lockedView is active.
+    let lastWidth = 0;
+    let lastHeight = 0;
+
+    const resizeObserver = new ResizeObserver(entries => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width, height } = entry.contentRect;
+      if (width === 0 || height === 0) return;
+      if (
+        Math.abs(width - lastWidth) < 1 &&
+        Math.abs(height - lastHeight) < 1
+      ) {
+        return;
+      }
+      lastWidth = width;
+      lastHeight = height;
+
+      map.resize();
+
+      if (lockedView) {
+        const padding = getFitPadding(width, true);
+        map.fitBounds(cityBounds, { padding, duration: 0 });
+      }
+    });
     resizeObserver.observe(containerRef.current);
 
     return () => {
@@ -287,7 +339,7 @@ export default function BarangayProjectMap({
       map.remove();
       mapRef.current = null;
     };
-  }, [boundaries, cityBoundary]);
+  }, [boundaries, cityBoundary, lockedView]);
 
   // Recolor/re-tooltip in place when the lifecycle filter or underlying
   // counts change, without tearing down the map.
@@ -300,6 +352,7 @@ export default function BarangayProjectMap({
 
   // Selecting (or clearing) a barangay reframes the camera: to that
   // boundary's extent when selected, back to the full city when cleared.
+  // In lockedView mode, the camera framing stays locked to the full city.
   useEffect(() => {
     const map = mapRef.current;
     if (!map?.getLayer(SELECTED_LAYER_ID)) return;
@@ -308,6 +361,10 @@ export default function BarangayProjectMap({
       ['get', 'psgc_code'],
       selectedPsgc ?? '',
     ]);
+
+    if (lockedView) {
+      return;
+    }
 
     if (selectedPsgc === null) {
       map.fitBounds(boundsFromRings(cityBoundary.geometry.coordinates), {
@@ -326,12 +383,15 @@ export default function BarangayProjectMap({
         duration: 500,
       });
     }
-  }, [selectedPsgc, boundaries, cityBoundary]);
+  }, [selectedPsgc, boundaries, cityBoundary, lockedView]);
 
   return (
     <div
       ref={containerRef}
-      className="h-[26rem] w-full bg-gray-100 sm:h-[32rem] lg:h-full lg:min-h-[36rem]"
+      className={
+        className ??
+        'h-[26rem] w-full bg-gray-100 sm:h-[32rem] lg:h-full lg:min-h-[36rem]'
+      }
       aria-label="Interactive barangay project distribution map"
     />
   );

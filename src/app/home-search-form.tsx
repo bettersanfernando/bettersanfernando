@@ -5,11 +5,6 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, Search } from 'lucide-react';
 import { getSearchHref } from '../data/navigation';
 
-// The only interactive piece of the home page (Home.tsx): a controlled
-// search input that navigates to /search?q=... on submit. Extracted into
-// its own narrow Client Component so the rest of the home page stays a
-// Server Component. Mirrors Home.tsx's submitSearch exactly, using
-// next/navigation's useRouter() in place of react-router's useNavigate().
 export default function HomeSearchForm() {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
@@ -22,37 +17,33 @@ export default function HomeSearchForm() {
   return (
     <form
       onSubmit={submitSearch}
-      className="rounded-xl bg-primary-50 p-5 text-primary-950 md:p-6"
+      className="mx-auto w-full max-w-[720px] xl:max-w-[760px] 2xl:max-w-[800px]"
       role="search"
     >
-      <label htmlFor="home-search" className="text-lg font-bold">
+      <label htmlFor="home-search" className="sr-only">
         Search BetterSanFernando
       </label>
-      <p className="mt-1 text-sm leading-6 text-primary-900">
-        Search currently published projects, barangays, offices, legislation,
-        and project-source records.
-      </p>
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-        <div className="relative min-w-0 flex-1">
+      <div className="relative flex items-center shadow-lg">
+        <div className="pointer-events-none absolute left-4 sm:left-5 2xl:left-6 text-gray-400">
           <Search
-            className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-primary-700"
+            className="h-5 w-5 sm:h-5.5 sm:w-5.5 2xl:h-6 2xl:w-6"
             aria-hidden="true"
           />
-          <input
-            id="home-search"
-            type="search"
-            value={searchQuery}
-            onChange={event => setSearchQuery(event.target.value)}
-            placeholder="Project, barangay, office, or document"
-            className="w-full rounded-lg border border-primary-200 bg-white py-3 pl-11 pr-4 text-base text-gray-900 outline-none transition placeholder:text-gray-600 focus:border-primary-600 focus:ring-2 focus:ring-primary-200"
-          />
         </div>
+        <input
+          id="home-search"
+          type="search"
+          value={searchQuery}
+          onChange={event => setSearchQuery(event.target.value)}
+          placeholder="Search services, projects, offices, barangays, or public records…"
+          className="h-14 sm:h-[58px] 2xl:h-[64px] w-full rounded-sm border border-transparent bg-white pl-12 sm:pl-14 2xl:pl-16 pr-28 sm:pr-34 2xl:pr-38 text-sm sm:text-base 2xl:text-lg text-gray-950 placeholder:text-gray-500 outline-none transition focus:border-[#002EAC] focus:ring-4 focus:ring-[#0066EB]/30"
+        />
         <button
           type="submit"
-          className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-lg bg-primary-800 px-5 py-3 text-sm font-bold text-white transition hover:bg-primary-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+          className="absolute right-1.5 sm:right-2 2xl:right-2.5 inline-flex h-11 sm:h-11.5 2xl:h-12 items-center gap-1.5 2xl:gap-2 rounded-sm bg-[#002EAC] hover:bg-[#002488] active:bg-[#001c6d] px-4 sm:px-5 2xl:px-6 text-xs sm:text-sm 2xl:text-base font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] cursor-pointer"
         >
-          Search
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          <span>Search</span>
+          <ArrowRight className="h-4 w-4 2xl:h-5 2xl:w-5" aria-hidden="true" />
         </button>
       </div>
     </form>
