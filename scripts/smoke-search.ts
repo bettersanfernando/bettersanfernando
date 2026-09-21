@@ -161,6 +161,11 @@ assert.equal(
   `executive-order:${executiveOrder.id}`,
   'an exact Executive Order number (with the "EO" prefix) must rank that order first'
 );
+assert.equal(
+  searchCivicRecords('EO CMO2013-016')[0]?.id,
+  'executive-order:eo-cmo2013-016',
+  'the published EO identifier must remain an exact top result'
+);
 
 // Ordinance number
 const ordinance = getOrdinances()[0];
@@ -227,6 +232,22 @@ assert.ok(
   !raodTop20Titles.some(title => /solo parent/i.test(title)),
   'the unrelated Solo Parent ID service (an incidental "card"/"rape" fuzzy collision) must not rank near the top of "raod"'
 );
+
+// Neutral, non-civic four-character strings previously admitted unrelated
+// records through MiniSearch's generic distance-2 fuzzy matching. They must
+// not populate either global search or the homepage's top-four autocomplete.
+for (const query of ['mepo', 'lunq', 'zarn', 'plix']) {
+  assert.deepEqual(
+    searchCivicRecords(query),
+    [],
+    `a random short query (${query}) must not return fuzzy collisions`
+  );
+  assert.deepEqual(
+    searchCivicRecordsDetailed(query, 'all', 4).results,
+    [],
+    `a random short query (${query}) must not occupy homepage suggestions`
+  );
+}
 // 3. isSingleTransposition() itself: a true single-character-swap
 // transposition qualifies, but an arbitrary same-letter reordering
 // (an anagram where every position differs, not exactly two) must not.

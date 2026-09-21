@@ -20,11 +20,19 @@ const socialLinks: readonly {
   href?: string;
   icon: LucideIcon;
 }[] = [
-  { label: 'Facebook', icon: Facebook },
-  { label: 'LinkedIn', icon: Linkedin },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/BetterSanFernandoOrg',
+    icon: Facebook,
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/bettersanfernando',
+    icon: Linkedin,
+  },
   {
     label: 'GitHub',
-    href: 'https://github.com/bettersanfernando/bettersanfernando',
+    href: 'https://github.com/bettersanfernando',
     icon: Github,
   },
 ];

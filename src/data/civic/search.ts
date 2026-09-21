@@ -680,13 +680,13 @@ export function getSearchDocuments(): readonly CivicSearchDocument[] {
 // both short acronyms/identifiers (which need to stay precise — a 3-letter
 // office acronym should never fuzzy-match an unrelated word) and longer
 // resident-typed words (where even a common transposition typo, e.g.
-// "raod" for "road", is edit-distance 2 and needs more room than a fraction
-// of a short word's length allows). Terms of 3 characters or fewer get no
-// fuzzy matching; 4-5 character terms get a fixed edit distance of 2;
-// longer terms scale proportionally via MiniSearch's fractional fuzzy.
+// "raod" for "road", is handled by the dedicated transposition path below).
+// Terms of 3 characters or fewer get no fuzzy matching; 4-5 character terms
+// get one edit; longer terms scale proportionally via MiniSearch's fractional
+// fuzzy.
 function fuzzyForTerm(term: string): number | false {
   if (term.length <= 3) return false;
-  if (term.length <= 5) return 2;
+  if (term.length <= 5) return 1;
   return 0.2;
 }
 
@@ -800,23 +800,39 @@ export function searchCivicRecordsDetailed(
   // CHO" still gets the same exact-identifier bonus "CHO" alone would.
   const searchQuery = stripStopWords(normalizedQuery);
 
-  const matches = searchIndex
-    .search(searchQuery, {
-      fuzzy: fuzzyForTerm,
-      filter: result => {
+  const matchesById = new Map(
+    searchIndex
+      .search(searchQuery, {
+        fuzzy: fuzzyForTerm,
+        filter: result => {
+          const document = documentById.get(String(result.id));
+          return !domain || domain === 'all' || document?.domain === domain;
+        },
+      })
+      .flatMap(result => {
         const document = documentById.get(String(result.id));
-        return !domain || domain === 'all' || document?.domain === domain;
-      },
-    })
-    .flatMap(result => {
-      const document = documentById.get(String(result.id));
-      return document ? [{ document, score: result.score }] : [];
-    })
-    .sort(
-      (a, b) =>
-        b.score * relevanceMultiplier(b.document, searchQuery) -
-        a.score * relevanceMultiplier(a.document, searchQuery)
-    );
+        return document ? [{ document, score: result.score }] : [];
+      })
+      .map(match => [match.document.id, match] as const)
+  );
+
+  // MiniSearch's edit distance treats a transposition as two edits. Keep the
+  // narrow, real-typo path without reopening generic distance-2 matching.
+  for (const document of searchDocuments) {
+    if (
+      (!domain || domain === 'all' || document.domain === domain) &&
+      hasTransposedMatch(document, searchQuery) &&
+      !matchesById.has(document.id)
+    ) {
+      matchesById.set(document.id, { document, score: 1 });
+    }
+  }
+
+  const matches = [...matchesById.values()].sort(
+    (a, b) =>
+      b.score * relevanceMultiplier(b.document, searchQuery) -
+      a.score * relevanceMultiplier(a.document, searchQuery)
+  );
 
   const domainCounts = matches.reduce((counts, { document }) => {
     counts[document.domain] += 1;
