@@ -1,12 +1,4 @@
-import {
-  ArrowRight,
-  Building2,
-  ExternalLink,
-  Landmark,
-  MapPinned,
-  ShieldCheck,
-  UsersRound,
-} from 'lucide-react';
+import { ArrowDown, ArrowRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
@@ -17,14 +9,13 @@ import {
 import { getGeographyMetadata } from '../../../data/civic/geographyMetadata';
 import { getCityOfficesMetadata } from '../../../data/civic/government';
 import { aggregatePopulationStatistics } from '../../../data/civic/populationStatistics';
+import { buildPageMetadata } from '../../../lib/metadata';
 import { formatIsoDate } from '../../../lib/utils';
 
-import { buildPageMetadata } from '../../../lib/metadata';
-
 export const metadata = buildPageMetadata({
-  title: 'City profile: San Fernando, Pampanga',
+  title: 'City Profile: San Fernando, Pampanga',
   description:
-    'A compact, source-aware profile of the City of San Fernando in Pampanga, Philippines, including its PSA 2024 population baseline, barangays, boundary coverage, and published office directory.',
+    'A source-aware overview of the verified city facts BetterSanFernando currently publishes, including population, barangays, geographic coverage, and institutional records.',
   path: '/statistics/city-profile',
 });
 
@@ -37,328 +28,704 @@ const population = aggregatePopulationStatistics(
   getCityTotalPopulation()
 );
 
-const exploreLinks = [
+const exploreDestinations = [
+  {
+    category: 'PEOPLE & BARANGAYS',
+    href: '/statistics/population',
+    title: 'Population Statistics',
+    question:
+      'How is the City’s population distributed across its 35 barangays?',
+  },
+  {
+    category: 'PEOPLE & BARANGAYS',
+    href: '/barangays',
+    title: 'Barangay Directory',
+    question:
+      'Find PSGC identity, population, and classification facts by barangay.',
+  },
+  {
+    category: 'GEOGRAPHY & PROJECTS',
+    href: '/projects/map',
+    title: 'Project Distribution Map',
+    question: 'Explore published project records by barangay boundary.',
+  },
+  {
+    category: 'GEOGRAPHY & PROJECTS',
+    href: '/projects/city-projects',
+    title: 'Published Projects',
+    question: 'Browse BetterSanFernando’s bounded public-works dataset.',
+  },
+] as const;
+
+const readingGuideItems = [
+  {
+    title: 'Population Is a Census Baseline',
+    description:
+      'The population figure comes from the 2024 POPCEN reference and is not a projection or estimate.',
+  },
+  {
+    title: 'Boundary Coverage Has a Separate Geometry Source',
+    description:
+      'Published polygon geometry is community-maintained and is not presented as an official PSA shapefile.',
+  },
+  {
+    title: 'Office Count Is Directory Coverage',
+    description:
+      'The published office-record count describes BetterSanFernando’s current verified directory, not the City’s complete legal organization.',
+  },
+  {
+    title: 'This Is a Bounded Profile',
+    description:
+      'This page does not claim complete coverage of elected officials, historical narrative, economic indicators, or every City statistic.',
+  },
+] as const;
+
+const keepExploringLinks = [
   {
     href: '/statistics/population',
-    title: 'Population statistics',
-    description: 'Compare the 2024 POPCEN population across all 35 barangays.',
+    title: 'Population Statistics',
+    description: 'Explore 2024 census distribution across all 35 barangays.',
+    action: 'View statistics',
   },
   {
     href: '/barangays',
-    title: 'Barangay directory',
-    description: 'Search verified PSGC, population, and classification facts.',
+    title: 'Barangay Directory',
+    description:
+      'Search verified PSGC, population, and classification records.',
+    action: 'Browse barangays',
   },
   {
-    href: '/projects/city-projects',
-    title: 'Published projects',
-    description: 'Browse BetterSanFernando’s bounded public-works dataset.',
+    href: '/statistics/government',
+    title: 'Government Statistics',
+    description:
+      'View institutional coverage and verified city office statistics.',
+    action: 'Explore government',
   },
   {
-    href: '/projects/map',
-    title: 'Project distribution map',
-    description: 'Explore project records aggregated by barangay boundary.',
-  },
-  {
-    href: '/government/offices',
-    title: 'City offices directory',
-    description: 'Find published, verified institutional office records.',
+    href: '/statistics/public-records',
+    title: 'Public Records Statistics',
+    description:
+      'Track published datasets, coverage periods, and evidence units.',
+    action: 'View public records',
   },
 ] as const;
 
 export default function CityProfile() {
   return (
-    <>
-      <main className="flex-grow bg-gray-50">
-        <section className="border-b border-primary-100 bg-white">
-          <div className="container mx-auto px-4 py-10 md:py-14">
-            <Breadcrumbs
-              className="mb-8"
-              items={[
-                { label: 'Home', href: '/' },
-                { label: 'Statistics', href: '/statistics' },
-                { label: 'City profile' },
-              ]}
-            />
-            <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
-              <div className="max-w-3xl">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-700 text-white">
-                  <Landmark className="h-6 w-6" aria-hidden="true" />
-                </div>
-                <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
-                  City of San Fernando
-                </h1>
-                <p className="mt-2 text-xl font-semibold text-primary-800">
-                  Pampanga, Philippines
+    <main className="flex-grow bg-white">
+      {/* 1. EDITORIAL HERO */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
+          <Breadcrumbs
+            className="text-xs text-gray-500"
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Statistics', href: '/statistics' },
+              { label: 'City Profile' },
+            ]}
+          />
+
+          <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
+            <div className="max-w-3xl">
+              <p className="text-eyebrow text-[#0066EB]">
+                STATISTICS · CITY PROFILE
+              </p>
+              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
+                City of San Fernando
+              </h1>
+              <p className="mt-2 text-xl font-semibold text-primary-800">
+                Pampanga, Philippines
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
+                A source-aware overview of the verified city facts
+                BetterSanFernando currently publishes, including population,
+                barangays, geographic coverage, and institutional records.
+              </p>
+
+              {/* CTA row */}
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <a
+                  href="#at-a-glance"
+                  className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
+                >
+                  Explore the City Profile
+                  <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <Link
+                  href="/barangays"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
+                >
+                  Browse Barangays
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+
+            {/* RIGHT-SIDE SCOPE MODULE */}
+            <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
+              <p className="text-eyebrow text-[#0066EB]">PROFILE SCOPE</p>
+              <h2 className="mt-1.5 text-base font-bold text-gray-950">
+                San Fernando, Pampanga
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                This profile refers to the City of San Fernando in Pampanga—not
+                San Fernando, La Union. It is a bounded civic profile, not a
+                complete socioeconomic or legal profile of the City.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. AT A GLANCE */}
+      <section
+        id="at-a-glance"
+        className="border-b border-gray-200 bg-white"
+        aria-labelledby="at-a-glance-heading"
+      >
+        <div className="container mx-auto px-4 py-8 sm:py-10">
+          <div className="max-w-3xl">
+            <h2
+              id="at-a-glance-heading"
+              className="text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              At a Glance
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              Verified baseline measures from BetterSanFernando’s current public
+              datasets. Each figure keeps its own source and scope.
+            </p>
+          </div>
+
+          <dl className="mt-6 grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-gray-200">
+            <div className="lg:pr-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Population
+              </dt>
+              <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {numberFormatter.format(population.totalPopulation)}
+              </dd>
+              <p className="mt-1 text-xs text-gray-600">2024 POPCEN</p>
+            </div>
+
+            <div className="lg:px-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Barangays
+              </dt>
+              <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {population.barangayCount}
+              </dd>
+              <p className="mt-1 text-xs text-gray-600">
+                Complete published barangay set
+              </p>
+            </div>
+
+            <div className="lg:px-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Barangay Classification
+              </dt>
+              <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {population.urbanBarangayCount} Urban
+              </dd>
+              <p className="mt-1 text-xs text-gray-600">
+                {population.ruralBarangayCount} Rural · Lourdes
+              </p>
+            </div>
+
+            <div className="lg:pl-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Published Office Records
+              </dt>
+              <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {officesMetadata.officeCount}
+              </dd>
+              <p className="mt-1 text-xs text-gray-600">
+                Bounded institutional directory
+              </p>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      {/* 3. PEOPLE & BARANGAYS */}
+      <section
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="people-barangays-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">
+              PEOPLE &amp; BARANGAYS
+            </p>
+            <h2
+              id="people-barangays-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              Population and Barangay Classification
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              Population and classification use the PSA 2024 POPCEN baseline and
+              the currently published 35-barangay set.
+            </p>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* LEFT: Population summary */}
+            <div className="flex flex-col rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
+              <h3 className="text-base font-bold text-gray-950">
+                Population Summary
+              </h3>
+
+              {/* Primary statistic group */}
+              <div className="mt-6">
+                <p className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                  {numberFormatter.format(population.totalPopulation)}
                 </p>
-                <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg">
-                  A compact profile of the verified core city facts currently
-                  published by BetterSanFernando, with reference periods and
-                  source boundaries kept visible.
+                <p className="mt-1 text-sm font-medium text-gray-700">
+                  Population
+                </p>
+                <p className="text-xs text-gray-500">2024 POPCEN</p>
+              </div>
+
+              {/* Secondary statistic group */}
+              <div className="mt-5">
+                <p className="text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
+                  {population.barangayCount}
+                </p>
+                <p className="mt-0.5 text-sm font-medium text-gray-700">
+                  Barangays
                 </p>
               </div>
-              <aside className="rounded-xl bg-primary-50 p-5 text-sm leading-6 text-primary-950">
-                <div className="flex items-center gap-2">
-                  <MapPinned className="h-5 w-5" aria-hidden="true" />
-                  <p className="font-semibold">Location identity</p>
-                </div>
-                <p className="mt-2">
-                  This profile covers the City of San Fernando in the Province
-                  of Pampanga. It does not describe San Fernando, La Union.
+
+              {/* Short contextual explanation */}
+              <p className="mt-6 text-sm leading-relaxed text-gray-600">
+                San Fernando’s published population baseline comes from the PSA
+                2024 POPCEN and covers all 35 component barangays.
+              </p>
+
+              {/* CTA at bottom */}
+              <div className="mt-auto pt-6 border-t border-gray-100">
+                <Link
+                  href="/statistics/population"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
+                >
+                  Explore Population Statistics
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+
+            {/* RIGHT: Barangay Classification */}
+            <div className="flex flex-col rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
+              <h3 className="text-base font-bold text-gray-950">
+                Barangay Classification
+              </h3>
+
+              {/* Primary statistic group */}
+              <div className="mt-6">
+                <p className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                  {population.urbanBarangayCount}
                 </p>
-              </aside>
+                <p className="mt-1 text-sm font-medium text-gray-700">
+                  Urban Barangays
+                </p>
+              </div>
+
+              {/* Secondary statistic group */}
+              <div className="mt-5">
+                <p className="text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
+                  {population.ruralBarangayCount}
+                </p>
+                <p className="mt-0.5 text-sm font-medium text-gray-700">
+                  Rural Barangay
+                </p>
+                <p className="text-xs text-gray-500">Lourdes</p>
+              </div>
+
+              {/* Short contextual explanation */}
+              <p className="mt-6 text-sm leading-relaxed text-gray-600">
+                Classification applies to the currently published 35-barangay
+                set.
+              </p>
+
+              {/* CTA at bottom */}
+              <div className="mt-auto pt-6 border-t border-gray-100">
+                <Link
+                  href="/barangays"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
+                >
+                  Browse Barangay Directory
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div className="container mx-auto space-y-12 px-4 py-10 md:py-14">
-          <section aria-labelledby="core-profile-heading">
-            <div className="max-w-3xl">
-              <h2
-                id="core-profile-heading"
-                className="text-2xl font-bold tracking-[-0.02em] text-gray-900 md:text-3xl"
-              >
-                Core profile
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-gray-700">
-                Population and barangay classification use the PSA{' '}
-                {populationSource.census} baseline. These figures are not
-                estimates, projections, or a broader socioeconomic profile.
-              </p>
-            </div>
-            <dl className="mt-6 grid overflow-hidden rounded-xl bg-white shadow-[0_8px_28px_rgba(0,41,94,0.08)] sm:grid-cols-3">
-              <div className="p-6 sm:border-r sm:border-gray-200 md:p-7">
-                <dt className="text-sm font-medium text-gray-600">
-                  Population · {populationSource.referenceYear}
-                </dt>
-                <dd className="mt-2 text-4xl font-bold text-stat-value text-gray-900">
-                  {numberFormatter.format(population.totalPopulation)}
-                </dd>
-                <dd className="mt-2 text-sm text-gray-600">
-                  {populationSource.census}
-                </dd>
-              </div>
-              <div className="border-t border-gray-200 p-6 sm:border-r sm:border-t-0 md:p-7">
-                <dt className="text-sm font-medium text-gray-600">Barangays</dt>
-                <dd className="mt-2 text-4xl font-bold text-stat-value text-gray-900">
-                  {population.barangayCount}
-                </dd>
-                <dd className="mt-2 text-sm text-gray-600">
-                  Complete published barangay set
-                </dd>
-              </div>
-              <div className="border-t border-gray-200 p-6 sm:border-t-0 md:p-7">
-                <dt className="text-sm font-medium text-gray-600">
-                  Classification
-                </dt>
-                <dd className="mt-2 text-2xl font-bold tabular-nums text-gray-900">
-                  {population.urbanBarangayCount} Urban ·{' '}
-                  {population.ruralBarangayCount} Rural
-                </dd>
-                <dd className="mt-2 text-sm text-gray-600">
-                  Lourdes is the one Rural barangay
-                </dd>
-              </div>
-            </dl>
-          </section>
-
-          <section className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl bg-primary-900 p-6 text-white md:p-8">
-              <div className="flex items-center gap-3">
-                <MapPinned
-                  className="h-6 w-6 text-primary-200"
-                  aria-hidden="true"
-                />
-                <h2 className="text-2xl font-bold">Geographic context</h2>
-              </div>
-              <p className="mt-4 text-sm leading-6 text-primary-100">
-                The frontend-safe geography release contains one verified city
-                boundary feature for {geography.cityName} and{' '}
-                {geography.barangayBoundaryCount} barangay boundary features.
-              </p>
-              <dl className="mt-6 grid grid-cols-2 gap-5 border-y border-primary-700 py-5">
-                <div>
-                  <dt className="text-sm text-primary-200">City boundaries</dt>
-                  <dd className="mt-1 text-3xl font-bold tabular-nums">
-                    {geography.cityBoundaryCount}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-primary-200">
-                    Barangay boundaries
-                  </dt>
-                  <dd className="mt-1 text-3xl font-bold tabular-nums">
-                    {geography.barangayBoundaryCount}
-                  </dd>
-                </div>
-              </dl>
-              <p className="mt-5 text-sm leading-6 text-primary-100">
-                Polygon geometry is not an official PSA shapefile. It comes from
-                a community-maintained source; PSGC codes and names are matched
-                to PSA identity data.
-              </p>
-              <Link
-                href="/projects/map"
-                className="mt-5 inline-flex items-center gap-2 font-semibold text-white underline underline-offset-4 hover:text-primary-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200"
-              >
-                Explore the barangay map
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-[0_8px_28px_rgba(0,41,94,0.08)] md:p-8">
-              <div className="flex items-center gap-3">
-                <Building2
-                  className="h-6 w-6 text-primary-700"
-                  aria-hidden="true"
-                />
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Published office directory
-                </h2>
-              </div>
-              <p className="mt-4 text-sm leading-6 text-gray-700">
-                BetterSanFernando currently publishes{' '}
-                <strong className="font-semibold text-gray-900">
-                  {officesMetadata.officeCount} verified frontend-safe
-                  institutional office records
-                </strong>
-                . This is directory coverage, not a claim that the City
-                Government has only {officesMetadata.officeCount} offices or
-                units, and it is not an organizational hierarchy.
-              </p>
-              <dl className="mt-6 border-y border-gray-200 py-4 text-sm">
-                <div className="flex justify-between gap-4">
-                  <dt className="text-gray-600">Directory last verified</dt>
-                  <dd className="font-semibold text-gray-900">
-                    {formatIsoDate(officesMetadata.lastVerified)}
-                  </dd>
-                </div>
-              </dl>
-              <Link
-                href="/government/offices"
-                className="mt-5 inline-flex items-center gap-2 font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
-              >
-                Browse city offices
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-          </section>
-
-          <section aria-labelledby="explore-heading">
-            <div className="max-w-3xl">
-              <h2
-                id="explore-heading"
-                className="text-2xl font-bold tracking-[-0.02em] text-gray-900 md:text-3xl"
-              >
-                Explore verified civic information
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-gray-700">
-                Continue to the page that owns each detailed comparison,
-                directory, or project view.
-              </p>
-            </div>
-            <ul className="mt-6 divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-[0_8px_28px_rgba(0,41,94,0.08)] md:grid md:grid-cols-2 md:divide-y-0">
-              {exploreLinks.map((item, index) => (
-                <li
-                  key={item.href}
-                  className={`p-5 md:p-6 ${
-                    index % 2 === 0 ? 'md:border-r md:border-gray-200' : ''
-                  } ${index >= 2 ? 'md:border-t md:border-gray-200' : ''}`}
-                >
-                  <Link
-                    href={item.href}
-                    className="group block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
-                  >
-                    <span className="flex items-center justify-between gap-4 font-bold text-gray-900 group-hover:text-primary-700">
-                      {item.title}
-                      <ArrowRight
-                        className="h-4 w-4 shrink-0 text-primary-700"
-                        aria-hidden="true"
-                      />
-                    </span>
-                    <span className="mt-2 block text-sm leading-6 text-gray-600">
-                      {item.description}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="rounded-xl bg-white p-6 shadow-[0_8px_28px_rgba(0,41,94,0.08)] md:p-8">
-            <div className="flex items-center gap-3">
-              <ShieldCheck
-                className="h-6 w-6 text-primary-700"
-                aria-hidden="true"
-              />
-              <h2 className="text-2xl font-bold tracking-[-0.02em] text-gray-900">
-                Sources and reference dates
-              </h2>
-            </div>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
-              Different facts use different authorities. BetterSanFernando keeps
-              those source roles separate and independently presents the
-              verified public data.
+      {/* 4. CITY COVERAGE */}
+      <section
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="coverage-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">CITY COVERAGE</p>
+            <h2
+              id="coverage-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              Published Geographic and Institutional Coverage
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              These figures describe BetterSanFernando’s current published
+              coverage, not the City’s complete legal or organizational
+              structure.
             </p>
-            <div className="mt-6 divide-y divide-gray-200 border-y border-gray-200">
-              <article className="grid gap-3 py-5 md:grid-cols-[11rem_minmax(0,1fr)_auto] md:items-start">
-                <h3 className="font-bold text-gray-900">Population and PSGC</h3>
-                <p className="text-sm leading-6 text-gray-700">
-                  {populationSource.publisher} · {populationSource.census} ·
-                  last verified {formatIsoDate(populationSource.lastVerified)}
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* LEFT — GEOGRAPHIC COVERAGE */}
+            <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
+              <div>
+                <h3 className="text-base font-bold text-gray-950">
+                  Geographic Coverage
+                </h3>
+                <dl className="mt-4 grid grid-cols-2 gap-4 border-y border-gray-200 py-4">
+                  <div>
+                    <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                      {geography.cityBoundaryCount}
+                    </dd>
+                    <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      City Boundary
+                    </dt>
+                  </div>
+                  <div>
+                    <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                      {geography.barangayBoundaryCount}
+                    </dd>
+                    <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      Barangay Boundaries
+                    </dt>
+                  </div>
+                </dl>
+                <div className="mt-4 space-y-2 text-sm leading-relaxed text-gray-600">
+                  <p>
+                    The frontend-safe geography release contains the verified
+                    City boundary and published barangay boundary features.
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Polygon geometry is not an official PSA shapefile. It comes
+                    from a community-maintained source; PSGC codes and names are
+                    matched to PSA identity data.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 border-t border-gray-100 pt-4">
+                <Link
+                  href="/projects/map"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
+                >
+                  Explore Project &amp; Barangay Map
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+
+            {/* RIGHT — INSTITUTIONAL DIRECTORY */}
+            <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
+              <div>
+                <h3 className="text-base font-bold text-gray-950">
+                  Institutional Directory
+                </h3>
+                <dl className="mt-4 border-y border-gray-200 py-4">
+                  <div>
+                    <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                      {officesMetadata.officeCount}
+                    </dd>
+                    <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      Published Office Records
+                    </dt>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between border-t border-gray-100 pt-3 text-xs text-gray-500">
+                    <span>Directory Last Verified</span>
+                    <span className="font-semibold text-gray-700">
+                      {formatIsoDate(officesMetadata.lastVerified)}
+                    </span>
+                  </div>
+                </dl>
+                <p className="mt-4 text-sm leading-relaxed text-gray-600">
+                  This is directory coverage, not a claim that the City
+                  Government has only this number of offices or units, and it is
+                  not an organizational hierarchy.
                 </p>
+              </div>
+              <div className="mt-6 border-t border-gray-100 pt-4">
+                <Link
+                  href="/government/offices"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
+                >
+                  Browse City Offices
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. EXPLORE CITY INFORMATION */}
+      <section
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="explore-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">EXPLORE</p>
+            <h2
+              id="explore-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              Explore City Information
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              Continue to the page that owns each detailed comparison,
+              directory, map, or dataset.
+            </p>
+          </div>
+
+          <div className="mt-8 overflow-hidden rounded-sm border border-gray-200 bg-white">
+            {/* 2x2 Grid for first 4 destinations */}
+            <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
+              {exploreDestinations.map((item, index) => {
+                const isFirstCol = index % 2 === 0;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`group flex flex-col justify-between p-5 transition-colors hover:bg-[#F3F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] sm:p-6 ${
+                      isFirstCol
+                        ? 'md:border-r md:border-b md:border-gray-200'
+                        : 'md:border-b md:border-gray-200'
+                    }`}
+                  >
+                    <div>
+                      <p className="text-eyebrow text-xs text-[#0066EB]">
+                        {item.category}
+                      </p>
+                      <div className="mt-2 flex items-start justify-between gap-3">
+                        <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
+                          {item.title}
+                        </h3>
+                        <ArrowRight
+                          className="mt-1 h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:translate-x-0.5 group-hover:text-[#0066EB]"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
+                        {item.question}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Full-width City Offices Row */}
+            <Link
+              href="/government/offices"
+              className="group flex flex-col justify-between gap-4 border-t border-gray-200 p-5 transition-colors hover:bg-[#F3F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] sm:flex-row sm:items-center sm:p-6 md:border-t-0"
+            >
+              <div className="max-w-2xl">
+                <p className="text-eyebrow text-xs text-[#0066EB]">
+                  GOVERNMENT
+                </p>
+                <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
+                    City Offices
+                  </h3>
+                  <span className="text-xs font-semibold tabular-nums text-gray-500">
+                    {officesMetadata.officeCount} published office records
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-gray-600">
+                  Find published institutional office records and their public
+                  sources.
+                </p>
+              </div>
+              <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[#0066EB]">
+                Browse City Offices
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. HOW TO READ THIS PROFILE */}
+      <section
+        className="border-b border-gray-200 bg-[#F9FAFB] py-10 sm:py-12 lg:py-14"
+        aria-labelledby="reading-guide-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <h2
+              id="reading-guide-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              How to Read This Profile
+            </h2>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {readingGuideItems.map(item => (
+              <div
+                key={item.title}
+                className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6"
+              >
+                <h3 className="text-base font-bold text-gray-950">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. SOURCES & REFERENCE DATES */}
+      <section
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="provenance-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">PROVENANCE</p>
+            <h2
+              id="provenance-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              Sources &amp; Reference Dates
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              Different facts rely on different authorities and reference
+              periods. BetterSanFernando keeps those source roles visible.
+            </p>
+          </div>
+
+          <div className="mt-8 divide-y divide-gray-200 border-y border-gray-200">
+            {/* POPULATION & PSGC */}
+            <article className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4">
+              <h3 className="text-sm font-bold text-gray-950">
+                Population &amp; PSGC
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                {populationSource.publisher} · {populationSource.census} · Last
+                verified {formatIsoDate(populationSource.lastVerified)}
+              </p>
+              <div>
                 <a
                   href={populationSource.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  Official PSA source
-                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  Official PSA Source
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
-              </article>
-              <article className="grid gap-3 py-5 md:grid-cols-[11rem_minmax(0,1fr)_auto] md:items-start">
-                <h3 className="font-bold text-gray-900">Polygon geometry</h3>
-                <p className="text-sm leading-6 text-gray-700">
-                  {geography.geometryPublisher} · geometry reference: 31
-                  December 2023
-                </p>
+              </div>
+            </article>
+
+            {/* BOUNDARY GEOMETRY */}
+            <article className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4">
+              <h3 className="text-sm font-bold text-gray-950">
+                Boundary Geometry
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                {geography.geometryPublisher} · Geometry reference: 31 December
+                2023
+              </p>
+              <div>
                 <a
                   href={geography.geometryUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  View geometry source
-                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  View Geometry Source
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
-              </article>
-              <article className="grid gap-3 py-5 md:grid-cols-[11rem_minmax(0,1fr)_auto] md:items-start">
-                <h3 className="font-bold text-gray-900">Office directory</h3>
-                <p className="text-sm leading-6 text-gray-700">
-                  Published institutional records · record-specific official
-                  source links · last verified{' '}
-                  {formatIsoDate(officesMetadata.lastVerified)}
-                </p>
+              </div>
+            </article>
+
+            {/* OFFICE DIRECTORY */}
+            <article className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4">
+              <h3 className="text-sm font-bold text-gray-950">
+                Office Directory
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                Published institutional records · Record-specific official
+                source links · Last verified{' '}
+                {formatIsoDate(officesMetadata.lastVerified)}
+              </p>
+              <div>
                 <Link
                   href="/government/offices"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  Review office sources
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  Review Office Sources
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
-              </article>
-            </div>
-            <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-gray-700">
-              <UsersRound
-                className="mt-1 h-4 w-4 shrink-0 text-primary-700"
-                aria-hidden="true"
-              />
-              This core profile does not add elected officials, historical
-              narrative, economic indicators, or other unsupported city facts.
-            </p>
-          </section>
+              </div>
+            </article>
+          </div>
         </div>
-      </main>
-    </>
+      </section>
+
+      {/* 8. KEEP EXPLORING */}
+      <section
+        className="bg-white py-10 pb-16 sm:py-12 sm:pb-24 lg:py-14 lg:pb-28"
+        aria-labelledby="keep-exploring-heading"
+      >
+        <div className="container mx-auto px-4">
+          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <h2
+            id="keep-exploring-heading"
+            className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+          >
+            Keep Exploring
+          </h2>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {keepExploringLinks.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-4 transition-colors hover:border-[#0066EB] sm:p-5"
+              >
+                <div>
+                  <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">
+                    {item.description}
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
+                  {item.action}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

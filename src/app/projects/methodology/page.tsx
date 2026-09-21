@@ -137,6 +137,24 @@ const AMOUNT_ROWS = [
   ],
 ] as const;
 
+const ATTRIBUTION_STEPS = [
+  {
+    number: '01',
+    title: 'Published Evidence',
+    text: 'A public source supports a relationship between the project record and a barangay.',
+  },
+  {
+    number: '02',
+    title: 'Barangay Attribution',
+    text: 'The project record is associated with that barangay in BetterSanFernando.',
+  },
+  {
+    number: '03',
+    title: 'Project Map',
+    text: 'The map summarizes how published project records are distributed across barangays.',
+  },
+] as const;
+
 const MISSING_DATA_PRINCIPLES = [
   {
     number: '01',
@@ -760,7 +778,7 @@ export default function ProjectMethodology() {
             Money and geography describe different facts
           </h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
             <div>
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
                 Money fields are not interchangeable
@@ -785,51 +803,70 @@ export default function ProjectMethodology() {
 
             <div>
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Barangay attribution is not an exact project location
+                How Barangay Attribution Works
               </h3>
-              <div className="mt-3 overflow-hidden rounded-sm border border-gray-200 bg-[#F3F6FB]">
-                <div className="divide-y divide-gray-200">
-                  <div className="p-4 sm:p-5">
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                      What the map can show
-                    </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                      Projects may be attributed to one of San Fernando’s 35
-                      barangays when published evidence supports that
-                      relationship.
-                    </p>
-                  </div>
-                  <div className="p-4 sm:p-5">
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                      What the map cannot show
-                    </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                      The current project dataset does not publish verified
-                      project point coordinates. Barangay attribution should not
-                      be interpreted as an exact construction site, parcel, road
-                      segment, or facility coordinate.
-                    </p>
-                  </div>
-                </div>
-              </div>
 
-              <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                The Project Map therefore shows the distribution of project
-                records by barangay. It is not an exact project-location map.
+              <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm">
+                Barangay attribution describes the area associated with a
+                published project record. It does not establish an exact project
+                coordinate.
               </p>
 
-              <div className="mt-2 rounded-sm border border-gray-200 bg-gray-50 px-3 py-2 text-xs leading-relaxed text-gray-600">
-                Map shading represents project-record attribution by barangay,
-                not exact project coordinates.
+              {/* 3-Step Attribution Flow */}
+              <ol className="mt-4 space-y-3.5">
+                {ATTRIBUTION_STEPS.map((step, index) => {
+                  const isLast = index === ATTRIBUTION_STEPS.length - 1;
+                  return (
+                    <li key={step.number} className="flex gap-3">
+                      <div className="flex flex-col items-center">
+                        <span className="font-mono text-xs font-bold text-[#0066EB]">
+                          {step.number}
+                        </span>
+                        {!isLast && (
+                          <span
+                            className="mt-1 w-px flex-1 bg-gray-200"
+                            aria-hidden="true"
+                          />
+                        )}
+                      </div>
+                      <div className={!isLast ? 'pb-2' : ''}>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950">
+                          {step.title}
+                        </h4>
+                        <p className="mt-0.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
+                          {step.text}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+
+              {/* Boundary Statement & Map Note */}
+              <div className="mt-5 border-t border-gray-200 pt-3.5">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-950">
+                  Not an exact project location
+                </p>
+                <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
+                  Barangay attribution does not establish a construction site,
+                  parcel, road segment, facility coordinate, or verified project
+                  point.
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-gray-500">
+                  Map shading represents project-record attribution by barangay,
+                  not exact project coordinates; the Project Map is{' '}
+                  {'not an exact project-location map'}.
+                </p>
               </div>
 
+              {/* CTA */}
               <div className="mt-3.5">
                 <Link
                   href="/projects/map"
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                 >
                   <MapPinned className="h-4 w-4" aria-hidden="true" />
-                  View Project Map →
+                  <span>View Project Map →</span>
                 </Link>
               </div>
             </div>
@@ -866,8 +903,8 @@ export default function ProjectMethodology() {
             </ol>
           </div>
 
-          <div className="mt-3.5 rounded-sm border-l-2 border-[#0066EB] bg-gray-50 px-4 py-2.5">
-            <p className="text-xs font-medium text-gray-800 sm:text-sm">
+          <div className="mt-3.5 rounded-sm border border-gray-200 bg-gray-50/70 px-4 py-3">
+            <p className="text-xs font-semibold text-gray-900 sm:text-sm">
               Unknown, unavailable, and not established are not the same as
               zero, false, or not applicable.
             </p>

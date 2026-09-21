@@ -1,16 +1,5 @@
-import {
-  ArrowRight,
-  BarChart3,
-  Building2,
-  CalendarRange,
-  ExternalLink,
-  FileText,
-  Landmark,
-  ShieldCheck,
-  TrendingDown,
-  TrendingUp,
-  Users,
-} from 'lucide-react';
+import { ArrowDown, ArrowRight, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
@@ -19,14 +8,14 @@ import {
   getCityTotalPopulation,
 } from '../../../data/civic/demographics';
 import { aggregatePopulationStatistics } from '../../../data/civic/populationStatistics';
-import { formatIsoDate } from '../../../lib/utils';
 import { buildPageMetadata } from '../../../lib/metadata';
+import { formatIsoDate } from '../../../lib/utils';
 import BarangayTable from './BarangayTable';
 
 export const metadata = buildPageMetadata({
   title: 'Population Statistics',
   description:
-    'Compare the PSA 2024 POPCEN population of San Fernando, Pampanga across all 35 barangays, with exact values and source context.',
+    'Explore San Fernando’s 2024 POPCEN population across all 35 barangays, with exact counts, city shares, classifications, and official-source context.',
   path: '/statistics/population',
 });
 
@@ -47,18 +36,92 @@ const statistics = aggregatePopulationStatistics(
 
 const largestPopulation = statistics.largestBarangay?.population ?? 1;
 
+function getPopulationScale(maxValue: number) {
+  let step = 10000;
+  if (maxValue > 100000) {
+    step = 25000;
+  } else if (maxValue > 50000) {
+    step = 10000;
+  } else if (maxValue <= 20000) {
+    step = 5000;
+  }
+
+  const max = Math.max(step, Math.ceil(maxValue / step) * step);
+  const ticks: number[] = [];
+  for (let val = 0; val <= max; val += step) {
+    ticks.push(val);
+  }
+
+  return { max, ticks, step };
+}
+
+const populationScale = getPopulationScale(largestPopulation);
+
 const ruralBarangayNames = statistics.ruralBarangays
   .map(barangay => barangay.name)
   .join(', ');
 
 const topFiveBarangays = statistics.rankedBarangays.slice(0, 5);
 
+const readingGuideItems = [
+  {
+    title: 'Population',
+    description:
+      'The exact 2024 POPCEN population published for each barangay.',
+  },
+  {
+    title: 'City Share',
+    description: `The barangay population as a share of San Fernando’s published city total of ${numberFormatter.format(statistics.totalPopulation)}.`,
+  },
+  {
+    title: 'Classification',
+    description:
+      'The published Urban or Rural classification associated with each barangay.',
+  },
+  {
+    title: 'Reference Period',
+    description:
+      'All comparisons on this page use the same 2024 POPCEN baseline.',
+  },
+] as const;
+
+const keepExploringLinks = [
+  {
+    href: '/statistics/city-profile',
+    title: 'City Profile',
+    description:
+      'A source-aware overview of verified city facts, boundaries, and office records.',
+    action: 'View city profile',
+  },
+  {
+    href: '/barangays',
+    title: 'Barangay Directory',
+    description:
+      'Search verified PSGC identity, population, and classification records.',
+    action: 'Browse barangays',
+  },
+  {
+    href: '/statistics/public-records',
+    title: 'Public Records Statistics',
+    description:
+      'Track published datasets, coverage periods, and evidence units.',
+    action: 'View public records',
+  },
+  {
+    href: '/transparency/methodology',
+    title: 'How We Publish Data',
+    description:
+      'Learn how BetterSanFernando verifies and documents public data sources.',
+    action: 'Read methodology',
+  },
+] as const;
+
 export default function PopulationStatistics() {
   return (
-    <main className="flex-grow bg-[#f7f8fa]">
-      {/* Breadcrumb */}
-      <div className="border-b border-gray-200 bg-white">
-        <div className="container mx-auto px-4 py-4">
+    <main className="flex-grow bg-white">
+      {/* 1. EDITORIAL HERO */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
@@ -67,397 +130,431 @@ export default function PopulationStatistics() {
               { label: 'Population Statistics' },
             ]}
           />
-        </div>
-      </div>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-[#002EAC] text-white">
-        <div
-          className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.055]"
-          aria-hidden="true"
-        >
-          <div className="absolute -right-24 -top-32 h-[28rem] w-[28rem] rounded-full border-[72px] border-white" />
-          <div className="absolute -bottom-64 right-[20%] h-[32rem] w-[32rem] rounded-full border-[80px] border-white" />
-        </div>
+          <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
+            <div className="max-w-3xl">
+              <p className="text-eyebrow text-[#0066EB]">
+                STATISTICS · POPULATION
+              </p>
+              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
+                Population Statistics
+              </h1>
+              <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
+                Explore San Fernando’s {source.census} population across all{' '}
+                {statistics.barangayCount} barangays, with exact counts, city
+                shares, classifications, and official-source context.
+              </p>
 
-        <div className="container relative mx-auto grid gap-10 px-4 py-12 md:py-14 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end lg:gap-16 lg:py-16">
-          <div className="max-w-3xl">
-            <p className="text-eyebrow text-blue-100">Population</p>
-
-            <h1 className="mt-4 max-w-3xl text-4xl font-extrabold text-display text-white sm:text-5xl lg:text-[3.75rem]">
-              Population Statistics
-            </h1>
-
-            <p className="mt-5 max-w-2xl text-base font-normal leading-7 text-blue-100 md:text-[17px]">
-              Understand San Fernando&apos;s {source.census} population baseline
-              and see how residents are distributed across the city&apos;s{' '}
-              {statistics.barangayCount} barangays.
-            </p>
-
-            <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:gap-8">
-              <div>
-                <p className="text-5xl font-extrabold text-stat-value leading-none text-white sm:text-6xl lg:text-[4.25rem]">
+              {/* Prominent primary figure */}
+              <div className="mt-6">
+                <p className="text-4xl font-extrabold tabular-nums text-gray-950 sm:text-5xl">
                   {numberFormatter.format(statistics.totalPopulation)}
                 </p>
-
-                <p className="mt-2 text-sm font-medium text-blue-100">
-                  {source.referenceYear} POPCEN city population
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  {source.census} Population
                 </p>
               </div>
 
-              <a
-                href={source.url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                <Landmark className="h-4 w-4" aria-hidden="true" />
-                Philippine Statistics Authority
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-              </a>
+              {/* CTA row */}
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <a
+                  href="#distribution"
+                  className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
+                >
+                  Explore Population Distribution
+                  <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
+                >
+                  View Official PSA Source
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
+
+            {/* RIGHT-SIDE SCOPE MODULE */}
+            <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
+              <p className="text-eyebrow text-[#0066EB]">DATA SCOPE</p>
+              <h2 className="mt-1.5 text-base font-bold text-gray-950">
+                {source.census}
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                Official population baseline published by the Philippine
+                Statistics Authority. These figures are census values, not
+                estimates or projections.
+              </p>
+              <div className="mt-4 flex items-center justify-between border-t border-gray-200/80 pt-3 text-xs text-gray-600">
+                <span>{statistics.barangayCount} Barangays</span>
+                <span>Last Verified: {formatIsoDate(source.lastVerified)}</span>
+              </div>
+            </aside>
           </div>
+        </div>
+      </section>
 
-          <dl className="divide-y divide-white/20 border-y border-white/20">
-            <div className="flex gap-4 py-4">
-              <Users
-                className="mt-1 h-5 w-5 shrink-0 text-blue-100"
-                aria-hidden="true"
-              />
+      {/* 2. AT A GLANCE */}
+      <section
+        id="at-a-glance"
+        className="border-b border-gray-200 bg-white"
+        aria-labelledby="snapshot-heading"
+      >
+        <div className="container mx-auto px-4 py-8 sm:py-10">
+          <h2 id="snapshot-heading" className="sr-only">
+            At a Glance
+          </h2>
 
-              <div>
-                <dd className="text-xl font-bold tracking-[-0.02em] text-white">
-                  {statistics.barangayCount} barangays
-                </dd>
-
-                <dt className="mt-0.5 text-sm font-normal text-blue-100">
-                  Administrative divisions
-                </dt>
-              </div>
+          <dl className="grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-gray-200">
+            {/* Barangays */}
+            <div className="lg:pr-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Barangays
+              </dt>
+              <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {statistics.barangayCount}
+              </dd>
+              <p className="mt-1 text-xs text-gray-600">
+                Complete published barangay set
+              </p>
             </div>
 
-            <div className="flex gap-4 py-4">
-              <CalendarRange
-                className="mt-1 h-5 w-5 shrink-0 text-blue-100"
-                aria-hidden="true"
-              />
-
-              <div>
-                <dd className="text-xl font-bold tracking-[-0.02em] text-white">
-                  {source.census}
-                </dd>
-
-                <dt className="mt-0.5 text-sm font-normal text-blue-100">
-                  Reference period
-                </dt>
-              </div>
+            {/* Largest Barangay */}
+            <div className="lg:px-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Largest Barangay
+              </dt>
+              <dd className="mt-1 text-sm font-semibold text-gray-900">
+                {statistics.largestBarangay?.name}
+              </dd>
+              <p className="mt-0.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {numberFormatter.format(
+                  statistics.largestBarangay?.population ?? 0
+                )}
+              </p>
+              <p className="mt-1 text-xs text-gray-600">
+                {percentFormatter.format(
+                  statistics.largestBarangay?.share ?? 0
+                )}{' '}
+                of city total
+              </p>
             </div>
 
-            <div className="flex gap-4 py-4">
-              <Landmark
-                className="mt-1 h-5 w-5 shrink-0 text-blue-100"
-                aria-hidden="true"
-              />
+            {/* Smallest Barangay */}
+            <div className="lg:px-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Smallest Barangay
+              </dt>
+              <dd className="mt-1 text-sm font-semibold text-gray-900">
+                {statistics.smallestBarangay?.name}
+              </dd>
+              <p className="mt-0.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {numberFormatter.format(
+                  statistics.smallestBarangay?.population ?? 0
+                )}
+              </p>
+              <p className="mt-1 text-xs text-gray-600">
+                {percentFormatter.format(
+                  statistics.smallestBarangay?.share ?? 0
+                )}{' '}
+                of city total
+              </p>
+            </div>
 
-              <div>
-                <dd className="font-bold leading-6 tracking-[-0.01em] text-white">
-                  {source.publisher}
-                </dd>
-
-                <dt className="mt-0.5 text-sm font-normal text-blue-100">
-                  Official data publisher
-                </dt>
-              </div>
+            {/* Classification */}
+            <div className="lg:pl-6">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Classification
+              </dt>
+              <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
+                {statistics.urbanBarangayCount} Urban
+              </dd>
+              <p className="mt-1 text-xs text-gray-600">
+                {statistics.ruralBarangayCount} Rural · {ruralBarangayNames}
+              </p>
             </div>
           </dl>
         </div>
       </section>
 
-      {/* KPI row */}
+      {/* 3 & 4 & 5. POPULATION DISTRIBUTION */}
       <section
-        className="relative z-10 lg:-mt-7"
-        aria-label="Key population figures"
+        id="distribution"
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="distribution-heading"
       >
         <div className="container mx-auto px-4">
-          <div className="grid overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.08)] sm:grid-cols-3">
-            {/* Total population */}
-            <div className="border-b border-gray-200 p-5 sm:border-b-0 sm:border-r md:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Total Population
-                  </p>
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">DISTRIBUTION</p>
+            <h2
+              id="distribution-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              How Population Is Distributed
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              The five most populous barangays based on the {source.census}{' '}
+              population baseline.
+            </p>
+          </div>
 
-                  <p className="mt-3 text-3xl font-bold text-stat-value text-[#0066EB] md:text-4xl">
-                    {numberFormatter.format(statistics.totalPopulation)}
-                  </p>
-
-                  <p className="mt-1 text-sm text-gray-500">{source.census}</p>
+          <div className="mt-8 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(19rem,0.8fr)] lg:gap-12">
+            {/* 4. LEFT: TOP 5 HORIZONTAL BAR CHART */}
+            <div className="flex flex-col justify-between overflow-hidden rounded-sm border border-gray-200 bg-white">
+              <div>
+                {/* Header */}
+                <div className="border-b border-gray-200 bg-white px-4 py-3.5 sm:px-5">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-base font-bold text-gray-950">
+                        Top 5 Most Populous Barangays
+                      </h3>
+                      <p className="mt-0.5 text-xs text-gray-500">
+                        Population counts from the {source.census}.
+                      </p>
+                    </div>
+                    <div className="text-xs text-gray-500 sm:text-right">
+                      <p className="font-medium text-gray-600">
+                        {source.census} · {statistics.barangayCount} Barangays
+                      </p>
+                      <p className="mt-0.5 text-[11px] text-gray-400">
+                        Population scale · residents
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6F0FD] text-[#0066EB]">
-                  <Users className="h-4 w-4" aria-hidden="true" />
-                </span>
-              </div>
-            </div>
-
-            {/* Largest */}
-            <div className="border-b border-gray-200 p-5 sm:border-b-0 sm:border-r md:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Largest Barangay
-                  </p>
-
-                  <p className="mt-3 text-lg font-semibold text-gray-900">
-                    {statistics.largestBarangay?.name}
-                  </p>
-
-                  <p className="mt-0.5 text-3xl font-bold text-stat-value text-gray-950">
-                    {numberFormatter.format(
-                      statistics.largestBarangay?.population ?? 0
-                    )}
-                  </p>
-
-                  <p className="mt-1 text-sm text-gray-500">
-                    {percentFormatter.format(
-                      statistics.largestBarangay?.share ?? 0
-                    )}{' '}
-                    of city total
-                  </p>
+                {/* Desktop Column Header */}
+                <div className="hidden border-b border-gray-200 bg-gray-50/70 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500 sm:grid sm:grid-cols-[1.75rem_8.5rem_minmax(0,1fr)_5.5rem_4.5rem] sm:items-center sm:gap-4 sm:px-5">
+                  <span>#</span>
+                  <span>Barangay</span>
+                  <span>Barangay Population</span>
+                  <span className="text-right">Population</span>
+                  <span className="text-right">City Share</span>
                 </div>
 
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
-                  <TrendingUp className="h-4 w-4" aria-hidden="true" />
-                </span>
-              </div>
-            </div>
+                {/* Rows */}
+                <ol className="divide-y divide-gray-100">
+                  {topFiveBarangays.map(barangay => {
+                    const barWidthPercent =
+                      (barangay.population / populationScale.max) * 100;
+                    const accessibleLabel = `${barangay.name}: ${numberFormatter.format(
+                      barangay.population
+                    )} residents, ${(barangay.share * 100).toFixed(
+                      1
+                    )} percent of San Fernando’s ${source.census} population.`;
 
-            {/* Smallest */}
-            <div className="p-5 md:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Smallest Barangay
-                  </p>
+                    return (
+                      <li
+                        key={barangay.psgc_code}
+                        className="px-4 py-3.5 sm:px-5"
+                      >
+                        {/* Desktop layout: all rows share the same grid */}
+                        <div className="hidden sm:grid sm:grid-cols-[1.75rem_8.5rem_minmax(0,1fr)_5.5rem_4.5rem] sm:items-center sm:gap-4">
+                          <span className="text-xs font-semibold tabular-nums text-gray-400">
+                            {barangay.rank}
+                          </span>
 
-                  <p className="mt-3 text-lg font-semibold text-gray-900">
-                    {statistics.smallestBarangay?.name}
-                  </p>
+                          <span className="truncate text-sm font-semibold text-gray-950">
+                            {barangay.name}
+                          </span>
 
-                  <p className="mt-0.5 text-3xl font-bold text-stat-value text-gray-950">
-                    {numberFormatter.format(
-                      statistics.smallestBarangay?.population ?? 0
-                    )}
-                  </p>
+                          {/* Bar: simple horizontal comparison bar on neutral track */}
+                          <div
+                            className="h-4 w-full bg-gray-100"
+                            role="img"
+                            aria-label={accessibleLabel}
+                          >
+                            <div
+                              className="h-full bg-[#0066EB]"
+                              style={{ width: `${barWidthPercent}%` }}
+                            />
+                          </div>
 
-                  <p className="mt-1 text-sm text-gray-500">
-                    {percentFormatter.format(
-                      statistics.smallestBarangay?.share ?? 0
-                    )}{' '}
-                    of city total
-                  </p>
+                          <span className="text-right text-sm font-semibold tabular-nums text-gray-950">
+                            {numberFormatter.format(barangay.population)}
+                          </span>
+
+                          <span className="text-right text-sm tabular-nums text-gray-600">
+                            {percentFormatter.format(barangay.share)}
+                          </span>
+                        </div>
+
+                        {/* Mobile layout: clean stack without squeezing axis */}
+                        <div className="space-y-2 sm:hidden">
+                          <div className="flex items-baseline justify-between gap-2">
+                            <div className="flex min-w-0 items-baseline gap-2">
+                              <span className="text-xs font-semibold tabular-nums text-gray-400">
+                                #{barangay.rank}
+                              </span>
+                              <span className="truncate text-sm font-semibold text-gray-950">
+                                {barangay.name}
+                              </span>
+                            </div>
+                            <span className="shrink-0 text-sm font-semibold tabular-nums text-gray-950">
+                              {numberFormatter.format(barangay.population)}
+                            </span>
+                          </div>
+
+                          <div
+                            className="h-3.5 w-full bg-gray-100"
+                            role="img"
+                            aria-label={accessibleLabel}
+                          >
+                            <div
+                              className="h-full bg-[#0066EB]"
+                              style={{ width: `${barWidthPercent}%` }}
+                            />
+                          </div>
+
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span>
+                              {percentFormatter.format(barangay.share)} of city
+                              population
+                            </span>
+                            <span className="tabular-nums">
+                              0–{numberFormatter.format(populationScale.max)}{' '}
+                              scale
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+
+                {/* Desktop Axis beneath bars: streamlined to minimal height and clean tick labels */}
+                <div className="hidden border-t border-gray-100 bg-gray-50/30 px-4 py-1.5 sm:grid sm:grid-cols-[1.75rem_8.5rem_minmax(0,1fr)_5.5rem_4.5rem] sm:items-center sm:gap-4 sm:px-5">
+                  <span />
+                  <span />
+                  <div>
+                    <div className="flex justify-between px-0.5">
+                      {populationScale.ticks.map(tick => (
+                        <span
+                          key={tick}
+                          className="h-1 w-px bg-gray-300"
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-0.5 flex justify-between text-[11px] tabular-nums text-gray-400">
+                      {populationScale.ticks.map((tick, index) => (
+                        <span
+                          key={tick}
+                          className={
+                            index === 0
+                              ? 'text-left'
+                              : index === populationScale.ticks.length - 1
+                                ? 'text-right'
+                                : 'text-center'
+                          }
+                        >
+                          {tick === 0 ? '0' : `${tick / 1000}k`}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <span />
+                  <span />
                 </div>
-
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-rose-700">
-                  <TrendingDown className="h-4 w-4" aria-hidden="true" />
-                </span>
               </div>
+
+              <a
+                href="#barangays"
+                className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 text-xs font-semibold text-[#0066EB] transition-colors hover:bg-[#F3F6FB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] sm:px-5"
+              >
+                <span>View all {statistics.barangayCount} barangays</span>
+                <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
+              </a>
             </div>
+
+            {/* 5. RIGHT: POPULATION CONTEXT */}
+            <aside
+              aria-labelledby="context-heading"
+              className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-7"
+            >
+              <div>
+                <h3
+                  id="context-heading"
+                  className="text-base font-bold text-gray-950"
+                >
+                  Population Context
+                </h3>
+
+                <div className="mt-5 space-y-4 text-sm">
+                  <div>
+                    <h4 className="font-semibold text-gray-950">
+                      Largest to Smallest
+                    </h4>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-600">
+                      {statistics.largestBarangay?.name} has{' '}
+                      {numberFormatter.format(
+                        statistics.largestBarangay?.population ?? 0
+                      )}{' '}
+                      residents, compared with{' '}
+                      {numberFormatter.format(
+                        statistics.smallestBarangay?.population ?? 0
+                      )}{' '}
+                      in {statistics.smallestBarangay?.name}.
+                    </p>
+                  </div>
+
+                  <div className="border-t border-gray-100 pt-4">
+                    <h4 className="font-semibold text-gray-950">
+                      Urban and Rural Classification
+                    </h4>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-600">
+                      {statistics.urbanBarangayCount} barangays are classified
+                      Urban and {ruralBarangayNames} is classified Rural.
+                    </p>
+                  </div>
+
+                  <div className="border-t border-gray-100 pt-4">
+                    <h4 className="font-semibold text-gray-950">
+                      One Census Baseline
+                    </h4>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-600">
+                      All barangay comparisons on this page use the same{' '}
+                      {source.census} reference.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pale support module */}
+              <div className="mt-6 rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 text-xs leading-relaxed text-gray-700">
+                <p className="text-eyebrow text-[#0066EB]">
+                  VERIFIED POPULATION BASELINE
+                </p>
+                <p className="mt-1.5 text-gray-700">
+                  Figures come from the Philippine Statistics Authority’s{' '}
+                  {source.census}. BetterSanFernando presents the published
+                  values without adding estimates or projections.
+                </p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* Main content */}
-      <div className="container mx-auto space-y-16 px-4 pt-12 pb-8 md:pt-16 md:pb-10">
-        {/* Population distribution */}
-        <section
-          className="grid gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(19rem,0.75fr)] lg:gap-12"
-          aria-labelledby="distribution-heading"
-        >
-          <div>
-            <div className="max-w-2xl">
-              <p className="text-eyebrow text-[#0066EB]">Distribution</p>
-
-              <h2
-                id="distribution-heading"
-                className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
-              >
-                How Population Is Distributed
-              </h2>
-
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                The five most populous barangays based on the {source.census}{' '}
-                population baseline.
-              </p>
-            </div>
-
-            <div className="mt-7 overflow-hidden rounded-2xl border border-gray-200 bg-white">
-              <div className="grid grid-cols-[2rem_minmax(0,1fr)_5rem] gap-3 border-b border-gray-200 bg-gray-50/80 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 sm:grid-cols-[2rem_10rem_minmax(0,1fr)_6rem_4rem]">
-                <span>#</span>
-                <span>Barangay</span>
-                <span className="hidden sm:block">Relative population</span>
-                <span className="text-right">Population</span>
-                <span className="hidden text-right sm:block">Share</span>
-              </div>
-
-              <ol className="divide-y divide-gray-100">
-                {topFiveBarangays.map(barangay => (
-                  <li
-                    key={barangay.psgc_code}
-                    className="grid grid-cols-[2rem_minmax(0,1fr)_5rem] items-center gap-3 px-4 py-4 sm:grid-cols-[2rem_10rem_minmax(0,1fr)_6rem_4rem]"
-                  >
-                    <span className="text-sm tabular-nums text-gray-400">
-                      {barangay.rank}
-                    </span>
-
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-gray-900">
-                        {barangay.name}
-                      </p>
-
-                      <p className="mt-1 text-xs text-gray-500 sm:hidden">
-                        {percentFormatter.format(barangay.share)} of city
-                      </p>
-                    </div>
-
-                    <div
-                      className="hidden h-2 overflow-hidden rounded-full bg-gray-100 sm:block"
-                      role="img"
-                      aria-label={`${barangay.name}: ${numberFormatter.format(
-                        barangay.population
-                      )} residents`}
-                    >
-                      <div
-                        className="h-full rounded-full bg-[#0066EB]"
-                        style={{
-                          width: `${
-                            (barangay.population / largestPopulation) * 100
-                          }%`,
-                        }}
-                      />
-                    </div>
-
-                    <span className="text-right text-sm font-semibold tabular-nums text-gray-900">
-                      {numberFormatter.format(barangay.population)}
-                    </span>
-
-                    <span className="hidden text-right text-sm tabular-nums text-gray-500 sm:block">
-                      {percentFormatter.format(barangay.share)}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-
-              <a
-                href="#barangays"
-                className="flex items-center justify-between border-t border-gray-200 px-4 py-4 text-sm font-semibold text-[#0066EB] transition-colors hover:bg-[#E6F0FD] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0066EB]"
-              >
-                View all {statistics.barangayCount} barangays
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-
-          {/* Population insights */}
-          <aside aria-labelledby="insights-heading">
-            <p className="text-eyebrow text-[#0066EB]">Context</p>
-
-            <h2
-              id="insights-heading"
-              className="mt-2 text-2xl font-bold text-section-title text-gray-950"
-            >
-              Population Insights
-            </h2>
-
-            <div className="mt-7 border-y border-gray-200">
-              <div className="flex gap-4 py-5">
-                <BarChart3
-                  className="mt-0.5 h-5 w-5 shrink-0 text-[#0066EB]"
-                  aria-hidden="true"
-                />
-
-                <div>
-                  <h3 className="font-semibold text-gray-900">
-                    Population range
-                  </h3>
-
-                  <p className="mt-1.5 text-sm leading-6 text-gray-600">
-                    {statistics.largestBarangay?.name} has{' '}
-                    {numberFormatter.format(
-                      statistics.largestBarangay?.population ?? 0
-                    )}{' '}
-                    residents, compared with{' '}
-                    {numberFormatter.format(
-                      statistics.smallestBarangay?.population ?? 0
-                    )}{' '}
-                    in {statistics.smallestBarangay?.name}.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 border-t border-gray-200 py-5">
-                <Building2
-                  className="mt-0.5 h-5 w-5 shrink-0 text-[#0066EB]"
-                  aria-hidden="true"
-                />
-
-                <div>
-                  <h3 className="font-semibold text-gray-900">
-                    Urban and rural classification
-                  </h3>
-
-                  <p className="mt-1.5 text-sm leading-6 text-gray-600">
-                    {statistics.urbanBarangayCount} barangays are classified as
-                    Urban and {statistics.ruralBarangayCount} (
-                    {ruralBarangayNames}) as Rural.
-                  </p>
-
-                  <p className="mt-2 text-xs leading-5 text-gray-500">
-                    This classification is published source data. It does not by
-                    itself measure wealth, population density, development, or
-                    access to services.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 rounded-xl border border-[#CCE0FB] bg-[#E6F0FD] px-4 py-4">
-              <div className="flex gap-3">
-                <ShieldCheck
-                  className="mt-0.5 h-5 w-5 shrink-0 text-[#0052BC]"
-                  aria-hidden="true"
-                />
-
-                <div>
-                  <p className="text-sm font-semibold text-[#003D8D]">
-                    Verified population baseline
-                  </p>
-
-                  <p className="mt-1 text-sm leading-6 text-[#003D8D]/80">
-                    Figures come from the Philippine Statistics Authority&apos;s
-                    2024 POPCEN. BetterSanFernando presents the published data
-                    without adding estimates or projections.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        {/* Full barangay dataset */}
-        <section id="barangays" aria-labelledby="barangays-heading">
+      {/* 6, 7, 8, 9, 10. ALL BARANGAYS */}
+      <section
+        id="barangays"
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="barangays-heading"
+      >
+        <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">Barangay Data</p>
-
+            <p className="text-eyebrow text-[#0066EB]">ALL BARANGAYS</p>
             <h2
               id="barangays-heading"
-              className="mt-2 text-3xl font-bold text-section-title text-gray-950"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
               All Barangays
             </h2>
-
-            <p className="mt-2 text-sm leading-6 text-gray-600">
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
               Search and compare all {statistics.barangayCount} barangays using
               their official {source.census} population, city share, and
               classification.
@@ -470,111 +567,191 @@ export default function PopulationStatistics() {
             totalPopulation={statistics.totalPopulation}
             barangayCount={statistics.barangayCount}
           />
-        </section>
+        </div>
+      </section>
 
-        {/* Source and provenance */}
-        <section
-          aria-labelledby="source-heading"
-          className="overflow-hidden rounded-2xl border border-gray-200 bg-white"
-        >
-          <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]">
-            {/* Main source information */}
-            <div className="p-6 md:p-7 lg:p-8">
-              <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E6F0FD] text-[#0066EB]">
-                  <FileText className="h-5 w-5" aria-hidden="true" />
-                </div>
+      {/* 11. HOW TO READ THESE NUMBERS */}
+      <section
+        className="border-b border-gray-200 bg-[#F9FAFB] py-10 sm:py-12 lg:py-14"
+        aria-labelledby="reading-guide-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <h2
+              id="reading-guide-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              How to Read These Numbers
+            </h2>
+          </div>
 
-                <div>
-                  <p className="text-eyebrow text-[#0066EB]">Data Provenance</p>
-
-                  <h2
-                    id="source-heading"
-                    className="mt-1 text-xl font-bold text-section-title text-gray-950 md:text-2xl"
-                  >
-                    Source and Reference Period
-                  </h2>
-                </div>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {readingGuideItems.map(item => (
+              <div
+                key={item.title}
+                className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6"
+              >
+                <h3 className="text-base font-bold text-gray-950">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  {item.description}
+                </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <p className="mt-5 max-w-2xl text-sm leading-6 text-gray-600">
-                BetterSanFernando presents the Philippine Statistics
-                Authority&apos;s {source.census} population figures for the City
-                of San Fernando, Pampanga. This page uses the official{' '}
-                {source.referenceYear} baseline and does not combine estimates,
-                projections, or older census values.
-              </p>
+      {/* 12. SOURCE & REFERENCE PERIOD */}
+      <section
+        className="border-b border-gray-200 bg-white py-10 sm:py-12 lg:py-14"
+        aria-labelledby="provenance-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow text-[#0066EB]">PROVENANCE</p>
+            <h2
+              id="provenance-heading"
+              className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+            >
+              Source &amp; Reference Period
+            </h2>
+          </div>
 
-              <div className="mt-6 flex flex-wrap items-center gap-4">
+          <div className="mt-8 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* LEFT: Authority & Verification */}
+            <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
+              <div>
+                <h3 className="text-base font-bold text-gray-950">
+                  {source.publisher}
+                </h3>
+                <div className="mt-4 space-y-2 text-sm text-gray-600">
+                  <p>
+                    <span className="font-semibold text-gray-900">
+                      Reference:
+                    </span>{' '}
+                    {source.census}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-gray-900">
+                      Last Verified:
+                    </span>{' '}
+                    {formatIsoDate(source.lastVerified)}
+                  </p>
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-gray-600">
+                  BetterSanFernando presents the Philippine Statistics
+                  Authority’s official census release for the City of San
+                  Fernando, Pampanga.
+                </p>
+              </div>
+              <div className="mt-6 border-t border-gray-100 pt-4">
                 <a
                   href={source.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#0066EB] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  View official PSA source
+                  View Official PSA Source
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
-
-                <div className="flex items-center gap-2 text-xs font-medium text-gray-500">
-                  <ShieldCheck
-                    className="h-4 w-4 text-[#0066EB]"
-                    aria-hidden="true"
-                  />
-                  Official source · no added estimates
-                </div>
               </div>
             </div>
 
-            {/* Dataset metadata */}
-            <div className="border-t border-gray-200 bg-[#f8fafc] px-6 py-6 md:px-7 lg:border-l lg:border-t-0 lg:px-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">
-                Dataset Details
-              </p>
-
-              <dl className="mt-4 divide-y divide-gray-200">
-                <div className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-4 py-3 first:pt-0">
-                  <dt className="text-sm text-gray-500">Publisher</dt>
-
-                  <dd className="text-sm font-semibold leading-5 text-gray-950">
-                    {source.publisher}
-                  </dd>
-                </div>
-
-                <div className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-4 py-3">
-                  <dt className="text-sm text-gray-500">Reference</dt>
-
-                  <dd className="text-sm font-semibold text-gray-950">
-                    {source.census}
-                  </dd>
-                </div>
-
-                <div className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-4 py-3">
-                  <dt className="text-sm text-gray-500">Last verified</dt>
-
-                  <dd className="text-sm font-semibold text-gray-950">
-                    {formatIsoDate(source.lastVerified)}
-                  </dd>
-                </div>
-              </dl>
+            {/* RIGHT: What This Means */}
+            <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
+              <div>
+                <h3 className="text-base font-bold text-gray-950">
+                  What This Means
+                </h3>
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0066EB]"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      Official census values published by the national
+                      statistical agency.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0066EB]"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      One shared census reference across all 35 component
+                      barangays.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0066EB]"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      BetterSanFernando does not add population estimates.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0066EB]"
+                      aria-hidden="true"
+                    />
+                    <span>BetterSanFernando does not add projections.</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="mt-6 border-t border-gray-100 pt-3 text-xs text-gray-500">
+                All 35 barangay populations sum exactly to the published city
+                total.
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Verification footer */}
-          <div className="flex items-start gap-3 border-t border-[#CCE0FB] bg-[#F4F8FE] px-6 py-3.5 md:px-7 lg:px-8">
-            <ShieldCheck
-              className="mt-0.5 h-4 w-4 shrink-0 text-[#0066EB]"
-              aria-hidden="true"
-            />
+      {/* 13. KEEP EXPLORING */}
+      <section
+        className="bg-white py-10 pb-16 sm:py-12 sm:pb-24 lg:py-14 lg:pb-28"
+        aria-labelledby="keep-exploring-heading"
+      >
+        <div className="container mx-auto px-4">
+          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <h2
+            id="keep-exploring-heading"
+            className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
+          >
+            Keep Exploring
+          </h2>
 
-            <p className="text-xs leading-5 text-[#003D8D]">
-              Population values are presented from the official PSA dataset. The
-              figures shown on this page are not estimates generated by
-              BetterSanFernando.
-            </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {keepExploringLinks.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-4 transition-colors hover:border-[#0066EB] sm:p-5"
+              >
+                <div>
+                  <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">
+                    {item.description}
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
+                  {item.action}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }

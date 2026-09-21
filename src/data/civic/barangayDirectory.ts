@@ -2,7 +2,11 @@ import type { RankedBarangayPopulation } from './populationStatistics.ts';
 
 export type BarangayDirectoryClassification = 'All' | 'Urban' | 'Rural';
 export type BarangayDirectorySort =
-  'name-asc' | 'population-desc' | 'population-asc';
+  | 'name-asc'
+  | 'name-desc'
+  | 'population-desc'
+  | 'population-asc'
+  | 'share-desc';
 
 export interface BarangayDirectoryOptions {
   query: string;
@@ -23,7 +27,10 @@ export function filterAndSortBarangays(
   );
 
   return [...filtered].sort((a, b) => {
-    if (options.sort === 'population-desc') {
+    if (options.sort === 'name-desc') {
+      return b.name.localeCompare(a.name, 'en-PH');
+    }
+    if (options.sort === 'population-desc' || options.sort === 'share-desc') {
       return (
         b.population - a.population || a.name.localeCompare(b.name, 'en-PH')
       );
