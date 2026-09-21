@@ -1,312 +1,139 @@
-# BetterSanFernando
+<p align="center">
+  <img src="public/logo-512.png" width="96" alt="BetterSanFernando logo" />
+</p>
 
-BetterSanFernando is an independent civic-information and transparency portal
-for the City of San Fernando, Pampanga, Philippines. It organizes verified
-local government information — services, projects, government structure,
-legislation, and transparency records — around resident needs, with a clear
-link from every published fact back to its source.
+<h1 align="center">BetterSanFernando</h1>
 
-**BetterSanFernando is not the official website of the City Government of San
-Fernando.** It is an independent project, not affiliated with, endorsed by, or
-authorized to speak on behalf of the City Government. Official City Government
-contact information is presented as sourced official information, not as a
-BetterSanFernando channel.
+<p align="center">
+  Independent civic information and transparency for San Fernando, Pampanga.
+</p>
 
-## Current public scope
+<p align="center">
+  <a href="https://bettersanfernando.org">Visit the live site</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a> ·
+  <a href="https://github.com/bettersanfernando/bettersanfernando/issues">Report an issue</a>
+</p>
 
-The site has exactly seven top-level navigation areas:
+<p align="center">
+  <a href="https://github.com/bettersanfernando/bettersanfernando/actions/workflows/ci.yml">
+    <img src="https://github.com/bettersanfernando/bettersanfernando/actions/workflows/ci.yml/badge.svg" alt="CI status" />
+  </a>
+</p>
 
-- **Home** — introduces the portal and surfaces high-value civic facts.
+## About
+
+BetterSanFernando is an independent civic-information and transparency
+portal for the City of San Fernando, Pampanga, Philippines. It organizes
+public information from official and public sources — city services,
+infrastructure and public projects, government offices and contacts,
+legislation and public records, transparency information, and
+barangay/statistical data — into a resident-oriented interface with search
+across all of it.
+
+**BetterSanFernando is not the official website of the City Government of
+San Fernando.** It is an independent project, not affiliated with,
+endorsed by, or authorized to speak on behalf of the City Government.
+
+## What you can find
+
 - **Services** — resident-facing guidance on city services, organized by need.
-- **Projects** — a bounded, verified subset of city infrastructure/public-works
-  projects and their evidence.
+- **Projects** — infrastructure and public-works projects with supporting evidence.
 - **Government** — offices, official contacts, and legislation.
-- **Transparency** — published-record inventory, sources, and methodology.
-  Statistics is a content area under Transparency, not a separate top-level
-  item.
-- **About** — the project's purpose, independence, and methodology.
-- **Contact** — `/government/contact`, a concise hub for verified official
-  City Government contact channels. `/contact` permanently redirects here;
-  there is no separate BetterSanFernando feedback channel.
+- **Transparency & public records** — published-record inventory, sources, and methodology.
+- **Barangays & statistics** — barangay information and city statistical data.
+- **Search** — a single search across services, projects, government, and records.
 
-Full route ownership and publication rules are defined in
-[`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md).
+## How information is handled
 
-## Current bounded data snapshot
-
-These are BetterSanFernando's current published holdings, not complete City
-Government inventories. Coverage is progressive: absence from the portal does
-not mean a City service or record does not exist, only that it has not yet
-been verified and reviewed for publication.
-
-| Domain                            | Published count                                                 |
-| --------------------------------- | --------------------------------------------------------------- |
-| Reviewed External service records | 177                                                             |
-| Published service categories      | 16 of 16                                                        |
-| Planned service categories        | 0 of 16                                                         |
-| Project records                   | 324                                                             |
-| Project-evidence records          | 563                                                             |
-| Project Cost & Utilization        | 298 observations across 109 projects                            |
-| Official Documents                | 9 verified records                                              |
-| Barangays                         | 35                                                              |
-| City-office directory records     | 44                                                              |
-| Demographic profile records       | 136 (2024 household population, 2020 age/sex, 2023 poverty SAE) |
-| Government structure entities     | 44 (33 official-directory matches, 14 verified relationships)   |
-| Government Hotlines contacts      | 11                                                              |
-| Barangay Contacts records         | 324 (35 Secretary, 289 BHERT)                                   |
-| Official Government Links         | 35 (30 websites, 2 digital services, 3 Facebook pages)          |
-| Executive orders                  | 13 (11 archive-captured, 2 subject-verified 2023)               |
-| Ordinances                        | 11 (2 full text, 9 metadata/reference)                          |
-| Resolutions                       | 2 (subject-verified)                                            |
-| City Finances reports             | 53 reports, 121 observations                                    |
-| Public Records Coverage metrics   | 8 datasets, 6 archive-range entries, 1 related collection       |
-
-Published service categories:
-
-| Category                      | Records | Route                                   |
-| ----------------------------- | ------: | --------------------------------------- |
-| Business Services             |       8 | `/services/business`                    |
-| Disaster Preparedness         |       7 | `/services/disaster-preparedness`       |
-| Assistance Programs           |      19 | `/services/assistance-programs`         |
-| Social Welfare                |      14 | `/services/social-welfare`              |
-| PWD Services                  |       6 | `/services/pwd-services`                |
-| Health Services               |      59 | `/services/health-services`             |
-| Employment                    |       7 | `/services/employment`                  |
-| Agriculture & Fisheries       |       7 | `/services/agriculture-fisheries`       |
-| Education Services            |       9 | `/services/education`                   |
-| Environment                   |       1 | `/services/environment`                 |
-| Civil Registry                |      15 | `/services/civil-registry`              |
-| Senior Citizens               |       2 | `/services/senior-citizens`             |
-| Infrastructure & Public Works |       1 | `/services/infrastructure-public-works` |
-| Housing & Land Use            |       2 | `/services/housing-land-use`            |
-| Utilities & Water             |       9 | `/services/utilities-water`             |
-| Property & Taxes              |      11 | `/services/property-taxes`              |
-
-[`/government/hotlines`](src/app/government/hotlines/page.tsx),
-[`/government/barangay-contacts`](src/app/government/barangay-contacts/GovernmentBarangayContacts.tsx),
-and [`/government/links`](src/app/government/links/GovernmentOfficialLinks.tsx) are all
-`PARTIAL`, not `READY`, and are deliberately separate directories: Government
-Hotlines is the citywide emergency/institutional contact list (11 contacts),
-Barangay Contacts is a barangay-scoped Barangay Secretary/BHERT directory (324
-contacts across all 35 barangays) reproduced from official CSFP City
-Information Office posts, and Official Government Links is a directory of 35
-verified official websites, digital services, and Facebook pages with no
-phone numbers or addresses. None claims to be independently call-tested or a
-citywide emergency-dispatch destination; BetterSanFernando remains
-independent from the City Government throughout.
-
-All 16 canonical service categories are published; none remain planned. A
-completed no-export research decision found no unique, permanent,
-publication-ready City service for a standalone Livelihood category, so no
-Livelihood category or page is published; livelihood-related services
-(skills training, agricultural support, and compost-fertilizer sale) remain
-available under Employment, Agriculture & Fisheries, and Environment. Health
-Services, Employment, Agriculture & Fisheries, and Education Services are
-all
-`PARTIAL`, not `READY`: Health Services' 59 publication-reviewed CHO records,
-Employment's 7 publication-reviewed CIPPESO records, and Agriculture &
-Fisheries' 7 publication-reviewed CAVO records are each a bounded subset of
-the canonical inventory. Employment's Investment Incentive record
-(external-01) and Technical Vocational Institutions Accreditation record
-(external-09) are intentionally excluded — the former is scoped to a future
-category, the latter remains held. Agriculture & Fisheries publishes no
-standalone fisheries Charter service and no Fish Production Support
-service — the CAVO batch covers agriculture, crops, animal health, and meat
-regulation only; its Poultry Dressing Plant record is scoped to the Meat
-Inspection Certificate (MIC) only, not the National Meat and Meat Products
-Certificate (NMMPIC). Education Services publishes nine reviewed City College
-procedures and remains `PARTIAL`; five City College Charter records remain
-held, and no current admission or enrollment window is claimed. Environment
-publishes one reviewed CENRO compost-sale service and remains `PARTIAL`; two
-tree-related certification records remain held, and national tree-cutting
-permits remain under the applicable DENR/PENRO process. Civil Registry
-publishes 15 reviewed CCRO procedures and remains `PARTIAL`; four CCRO records
-remain held, and PSA, court, NACC/RACCO, and City Health Office responsibilities
-remain separate. Senior Citizens publishes two reviewed OSCA procedures (new
-Senior Citizen ID issuance and lost-card replacement) and remains `PARTIAL`;
-renewal, transfer, damaged-card replacement, and record-update procedures
-remain unverified. Infrastructure & Public Works publishes one reviewed
-City Administrator's Office (CAdminO) complaint-intake and referral
-procedure and remains `PARTIAL`; it covers only the 12-hour intake/referral
-window across six issue topics (roads, bridges, drainage/flooding,
-streetlights, public buildings, and other City infrastructure) — it is not a
-repair service, and inspection, evaluation, funding, scheduling, resolution,
-and repair time are not stated. Housing & Land Use publishes two reviewed
-Office of the City Building Official (OCBO) certificate procedures (Annual
-Inspection Certificate & Certificate of Operation, and Certificate of Final
-Electrical Inspection/Completion for Small Electrical) and remains
-`PARTIAL`; both use the PD 1096 Schedule of Fees with no fixed peso amount
-shown, a maximum/exactly-3-working-day Simple processing time that excludes
-the physical inspection itself, and no guaranteed inspection slot or
-issuance. OCBO's downloadable forms remain temporarily unavailable and no
-online filing channel is published; the institutional email is an inquiries
--only contact, not a submission channel. Building permits, certificates of
-occupancy, zoning clearances, and other building/zoning transactions remain
-unpublished pending source clarification. Another 87 CSFP External services
-and all 74 CSFP Internal services remain unpublished; CHO records
-external-22 and external-60 remain held and are not published. Utilities &
-Water publishes nine reviewed City of San Fernando Water District (CSFWD)
-Charter transactions plus two supporting resources (a Billing Inquiry tool
-and the Feedback and Complaints Mechanism) and remains `PARTIAL`. CSFWD is a
-distinct Water District organized under Presidential Decree 198 — not a
-City Government office or City Engineer division — and its own Citizen's
-Charter is separate from the CSFP Citizen's Charter counted above; service
-availability applies only within CSFWD/PW-CSF coverage, not every San
-Fernando barangay or property. No universal flat new-connection fee, online
-payment, online application, or 24/7 hotline/office is published for
-Utilities & Water; the two reconnection procedures remain separate, and the
-maintenance procedure's eight technical subtypes remain one canonical
-service, not separate pages. Property & Taxes publishes eleven reviewed
-records from two offices and remains `PARTIAL`: eight City Assessor's
-Office records (appraisal, assessment, tax declarations, ownership-record
-updates, tax mapping, and assessment documents) and three City Treasurer's
-Office records (RPT/Amilyar, transfer tax, and individual Community Tax
-Certificate). Six additional Assessor records, Market Stall Rental, and a
-standalone RPT Clearance service remain held. Assessor Transfer of
-Ownership updates the City's own assessment record only and does not
-perform land-title registration, which remains with the Registry of
-Deeds/LRA; applicable national tax requirements remain with the BIR; and
-building, occupancy, zoning, and locational responsibilities remain with
-OCBO and CPDCO. No online RPT, transfer-tax, or CTC payment/application
-channel is published, no universal barangay CTC availability is claimed,
-and no current Schedule of Market Values table is included. See
-[`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
-page-by-page readiness assessment.
-
-## Data and publication model
+Published information is based on official and public sources, and
+published records retain source and provenance information where
+applicable. Coverage is progressive and intentionally bounded: an absent or
+partial dataset is presented as such rather than inferred, filled in, or
+backfilled with assumptions.
 
 Private research and canonical civic data are maintained in a separate,
-private repository. This repository (`bettersanfernando`) is the **public
-frontend only**:
+private repository. This repository is the public frontend and a reviewed,
+frontend-safe civic-data export:
 
-- Canonical/raw research data, source PDFs/XLSX, recovery queues, and internal
-  analysis files are never copied into this repository.
-- The frontend consumes only a versioned, reviewed, frontend-safe export,
-  vendored into `src/data/generated/civic/`.
-- Application code reads that data exclusively through the typed access layer
-  in `src/data/civic/` — never by importing generated JSON/GeoJSON directly,
-  and never by reading the private repository at build or run time.
-- Generated frontend data is refreshed only through the established sync
-  workflow (`pnpm data:sync`); it is never hand-edited.
-- The 85 NTA-sourced projects use `IMPLEMENTATION_REPORTED`: an official
-  implementation or utilization report describes activity, without independently
-  establishing an award, signed contract, payment, disbursement, or physical
-  verification.
-- Project Cost & Utilization has partial coverage (109 of 324 projects). Source
-  currency is unstated, and Total Cost Incurred to Date is not interpreted as
-  actual payment or spending.
-- `/transparency/documents` is a hybrid discovery hub and bounded nine-record
-  collection of Citizen’s Charters, business forms, and privacy documents.
-  Laws, Full Disclosure, procurement, projects, and services remain in their
-  canonical datasets; held and excluded documents remain unpublished.
-- Private research files, sensitive or person-level data, recovery queues, and
-  source workbooks existing privately does not make them publication-safe —
-  publishing a dataset requires a deliberate, allowlisted export and
-  publication review.
+- Application code reads civic data only through the typed access layer in
+  `src/data/civic/`.
+- `src/data/generated/civic/` is generated, reviewed output and must never
+  be hand-edited.
+- Normal contributors do not require access to the private canonical
+  research repository.
 
-See the **Repository Boundary** section of [`CLAUDE.md`](CLAUDE.md) for the
-exact rules agents and contributors must follow.
+For the full picture, see
+[`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md),
+[`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md), and
+[`PROVENANCE.md`](PROVENANCE.md).
 
-## Technology
+## Getting started
 
-- Next.js App Router, React 19, TypeScript, Tailwind CSS
-- i18next for multilingual support
-- Zod-validated typed data access layer
-- pnpm as the package manager (`packageManager: pnpm@11.9.0`)
-
-## Local development
+Prerequisites: Node.js 22 and pnpm (`packageManager: pnpm@11.9.0`).
 
 ```bash
-pnpm install       # Install dependencies
-pnpm dev           # Start Next.js development (localhost:3000)
-pnpm build         # Next.js production build
-pnpm lint          # Run ESLint
+git clone https://github.com/bettersanfernando/bettersanfernando.git
+cd bettersanfernando
+pnpm install
+pnpm dev
 ```
 
-### Data validation and smoke tests
+The app runs at [http://localhost:3000](http://localhost:3000).
 
-These checks run against the already-vendored, public-safe data in
-`src/data/generated/civic/` and require no private-repository access:
+Before opening a pull request:
 
 ```bash
-pnpm data:validate            # Validate the vendored civic-data export
-pnpm data:smoke                # Civic data layer smoke checks
-pnpm services:smoke            # Services dataset and route smoke checks
-pnpm nav:smoke                  # Navigation and planned-page smoke checks
-pnpm check:public-data-boundary # Guard against private data re-entering this repo
+pnpm lint
+pnpm format:check
+pnpm build
 ```
 
-Additional domain-specific smoke tests (projects, barangays, legislation,
-transparency, statistics, government, search, and more) are listed in
-`package.json`.
+More targeted smoke and data-validation checks are documented in
+[`CONTRIBUTING.md`](CONTRIBUTING.md) and `package.json`.
 
 ## Repository structure
 
 ```
 src/
-├── app/                        # Next.js App Router routes, layouts, and metadata
-├── components/                 # Reusable UI and layout components
+├── app/                    # Next.js App Router routes, layouts, and metadata
+├── components/             # Reusable UI and layout components
 ├── data/
-│   ├── civic/                  # Typed, validated access layer for civic data
-│   │                            (the only sanctioned way to read civic data)
-│   └── generated/civic/        # Vendored frontend-safe export (never hand-edited)
-├── lib/                        # Shared utilities (metadata, site URL, etc.)
-└── i18n/                       # Internationalization setup
+│   ├── civic/               # Typed access layer for civic data (read it, never bypass it)
+│   └── generated/civic/     # Reviewed, frontend-safe export — never hand-edited
+└── lib/                    # Shared utilities
 
-scripts/                      # Data sync, validation, and smoke-test scripts
-docs/                         # Architecture, data-readiness, and design docs
+public/                    # Static assets
+scripts/                   # Data sync, validation, and smoke-test scripts
+docs/                      # Architecture, data-readiness, and design docs
 ```
-
-## Data synchronization
-
-Only authorized maintainers preparing an approved public export should refresh
-the vendored data:
-
-```bash
-pnpm data:sync
-```
-
-This is a local maintainer step, never a production or CI dependency. Normal
-contributors work with the committed export and run `pnpm data:validate`; the
-private canonical repository is never a runtime or production data source.
-
-## Methodology and limitations
-
-- [`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md) — canonical routes,
-  section ownership, and publication rules.
-- [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) — per-page data
-  readiness and publication status.
-- [`docs/FRONTEND-DESIGN-SYSTEM.md`](docs/FRONTEND-DESIGN-SYSTEM.md) — the
-  current BetterSanFernando frontend design system. The
-  [`/transparency`](src/app/transparency/page.tsx) route is the first
-  reference implementation of this direction, emphasizing editorial
-  hierarchy, pure-white canvas, Inter typography, sharp borders, restrained
-  blue accents, minimal radius/shadows, and information-first layouts.
-  Future pages should follow the documented system rather than copy
-  `/transparency`'s layout literally; other existing routes predate this
-  direction and will be migrated to it progressively.
-- In the running application, `/transparency/methodology` and
-  `/projects/methodology` explain verification, lifecycle, and data-quality
-  rules for the published domains, and `/transparency/sources` inventories the
-  sources behind them.
-
-Coverage is progressive and intentionally bounded. Verification status and
-provenance matter more than apparent completeness: the portal does not infer
-or fill in missing government facts, and an empty or partial dataset is
-reported as such rather than backfilled with assumptions.
 
 ## Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guide. In short:
-frontend, docs, and code contributions are welcome and require no access to
-the private canonical research repository; civic-data corrections go through
-the **Civic data correction** issue form rather than a direct edit.
+Contributions to the frontend, accessibility, documentation, tests,
+performance, search, and general usability are welcome — see
+[`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guide.
 
-## License
+Civic-data corrections should be submitted through the repository's **Civic
+Data Correction** issue form rather than by editing generated civic-data
+files directly. Normal contributors do not need access to the private
+research repository for any of the above.
 
-This project is licensed under [CC0 1.0 Universal](LICENSE) (Creative Commons
-Zero) — see the [`LICENSE`](LICENSE) file for the full text. Third-party
+## Documentation
+
+| Document                                                           | Purpose                                                                              |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| [`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md)           | Current route and information architecture                                           |
+| [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md)             | Publication readiness and data coverage                                              |
+| [`docs/FRONTEND-DESIGN-SYSTEM.md`](docs/FRONTEND-DESIGN-SYSTEM.md) | Frontend design and UI conventions                                                   |
+| [`docs/NEXTJS-MIGRATION-SPEC.md`](docs/NEXTJS-MIGRATION-SPEC.md)   | Historical Next.js migration specification — not current implementation instructions |
+
+See also [`CONTRIBUTING.md`](CONTRIBUTING.md),
+[`SECURITY.md`](SECURITY.md), and [`PROVENANCE.md`](PROVENANCE.md).
+
+## License and provenance
+
+This repository's LICENSE remains [CC0 1.0 Universal](LICENSE). Third-party
 dependencies and source materials referenced or included by this project
-remain subject to their own applicable rights and terms, and are not
-relicensed merely by inclusion in or reference from this repository — see
+remain subject to their own applicable rights and terms — inclusion in or
+reference from this repository does not relicense them. See
 [`PROVENANCE.md`](PROVENANCE.md) for what has been specifically verified.
