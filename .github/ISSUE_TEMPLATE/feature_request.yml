@@ -1,0 +1,32 @@
+name: Feature request
+description: Suggest an improvement for residents or contributors
+title: '[Feature] '
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / resident need
+      description: What need or difficulty prompts this suggestion?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+      description: This is a suggestion for maintainers to consider, not a request for guaranteed implementation.
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Affected area
+      description: e.g. Services, Search, Navigation, Transparency
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives/context considered
+    validations:
+      required: false

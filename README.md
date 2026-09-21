@@ -250,7 +250,7 @@ src/
 │   ├── civic/                  # Typed, validated access layer for civic data
 │   │                            (the only sanctioned way to read civic data)
 │   └── generated/civic/        # Vendored frontend-safe export (never hand-edited)
-├── lib/                        # Utility functions (YAML loaders, metadata, etc.)
+├── lib/                        # Shared utilities (metadata, site URL, etc.)
 └── i18n/                       # Internationalization setup
 
 scripts/                      # Data sync, validation, and smoke-test scripts
@@ -297,21 +297,16 @@ reported as such rather than backfilled with assumptions.
 
 ## Contributing
 
-1. Fork or branch, install dependencies with `pnpm install`, and run `pnpm dev`
-   to work locally.
-2. Follow the conventions and repository boundary documented in
-   [`CLAUDE.md`](CLAUDE.md).
-3. Run `pnpm lint` and `pnpm build` before opening a pull request; run the
-   relevant smoke tests for any area you changed.
-4. A pre-commit hook runs `lint-staged` (ESLint + Prettier) automatically on
-   staged files.
-5. Any change that affects routes, published dataset counts, category
-   publication status, or coverage statements must complete the
-   documentation-impact checkpoint described in `CLAUDE.md` — either update the
-   affected planning documents in the same change, or state
-   `Documentation impact: none` with a specific reason.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guide. In short:
+frontend, docs, and code contributions are welcome and require no access to
+the private canonical research repository; civic-data corrections go through
+the **Civic data correction** issue form rather than a direct edit.
 
 ## License
 
 This project is licensed under [CC0 1.0 Universal](LICENSE) (Creative Commons
-Zero) — see the [`LICENSE`](LICENSE) file for the full text.
+Zero) — see the [`LICENSE`](LICENSE) file for the full text. Third-party
+dependencies and source materials referenced or included by this project
+remain subject to their own applicable rights and terms, and are not
+relicensed merely by inclusion in or reference from this repository — see
+[`PROVENANCE.md`](PROVENANCE.md) for what has been specifically verified.
