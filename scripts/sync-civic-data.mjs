@@ -45,11 +45,15 @@ function resolveSourceRepo() {
   return resolve(raw);
 }
 
-const config = JSON.parse(readFileSync(join(ROOT, 'civic-data.config.json'), 'utf8'));
+const config = JSON.parse(
+  readFileSync(join(ROOT, 'civic-data.config.json'), 'utf8')
+);
 
 const sourceRepo = resolveSourceRepo();
 if (!existsSync(sourceRepo)) {
-  fail(`Source data repo not found at ${sourceRepo}. Set CIVIC_DATA_SOURCE_REPO or --source=<path>.`);
+  fail(
+    `Source data repo not found at ${sourceRepo}. Set CIVIC_DATA_SOURCE_REPO or --source=<path>.`
+  );
 }
 
 const exportDir = join(sourceRepo, config.export_dir);
@@ -81,7 +85,9 @@ if (datasetEntries.length === 0) {
 }
 
 console.log(`[sync-civic-data] Source: ${exportDir}`);
-console.log(`[sync-civic-data] export_version=${manifest.export_version} source_data_version=${manifest.source_data_version}`);
+console.log(
+  `[sync-civic-data] export_version=${manifest.export_version} source_data_version=${manifest.source_data_version}`
+);
 
 // Verify every declared file exists and its checksum matches before copying anything.
 for (const [relPath, meta] of datasetEntries) {
@@ -91,10 +97,14 @@ for (const [relPath, meta] of datasetEntries) {
   }
   const actual = sha256(filePath);
   if (actual !== meta.sha256) {
-    fail(`Checksum mismatch for ${relPath}: expected ${meta.sha256}, got ${actual}`);
+    fail(
+      `Checksum mismatch for ${relPath}: expected ${meta.sha256}, got ${actual}`
+    );
   }
 }
-console.log(`[sync-civic-data] Verified ${datasetEntries.length} dataset checksum(s).`);
+console.log(
+  `[sync-civic-data] Verified ${datasetEntries.length} dataset checksum(s).`
+);
 
 const destDir = join(ROOT, config.generated_target);
 
@@ -131,7 +141,9 @@ function listFilesRecursive(dir) {
   return out;
 }
 
-const declaredFiles = new Set(datasetEntries.map(([relPath]) => join(exportDir, relPath)));
+const declaredFiles = new Set(
+  datasetEntries.map(([relPath]) => join(exportDir, relPath))
+);
 declaredFiles.add(manifestPath);
 const actualFiles = listFilesRecursive(exportDir);
 const undeclared = actualFiles.filter(f => !declaredFiles.has(f));
@@ -141,5 +153,7 @@ if (undeclared.length > 0) {
   );
 }
 
-console.log(`[sync-civic-data] Copied ${datasetEntries.length} file(s) to ${destDir}`);
+console.log(
+  `[sync-civic-data] Copied ${datasetEntries.length} file(s) to ${destDir}`
+);
 console.log('[sync-civic-data] Done.');

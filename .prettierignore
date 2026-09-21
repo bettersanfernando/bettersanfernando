@@ -23,3 +23,6 @@ pnpm-lock.yaml
 # Vendored, checksummed civic data export — never reformat, see
 # src/data/generated/README.md
 src/data/generated/civic
+
+# Generated hook cache, not hand-formatted source
+.impeccable/hook.cache.json

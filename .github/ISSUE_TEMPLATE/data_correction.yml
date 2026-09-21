@@ -1,0 +1,60 @@
+name: Civic data correction
+description: Report incorrect or outdated civic information published on the site
+title: '[Data correction] '
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not submit passwords, private records, personal data, confidential
+        files, unpublished internal documents, or other sensitive information
+        in this form.**
+
+        This form is a lead for maintainers to verify, not a direct edit.
+        Corrections are reviewed and, if confirmed, published through the
+        private publication workflow — they are not automatically published.
+  - type: input
+    id: page
+    attributes:
+      label: Affected route/page
+      description: e.g. /transparency/full-disclosure
+    validations:
+      required: true
+  - type: input
+    id: record
+    attributes:
+      label: Record/service/project/document involved
+      description: Name or identifier of the specific record, if known
+    validations:
+      required: true
+  - type: textarea
+    id: incorrect
+    attributes:
+      label: What appears incorrect or outdated
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Expected correction
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official/public source URL
+      description: A link to an official or public source supporting the correction, if available
+    validations:
+      required: false
+  - type: input
+    id: source_date
+    attributes:
+      label: Source date (if known)
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context (optional)
+    validations:
+      required: false

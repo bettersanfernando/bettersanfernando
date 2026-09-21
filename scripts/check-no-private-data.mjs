@@ -99,8 +99,14 @@ export const PROHIBITED_CONTENT_KEYS = new Set([
 
 const PROHIBITED_VALUE_PATTERNS = [
   { pattern: /[A-Za-z]:\\/, description: 'a Windows filesystem path' },
-  { pattern: /\/home\/|\/Users\//, description: 'a local Unix filesystem path' },
-  { pattern: /\bnta-candidate-\d/i, description: 'an internal candidate-group identifier' },
+  {
+    pattern: /\/home\/|\/Users\//,
+    description: 'a local Unix filesystem path',
+  },
+  {
+    pattern: /\bnta-candidate-\d/i,
+    description: 'an internal candidate-group identifier',
+  },
 ];
 
 /**
@@ -124,7 +130,9 @@ export function findContentViolations(datasetRelPath, value, jsonPath = '') {
     for (const key of Object.keys(value)) {
       const fieldPath = jsonPath ? `${jsonPath}.${key}` : key;
       if (PROHIBITED_CONTENT_KEYS.has(key)) {
-        violations.push(`${datasetRelPath}:${fieldPath} (prohibited key "${key}")`);
+        violations.push(
+          `${datasetRelPath}:${fieldPath} (prohibited key "${key}")`
+        );
       }
       violations.push(
         ...findContentViolations(datasetRelPath, value[key], fieldPath)

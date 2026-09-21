@@ -83,7 +83,11 @@ test('pre-commit stops when the boundary guard cannot run', () => {
 test('allows ordinary public dataset content', () => {
   const dataset = {
     records: [
-      { id: 'x-1', title: 'Public record', reconciliation_status: 'reconciled_to_source_total' },
+      {
+        id: 'x-1',
+        title: 'Public record',
+        reconciliation_status: 'reconciled_to_source_total',
+      },
     ],
     record_count: 1,
   };
@@ -117,7 +121,9 @@ test('rejects an injected reviewer identity key', () => {
 });
 
 test('rejects an injected matching-score key', () => {
-  const dataset = { matches: [{ candidate_id: 'c-1', match_confidence: 0.92 }] };
+  const dataset = {
+    matches: [{ candidate_id: 'c-1', match_confidence: 0.92 }],
+  };
   const violations = findContentViolations('dataset.json', dataset);
   assert.equal(violations.length, 2);
   assert.ok(violations.some(v => v.includes('candidate_id')));
