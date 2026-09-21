@@ -50,7 +50,7 @@ assert.equal(getResolutions().length, 2);
 assert.equal(getFinanceReports().length, 53);
 assert.equal(getFinanceObservations().length, 121);
 assert.equal(getDemographicProfileRecords().length, 136);
-assert.equal(getSearchDocuments().length, 990);
+assert.equal(getSearchDocuments().length, 1735);
 assert.equal(plannedPages.length, 0);
 
 const staticPaths = (readdirSync('src/app', { recursive: true }) as string[])

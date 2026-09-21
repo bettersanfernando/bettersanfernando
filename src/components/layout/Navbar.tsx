@@ -15,21 +15,16 @@ import {
   Droplets,
   ExternalLink,
   FileCheck2,
-  FileSearch,
   FileText,
-  FolderKanban,
   GraduationCap,
   HandHeart,
   HeartPulse,
   House,
-  Info,
   Landmark,
   Leaf,
   LibraryBig,
   ListChecks,
-  LayoutGrid,
   MapPinned,
-  Mail,
   Network,
   Phone,
   Receipt,
@@ -52,7 +47,6 @@ import {
   mainNavigation,
   searchNavigation,
 } from '../../data/navigation';
-import { civicUtilityBar } from '../../data/headerUtility';
 import { SUPPORTED_LANGUAGES } from '../../i18n/languages';
 import type {
   LanguageType,
@@ -83,15 +77,7 @@ const DESKTOP_MEGA_MENU_GRID_COLS: Record<number, string> = {
   3: 'grid-cols-3',
   4: 'grid-cols-4',
 };
-const mobileNavigationIcons: Record<NavigationId, LucideIcon> = {
-  home: House,
-  services: LayoutGrid,
-  projects: FolderKanban,
-  government: Landmark,
-  transparency: FileSearch,
-  about: Info,
-  contact: Mail,
-};
+
 const focusStyles =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2';
 
@@ -485,30 +471,35 @@ export default function Navbar() {
                   'grid-cols-4'
                 }`}
               >
-                {item.sections!.map(section => (
-                  <div key={section.labelKey} className="min-w-0">
-                    <div className="mb-3 flex items-center gap-2 border-b border-primary-100 pb-3">
-                      <span
-                        className="h-6 w-1 shrink-0 rounded-full bg-primary-600"
-                        aria-hidden="true"
-                      />
-                      <h2 className="text-sm font-semibold text-gray-900">
-                        {t(section.labelKey)}
-                      </h2>
+                {item.sections!.map(section => {
+                  const sectionIdx = item.sections!.indexOf(section);
+                  return (
+                    <div key={section.labelKey} className="min-w-0">
+                      <div className="mb-3 flex items-center gap-2 border-b border-gray-100 pb-3">
+                        <span
+                          className="rounded bg-primary-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-primary-600"
+                          aria-hidden="true"
+                        >
+                          {String(sectionIdx + 1).padStart(2, '0')}
+                        </span>
+                        <h2 className="text-sm font-semibold text-gray-900">
+                          {t(section.labelKey)}
+                        </h2>
+                      </div>
+                      <ul className="space-y-1">
+                        {section.items.map(destination => (
+                          <li key={destination.href}>
+                            <DestinationLink
+                              destination={destination}
+                              onNavigate={closeNavigation}
+                              showDescription
+                            />
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="space-y-1">
-                      {section.items.map(destination => (
-                        <li key={destination.href}>
-                          <DestinationLink
-                            destination={destination}
-                            onNavigate={closeNavigation}
-                            showDescription
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -526,9 +517,9 @@ export default function Navbar() {
           aria-modal="true"
           aria-label={t('navigation.accessibility.primary')}
           inert={!isMobileOpen}
-          className={`fixed inset-y-0 right-0 z-[61] flex w-[min(90vw,400px)] max-w-full flex-col bg-white shadow-[-12px_0_40px_rgba(15,23,42,0.14)] transition-transform duration-[250ms] motion-reduce:transition-none xl:hidden ${isMobileOpen ? 'translate-x-0' : 'pointer-events-none translate-x-full'}`}
+          className={`fixed inset-y-0 right-0 z-[61] flex w-full max-w-full flex-col bg-white shadow-[-12px_0_40px_rgba(15,23,42,0.14)] transition-transform duration-[250ms] motion-reduce:transition-none sm:w-[min(92vw,420px)] xl:hidden ${isMobileOpen ? 'translate-x-0' : 'pointer-events-none translate-x-full'}`}
         >
-          <div className="flex h-[72px] shrink-0 items-center justify-between border-b border-slate-100 px-5">
+          <div className="flex h-16 shrink-0 items-center justify-between border-b border-gray-100 bg-white px-5">
             <Link
               href="/"
               onClick={closeNavigation}
@@ -540,27 +531,27 @@ export default function Navbar() {
               type="button"
               onClick={closeNavigation}
               aria-label={t('navigation.accessibility.closeMenu')}
-              className={`inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700 ${focusStyles}`}
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 transition-colors duration-200 hover:bg-slate-100 hover:text-slate-900 ${focusStyles}`}
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+          <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
             <Link
               href={searchNavigation.href}
               onClick={closeNavigation}
-              className={`mb-4 flex min-h-[52px] items-center justify-between rounded-lg bg-slate-50 px-4 text-base font-semibold text-slate-800 transition-colors duration-200 hover:bg-primary-50 hover:text-primary-800 ${focusStyles}`}
+              className={`group mb-4 flex min-h-[48px] items-center justify-between rounded-md border border-gray-200/90 bg-gray-50/60 px-3.5 py-2.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-primary-300 hover:bg-primary-50/50 hover:text-primary-800 ${focusStyles}`}
             >
-              <span className="flex items-center gap-3">
+              <span className="flex items-center gap-2.5">
                 <Search
-                  className="h-5 w-5 text-primary-700"
+                  className="h-4 w-4 text-slate-500 transition-colors group-hover:text-primary-700"
                   aria-hidden="true"
                 />
-                {t(searchNavigation.labelKey)}
+                <span>{t(searchNavigation.labelKey)}</span>
               </span>
               <ChevronRight
-                className="h-4 w-4 text-slate-400"
+                className="h-4 w-4 text-slate-400 transition-[transform,color] duration-200 group-hover:translate-x-0.5 group-hover:text-primary-700"
                 aria-hidden="true"
               />
             </Link>
@@ -570,86 +561,158 @@ export default function Navbar() {
                 {mainNavigation.map(item => {
                   const isActive = activeNavigationId === item.id;
                   const isOpen = openMobileMenu === item.id;
-                  const Icon = mobileNavigationIcons[item.id];
-                  return (
-                    <div key={item.id}>
-                      <div className="flex min-h-[52px] items-center gap-1">
-                        <Link
-                          href={item.href}
-                          onClick={closeNavigation}
-                          aria-current={isActive ? 'page' : undefined}
-                          className={`group flex min-h-[52px] flex-1 items-center rounded-lg px-4 text-base font-medium transition-colors duration-200 ${focusStyles} ${
+
+                  if (item.sections) {
+                    return (
+                      <div key={item.id}>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setOpenMobileMenu(isOpen ? null : item.id)
+                          }
+                          aria-expanded={isOpen}
+                          aria-controls={`mobile-mega-${item.id}`}
+                          aria-label={t(
+                            isOpen
+                              ? 'navigation.accessibility.closeSection'
+                              : 'navigation.accessibility.openSection',
+                            { section: t(item.labelKey) }
+                          )}
+                          className={`flex min-h-[50px] w-full items-center justify-between rounded-md px-3.5 py-3 text-left text-[15px] font-medium transition-colors duration-200 ${focusStyles} ${
                             isActive
-                              ? 'bg-primary-50 font-semibold text-primary-800'
-                              : 'text-slate-800 hover:bg-slate-50 hover:text-primary-700'
+                              ? 'bg-[#F3F6FB] font-semibold text-primary-700'
+                              : 'text-slate-800 hover:bg-slate-50 hover:text-slate-950'
                           }`}
                         >
-                          <span className="flex items-center gap-3">
-                            <Icon
-                              className={`h-5 w-5 shrink-0 transition-colors duration-200 ${isActive ? 'text-primary-700' : 'text-slate-600 group-hover:text-primary-700'}`}
-                              aria-hidden="true"
-                            />
-                            {t(item.labelKey)}
-                          </span>
-                        </Link>
-                        {item.sections && (
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setOpenMobileMenu(isOpen ? null : item.id)
-                            }
-                            aria-expanded={isOpen}
-                            aria-controls={`mobile-mega-${item.id}`}
-                            aria-label={t(
-                              isOpen
-                                ? 'navigation.accessibility.closeSection'
-                                : 'navigation.accessibility.openSection',
-                              { section: t(item.labelKey) }
-                            )}
-                            className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-slate-600 transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700 ${focusStyles}`}
-                          >
-                            <ChevronDown
-                              className={`h-5 w-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                              aria-hidden="true"
-                            />
-                          </button>
-                        )}
-                      </div>
+                          <span>{t(item.labelKey)}</span>
+                          <ChevronDown
+                            className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
+                              isOpen ? 'rotate-180 text-primary-700' : ''
+                            }`}
+                            aria-hidden="true"
+                          />
+                        </button>
 
-                      {item.sections && (
                         <div
                           id={`mobile-mega-${item.id}`}
                           className={`grid transition-[grid-template-rows,opacity] duration-[250ms] motion-reduce:transition-none ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                         >
                           <div className="min-h-0 overflow-hidden">
-                            <div className="space-y-5 px-3 pt-3 pb-4">
-                              {item.sections.map(section => (
-                                <div key={section.labelKey}>
-                                  <div className="mb-2 flex items-center gap-2 border-b border-primary-100 pb-2">
-                                    <span
-                                      className="h-5 w-1 shrink-0 rounded-full bg-primary-600"
-                                      aria-hidden="true"
-                                    />
-                                    <h2 className="text-xs font-semibold text-slate-800">
-                                      {t(section.labelKey)}
-                                    </h2>
+                            <div className="space-y-4 pt-1 pb-3 pl-3.5 pr-1">
+                              <Link
+                                href={item.href}
+                                onClick={closeNavigation}
+                                className={`group flex min-h-[44px] items-center justify-between rounded-md px-3 py-2.5 text-sm font-semibold text-primary-700 transition-colors duration-150 hover:bg-primary-50 hover:text-primary-800 ${focusStyles}`}
+                              >
+                                <span>View {t(item.labelKey)} Overview</span>
+                                <ChevronRight
+                                  className="h-4 w-4 text-primary-600 transition-transform duration-150 group-hover:translate-x-0.5"
+                                  aria-hidden="true"
+                                />
+                              </Link>
+
+                              {item.sections.map(section => {
+                                const sectionIdx =
+                                  item.sections!.indexOf(section);
+                                return (
+                                  <div
+                                    key={section.labelKey}
+                                    className="space-y-1"
+                                  >
+                                    <div className="flex items-center gap-2 border-b border-gray-100 px-3 pt-2 pb-1.5">
+                                      <span
+                                        className="rounded bg-primary-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-primary-600"
+                                        aria-hidden="true"
+                                      >
+                                        {String(sectionIdx + 1).padStart(
+                                          2,
+                                          '0'
+                                        )}
+                                      </span>
+                                      <h2 className="text-xs font-semibold text-gray-900">
+                                        {t(section.labelKey)}
+                                      </h2>
+                                    </div>
+                                    <ul className="space-y-0.5">
+                                      {section.items.map(destination => {
+                                        const isExternal =
+                                          destination.kind === 'external';
+                                        const linkClasses = `group flex min-h-[44px] w-full items-center justify-between rounded-md px-3 py-2 text-sm text-slate-700 transition-colors duration-150 hover:bg-slate-50 hover:text-slate-950 ${focusStyles}`;
+                                        return (
+                                          <li key={destination.href}>
+                                            {isExternal ? (
+                                              <a
+                                                href={destination.href}
+                                                className={linkClasses}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={closeNavigation}
+                                              >
+                                                <span className="leading-snug">
+                                                  {t(destination.labelKey)}
+                                                </span>
+                                                <ExternalLink
+                                                  className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-primary-700"
+                                                  aria-hidden="true"
+                                                />
+                                              </a>
+                                            ) : (
+                                              <Link
+                                                href={destination.href}
+                                                className={linkClasses}
+                                                onClick={closeNavigation}
+                                              >
+                                                <span className="leading-snug">
+                                                  {t(destination.labelKey)}
+                                                </span>
+                                                <ChevronRight
+                                                  className="h-3.5 w-3.5 shrink-0 text-slate-400 transition-[transform,color] duration-150 group-hover:translate-x-0.5 group-hover:text-primary-700"
+                                                  aria-hidden="true"
+                                                />
+                                              </Link>
+                                            )}
+                                          </li>
+                                        );
+                                      })}
+                                    </ul>
                                   </div>
-                                  <ul className="space-y-1">
-                                    {section.items.map(destination => (
-                                      <li key={destination.href}>
-                                        <DestinationLink
-                                          destination={destination}
-                                          onNavigate={closeNavigation}
-                                        />
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
+                                );
+                              })}
                             </div>
                           </div>
                         </div>
-                      )}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div key={item.id}>
+                      <Link
+                        href={item.href}
+                        onClick={closeNavigation}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`group flex min-h-[50px] items-center justify-between rounded-md px-3.5 py-3 text-[15px] font-medium transition-colors duration-200 ${focusStyles} ${
+                          isActive
+                            ? 'bg-[#F3F6FB] font-semibold text-primary-700'
+                            : 'text-slate-800 hover:bg-slate-50 hover:text-slate-950'
+                        }`}
+                      >
+                        <span className="flex items-center gap-2.5">
+                          {item.id === 'home' && (
+                            <House
+                              className="h-4 w-4 text-slate-400"
+                              aria-hidden="true"
+                            />
+                          )}
+                          <span>{t(item.labelKey)}</span>
+                        </span>
+                        {item.id !== 'home' && (
+                          <ChevronRight
+                            className="h-4 w-4 text-slate-400 transition-[transform,color] duration-200 group-hover:translate-x-0.5 group-hover:text-primary-700"
+                            aria-hidden="true"
+                          />
+                        )}
+                      </Link>
                     </div>
                   );
                 })}
@@ -657,31 +720,26 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <div className="relative h-32 shrink-0 overflow-hidden border-t border-slate-100 bg-primary-50/50 px-5 py-4 text-xs">
-            <div className="relative z-10">
-              <span className="flex items-center gap-2 font-medium text-slate-700">
-                <MapPinned
-                  className="h-3.5 w-3.5 text-primary-700"
-                  aria-hidden="true"
-                />
-                San Fernando, Pampanga
-              </span>
-              <a
-                href={civicUtilityBar.betterGovHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-2 inline-flex items-center gap-1 text-primary-700 transition-colors duration-200 hover:text-primary-900 ${focusStyles}`}
-              >
-                BetterGov Philippines
-                <ExternalLink className="h-3 w-3" aria-hidden="true" />
-              </a>
+          <div className="shrink-0 p-4 pt-1">
+            <div className="relative overflow-hidden rounded-md bg-[#002EAC] p-4 text-white">
+              <div className="relative z-10">
+                <span className="block font-mono text-[10px] font-semibold tracking-wider text-blue-200 uppercase">
+                  BETTER SAN FERNANDO
+                </span>
+                <p className="mt-1 text-sm font-medium leading-snug text-white">
+                  Public information, made easier.
+                </p>
+                <p className="mt-3 text-xs text-blue-100/80">
+                  San Fernando, Pampanga
+                </p>
+              </div>
+              <img
+                src="/assets/brand/illustrations/san-fernando-civic-skyline-blue.png"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-4 -bottom-1 h-20 w-auto object-contain opacity-15 select-none"
+              />
             </div>
-            <img
-              src="/assets/brand/illustrations/san-fernando-civic-skyline-blue.png"
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute bottom-0 left-1/2 h-28 w-auto max-w-none -translate-x-1/2 opacity-25"
-            />
           </div>
         </aside>
       </nav>

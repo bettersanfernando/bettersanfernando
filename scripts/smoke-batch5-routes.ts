@@ -205,13 +205,13 @@ for (const source of [mapPageSource, mapViewSource, barangayMapSource]) {
 }
 
 // 7. All expected civic datasets remain represented, and the search index
-//    count is reported (990 documents: 324 projects + 35 barangays +
-//    44 offices + 24 legislation + 563 sources).
+//    count is reported. See scripts/smoke-search.ts for the full per-domain
+//    breakdown and count assertions — this is a lighter cross-check.
 const searchDocuments = getSearchDocuments();
 assert.equal(
   searchDocuments.length,
-  990,
-  'expected exactly 990 search documents (324 projects + 35 barangays + 44 offices + 24 legislation + 563 sources)'
+  1735,
+  'expected exactly 1735 search documents across services, projects, barangays, government, and public-records'
 );
 assert.equal(getBarangays().length, 35, 'expected exactly 35 barangays');
 assert.equal(

@@ -208,12 +208,12 @@ export default function Home() {
           </p>
 
           {/* Large Central Search Box */}
-          <div className="animate-hero-search mt-6 sm:mt-7 xl:mt-8 2xl:mt-9">
+          <div className="animate-hero-search relative z-30 mt-6 sm:mt-7 xl:mt-8 2xl:mt-9">
             <HomeSearchForm />
           </div>
 
           {/* Quick Action Shortcuts */}
-          <div className="animate-hero-actions mt-4 sm:mt-4.5 xl:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 xl:gap-3">
+          <div className="animate-hero-actions relative z-10 mt-4 sm:mt-4.5 xl:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 xl:gap-3">
             {[
               { label: 'Find a Service', href: '/services' },
               { label: 'Explore Projects', href: '/projects' },
@@ -232,7 +232,7 @@ export default function Home() {
           </div>
 
           {/* Civic Snapshot (Integrated horizontal metrics with count-up animation) */}
-          <div className="animate-hero-metrics">
+          <div className="animate-hero-metrics relative z-10">
             <HomeCivicMetrics
               population={summary.population.total}
               barangays={summary.population.barangays}
