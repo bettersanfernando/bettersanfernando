@@ -9,10 +9,7 @@ import { getObservationsForProject } from '../../../data/civic/projectCostUtiliz
 import { titleCaseEnum } from '../../../lib/utils';
 import { buildPageMetadata } from '../../../lib/metadata';
 
-// Ported from src/pages/ProjectDetail.tsx: identical content/markup;
-// react-router's useParams()/Link replaced with Next's params prop and
-// next/link. Unknown IDs call notFound() (a real HTTP 404) instead of
-// rendering an inline "Project not found" banner.
+// Unknown IDs call notFound() (a real HTTP 404).
 //
 // ProjectDetailView is a plain Server Component — it no longer depends on
 // @bettergov/kapwa (which forced a client boundary) and has no interactive

@@ -171,9 +171,7 @@ OCBO and CPDCO. No online RPT, transfer-tax, or CTC payment/application
 channel is published, no universal barangay CTC availability is claimed,
 and no current Schedule of Market Values table is included. See
 [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) for the full
-page-by-page readiness assessment and
-[`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) for what is
-planned next.
+page-by-page readiness assessment.
 
 ## Data and publication model
 
@@ -256,25 +254,21 @@ src/
 └── i18n/                       # Internationalization setup
 
 scripts/                      # Data sync, validation, and smoke-test scripts
-docs/                         # Architecture, data-readiness, and roadmap docs
-content/                      # YAML/Markdown content for Services and Government
+docs/                         # Architecture, data-readiness, and design docs
 ```
 
 ## Data synchronization
 
-Maintainers with local access to the private `bettersanfernando-data`
-repository can refresh the vendored export:
+Only authorized maintainers preparing an approved public export should refresh
+the vendored data:
 
 ```bash
 pnpm data:sync
-# or: pnpm data:sync -- --source=/path/to/bettersanfernando-data
 ```
 
-This copies only the files declared in that repository's versioned, checksummed
-export manifest into `src/data/generated/civic/`, verifying every checksum
-before copying. It is a local maintainer step, never a production or CI
-dependency — the private repository is never a runtime or production data
-source for this application.
+This is a local maintainer step, never a production or CI dependency. Normal
+contributors work with the committed export and run `pnpm data:validate`; the
+private canonical repository is never a runtime or production data source.
 
 ## Methodology and limitations
 
@@ -282,8 +276,6 @@ source for this application.
   section ownership, and publication rules.
 - [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md) — per-page data
   readiness and publication status.
-- [`docs/IMPLEMENTATION-ROADMAP.md`](docs/IMPLEMENTATION-ROADMAP.md) — what has
-  shipped and what is planned next.
 - [`docs/FRONTEND-DESIGN-SYSTEM.md`](docs/FRONTEND-DESIGN-SYSTEM.md) — the
   current BetterSanFernando frontend design system. The
   [`/transparency`](src/app/transparency/page.tsx) route is the first

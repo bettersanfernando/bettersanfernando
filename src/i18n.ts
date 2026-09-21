@@ -4,32 +4,22 @@ import HttpBackend from 'i18next-http-backend';
 import { SUPPORTED_LANGUAGES } from './i18n/languages';
 import enCommon from '../public/locales/en/common.json';
 
-// Next.js equivalent of src/i18n.ts, reusing the same public/locales/*
-// files as the single source of truth (no translation text is duplicated).
-// Differences from the legacy Vite instance, both required because this
-// module also runs during `next build`'s server-side prerender and the
-// first client hydration of the same Client Component tree:
+// This module runs during `next build`'s server-side prerender and the first
+// client hydration of the same Client Component tree:
 //
-// - A dedicated instance (i18next.createInstance()), not the shared
-//   `i18next` default-export singleton the legacy build mutates — a Next.js
-//   server process is long-lived across requests, and mutating a
-//   process-wide instance's language state risks leaking between them.
+// - A dedicated instance (i18next.createInstance()) prevents a long-lived
+//   server process from leaking language state between requests.
 // - English is bundled directly (`resources`) and set as the initial
 //   `lng`, so the server render and the first client render before
 //   hydration produce byte-identical, real English text — never an
 //   HttpBackend fetch that could hang `next build`'s prerender, and never
 //   a raw i18n key. `partialBundledLanguages: true` keeps Filipino/
-//   Kapampangan lazily fetchable via HttpBackend after hydration, exactly
-//   as the legacy build already does.
+//   Kapampangan lazily fetchable via HttpBackend after hydration.
 // - No i18next-browser-languagedetector here: it would resolve navigator/
 //   localStorage synchronously during this same module-eval init, which on
 //   the client would disagree with the server-rendered English before
 //   hydration completes. Browser-only detection happens instead in
 //   src/app/providers.tsx, strictly after mount (see there).
-// - `import.meta.env.DEV` (Vite-only) becomes `process.env.NODE_ENV`.
-//
-// Keep both files in sync until src/i18n.ts and the Vite build it serves
-// are retired.
 const i18n = i18next.createInstance();
 const isBrowser = typeof window !== 'undefined';
 

@@ -6,9 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 import { BreadcrumbListJsonLd } from '../../lib/json-ld';
 
-// Next.js port of Breadcrumbs.tsx — identical markup and auto-generation
-// logic, next/link + next/navigation's usePathname() instead of
-// react-router's Link/useLocation. Shared by every ported Batch 3+ page.
+// Shared breadcrumb navigation and structured-data companion for App Router pages.
 
 interface BreadcrumbItem {
   label: string;

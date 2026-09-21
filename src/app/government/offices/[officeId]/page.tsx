@@ -20,10 +20,7 @@ import {
 } from '../../../../data/civic/government';
 import { buildPageMetadata } from '../../../../lib/metadata';
 
-// Ported from src/pages/GovernmentOfficeDetail.tsx: identical content/
-// markup; react-router's useParams()/Link replaced with Next's params prop
-// and next/link. Unknown office IDs call notFound() (a real HTTP 404)
-// instead of rendering an inline "Office not found" panel.
+// Unknown office IDs call notFound() (a real HTTP 404).
 
 const metadata = getCityOfficesMetadata();
 

@@ -58,10 +58,6 @@ const nextConfig: NextConfig = {
       permanent: true, // HTTP 308
     }));
   },
-  // Keeps type-checking scoped to src/app/.
-  typescript: {
-    tsconfigPath: 'tsconfig.next.json',
-  },
 };
 
 export default nextConfig;

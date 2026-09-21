@@ -10,8 +10,8 @@ It does not claim that every route described here is implemented.
 The Next.js App Router application is the sole implementation: 599 canonical
 URLs, 16 permanent aliases, and zero planned routes passed the Batch 7 parity
 audit, and the legacy Vite/React Router application has been retired. Redirect
-implementation state is tracked in `NEXTJS-MIGRATION-SPEC.md` and
-`IMPLEMENTATION-ROADMAP.md`.
+redirect implementation is defined in `next.config.ts` and verified by the
+route smoke tests.
 
 ## Product purpose and position
 

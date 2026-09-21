@@ -9,7 +9,7 @@ This project uses **pnpm** (`pnpm-lock.yaml` is the lockfile; there is no
 
 ```bash
 pnpm dev             # Start Next.js dev server (localhost:3000)
-pnpm build           # Next.js production build (type-checked against tsconfig.next.json)
+pnpm build           # Next.js production build (type-checked against tsconfig.json)
 pnpm start           # Serve the production build
 pnpm lint            # Run ESLint
 pnpm lint:fix        # Auto-fix ESLint issues
@@ -33,7 +33,7 @@ This repo (`bettersanfernando`) is the **public frontend only**. Canonical/raw c
 
 ### Documentation-impact checkpoint
 
-Every data publication, export sync, category activation, or frontend injection must check whether it changes: dataset counts; published/planned category status; route availability; public coverage statements; provenance or source versions; or roadmap completion state. If it does, either (1) update the affected authoritative documents in the same change, or (2) explicitly report `Documentation impact: none` with a specific reason. Documents to check: `docs/PAGE-DATA-MATRIX.md`, `docs/IMPLEMENTATION-ROADMAP.md`; `docs/SITE-ARCHITECTURE.md` only when taxonomy or canonical routes change; `README.md` only when public project scope materially changes; the generated manifest only through `pnpm data:sync`, never by hand.
+Every data publication, export sync, category activation, or frontend injection must check whether it changes: dataset counts; published/planned category status; route availability; public coverage statements; provenance or source versions; or roadmap completion state. If it does, either (1) update the affected authoritative documents in the same change, or (2) explicitly report `Documentation impact: none` with a specific reason. Documents to check: `docs/PAGE-DATA-MATRIX.md`; `docs/SITE-ARCHITECTURE.md` only when taxonomy or canonical routes change; `README.md` only when public project scope materially changes; the generated manifest only through `pnpm data:sync`, never by hand.
 
 ## Architecture
 
@@ -57,11 +57,8 @@ Public page content comes from the typed access layer in `src/data/civic/`
 (e.g. `getServices()`, `getProjects()`, `getCityOffices()`), which reads the
 versioned, public-safe generated export at `src/data/generated/civic/` —
 never raw private-repo data (see "Repository Boundary" above). Pages call
-these accessors directly; there is no runtime markdown/YAML content loader
-in the current app. (`content/{services,government}/*.md` and
-`src/data/yamlLoader.ts` predate the Next.js migration, have no current
-importers, and are not the live content source — do not build against
-them.)
+these accessors directly; there is no runtime Markdown/YAML content loader
+in the current app.
 
 ### Navigation
 
@@ -93,10 +90,8 @@ and `sitemap.ts` under `src/app/` are the crawl/indexing configuration.
 ### Environment Variables
 
 `NEXT_PUBLIC_SITE_URL` is the canonical production URL, resolved by
-`src/lib/site-url.ts` (see that file's own priority-order comment). The app
-also uses `VITE_GOVERNMENT_NAME`-style branding env vars carried over from
-the pre-migration setup script; confirm current usage in `env.example`
-before relying on a specific name.
+`src/lib/site-url.ts` (see that file's own priority-order comment). Normal
+local development needs no environment file.
 
 ### UI Components
 

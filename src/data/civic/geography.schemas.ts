@@ -2,10 +2,8 @@ import { z } from 'zod';
 import { PsgcCode } from './schemas.ts';
 
 /**
- * Pure Zod schemas for the geography GeoJSON exports — deliberately has no
- * import of the actual .geojson files (see geography.ts), so it can be
- * reused outside Vite (e.g. scripts/smoke-civic-data-layer.ts, which runs
- * under plain Node and can't resolve Vite's `?raw` import convention).
+ * Pure Zod schemas for the geography GeoJSON exports. They deliberately do
+ * not import the data files, so Node smoke tests can reuse them directly.
  */
 
 // Minimal Polygon-only GeoJSON modeling — sufficient for this dataset,
