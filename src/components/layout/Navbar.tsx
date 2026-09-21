@@ -485,30 +485,35 @@ export default function Navbar() {
                   'grid-cols-4'
                 }`}
               >
-                {item.sections!.map(section => (
-                  <div key={section.labelKey} className="min-w-0">
-                    <div className="mb-3 flex items-center gap-2 border-b border-primary-100 pb-3">
-                      <span
-                        className="h-6 w-1 shrink-0 rounded-full bg-primary-600"
-                        aria-hidden="true"
-                      />
-                      <h2 className="text-sm font-semibold text-gray-900">
-                        {t(section.labelKey)}
-                      </h2>
+                {item.sections!.map(section => {
+                  const sectionIdx = item.sections!.indexOf(section);
+                  return (
+                    <div key={section.labelKey} className="min-w-0">
+                      <div className="mb-3 flex items-center gap-2 border-b border-gray-100 pb-3">
+                        <span
+                          className="rounded bg-primary-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-primary-600"
+                          aria-hidden="true"
+                        >
+                          {String(sectionIdx + 1).padStart(2, '0')}
+                        </span>
+                        <h2 className="text-sm font-semibold text-gray-900">
+                          {t(section.labelKey)}
+                        </h2>
+                      </div>
+                      <ul className="space-y-1">
+                        {section.items.map(destination => (
+                          <li key={destination.href}>
+                            <DestinationLink
+                              destination={destination}
+                              onNavigate={closeNavigation}
+                              showDescription
+                            />
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="space-y-1">
-                      {section.items.map(destination => (
-                        <li key={destination.href}>
-                          <DestinationLink
-                            destination={destination}
-                            onNavigate={closeNavigation}
-                            showDescription
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -623,29 +628,38 @@ export default function Navbar() {
                         >
                           <div className="min-h-0 overflow-hidden">
                             <div className="space-y-5 px-3 pt-3 pb-4">
-                              {item.sections.map(section => (
-                                <div key={section.labelKey}>
-                                  <div className="mb-2 flex items-center gap-2 border-b border-primary-100 pb-2">
-                                    <span
-                                      className="h-5 w-1 shrink-0 rounded-full bg-primary-600"
-                                      aria-hidden="true"
-                                    />
-                                    <h2 className="text-xs font-semibold text-slate-800">
-                                      {t(section.labelKey)}
-                                    </h2>
+                              {item.sections.map(section => {
+                                const sectionIdx =
+                                  item.sections!.indexOf(section);
+                                return (
+                                  <div key={section.labelKey}>
+                                    <div className="mb-2 flex items-center gap-2 border-b border-gray-100 pb-2">
+                                      <span
+                                        className="rounded bg-primary-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-primary-600"
+                                        aria-hidden="true"
+                                      >
+                                        {String(sectionIdx + 1).padStart(
+                                          2,
+                                          '0'
+                                        )}
+                                      </span>
+                                      <h2 className="text-xs font-semibold text-gray-900">
+                                        {t(section.labelKey)}
+                                      </h2>
+                                    </div>
+                                    <ul className="space-y-1">
+                                      {section.items.map(destination => (
+                                        <li key={destination.href}>
+                                          <DestinationLink
+                                            destination={destination}
+                                            onNavigate={closeNavigation}
+                                          />
+                                        </li>
+                                      ))}
+                                    </ul>
                                   </div>
-                                  <ul className="space-y-1">
-                                    {section.items.map(destination => (
-                                      <li key={destination.href}>
-                                        <DestinationLink
-                                          destination={destination}
-                                          onNavigate={closeNavigation}
-                                        />
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
+                                );
+                              })}
                             </div>
                           </div>
                         </div>
