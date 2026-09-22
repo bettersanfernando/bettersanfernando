@@ -34,11 +34,11 @@ const manifest = JSON.parse(
   readFileSync('src/data/generated/civic/manifest.json', 'utf8')
 ) as { datasets: Record<string, { record_count: number }> };
 
-assert.equal(Object.keys(manifest.datasets).length, 22);
-assert.equal(getProjects().length, 324);
+assert.equal(Object.keys(manifest.datasets).length, 23);
+assert.equal(getProjects().length, 307);
 assert.equal(getAllProjectEvidence().length, 563);
 assert.equal(getProjectCostUtilizationObservations().length, 298);
-assert.equal(getCoveredProjectIds().length, 109);
+assert.equal(getCoveredProjectIds().length, 106);
 assert.equal(getServices().length, 177);
 assert.equal(new Set(getServices().map(getServiceCategory)).size, 16);
 assert.equal(getCityOffices().length, 44);
@@ -50,7 +50,7 @@ assert.equal(getResolutions().length, 2);
 assert.equal(getFinanceReports().length, 53);
 assert.equal(getFinanceObservations().length, 121);
 assert.equal(getDemographicProfileRecords().length, 136);
-assert.equal(getSearchDocuments().length, 1735);
+assert.equal(getSearchDocuments().length, 1718);
 assert.equal(plannedPages.length, 0);
 
 const staticPaths = (readdirSync('src/app', { recursive: true }) as string[])
@@ -79,9 +79,9 @@ const canonicalPaths = [...staticPaths, ...dynamicPaths];
 // (noindex; see src/app/search/page.tsx) — so it stays at 41 even though
 // the sitemap itself lists one fewer static route.
 assert.equal(staticPaths.length, 41);
-assert.equal(dynamicPaths.length, 561);
-assert.equal(canonicalPaths.length, 602);
-assert.equal(new Set(canonicalPaths).size, 602);
+assert.equal(dynamicPaths.length, 544);
+assert.equal(canonicalPaths.length, 585);
+assert.equal(new Set(canonicalPaths).size, 585);
 
 const queryRoutes = [
   '/search',
@@ -124,5 +124,5 @@ assert.match(serviceCategorySource, /categoryServices\.filter/);
 assert.match(serviceCategorySource, /aria-live="polite"/);
 
 console.log(
-  'Batch 7 parity smoke passed: protected data and 602 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
+  'Batch 7 parity smoke passed: protected data and 585 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
 );

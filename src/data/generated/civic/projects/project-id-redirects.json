@@ -1,0 +1,73 @@
+{
+  "record_count": 17,
+  "redirects": [
+    {
+      "canonical_project_id": "proj-2022-canal-del-rosario-02178",
+      "deprecated_project_id": "proj-2023-del-rosario-canal"
+    },
+    {
+      "canonical_project_id": "proj-2022-road-dolores-02099",
+      "deprecated_project_id": "proj-2023-dolores-road"
+    },
+    {
+      "canonical_project_id": "proj-2022-canal-malpitic-02113",
+      "deprecated_project_id": "proj-2023-malpitic-canal"
+    },
+    {
+      "canonical_project_id": "proj-2022-road-san-isidro-02161",
+      "deprecated_project_id": "proj-2023-san-isidro-road-duplex"
+    },
+    {
+      "canonical_project_id": "proj-2022-road-san-nicolas-02097",
+      "deprecated_project_id": "proj-2023-san-nicolas-road"
+    },
+    {
+      "canonical_project_id": "proj-2022-waterway-san-pedro-02160",
+      "deprecated_project_id": "proj-2023-san-pedro-canal-alt"
+    },
+    {
+      "canonical_project_id": "proj-2022-canal-santa-lucia-02112",
+      "deprecated_project_id": "proj-2023-santa-lucia-canal"
+    },
+    {
+      "canonical_project_id": "proj-2024-alasas-road",
+      "deprecated_project_id": "proj-2025-alasas-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-road-del-rosario-02292",
+      "deprecated_project_id": "proj-2025-del-rosario-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-road-dela-paz-norte-02291",
+      "deprecated_project_id": "proj-2025-dela-paz-norte-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-road-malpitic-02280",
+      "deprecated_project_id": "proj-2025-malpitic-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-road-pulung-bulu-02288",
+      "deprecated_project_id": "proj-2025-pulung-bulu-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-road-san-felipe-02282",
+      "deprecated_project_id": "proj-2025-san-felipe-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-canal-san-nicolas-02430",
+      "deprecated_project_id": "proj-2025-san-nicolas-canal"
+    },
+    {
+      "canonical_project_id": "proj-2024-canal-santa-lucia-02361",
+      "deprecated_project_id": "proj-2025-santa-lucia-canal"
+    },
+    {
+      "canonical_project_id": "proj-2024-canal-santa-teresita-02364",
+      "deprecated_project_id": "proj-2025-santa-teresita-canal"
+    },
+    {
+      "canonical_project_id": "proj-2024-waterway-santo-rosario-02517",
+      "deprecated_project_id": "proj-2025-santo-rosario-canal"
+    }
+  ]
+}

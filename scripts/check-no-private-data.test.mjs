@@ -185,12 +185,12 @@ test('reads the dataset list from the generated manifest, not a hardcoded list',
   }
 });
 
-test('the real 22 generated datasets currently pass the content scan', () => {
+test('the real 23 generated datasets currently pass the content scan', () => {
   const civicDir = fileURLToPath(
     new URL('../src/data/generated/civic/', import.meta.url)
   );
   const datasets = readGeneratedDatasets(civicDir);
-  assert.equal(Object.keys(datasets).length, 22);
+  assert.equal(Object.keys(datasets).length, 23);
   for (const [relPath, data] of Object.entries(datasets)) {
     assert.deepEqual(findContentViolations(relPath, data), []);
   }

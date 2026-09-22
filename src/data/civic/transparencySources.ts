@@ -29,6 +29,7 @@ const DatasetPath = z.enum([
   'projects/city-projects.json',
   'projects/project-cost-utilization.json',
   'projects/project-evidence.json',
+  'projects/project-id-redirects.json',
   'services/services.json',
   'services/utilities-water-resources.json',
   'statistics/public-records-coverage.json',

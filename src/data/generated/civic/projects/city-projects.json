@@ -10,6 +10,7 @@
       "contract_effectivity_date": "2025-05-27",
       "contract_end_date": "2026-01-27",
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": "Special Education Fund 2025",
       "id": "proj-2025-san-nicolas-school",
       "identifiers": {
@@ -38,6 +39,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-cmrf-lara-canal",
       "identifiers": {
@@ -66,6 +68,7 @@
       "contract_effectivity_date": "2025-01-15",
       "contract_end_date": "2025-05-24",
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
       "id": "proj-2024-malpitic-canal",
       "identifiers": {
@@ -94,6 +97,7 @@
       "contract_effectivity_date": "2023-09-05",
       "contract_end_date": "2023-12-02",
       "contractor": "N.J. Chipe Construction Services",
+      "estimated_budget": null,
       "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
       "id": "proj-2022-neptune-road",
       "identifiers": {
@@ -122,6 +126,7 @@
       "contract_effectivity_date": "2024-04-02",
       "contract_end_date": "2024-08-09",
       "contractor": "Nulas Builders",
+      "estimated_budget": null,
       "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
       "id": "proj-2024-alasas-road",
       "identifiers": {
@@ -150,6 +155,7 @@
       "contract_effectivity_date": "2024-05-08",
       "contract_end_date": "2024-07-30",
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
       "id": "proj-2024-malino-road",
       "identifiers": {
@@ -178,6 +184,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": 50000000,
       "funding_source": "Regular Agency Fund",
       "id": "proj-2026-hospital-phase2",
       "identifiers": {
@@ -206,6 +213,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": 4000000,
       "funding_source": "Regular Agency Fund",
       "id": "proj-2026-new-public-market-road",
       "identifiers": {
@@ -234,6 +242,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": 4000000,
       "funding_source": "Regular Agency Fund",
       "id": "proj-2026-saguin-slope-protection",
       "identifiers": {
@@ -262,6 +271,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": 5000000,
       "funding_source": "Regular Agency Fund",
       "id": "proj-2026-san-agustin-waterways",
       "identifiers": {
@@ -290,6 +300,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": 3000000,
       "funding_source": "Regular Agency Fund",
       "id": "proj-2026-panipuan-canal",
       "identifiers": {
@@ -318,6 +329,7 @@
       "contract_effectivity_date": "2026-03-19",
       "contract_end_date": "2026-06-15",
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": 3000000,
       "funding_source": "Regular Agency Fund",
       "id": "proj-2026-unisite-road",
       "identifiers": {
@@ -346,6 +358,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "JAKKKK Engineering Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-pampanga-high-school-01846",
       "identifiers": {
@@ -374,6 +387,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "APEXO Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-santo-rosario-01912",
       "identifiers": {
@@ -402,6 +416,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "APEXO Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-bulaon-02102",
       "identifiers": {
@@ -430,6 +445,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-canal-calulut-02104",
       "identifiers": {
@@ -458,6 +474,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "N.M.D. Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-canal-san-jose-02106",
       "identifiers": {
@@ -486,6 +503,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "N.J. Chipe Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-canal-santa-lucia-02112",
       "identifiers": {
@@ -514,6 +532,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E. B. Matias Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-v-tiomico-st-02092",
       "identifiers": {
@@ -542,6 +561,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "APEXO Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-san-nicolas-02097",
       "identifiers": {
@@ -570,6 +590,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-dolores-02099",
       "identifiers": {
@@ -598,6 +619,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-canal-malpitic-02113",
       "identifiers": {
@@ -626,6 +648,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-dela-paz-norte-02115",
       "identifiers": {
@@ -654,6 +677,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Joynieltin Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-slope-del-carmen-00055",
       "identifiers": {
@@ -682,6 +706,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "JAKKKK Engineering Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-bldg-san-juan-00075",
       "identifiers": {
@@ -710,6 +735,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.L. Montoya Builders and Construction, Inc.",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-utility-alasas-00077",
       "identifiers": {
@@ -738,6 +764,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.S.C. Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-cemetery-lara-00122",
       "identifiers": {
@@ -766,6 +793,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-waterway-san-pedro-02160",
       "identifiers": {
@@ -794,6 +822,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-san-isidro-02161",
       "identifiers": {
@@ -822,6 +851,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "N.M.D. Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-canal-del-rosario-02178",
       "identifiers": {
@@ -850,6 +880,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-canal-san-nicolas-02179",
       "identifiers": {
@@ -878,6 +909,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Geoheart Construction & Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-road-del-pilar-00267",
       "identifiers": {
@@ -906,6 +938,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "V. Trillana Builders and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-canal-del-pilar-00331",
       "identifiers": {
@@ -934,6 +967,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "P.V.B. Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-canal-calulut-00332",
       "identifiers": {
@@ -962,6 +996,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-canal-del-pilar-00335",
       "identifiers": {
@@ -990,6 +1025,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-infra-santo-rosario-00513",
       "identifiers": {
@@ -1018,6 +1054,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "T. Reyes Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-slope-saguin-00965",
       "identifiers": {
@@ -1046,6 +1083,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "APEXO Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-bldg-san-isidro-00980",
       "identifiers": {
@@ -1074,6 +1112,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-slope-panipuan-00998",
       "identifiers": {
@@ -1102,6 +1141,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-waterway-san-jose-01314",
       "identifiers": {
@@ -1130,6 +1170,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-waterway-san-felipe-01327",
       "identifiers": {
@@ -1158,6 +1199,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-road-calulut-01365",
       "identifiers": {
@@ -1186,6 +1228,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-bridge-pandaras-01366",
       "identifiers": {
@@ -1214,6 +1257,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.D. Polintan Construction & Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-canal-san-pedro-and-sta-lu-01367",
       "identifiers": {
@@ -1242,6 +1286,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-canal-dolores-01476",
       "identifiers": {
@@ -1270,6 +1315,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-canal-dela-paz-norte-01570",
       "identifiers": {
@@ -1298,6 +1344,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Big Dreams Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-bldg-santo-rosario-01594",
       "identifiers": {
@@ -1326,6 +1373,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-infra-lara-01722",
       "identifiers": {
@@ -1354,6 +1402,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-utility-lara-01917",
       "identifiers": {
@@ -1382,6 +1431,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-park-san-juan-01433",
       "identifiers": {
@@ -1410,6 +1460,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-road-baliti-01755",
       "identifiers": {
@@ -1438,6 +1489,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "TF 2023",
       "id": "proj-2023-road-baliti-01756",
       "identifiers": {
@@ -1466,6 +1518,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-road-quebiauan-01872",
       "identifiers": {
@@ -1494,6 +1547,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-utility-quebiauan-01876",
       "identifiers": {
@@ -1522,6 +1576,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2023-bldg-lara-02217",
       "identifiers": {
@@ -1550,6 +1605,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.D. Polintan Construction & Trading",
+      "estimated_budget": null,
       "funding_source": "SEF 2023",
       "id": "proj-2023-bldg-san-isidro-02375",
       "identifiers": {
@@ -1578,6 +1634,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-road-santo-rosario-02687",
       "identifiers": {
@@ -1606,6 +1663,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-canal-san-juan-02916",
       "identifiers": {
@@ -1634,6 +1692,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-bldg-san-isidro-02934",
       "identifiers": {
@@ -1662,6 +1721,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.D. Polintan Construction & Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-park-lara-02871",
       "identifiers": {
@@ -1690,6 +1750,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-park-lara-02872",
       "identifiers": {
@@ -1718,6 +1779,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-canal-calulut-02954",
       "identifiers": {
@@ -1746,6 +1808,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-park-calulut-02219",
       "identifiers": {
@@ -1774,6 +1837,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-bulaon-00311",
       "identifiers": {
@@ -1802,6 +1866,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-san-agustin-00389",
       "identifiers": {
@@ -1830,6 +1895,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-slope-del-carmen-00391",
       "identifiers": {
@@ -1858,6 +1924,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-lara-00394",
       "identifiers": {
@@ -1886,6 +1953,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.S.C. Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-cemetery-lara-00395",
       "identifiers": {
@@ -1914,6 +1982,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Arrowhead Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-park-san-isidro-00474",
       "identifiers": {
@@ -1942,6 +2011,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-isidro-00475",
       "identifiers": {
@@ -1970,6 +2040,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-dela-paz-sur-00476",
       "identifiers": {
@@ -1998,6 +2069,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-telabastagan-00504",
       "identifiers": {
@@ -2026,6 +2098,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-alasas-00565",
       "identifiers": {
@@ -2054,6 +2127,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-santo-rosario-00568",
       "identifiers": {
@@ -2082,6 +2156,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-del-pilar-00569",
       "identifiers": {
@@ -2110,6 +2185,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-san-nicolas-00669",
       "identifiers": {
@@ -2138,6 +2214,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-santa-lucia-00671",
       "identifiers": {
@@ -2166,6 +2243,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-dolores-00673",
       "identifiers": {
@@ -2194,6 +2272,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-san-isidro-00670",
       "identifiers": {
@@ -2222,6 +2301,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-city-market-plaza-00694",
       "identifiers": {
@@ -2250,6 +2330,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-isidro-00734",
       "identifiers": {
@@ -2278,6 +2359,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-slope-saguin-00754",
       "identifiers": {
@@ -2306,6 +2388,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-slope-dela-paz-norte-00755",
       "identifiers": {
@@ -2334,6 +2417,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-san-jose-del-pilar-00790",
       "identifiers": {
@@ -2362,6 +2446,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "J.M. Morales Construction and Supply",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-isidro-00872",
       "identifiers": {
@@ -2390,6 +2475,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-city-of-san-fernando-00873",
       "identifiers": {
@@ -2418,6 +2504,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-bldg-san-isidro-01263",
       "identifiers": {
@@ -2446,6 +2533,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-bldg-santo-rosario-01337",
       "identifiers": {
@@ -2474,6 +2562,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-canal-pandaras-01381",
       "identifiers": {
@@ -2502,6 +2591,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-canal-lara-01382",
       "identifiers": {
@@ -2530,6 +2620,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-drrm-sta-teresita-and-pon-00953",
       "identifiers": {
@@ -2558,6 +2649,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-del-rosario-01082",
       "identifiers": {
@@ -2586,6 +2678,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-waterway-san-pedro-01025",
       "identifiers": {
@@ -2614,6 +2707,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bridge-del-carmen-and-san-j-01113",
       "identifiers": {
@@ -2642,6 +2736,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "EDDMARI Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-del-pilar-01124",
       "identifiers": {
@@ -2670,6 +2765,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-malpitic-01130",
       "identifiers": {
@@ -2698,6 +2794,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-alasas-01131",
       "identifiers": {
@@ -2726,6 +2823,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Five JCL Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-san-agustin-01133",
       "identifiers": {
@@ -2754,6 +2852,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-waterway-san-felipe-01215",
       "identifiers": {
@@ -2782,6 +2881,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-dela-paz-norte-01216",
       "identifiers": {
@@ -2810,6 +2910,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-utility-city-of-san-fernando-01318",
       "identifiers": {
@@ -2838,6 +2939,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.D. Polintan Construction & Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-santo-ni-o-01310",
       "identifiers": {
@@ -2866,6 +2968,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-pandaras-01317",
       "identifiers": {
@@ -2894,6 +2997,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-infra-alasas-01587",
       "identifiers": {
@@ -2922,6 +3026,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "LGA Metabuilders Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-santo-rosario-01592",
       "identifiers": {
@@ -2950,6 +3055,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-malpitic-01642",
       "identifiers": {
@@ -2978,6 +3084,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-saguin-01717",
       "identifiers": {
@@ -3006,6 +3113,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-pulung-bulu-01720",
       "identifiers": {
@@ -3034,6 +3142,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bridge-del-pilar-01722",
       "identifiers": {
@@ -3062,6 +3171,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-isidro-01745",
       "identifiers": {
@@ -3090,6 +3200,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-dela-paz-norte-01940",
       "identifiers": {
@@ -3118,6 +3229,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-calulut-02010",
       "identifiers": {
@@ -3146,6 +3258,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-isidro-02127",
       "identifiers": {
@@ -3174,6 +3287,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-slope-malpitic-02165",
       "identifiers": {
@@ -3202,6 +3316,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-agustin-02166",
       "identifiers": {
@@ -3230,6 +3345,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-san-isidro-02180",
       "identifiers": {
@@ -3258,6 +3374,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.S.C. Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-cemetery-lara-02184",
       "identifiers": {
@@ -3286,6 +3403,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-lara-02204",
       "identifiers": {
@@ -3314,6 +3432,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-san-felipe-02282",
       "identifiers": {
@@ -3342,6 +3461,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-dela-paz-norte-02291",
       "identifiers": {
@@ -3370,6 +3490,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-road-dolores-02298",
       "identifiers": {
@@ -3398,6 +3519,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Arrowhead Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-road-calulut-02354",
       "identifiers": {
@@ -3426,6 +3548,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-bridge-del-pilar-02355",
       "identifiers": {
@@ -3454,6 +3577,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-alasas-to-del-rosari-02363",
       "identifiers": {
@@ -3482,6 +3606,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-malpitic-02280",
       "identifiers": {
@@ -3510,6 +3635,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-road-pulung-bulu-02288",
       "identifiers": {
@@ -3538,6 +3664,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-road-telabastagan-02290",
       "identifiers": {
@@ -3566,6 +3693,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-del-rosario-02292",
       "identifiers": {
@@ -3594,6 +3722,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Greenwall Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-canal-santa-lucia-02361",
       "identifiers": {
@@ -3622,6 +3751,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Jacee Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-san-nicolas-02430",
       "identifiers": {
@@ -3650,6 +3780,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Joynieltin Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-canal-san-juan-02432",
       "identifiers": {
@@ -3678,6 +3809,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-road-san-isidro-02434",
       "identifiers": {
@@ -3706,6 +3838,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-canal-calulut-02457",
       "identifiers": {
@@ -3734,6 +3867,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-slope-del-rosario-02464",
       "identifiers": {
@@ -3762,6 +3896,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-canal-dolores-02473",
       "identifiers": {
@@ -3790,6 +3925,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-canal-santa-teresita-02364",
       "identifiers": {
@@ -3818,6 +3954,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-bldg-lourdes-1-and-2-02490",
       "identifiers": {
@@ -3846,6 +3983,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.S.C. Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-bldg-lara-02516",
       "identifiers": {
@@ -3874,6 +4012,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-waterway-santo-rosario-02517",
       "identifiers": {
@@ -3902,6 +4041,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-infra-alasas-02518",
       "identifiers": {
@@ -3930,6 +4070,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-waterway-solana-to-villa-del--02537",
       "identifiers": {
@@ -3958,6 +4099,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-road-san-isidro-00210",
       "identifiers": {
@@ -3986,6 +4128,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-canal-del-pilar-00433",
       "identifiers": {
@@ -4014,6 +4157,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R2DC Construction",
+      "estimated_budget": null,
       "funding_source": "SEF",
       "id": "proj-2025-bldg-alasas-00556",
       "identifiers": {
@@ -4042,6 +4186,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": "SEF",
       "id": "proj-2025-bldg-san-isidro-00571",
       "identifiers": {
@@ -4070,6 +4215,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2024-bldg-alasas-02594",
       "identifiers": {
@@ -4098,6 +4244,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "SEF",
       "id": "proj-2025-bldg-dolores-00561",
       "identifiers": {
@@ -4126,6 +4273,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "SEF",
       "id": "proj-2025-park-san-isidro-00572",
       "identifiers": {
@@ -4154,6 +4302,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-drrm-santa-teresita-00683",
       "identifiers": {
@@ -4182,6 +4331,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-bldg-san-isidro-00799",
       "identifiers": {
@@ -4210,6 +4360,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-bldg-santo-rosario-00770",
       "identifiers": {
@@ -4238,6 +4389,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-bldg-san-isidro-00894",
       "identifiers": {
@@ -4266,6 +4418,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
+      "estimated_budget": null,
       "funding_source": "TF",
       "id": "proj-2025-bldg-santo-rosario-00992",
       "identifiers": {
@@ -4294,6 +4447,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": "GF 2025",
       "id": "proj-2025-bldg-santo-rosario-01019",
       "identifiers": {
@@ -4322,6 +4476,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "GF 2023",
       "id": "proj-2022-road-san-fernando-river-02098",
       "identifiers": {
@@ -4350,6 +4505,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "M.P.Z. Carreon Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-waterway-san-fernando-river-01011",
       "identifiers": {
@@ -4378,6 +4534,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
+      "estimated_budget": null,
       "funding_source": "CSFP General Fund",
       "id": "proj-2023-road-markings-manila-north-road-01475",
       "identifiers": {
@@ -4406,6 +4563,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.D. Polintan Construction and Trading",
+      "estimated_budget": null,
       "funding_source": "CSFP budget/funding",
       "id": "proj-2023-utilities-diosdado-macapagal-government-center-02873",
       "identifiers": {
@@ -4434,6 +4592,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": "General Fund 2025",
       "id": "proj-2025-building-city-police-station-00768",
       "identifiers": {
@@ -4462,6 +4621,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-dolores-1632",
       "identifiers": {
@@ -4490,6 +4650,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R. G. Diaz Builders and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-san-juan-1633",
       "identifiers": {
@@ -4518,6 +4679,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R. G. Diaz Builders and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-nicolas-1467",
       "identifiers": {
@@ -4546,6 +4708,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-isidro-1639",
       "identifiers": {
@@ -4574,6 +4737,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Nulas Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-sindalan-1680",
       "identifiers": {
@@ -4602,6 +4766,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R. G. Roque Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-park-lara-1361",
       "identifiers": {
@@ -4630,6 +4795,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Escan Engineering & General Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-isidro-1641",
       "identifiers": {
@@ -4658,6 +4824,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction & Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-alasas-1678",
       "identifiers": {
@@ -4686,6 +4853,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-san-isidro-and-alasas-1679",
       "identifiers": {
@@ -4714,6 +4882,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "NMD Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-del-rosario-1681",
       "identifiers": {
@@ -4742,6 +4911,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-slope-calulut-00009",
       "identifiers": {
@@ -4770,6 +4940,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-cemetery-lara-00010",
       "identifiers": {
@@ -4798,6 +4969,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-slope-san-isidro-and-alasas-00011",
       "identifiers": {
@@ -4826,6 +4998,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-alasas-00013",
       "identifiers": {
@@ -4854,6 +5027,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-alasas-00014",
       "identifiers": {
@@ -4882,6 +5056,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-lara-00015",
       "identifiers": {
@@ -4910,6 +5085,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-san-isidro-and-alasas-00016",
       "identifiers": {
@@ -4938,6 +5114,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "P.V.B. Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-sindalan-and-malpitic-00017",
       "identifiers": {
@@ -4966,6 +5143,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Turquoise Construction and Realty Development",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-park-san-isidro-00018",
       "identifiers": {
@@ -4994,6 +5172,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-san-felipe-1724",
       "identifiers": {
@@ -5022,6 +5201,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Chariots Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-isidro-00019",
       "identifiers": {
@@ -5050,6 +5230,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.C. Ramos Construction Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-santo-rosario-00117",
       "identifiers": {
@@ -5078,6 +5259,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "APEXO Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-del-rosario-00118",
       "identifiers": {
@@ -5106,6 +5288,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Diaz Builders and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-san-nicolas-00120",
       "identifiers": {
@@ -5134,6 +5317,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Diaz Builders and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-del-pilar-00121",
       "identifiers": {
@@ -5162,6 +5346,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-dolores-00122",
       "identifiers": {
@@ -5190,6 +5375,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Cholo Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-lourdes-00123",
       "identifiers": {
@@ -5218,6 +5404,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-santo-rosario-00130",
       "identifiers": {
@@ -5246,6 +5433,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-lourdes-00133",
       "identifiers": {
@@ -5274,6 +5462,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Diaz Builders and Trading ",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-quebiauan-00178",
       "identifiers": {
@@ -5302,6 +5491,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Cholo Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-calulut-00255",
       "identifiers": {
@@ -5330,6 +5520,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-telabastagan-00265",
       "identifiers": {
@@ -5358,6 +5549,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-san-jose-village-00132",
       "identifiers": {
@@ -5386,6 +5578,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Roque Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-magliman-00179",
       "identifiers": {
@@ -5414,6 +5607,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-alasas-00183",
       "identifiers": {
@@ -5442,6 +5636,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-slope-calulut-00208",
       "identifiers": {
@@ -5470,6 +5665,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bridge-city-town-center-00209",
       "identifiers": {
@@ -5498,6 +5694,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Nulas Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-fernando-elementary-school-00227",
       "identifiers": {
@@ -5526,6 +5723,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-alasas-00387",
       "identifiers": {
@@ -5554,6 +5752,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-del-carmen-00230",
       "identifiers": {
@@ -5582,6 +5781,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E. B. Matias Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-pampanga-high-school-00238",
       "identifiers": {
@@ -5610,6 +5810,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Cholo Construction and Trading ",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-slope-panipuan-00239",
       "identifiers": {
@@ -5638,6 +5839,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Escan Engineering & General Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-alasas-00249",
       "identifiers": {
@@ -5666,6 +5868,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Chariots Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-alasas-00253",
       "identifiers": {
@@ -5694,6 +5897,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bridge-calulut-00254",
       "identifiers": {
@@ -5722,6 +5926,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-park-san-isidro-00258",
       "identifiers": {
@@ -5750,6 +5955,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-slope-calulut-00259",
       "identifiers": {
@@ -5778,6 +5984,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-san-juan-00277",
       "identifiers": {
@@ -5806,6 +6013,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-park-various-00325",
       "identifiers": {
@@ -5834,6 +6042,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-del-pilar-00337",
       "identifiers": {
@@ -5862,6 +6071,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Chariots Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-slope-bulaon-00353",
       "identifiers": {
@@ -5890,6 +6100,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Diaz Builders and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-lourdes-00354",
       "identifiers": {
@@ -5918,6 +6129,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-road-san-isidro-00356",
       "identifiers": {
@@ -5946,6 +6158,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-bulaon-00357",
       "identifiers": {
@@ -5974,6 +6187,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Cholo Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-alasas-00358",
       "identifiers": {
@@ -6002,6 +6216,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Escan Engineering & General Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-main-thoroughfare-00359",
       "identifiers": {
@@ -6030,6 +6245,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-alasas-00360",
       "identifiers": {
@@ -6058,6 +6274,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "J.M. Morales Construction and Supply",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-quebiauan-00361",
       "identifiers": {
@@ -6086,6 +6303,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.C. Ramos Construction Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-santo-rosario-00369",
       "identifiers": {
@@ -6114,6 +6332,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Diaz Builders and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-alasas-00372",
       "identifiers": {
@@ -6142,6 +6361,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Escan Engineering & General Services",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-san-agustin-00373",
       "identifiers": {
@@ -6170,6 +6390,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.G. Roque Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-san-isidro-00381",
       "identifiers": {
@@ -6198,6 +6419,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Chariots Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-isidro-00382",
       "identifiers": {
@@ -6226,6 +6448,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.C. Ramos Construction Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-utility-santo-rosario-00383",
       "identifiers": {
@@ -6254,6 +6477,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Geoheart Construction & Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-calulut-00384",
       "identifiers": {
@@ -6282,6 +6506,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.C. Ramos Construction Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-santo-rosario-00385",
       "identifiers": {
@@ -6310,6 +6535,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-waterway-alasas-00386",
       "identifiers": {
@@ -6338,6 +6564,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.C. Eugenio Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-del-rosario-00389",
       "identifiers": {
@@ -6366,6 +6593,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E.D. Polintan Construction & Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-san-agustin-00390",
       "identifiers": {
@@ -6394,6 +6622,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Code RNR Construction and Trading Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-canal-alasas-00391",
       "identifiers": {
@@ -6422,6 +6651,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Joynieltin Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-infra-calulut-00392",
       "identifiers": {
@@ -6450,6 +6680,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-del-pilar-00393",
       "identifiers": {
@@ -6478,6 +6709,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Chariots Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-santo-rosario-00394",
       "identifiers": {
@@ -6506,6 +6738,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.C. Ramos Construction Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-drrm-santo-rosario-00395",
       "identifiers": {
@@ -6534,6 +6767,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Eldico Builders",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-utility-lara-00406",
       "identifiers": {
@@ -6562,6 +6796,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Alfredo D. Santos Construction",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-utility-lara-00407",
       "identifiers": {
@@ -6590,6 +6825,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Turquoise Construction and Realty Development",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-calulut-00419",
       "identifiers": {
@@ -6618,6 +6854,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "Five JCL Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-alasas-00420",
       "identifiers": {
@@ -6646,6 +6883,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "E. B. Matias Construction and Trading",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-pandaras-00430",
       "identifiers": {
@@ -6674,6 +6912,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": "R.C. Ramos Construction Corporation",
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-bldg-santo-rosario-00368",
       "identifiers": {
@@ -6702,6 +6941,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-bulaon-road",
       "identifiers": {
@@ -6730,6 +6970,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-magliman-road",
       "identifiers": {
@@ -6758,6 +6999,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-agustin-road",
       "identifiers": {
@@ -6786,6 +7028,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-pedro-road",
       "identifiers": {
@@ -6808,40 +7051,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "San Nicolas",
-      "barangay_psgc": "0305416030",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-san-nicolas-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Sitio Bulusan to Sitio Balagtas, San Nicolas",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Santo Niño",
       "barangay_psgc": "0305416034",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-santo-ni-o-road",
       "identifiers": {
@@ -6870,6 +7086,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-malino-road",
       "identifiers": {
@@ -6898,6 +7115,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-pedro-canal",
       "identifiers": {
@@ -6920,40 +7138,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Del Rosario",
-      "barangay_psgc": "0305416009",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-del-rosario-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal at Del Rosario",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Dela Paz Sur",
       "barangay_psgc": "0305416006",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-dela-paz-sur-canal",
       "identifiers": {
@@ -6976,40 +7167,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Malpitic",
-      "barangay_psgc": "0305416017",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-malpitic-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal at Purok 1, Malpitic",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "San Nicolas",
       "barangay_psgc": "0305416030",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-nicolas-canal",
       "identifiers": {
@@ -7032,68 +7196,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Santa Lucia",
-      "barangay_psgc": "0305416032",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-santa-lucia-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal at Purok 8, Sta. Lucia",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "San Pedro",
-      "barangay_psgc": "0305416031",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-san-pedro-canal-alt",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Clearing, Desilting and Declogging of Waterways at San Pedro Creek",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Lara",
       "barangay_psgc": "0305416012",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-lara-road",
       "identifiers": {
@@ -7122,6 +7231,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-magliman-road",
       "identifiers": {
@@ -7150,6 +7260,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-maimpis-road",
       "identifiers": {
@@ -7178,6 +7289,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-panipuan-road",
       "identifiers": {
@@ -7206,6 +7318,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-quebiauan-road",
       "identifiers": {
@@ -7234,6 +7347,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-saguin-road",
       "identifiers": {
@@ -7262,6 +7376,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-san-agustin-road",
       "identifiers": {
@@ -7290,6 +7405,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-san-jose-road",
       "identifiers": {
@@ -7318,6 +7434,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-sindalan-road",
       "identifiers": {
@@ -7346,6 +7463,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-santo-ni-o-road",
       "identifiers": {
@@ -7374,6 +7492,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-baliti-canal",
       "identifiers": {
@@ -7402,6 +7521,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-lourdes-canal",
       "identifiers": {
@@ -7430,6 +7550,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-calulut-road",
       "identifiers": {
@@ -7452,40 +7573,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Dela Paz Norte",
-      "barangay_psgc": "0305416005",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-dela-paz-norte-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Dela Paz Norte",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Magliman",
       "barangay_psgc": "0305416014",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-magliman-road",
       "identifiers": {
@@ -7514,6 +7608,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-malino-road",
       "identifiers": {
@@ -7542,6 +7637,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-panipuan-road",
       "identifiers": {
@@ -7570,6 +7666,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-quebiauan-road",
       "identifiers": {
@@ -7598,6 +7695,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-saguin-road",
       "identifiers": {
@@ -7620,40 +7718,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "San Felipe",
-      "barangay_psgc": "0305416025",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-san-felipe-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at San Felipe",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "San Jose",
       "barangay_psgc": "0305416027",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-san-jose-road",
       "identifiers": {
@@ -7682,6 +7753,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-san-juan-road",
       "identifiers": {
@@ -7710,6 +7782,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-sindalan-road",
       "identifiers": {
@@ -7738,6 +7811,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-santo-ni-o-road",
       "identifiers": {
@@ -7766,6 +7840,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-telabastagan-road",
       "identifiers": {
@@ -7794,6 +7869,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-del-carmen-road",
       "identifiers": {
@@ -7816,96 +7892,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Del Rosario",
-      "barangay_psgc": "0305416009",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-del-rosario-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Del Rosario",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "Malpitic",
-      "barangay_psgc": "0305416017",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-malpitic-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Malpitic",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "Pulung Bulu",
-      "barangay_psgc": "0305416038",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-pulung-bulu-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Pulung Bulu",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "San Agustin",
       "barangay_psgc": "0305416024",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-san-agustin-road",
       "identifiers": {
@@ -7934,6 +7927,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-bulaon-canal",
       "identifiers": {
@@ -7962,6 +7956,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-dela-paz-sur-canal",
       "identifiers": {
@@ -7990,6 +7985,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-lourdes-canal",
       "identifiers": {
@@ -8018,6 +8014,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-san-pedro-canal",
       "identifiers": {
@@ -8040,40 +8037,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Santa Lucia",
-      "barangay_psgc": "0305416032",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-santa-lucia-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal at Sta. Lucia",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Baliti",
       "barangay_psgc": "0305416002",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-baliti-canal",
       "identifiers": {
@@ -8102,6 +8072,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-baliti-road",
       "identifiers": {
@@ -8130,6 +8101,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-malino-road",
       "identifiers": {
@@ -8158,6 +8130,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-panipuan-road",
       "identifiers": {
@@ -8186,6 +8159,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-del-carmen-road",
       "identifiers": {
@@ -8214,6 +8188,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-dela-paz-norte-road",
       "identifiers": {
@@ -8242,6 +8217,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-lara-road",
       "identifiers": {
@@ -8270,6 +8246,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-panipuan-road",
       "identifiers": {
@@ -8298,6 +8275,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-felipe-road",
       "identifiers": {
@@ -8326,6 +8304,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-isidro-road",
       "identifiers": {
@@ -8354,6 +8333,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-jose-road",
       "identifiers": {
@@ -8376,68 +8356,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Dolores",
-      "barangay_psgc": "0305416010",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-dolores-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Dolores",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "San Isidro",
-      "barangay_psgc": "0305416026",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2023-san-isidro-road-duplex",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Duplex, San Isidro",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Maimpis",
       "barangay_psgc": "0305416015",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-maimpis-canal",
       "identifiers": {
@@ -8466,6 +8391,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2023-san-isidro-slope-protection",
       "identifiers": {
@@ -8494,6 +8420,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-del-pilar-road",
       "identifiers": {
@@ -8522,6 +8449,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-san-juan-road",
       "identifiers": {
@@ -8550,6 +8478,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2024-san-pedro-road",
       "identifiers": {
@@ -8572,68 +8501,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Santo Rosario",
-      "barangay_psgc": "0305416021",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-santo-rosario-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Clearing, Desilting, and Declogging of Waterways at Sto. Rosario",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "Alasas",
-      "barangay_psgc": "0305416001",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-alasas-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Alasas",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Del Pilar",
       "barangay_psgc": "0305416008",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-del-pilar-road",
       "identifiers": {
@@ -8662,6 +8536,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-dolores-road",
       "identifiers": {
@@ -8690,6 +8565,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2025-maimpis-road",
       "identifiers": {
@@ -8712,68 +8588,13 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "San Nicolas",
-      "barangay_psgc": "0305416030",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-san-nicolas-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal at San Nicolas",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "Santa Teresita",
-      "barangay_psgc": "0305416033",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "funding_source": null,
-      "id": "proj-2025-santa-teresita-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal at Sta. Teresita",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Malpitic",
       "barangay_psgc": "0305416017",
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-malpitic-building",
       "identifiers": {
@@ -8802,6 +8623,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-malpitic-building-health-center",
       "identifiers": {
@@ -8830,6 +8652,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-lara-road",
       "identifiers": {
@@ -8858,6 +8681,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-san-agustin-road",
       "identifiers": {
@@ -8886,6 +8710,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-san-pedro-road",
       "identifiers": {
@@ -8914,6 +8739,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-sindalan-road",
       "identifiers": {
@@ -8942,6 +8768,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-telabastagan-road",
       "identifiers": {
@@ -8970,6 +8797,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-dela-paz-norte-canal",
       "identifiers": {
@@ -8998,6 +8826,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-santo-ni-o-canal",
       "identifiers": {
@@ -9026,6 +8855,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-malpitic-slope-protection",
       "identifiers": {
@@ -9054,6 +8884,7 @@
       "contract_effectivity_date": null,
       "contract_end_date": null,
       "contractor": null,
+      "estimated_budget": null,
       "funding_source": null,
       "id": "proj-2022-san-agustin-road-asphalt-overlay",
       "identifiers": {
@@ -9074,5 +8905,5 @@
       "year": 2022
     }
   ],
-  "record_count": 324
+  "record_count": 307
 }

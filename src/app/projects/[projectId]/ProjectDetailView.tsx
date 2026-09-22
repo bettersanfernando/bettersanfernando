@@ -68,12 +68,16 @@ function FinancialMetric({
 
 function FinancialOverview({ project }: { project: Project }) {
   const {
+    estimated_budget,
     approved_budget_abc: abc,
     winning_bid_amount,
     contract_amount,
   } = project;
   const allUnavailable =
-    abc === null && winning_bid_amount === null && contract_amount === null;
+    estimated_budget === null &&
+    abc === null &&
+    winning_bid_amount === null &&
+    contract_amount === null;
 
   const percentOfAbc = (value: number | null) =>
     abc !== null && abc > 0 && value !== null
@@ -107,7 +111,14 @@ function FinancialOverview({ project }: { project: Project }) {
         </div>
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-          <FinancialMetric label="Approved Budget (ABC)" amount={abc} />
+          <FinancialMetric
+            label="APP Estimated Budget"
+            amount={estimated_budget}
+          />
+          <FinancialMetric
+            label="Approved Budget for Contract (ABC)"
+            amount={abc}
+          />
           <FinancialMetric
             label="Winning Bid Amount"
             amount={winning_bid_amount}
