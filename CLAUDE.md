@@ -29,7 +29,7 @@ Pre-commit hook runs `lint-staged` automatically (ESLint + Prettier on staged fi
 
 ## Repository Boundary
 
-This repo (`bettersanfernando`) is the **public frontend only**. Canonical/raw civic research data, source PDFs/XLSX, and research docs live only in the private `../bettersanfernando-data` repo — never copy root `data/`, `pdf/`, or `xlsx/` here. This repo consumes only the public-safe generated export via `pnpm data:sync`; `src/data/generated/civic/` is the expected, allowed vendored copy.
+This repo (`bettersanfernando`) is the **public frontend only**. Canonical/raw civic research data, source PDFs/XLSX, and research docs live only in the private `../bettersanfernando-data` repo — never copy root `data/`, `pdf/`, or `xlsx/` here. This repo consumes only the public-safe generated export via `pnpm data:sync`; `src/data/generated/civic/` is the expected, allowed vendored copy. This boundary is enforced automatically by `pnpm check:public-data-boundary` (and its test, `pnpm test:public-data-boundary`).
 
 ### Documentation-impact checkpoint
 
@@ -59,6 +59,12 @@ versioned, public-safe generated export at `src/data/generated/civic/` —
 never raw private-repo data (see "Repository Boundary" above). Pages call
 these accessors directly; there is no runtime Markdown/YAML content loader
 in the current app.
+
+Site search is backed by MiniSearch. `src/data/civic/search.ts` is the main
+implementation, indexing documents across the domains defined by
+`CIVIC_SEARCH_DOMAINS`; `src/data/civic/searchAliases.ts` and
+`src/data/civic/searchNormalization.ts` handle alias expansion and query
+normalization.
 
 ### Navigation
 
@@ -97,7 +103,8 @@ local development needs no environment file.
 
 Reusable primitives live in `src/components/ui/`: `Section`, `Heading`,
 `Text`, `Breadcrumbs`, `ScrollToTop`, `PageLoading`, `EligibilityText`. Use
-these instead of raw HTML elements for consistency.
+these instead of raw HTML elements for consistency. For current visual and
+interaction guidance, see `docs/FRONTEND-DESIGN-SYSTEM.md`.
 
 ### Code Style
 
