@@ -5,13 +5,14 @@
 This document is the authoritative information architecture for the public
 BetterSanFernando website. It defines the site's major sections, canonical
 route hierarchy, route ownership, overlap decisions, and publication rules.
-It does not claim that every route described here is implemented.
+It distinguishes implemented routes from deferred concepts that do not yet
+have a public route.
 
 The Next.js App Router application is the sole implementation: 599 canonical
-URLs, 16 permanent aliases, and zero planned routes passed the Batch 7 parity
-audit, and the legacy Vite/React Router application has been retired. Redirect
-redirect implementation is defined in `next.config.ts` and verified by the
-route smoke tests.
+URLs and 16 permanent aliases passed the Batch 7 parity audit, and the legacy
+Vite/React Router application has been retired. `/government/structure`
+remains a deferred concept, not an implemented route. Redirect implementation
+is defined in `next.config.ts` and verified by the route smoke tests.
 
 ## Product purpose and position
 
@@ -123,6 +124,7 @@ support that purpose.
 │   └── disaster-preparedness
 ├── projects
 │   ├── :projectId
+│   ├── city-projects
 │   ├── map
 │   ├── sources
 │   └── methodology
@@ -130,7 +132,6 @@ support that purpose.
 │   ├── bid-results
 │   └── contracts
 ├── government
-│   ├── structure
 │   ├── contact
 │   ├── offices
 │   ├── hotlines
@@ -158,16 +159,22 @@ support that purpose.
 │   └── public-records
 ├── barangays
 ├── about
-├── contact
 ├── sitemap
 ├── accessibility
-└── search
+├── search
+└── llms.txt
 ```
+
+`/projects/city-projects` is the canonical project directory and
+`/llms.txt` is a current non-HTML discovery route. `/contact` is a redirect
+alias to `/government/contact`, not a canonical page. `/government/structure`
+remains deferred until a verified, frontend-safe organizational structure
+dataset supports it.
 
 Routes in the hierarchy are architectural destinations, not promises of
 immediate publication. Pages without sufficient verified public data should
-remain unimplemented or clearly planned rather than being filled with generic,
-inferred, or non-San Fernando content.
+remain deferred rather than being filled with generic, inferred, or
+non-San Fernando content.
 
 ## Section responsibilities
 
@@ -395,8 +402,9 @@ resident information.
 
 ### Search
 
-Search is a utility rather than a top-level section. It should index only
-published, verified content and canonical destinations. Redirect aliases,
+Search is a utility rather than a top-level section. The current local
+MiniSearch index is provided through `src/data/civic/search.ts` and indexes
+only published, verified content and canonical destinations. Redirect aliases,
 planned placeholders, and withdrawn legacy content should not appear as
 independent results.
 
@@ -514,8 +522,8 @@ qualifies, with a link to the relevant methodology or source page for detail.
 
 ## Canonical routes and redirects
 
-The following decisions resolve overlaps present in the current navigation
-and planned-route registry. Redirect behavior will be implemented separately.
+The following implemented decisions resolve overlaps in the current navigation
+and route hierarchy. `next.config.ts` implements the 16 permanent aliases.
 
 | Current or proposed route          | Canonical destination                    | Decision                                                                     |
 | ---------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
@@ -621,12 +629,7 @@ The following decisions remain outside this document's settled route model:
   and how term changes will be maintained;
 - whether a dedicated historical Full Disclosure workflow eventually becomes
   different enough to justify a route separate from the filterable canonical
-  collection;
-- whether Search uses a hosted index, a generated local index, or remains
-  deferred until the core content corpus is publication-ready; and
-- whether currently linked but unplanned utility destinations such as
-  Accessibility, Community Discord, and Holidays become supported pages or
-  are removed from navigation.
+  collection.
 
 These questions may change page scope or labels, but they do not change the
 seven-item top-level navigation or the canonical overlap decisions above.
