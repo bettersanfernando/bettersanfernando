@@ -67,7 +67,7 @@ export const ProjectSchema = z
     jurisdiction_psgc: PsgcCode,
 
     // Distinct budget/money semantics — never collapsed into one "amount".
-    estimated_budget: z.null().optional().default(null),
+    estimated_budget: z.number().nullable(),
     approved_budget_abc: z.number().nullable(),
     winning_bid_amount: z.number().nullable(),
     contract_amount: z.number().nullable(),

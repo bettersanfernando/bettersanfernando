@@ -23,21 +23,21 @@ const repeatedProjectIds = getRepeatedObservationProjectIds();
 // 1. Exact schema/counts.
 assert.equal(observations.length, 298, 'exactly 298 verified observations');
 assert.equal(metadata.recordCount, 298);
-assert.equal(coveredProjectIds.length, 109, 'exactly 109 unique projects');
-assert.equal(metadata.uniqueProjectCount, 109);
+assert.equal(coveredProjectIds.length, 106, 'exactly 106 unique projects');
+assert.equal(metadata.uniqueProjectCount, 106);
 assert.equal(
   repeatedProjectIds.length,
-  108,
-  'exactly 108 projects with repeated observations'
+  105,
+  'exactly 105 projects with repeated observations'
 );
-assert.equal(metadata.repeatedObservationProjectCount, 108);
+assert.equal(metadata.repeatedObservationProjectCount, 105);
 assert.equal(
   new Set(observations.map(o => o.id)).size,
   298,
   'observation ids must be unique'
 );
 
-// 2. All project references resolve against the 324-project canonical set.
+// 2. All project references resolve against the 307-project canonical set.
 for (const observation of observations) {
   const project = getProjectById(observation.canonical_project_id);
   assert.ok(
@@ -45,7 +45,7 @@ for (const observation of observations) {
     `observation ${observation.id} must resolve to a canonical project`
   );
 }
-assert.equal(getProjects().length, 324, 'canonical projects must be 324');
+assert.equal(getProjects().length, 307, 'canonical projects must be 307');
 
 // 3. currency_unit null throughout; period_basis is year_to_date.
 for (const observation of observations) {
@@ -83,7 +83,16 @@ for (const observation of observations) {
 
 // 5. Repeated observations remain separate — each repeated project has more
 // than one distinct observation id, and every repeat sits in one reporting
-// year (no observation is silently merged or connected across years).
+// year (no observation is silently merged or connected across years) EXCEPT
+// the 3 canonical-project-dedup survivors below, which legitimately combine
+// their own pre-existing observations with a retired duplicate project's
+// observations from an adjacent year (see data/projects/project-canonical-merges.json
+// in the private repo) — a genuine multi-year lifecycle, not a merge bug.
+const MULTI_YEAR_MERGE_SURVIVOR_IDS = new Set([
+  'proj-2024-alasas-road',
+  'proj-2022-road-san-isidro-02161',
+  'proj-2022-canal-santa-lucia-02112',
+]);
 for (const projectId of repeatedProjectIds) {
   const list = getObservationsForProject(projectId);
   assert.ok(
@@ -96,10 +105,13 @@ for (const projectId of repeatedProjectIds) {
     `${projectId} observations must be distinct records, not merged`
   );
   const years = new Set(list.map(o => o.reporting_year));
+  const expectedYearCount = MULTI_YEAR_MERGE_SURVIVOR_IDS.has(projectId)
+    ? 2
+    : 1;
   assert.equal(
     years.size,
-    1,
-    `${projectId}'s repeated observations must currently sit in one reporting year`
+    expectedYearCount,
+    `${projectId}'s repeated observations must sit in exactly ${expectedYearCount} reporting year(s)`
   );
 }
 
@@ -140,7 +152,7 @@ assert.equal(
 );
 assert.equal(spendingDestinations[0]?.kind, 'real');
 
-// 8. Project-detail sections limited to exactly the 19 matched projects.
+// 8. Project-detail sections limited to exactly the 106 matched projects.
 const projectDetailSource = readFileSync(
   'src/app/projects/[projectId]/page.tsx',
   'utf8'
@@ -200,22 +212,22 @@ for (const project of getProjects()) {
     assert.equal(
       list.length,
       0,
-      `${project.id} is not one of the 19 matched projects and must have no observations`
+      `${project.id} is not one of the 106 matched projects and must have no observations`
     );
   }
 }
-assert.equal(coveredProjectIds.length + (324 - coveredProjectIds.length), 324);
+assert.equal(coveredProjectIds.length + (307 - coveredProjectIds.length), 307);
 assert.equal(
   getProjects().filter(
     project => getObservationsForProject(project.id).length > 0
   ).length,
-  109
+  106
 );
 assert.equal(
   getProjects().filter(
     project => getObservationsForProject(project.id).length === 0
   ).length,
-  215
+  201
 );
 
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
@@ -274,13 +286,13 @@ for (const source of [pageSource, projectDetailPresentationSource]) {
 
 // 12. UI presentation: the analytical redesign replaced the compact
 // preview/show-all toggle with a searchable, sortable, paginated "Latest
-// project snapshots" directory — all 109 projects must remain reachable via
+// project snapshots" directory — all 106 projects must remain reachable via
 // pagination, and the full list must stay in memory, not truncated at the
 // source.
 assert.match(
   pageSource,
   /latestByProject/,
-  'the full 109-project snapshot list must remain in memory, not truncated at the source'
+  'the full 106-project snapshot list must remain in memory, not truncated at the source'
 );
 assert.match(
   pageSource,
@@ -327,12 +339,12 @@ assert.match(pageSource, />\s*Next\s*</);
 assert.match(
   pageSource,
   /Browse all \{metadata\.canonicalProjectCount\} projects/,
-  'the page must link to /projects/city-projects labeled to browse all 324 projects'
+  'the page must link to /projects/city-projects labeled to browse all 307 projects'
 );
 assert.match(
   pageSource,
   /href="\/projects\/city-projects"[\s\S]{0,300}Browse all/,
-  'the Browse-all-324 control must link to /projects/city-projects'
+  'the Browse-all-307 control must link to /projects/city-projects'
 );
 // Coverage must remain derived from metadata, include both sides of the
 // represented-project count, and avoid treating the subset as citywide data.
@@ -408,7 +420,7 @@ assert.doesNotMatch(
 );
 
 // The redesign must not drop or paginate away any of the 298 underlying
-// observations or 109 projects — only the rendered slice per page/view.
+// observations or 106 projects — only the rendered slice per page/view.
 assert.match(pageSource, /filteredObservations\.slice/);
 assert.match(pageSource, /pagedObservations/);
 assert.equal(

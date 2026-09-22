@@ -110,6 +110,7 @@ const barangays = parsed['demographics/barangays.json'];
 const projects = parsed['projects/city-projects.json'];
 const evidence = parsed['projects/project-evidence.json'];
 const utilization = parsed['projects/project-cost-utilization.json'];
+const redirects = parsed['projects/project-id-redirects.json'];
 const services = parsed['services/services.json'];
 const officialDocuments = parsed['transparency/official-documents.json'];
 
@@ -127,8 +128,8 @@ if (barangays) {
 let projectIds = new Set();
 if (projects) {
   const list = projects.projects ?? [];
-  if (list.length !== 324) {
-    fail(`Expected 324 projects, got ${list.length}`);
+  if (list.length !== 307) {
+    fail(`Expected 307 projects, got ${list.length}`);
   }
   for (const p of list) {
     if (projectIds.has(p.id)) {
@@ -155,6 +156,34 @@ if (evidence) {
   }
 }
 
+if (redirects) {
+  const list = redirects.redirects ?? [];
+  if (list.length !== 17) {
+    fail(`Expected 17 project ID redirects, got ${list.length}`);
+  }
+  const deprecatedIds = new Set(list.map(r => r.deprecated_project_id));
+  if (deprecatedIds.size !== list.length) {
+    fail('Duplicate deprecated_project_id in project-id-redirects.json');
+  }
+  for (const r of list) {
+    if (projectIds.has(r.deprecated_project_id)) {
+      fail(
+        `Redirect source ${r.deprecated_project_id} must not still exist as a live project`
+      );
+    }
+    if (!projectIds.has(r.canonical_project_id)) {
+      fail(
+        `Redirect target ${r.canonical_project_id} does not resolve to a live project`
+      );
+    }
+    if (deprecatedIds.has(r.canonical_project_id)) {
+      fail(
+        `Redirect chain/loop: ${r.deprecated_project_id} -> ${r.canonical_project_id}, but the target is itself deprecated`
+      );
+    }
+  }
+}
+
 if (utilization) {
   const list = utilization.observations ?? [];
   const counts = new Map();
@@ -164,14 +193,14 @@ if (utilization) {
       (counts.get(observation.canonical_project_id) ?? 0) + 1
     );
   }
-  if (list.length !== 298 || counts.size !== 109) {
+  if (list.length !== 298 || counts.size !== 106) {
     fail(
-      `Expected 298 utilization observations for 109 projects, got ${list.length} for ${counts.size}`
+      `Expected 298 utilization observations for 106 projects, got ${list.length} for ${counts.size}`
     );
   }
   const repeated = [...counts.values()].filter(count => count > 1).length;
-  if (repeated !== 108)
-    fail(`Expected 108 repeated-observation projects, got ${repeated}`);
+  if (repeated !== 105)
+    fail(`Expected 105 repeated-observation projects, got ${repeated}`);
 }
 
 if (services?.services?.length !== 177) {

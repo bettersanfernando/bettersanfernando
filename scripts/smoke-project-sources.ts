@@ -25,7 +25,7 @@ const counts = countProjectEvidenceByStage(evidence);
 
 // 1. Evidence and project integrity
 assert.equal(evidence.length, 563);
-assert.equal(projects.length, 324);
+assert.equal(projects.length, 307);
 assert.equal(counts.BID_RESULTS, 233);
 assert.equal(counts.NTA_UTILIZATION_REPORT, 229);
 assert.equal(counts.PROCUREMENT_MONITORING_REPORT, 74);
@@ -33,7 +33,7 @@ assert.equal(counts.NOTICE_OF_AWARD, 11);
 assert.equal(counts.ITB, 10);
 assert.equal(counts.APP, 6);
 assert.equal(records.length, evidence.length, 'no evidence may be orphaned');
-assert.equal(new Set(evidence.map(item => item.project_id)).size, 324);
+assert.equal(new Set(evidence.map(item => item.project_id)).size, 307);
 
 // 2. Document coverage derivation
 const withAttachmentCount = evidence.filter(hasAttachment).length;

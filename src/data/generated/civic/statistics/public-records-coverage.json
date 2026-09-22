@@ -127,7 +127,7 @@
     {
       "availability_status": "available",
       "canonical_route": "/projects",
-      "count": 324,
+      "count": 307,
       "count_basis": "published_item_level",
       "coverage_note": "Published project records only; this is not every project undertaken by the City.",
       "metadata_granularity": "record_level",

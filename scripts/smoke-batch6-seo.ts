@@ -225,8 +225,8 @@ const expectedTotal =
   getCityOffices().length;
 assert.equal(
   expectedTotal,
-  601,
-  'independently recomputed sitemap count must be 601'
+  584,
+  'independently recomputed sitemap count must be 584'
 );
 
 const sitemapSource = readFileSync('src/app/sitemap.ts', 'utf8');

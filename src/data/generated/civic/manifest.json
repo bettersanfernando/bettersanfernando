@@ -72,19 +72,24 @@
       "sha256": "6406acb11d81d458b41132717e6fde39cebb5daa7b49eee4f5e7aac468e62246"
     },
     "projects/city-projects.json": {
-      "record_count": 324,
+      "record_count": 307,
       "schema_version": 1,
-      "sha256": "14e8e7f4cf485c28700174e9061ee93460d93648e1907738ae863e5c5c835665"
+      "sha256": "d6ce650c1b7fa04ced6b50b372c8a94bc2b58f61769b22a453eeba3dda2266fe"
     },
     "projects/project-cost-utilization.json": {
       "record_count": 298,
       "schema_version": 1,
-      "sha256": "39a606f9a48f497a0e38156f0a720a2e91a1c5b229b9b80ad1f9d4077ff21a14"
+      "sha256": "bea33d5418284dad9057ed0098a59d10a413e958365e6061578394dacd2298b5"
     },
     "projects/project-evidence.json": {
       "record_count": 563,
       "schema_version": 1,
-      "sha256": "77f257a0ae54defc5095180bfcac6aef64f570313429734351b9ac152451fa51"
+      "sha256": "97822177d6dc8caeb10f35da62cad257bfdda5574cfefb583d0383d98c16d7bf"
+    },
+    "projects/project-id-redirects.json": {
+      "record_count": 17,
+      "schema_version": 1,
+      "sha256": "8156f9b2279e5dcd0a92ef22843b24ccea181d49ea9448f8b455dcd20a927774"
     },
     "services/services.json": {
       "record_count": 177,
@@ -99,7 +104,7 @@
     "statistics/public-records-coverage.json": {
       "record_count": 8,
       "schema_version": 1,
-      "sha256": "76f73035efe93509497218d5e497c7f790bad7a56adf6aaccac933e2c38119c3"
+      "sha256": "d9978905ae2313ad615a8445fdc4e4abc3ef339cecb1a85067ec74de7bf2a767"
     },
     "transparency/full-disclosure.json": {
       "record_count": 10,
@@ -126,6 +131,7 @@
     "data/legislation/resolutions.json",
     "data/projects/city-projects.json",
     "data/projects/project-evidence.json",
+    "data/projects/project-canonical-merges.json",
     "data/projects/bid-results-source-manifest.json",
     "data/projects/cy2022-source-manifest.json",
     "data/services/citizens-charter-services.json",
@@ -208,7 +214,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "965b1fc8a9d61aefa8ce8e3ff8480e434caba1c1",
+  "source_commit": "54c32434cb0b1cf3320f8b65c4f31b37c81bbcfa",
   "source_data_version": "v0.1.1",
   "sources": [
     {
