@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="public/logo-512.png" width="96" alt="BetterSanFernando logo" />
+  <img
+    src="public/og-default.png"
+    width="900"
+    alt="BetterSanFernando — independent civic information and transparency for San Fernando, Pampanga"
+  />
 </p>
 
 <h1 align="center">BetterSanFernando</h1>
@@ -120,8 +124,12 @@ research repository for any of the above.
 
 ## Documentation
 
+See the [documentation index](docs/README.md) for the complete project
+documentation map.
+
 | Document                                                           | Purpose                                                                              |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| [`docs/DATA-PUBLICATION.md`](docs/DATA-PUBLICATION.md)             | Civic-data publication workflow and public/private boundaries                        |
 | [`docs/SITE-ARCHITECTURE.md`](docs/SITE-ARCHITECTURE.md)           | Current route and information architecture                                           |
 | [`docs/PAGE-DATA-MATRIX.md`](docs/PAGE-DATA-MATRIX.md)             | Publication readiness and data coverage                                              |
 | [`docs/FRONTEND-DESIGN-SYSTEM.md`](docs/FRONTEND-DESIGN-SYSTEM.md) | Frontend design and UI conventions                                                   |
