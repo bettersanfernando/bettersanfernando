@@ -26,8 +26,8 @@ assert.deepEqual(
     PLANNED: 2,
     PROCUREMENT: 3,
     AWARDED: 228,
-    CONTRACTED: 6,
-    IMPLEMENTATION_REPORTED: 67,
+    CONTRACTED: 7,
+    IMPLEMENTATION_REPORTED: 66,
   }
 );
 assert.equal(
@@ -80,9 +80,9 @@ assert.deepEqual(
     item.unavailableCount,
   ]),
   [
-    ['approved_budget_abc', 237, 69],
+    ['approved_budget_abc', 238, 68],
     ['winning_bid_amount', 232, 74],
-    ['contract_amount', 10, 296],
+    ['contract_amount', 11, 295],
   ]
 );
 

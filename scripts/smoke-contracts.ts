@@ -17,11 +17,11 @@ const records = getAwardAndContractRecords();
 const summary = getContractsSummary(records, projects.length);
 
 assert.equal(projects.length, 306);
-assert.equal(records.length, 234);
+assert.equal(records.length, 235);
 assert.equal(summary.awarded, 228);
-assert.equal(summary.contracted, 6);
-assert.equal(summary.withContractAmount, 10);
-assert.equal(summary.withContractNumber, 8);
+assert.equal(summary.contracted, 7);
+assert.equal(summary.withContractAmount, 11);
+assert.equal(summary.withContractNumber, 9);
 assert.ok(
   records.every(record =>
     ['AWARDED', 'CONTRACTED'].includes(record.project.lifecycle_status)
@@ -72,15 +72,15 @@ for (const sort of CONTRACT_RECORD_SORTS) {
 }
 assert.equal(
   filterAndSortContractRecords(records, { lifecycle: 'CONTRACTED' }).length,
-  6
+  7
 );
 assert.equal(
   filterAndSortContractRecords(records, { contractAmount: 'available' }).length,
-  10
+  11
 );
 assert.equal(
   filterAndSortContractRecords(records, { contractNumber: 'available' }).length,
-  8
+  9
 );
 assert.ok(
   records

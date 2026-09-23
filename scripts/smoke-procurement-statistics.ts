@@ -8,17 +8,17 @@ const second = getProcurementStatistics();
 
 assert.deepEqual(first, second, 'procurement statistics must be deterministic');
 assert.equal(first.projects.total, 306);
-assert.equal(first.evidence.total, 570);
+assert.equal(first.evidence.total, 572);
 assert.deepEqual(first.projects.lifecycle, [
   { key: 'PLANNED', count: 2, denominator: 306, percentage: 0.7 },
   { key: 'PROCUREMENT', count: 3, denominator: 306, percentage: 1 },
   { key: 'AWARDED', count: 228, denominator: 306, percentage: 74.5 },
-  { key: 'CONTRACTED', count: 6, denominator: 306, percentage: 2 },
+  { key: 'CONTRACTED', count: 7, denominator: 306, percentage: 2.3 },
   {
     key: 'IMPLEMENTATION_REPORTED',
-    count: 67,
+    count: 66,
     denominator: 306,
-    percentage: 21.9,
+    percentage: 21.6,
   },
 ]);
 assert.equal(
@@ -30,10 +30,10 @@ assert.deepEqual(
     first.projects.fieldCoverage.map(item => [item.key, item.count])
   ),
   {
-    approvedBudgetAbc: 237,
+    approvedBudgetAbc: 238,
     winningBidAmount: 232,
-    contractAmount: 10,
-    contractNumber: 8,
+    contractAmount: 11,
+    contractNumber: 9,
   }
 );
 assert.ok(
@@ -68,9 +68,9 @@ assert.equal(
 );
 assert.equal(first.bidResults.unknownDocumentDate, 10);
 assert.equal(first.awardsAndContracts.awarded, 228);
-assert.equal(first.awardsAndContracts.contracted, 6);
-assert.equal(first.awardsAndContracts.withContractAmount, 10);
-assert.equal(first.awardsAndContracts.withContractNumber, 8);
+assert.equal(first.awardsAndContracts.contracted, 7);
+assert.equal(first.awardsAndContracts.withContractAmount, 11);
+assert.equal(first.awardsAndContracts.withContractNumber, 9);
 
 const pageSource = readNextRoute('/statistics/procurement');
 for (const privateField of [
