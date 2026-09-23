@@ -25,7 +25,7 @@ assert.equal(projectMetric?.count, 307);
 const evidenceMetric = metrics.find(
   metric => metric.record_type === 'project_evidence'
 );
-assert.equal(evidenceMetric?.count, 564);
+assert.equal(evidenceMetric?.count, 570);
 const servicesMetric = metrics.find(metric => metric.record_type === 'service');
 assert.equal(servicesMetric?.count, 177);
 const fullDisclosureMetric = metrics.find(

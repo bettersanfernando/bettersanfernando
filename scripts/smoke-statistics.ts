@@ -29,7 +29,7 @@ assert.deepEqual(summary.projects.lifecycle, {
 });
 assert.equal(summary.projects.attributedToBarangay, 282);
 assert.equal(summary.projects.unattributed, 25);
-assert.equal(summary.procurement.evidence, 564);
+assert.equal(summary.procurement.evidence, 570);
 assert.equal(summary.procurement.bidResults, 233);
 assert.equal(summary.procurement.bidResultProjects, 233);
 assert.equal(summary.government.officeRecords, 44);
