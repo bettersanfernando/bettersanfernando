@@ -50,30 +50,56 @@
       "stage": "NOTICE_OF_AWARD"
     },
     {
-      "attachment_url": null,
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-11-02337.pdf",
       "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 4900000,
+        "funding_source_per_itb": "General Fund 2024",
+        "reference_number": "2024-11-02337"
+      },
       "fields_established": [
         "project_name",
-        "primary_procurement_id"
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
       ],
       "id": "ev-cmrf-lara-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-lined-canal-at-cmrf-brgy-lara-city-of-san-fernando-pampanga/",
       "project_id": "proj-2024-cmrf-lara-canal",
-      "retrieval_status": "PAGE_ONLY",
+      "retrieval_status": "INSPECTED",
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2024-11-02337",
       "stage": "ITB"
     },
     {
-      "attachment_url": null,
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/02/2024-11-02337.pdf",
       "document_date": null,
+      "facts": {
+        "award_date": "2025-01-22",
+        "awardee": "EL KAPITAN CONSTRUCTION SERVICES",
+        "contract_amount": 4889795.54,
+        "contract_effectivity_date": "2025-01-27",
+        "contract_end_date": "2025-05-15",
+        "contract_number": "2025-01-00061",
+        "control_number": "2024-11-02337",
+        "funding_source_per_award": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding"
+      },
       "fields_established": [
-        "primary_procurement_id"
+        "primary_procurement_id",
+        "contract_number",
+        "contract_amount",
+        "contractor",
+        "award_date",
+        "contract_effectivity_date",
+        "contract_end_date",
+        "procurement_mode",
+        "funding_source"
       ],
       "id": "ev-cmrf-lara-award",
       "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-construction-of-lined-canal-at-cmrf-brgy-lara-city-of-san-fernando-pampanga/",
       "project_id": "proj-2024-cmrf-lara-canal",
-      "retrieval_status": "PAGE_ONLY",
+      "retrieval_status": "INSPECTED",
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2024-11-02337",
       "stage": "NOTICE_OF_AWARD"
@@ -363,29 +389,56 @@
       "stage": "APP"
     },
     {
-      "attachment_url": null,
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/04/ITB-2026-03-00587.pdf",
       "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 5000000,
+        "funding_source_per_itb": "General Fund 2026",
+        "reference_number": "2026-03-00587"
+      },
       "fields_established": [
-        "primary_procurement_id"
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
       ],
       "id": "ev-san-agustin-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-clearing-desilting-and-declogging-of-waterways-at-san-agustin-cuidad-de-hizon-villa-del-sol-city-of-san-fernando-pampanga/",
       "project_id": "proj-2026-san-agustin-waterways",
-      "retrieval_status": "PAGE_ONLY",
+      "retrieval_status": "INSPECTED",
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2026-03-00587",
       "stage": "ITB"
     },
     {
-      "attachment_url": null,
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/07/2026-03-00587.pdf",
       "document_date": null,
+      "facts": {
+        "award_date": "2026-05-19",
+        "awardee": "ANN REYRICK CONSTRUCTION",
+        "contract_amount": 4984842.75,
+        "contract_effectivity_date": "2026-05-25",
+        "contract_end_date": "2026-08-01",
+        "contract_number": "2026-05-01239",
+        "control_number": "2026-03-00587",
+        "funding_source_per_award": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding"
+      },
       "fields_established": [
-        "primary_procurement_id"
+        "primary_procurement_id",
+        "contract_number",
+        "contract_amount",
+        "contractor",
+        "award_date",
+        "contract_effectivity_date",
+        "contract_end_date",
+        "procurement_mode",
+        "funding_source"
       ],
       "id": "ev-san-agustin-award",
       "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-clearing-desilting-and-declogging-of-waterways-at-san-agustin-cuidad-dehizon-villa-del-sol-city-of-san-fernando-pampanga/",
       "project_id": "proj-2026-san-agustin-waterways",
-      "retrieval_status": "PAGE_ONLY",
+      "retrieval_status": "INSPECTED",
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2026-03-00587",
       "stage": "NOTICE_OF_AWARD"
@@ -420,15 +473,23 @@
       "stage": "APP"
     },
     {
-      "attachment_url": null,
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/02/ITB-2026-01-00025.pdf",
       "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "funding_source_per_itb": "General Fund 2026",
+        "reference_number": "2026-01-00025"
+      },
       "fields_established": [
-        "primary_procurement_id"
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
       ],
       "id": "ev-panipuan-itb",
       "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-lined-canal-at-purok-6-panipuan-city-of-san-fernando-pampanga/",
       "project_id": "proj-2026-panipuan-canal",
-      "retrieval_status": "PAGE_ONLY",
+      "retrieval_status": "INSPECTED",
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2026-01-00025",
       "stage": "ITB"
@@ -5581,7 +5642,7 @@
       "id": "ev-proj-2025-building-city-police-station-00768-itb",
       "page_url": null,
       "project_id": "proj-2025-building-city-police-station-00768",
-      "retrieval_status": "URL_RECORDED_NOT_DOWNLOADED",
+      "retrieval_status": "INSPECTED",
       "source_authority": "PRIMARY_OFFICIAL_CSFP",
       "source_identifier": "2025-04-00768",
       "stage": "ITB"
