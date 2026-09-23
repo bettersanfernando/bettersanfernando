@@ -35,7 +35,7 @@ const manifest = JSON.parse(
 ) as { datasets: Record<string, { record_count: number }> };
 
 assert.equal(Object.keys(manifest.datasets).length, 23);
-assert.equal(getProjects().length, 307);
+assert.equal(getProjects().length, 306);
 assert.equal(getAllProjectEvidence().length, 570);
 assert.equal(getProjectCostUtilizationObservations().length, 298);
 assert.equal(getCoveredProjectIds().length, 106);
@@ -50,7 +50,7 @@ assert.equal(getResolutions().length, 2);
 assert.equal(getFinanceReports().length, 53);
 assert.equal(getFinanceObservations().length, 121);
 assert.equal(getDemographicProfileRecords().length, 136);
-assert.equal(getSearchDocuments().length, 1719);
+assert.equal(getSearchDocuments().length, 1724);
 assert.equal(plannedPages.length, 0);
 
 const staticPaths = (readdirSync('src/app', { recursive: true }) as string[])
@@ -79,9 +79,9 @@ const canonicalPaths = [...staticPaths, ...dynamicPaths];
 // (noindex; see src/app/search/page.tsx) — so it stays at 41 even though
 // the sitemap itself lists one fewer static route.
 assert.equal(staticPaths.length, 41);
-assert.equal(dynamicPaths.length, 544);
-assert.equal(canonicalPaths.length, 585);
-assert.equal(new Set(canonicalPaths).size, 585);
+assert.equal(dynamicPaths.length, 543);
+assert.equal(canonicalPaths.length, 584);
+assert.equal(new Set(canonicalPaths).size, 584);
 
 const queryRoutes = [
   '/search',
@@ -124,5 +124,5 @@ assert.match(serviceCategorySource, /categoryServices\.filter/);
 assert.match(serviceCategorySource, /aria-live="polite"/);
 
 console.log(
-  'Batch 7 parity smoke passed: protected data and 585 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
+  'Batch 7 parity smoke passed: protected data and 584 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
 );

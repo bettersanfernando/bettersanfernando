@@ -21,7 +21,7 @@ const units = new Set(metrics.map(metric => metric.unit_label));
 assert.ok(units.size > 1, 'metrics must use more than one distinct unit');
 
 const projectMetric = metrics.find(metric => metric.record_type === 'project');
-assert.equal(projectMetric?.count, 307);
+assert.equal(projectMetric?.count, 306);
 const evidenceMetric = metrics.find(
   metric => metric.record_type === 'project_evidence'
 );

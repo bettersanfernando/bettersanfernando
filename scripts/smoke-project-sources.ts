@@ -25,23 +25,23 @@ const counts = countProjectEvidenceByStage(evidence);
 
 // 1. Evidence and project integrity
 assert.equal(evidence.length, 570);
-assert.equal(projects.length, 307);
+assert.equal(projects.length, 306);
 assert.equal(counts.BID_RESULTS, 233);
 assert.equal(counts.NTA_UTILIZATION_REPORT, 229);
 assert.equal(counts.PROCUREMENT_MONITORING_REPORT, 74);
 assert.equal(counts.NOTICE_OF_AWARD, 11);
-assert.equal(counts.ITB, 11);
+assert.equal(counts.ITB, 17);
 assert.equal(counts.APP, 6);
 assert.equal(records.length, evidence.length, 'no evidence may be orphaned');
-assert.equal(new Set(evidence.map(item => item.project_id)).size, 307);
+assert.equal(new Set(evidence.map(item => item.project_id)).size, 306);
 
 // 2. Document coverage derivation
 const withAttachmentCount = evidence.filter(hasAttachment).length;
 const withoutAttachmentCount = evidence.length - withAttachmentCount;
-assert.equal(withAttachmentCount, 555);
-assert.equal(withoutAttachmentCount, 9);
+assert.equal(withAttachmentCount, 566);
+assert.equal(withoutAttachmentCount, 4);
 const coveragePct = ((withAttachmentCount / evidence.length) * 100).toFixed(1);
-assert.equal(coveragePct, '98.4');
+assert.equal(coveragePct, '99.3');
 
 // 3. Provenance and link validation
 for (const item of evidence) {
@@ -74,7 +74,7 @@ assert.equal(
 // 5. Filtering: Source Authority
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL' }).length,
-  20
+  26
 );
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL_CSFP' }).length,
@@ -84,16 +84,16 @@ assert.equal(
 // 6. Filtering: Document availability
 assert.equal(
   filterProjectEvidence(records, { document: 'attachment' }).length,
-  555
+  566
 );
 assert.equal(
   filterProjectEvidence(records, { document: 'page-only' }).length,
-  9
+  4
 );
 
 // 7. Filtering: Year & Undated
 assert.equal(filterProjectEvidence(records, { year: '2024' }).length, 67);
-assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 332);
+assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 338);
 
 // 8. Search query matching
 assert.equal(

@@ -17,7 +17,7 @@ assert.equal(
   summary.release.publishedDomains,
   inventory.publishedDomains.length
 );
-assert.equal(summary.projects.total, 307);
+assert.equal(summary.projects.total, 306);
 assert.equal(summary.projects.evidence, 570);
 assert.equal(summary.projects.bidResults, 233);
 assert.equal(summary.projects.awarded, 228);
