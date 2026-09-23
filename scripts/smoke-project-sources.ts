@@ -24,7 +24,7 @@ const records = resolveProjectEvidence(evidence);
 const counts = countProjectEvidenceByStage(evidence);
 
 // 1. Evidence and project integrity
-assert.equal(evidence.length, 564);
+assert.equal(evidence.length, 570);
 assert.equal(projects.length, 307);
 assert.equal(counts.BID_RESULTS, 233);
 assert.equal(counts.NTA_UTILIZATION_REPORT, 229);

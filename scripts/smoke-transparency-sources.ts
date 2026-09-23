@@ -29,7 +29,7 @@ assert.deepEqual(
 
 const expectedRecordCounts = {
   projects: 307,
-  'project-evidence': 564,
+  'project-evidence': 570,
   'project-cost-utilization': 298,
   population: 35,
   geography: 36,

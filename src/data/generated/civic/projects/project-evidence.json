@@ -17511,7 +17511,139 @@
       "source_authority": "PRIMARY_OFFICIAL_CSFP",
       "source_identifier": "nta-2022-q3",
       "stage": "NTA_UTILIZATION_REPORT"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/01/ITB-2023-12-02954.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 5000000,
+        "funding_source_per_itb": "General Fund 2023",
+        "reference_number": "2023-12-02954"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
+      ],
+      "id": "ev-proj-2023-canal-calulut-02954-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-lined-canal-at-calulut-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2023-canal-calulut-02954",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2023-12-02954",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/02/ITB-2023-09-02219.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "funding_source_per_itb": "General Fund 2023",
+        "reference_number": "2023-09-02219"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
+      ],
+      "id": "ev-proj-2023-park-calulut-02219-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-landscaping-of-the-heritage-park-for-the-rehabilitation-of-calulut-heritage-park-at-san-vicente-ferrer-church-calulut-city-of-san-fernando-pamp/",
+      "project_id": "proj-2023-park-calulut-02219",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2023-09-02219",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/03/ITB-2024-01-00389.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "funding_source_per_itb": "General Fund 2024",
+        "reference_number": "2024-01-00389"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
+      ],
+      "id": "ev-proj-2024-road-san-agustin-00389-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-improvement-construction-of-road-at-san-agustin-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2024-road-san-agustin-00389",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-01-00389",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/03/ITB-2024-01-00391.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "funding_source_per_itb": "General Fund 2024",
+        "reference_number": "2024-01-00391"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
+      ],
+      "id": "ev-proj-2024-slope-del-carmen-00391-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-slope-protection-at-del-carmen-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2024-slope-del-carmen-00391",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-01-00391",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/03/ITB-2024-01-00394.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 5500000,
+        "funding_source_per_itb": "General Fund 2024",
+        "reference_number": "2024-01-00394"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
+      ],
+      "id": "ev-proj-2024-bldg-lara-00394-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-improvement-of-the-multi-purpose-building-evacuation-center-at-lara-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2024-bldg-lara-00394",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-01-00394",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/03/ITB-2024-01-00395.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 15000000,
+        "funding_source_per_itb": "General Fund 2024",
+        "reference_number": "2024-01-00395"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "funding_source"
+      ],
+      "id": "ev-proj-2024-cemetery-lara-00395-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/invitation-to-bid-for-the-labor-and-materials-for-the-construction-of-niches-phase-1-at-himlayan-fernandino-lara-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2024-cemetery-lara-00395",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-01-00395",
+      "stage": "ITB"
     }
   ],
-  "record_count": 564
+  "record_count": 570
 }

@@ -1771,7 +1771,7 @@
       "year": 2023
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 5000000,
       "award_date": null,
       "barangay": "Calulut",
       "barangay_psgc": "0305416004",
@@ -1780,7 +1780,7 @@
       "contract_end_date": null,
       "contractor": "R2DC Construction",
       "estimated_budget": null,
-      "funding_source": null,
+      "funding_source": "General Fund 2023",
       "id": "proj-2023-canal-calulut-02954",
       "identifiers": {
         "app_code": null,
@@ -1800,7 +1800,7 @@
       "year": 2023
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 3000000,
       "award_date": null,
       "barangay": "Calulut",
       "barangay_psgc": "0305416004",
@@ -1809,7 +1809,7 @@
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
       "estimated_budget": null,
-      "funding_source": null,
+      "funding_source": "General Fund 2023",
       "id": "proj-2023-park-calulut-02219",
       "identifiers": {
         "app_code": null,
@@ -1858,7 +1858,7 @@
       "year": 2024
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 3000000,
       "award_date": null,
       "barangay": "San Agustin",
       "barangay_psgc": "0305416024",
@@ -1867,7 +1867,7 @@
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
       "estimated_budget": null,
-      "funding_source": null,
+      "funding_source": "General Fund 2024",
       "id": "proj-2024-road-san-agustin-00389",
       "identifiers": {
         "app_code": null,
@@ -1887,7 +1887,7 @@
       "year": 2024
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 3000000,
       "award_date": null,
       "barangay": "Del Carmen",
       "barangay_psgc": "0305416007",
@@ -1896,7 +1896,7 @@
       "contract_end_date": null,
       "contractor": "Ann Reyrick Construction",
       "estimated_budget": null,
-      "funding_source": null,
+      "funding_source": "General Fund 2024",
       "id": "proj-2024-slope-del-carmen-00391",
       "identifiers": {
         "app_code": null,
@@ -1916,7 +1916,7 @@
       "year": 2024
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 5500000,
       "award_date": null,
       "barangay": "Lara",
       "barangay_psgc": "0305416012",
@@ -1925,7 +1925,7 @@
       "contract_end_date": null,
       "contractor": "El Kapitan Construction Services",
       "estimated_budget": null,
-      "funding_source": null,
+      "funding_source": "General Fund 2024",
       "id": "proj-2024-bldg-lara-00394",
       "identifiers": {
         "app_code": null,
@@ -1945,7 +1945,7 @@
       "year": 2024
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 15000000,
       "award_date": null,
       "barangay": "Lara",
       "barangay_psgc": "0305416012",
@@ -1954,7 +1954,7 @@
       "contract_end_date": null,
       "contractor": "R.S.C. Construction Services",
       "estimated_budget": null,
-      "funding_source": null,
+      "funding_source": "General Fund 2024",
       "id": "proj-2024-cemetery-lara-00395",
       "identifiers": {
         "app_code": null,
