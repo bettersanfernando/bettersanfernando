@@ -24,13 +24,13 @@ const records = resolveProjectEvidence(evidence);
 const counts = countProjectEvidenceByStage(evidence);
 
 // 1. Evidence and project integrity
-assert.equal(evidence.length, 563);
+assert.equal(evidence.length, 564);
 assert.equal(projects.length, 307);
 assert.equal(counts.BID_RESULTS, 233);
 assert.equal(counts.NTA_UTILIZATION_REPORT, 229);
 assert.equal(counts.PROCUREMENT_MONITORING_REPORT, 74);
 assert.equal(counts.NOTICE_OF_AWARD, 11);
-assert.equal(counts.ITB, 10);
+assert.equal(counts.ITB, 11);
 assert.equal(counts.APP, 6);
 assert.equal(records.length, evidence.length, 'no evidence may be orphaned');
 assert.equal(new Set(evidence.map(item => item.project_id)).size, 307);
@@ -38,7 +38,7 @@ assert.equal(new Set(evidence.map(item => item.project_id)).size, 307);
 // 2. Document coverage derivation
 const withAttachmentCount = evidence.filter(hasAttachment).length;
 const withoutAttachmentCount = evidence.length - withAttachmentCount;
-assert.equal(withAttachmentCount, 554);
+assert.equal(withAttachmentCount, 555);
 assert.equal(withoutAttachmentCount, 9);
 const coveragePct = ((withAttachmentCount / evidence.length) * 100).toFixed(1);
 assert.equal(coveragePct, '98.4');
@@ -78,13 +78,13 @@ assert.equal(
 );
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL_CSFP' }).length,
-  543
+  544
 );
 
 // 6. Filtering: Document availability
 assert.equal(
   filterProjectEvidence(records, { document: 'attachment' }).length,
-  554
+  555
 );
 assert.equal(
   filterProjectEvidence(records, { document: 'page-only' }).length,
@@ -93,7 +93,7 @@ assert.equal(
 
 // 7. Filtering: Year & Undated
 assert.equal(filterProjectEvidence(records, { year: '2024' }).length, 67);
-assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 331);
+assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 332);
 
 // 8. Search query matching
 assert.equal(

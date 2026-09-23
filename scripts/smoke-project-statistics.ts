@@ -80,8 +80,8 @@ assert.deepEqual(
     item.unavailableCount,
   ]),
   [
-    ['approved_budget_abc', 228, 79],
-    ['winning_bid_amount', 231, 76],
+    ['approved_budget_abc', 229, 78],
+    ['winning_bid_amount', 232, 75],
     ['contract_amount', 8, 299],
   ]
 );

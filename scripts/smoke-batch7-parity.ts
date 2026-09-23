@@ -36,7 +36,7 @@ const manifest = JSON.parse(
 
 assert.equal(Object.keys(manifest.datasets).length, 23);
 assert.equal(getProjects().length, 307);
-assert.equal(getAllProjectEvidence().length, 563);
+assert.equal(getAllProjectEvidence().length, 564);
 assert.equal(getProjectCostUtilizationObservations().length, 298);
 assert.equal(getCoveredProjectIds().length, 106);
 assert.equal(getServices().length, 177);
@@ -50,7 +50,7 @@ assert.equal(getResolutions().length, 2);
 assert.equal(getFinanceReports().length, 53);
 assert.equal(getFinanceObservations().length, 121);
 assert.equal(getDemographicProfileRecords().length, 136);
-assert.equal(getSearchDocuments().length, 1718);
+assert.equal(getSearchDocuments().length, 1719);
 assert.equal(plannedPages.length, 0);
 
 const staticPaths = (readdirSync('src/app', { recursive: true }) as string[])

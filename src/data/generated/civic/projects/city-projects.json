@@ -1829,7 +1829,7 @@
       "year": 2023
     },
     {
-      "approved_budget_abc": null,
+      "approved_budget_abc": 3000000,
       "award_date": null,
       "barangay": "Bulaon",
       "barangay_psgc": "0305416003",
@@ -4591,7 +4591,7 @@
       "contract_amount": null,
       "contract_effectivity_date": null,
       "contract_end_date": null,
-      "contractor": null,
+      "contractor": "ALMEDGARCIA CONSTRUCTION AND TRADING",
       "estimated_budget": null,
       "funding_source": "General Fund 2025",
       "id": "proj-2025-building-city-police-station-00768",
@@ -4609,7 +4609,7 @@
       "project_type": "BUILDING",
       "status_as_of": "2026-08-30",
       "verification_confidence": "HIGH",
-      "winning_bid_amount": null,
+      "winning_bid_amount": 592711.87,
       "year": 2025
     },
     {

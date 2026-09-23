@@ -71,8 +71,8 @@ assert(
 
 const evidence = getAllProjectEvidence();
 assert(
-  evidence.length === 563,
-  `expected 563 evidence records, got ${evidence.length}`
+  evidence.length === 564,
+  `expected 564 evidence records, got ${evidence.length}`
 );
 assert(
   evidence.filter(e => e.stage === 'NTA_UTILIZATION_REPORT').length === 229,

@@ -325,7 +325,7 @@ assert.equal(
 // word "project", and a location must find the real matching projects —
 // this previously broke because every "Project source" (evidence) record
 // carried a generic `category: 'Project evidence'` label, which exact-
-// matched the literal word "project" for all 563 of them regardless of
+// matched the literal word "project" for all 564 of them regardless of
 // topic. Fixed by using the evidence's own stage as its category instead,
 // and giving real project records an explicit "project" alias keyword.
 const roadProjectSindalan = searchCivicRecords('road project sindalan');
