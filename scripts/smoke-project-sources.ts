@@ -24,21 +24,21 @@ const records = resolveProjectEvidence(evidence);
 const counts = countProjectEvidenceByStage(evidence);
 
 // 1. Evidence and project integrity
-assert.equal(evidence.length, 570);
+assert.equal(evidence.length, 572);
 assert.equal(projects.length, 306);
 assert.equal(counts.BID_RESULTS, 233);
 assert.equal(counts.NTA_UTILIZATION_REPORT, 229);
 assert.equal(counts.PROCUREMENT_MONITORING_REPORT, 74);
-assert.equal(counts.NOTICE_OF_AWARD, 11);
+assert.equal(counts.NOTICE_OF_AWARD, 12);
 assert.equal(counts.ITB, 17);
-assert.equal(counts.APP, 6);
+assert.equal(counts.APP, 7);
 assert.equal(records.length, evidence.length, 'no evidence may be orphaned');
 assert.equal(new Set(evidence.map(item => item.project_id)).size, 306);
 
 // 2. Document coverage derivation
 const withAttachmentCount = evidence.filter(hasAttachment).length;
 const withoutAttachmentCount = evidence.length - withAttachmentCount;
-assert.equal(withAttachmentCount, 566);
+assert.equal(withAttachmentCount, 568);
 assert.equal(withoutAttachmentCount, 4);
 const coveragePct = ((withAttachmentCount / evidence.length) * 100).toFixed(1);
 assert.equal(coveragePct, '99.3');
@@ -74,7 +74,7 @@ assert.equal(
 // 5. Filtering: Source Authority
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL' }).length,
-  26
+  28
 );
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL_CSFP' }).length,
@@ -84,7 +84,7 @@ assert.equal(
 // 6. Filtering: Document availability
 assert.equal(
   filterProjectEvidence(records, { document: 'attachment' }).length,
-  566
+  568
 );
 assert.equal(
   filterProjectEvidence(records, { document: 'page-only' }).length,
@@ -93,7 +93,7 @@ assert.equal(
 
 // 7. Filtering: Year & Undated
 assert.equal(filterProjectEvidence(records, { year: '2024' }).length, 67);
-assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 338);
+assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 339);
 
 // 8. Search query matching
 assert.equal(
@@ -139,7 +139,7 @@ for (const sortOption of [
 // 10. Pagination: 10 per page
 const PAGE_SIZE = 10;
 const totalPages = Math.ceil(records.length / PAGE_SIZE);
-assert.equal(totalPages, 57);
+assert.equal(totalPages, 58);
 const page1 = records.slice(0, PAGE_SIZE);
 assert.equal(page1.length, 10);
 

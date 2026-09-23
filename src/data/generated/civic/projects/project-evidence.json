@@ -16932,6 +16932,67 @@
       "stage": "NTA_UTILIZATION_REPORT"
     },
     {
+      "attachment_url": "http://cityofsanfernando.gov.ph/wp-content/uploads/2023/04/APP_2022.xlsx",
+      "document_date": null,
+      "facts": {
+        "app_item_no": "1202",
+        "title_raw": "Labor and Materials for the Repair/Improvement of Health Center at Purok 1, Malpitic, City of San Fernando, Pampanga",
+        "total_cost": 1000000
+      },
+      "fields_established": [
+        "project_name",
+        "location_text",
+        "estimated_budget"
+      ],
+      "id": "ev-proj-2022-malpitic-building-health-center-app-2022",
+      "page_url": "https://cityofsanfernando.gov.ph/annual-procurement-plan-2022/",
+      "project_id": "proj-2022-malpitic-building-health-center",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "1202",
+      "stage": "APP"
+    },
+    {
+      "attachment_url": "http://cityofsanfernando.gov.ph/wp-content/uploads/2023/07/2022-08-01248.pdf",
+      "document_date": "2023-04-19",
+      "facts": {
+        "approved_budget": 1000000,
+        "award_date": "2023-04-19",
+        "awardee": "MILMETRO CONSTRUCTION",
+        "contract_amount": 853272.15,
+        "contract_effectivity_date": "2023-04-28",
+        "contract_end_date": "2023-06-20",
+        "contract_number": "2023-04-00755",
+        "control_number_conflict": "UNRESOLVED",
+        "control_number_per_document_text": "2022-09-01248",
+        "control_number_per_page_url": "2022-08-01248",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reason_for_award": "Lowest calculated responsive bid",
+        "reference_number": "9010136"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2022-malpitic-building-health-center-award",
+      "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-repair-improvement-of-health-center-at-purok-1-malpitic-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2022-malpitic-building-health-center",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2022-08-01248",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
       "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/04/20-Component-of-The-IRA-Utilization-1st_Quarter_compressed.pdf",
       "document_date": null,
       "facts": {
@@ -17645,5 +17706,5 @@
       "stage": "ITB"
     }
   ],
-  "record_count": 570
+  "record_count": 572
 }
