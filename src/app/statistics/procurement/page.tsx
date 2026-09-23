@@ -26,13 +26,13 @@ const PROJECT_FIELD_INFO = [
   {
     key: 'approvedBudgetAbc',
     label: 'Approved Budget for the Contract (ABC)',
-    availableCount: 228,
+    availableCount: 229,
     isExpenditure: false,
   },
   {
     key: 'winningBidAmount',
     label: 'Winning bid amount',
-    availableCount: 231,
+    availableCount: 232,
     isExpenditure: false,
   },
   {
@@ -102,7 +102,7 @@ export default function ProcurementStatistics() {
   const statistics = getProcurementStatistics();
 
   const totalProjects = statistics.projects.total; // 324
-  const totalEvidence = statistics.evidence.total; // 563
+  const totalEvidence = statistics.evidence.total; // 564
   const totalBidResults = statistics.bidResults.total; // 233
   const awardedCount = statistics.awardsAndContracts.awarded; // 228
   const contractedCount = statistics.awardsAndContracts.contracted; // 6

@@ -22,7 +22,7 @@ assert.deepEqual(summary.government, government);
 assert.equal(summary.population.total, 377_534);
 assert.equal(summary.population.barangays, 35);
 assert.equal(summary.projects.total, 307);
-assert.equal(summary.projects.evidence, 563);
+assert.equal(summary.projects.evidence, 564);
 assert.equal(summary.government.officeRecords, 44);
 
 assert.match(pageSource, /BetterSanFernando/);

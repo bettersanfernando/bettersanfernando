@@ -139,7 +139,7 @@ export default function ProjectSources() {
   const evidence = getAllProjectEvidence();
   const records = useMemo(() => resolveProjectEvidence(evidence), [evidence]);
 
-  const totalEvidence = evidence.length; // 563
+  const totalEvidence = evidence.length; // 564
   const totalProjects = useMemo(
     () => new Set(evidence.map(item => item.project_id)).size,
     [evidence]

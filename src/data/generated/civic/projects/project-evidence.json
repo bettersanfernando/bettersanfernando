@@ -2387,6 +2387,26 @@
       "stage": "BID_RESULTS"
     },
     {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/02/ITB-2024-01-00311.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "reference_number": "2024-01-00311"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc"
+      ],
+      "id": "ev-proj-2024-road-bulaon-00311-itb",
+      "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-improvement-construction-of-road-at-bulaon-city-of-san-fernando-pampanga/",
+      "project_id": "proj-2024-road-bulaon-00311",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-01-00311",
+      "stage": "ITB"
+    },
+    {
       "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/2024-1st-Quarter-Bid-Results-on-Civil-Works-Good-and-Services-and-Consulting-Services.xlsx",
       "document_date": "2024-03-26",
       "facts": {
@@ -17432,5 +17452,5 @@
       "stage": "NTA_UTILIZATION_REPORT"
     }
   ],
-  "record_count": 563
+  "record_count": 564
 }
