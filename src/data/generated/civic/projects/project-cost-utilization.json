@@ -1,5 +1,5 @@
 {
-  "coverage_limitation": "Covers only 298 verified observations connected to 106 of the 307 canonical projects in projects/city-projects.json. Coverage is incomplete and does not represent all city projects. All observations are year-to-date figures from the source's own 'Total Cost Incurred to Date' field, which is not proof of cash payment or disbursement. Observations from different reporting quarters are separate and non-additive -- they must never be summed together, and no citywide total is published here. Currency is not stated in the official source documents (currency_unit is null throughout, not an inferred PHP value). Physical-completion and status fields are documentary observations transcribed from the official source, not independent field verification. Some observations are connected to a canonical project whose lifecycle_status is IMPLEMENTATION_REPORTED -- see projects/city-projects.json for what that status does and does not establish. No chart derived from this dataset may be titled or described as citywide spending, actual spending, or amount paid.",
+  "coverage_limitation": "Covers only 298 verified observations connected to 106 of the 306 canonical projects in projects/city-projects.json. Coverage is incomplete and does not represent all city projects. All observations are year-to-date figures from the source's own 'Total Cost Incurred to Date' field, which is not proof of cash payment or disbursement. Observations from different reporting quarters are separate and non-additive -- they must never be summed together, and no citywide total is published here. Currency is not stated in the official source documents (currency_unit is null throughout, not an inferred PHP value). Physical-completion and status fields are documentary observations transcribed from the official source, not independent field verification. Some observations are connected to a canonical project whose lifecycle_status is IMPLEMENTATION_REPORTED -- see projects/city-projects.json for what that status does and does not establish. No chart derived from this dataset may be titled or described as citywide spending, actual spending, or amount paid.",
   "dataset": "project-cost-utilization",
   "jurisdiction_psgc": "0305416000",
   "last_verified": "2026-09-13",
@@ -1461,7 +1461,7 @@
       "verification_date": "2026-09-13"
     },
     {
-      "canonical_project_id": "proj-2023-san-nicolas-canal",
+      "canonical_project_id": "proj-2022-canal-san-nicolas-02179",
       "cost_incurred_to_date_percent_derived": 99.44,
       "currency_unit": null,
       "id": "nta-2023-q2-r141",
@@ -1477,7 +1477,7 @@
       "verification_date": "2026-09-13"
     },
     {
-      "canonical_project_id": "proj-2023-san-nicolas-canal",
+      "canonical_project_id": "proj-2022-canal-san-nicolas-02179",
       "cost_incurred_to_date_percent_derived": 99.44,
       "currency_unit": null,
       "id": "nta-2023-q4-r149",

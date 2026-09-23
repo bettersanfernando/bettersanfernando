@@ -37,7 +37,7 @@ assert.equal(
   'observation ids must be unique'
 );
 
-// 2. All project references resolve against the 307-project canonical set.
+// 2. All project references resolve against the 306-project canonical set.
 for (const observation of observations) {
   const project = getProjectById(observation.canonical_project_id);
   assert.ok(
@@ -45,7 +45,7 @@ for (const observation of observations) {
     `observation ${observation.id} must resolve to a canonical project`
   );
 }
-assert.equal(getProjects().length, 307, 'canonical projects must be 307');
+assert.equal(getProjects().length, 306, 'canonical projects must be 306');
 
 // 3. currency_unit null throughout; period_basis is year_to_date.
 for (const observation of observations) {
@@ -216,7 +216,7 @@ for (const project of getProjects()) {
     );
   }
 }
-assert.equal(coveredProjectIds.length + (307 - coveredProjectIds.length), 307);
+assert.equal(coveredProjectIds.length + (306 - coveredProjectIds.length), 306);
 assert.equal(
   getProjects().filter(
     project => getObservationsForProject(project.id).length > 0
@@ -227,7 +227,7 @@ assert.equal(
   getProjects().filter(
     project => getObservationsForProject(project.id).length === 0
   ).length,
-  201
+  200
 );
 
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
@@ -339,12 +339,12 @@ assert.match(pageSource, />\s*Next\s*</);
 assert.match(
   pageSource,
   /Browse all \{metadata\.canonicalProjectCount\} projects/,
-  'the page must link to /projects/city-projects labeled to browse all 307 projects'
+  'the page must link to /projects/city-projects labeled to browse all 306 projects'
 );
 assert.match(
   pageSource,
   /href="\/projects\/city-projects"[\s\S]{0,300}Browse all/,
-  'the Browse-all-307 control must link to /projects/city-projects'
+  'the Browse-all-306 control must link to /projects/city-projects'
 );
 // Coverage must remain derived from metadata, include both sides of the
 // represented-project count, and avoid treating the subset as citywide data.

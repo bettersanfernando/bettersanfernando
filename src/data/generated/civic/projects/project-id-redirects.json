@@ -1,5 +1,5 @@
 {
-  "record_count": 17,
+  "record_count": 18,
   "redirects": [
     {
       "canonical_project_id": "proj-2022-canal-del-rosario-02178",
@@ -16,6 +16,10 @@
     {
       "canonical_project_id": "proj-2022-road-san-isidro-02161",
       "deprecated_project_id": "proj-2023-san-isidro-road-duplex"
+    },
+    {
+      "canonical_project_id": "proj-2022-canal-san-nicolas-02179",
+      "deprecated_project_id": "proj-2023-san-nicolas-canal"
     },
     {
       "canonical_project_id": "proj-2022-road-san-nicolas-02097",

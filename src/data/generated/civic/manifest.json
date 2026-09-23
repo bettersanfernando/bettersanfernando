@@ -72,24 +72,24 @@
       "sha256": "6406acb11d81d458b41132717e6fde39cebb5daa7b49eee4f5e7aac468e62246"
     },
     "projects/city-projects.json": {
-      "record_count": 307,
+      "record_count": 306,
       "schema_version": 1,
-      "sha256": "42e2f953c171b9ed8e798af75d87d30aca359354197182ae269fcabdcb290b8b"
+      "sha256": "9f77ad94a57a06c2abfd7fa7b9c4c7e0468209d53d74f68ad3e7b9ecfd12f854"
     },
     "projects/project-cost-utilization.json": {
       "record_count": 298,
       "schema_version": 1,
-      "sha256": "bea33d5418284dad9057ed0098a59d10a413e958365e6061578394dacd2298b5"
+      "sha256": "2770cea2d1252339af4ccaa89c41463517fd19e8d58e99d23d2c2303be0460df"
     },
     "projects/project-evidence.json": {
       "record_count": 570,
       "schema_version": 1,
-      "sha256": "d7ccf0e9ba15a9849b5aa76443157ba7fd2cda4f9398510b3d744a190dcf1c7b"
+      "sha256": "f52907266adcfdf69325c6e528d2313d7397679f3acaa8e12039021c60d867da"
     },
     "projects/project-id-redirects.json": {
-      "record_count": 17,
+      "record_count": 18,
       "schema_version": 1,
-      "sha256": "8156f9b2279e5dcd0a92ef22843b24ccea181d49ea9448f8b455dcd20a927774"
+      "sha256": "1944f94f09efa59238704a1fd3fbfee9a74932222d9c6299cb4b10b784604b1c"
     },
     "services/services.json": {
       "record_count": 177,
@@ -104,7 +104,7 @@
     "statistics/public-records-coverage.json": {
       "record_count": 8,
       "schema_version": 1,
-      "sha256": "171dc1a1466ec6dc88944284928ece492bc2fe212634429fe37602c6479731ca"
+      "sha256": "ca54f881a6ad1ea7fc433837d123c972751c6caec2a2af1a814aa2d6ed9577fc"
     },
     "transparency/full-disclosure.json": {
       "record_count": 10,
@@ -214,7 +214,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "536df47176fc1c716887e8fe4bcf4e2d2470a825",
+  "source_commit": "ac2921179962a3c63031b63fc99e8fd5458e9cf5",
   "source_data_version": "v0.1.1",
   "sources": [
     {

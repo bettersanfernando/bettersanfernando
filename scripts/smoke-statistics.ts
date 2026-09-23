@@ -19,15 +19,15 @@ assert.deepEqual(summary.population, {
   urbanBarangays: 34,
   ruralBarangays: 1,
 });
-assert.equal(summary.projects.total, 307);
+assert.equal(summary.projects.total, 306);
 assert.deepEqual(summary.projects.lifecycle, {
   PLANNED: 2,
   PROCUREMENT: 3,
   AWARDED: 228,
   CONTRACTED: 6,
-  IMPLEMENTATION_REPORTED: 68,
+  IMPLEMENTATION_REPORTED: 67,
 });
-assert.equal(summary.projects.attributedToBarangay, 282);
+assert.equal(summary.projects.attributedToBarangay, 281);
 assert.equal(summary.projects.unattributed, 25);
 assert.equal(summary.procurement.evidence, 570);
 assert.equal(summary.procurement.bidResults, 233);

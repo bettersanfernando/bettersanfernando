@@ -8,8 +8,8 @@ const projects = getProjects();
 const statistics = aggregateProjectStatistics(projects);
 
 // 1. Project counts & denominations
-assert.equal(statistics.totalProjects, 307);
-assert.equal(statistics.barangayAttribution.attributed, 282);
+assert.equal(statistics.totalProjects, 306);
+assert.equal(statistics.barangayAttribution.attributed, 281);
 assert.equal(statistics.barangayAttribution.unattributed, 25);
 assert.equal(statistics.barangayAttribution.representedBarangays, 34);
 assert.equal(
@@ -27,7 +27,7 @@ assert.deepEqual(
     PROCUREMENT: 3,
     AWARDED: 228,
     CONTRACTED: 6,
-    IMPLEMENTATION_REPORTED: 68,
+    IMPLEMENTATION_REPORTED: 67,
   }
 );
 assert.equal(
@@ -62,7 +62,7 @@ assert.deepEqual(
     statistics.projectCategories.map(item => [item.key, item.count])
   ),
   {
-    INFRASTRUCTURE_CAPITAL: 252,
+    INFRASTRUCTURE_CAPITAL: 251,
     INFRASTRUCTURE_MAINTENANCE: 55,
   }
 );
@@ -80,9 +80,9 @@ assert.deepEqual(
     item.unavailableCount,
   ]),
   [
-    ['approved_budget_abc', 229, 78],
-    ['winning_bid_amount', 232, 75],
-    ['contract_amount', 8, 299],
+    ['approved_budget_abc', 237, 69],
+    ['winning_bid_amount', 232, 74],
+    ['contract_amount', 10, 296],
   ]
 );
 

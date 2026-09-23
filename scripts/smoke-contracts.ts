@@ -16,12 +16,12 @@ const projects = getProjects();
 const records = getAwardAndContractRecords();
 const summary = getContractsSummary(records, projects.length);
 
-assert.equal(projects.length, 307);
+assert.equal(projects.length, 306);
 assert.equal(records.length, 234);
 assert.equal(summary.awarded, 228);
 assert.equal(summary.contracted, 6);
-assert.equal(summary.withContractAmount, 8);
-assert.equal(summary.withContractNumber, 6);
+assert.equal(summary.withContractAmount, 10);
+assert.equal(summary.withContractNumber, 8);
 assert.ok(
   records.every(record =>
     ['AWARDED', 'CONTRACTED'].includes(record.project.lifecycle_status)
@@ -43,11 +43,12 @@ const amountWithoutContractedLifecycle = records.filter(
     hasContractAmount(record.project) &&
     record.project.lifecycle_status === 'AWARDED'
 );
-assert.equal(amountWithoutContractedLifecycle.length, 2);
-assert.ok(
-  amountWithoutContractedLifecycle.every(
+assert.equal(amountWithoutContractedLifecycle.length, 4);
+assert.equal(
+  amountWithoutContractedLifecycle.filter(
     record => !hasContractNumber(record.project)
-  )
+  ).length,
+  2
 );
 assert.ok(
   records
@@ -75,11 +76,11 @@ assert.equal(
 );
 assert.equal(
   filterAndSortContractRecords(records, { contractAmount: 'available' }).length,
-  8
+  10
 );
 assert.equal(
   filterAndSortContractRecords(records, { contractNumber: 'available' }).length,
-  6
+  8
 );
 assert.ok(
   records

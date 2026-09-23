@@ -7167,35 +7167,6 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "San Nicolas",
-      "barangay_psgc": "0305416030",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "estimated_budget": null,
-      "funding_source": null,
-      "id": "proj-2023-san-nicolas-canal",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction/Improvement of Lined Canal with cover at Sitio Bulusan, San Nicolas",
-      "project_type": "DRAINAGE",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Lara",
       "barangay_psgc": "0305416012",
       "contract_amount": null,
@@ -8905,5 +8876,5 @@
       "year": 2022
     }
   ],
-  "record_count": 307
+  "record_count": 306
 }
