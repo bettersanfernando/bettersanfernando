@@ -74,7 +74,7 @@
     "projects/city-projects.json": {
       "record_count": 306,
       "schema_version": 1,
-      "sha256": "bfeb7bd6c00052e4c54859e05c4c3ee543cc53683b277e1f0e7940291d74d915"
+      "sha256": "4ed22c5477583a4a966d18d03c04bab7f8918be2d1516e435a12f081b27b4fc6"
     },
     "projects/project-cost-utilization.json": {
       "record_count": 298,
@@ -214,7 +214,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "d3c9c2da3ca062e2e2043d829f195148cbdd4dfd-dirty",
+  "source_commit": "e6be5a8bf8a09fc22dd668dc622d761e8761a1d3-dirty",
   "source_data_version": "v0.1.1",
   "sources": [
     {
