@@ -5,7 +5,6 @@ import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
-const pnpm = 'pnpm';
 export const VERIFY_STAGES = [
   ['validate civic data', ['data:validate']],
   ['smoke civic data', ['data:smoke']],
@@ -38,9 +37,18 @@ export function validSource(source) {
 
 function runPnpm(stage, args) {
   console.log(`\n[civic-workflow] ${stage}`);
-  const result = spawnSync(pnpm, args, { cwd: ROOT, stdio: 'inherit', shell: process.platform === 'win32' });
+  const pnpmEntrypoint = process.env.npm_execpath;
+  if (!pnpmEntrypoint) {
+    console.error('[civic-workflow] Run this command through pnpm so its executable path is available.');
+    return 2;
+  }
+  const result = spawnSync(process.execPath, [pnpmEntrypoint, ...args], { cwd: ROOT, stdio: 'inherit' });
   if (result.error) {
     console.error(`[civic-workflow] ${stage} failed: ${result.error.message}`);
+    return 1;
+  }
+  if (result.signal) {
+    console.error(`[civic-workflow] ${stage} terminated by ${result.signal}.`);
     return 1;
   }
   if (result.status) console.error(`[civic-workflow] ${stage} failed with exit code ${result.status}.`);
