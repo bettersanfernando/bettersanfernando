@@ -152,7 +152,7 @@
     {
       "availability_status": "available",
       "canonical_route": "/projects/sources",
-      "count": 572,
+      "count": 578,
       "count_basis": "published_evidence_records",
       "coverage_note": "Evidence records support projects and are not additional projects or necessarily unique source documents.",
       "metadata_granularity": "evidence_record_level",

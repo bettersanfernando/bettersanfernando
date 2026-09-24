@@ -54,8 +54,8 @@ const implementationReported = projects.filter(
   project => project.lifecycle_status === 'IMPLEMENTATION_REPORTED'
 );
 assert(
-  implementationReported.length === 66,
-  'expected 66 IMPLEMENTATION_REPORTED projects'
+  implementationReported.length === 61,
+  'expected 61 IMPLEMENTATION_REPORTED projects'
 );
 assert(
   implementationReported.every(
@@ -71,8 +71,8 @@ assert(
 
 const evidence = getAllProjectEvidence();
 assert(
-  evidence.length === 572,
-  `expected 572 evidence records, got ${evidence.length}`
+  evidence.length === 578,
+  `expected 578 evidence records, got ${evidence.length}`
 );
 assert(
   evidence.filter(e => e.stage === 'NTA_UTILIZATION_REPORT').length === 229,

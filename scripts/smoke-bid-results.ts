@@ -13,7 +13,7 @@ const allEvidence = getAllProjectEvidence();
 const records = getBidResultEvidence();
 const summary = getBidResultsSummary(records);
 
-assert.equal(allEvidence.length, 572);
+assert.equal(allEvidence.length, 578);
 assert.equal(records.length, 233);
 assert.equal(summary.totalRecords, records.length);
 assert.equal(summary.projectsRepresented, 233);
