@@ -36,7 +36,7 @@ const manifest = JSON.parse(
 
 assert.equal(Object.keys(manifest.datasets).length, 23);
 assert.equal(getProjects().length, 306);
-assert.equal(getAllProjectEvidence().length, 578);
+assert.equal(getAllProjectEvidence().length, 590);
 assert.equal(getProjectCostUtilizationObservations().length, 298);
 assert.equal(getCoveredProjectIds().length, 106);
 assert.equal(getServices().length, 177);
