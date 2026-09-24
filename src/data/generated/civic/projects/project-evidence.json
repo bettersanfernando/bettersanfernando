@@ -18305,7 +18305,313 @@
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2024-11-02431",
       "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/01/2022-12-02109.pdf",
+      "document_date": "2023-10-16",
+      "facts": {
+        "approved_budget": 5000000,
+        "award_date": "2023-10-16",
+        "awardee": "CHARIOT'S CONSTRUCTION & TRADING",
+        "contract_amount": 4987314.95,
+        "contract_effectivity_date": "2023-10-26",
+        "contract_end_date": "2024-03-02",
+        "contract_number": "2023-05-01354",
+        "control_number": "2022-12-02109",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "9407876"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2023-san-pedro-road-2022-12-02109-award",
+      "page_url": null,
+      "project_id": "proj-2023-san-pedro-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2022-12-02109",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": null,
+      "document_date": null,
+      "facts": {
+        "official_csfp_award_notice_exists": true,
+        "reference_number": "2024-02-00514"
+      },
+      "fields_established": [
+        "primary_procurement_id"
+      ],
+      "id": "ev-proj-2024-lara-road-2024-02-00514-award-page",
+      "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-the-improvement-construction-of-roadat-lara-city-of-san-fernandopampanga/",
+      "project_id": "proj-2024-lara-road",
+      "retrieval_status": "PAGE_ONLY_RESEARCH_VERIFIED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-02-00514",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/2024-02-00501.pdf",
+      "document_date": "2024-05-08",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2024-05-08",
+        "awardee": "EL KAPITAN CONSTRUCTION SERVICES",
+        "contract_amount": 2989965.18,
+        "contract_effectivity_date": "2024-05-16",
+        "contract_end_date": "2024-09-16",
+        "contract_number": "2024-04-01192",
+        "control_number": "2024-02-00501",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "10683132"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2024-magliman-road-2024-02-00501-award",
+      "page_url": null,
+      "project_id": "proj-2024-magliman-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-02-00501",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/05/ITB-2024-02-00501.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-02-00501",
+        "funding_source": "General Fund 2024",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode",
+        "funding_source"
+      ],
+      "id": "ev-proj-2024-magliman-road-2024-02-00501-itb",
+      "page_url": null,
+      "project_id": "proj-2024-magliman-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-02-00501",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/10/2024-02-00648.pdf",
+      "document_date": null,
+      "facts": {
+        "control_number": "2024-02-00648"
+      },
+      "fields_established": [
+        "primary_procurement_id"
+      ],
+      "id": "ev-proj-2024-sindalan-road-2024-02-00648-award",
+      "page_url": "https://cityofsanfernando.gov.ph/labor-and-materials-for-theimprovement-construction-of-road-at-sindalan-city-of-san-fernandopampanga/",
+      "project_id": "proj-2024-sindalan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-02-00648",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/01/2024-08-01629.pdf",
+      "document_date": "2024-10-31",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2024-10-31",
+        "awardee": "NULAS BUILDERS",
+        "contract_amount": 2991759.51,
+        "contract_effectivity_date": "2024-11-05",
+        "contract_end_date": "2025-01-12",
+        "contract_number": "2024-10-05055",
+        "control_number": "2024-08-01629",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11262231"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2024-san-pedro-road-2024-08-01629-award",
+      "page_url": null,
+      "project_id": "proj-2024-san-pedro-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-08-01629",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/02/2024-10-02347.pdf",
+      "document_date": "2025-01-23",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-01-23",
+        "awardee": "E.D. POLINTAN CONSTRUCTION AND TRADING",
+        "contract_amount": 2991305.65,
+        "contract_effectivity_date": "2025-01-27",
+        "contract_end_date": "2025-04-05",
+        "contract_number": "2025-01-00072",
+        "control_number": "2024-10-02347",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11598750"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-magliman-road-2024-10-02347-award",
+      "page_url": null,
+      "project_id": "proj-2025-magliman-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-10-02347",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-PROCUREMENT-MONITORING-REPORT-2025.pdf",
+      "document_date": null,
+      "facts": {
+        "abc_total_left_block": "3,000,000.00",
+        "mode_of_procurement": "Public Bidding",
+        "pmo_end_user": "City Engineer's Office",
+        "reference_number": "2024-10-02284"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-panipuan-road-2024-10-02284-pmr2025",
+      "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
+      "project_id": "proj-2025-panipuan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02284",
+      "stage": "PROCUREMENT_MONITORING_REPORT"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-10-02465.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-10-02465",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-san-jose-road-2024-10-02465-itb",
+      "page_url": null,
+      "project_id": "proj-2025-san-jose-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-10-02465",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-PROCUREMENT-MONITORING-REPORT-2025.pdf",
+      "document_date": null,
+      "facts": {
+        "abc_total_left_block": "3,000,000.00",
+        "mode_of_procurement": "Public Bidding",
+        "pmo_end_user": "City Engineer's Office",
+        "reference_number": "2024-10-02465"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-san-jose-road-2024-10-02465-pmr2025",
+      "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
+      "project_id": "proj-2025-san-jose-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02465",
+      "stage": "PROCUREMENT_MONITORING_REPORT"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-10-02277.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-10-02277",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-sindalan-road-2024-10-02277-itb",
+      "page_url": null,
+      "project_id": "proj-2025-sindalan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-10-02277",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-PROCUREMENT-MONITORING-REPORT-2025.pdf",
+      "document_date": null,
+      "facts": {
+        "abc_total_left_block": "3,000,000.00",
+        "mode_of_procurement": "Public Bidding",
+        "pmo_end_user": "City Engineer's Office",
+        "reference_number": "2024-10-02277"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-sindalan-road-2024-10-02277-pmr2025",
+      "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
+      "project_id": "proj-2025-sindalan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02277",
+      "stage": "PROCUREMENT_MONITORING_REPORT"
     }
   ],
-  "record_count": 590
+  "record_count": 602
 }

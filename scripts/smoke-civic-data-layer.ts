@@ -54,25 +54,49 @@ const implementationReported = projects.filter(
   project => project.lifecycle_status === 'IMPLEMENTATION_REPORTED'
 );
 assert(
-  implementationReported.length === 53,
-  'expected 53 IMPLEMENTATION_REPORTED projects'
+  implementationReported.length === 49,
+  'expected 49 IMPLEMENTATION_REPORTED projects'
 );
+const expectedHeldProcurement = new Map([
+  ['proj-2024-lara-road', ['2024-02-00514', null, null]],
+  ['proj-2024-sindalan-road', ['2024-02-00648', null, null]],
+  ['proj-2025-panipuan-road', ['2024-10-02284', 3_000_000, 'Public Bidding']],
+  ['proj-2025-san-jose-road', ['2024-10-02465', 3_000_000, 'Public Bidding']],
+  ['proj-2025-sindalan-road', ['2024-10-02277', 3_000_000, 'Public Bidding']],
+]);
 assert(
-  implementationReported.every(
-    project =>
+  implementationReported.every(project => {
+    const expected = expectedHeldProcurement.get(project.id);
+    if (expected) {
+      return (
+        project.identifiers.bid_reference === expected[0] &&
+        project.approved_budget_abc === expected[1] &&
+        project.procurement_mode === expected[2] &&
+        project.estimated_budget === null &&
+        project.winning_bid_amount === null &&
+        project.contract_amount === null &&
+        project.contractor === null &&
+        project.funding_source === null &&
+        project.identifiers.app_code === null &&
+        project.identifiers.contract_number === null &&
+        project.identifiers.philgeps_reference === null
+      );
+    }
+    return (
       project.estimated_budget === null &&
       project.approved_budget_abc === null &&
       project.winning_bid_amount === null &&
       project.contract_amount === null &&
       Object.values(project.identifiers).every(value => value === null)
-  ),
-  'NTA-sourced projects must not expose procurement amounts or identifiers'
+    );
+  }),
+  'implementation-reported projects must preserve exact held procurement fields only'
 );
 
 const evidence = getAllProjectEvidence();
 assert(
-  evidence.length === 590,
-  `expected 590 evidence records, got ${evidence.length}`
+  evidence.length === 602,
+  `expected 602 evidence records, got ${evidence.length}`
 );
 assert(
   evidence.filter(e => e.stage === 'NTA_UTILIZATION_REPORT').length === 229,
