@@ -24,14 +24,14 @@ assert.deepEqual(summary.projects.lifecycle, {
   PLANNED: 2,
   PROCUREMENT: 3,
   AWARDED: 228,
-  CONTRACTED: 24,
-  IMPLEMENTATION_REPORTED: 49,
+  CONTRACTED: 29,
+  IMPLEMENTATION_REPORTED: 44,
 });
 assert.equal(summary.projects.attributedToBarangay, 281);
 assert.equal(summary.projects.unattributed, 25);
-assert.equal(summary.procurement.evidence, 602);
-assert.equal(summary.procurement.bidResults, 233);
-assert.equal(summary.procurement.bidResultProjects, 233);
+assert.equal(summary.procurement.evidence, 617);
+assert.equal(summary.procurement.bidResults, 237);
+assert.equal(summary.procurement.bidResultProjects, 237);
 assert.equal(summary.government.officeRecords, 44);
 assert.equal(summary.geography.cityBoundaries, 1);
 assert.equal(summary.geography.barangayBoundaries, 35);

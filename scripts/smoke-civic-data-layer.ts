@@ -54,8 +54,8 @@ const implementationReported = projects.filter(
   project => project.lifecycle_status === 'IMPLEMENTATION_REPORTED'
 );
 assert(
-  implementationReported.length === 49,
-  'expected 49 IMPLEMENTATION_REPORTED projects'
+  implementationReported.length === 44,
+  'expected 44 IMPLEMENTATION_REPORTED projects'
 );
 const expectedHeldProcurement = new Map([
   ['proj-2024-lara-road', ['2024-02-00514', null, null]],
@@ -95,8 +95,8 @@ assert(
 
 const evidence = getAllProjectEvidence();
 assert(
-  evidence.length === 602,
-  `expected 602 evidence records, got ${evidence.length}`
+  evidence.length === 617,
+  `expected 617 evidence records, got ${evidence.length}`
 );
 assert(
   evidence.filter(e => e.stage === 'NTA_UTILIZATION_REPORT').length === 229,
@@ -115,8 +115,8 @@ assert(
 
 const bidResults = evidence.filter(e => e.stage === 'BID_RESULTS');
 assert(
-  bidResults.length === 233,
-  `expected 233 BID_RESULTS evidence records, got ${bidResults.length}`
+  bidResults.length === 237,
+  `expected 237 BID_RESULTS evidence records, got ${bidResults.length}`
 );
 
 const bidResultsWithoutSource = bidResults.filter(

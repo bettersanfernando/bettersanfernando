@@ -18611,7 +18611,421 @@
       "source_authority": "PRIMARY_OFFICIAL_CSFP",
       "source_identifier": "2024-10-02277",
       "stage": "PROCUREMENT_MONITORING_REPORT"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/10/2024-01-00584.pdf",
+      "document_date": "2024-06-11",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2024-06-11",
+        "awardee": "ANN REYRICK CONSTRUCTION",
+        "contract_amount": 2992769.93,
+        "contract_effectivity_date": "2024-06-19",
+        "contract_end_date": "2024-08-25",
+        "contract_number": "2024-05-01342",
+        "control_number": "2024-01-00584",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "10721120"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date",
+        "contractor"
+      ],
+      "id": "ev-proj-2024-quebiauan-road-2024-01-00584-award",
+      "page_url": null,
+      "project_id": "proj-2024-quebiauan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-01-00584",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/05/ITB-2024-01-00584.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-01-00584",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2024-quebiauan-road-2024-01-00584-itb",
+      "page_url": null,
+      "project_id": "proj-2024-quebiauan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-01-00584",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/2024-2nd-Quarter-Bid-Results-on-Civil-Works-Good-and-Services-and-Consulting-Services.xlsx",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "bid_amount": 2992769.93,
+        "item_number": 17,
+        "reference_number": "2024-01-00584",
+        "report_quarter": 2,
+        "report_year": 2024,
+        "winning_bidder": "ANN REYRICK CONSTRUCTION"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contractor",
+        "winning_bid_amount"
+      ],
+      "id": "ev-proj-2024-quebiauan-road-2024-01-00584-bidresults",
+      "page_url": "https://cityofsanfernando.gov.ph/2024-2nd-quarter-bid-results-on-civil-works-good-and-services-and-consulting-services/",
+      "project_id": "proj-2024-quebiauan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-01-00584",
+      "stage": "BID_RESULTS"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/2024-02-00479.pdf",
+      "document_date": "2024-05-08",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2024-05-08",
+        "awardee": "ANN REYRICK CONSTRUCTION",
+        "contract_amount": 2990550.58,
+        "contract_effectivity_date": "2024-05-16",
+        "contract_end_date": "2024-08-13",
+        "contract_number": "2024-05-01230",
+        "control_number": "2024-02-00479",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "10662056"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date",
+        "contractor"
+      ],
+      "id": "ev-proj-2024-saguin-road-2024-02-00479-award",
+      "page_url": null,
+      "project_id": "proj-2024-saguin-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-02-00479",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/03/ITB-2024-02-00479.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-02-00479",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2024-saguin-road-2024-02-00479-itb",
+      "page_url": null,
+      "project_id": "proj-2024-saguin-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-02-00479",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/09/2024-2nd-Quarter-Bid-Results-on-Civil-Works-Good-and-Services-and-Consulting-Services.xlsx",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "bid_amount": 2990550.58,
+        "item_number": 6,
+        "reference_number": "2024-02-00479",
+        "report_quarter": 2,
+        "report_year": 2024,
+        "winning_bidder": "ANN REYRICK CONSTRUCTION"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contractor",
+        "winning_bid_amount"
+      ],
+      "id": "ev-proj-2024-saguin-road-2024-02-00479-bidresults",
+      "page_url": "https://cityofsanfernando.gov.ph/2024-2nd-quarter-bid-results-on-civil-works-good-and-services-and-consulting-services/",
+      "project_id": "proj-2024-saguin-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-02-00479",
+      "stage": "BID_RESULTS"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/03/2024-10-02297.pdf",
+      "document_date": "2025-02-03",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-02-03",
+        "awardee": "R2DC CONSTRUCTION",
+        "contract_amount": 2991768.09,
+        "contract_effectivity_date": "2025-02-06",
+        "contract_end_date": "2025-03-26",
+        "contract_number": "2025-01-00109",
+        "control_number": "2024-10-02297",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11539899"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-calulut-road-2024-10-02297-award",
+      "page_url": null,
+      "project_id": "proj-2025-calulut-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-10-02297",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-10-02297.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-10-02297",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-calulut-road-2024-10-02297-itb",
+      "page_url": null,
+      "project_id": "proj-2025-calulut-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-10-02297",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/04/Bid-Results-on-Civil-Works-Good-and-Services-and-Consulting-Services2025-02-20.xlsx",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "bid_amount": 2991768.09,
+        "item_number": 31,
+        "reference_number": "2024-10-02297",
+        "report_quarter": 4,
+        "report_year": 2024,
+        "winning_bidder": "ANN REYRICK CONSTRUCTION"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc"
+      ],
+      "id": "ev-proj-2025-calulut-road-2024-10-02297-bidresults",
+      "page_url": "https://cityofsanfernando.gov.ph/bid-results-on-civil-works-good-and-services-and-consulting-services2025-02-20/",
+      "project_id": "proj-2025-calulut-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02297",
+      "stage": "BID_RESULTS"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-PROCUREMENT-MONITORING-REPORT-2025.pdf",
+      "document_date": null,
+      "facts": {
+        "abc_total_left_block": "3,000,000.00",
+        "mode_of_procurement": "Public Bidding",
+        "pmo_end_user": "City Engineer's Office",
+        "reference_number": "2024-10-02297"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-calulut-road-2024-10-02297-pmr2025",
+      "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
+      "project_id": "proj-2025-calulut-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02297",
+      "stage": "PROCUREMENT_MONITORING_REPORT"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/02/2024-10-02281.pdf",
+      "document_date": "2025-10-15",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-10-15",
+        "awardee": "EL KAPITAN CONSTRUCTION SERVICES",
+        "contract_amount": 2991106.51,
+        "contract_effectivity_date": "2025-10-22",
+        "contract_end_date": "2025-12-09",
+        "contract_number": "2025-01-00070",
+        "control_number": "2024-10-02281",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11540152"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date",
+        "contractor"
+      ],
+      "id": "ev-proj-2025-san-juan-road-2024-10-02281-award",
+      "page_url": null,
+      "project_id": "proj-2025-san-juan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-10-02281",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-10-02281.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "control_number": "2024-10-02281",
+        "procurement_mode": "Public Bidding"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-san-juan-road-2024-10-02281-itb",
+      "page_url": null,
+      "project_id": "proj-2025-san-juan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "ITB-2024-10-02281",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/04/Bid-Results-on-Civil-Works-Good-and-Services-and-Consulting-Services2025-02-20.xlsx",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_contract": 3000000,
+        "bid_amount": 2991106.51,
+        "item_number": 23,
+        "reference_number": "2024-10-02281",
+        "report_quarter": 4,
+        "report_year": 2024,
+        "winning_bidder": "EL KAPITAN CONSTRUCTION SERVICES"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contractor",
+        "winning_bid_amount"
+      ],
+      "id": "ev-proj-2025-san-juan-road-2024-10-02281-bidresults",
+      "page_url": "https://cityofsanfernando.gov.ph/bid-results-on-civil-works-good-and-services-and-consulting-services2025-02-20/",
+      "project_id": "proj-2025-san-juan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02281",
+      "stage": "BID_RESULTS"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2026/06/LGU-CSFP-PROCUREMENT-MONITORING-REPORT-2025.pdf",
+      "document_date": null,
+      "facts": {
+        "abc_total_left_block": "3,000,000.00",
+        "mode_of_procurement": "Public Bidding",
+        "pmo_end_user": "City Engineer's Office",
+        "reference_number": "2024-10-02281"
+      },
+      "fields_established": [
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "procurement_mode"
+      ],
+      "id": "ev-proj-2025-san-juan-road-2024-10-02281-pmr2025",
+      "page_url": "https://cityofsanfernando.gov.ph/lgu-csfp-procurement-monitoring-report-2025/",
+      "project_id": "proj-2025-san-juan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL_CSFP",
+      "source_identifier": "2024-10-02281",
+      "stage": "PROCUREMENT_MONITORING_REPORT"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/12/2022-12-02111.pdf",
+      "document_date": "2023-09-19",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2023-09-19",
+        "awardee": "EL KAPITAN CONSTRUCTION SERVICES",
+        "contract_amount": 2989855.03,
+        "contract_effectivity_date": "2023-09-21",
+        "contract_end_date": "2023-12-14",
+        "contract_number": "2023-09-02611",
+        "control_number": "2022-12-02111",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "9407990"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date",
+        "contractor"
+      ],
+      "id": "ev-proj-2023-san-felipe-road-2022-12-02111-award",
+      "page_url": null,
+      "project_id": "proj-2023-san-felipe-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2022-12-02111",
+      "stage": "NOTICE_OF_AWARD"
     }
   ],
-  "record_count": 602
+  "record_count": 617
 }

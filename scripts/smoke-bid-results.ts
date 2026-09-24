@@ -13,14 +13,14 @@ const allEvidence = getAllProjectEvidence();
 const records = getBidResultEvidence();
 const summary = getBidResultsSummary(records);
 
-assert.equal(allEvidence.length, 602);
-assert.equal(records.length, 233);
+assert.equal(allEvidence.length, 617);
+assert.equal(records.length, 237);
 assert.equal(summary.totalRecords, records.length);
-assert.equal(summary.projectsRepresented, 233);
-assert.equal(summary.withApprovedBudget, 225);
-assert.equal(summary.withWinningBid, 233);
-assert.equal(summary.withWinningBidder, 233);
-assert.equal(summary.withAttachment, 233);
+assert.equal(summary.projectsRepresented, 237);
+assert.equal(summary.withApprovedBudget, 229);
+assert.equal(summary.withWinningBid, 236);
+assert.equal(summary.withWinningBidder, 236);
+assert.equal(summary.withAttachment, 237);
 assert.ok(records.every(record => record.evidence.stage === 'BID_RESULTS'));
 assert.ok(
   records.every(record => record.project.id === record.evidence.project_id)
@@ -32,8 +32,13 @@ assert.equal(
 
 for (const record of records) {
   assert.notEqual(record.project.id, record.evidence.id);
-  assert.ok(record.facts.winningBidAmount !== null);
-  assert.ok(record.facts.winningBidder);
+  assert.ok(
+    record.project.id === 'proj-2025-calulut-road' ||
+      record.facts.winningBidAmount !== null
+  );
+  assert.ok(
+    record.project.id === 'proj-2025-calulut-road' || record.facts.winningBidder
+  );
   assert.notEqual(
     'approvedBudgetAbc',
     'winningBidAmount',
@@ -46,6 +51,12 @@ const missingAbc = records.filter(
 );
 assert.equal(missingAbc.length, 8);
 assert.ok(missingAbc.every(record => record.facts.approvedBudgetAbc !== 0));
+assert.deepEqual(
+  records
+    .filter(record => record.facts.winningBidAmount === null)
+    .map(record => record.project.id),
+  ['proj-2025-calulut-road']
+);
 
 for (const sort of BID_RESULT_SORTS) {
   const first = filterAndSortBidResults(records, { sort }).map(
@@ -68,7 +79,7 @@ assert.equal(
 
 assert.equal(
   filterAndSortBidResults(records, { approvedBudget: 'available' }).length,
-  225
+  229
 );
 assert.equal(
   filterAndSortBidResults(records, { approvedBudget: 'unavailable' }).length,

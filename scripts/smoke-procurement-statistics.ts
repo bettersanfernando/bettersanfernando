@@ -8,17 +8,17 @@ const second = getProcurementStatistics();
 
 assert.deepEqual(first, second, 'procurement statistics must be deterministic');
 assert.equal(first.projects.total, 306);
-assert.equal(first.evidence.total, 602);
+assert.equal(first.evidence.total, 617);
 assert.deepEqual(first.projects.lifecycle, [
   { key: 'PLANNED', count: 2, denominator: 306, percentage: 0.7 },
   { key: 'PROCUREMENT', count: 3, denominator: 306, percentage: 1 },
   { key: 'AWARDED', count: 228, denominator: 306, percentage: 74.5 },
-  { key: 'CONTRACTED', count: 24, denominator: 306, percentage: 7.8 },
+  { key: 'CONTRACTED', count: 29, denominator: 306, percentage: 9.5 },
   {
     key: 'IMPLEMENTATION_REPORTED',
-    count: 49,
+    count: 44,
     denominator: 306,
-    percentage: 16,
+    percentage: 14.4,
   },
 ]);
 assert.equal(
@@ -30,10 +30,10 @@ assert.deepEqual(
     first.projects.fieldCoverage.map(item => [item.key, item.count])
   ),
   {
-    approvedBudgetAbc: 258,
-    winningBidAmount: 245,
-    contractAmount: 28,
-    contractNumber: 26,
+    approvedBudgetAbc: 263,
+    winningBidAmount: 248,
+    contractAmount: 33,
+    contractNumber: 31,
   }
 );
 assert.ok(
@@ -41,17 +41,17 @@ assert.ok(
     item => item.denominator === first.projects.total
   )
 );
-assert.equal(first.bidResults.total, 233);
-assert.equal(first.bidResults.projectsRepresented, 233);
+assert.equal(first.bidResults.total, 237);
+assert.equal(first.bidResults.projectsRepresented, 237);
 assert.deepEqual(
   Object.fromEntries(
     first.bidResults.fieldCoverage.map(item => [item.key, item.count])
   ),
   {
-    approvedBudgetAbc: 225,
-    winningBidAmount: 233,
-    winningBidder: 233,
-    attachment: 233,
+    approvedBudgetAbc: 229,
+    winningBidAmount: 236,
+    winningBidder: 236,
+    attachment: 237,
   }
 );
 assert.ok(
@@ -66,11 +66,11 @@ assert.equal(
   ),
   first.bidResults.total
 );
-assert.equal(first.bidResults.unknownDocumentDate, 10);
+assert.equal(first.bidResults.unknownDocumentDate, 14);
 assert.equal(first.awardsAndContracts.awarded, 228);
-assert.equal(first.awardsAndContracts.contracted, 24);
-assert.equal(first.awardsAndContracts.withContractAmount, 28);
-assert.equal(first.awardsAndContracts.withContractNumber, 26);
+assert.equal(first.awardsAndContracts.contracted, 29);
+assert.equal(first.awardsAndContracts.withContractAmount, 33);
+assert.equal(first.awardsAndContracts.withContractNumber, 31);
 
 const pageSource = readNextRoute('/statistics/procurement');
 for (const privateField of [
