@@ -82,10 +82,20 @@ automatically result in publication.
 
 ## Maintainer publication workflow
 
-Maintainers prepare an approved export, then use `pnpm data:sync` to refresh
-the vendored frontend-safe dataset. Validation and public-data boundary checks
-run afterward. This maintainer-only refresh command is not required for
-ordinary contributors or CI.
+Maintainers prepare an approved export, then use one maintainer command to
+sync and verify the vendored frontend-safe dataset:
+
+```text
+pnpm civic:sync-verify --source="<validated private repo/worktree>"
+  -> commit public sync
+```
+
+It forwards `--source` to the existing sanctioned `data:sync` mechanism, then
+runs civic validation, smoke checks, public-data-boundary checks, the build,
+and `git diff --check`. `pnpm civic:verify` runs that same verification stage
+without syncing. These commands never hand-edit generated data and never
+commit, push, merge, reset, clean, or delete worktrees. This maintainer-only
+refresh command is not required for ordinary contributors or CI.
 
 The workflow intentionally does not document private source locations,
 credentials, recovery queues, or unpublished records.
@@ -99,6 +109,8 @@ pnpm data:validate
 pnpm check:public-data-boundary
 pnpm test:public-data-boundary
 ```
+
+For the complete maintained sequence, use `pnpm civic:verify`.
 
 Use targeted smoke tests when a change affects the corresponding application
 area; see `package.json` for the available checks.

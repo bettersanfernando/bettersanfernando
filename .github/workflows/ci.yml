@@ -24,10 +24,5 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm format:check
-      - run: pnpm data:validate
-      - run: pnpm check:public-data-boundary
-      - run: pnpm test:public-data-boundary
-      - run: pnpm search:smoke
-      - run: pnpm nav:smoke
+      - run: pnpm civic:verify
       - run: pnpm next-shell:smoke
-      - run: pnpm build
