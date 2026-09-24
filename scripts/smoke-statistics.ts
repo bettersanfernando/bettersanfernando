@@ -24,12 +24,12 @@ assert.deepEqual(summary.projects.lifecycle, {
   PLANNED: 2,
   PROCUREMENT: 3,
   AWARDED: 228,
-  CONTRACTED: 12,
-  IMPLEMENTATION_REPORTED: 61,
+  CONTRACTED: 20,
+  IMPLEMENTATION_REPORTED: 53,
 });
 assert.equal(summary.projects.attributedToBarangay, 281);
 assert.equal(summary.projects.unattributed, 25);
-assert.equal(summary.procurement.evidence, 578);
+assert.equal(summary.procurement.evidence, 590);
 assert.equal(summary.procurement.bidResults, 233);
 assert.equal(summary.procurement.bidResultProjects, 233);
 assert.equal(summary.government.officeRecords, 44);

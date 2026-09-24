@@ -17928,7 +17928,384 @@
       "source_authority": "PRIMARY_OFFICIAL",
       "source_identifier": "2024-11-02296",
       "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/07/2024-11-02429.pdf",
+      "document_date": "2025-05-27",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-05-27",
+        "awardee": "R.G. DIAZ BUILDERS & TRADING",
+        "contract_amount": 2991595.66,
+        "contract_effectivity_date": "2025-06-05",
+        "contract_end_date": "2025-09-08",
+        "contract_number": "2025-01-00053",
+        "control_number": "2024-11-02429",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11619456"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-dela-paz-sur-canal-award",
+      "page_url": null,
+      "project_id": "proj-2025-dela-paz-sur-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02429",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/07/2024-11-02366.pdf",
+      "document_date": "2025-05-20",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-05-20",
+        "awardee": "LGA METABUILDERS CORPORATION",
+        "contract_amount": 2991027.07,
+        "contract_effectivity_date": "2025-05-27",
+        "contract_end_date": "2025-09-02",
+        "contract_number": "2025-01-00089",
+        "control_number": "2024-11-02366",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11597642"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-lourdes-canal-award",
+      "page_url": null,
+      "project_id": "proj-2025-lourdes-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02366",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/07/2024-11-02365.pdf",
+      "document_date": "2025-05-22",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-05-22",
+        "awardee": "GREENWALL CONSTRUCTION",
+        "contract_amount": 2991121.36,
+        "contract_effectivity_date": "2025-05-27",
+        "contract_end_date": "2025-09-02",
+        "contract_number": "2025-01-00068",
+        "control_number": "2024-11-02365",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11597602"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-san-pedro-canal-award",
+      "page_url": null,
+      "project_id": "proj-2025-san-pedro-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02365",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/07/2024-11-02431.pdf",
+      "document_date": "2025-05-22",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-05-22",
+        "awardee": "N.M.D. CONSTRUCTION AND TRADING",
+        "contract_amount": 2991877.6,
+        "contract_effectivity_date": "2025-05-27",
+        "contract_end_date": "2025-09-02",
+        "contract_number": "2025-01-00108",
+        "control_number": "2024-11-02431",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11619361"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-baliti-canal-award",
+      "page_url": null,
+      "project_id": "proj-2025-baliti-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02431",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/08/2022-12-02105.pdf",
+      "document_date": "2023-07-05",
+      "facts": {
+        "approved_budget": 5000000,
+        "award_date": "2023-07-05",
+        "awardee": "ANN REYRICK CONSTRUCTION",
+        "contract_amount": 4946976.69,
+        "contract_effectivity_date": "2023-07-06",
+        "contract_end_date": "2023-08-18",
+        "contract_number": "2023-06-01616",
+        "control_number": "2022-12-02105",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "9407758"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2023-san-isidro-road-award",
+      "page_url": null,
+      "project_id": "proj-2023-san-isidro-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2022-12-02105",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2023/07/2022-12-02166.pdf",
+      "document_date": "2023-04-25",
+      "facts": {
+        "approved_budget": 2000000,
+        "award_date": "2023-04-25",
+        "award_notice_reference_number": "4219379",
+        "awardee": "N.T. TULABUT CONSTRUCTION & SUPPLY",
+        "contract_amount": 1989985.51,
+        "contract_effectivity_date": "2023-04-27",
+        "contract_end_date": "2023-07-19",
+        "contract_number": "2023-04-00741",
+        "control_number": "2022-12-02166",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "9473613"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2023-maimpis-canal-award",
+      "page_url": null,
+      "project_id": "proj-2023-maimpis-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2022-12-02166",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/10/2024-03-00480.pdf",
+      "document_date": "2024-07-09",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2024-07-09",
+        "awardee": "EL KAPITAN CONSTRUCTION SERVICES",
+        "contract_amount": 2991179.75,
+        "contract_effectivity_date": "2024-07-10",
+        "contract_end_date": "2024-10-09",
+        "contract_number": "2024-05-01343",
+        "control_number": "2024-03-00480",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "10721490"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2024-san-juan-road-award",
+      "page_url": null,
+      "project_id": "proj-2024-san-juan-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-03-00480",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2025/02/2024-10-02285.pdf",
+      "document_date": "2025-01-23",
+      "facts": {
+        "approved_budget": 3000000,
+        "award_date": "2025-01-23",
+        "awardee": "ANN REYRICK CONSTRUCTION",
+        "contract_amount": 2991537.15,
+        "contract_effectivity_date": "2025-01-30",
+        "contract_end_date": "2025-03-10",
+        "contract_number": "2025-01-00067",
+        "control_number": "2024-10-02285",
+        "funding_source": "Government of the Philippines (GOP) / Budget for the Contract Approved by the Sanggunian",
+        "procurement_mode": "Public Bidding",
+        "reference_number": "11542794"
+      },
+      "fields_established": [
+        "philgeps_reference",
+        "primary_procurement_id",
+        "approved_budget_abc",
+        "contract_amount",
+        "contractor",
+        "procurement_mode",
+        "funding_source",
+        "award_date",
+        "contract_number",
+        "contract_effectivity_date",
+        "contract_end_date"
+      ],
+      "id": "ev-proj-2025-maimpis-road-award",
+      "page_url": null,
+      "project_id": "proj-2025-maimpis-road",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-10-02285",
+      "stage": "NOTICE_OF_AWARD"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-11-02429.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "control_number": "2024-11-02429"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc"
+      ],
+      "id": "ev-proj-2025-dela-paz-sur-canal-itb",
+      "page_url": null,
+      "project_id": "proj-2025-dela-paz-sur-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02429",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-11-02366.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "control_number": "2024-11-02366"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc"
+      ],
+      "id": "ev-proj-2025-lourdes-canal-itb",
+      "page_url": null,
+      "project_id": "proj-2025-lourdes-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02366",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-11-02365.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "control_number": "2024-11-02365"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc"
+      ],
+      "id": "ev-proj-2025-san-pedro-canal-itb",
+      "page_url": null,
+      "project_id": "proj-2025-san-pedro-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02365",
+      "stage": "ITB"
+    },
+    {
+      "attachment_url": "https://cityofsanfernando.gov.ph/wp-content/uploads/2024/12/ITB-2024-11-02431.pdf",
+      "document_date": null,
+      "facts": {
+        "approved_budget_for_the_contract": 3000000,
+        "control_number": "2024-11-02431"
+      },
+      "fields_established": [
+        "project_name",
+        "primary_procurement_id",
+        "approved_budget_abc"
+      ],
+      "id": "ev-proj-2025-baliti-canal-itb",
+      "page_url": null,
+      "project_id": "proj-2025-baliti-canal",
+      "retrieval_status": "INSPECTED",
+      "source_authority": "PRIMARY_OFFICIAL",
+      "source_identifier": "2024-11-02431",
+      "stage": "ITB"
     }
   ],
-  "record_count": 578
+  "record_count": 590
 }

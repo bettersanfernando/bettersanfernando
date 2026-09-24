@@ -74,7 +74,7 @@
     "projects/city-projects.json": {
       "record_count": 306,
       "schema_version": 1,
-      "sha256": "4ed22c5477583a4a966d18d03c04bab7f8918be2d1516e435a12f081b27b4fc6"
+      "sha256": "8ef1dfb24815a34ee61495e7603c7e02240eafa1f9f9bb6e49fbfa3e1278d2c1"
     },
     "projects/project-cost-utilization.json": {
       "record_count": 298,
@@ -82,9 +82,9 @@
       "sha256": "2770cea2d1252339af4ccaa89c41463517fd19e8d58e99d23d2c2303be0460df"
     },
     "projects/project-evidence.json": {
-      "record_count": 578,
+      "record_count": 590,
       "schema_version": 1,
-      "sha256": "9d6674f3496af6e5504f25342f703cc47fae3f3a0f34767d5c8fa07e70707f2f"
+      "sha256": "c58d35de09267feb6467f895f17d056434b8ad404c5c10078ac4cebf15a7b681"
     },
     "projects/project-id-redirects.json": {
       "record_count": 18,
@@ -104,7 +104,7 @@
     "statistics/public-records-coverage.json": {
       "record_count": 8,
       "schema_version": 1,
-      "sha256": "1be48e2f6c180497023c51d34936039058e0b239d77c966b878aafa52b5c4dd2"
+      "sha256": "1dad80e3165eab299a01168e844aa7c04b5c52be18682a0898ce684c1d0dc738"
     },
     "transparency/full-disclosure.json": {
       "record_count": 10,
@@ -214,7 +214,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "e6be5a8bf8a09fc22dd668dc622d761e8761a1d3-dirty",
+  "source_commit": "c7b753fb7d0df0c28eee90f7806b6e55d51b5b9f",
   "source_data_version": "v0.1.1",
   "sources": [
     {
