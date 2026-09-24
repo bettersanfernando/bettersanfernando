@@ -18,10 +18,10 @@ assert.equal(
   inventory.publishedDomains.length
 );
 assert.equal(summary.projects.total, 306);
-assert.equal(summary.projects.evidence, 572);
+assert.equal(summary.projects.evidence, 578);
 assert.equal(summary.projects.bidResults, 233);
 assert.equal(summary.projects.awarded, 228);
-assert.equal(summary.projects.contracted, 7);
+assert.equal(summary.projects.contracted, 12);
 assert.equal(summary.government.officeRecords, 44);
 assert.equal(summary.legislation.executiveOrders, 13);
 assert.equal(summary.legislation.ordinances, 11);
