@@ -20,8 +20,8 @@ const projects = getProjects();
 const evidence = getAllProjectEvidence();
 
 assert.equal(projects.length, 306);
-assert.equal(evidence.length, 602);
-assert.equal(evidence.filter(item => item.stage === 'BID_RESULTS').length, 233);
+assert.equal(evidence.length, 617);
+assert.equal(evidence.filter(item => item.stage === 'BID_RESULTS').length, 237);
 assert.deepEqual(ProjectLifecycleStatus.options, [
   'PLANNED',
   'PROCUREMENT',

@@ -141,8 +141,8 @@ if (projects) {
 
 if (evidence) {
   const list = evidence.evidence ?? [];
-  if (list.length !== 602) {
-    fail(`Expected 602 evidence records, got ${list.length}`);
+  if (list.length !== 617) {
+    fail(`Expected 617 evidence records, got ${list.length}`);
   }
   for (const e of list) {
     if (!projectIds.has(e.project_id)) {

@@ -24,13 +24,13 @@ const records = resolveProjectEvidence(evidence);
 const counts = countProjectEvidenceByStage(evidence);
 
 // 1. Evidence and project integrity
-assert.equal(evidence.length, 602);
+assert.equal(evidence.length, 617);
 assert.equal(projects.length, 306);
-assert.equal(counts.BID_RESULTS, 233);
+assert.equal(counts.BID_RESULTS, 237);
 assert.equal(counts.NTA_UTILIZATION_REPORT, 229);
-assert.equal(counts.PROCUREMENT_MONITORING_REPORT, 77);
-assert.equal(counts.NOTICE_OF_AWARD, 31);
-assert.equal(counts.ITB, 25);
+assert.equal(counts.PROCUREMENT_MONITORING_REPORT, 79);
+assert.equal(counts.NOTICE_OF_AWARD, 36);
+assert.equal(counts.ITB, 29);
 assert.equal(counts.APP, 7);
 assert.equal(records.length, evidence.length, 'no evidence may be orphaned');
 assert.equal(new Set(evidence.map(item => item.project_id)).size, 306);
@@ -38,7 +38,7 @@ assert.equal(new Set(evidence.map(item => item.project_id)).size, 306);
 // 2. Document coverage derivation
 const withAttachmentCount = evidence.filter(hasAttachment).length;
 const withoutAttachmentCount = evidence.length - withAttachmentCount;
-assert.equal(withAttachmentCount, 597);
+assert.equal(withAttachmentCount, 612);
 assert.equal(withoutAttachmentCount, 5);
 const coveragePct = ((withAttachmentCount / evidence.length) * 100).toFixed(1);
 assert.equal(coveragePct, '99.2');
@@ -74,17 +74,17 @@ assert.equal(
 // 5. Filtering: Source Authority
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL' }).length,
-  54
+  63
 );
 assert.equal(
   filterProjectEvidence(records, { authority: 'PRIMARY_OFFICIAL_CSFP' }).length,
-  548
+  554
 );
 
 // 6. Filtering: Document availability
 assert.equal(
   filterProjectEvidence(records, { document: 'attachment' }).length,
-  597
+  612
 );
 assert.equal(
   filterProjectEvidence(records, { document: 'page-only' }).length,
@@ -92,8 +92,8 @@ assert.equal(
 );
 
 // 7. Filtering: Year & Undated
-assert.equal(filterProjectEvidence(records, { year: '2024' }).length, 71);
-assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 352);
+assert.equal(filterProjectEvidence(records, { year: '2024' }).length, 73);
+assert.equal(filterProjectEvidence(records, { year: 'undated' }).length, 362);
 
 // 8. Search query matching
 assert.equal(
@@ -139,7 +139,7 @@ for (const sortOption of [
 // 10. Pagination: 10 per page
 const PAGE_SIZE = 10;
 const totalPages = Math.ceil(records.length / PAGE_SIZE);
-assert.equal(totalPages, 61);
+assert.equal(totalPages, 62);
 const page1 = records.slice(0, PAGE_SIZE);
 assert.equal(page1.length, 10);
 
