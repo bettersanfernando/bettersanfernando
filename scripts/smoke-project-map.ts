@@ -35,10 +35,10 @@ const boundaries = BarangaysGeojsonSchema.parse(
 ).features;
 const distribution = aggregateProjectsByBarangay(getProjects(), boundaries);
 
-assert(distribution.totalProjects === 306, 'expected 306 total projects');
+assert(distribution.totalProjects === 303, 'expected 303 total projects');
 assert(
-  distribution.attributedProjects === 281,
-  'expected 281 barangay-attributed projects'
+  distribution.attributedProjects === 278,
+  'expected 278 barangay-attributed projects'
 );
 assert(
   distribution.unattributedProjects === 25,

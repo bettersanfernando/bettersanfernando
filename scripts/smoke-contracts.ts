@@ -16,7 +16,7 @@ const projects = getProjects();
 const records = getAwardAndContractRecords();
 const summary = getContractsSummary(records, projects.length);
 
-assert.equal(projects.length, 306);
+assert.equal(projects.length, 303);
 assert.equal(records.length, 235);
 assert.equal(summary.awarded, 228);
 assert.equal(summary.contracted, 7);

@@ -39,23 +39,23 @@ function assert(condition: boolean, message: string): void {
 
 const projects = getProjects();
 assert(
-  projects.length === 306,
-  `expected 306 projects, got ${projects.length}`
+  projects.length === 303,
+  `expected 303 projects, got ${projects.length}`
 );
 
 const projectIds = new Set(projects.map(p => p.id));
 assert(projectIds.size === projects.length, 'duplicate project IDs found');
 assert(
   projects.every(project => getProjectById(project.id) === project),
-  'all 306 canonical project detail IDs must resolve'
+  'all 303 canonical project detail IDs must resolve'
 );
 
 const implementationReported = projects.filter(
   project => project.lifecycle_status === 'IMPLEMENTATION_REPORTED'
 );
 assert(
-  implementationReported.length === 44,
-  'expected 44 IMPLEMENTATION_REPORTED projects'
+  implementationReported.length === 41,
+  'expected 41 IMPLEMENTATION_REPORTED projects'
 );
 const expectedHeldProcurement = new Map([
   ['proj-2024-lara-road', ['2024-02-00514', null, null]],

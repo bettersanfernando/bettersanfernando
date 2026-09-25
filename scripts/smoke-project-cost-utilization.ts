@@ -37,7 +37,7 @@ assert.equal(
   'observation ids must be unique'
 );
 
-// 2. All project references resolve against the 306-project canonical set.
+// 2. All project references resolve against the 303-project canonical set.
 for (const observation of observations) {
   const project = getProjectById(observation.canonical_project_id);
   assert.ok(
@@ -45,7 +45,7 @@ for (const observation of observations) {
     `observation ${observation.id} must resolve to a canonical project`
   );
 }
-assert.equal(getProjects().length, 306, 'canonical projects must be 306');
+assert.equal(getProjects().length, 303, 'canonical projects must be 303');
 
 // 3. currency_unit null throughout; period_basis is year_to_date.
 for (const observation of observations) {
@@ -216,7 +216,7 @@ for (const project of getProjects()) {
     );
   }
 }
-assert.equal(coveredProjectIds.length + (306 - coveredProjectIds.length), 306);
+assert.equal(coveredProjectIds.length + (303 - coveredProjectIds.length), 303);
 assert.equal(
   getProjects().filter(
     project => getObservationsForProject(project.id).length > 0
@@ -339,12 +339,12 @@ assert.match(pageSource, />\s*Next\s*</);
 assert.match(
   pageSource,
   /Browse all \{metadata\.canonicalProjectCount\} projects/,
-  'the page must link to /projects/city-projects labeled to browse all 306 projects'
+  'the page must link to /projects/city-projects labeled to browse all 303 projects'
 );
 assert.match(
   pageSource,
   /href="\/projects\/city-projects"[\s\S]{0,300}Browse all/,
-  'the Browse-all-306 control must link to /projects/city-projects'
+  'the Browse-all-303 control must link to /projects/city-projects'
 );
 // Coverage must remain derived from metadata, include both sides of the
 // represented-project count, and avoid treating the subset as citywide data.

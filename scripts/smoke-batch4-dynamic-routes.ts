@@ -84,8 +84,8 @@ for (const [name, filePath] of Object.entries(routeFiles)) {
   );
 }
 
-// 4. Exact counts: 16 categories, 177 service details, 306 projects, 44
-//    offices — 543 total canonical dynamic paths.
+// 4. Exact counts: 16 categories, 177 service details, 303 projects, 44
+//    offices — 540 total canonical dynamic paths.
 const services = getServices();
 const categories = new Set(services.map(getServiceCategory));
 const projects = getProjects();
@@ -93,15 +93,15 @@ const offices = getCityOffices();
 
 assert.equal(categories.size, 16, 'expected exactly 16 service categories');
 assert.equal(services.length, 177, 'expected exactly 177 services');
-assert.equal(projects.length, 306, 'expected exactly 306 projects');
+assert.equal(projects.length, 303, 'expected exactly 303 projects');
 assert.equal(offices.length, 44, 'expected exactly 44 government offices');
 
 const totalCanonicalPaths =
   categories.size + services.length + projects.length + offices.length;
 assert.equal(
   totalCanonicalPaths,
-  543,
-  'expected exactly 543 total canonical dynamic paths (16 + 177 + 306 + 44)'
+  540,
+  'expected exactly 540 total canonical dynamic paths (16 + 177 + 303 + 44)'
 );
 
 // 5. All generated parameters are unique.
@@ -235,5 +235,5 @@ assert.ok(
 );
 
 console.log(
-  `Batch 4 dynamic route smoke passed: 16 categories + 177 services + 306 projects + 44 offices = ${totalCanonicalPaths} canonical dynamic paths, all unique, all resolvable, no legacy slug/removed pattern leaked into static generation.`
+  `Batch 4 dynamic route smoke passed: 16 categories + 177 services + 303 projects + 44 offices = ${totalCanonicalPaths} canonical dynamic paths, all unique, all resolvable, no legacy slug/removed pattern leaked into static generation.`
 );

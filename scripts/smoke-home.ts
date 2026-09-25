@@ -21,7 +21,7 @@ assert.equal(summary.projects.bidResults, statistics.procurement.bidResults);
 assert.deepEqual(summary.government, government);
 assert.equal(summary.population.total, 377_534);
 assert.equal(summary.population.barangays, 35);
-assert.equal(summary.projects.total, 306);
+assert.equal(summary.projects.total, 303);
 assert.equal(summary.projects.evidence, 617);
 assert.equal(summary.government.officeRecords, 44);
 

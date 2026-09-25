@@ -6935,35 +6935,6 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Bulaon",
-      "barangay_psgc": "0305416003",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "estimated_budget": null,
-      "funding_source": null,
-      "id": "proj-2023-bulaon-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Bulaon",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Magliman",
       "barangay_psgc": "0305416014",
       "contract_amount": null,
@@ -8153,35 +8124,6 @@
     {
       "approved_budget_abc": null,
       "award_date": null,
-      "barangay": "Dela Paz Norte",
-      "barangay_psgc": "0305416005",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "estimated_budget": null,
-      "funding_source": null,
-      "id": "proj-2023-dela-paz-norte-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Construction of Road at Dela Paz Norte",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2023
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
       "barangay": "Lara",
       "barangay_psgc": "0305416012",
       "contract_amount": null,
@@ -8492,35 +8434,6 @@
       "procurement_mode": null,
       "project_category": "INFRASTRUCTURE_CAPITAL",
       "project_name": "Improvement/Construction of Road at Del Pilar",
-      "project_type": "ROAD",
-      "status_as_of": "2026-09-12",
-      "verification_confidence": "MEDIUM",
-      "winning_bid_amount": null,
-      "year": 2025
-    },
-    {
-      "approved_budget_abc": null,
-      "award_date": null,
-      "barangay": "Dolores",
-      "barangay_psgc": "0305416010",
-      "contract_amount": null,
-      "contract_effectivity_date": null,
-      "contract_end_date": null,
-      "contractor": null,
-      "estimated_budget": null,
-      "funding_source": null,
-      "id": "proj-2025-dolores-road",
-      "identifiers": {
-        "app_code": null,
-        "bid_reference": null,
-        "contract_number": null,
-        "philgeps_reference": null
-      },
-      "jurisdiction_psgc": "0305416000",
-      "lifecycle_status": "IMPLEMENTATION_REPORTED",
-      "procurement_mode": null,
-      "project_category": "INFRASTRUCTURE_CAPITAL",
-      "project_name": "Improvement/Construction of Road at Dolores",
       "project_type": "ROAD",
       "status_as_of": "2026-09-12",
       "verification_confidence": "MEDIUM",
@@ -8876,5 +8789,5 @@
       "year": 2022
     }
   ],
-  "record_count": 306
+  "record_count": 303
 }
