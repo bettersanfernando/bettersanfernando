@@ -8,8 +8,8 @@ const projects = getProjects();
 const statistics = aggregateProjectStatistics(projects);
 
 // 1. Project counts & denominations
-assert.equal(statistics.totalProjects, 306);
-assert.equal(statistics.barangayAttribution.attributed, 281);
+assert.equal(statistics.totalProjects, 303);
+assert.equal(statistics.barangayAttribution.attributed, 278);
 assert.equal(statistics.barangayAttribution.unattributed, 25);
 assert.equal(statistics.barangayAttribution.representedBarangays, 34);
 assert.equal(
@@ -56,13 +56,13 @@ assert.deepEqual(
   'project years must be chronological'
 );
 
-// 5. Project category totals reconcile with 324
+// 5. Project category totals reconcile with 303
 assert.deepEqual(
   Object.fromEntries(
     statistics.projectCategories.map(item => [item.key, item.count])
   ),
   {
-    INFRASTRUCTURE_CAPITAL: 251,
+    INFRASTRUCTURE_CAPITAL: 248,
     INFRASTRUCTURE_MAINTENANCE: 55,
   }
 );

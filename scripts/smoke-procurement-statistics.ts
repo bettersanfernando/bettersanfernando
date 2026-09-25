@@ -7,18 +7,18 @@ const first = getProcurementStatistics();
 const second = getProcurementStatistics();
 
 assert.deepEqual(first, second, 'procurement statistics must be deterministic');
-assert.equal(first.projects.total, 306);
+assert.equal(first.projects.total, 303);
 assert.equal(first.evidence.total, 617);
 assert.deepEqual(first.projects.lifecycle, [
-  { key: 'PLANNED', count: 2, denominator: 306, percentage: 0.7 },
-  { key: 'PROCUREMENT', count: 3, denominator: 306, percentage: 1 },
-  { key: 'AWARDED', count: 228, denominator: 306, percentage: 74.5 },
-  { key: 'CONTRACTED', count: 29, denominator: 306, percentage: 9.5 },
+  { key: 'PLANNED', count: 2, denominator: 303, percentage: 0.7 },
+  { key: 'PROCUREMENT', count: 3, denominator: 303, percentage: 1 },
+  { key: 'AWARDED', count: 228, denominator: 303, percentage: 75.2 },
+  { key: 'CONTRACTED', count: 29, denominator: 303, percentage: 9.6 },
   {
     key: 'IMPLEMENTATION_REPORTED',
-    count: 44,
-    denominator: 306,
-    percentage: 14.4,
+    count: 41,
+    denominator: 303,
+    percentage: 13.5,
   },
 ]);
 assert.equal(

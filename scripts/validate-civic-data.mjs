@@ -128,8 +128,8 @@ if (barangays) {
 let projectIds = new Set();
 if (projects) {
   const list = projects.projects ?? [];
-  if (list.length !== 306) {
-    fail(`Expected 306 projects, got ${list.length}`);
+  if (list.length !== 303) {
+    fail(`Expected 303 projects, got ${list.length}`);
   }
   for (const p of list) {
     if (projectIds.has(p.id)) {
@@ -158,8 +158,8 @@ if (evidence) {
 
 if (redirects) {
   const list = redirects.redirects ?? [];
-  if (list.length !== 18) {
-    fail(`Expected 18 project ID redirects, got ${list.length}`);
+  if (list.length !== 21) {
+    fail(`Expected 21 project ID redirects, got ${list.length}`);
   }
   const deprecatedIds = new Set(list.map(r => r.deprecated_project_id));
   if (deprecatedIds.size !== list.length) {

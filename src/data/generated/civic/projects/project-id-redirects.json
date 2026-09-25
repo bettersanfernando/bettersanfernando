@@ -1,9 +1,17 @@
 {
-  "record_count": 18,
+  "record_count": 21,
   "redirects": [
+    {
+      "canonical_project_id": "proj-2022-road-bulaon-02102",
+      "deprecated_project_id": "proj-2023-bulaon-road"
+    },
     {
       "canonical_project_id": "proj-2022-canal-del-rosario-02178",
       "deprecated_project_id": "proj-2023-del-rosario-canal"
+    },
+    {
+      "canonical_project_id": "proj-2022-road-dela-paz-norte-02115",
+      "deprecated_project_id": "proj-2023-dela-paz-norte-road"
     },
     {
       "canonical_project_id": "proj-2022-road-dolores-02099",
@@ -44,6 +52,10 @@
     {
       "canonical_project_id": "proj-2024-road-dela-paz-norte-02291",
       "deprecated_project_id": "proj-2025-dela-paz-norte-road"
+    },
+    {
+      "canonical_project_id": "proj-2024-road-dolores-02298",
+      "deprecated_project_id": "proj-2025-dolores-road"
     },
     {
       "canonical_project_id": "proj-2024-road-malpitic-02280",
