@@ -23,6 +23,12 @@ import {
   getParentOffice,
   type CityOffice,
 } from '../../../data/civic/government';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import type { LanguageType } from '../../../types';
+import { withSlots } from '../../../components/i18n/rich';
 
 type ContactFilter = 'all' | 'phone' | 'email' | 'hotline';
 type RelationshipFilter = 'all' | 'standalone' | 'subunit';
@@ -35,62 +41,75 @@ const eyebrowTracking = { letterSpacing: '0.08em' };
 const allOffices = getCityOffices();
 const metadata = getCityOfficesMetadata();
 
-const CONTACT_FILTERS: Array<{ value: ContactFilter; label: string }> = [
-  { value: 'all', label: 'All offices' },
-  { value: 'phone', label: 'With phone' },
-  { value: 'email', label: 'With email' },
-  { value: 'hotline', label: 'With hotline' },
+const CONTACT_FILTERS = (
+  t: PageT
+): Array<{ value: ContactFilter; label: string }> => [
+  { value: 'all', label: t('All offices') },
+  { value: 'phone', label: t('With phone') },
+  { value: 'email', label: t('With email') },
+  { value: 'hotline', label: t('With hotline') },
 ];
 
-const RELATIONSHIP_FILTERS: Array<{
+const RELATIONSHIP_FILTERS = (
+  t: PageT
+): Array<{
   value: RelationshipFilter;
   label: string;
-}> = [
-  { value: 'all', label: 'All records' },
-  { value: 'standalone', label: 'Standalone / parent not recorded' },
-  { value: 'subunit', label: 'Verified subunits' },
+}> => [
+  { value: 'all', label: t('All records') },
+  { value: 'standalone', label: t('Standalone / parent not recorded') },
+  { value: 'subunit', label: t('Verified subunits') },
 ];
 
-const OFFICIAL_PAGE_FILTERS: Array<{
+const OFFICIAL_PAGE_FILTERS = (
+  t: PageT
+): Array<{
   value: OfficialPageFilter;
   label: string;
-}> = [
-  { value: 'all', label: 'All records' },
-  { value: 'available', label: 'Official office page available' },
+}> => [
+  { value: 'all', label: t('All records') },
+  { value: 'available', label: t('Official office page available') },
 ];
 
-const SORT_OPTIONS: Array<{ value: SortOption; label: string }> = [
-  { value: 'name-asc', label: 'Office name A–Z' },
-  { value: 'name-desc', label: 'Office name Z–A' },
-  { value: 'recently-verified', label: 'Recently verified' },
+const SORT_OPTIONS = (
+  t: PageT
+): Array<{ value: SortOption; label: string }> => [
+  { value: 'name-asc', label: t('Office name A–Z') },
+  { value: 'name-desc', label: t('Office name Z–A') },
+  { value: 'recently-verified', label: t('Recently verified') },
 ];
 
-const RELATED_RESOURCES = [
+const RELATED_RESOURCES = (t: PageT) => [
   {
-    title: 'Emergency Hotlines',
-    description: 'Find important public-safety and emergency contact numbers.',
+    title: t('Emergency Hotlines'),
+    description: t(
+      'Find important public-safety and emergency contact numbers.'
+    ),
     href: '/government/hotlines',
   },
   {
-    title: 'Barangay Contacts',
-    description: "Find contact information for San Fernando's barangays.",
+    title: t('Barangay Contacts'),
+    description: t("Find contact information for San Fernando's barangays."),
     href: '/government/barangay-contacts',
   },
   {
-    title: 'Official Government Links',
-    description: 'Open official City Government websites and public channels.',
+    title: t('Official Government Links'),
+    description: t(
+      'Open official City Government websites and public channels.'
+    ),
     href: '/government/links',
   },
   {
-    title: 'Government Statistics',
-    description:
-      'Explore descriptive information about the current published government directory.',
+    title: t('Government Statistics'),
+    description: t(
+      'Explore descriptive information about the current published government directory.'
+    ),
     href: '/statistics/government',
   },
 ];
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-PH', {
+function formatDate(value: string, locale: LanguageType) {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -136,6 +155,8 @@ function getPageWindow(current: number, total: number): (number | '…')[] {
 }
 
 export default function GovernmentOffices() {
+  const t = usePageT();
+  const locale = useLocale();
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [contactFilter, setContactFilter] = useQueryState('contact', {
     defaultValue: 'all',
@@ -284,9 +305,9 @@ export default function GovernmentOffices() {
         <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
           <Breadcrumbs
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Government', href: '/government' },
-              { label: 'City Offices' },
+              { label: t('Home'), href: '/' },
+              { label: t('Government'), href: '/government' },
+              { label: t('City Offices') },
             ]}
           />
 
@@ -296,34 +317,34 @@ export default function GovernmentOffices() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                CITY DIRECTORY
+                {t('CITY DIRECTORY')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                City offices and public contact information
+                {t('City offices and public contact information')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Find verified office locations, phone numbers, email addresses,
-                official pages, and available public contact channels for City
-                Government offices in San Fernando, Pampanga.
+                {t(
+                  'Find verified office locations, phone numbers, email addresses, official pages, and available public contact channels for City Government offices in San Fernando, Pampanga.'
+                )}
               </p>
             </div>
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                ABOUT THIS DIRECTORY
+                {t('ABOUT THIS DIRECTORY')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                Bounded civic directory
+                {t('Bounded civic directory')}
               </h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                BetterSanFernando organizes publicly available office
-                information from official City sources. This is a bounded civic
-                directory and should not be read as the complete legal
-                organizational structure of the City Government.
+                {t(
+                  'BetterSanFernando organizes publicly available office information from official City sources. This is a bounded civic directory and should not be read as the complete legal organizational structure of the City Government.'
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -334,54 +355,58 @@ export default function GovernmentOffices() {
         {/* 2. Top Metric Strip */}
         <section aria-labelledby="metrics-heading" className="pt-8 sm:pt-10">
           <h2 id="metrics-heading" className="sr-only">
-            Directory overview metrics
+            {t('Directory overview metrics')}
           </h2>
           <div className="grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 py-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-7">
             <div className="pb-4 sm:pb-0 sm:pr-6">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Verified office records
+                {t('Verified office records')}
               </p>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {totalOffices}
               </p>
               <p className="mt-1 text-xs text-gray-600">
-                Published City Government directory
+                {t('Published City Government directory')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 sm:px-6">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                With public contact details
+                {t('With public contact details')}
               </p>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {officesWithContact}{' '}
                 <span className="text-sm font-normal text-gray-500">
-                  of {totalOffices}
+                  {t('of {{totalOffices}}', { totalOffices })}
                 </span>
               </p>
               <p className="mt-1 text-xs font-medium text-[#0066EB]">
-                {contactPercentage}% coverage
+                {t('{{contactPercentage}}% coverage', { contactPercentage })}
               </p>
             </div>
 
             <div className="pt-4 sm:pt-0 sm:pl-6">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                With official office pages
+                {t('With official office pages')}
               </p>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {officesWithOfficialPage}{' '}
                 <span className="text-sm font-normal text-gray-500">
-                  of {totalOffices}
+                  {t('of {{totalOffices}}', { totalOffices })}
                 </span>
               </p>
               <p className="mt-1 text-xs font-medium text-[#0066EB]">
-                {officialPagePercentage}% coverage
+                {t('{{officialPagePercentage}}% coverage', {
+                  officialPagePercentage,
+                })}
               </p>
             </div>
           </div>
 
           <p className="mt-3 text-xs text-gray-500">
-            Directory last verified {formatDate(metadata.lastVerified)}
+            {t('Directory last verified {{lastVerified}}', {
+              lastVerified: formatDate(metadata.lastVerified, locale),
+            })}
           </p>
         </section>
 
@@ -396,13 +421,15 @@ export default function GovernmentOffices() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                OFFICE DIRECTORY
+                {t('OFFICE DIRECTORY')}
               </p>
               <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-                Find an office
+                {t('Find an office')}
               </h2>
               <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                Search by office name, acronym, alternate name, or location.
+                {t(
+                  'Search by office name, acronym, alternate name, or location.'
+                )}
               </p>
             </div>
 
@@ -413,7 +440,7 @@ export default function GovernmentOffices() {
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
               >
                 <X className="h-3.5 w-3.5" aria-hidden="true" />
-                Reset filters
+                {t('Reset filters')}
               </button>
             )}
           </div>
@@ -421,7 +448,7 @@ export default function GovernmentOffices() {
           {/* Search Input */}
           <div className="mt-6">
             <label htmlFor="office-search" className="sr-only">
-              Search office, acronym, or location
+              {t('Search office, acronym, or location')}
             </label>
             <div className="relative">
               <Search
@@ -436,7 +463,7 @@ export default function GovernmentOffices() {
                   setQuery(event.target.value);
                   if (page !== 1) setPage(1);
                 }}
-                placeholder="Search office, acronym, or location..."
+                placeholder={t('Search office, acronym, or location...')}
                 className="w-full rounded-sm border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-950 placeholder:text-gray-400 transition-colors focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
               />
             </div>
@@ -450,7 +477,7 @@ export default function GovernmentOffices() {
                 htmlFor="contact-filter"
                 className="mb-1 block text-xs font-medium text-gray-700"
               >
-                Contact
+                {t('Contact')}
               </label>
               <select
                 id="contact-filter"
@@ -461,7 +488,7 @@ export default function GovernmentOffices() {
                 }}
                 className="w-full rounded-sm border border-gray-300 bg-white px-2.5 py-2 text-xs text-gray-900 transition-colors focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB] sm:text-sm"
               >
-                {CONTACT_FILTERS.map(option => (
+                {CONTACT_FILTERS(t).map(option => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -475,7 +502,7 @@ export default function GovernmentOffices() {
                 htmlFor="relationship-filter"
                 className="mb-1 block text-xs font-medium text-gray-700"
               >
-                Directory relationship
+                {t('Directory relationship')}
               </label>
               <select
                 id="relationship-filter"
@@ -488,7 +515,7 @@ export default function GovernmentOffices() {
                 }}
                 className="w-full rounded-sm border border-gray-300 bg-white px-2.5 py-2 text-xs text-gray-900 transition-colors focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB] sm:text-sm"
               >
-                {RELATIONSHIP_FILTERS.map(option => (
+                {RELATIONSHIP_FILTERS(t).map(option => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -502,7 +529,7 @@ export default function GovernmentOffices() {
                 htmlFor="official-page-filter"
                 className="mb-1 block text-xs font-medium text-gray-700"
               >
-                Official page
+                {t('Official page')}
               </label>
               <select
                 id="official-page-filter"
@@ -515,7 +542,7 @@ export default function GovernmentOffices() {
                 }}
                 className="w-full rounded-sm border border-gray-300 bg-white px-2.5 py-2 text-xs text-gray-900 transition-colors focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB] sm:text-sm"
               >
-                {OFFICIAL_PAGE_FILTERS.map(option => (
+                {OFFICIAL_PAGE_FILTERS(t).map(option => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -529,7 +556,7 @@ export default function GovernmentOffices() {
                 htmlFor="sort-filter"
                 className="mb-1 block text-xs font-medium text-gray-700"
               >
-                Sort by
+                {t('Sort by')}
               </label>
               <select
                 id="sort-filter"
@@ -540,7 +567,7 @@ export default function GovernmentOffices() {
                 }}
                 className="w-full rounded-sm border border-gray-300 bg-white px-2.5 py-2 text-xs text-gray-900 transition-colors focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB] sm:text-sm"
               >
-                {SORT_OPTIONS.map(option => (
+                {SORT_OPTIONS(t).map(option => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
@@ -554,24 +581,28 @@ export default function GovernmentOffices() {
             <p aria-live="polite">
               {filteredOffices.length > 0 ? (
                 <>
-                  Showing{' '}
-                  <span className="font-semibold text-gray-950">
-                    {startIndex}–{endIndex}
-                  </span>{' '}
-                  of{' '}
-                  <span className="font-semibold text-gray-950">
-                    {filteredOffices.length}
-                  </span>{' '}
-                  offices
+                  {withSlots(t('Showing {{range}} of {{total}} offices'), {
+                    range: (
+                      <span className="font-semibold text-gray-950">
+                        {startIndex}–{endIndex}
+                      </span>
+                    ),
+                    total: (
+                      <span className="font-semibold text-gray-950">
+                        {filteredOffices.length}
+                      </span>
+                    ),
+                  })}
                   {filteredOffices.length < totalOffices && (
                     <span className="text-gray-500">
-                      {' '}
-                      (filtered from {totalOffices} total)
+                      {t('(filtered from {{totalOffices}} total)', {
+                        totalOffices,
+                      })}
                     </span>
                   )}
                 </>
               ) : (
-                '0 offices found'
+                t('0 offices found')
               )}
             </p>
           </div>
@@ -609,7 +640,7 @@ export default function GovernmentOffices() {
 
                         {parent && (
                           <p className="mt-1 text-xs text-gray-600 sm:text-sm">
-                            Verified subunit of{' '}
+                            {t('Verified subunit of')}{' '}
                             <Link
                               href={`/government/offices/${parent.office_id}`}
                               className="font-medium text-gray-900 underline decoration-gray-300 underline-offset-2 hover:text-[#0066EB]"
@@ -635,10 +666,13 @@ export default function GovernmentOffices() {
                             aria-hidden="true"
                           />
                           <span>
-                            Verified · Checked{' '}
-                            {formatDate(
-                              office.last_verified_at ?? metadata.lastVerified
-                            )}
+                            {t('Verified · Checked {{last_verified_at}}', {
+                              last_verified_at: formatDate(
+                                office.last_verified_at ??
+                                  metadata.lastVerified,
+                                locale
+                              ),
+                            })}
                           </span>
                         </div>
                       </div>
@@ -660,8 +694,9 @@ export default function GovernmentOffices() {
                               </a>
                               {office.phone_extensions?.length ? (
                                 <span className="text-gray-500">
-                                  {' '}
-                                  · Ext. {office.phone_extensions.join(', ')}
+                                  {t(' · Ext. {{join}}', {
+                                    join: office.phone_extensions.join(', '),
+                                  })}
                                 </span>
                               ) : null}
                             </div>
@@ -683,7 +718,9 @@ export default function GovernmentOffices() {
                               </a>
                               {emails.length > 1 && (
                                 <span className="ml-1 text-[11px] text-gray-400">
-                                  (+{emails.length - 1} more)
+                                  {t('(+{{length}} more)', {
+                                    length: emails.length - 1,
+                                  })}
                                 </span>
                               )}
                             </div>
@@ -697,7 +734,7 @@ export default function GovernmentOffices() {
                               aria-hidden="true"
                             />
                             <span>
-                              Hotline:{' '}
+                              {t('Hotline:')}{' '}
                               <a
                                 href={`tel:${office.emergency_hotlines[0].replace(/[^+\d]/g, '')}`}
                                 className="font-bold text-red-700 hover:underline"
@@ -712,7 +749,7 @@ export default function GovernmentOffices() {
                           !primaryEmail &&
                           !office.emergency_hotlines?.length && (
                             <p className="text-xs italic text-gray-400">
-                              No phone, email, or hotline recorded
+                              {t('No phone, email, or hotline recorded')}
                             </p>
                           )}
                       </div>
@@ -723,7 +760,7 @@ export default function GovernmentOffices() {
                           href={`/government/offices/${office.office_id}`}
                           className="group inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                         >
-                          <span>View office</span>
+                          <span>{t('View office')}</span>
                           <ChevronRight
                             className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
                             aria-hidden="true"
@@ -737,7 +774,7 @@ export default function GovernmentOffices() {
                             rel="noreferrer"
                             className="inline-flex items-center gap-1 text-xs text-gray-600 hover:text-gray-900 hover:underline"
                           >
-                            <span>Official page</span>
+                            <span>{t('Official page')}</span>
                             <ArrowUpRight
                               className="h-3.5 w-3.5 text-gray-400"
                               aria-hidden="true"
@@ -757,10 +794,10 @@ export default function GovernmentOffices() {
                 aria-hidden="true"
               />
               <h3 className="mt-3 text-base font-bold text-gray-950">
-                No offices match these filters.
+                {t('No offices match these filters.')}
               </h3>
               <p className="mt-1 text-xs text-gray-600 sm:text-sm">
-                Try changing or clearing one or more filters.
+                {t('Try changing or clearing one or more filters.')}
               </p>
               <button
                 type="button"
@@ -768,7 +805,7 @@ export default function GovernmentOffices() {
                 className="mt-4 inline-flex items-center gap-1.5 rounded-sm bg-[#0066EB] px-3.5 py-2 text-xs font-semibold text-white transition hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <X className="h-3.5 w-3.5" aria-hidden="true" />
-                Clear filters
+                {t('Clear filters')}
               </button>
             </div>
           )}
@@ -776,7 +813,7 @@ export default function GovernmentOffices() {
           {/* Pagination Controls */}
           {totalPages > 1 && (
             <nav
-              aria-label="Office directory pagination"
+              aria-label={t('Office directory pagination')}
               className="mt-6 flex items-center justify-between gap-4 border-t border-gray-200 pt-5"
             >
               <button
@@ -786,7 +823,7 @@ export default function GovernmentOffices() {
                 className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                Previous
+                {t('Previous')}
               </button>
 
               {/* Desktop Page Window */}
@@ -820,7 +857,10 @@ export default function GovernmentOffices() {
 
               {/* Mobile Page Indicator */}
               <p className="text-sm font-medium text-gray-700 sm:hidden">
-                Page {currentPage} of {totalPages}
+                {t('Page {{currentPage}} of {{totalPages}}', {
+                  currentPage,
+                  totalPages,
+                })}
               </p>
 
               <button
@@ -829,7 +869,7 @@ export default function GovernmentOffices() {
                 onClick={() => setPage(currentPage + 1)}
                 className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Next
+                {t('Next')}
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </nav>
@@ -842,42 +882,43 @@ export default function GovernmentOffices() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            ABOUT THE DIRECTORY
+            {t('ABOUT THE DIRECTORY')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            How to read these records
+            {t('How to read these records')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-white p-5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Verified public information
+                {t('Verified public information')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                Contact and location details are included when they are
-                supported by the recorded official sources.
+                {t(
+                  'Contact and location details are included when they are supported by the recorded official sources.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Relationships are partial
+                {t('Relationships are partial')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                A parent or subunit relationship is shown only when the current
-                evidence supports it. The directory is not presented as a
-                complete legal organizational chart.
+                {t(
+                  'A parent or subunit relationship is shown only when the current evidence supports it. The directory is not presented as a complete legal organizational chart.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Missing details remain unknown
+                {t('Missing details remain unknown')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                If a phone number, email address, or official page is not
-                listed, BetterSanFernando has not established that detail in the
-                current directory.
+                {t(
+                  'If a phone number, email address, or official page is not listed, BetterSanFernando has not established that detail in the current directory.'
+                )}
               </p>
             </div>
           </div>
@@ -889,10 +930,10 @@ export default function GovernmentOffices() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10 lg:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            KEEP EXPLORING
+            {t('KEEP EXPLORING')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Explore more government information
+            {t('Explore more government information')}
           </h2>
 
           {/* Two compact featured destinations in ONE coordinated 2-column surface */}
@@ -900,35 +941,36 @@ export default function GovernmentOffices() {
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-x md:divide-y-0">
               <div className="p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                  Government Overview
+                  {t('Government Overview')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                  Understand the City Government information currently organized
-                  by BetterSanFernando.
+                  {t(
+                    'Understand the City Government information currently organized by BetterSanFernando.'
+                  )}
                 </p>
                 <div className="mt-3.5">
                   <Link
                     href="/government"
                     className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
-                    View Government Overview →
+                    {t('View Government Overview →')}
                   </Link>
                 </div>
               </div>
 
               <div className="p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                  Contact the City
+                  {t('Contact the City')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                  Find general City Government contact channels.
+                  {t('Find general City Government contact channels.')}
                 </p>
                 <div className="mt-3.5">
                   <Link
                     href="/government/contact"
                     className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
-                    View Contact Information →
+                    {t('View Contact Information →')}
                   </Link>
                 </div>
               </div>
@@ -938,11 +980,11 @@ export default function GovernmentOffices() {
           {/* 2x2 Related Resources Directory */}
           <div className="mt-8">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              Related resources
+              {t('Related resources')}
             </h3>
             <div className="mt-3 overflow-hidden rounded-sm border border-gray-200 bg-white">
               <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-                {RELATED_RESOURCES.map((item, index) => (
+                {RELATED_RESOURCES(t).map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}

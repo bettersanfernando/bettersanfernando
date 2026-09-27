@@ -7,24 +7,22 @@ import {
 } from '../../../data/civic/legislation';
 import { getPublicRecordsArchiveCoverage } from '../../../data/civic/publicRecordsCoverage';
 import { buildPageMetadata } from '../../../lib/metadata';
+import { getPageT } from '../../../i18n/server';
+import { INTL_LOCALES } from '../../../i18n/locale';
 
-export const metadata = buildPageMetadata({
-  title: 'Resolutions',
-  description:
-    'Browse the subject-verified City of San Fernando resolution records currently published by BetterSanFernando.',
-  path: '/legislation/resolutions',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('legislation-resolutions');
+  return buildPageMetadata({
+    title: t('Resolutions'),
+    description: t(
+      'Browse the subject-verified City of San Fernando resolution records currently published by BetterSanFernando.'
+    ),
+    path: '/legislation/resolutions',
+    locale,
+  });
+}
 
 const eyebrowTracking = { letterSpacing: '0.08em' };
-
-function formatDate(date: string): string {
-  return new Intl.DateTimeFormat('en-PH', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${date}T00:00:00Z`));
-}
 
 const resolutions = getResolutions();
 const legislationMetadata = getResolutionsMetadata();
@@ -32,7 +30,17 @@ const archiveRanges = getPublicRecordsArchiveCoverage().filter(
   entry => entry.record_type === 'resolution_archive_range'
 );
 
-export default function Resolutions() {
+export default async function Resolutions() {
+  const { t, locale } = await getPageT('legislation-resolutions');
+
+  function formatDate(date: string): string {
+    return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC',
+    }).format(new Date(`${date}T00:00:00Z`));
+  }
   return (
     <main className="flex-grow bg-white">
       {/* 1. Editorial Hero & Scope Intro */}
@@ -41,9 +49,9 @@ export default function Resolutions() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Legislation', href: '/legislation' },
-              { label: 'Resolutions' },
+              { label: t('Home'), href: '/' },
+              { label: t('Legislation'), href: '/legislation' },
+              { label: t('Resolutions') },
             ]}
           />
 
@@ -53,16 +61,15 @@ export default function Resolutions() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                LEGISLATION · RESOLUTION ARCHIVE
+                {t('LEGISLATION · RESOLUTION ARCHIVE')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                Resolutions
+                {t('Resolutions')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Browse the resolution records BetterSanFernando can currently
-                verify through official City cross-references. Published
-                coverage is partial and subject-verified, not a complete
-                historical register.
+                {t(
+                  'Browse the resolution records BetterSanFernando can currently verify through official City cross-references. Published coverage is partial and subject-verified, not a complete historical register.'
+                )}
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -70,14 +77,14 @@ export default function Resolutions() {
                   href="#verified-records"
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition hover:bg-[#0052BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066EB]"
                 >
-                  <span>Browse verified records</span>
+                  <span>{t('Browse verified records')}</span>
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/legislation"
                   className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition hover:text-[#0052BC] hover:underline focus-visible:outline-none focus-visible:underline"
                 >
-                  <span>Legislation overview</span>
+                  <span>{t('Legislation overview')}</span>
                   <ArrowRight
                     className="h-4 w-4 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -88,21 +95,26 @@ export default function Resolutions() {
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                VERIFICATION SCOPE
+                {t('VERIFICATION SCOPE')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                Subject-verified collection
+                {t('Subject-verified collection')}
               </h2>
               <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                <li>• Subjects are supported by official City references.</li>
-                <li>• Verbatim formal titles are not currently recovered.</li>
-                <li>• Full resolution text is unavailable.</li>
-                <li>• Exact adoption dates are unavailable.</li>
-                <li>• This is not a complete historical register.</li>
+                <li>
+                  {t('• Subjects are supported by official City references.')}
+                </li>
+                <li>
+                  {t('• Verbatim formal titles are not currently recovered.')}
+                </li>
+                <li>{t('• Full resolution text is unavailable.')}</li>
+                <li>{t('• Exact adoption dates are unavailable.')}</li>
+                <li>{t('• This is not a complete historical register.')}</li>
               </ul>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -113,47 +125,49 @@ export default function Resolutions() {
         {/* 2. Collection Snapshot */}
         <section aria-labelledby="snapshot-heading" className="pt-8 sm:pt-10">
           <h2 id="snapshot-heading" className="sr-only">
-            Collection snapshot
+            {t('Collection snapshot')}
           </h2>
           <dl className="grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 py-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-7">
             <div className="pb-4 sm:pb-0 sm:pr-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Subject-verified records
+                {t('Subject-verified records')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {resolutions.length}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Verified via official cross-reference
+                {t('Verified via official cross-reference')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 sm:px-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Full text available
+                {t('Full text available')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 0
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                No full resolution text recovered
+                {t('No full resolution text recovered')}
               </p>
             </div>
 
             <div className="pt-4 sm:pt-0 sm:pl-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Date precision
+                {t('Date precision')}
               </dt>
               <dd className="mt-2 text-2xl font-bold text-gray-950 sm:text-3xl">
-                YEAR-LEVEL
+                {t('YEAR-LEVEL')}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Exact adoption dates unavailable
+                {t('Exact adoption dates unavailable')}
               </p>
             </div>
           </dl>
           <p className="mt-3 text-xs text-gray-500 sm:text-sm">
-            Last verified: {formatDate(legislationMetadata.lastVerified)}
+            {t('Last verified: {{lastVerified}}', {
+              lastVerified: formatDate(legislationMetadata.lastVerified),
+            })}
           </p>
         </section>
 
@@ -161,34 +175,35 @@ export default function Resolutions() {
         <section aria-labelledby="verification-model-heading">
           <div className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              EVIDENCE MODEL
+              {t('EVIDENCE MODEL')}
             </p>
             <h2
               id="verification-model-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              What &ldquo;subject-verified&rdquo; means
+              {t('What “subject-verified” means')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  What is verified
+                  {t('What is verified')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  Resolution number, year, issuing body, and subject are
-                  supported through official City cross-references.
+                  {t(
+                    'Resolution number, year, issuing body, and subject are supported through official City cross-references.'
+                  )}
                 </p>
               </div>
 
               <div className="md:border-l md:border-gray-200 md:pl-8">
                 <h3 className="text-base font-bold text-gray-950">
-                  What is not currently recovered
+                  {t('What is not currently recovered')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  BetterSanFernando does not currently have verbatim formal
-                  titles, full resolution text, or exact adoption dates for
-                  these records.
+                  {t(
+                    'BetterSanFernando does not currently have verbatim formal titles, full resolution text, or exact adoption dates for these records.'
+                  )}
                 </p>
               </div>
             </div>
@@ -202,16 +217,18 @@ export default function Resolutions() {
         >
           <div className="mb-4">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              PUBLISHED RECORDS
+              {t('PUBLISHED RECORDS')}
             </p>
             <h2
               id="verified-records-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Verified resolution subjects
+              {t('Verified resolution subjects')}
             </h2>
             <p className="mt-1 text-sm text-gray-600">
-              Each entry below is an individually subject-verified record.
+              {t(
+                'Each entry below is an individually subject-verified record.'
+              )}
             </p>
           </div>
 
@@ -228,14 +245,16 @@ export default function Resolutions() {
                       {/* Top row: Resolution number + Status */}
                       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                         <span className="font-mono text-xs font-bold uppercase tracking-wider text-gray-700">
-                          RESOLUTION NO. {resolution.document_number}
+                          {t('RESOLUTION NO. {{document_number}}', {
+                            document_number: resolution.document_number,
+                          })}
                         </span>
                         <span className="inline-flex items-center gap-1 rounded-xs bg-[#F3F6FB] px-2 py-0.5 text-xs font-medium text-primary-800">
                           <FileText
                             className="h-3.5 w-3.5"
                             aria-hidden="true"
                           />
-                          Subject-verified
+                          {t('Subject-verified')}
                         </span>
                       </div>
 
@@ -248,23 +267,24 @@ export default function Resolutions() {
                       </h3>
 
                       <p className="mt-1.5 text-xs text-gray-500 sm:text-sm">
-                        Verified subject — no verbatim formal title is currently
-                        available for this record.
+                        {t(
+                          'Verified subject — no verbatim formal title is currently available for this record.'
+                        )}
                       </p>
 
                       {/* Structured Metadata */}
                       <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-xs sm:text-sm">
                         <div>
-                          <dt className="text-gray-500">Year</dt>
+                          <dt className="text-gray-500">{t('Year')}</dt>
                           <dd className="font-medium text-gray-900">
                             {resolution.year}
                             <span className="ml-1.5 text-xs font-normal text-gray-500">
-                              (year-level precision only)
+                              {t('(year-level precision only)')}
                             </span>
                           </dd>
                         </div>
                         <div>
-                          <dt className="text-gray-500">Issuing body</dt>
+                          <dt className="text-gray-500">{t('Issuing body')}</dt>
                           <dd className="font-medium text-gray-900">
                             {resolution.issuing_body}
                           </dd>
@@ -275,17 +295,17 @@ export default function Resolutions() {
                     {/* Right Evidence Rail */}
                     <div className="border-t border-gray-200 pt-4 text-xs sm:text-sm lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
                       <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-gray-500">
-                        SOURCE &amp; EVIDENCE
+                        {t('SOURCE & EVIDENCE')}
                       </p>
                       <p className="mt-1.5 text-gray-700">
-                        <span className="text-gray-500">Evidence:</span>{' '}
-                        Official City cross-reference
+                        <span className="text-gray-500">{t('Evidence:')}</span>{' '}
+                        {t('Official City cross-reference')}
                       </p>
 
                       <ul className="mt-2 space-y-1 text-xs text-gray-500">
-                        <li>• Verbatim formal title unavailable</li>
-                        <li>• Full resolution text unavailable</li>
-                        <li>• Exact adoption date unavailable</li>
+                        <li>{t('• Verbatim formal title unavailable')}</li>
+                        <li>{t('• Full resolution text unavailable')}</li>
+                        <li>{t('• Exact adoption date unavailable')}</li>
                       </ul>
 
                       {resolution.reference_url && (
@@ -294,10 +314,13 @@ export default function Resolutions() {
                             href={resolution.reference_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={`View official cross-reference for Resolution ${resolution.document_number} (opens in a new tab)`}
+                            aria-label={t(
+                              'View official cross-reference for Resolution {{document_number}} (opens in a new tab)',
+                              { document_number: resolution.document_number }
+                            )}
                             className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC] hover:underline"
                           >
-                            View official cross-reference
+                            {t('View official cross-reference')}
                             <ExternalLink
                               className="h-3.5 w-3.5 shrink-0"
                               aria-hidden="true"
@@ -320,19 +343,19 @@ export default function Resolutions() {
             className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8"
           >
             <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-              ARCHIVE CONTEXT
+              {t('ARCHIVE CONTEXT')}
             </p>
             <h2
               id="archive-range-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              What the official archive ranges show
+              {t('What the official archive ranges show')}
             </h2>
 
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-600">
-              The official City archive also exposes numbered resolution ranges
-              for some years. These indicate archive positions only and are not
-              individually verified resolution records.
+              {t(
+                'The official City archive also exposes numbered resolution ranges for some years. These indicate archive positions only and are not individually verified resolution records.'
+              )}
             </p>
 
             <div className="mt-6 rounded-sm border border-gray-200 bg-[#F3F6FB]">
@@ -347,11 +370,16 @@ export default function Resolutions() {
                         {entry.year}
                       </span>
                       <span className="text-sm text-gray-700">
-                        {entry.count} archive positions
+                        {t('{{count}} archive positions', {
+                          count: entry.count,
+                        })}
                       </span>
                     </div>
                     <span className="font-mono text-xs font-medium text-gray-600 sm:text-sm">
-                      Numbered range {entry.range_start}&ndash;{entry.range_end}
+                      {t('Numbered range {{range_start}}–{{range_end}}', {
+                        range_start: entry.range_start,
+                        range_end: entry.range_end,
+                      })}
                     </span>
                   </div>
                 ))}
@@ -359,8 +387,10 @@ export default function Resolutions() {
             </div>
 
             <p className="mt-4 text-xs leading-relaxed text-gray-500 sm:text-sm">
-              Note: These archive positions are not added to the{' '}
-              {resolutions.length} individually published records above.
+              {t(
+                'Note: These archive positions are not added to the {{length}} individually published records above.',
+                { length: resolutions.length }
+              )}
             </p>
           </section>
         )}
@@ -369,13 +399,13 @@ export default function Resolutions() {
         <section aria-labelledby="keep-exploring-heading">
           <div className="border-t border-gray-200 pt-10 sm:pt-12">
             <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-              KEEP EXPLORING
+              {t('KEEP EXPLORING')}
             </p>
             <h2
               id="keep-exploring-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Related legislative resources
+              {t('Related legislative resources')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -385,14 +415,16 @@ export default function Resolutions() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Legislation overview
+                    {t('Legislation overview')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    City ordinances, executive orders, and legislative tracking.
+                    {t(
+                      'City ordinances, executive orders, and legislative tracking.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse overview</span>
+                  <span>{t('Browse overview')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -406,15 +438,16 @@ export default function Resolutions() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Executive Orders
+                    {t('Executive Orders')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Verified mayoral and executive order records with source
-                    documents.
+                    {t(
+                      'Verified mayoral and executive order records with source documents.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse Executive Orders</span>
+                  <span>{t('Browse Executive Orders')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -428,15 +461,16 @@ export default function Resolutions() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Ordinances
+                    {t('Ordinances')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Verified City council ordinances with full text and official
-                    sources.
+                    {t(
+                      'Verified City council ordinances with full text and official sources.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse Ordinances</span>
+                  <span>{t('Browse Ordinances')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -450,15 +484,16 @@ export default function Resolutions() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Legislation Statistics
+                    {t('Legislation Statistics')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Overview metrics, document counts, and archive coverage
-                    breakdowns.
+                    {t(
+                      'Overview metrics, document counts, and archive coverage breakdowns.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>View statistics</span>
+                  <span>{t('View statistics')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"

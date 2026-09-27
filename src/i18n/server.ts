@@ -49,7 +49,17 @@ export type PageNamespace =
   | 'procurement-shared'
   | 'procurement'
   | 'procurement-bid-results'
-  | 'procurement-contracts';
+  | 'procurement-contracts'
+  | 'government-shared'
+  | 'government-hotlines'
+  | 'government-offices'
+  | 'government-offices-detail'
+  | 'government-barangay-contacts'
+  | 'government-links'
+  | 'legislation-shared'
+  | 'legislation-executive-orders'
+  | 'legislation-ordinances'
+  | 'legislation-resolutions';
 
 // Route families that keep their own shared bundle (`<family>-shared.json`).
 function pageFamily(namespace: string): string | null {
@@ -57,6 +67,12 @@ function pageFamily(namespace: string): string | null {
   if (namespace.startsWith('projects-')) return 'projects';
   if (namespace === 'procurement' || namespace.startsWith('procurement-')) {
     return 'procurement';
+  }
+  if (namespace === 'government' || namespace.startsWith('government-')) {
+    return 'government';
+  }
+  if (namespace === 'legislation' || namespace.startsWith('legislation-')) {
+    return 'legislation';
   }
   return null;
 }

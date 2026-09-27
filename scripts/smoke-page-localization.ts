@@ -89,6 +89,31 @@ const PAGES: Record<string, string[]> = {
     'src/app/procurement/contracts/Contracts.tsx',
     'src/app/procurement/contracts/page.tsx',
   ],
+  'government-hotlines': ['src/app/government/hotlines/page.tsx'],
+  'government-offices': [
+    'src/app/government/offices/GovernmentOffices.tsx',
+    'src/app/government/offices/page.tsx',
+  ],
+  'government-offices-detail': [
+    'src/app/government/offices/[officeId]/page.tsx',
+  ],
+  'government-barangay-contacts': [
+    'src/app/government/barangay-contacts/GovernmentBarangayContacts.tsx',
+    'src/app/government/barangay-contacts/page.tsx',
+  ],
+  'government-links': [
+    'src/app/government/links/GovernmentOfficialLinks.tsx',
+    'src/app/government/links/page.tsx',
+  ],
+  'legislation-executive-orders': [
+    'src/app/legislation/executive-orders/ExecutiveOrders.tsx',
+    'src/app/legislation/executive-orders/page.tsx',
+  ],
+  'legislation-ordinances': [
+    'src/app/legislation/ordinances/Ordinances.tsx',
+    'src/app/legislation/ordinances/page.tsx',
+  ],
+  'legislation-resolutions': ['src/app/legislation/resolutions/page.tsx'],
 };
 
 // Terms that intentionally read the same in Filipino: 'Home' is localized by
@@ -155,7 +180,13 @@ const placeholders = (text: string) =>
   (text.match(/\{\{\w+\}\}/g) ?? []).sort().join();
 
 const shared = readJson('public/locales/fil/shared.json');
-const FAMILIES = ['statistics', 'projects', 'procurement'] as const;
+const FAMILIES = [
+  'statistics',
+  'projects',
+  'procurement',
+  'government',
+  'legislation',
+] as const;
 const familyOf = (namespace: string) =>
   namespace.startsWith('statistics-')
     ? 'statistics'
@@ -163,7 +194,11 @@ const familyOf = (namespace: string) =>
       ? 'projects'
       : namespace === 'procurement' || namespace.startsWith('procurement-')
         ? 'procurement'
-        : null;
+        : namespace === 'government' || namespace.startsWith('government-')
+          ? 'government'
+          : namespace === 'legislation' || namespace.startsWith('legislation-')
+            ? 'legislation'
+            : null;
 const familyShared = Object.fromEntries(
   FAMILIES.map(family => [
     family,
@@ -182,8 +217,18 @@ for (const [namespace, files] of Object.entries(PAGES)) {
   );
 }
 
+const NO_OWN_BUNDLE_EXPECTED = new Set(['not-found']); // tiny pages fully covered by shared bundles
 for (const [namespace, keys] of used) {
   const bundle = readJson(`public/locales/fil/${namespace}.json`);
+  const nonKeptCount = [...keys].filter(
+    key => !KEPT_IN_ENGLISH.has(key)
+  ).length;
+  if (nonKeptCount > 0 && !NO_OWN_BUNDLE_EXPECTED.has(namespace)) {
+    assert.ok(
+      Object.keys(bundle).length > 0 || familyOf(namespace) !== null,
+      `${namespace}.json is empty and has no family-shared bundle to fall back to`
+    );
+  }
   for (const key of keys) {
     if (KEPT_IN_ENGLISH.has(key)) continue;
     const translation =

@@ -2,7 +2,6 @@
   "HOW TO READ THIS PAGE": "PAANO BASAHIN ANG PAHINANG ITO",
   "How to interpret these statistics": "Paano bigyang-kahulugan ang mga estadistikang ito",
   "Field coverage": "Saklaw ng field",
-  "Year": "Taon",
   "View city profile": "Tingnan ang profile ng lungsod",
   "Browse barangays": "Tingnan ang mga barangay",
   "Track published datasets, coverage periods, and evidence units.": "Subaybayan ang mga nailathalang dataset, panahon ng saklaw, at yunit ng ebidensya.",
@@ -13,7 +12,6 @@
   "{{ruralBarangayCount}} Rural · {{ruralBarangayNames}}": "{{ruralBarangayCount}} Rural · {{ruralBarangayNames}}",
   "How to Read These Numbers": "Paano Basahin ang mga Bilang na Ito",
   "PROVENANCE": "PINAGMULAN",
-  "RELATED RESOURCES": "MGA KAUGNAY NA MAPAGKUKUNAN",
   "Clear barangay search": "I-clear ang paghahanap ng barangay",
   "Barangay: A–Z": "Barangay: A–Z",
   "Barangay: Z–A": "Barangay: Z–A",
@@ -35,6 +33,5 @@
   "PDF": "PDF",
   "Numbered range": "Saklaw na may numero",
   "Positions": "Mga posisyon",
-  "Official PDF": "Opisyal na PDF",
-  "View statistics": "Tingnan ang estadistika"
+  "Official PDF": "Opisyal na PDF"
 }

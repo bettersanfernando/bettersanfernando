@@ -307,6 +307,72 @@ for (const [path, filipino, filipinoTitle] of [
     'Tuklasin ang Profile ng Lungsod',
     'Profile ng Lungsod: San Fernando, Pampanga',
   ],
+  [
+    '/projects/city-projects',
+    'Tingnan ang mga beripikadong proyekto at talaan ng procurement ng Lungsod.',
+    'Mga Proyekto ng Lungsod',
+  ],
+  [
+    '/projects/map',
+    'Mga barangay na may pinakamaraming talaan',
+    'Distribusyon ng proyekto ayon sa barangay',
+  ],
+  [
+    '/projects/methodology',
+    'Paano binubuo ng BetterSanFernando ang mga talaan ng proyekto',
+    'Metodolohiya ng Proyekto',
+  ],
+  [
+    '/projects/sources',
+    'Mga talaan sa likod ng mga katotohanan tungkol sa proyekto',
+    'Mga Source ng Proyekto',
+  ],
+  ['/procurement', 'Mga talaan at ebidensya ng procurement', 'Procurement'],
+  [
+    '/procurement/bid-results',
+    'Nailathalang ebidensya ng resulta ng bid',
+    'Resulta ng Bid',
+  ],
+  [
+    '/procurement/contracts',
+    'Nailathalang ebidensya ng award at kontrata',
+    'Mga Kontrata at Award',
+  ],
+  [
+    '/government/hotlines',
+    'Mga numero ng contact para sa emerhensiya at institusyon',
+    'Mga Hotline sa Emerhensiya',
+  ],
+  [
+    '/government/offices',
+    'Hanapin ang isang tanggapan',
+    'Mga Tanggapan ng Lungsod',
+  ],
+  [
+    '/government/barangay-contacts',
+    'Mga contact ng barangay sa buong San Fernando',
+    'Mga Contact ng Barangay',
+  ],
+  [
+    '/government/links',
+    'Hanapin ang isang opisyal na destinasyon',
+    'Mga Opisyal na Link ng Pamahalaan',
+  ],
+  [
+    '/legislation/executive-orders',
+    'Hanapin ang isang Executive Order',
+    'Mga Executive Order',
+  ],
+  [
+    '/legislation/ordinances',
+    'Hanapin at i-filter ang mga ordinansa',
+    'Mga Ordinansa',
+  ],
+  [
+    '/legislation/resolutions',
+    'Mga beripikadong paksa ng resolusyon',
+    'Mga Resolusyon',
+  ],
 ] as const) {
   const english = await (await request(path)).text();
   const filipinoPage = await (await request(`/fil${path}`)).text();
@@ -370,6 +436,47 @@ for (const [path, filipino, filipinoTitle] of [
         )
     );
   assert.deepEqual(unprefixed, [], '/fil links must keep /fil');
+}
+
+// Dynamic project detail: source-faithful title, localized chrome.
+for (const projectId of [
+  'proj-2025-san-nicolas-school',
+  'proj-2024-alasas-road',
+]) {
+  const english = await (await request(`/projects/${projectId}`)).text();
+  const filipino = await (await request(`/fil/projects/${projectId}`)).text();
+  assert.ok(filipino.includes('Pangkalahatang-tanaw ng Pananalapi'));
+  assert.ok(!english.includes('Pangkalahatang-tanaw ng Pananalapi'));
+  const titleMatch = /<title>([^<]*) \| BetterSanFernando<\/title>/.exec(
+    english
+  );
+  assert.ok(titleMatch);
+  assert.ok(
+    filipino.includes(`<title>${titleMatch[1]} | BetterSanFernando</title>`),
+    'project name/title must stay verbatim across locales'
+  );
+}
+
+// Dynamic office detail: record-faithful title, localized chrome.
+for (const officeId of ['city-government-main', 'rhu-i-dolores']) {
+  const english = await (
+    await request(`/government/offices/${officeId}`)
+  ).text();
+  const filipino = await (
+    await request(`/fil/government/offices/${officeId}`)
+  ).text();
+  assert.ok(filipino.includes('Beripikadong talaan'));
+  assert.ok(!english.includes('Beripikadong talaan'));
+  const officeTitleMatch = /<title>([^<]*) \| BetterSanFernando<\/title>/.exec(
+    english
+  );
+  assert.ok(officeTitleMatch);
+  assert.ok(
+    filipino.includes(
+      `<title>${officeTitleMatch[1]} | BetterSanFernando</title>`
+    ),
+    'office name in the title must stay verbatim across locales'
+  );
 }
 
 const filipinoNotFound = await request('/fil/definitely-not-a-route');
