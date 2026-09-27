@@ -614,7 +614,11 @@ export default function Navbar() {
                                 onClick={closeNavigation}
                                 className={`group flex min-h-[44px] items-center justify-between rounded-md px-3 py-2.5 text-sm font-semibold text-primary-700 transition-colors duration-150 hover:bg-primary-50 hover:text-primary-800 ${focusStyles}`}
                               >
-                                <span>View {t(item.labelKey)} Overview</span>
+                                <span>
+                                  {t('navigation.viewOverview', {
+                                    section: t(item.labelKey),
+                                  })}
+                                </span>
                                 <ChevronRight
                                   className="h-4 w-4 text-primary-600 transition-transform duration-150 group-hover:translate-x-0.5"
                                   aria-hidden="true"
@@ -740,7 +744,7 @@ export default function Navbar() {
                   BETTER SAN FERNANDO
                 </span>
                 <p className="mt-1 text-sm font-medium leading-snug text-white">
-                  Public information, made easier.
+                  {t('navigation.brandPanel.tagline')}
                 </p>
                 <p className="mt-3 text-xs text-blue-100/80">
                   San Fernando, Pampanga

@@ -27,7 +27,8 @@ export type PageNamespace =
   | 'projects'
   | 'statistics'
   | 'transparency'
-  | 'legislation';
+  | 'legislation'
+  | 'home';
 
 /**
  * Translations for BetterSanFernando-authored page copy in server

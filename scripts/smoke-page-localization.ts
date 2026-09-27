@@ -19,11 +19,19 @@ const PAGES = {
   statistics: 'src/app/statistics/page.tsx',
   transparency: 'src/app/transparency/page.tsx',
   legislation: 'src/app/legislation/page.tsx',
+  home: 'src/app/page.tsx',
 } as const;
 
 // Terms that intentionally read the same in Filipino: 'Home' is localized by
-// Breadcrumbs itself, and WCAG 2.1 Level AA is a standard identifier.
-const KEPT_IN_ENGLISH = new Set(['Home', 'WCAG 2.1 Level AA']);
+// Breadcrumbs itself; the rest are the brand, standard or source names.
+const KEPT_IN_ENGLISH = new Set([
+  'Home',
+  'WCAG 2.1 Level AA',
+  'BetterSanFernando',
+  '2024 POPCEN',
+  // Homepage evidence-chain step label; awaiting a reviewed Filipino term.
+  'Anchor',
+]);
 
 const readJson = (path: string) =>
   JSON.parse(readFileSync(path, 'utf8')) as Record<string, string>;

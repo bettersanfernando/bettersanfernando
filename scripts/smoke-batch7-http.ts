@@ -285,6 +285,48 @@ for (const [path, filipino, filipinoTitle] of [
   assert.deepEqual(unprefixed, [], `/fil${path} links must keep /fil`);
   assert.ok(!filipinoPage.includes('/fil/fil'));
 }
+// Homepage: Filipino copy and metadata on /fil, English untouched on /.
+{
+  const english = await (await request('/')).text();
+  const filipino = await (await request('/fil')).text();
+  assert.ok(filipino.includes('Mas Madaling Gamitin.'));
+  assert.ok(!english.includes('Mas Madaling Gamitin.'));
+  assert.ok(
+    english.includes('Public Information for San Fernando, Made Easier to Use.')
+  );
+  assert.ok(
+    !filipino.includes(
+      'Public Information for San Fernando, Made Easier to Use.'
+    )
+  );
+  assert.ok(
+    filipino.includes(
+      '<title>BetterSanFernando — Impormasyong Pampubliko para sa San Fernando, Pampanga</title>'
+    )
+  );
+  assert.ok(
+    english.includes(
+      '<title>BetterSanFernando — Civic Information for San Fernando, Pampanga</title>'
+    )
+  );
+  assert.ok(
+    filipino.includes(
+      '<link rel="canonical" href="https://bettersanfernando.example/fil"'
+    )
+  );
+  assert.ok(filipino.includes('<meta property="og:locale" content="fil_PH"'));
+  assert.ok(!filipino.includes('/fil/fil'));
+  const unprefixed = [...filipino.matchAll(/ href="(\/[^"]*)"/g)]
+    .map(match => match[1])
+    .filter(
+      href =>
+        !/^\/(fil(\/|$)|_next|assets|icon|apple-icon|favicon|sitemap\.xml)/.test(
+          href
+        )
+    );
+  assert.deepEqual(unprefixed, [], '/fil links must keep /fil');
+}
+
 const filipinoNotFound = await request('/fil/definitely-not-a-route');
 assert.equal(filipinoNotFound.status, 404);
 assert.ok(

@@ -130,9 +130,9 @@ export default function Footer() {
                   ) : (
                     <span
                       key={label}
-                      aria-label={`${label} link unavailable`}
+                      aria-label={t('footerCopy.linkUnavailable', { label })}
                       aria-disabled="true"
-                      title={`${label} link not configured`}
+                      title={t('footerCopy.linkNotConfigured', { label })}
                       className="inline-flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-sm border border-white/10 text-slate-500"
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
@@ -207,7 +207,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-300">
-                Built for ₱435.39
+                {`${t('footerCopy.builtFor')} ₱435.39`}
               </span>
               <Link
                 href={withLocalePrefix('/sitemap', locale)}

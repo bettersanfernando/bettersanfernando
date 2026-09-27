@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useTranslation } from 'react-i18next';
 import Link from '../i18n/LocaleLink';
 import { ArrowRight, ChevronLeft } from 'lucide-react';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
@@ -37,6 +38,7 @@ export default function HomeProjectMapSection({
   attributedProjects,
   unattributedProjects,
 }: HomeProjectMapSectionProps) {
+  const { t } = useTranslation('common');
   const [selectedPsgc, setSelectedPsgc] = useState<string | null>(null);
 
   const selectedSummary = summaries.find(s => s.psgcCode === selectedPsgc);
@@ -70,12 +72,12 @@ export default function HomeProjectMapSection({
                 className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
               >
                 <ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Back to Citywide Overview</span>
+                <span>{t('home.map.back')}</span>
               </button>
 
               <div className="mt-3">
                 <p className="font-mono text-xs font-bold uppercase tracking-wider text-gray-500">
-                  Selected Barangay
+                  {t('home.map.selectedBarangay')}
                 </p>
                 <h3 className="mt-1 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl">
                   {selectedSummary.name}
@@ -90,8 +92,9 @@ export default function HomeProjectMapSection({
                   {selectedSummary.projectCount}
                 </p>
                 <p className="mt-0.5 text-xs font-semibold text-gray-700 sm:text-sm">
-                  Published Project{' '}
-                  {selectedSummary.projectCount === 1 ? 'Record' : 'Records'}
+                  {selectedSummary.projectCount === 1
+                    ? t('home.map.projectRecordOne')
+                    : t('home.map.projectRecordMany')}
                 </p>
               </div>
 
@@ -106,8 +109,7 @@ export default function HomeProjectMapSection({
                   %
                 </p>
                 <p className="text-xs text-gray-600">
-                  of barangay-attributed published project records (
-                  {attributedProjects} total)
+                  {t('home.map.ofAttributed', { total: attributedProjects })}
                 </p>
               </div>
 
@@ -116,7 +118,9 @@ export default function HomeProjectMapSection({
                   href={`/projects/city-projects?barangay=${encodeURIComponent(selectedSummary.psgcCode)}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0066EB] transition-colors hover:text-[#0052BC] sm:text-sm"
                 >
-                  <span>Browse Projects for {selectedSummary.name}</span>
+                  <span>
+                    {t('home.map.browseFor', { name: selectedSummary.name })}
+                  </span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -125,19 +129,34 @@ export default function HomeProjectMapSection({
             {/* Density Legend for Reference */}
             <div className="py-5">
               <p className="font-mono text-xs font-bold uppercase tracking-wider text-gray-950">
-                Project-Record Density
+                {t('home.map.density')}
               </p>
               <div className="mt-3">
                 <div className="flex h-2.5 w-full overflow-hidden rounded-xs">
-                  <div className="flex-1 bg-[#e9ecef]" title="0 records" />
-                  <div className="flex-1 bg-[#cce0fb]" title="1–4 records" />
-                  <div className="flex-1 bg-[#66a3f3]" title="5–9 records" />
-                  <div className="flex-1 bg-[#0066eb]" title="10–19 records" />
-                  <div className="flex-1 bg-[#003d8d]" title="20+ records" />
+                  <div
+                    className="flex-1 bg-[#e9ecef]"
+                    title={t('home.map.legend.none')}
+                  />
+                  <div
+                    className="flex-1 bg-[#cce0fb]"
+                    title={t('home.map.legend.low')}
+                  />
+                  <div
+                    className="flex-1 bg-[#66a3f3]"
+                    title={t('home.map.legend.mid')}
+                  />
+                  <div
+                    className="flex-1 bg-[#0066eb]"
+                    title={t('home.map.legend.high')}
+                  />
+                  <div
+                    className="flex-1 bg-[#003d8d]"
+                    title={t('home.map.legend.top')}
+                  />
                 </div>
                 <div className="mt-1.5 flex justify-between text-[11px] font-medium text-gray-600">
-                  <span>Fewer records</span>
-                  <span>More records</span>
+                  <span>{t('home.map.fewer')}</span>
+                  <span>{t('home.map.more')}</span>
                 </div>
               </div>
             </div>
@@ -148,10 +167,10 @@ export default function HomeProjectMapSection({
             {/* Header */}
             <div className="border-b border-gray-200/80 pb-4">
               <p className="font-mono text-xs font-bold uppercase tracking-wider text-gray-500">
-                Project Distribution
+                {t('home.map.distribution')}
               </p>
               <h3 className="mt-1 text-xl font-bold tracking-tight text-gray-950 sm:text-2xl">
-                Citywide Overview
+                {t('home.map.citywide')}
               </h3>
             </div>
 
@@ -159,7 +178,7 @@ export default function HomeProjectMapSection({
             <div className="py-5 border-b border-gray-200/80">
               <div>
                 <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-gray-500">
-                  Published Project Records
+                  {t('home.map.projectRecordMany')}
                 </p>
                 <p className="mt-1 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                   {totalProjects}
@@ -169,7 +188,7 @@ export default function HomeProjectMapSection({
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div className="border-l-2 border-[#0066EB] pl-3">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-gray-500">
-                    Barangay-Attributed
+                    {t('home.map.attributed')}
                   </p>
                   <p className="mt-0.5 text-xl font-bold tabular-nums text-gray-950 sm:text-2xl">
                     {attributedProjects}
@@ -177,7 +196,7 @@ export default function HomeProjectMapSection({
                 </div>
                 <div className="border-l-2 border-gray-300 pl-3">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-gray-500">
-                    Citywide / Unassigned
+                    {t('home.map.unassigned')}
                   </p>
                   <p className="mt-0.5 text-xl font-bold tabular-nums text-gray-950 sm:text-2xl">
                     {unattributedProjects}
@@ -186,51 +205,61 @@ export default function HomeProjectMapSection({
               </div>
 
               <p className="mt-3 text-xs leading-relaxed text-gray-500">
-                {attributedProjects} attributed across 35 barangays +{' '}
-                {unattributedProjects} citywide / unassigned = {totalProjects}{' '}
-                published project records.
+                {t('home.map.breakdown', {
+                  attributed: attributedProjects,
+                  barangays: boundaries.length,
+                  unassigned: unattributedProjects,
+                  total: totalProjects,
+                })}
               </p>
             </div>
 
             {/* Project Density Legend */}
             <div className="py-5 border-b border-gray-200/80">
               <p className="font-mono text-xs font-bold uppercase tracking-wider text-gray-950">
-                Project-Record Density
+                {t('home.map.density')}
               </p>
               <div className="mt-3">
                 <div className="flex h-2.5 w-full overflow-hidden rounded-xs">
-                  <div className="flex-1 bg-[#e9ecef]" title="0 records" />
-                  <div className="flex-1 bg-[#cce0fb]" title="1–4 records" />
-                  <div className="flex-1 bg-[#66a3f3]" title="5–9 records" />
-                  <div className="flex-1 bg-[#0066eb]" title="10–19 records" />
-                  <div className="flex-1 bg-[#003d8d]" title="20+ records" />
+                  <div
+                    className="flex-1 bg-[#e9ecef]"
+                    title={t('home.map.legend.none')}
+                  />
+                  <div
+                    className="flex-1 bg-[#cce0fb]"
+                    title={t('home.map.legend.low')}
+                  />
+                  <div
+                    className="flex-1 bg-[#66a3f3]"
+                    title={t('home.map.legend.mid')}
+                  />
+                  <div
+                    className="flex-1 bg-[#0066eb]"
+                    title={t('home.map.legend.high')}
+                  />
+                  <div
+                    className="flex-1 bg-[#003d8d]"
+                    title={t('home.map.legend.top')}
+                  />
                 </div>
                 <div className="mt-1.5 flex justify-between text-[11px] font-medium text-gray-600">
-                  <span>Fewer records</span>
-                  <span>More records</span>
+                  <span>{t('home.map.fewer')}</span>
+                  <span>{t('home.map.more')}</span>
                 </div>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                Shading represents the number of published project records
-                attributed to each barangay.
+                {t('home.map.shading')}
               </p>
             </div>
 
             {/* How to Read This Map */}
             <div className="py-5">
               <p className="font-mono text-xs font-bold uppercase tracking-wider text-gray-950">
-                How to Read This Map
+                {t('home.map.howToRead')}
               </p>
               <div className="mt-2 space-y-2 text-xs leading-relaxed text-gray-600">
-                <p>
-                  Project records may be associated with a barangay when
-                  published evidence supports that relationship.
-                </p>
-                <p>
-                  Barangay shading represents project-record attribution and
-                  does not indicate an exact project coordinate, construction
-                  site, parcel, or road segment.
-                </p>
+                <p>{t('home.map.readOne')}</p>
+                <p>{t('home.map.readTwo')}</p>
               </div>
             </div>
           </div>
@@ -243,7 +272,7 @@ export default function HomeProjectMapSection({
               href="/projects/map"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0066EB] transition-colors hover:text-[#0052BC] sm:text-sm"
             >
-              <span>Explore Full Project Map</span>
+              <span>{t('home.map.exploreFull')}</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
@@ -252,7 +281,7 @@ export default function HomeProjectMapSection({
               href="/barangays"
               className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 transition-colors hover:text-[#0066EB] sm:text-sm"
             >
-              <span>Browse Barangay Directory</span>
+              <span>{t('home.map.browseDirectory')}</span>
               <ArrowRight
                 className="h-3.5 w-3.5 text-gray-400"
                 aria-hidden="true"

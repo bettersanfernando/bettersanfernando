@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import Link from '../i18n/LocaleLink';
 import { useLocale } from '../i18n/useLocale';
 import { localizeHref } from '../../i18n/locale';
@@ -25,6 +26,7 @@ export default function HomeServiceSearch({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { t } = useTranslation('common');
   const locale = useLocale();
 
   // Close dropdown on outside click
@@ -102,8 +104,8 @@ export default function HomeServiceSearch({
             onKeyDown={e => {
               if (e.key === 'Escape') setIsOpen(false);
             }}
-            placeholder="Search permits, certificates, assistance, health services, requirements…"
-            aria-label="Search services"
+            placeholder={t('home.search.placeholder')}
+            aria-label={t('home.search.label')}
             aria-expanded={isOpen && matches.length > 0}
             aria-autocomplete="list"
             className="h-12 w-full rounded-sm border border-gray-300 bg-white pl-11 pr-24 text-xs text-gray-950 placeholder:text-gray-500 transition-colors focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20 sm:h-13 sm:pr-28 sm:text-sm"
@@ -112,7 +114,7 @@ export default function HomeServiceSearch({
             type="submit"
             className="absolute right-1.5 inline-flex h-9 items-center gap-1.5 rounded-sm bg-[#0066EB] px-3.5 text-xs font-semibold text-white transition-colors hover:bg-[#0052BC] focus:outline-none focus:ring-2 focus:ring-[#0066EB] focus:ring-offset-1 sm:h-10 sm:px-4 sm:text-sm"
           >
-            <span>Find</span>
+            <span>{t('home.search.find')}</span>
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </button>
         </div>
@@ -122,7 +124,7 @@ export default function HomeServiceSearch({
       {isOpen && matches.length > 0 && (
         <div
           role="listbox"
-          aria-label="Matching services"
+          aria-label={t('home.search.matching')}
           className="absolute left-0 right-0 top-full z-30 mt-1.5 overflow-hidden rounded-sm border border-gray-200 bg-white shadow-lg"
         >
           <ul className="divide-y divide-gray-100">
@@ -155,7 +157,7 @@ export default function HomeServiceSearch({
               onClick={handleViewAll}
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
             >
-              <span>View all results for &ldquo;{query.trim()}&rdquo;</span>
+              <span>{t('home.search.viewAll', { query: query.trim() })}</span>
               <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </button>
           </div>

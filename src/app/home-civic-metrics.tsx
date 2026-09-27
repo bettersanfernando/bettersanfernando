@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { INTL_LOCALES } from '../i18n/locale';
+import { useLocale } from '../components/i18n/useLocale';
 
 interface HomeCivicMetricsProps {
   population: number;
@@ -9,14 +12,14 @@ interface HomeCivicMetricsProps {
   services: number;
 }
 
-const numberFormatter = new Intl.NumberFormat('en-PH');
-
 export default function HomeCivicMetrics({
   population,
   barangays,
   projects,
   services,
 }: HomeCivicMetricsProps) {
+  const { t } = useTranslation('common');
+  const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[useLocale()]);
   const [animatedValues, setAnimatedValues] = useState({
     population: 0,
     barangays: 0,
@@ -76,26 +79,26 @@ export default function HomeCivicMetrics({
     {
       finalFormatted: numberFormatter.format(population),
       currentFormatted: numberFormatter.format(animatedValues.population),
-      label: 'Population',
+      label: t('home.metrics.population'),
       qualifier: '2024 POPCEN',
     },
     {
       finalFormatted: numberFormatter.format(barangays),
       currentFormatted: numberFormatter.format(animatedValues.barangays),
-      label: 'Barangays',
-      qualifier: 'PUBLISHED SET',
+      label: t('home.metrics.barangays'),
+      qualifier: t('home.metrics.barangaysQualifier'),
     },
     {
       finalFormatted: numberFormatter.format(projects),
       currentFormatted: numberFormatter.format(animatedValues.projects),
-      label: 'Published Project Records',
-      qualifier: 'PUBLISHED RECORDS',
+      label: t('home.metrics.projects'),
+      qualifier: t('home.metrics.projectsQualifier'),
     },
     {
       finalFormatted: numberFormatter.format(services),
       currentFormatted: numberFormatter.format(animatedValues.services),
-      label: 'Resident-Facing Services',
-      qualifier: 'RESIDENT-FACING',
+      label: t('home.metrics.services'),
+      qualifier: t('home.metrics.servicesQualifier'),
     },
   ];
 
