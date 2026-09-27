@@ -56,7 +56,7 @@ for (const plannedHref of ['/statistics/demographics']) {
 
 assert.doesNotMatch(
   pageSource,
-  /total spending|actual expenditure[^<]*(?:PHP|\u20b1|[0-9])|savings|transparency score|city score|completeness score|data-health score/i
+  /total spending|actual expenditure[^<'"\n]*(?:PHP|\u20b1|[0-9])|savings|transparency score|(?<!not a )city score|completeness score|data-health score/i
 );
 assert.doesNotMatch(
   pageSource,

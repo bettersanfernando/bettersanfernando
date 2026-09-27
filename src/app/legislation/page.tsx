@@ -11,18 +11,26 @@ import { getLegislationSummary } from '../../data/civic/legislationSummary';
 import type { LegislationPreviewRecord } from '../../data/civic/legislationSummary';
 
 import { buildPageMetadata } from '../../lib/metadata';
+import { INTL_LOCALES } from '../../i18n/locale';
+import type { LanguageType } from '../../types';
+import { getPageT, type PageT } from '../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Legislation',
-  description:
-    'Explore the bounded Executive Order and ordinance collections currently verified and published by BetterSanFernando.',
-  path: '/legislation',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('legislation');
+  return buildPageMetadata({
+    title: t('Legislation'),
+    description: t(
+      'Explore the bounded Executive Order and ordinance collections currently verified and published by BetterSanFernando.'
+    ),
+    path: '/legislation',
+    locale,
+  });
+}
 
 const summary = getLegislationSummary();
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-PH', {
+function formatDate(value: string, locale: LanguageType) {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -33,7 +41,11 @@ function formatDate(value: string) {
 function PreviewList({
   records,
   type,
+  t,
+  locale,
 }: {
+  t: PageT;
+  locale: LanguageType;
   records: readonly LegislationPreviewRecord[];
   type: 'executive-order' | 'ordinance' | 'resolution';
 }) {
@@ -62,8 +74,8 @@ function PreviewList({
                     <FileText className="h-3.5 w-3.5" aria-hidden="true" />
                   )}
                   {record.fullTextAvailable
-                    ? 'Full text available'
-                    : 'Reference record only'}
+                    ? t('Full text available')
+                    : t('Reference record only')}
                 </span>
               )}
             </div>
@@ -74,9 +86,11 @@ function PreviewList({
             )}
             <p className="mt-1 text-xs text-gray-600">
               {record.date ? (
-                <time dateTime={record.date}>{formatDate(record.date)}</time>
+                <time dateTime={record.date}>
+                  {formatDate(record.date, locale)}
+                </time>
               ) : (
-                `Year ${record.year}`
+                t('Year {{year}}', { year: record.year })
               )}
             </p>
           </article>
@@ -86,7 +100,8 @@ function PreviewList({
   );
 }
 
-export default function Legislation() {
+export default async function Legislation() {
+  const { t, locale } = await getPageT('legislation');
   return (
     <>
       <main className="flex-grow bg-gray-50">
@@ -95,9 +110,9 @@ export default function Legislation() {
             <Breadcrumbs
               className="mb-8"
               items={[
-                { label: 'Home', href: '/' },
-                { label: 'Government', href: '/government' },
-                { label: 'Legislation' },
+                { label: t('Home'), href: '/' },
+                { label: t('Government'), href: '/government' },
+                { label: t('Legislation') },
               ]}
             />
             <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
@@ -106,19 +121,22 @@ export default function Legislation() {
                   <Scale className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <h1 className="text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-900 md:text-5xl">
-                  Legislation
+                  {t('Legislation')}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">
-                  Explore the executive and legislative records that
-                  BetterSanFernando can currently verify and publish for the
-                  City of San Fernando, Pampanga.
+                  {t(
+                    'Explore the executive and legislative records that BetterSanFernando can currently verify and publish for the City of San Fernando, Pampanga.'
+                  )}
                 </p>
               </div>
               <aside className="rounded-xl bg-primary-50 p-5 text-sm leading-relaxed text-primary-900">
-                <p className="font-semibold">Bounded public collection</p>
+                <p className="font-semibold">
+                  {t('Bounded public collection')}
+                </p>
                 <p className="mt-1">
-                  These are collection-specific record counts, not a complete
-                  legislative history or a count of every City measure.
+                  {t(
+                    'These are collection-specific record counts, not a complete legislative history or a count of every City measure.'
+                  )}
                 </p>
               </aside>
             </div>
@@ -126,21 +144,23 @@ export default function Legislation() {
             <dl className="mt-9 grid border-y border-gray-200 sm:grid-cols-3">
               <div className="p-5">
                 <dt className="text-sm text-gray-600">
-                  Executive Orders published
+                  {t('Executive Orders published')}
                 </dt>
                 <dd className="mt-1 text-3xl font-bold tabular-nums text-gray-900">
                   {summary.executiveOrders.total}
                 </dd>
               </div>
               <div className="border-t border-gray-200 p-5 sm:border-l sm:border-t-0">
-                <dt className="text-sm text-gray-600">Ordinances published</dt>
+                <dt className="text-sm text-gray-600">
+                  {t('Ordinances published')}
+                </dt>
                 <dd className="mt-1 text-3xl font-bold tabular-nums text-gray-900">
                   {summary.ordinances.total}
                 </dd>
               </div>
               <div className="border-t border-gray-200 p-5 sm:border-l sm:border-t-0">
                 <dt className="text-sm text-gray-600">
-                  Resolutions currently published
+                  {t('Resolutions currently published')}
                 </dt>
                 <dd className="mt-1 text-3xl font-bold tabular-nums text-gray-900">
                   {summary.resolutions.total}
@@ -159,12 +179,12 @@ export default function Legislation() {
               id="published-collections-heading"
               className="text-2xl font-bold text-gray-900 md:text-3xl"
             >
-              Published collections
+              {t('Published collections')}
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-700">
-              The previews below show the three newest records in each current
-              collection. Follow the archive links for every published record,
-              its availability state, and supporting source actions.
+              {t(
+                'The previews below show the three newest records in each current collection. Follow the archive links for every published record, its availability state, and supporting source actions.'
+              )}
             </p>
           </div>
 
@@ -173,13 +193,16 @@ export default function Legislation() {
               <div className="flex items-start justify-between gap-5">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    Executive Orders
+                    {t('Executive Orders')}
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-gray-700">
-                    Executive issuances published as their own record class.
-                    Full text is available for{' '}
-                    {summary.executiveOrders.withFullText} of{' '}
-                    {summary.executiveOrders.total} current records.
+                    {t(
+                      'Executive issuances published as their own record class. Full text is available for {{withFullText}} of {{total}} current records.',
+                      {
+                        withFullText: summary.executiveOrders.withFullText,
+                        total: summary.executiveOrders.total,
+                      }
+                    )}
                   </p>
                 </div>
                 <span className="shrink-0 text-3xl font-bold tabular-nums text-primary-800">
@@ -188,6 +211,8 @@ export default function Legislation() {
               </div>
 
               <PreviewList
+                t={t}
+                locale={locale}
                 records={summary.executiveOrders.preview}
                 type="executive-order"
               />
@@ -196,7 +221,7 @@ export default function Legislation() {
                 href="/legislation/executive-orders"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
               >
-                View all Executive Orders
+                {t('View all Executive Orders')}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </article>
@@ -205,14 +230,16 @@ export default function Legislation() {
               <div className="flex items-start justify-between gap-5">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    Ordinances
+                    {t('Ordinances')}
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-gray-700">
-                    Legislative enactments published separately from executive
-                    issuances. {summary.ordinances.withFullText} records have
-                    full text in BetterSanFernando;{' '}
-                    {summary.ordinances.referenceOnly} are reference-only
-                    records.
+                    {t(
+                      'Legislative enactments published separately from executive issuances. {{withFullText}} records have full text in BetterSanFernando; {{referenceOnly}} are reference-only records.',
+                      {
+                        withFullText: summary.ordinances.withFullText,
+                        referenceOnly: summary.ordinances.referenceOnly,
+                      }
+                    )}
                   </p>
                 </div>
                 <span className="shrink-0 text-3xl font-bold tabular-nums text-primary-800">
@@ -221,6 +248,8 @@ export default function Legislation() {
               </div>
 
               <PreviewList
+                t={t}
+                locale={locale}
                 records={summary.ordinances.preview}
                 type="ordinance"
               />
@@ -229,7 +258,7 @@ export default function Legislation() {
                 href="/legislation/ordinances"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
               >
-                View all Ordinances
+                {t('View all Ordinances')}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </article>
@@ -241,12 +270,12 @@ export default function Legislation() {
             <div className="flex items-start justify-between gap-5">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">
-                  Resolutions
+                  {t('Resolutions')}
                 </h2>
                 <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-700">
-                  A bounded set of subject-verified resolution records — neither
-                  includes full text, a verbatim formal title, or an exact
-                  adoption date.
+                  {t(
+                    'A bounded set of subject-verified resolution records — neither includes full text, a verbatim formal title, or an exact adoption date.'
+                  )}
                 </p>
               </div>
               <span className="shrink-0 text-3xl font-bold tabular-nums text-primary-800">
@@ -255,6 +284,8 @@ export default function Legislation() {
             </div>
 
             <PreviewList
+              t={t}
+              locale={locale}
               records={summary.resolutions.preview}
               type="resolution"
             />
@@ -263,7 +294,7 @@ export default function Legislation() {
               href="/legislation/resolutions"
               className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
             >
-              View all Resolutions
+              {t('View all Resolutions')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
@@ -273,15 +304,12 @@ export default function Legislation() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.55fr)]">
             <div>
               <h2 className="text-2xl font-bold text-gray-900">
-                Coverage and archive limits
+                {t('Coverage and archive limits')}
               </h2>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
-                BetterSanFernando publishes only records it can currently verify
-                and support safely. This is not a complete historical archive,
-                and Executive Order and ordinance coverage differ. Missing full
-                text does not prove that a document does not exist; absence from
-                these collections does not prove that a measure was never issued
-                or enacted.
+                {t(
+                  'BetterSanFernando publishes only records it can currently verify and support safely. This is not a complete historical archive, and Executive Order and ordinance coverage differ. Missing full text does not prove that a document does not exist; absence from these collections does not prove that a measure was never issued or enacted.'
+                )}
               </p>
             </div>
             <aside className="flex items-start gap-3 rounded-xl bg-primary-50 p-5 text-sm leading-6 text-primary-900">
@@ -290,26 +318,26 @@ export default function Legislation() {
                 aria-hidden="true"
               />
               <p>
-                BetterSanFernando is an independent civic-information project,
-                not the official City Government website. Detailed archives link
-                each published fact to its supporting public source.
+                {t(
+                  'BetterSanFernando is an independent civic-information project, not the official City Government website. Detailed archives link each published fact to its supporting public source.'
+                )}
               </p>
             </aside>
           </div>
 
           <nav
             className="mt-9 border-t border-gray-200 pt-7"
-            aria-label="Related pages"
+            aria-label={t('Related pages')}
           >
             <h2 className="text-lg font-bold text-gray-900">
-              Related information
+              {t('Related information')}
             </h2>
             <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
               {[
-                ['/government/offices', 'City Offices'],
-                ['/government/contact', 'Government Contact Directory'],
-                ['/transparency/sources', 'Published Data Sources'],
-                ['/transparency/methodology', 'Transparency Methodology'],
+                ['/government/offices', t('City Offices')],
+                ['/government/contact', t('Government Contact Directory')],
+                ['/transparency/sources', t('Published Data Sources')],
+                ['/transparency/methodology', t('Transparency Methodology')],
               ].map(([href, label]) => (
                 <Link
                   key={href}

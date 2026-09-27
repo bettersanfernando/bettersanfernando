@@ -57,6 +57,7 @@
     "procurement:smoke": "node --experimental-strip-types scripts/smoke-procurement.ts",
     "transparency:smoke": "node --experimental-strip-types scripts/smoke-transparency.ts",
     "statistics:smoke": "node --experimental-strip-types scripts/smoke-statistics.ts",
+    "page-localization:smoke": "node --experimental-strip-types scripts/smoke-page-localization.ts",
     "nav:smoke": "node --experimental-strip-types scripts/smoke-navigation.ts",
     "next-shell:smoke": "node --experimental-strip-types scripts/smoke-next-shell.ts",
     "batch3-routes:smoke": "node --experimental-strip-types scripts/smoke-batch3-routes.ts",

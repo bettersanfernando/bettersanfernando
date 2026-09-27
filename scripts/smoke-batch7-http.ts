@@ -242,6 +242,57 @@ for (const [source, destination] of [
   assert.equal(`${location.pathname}${location.search}`, destination);
 }
 
+// Localized editorial pages: /fil shows Filipino authored copy and metadata
+// with locale-preserving links, while the English URL stays English.
+for (const [path, filipino, filipinoTitle] of [
+  [
+    '/about',
+    'Dapat Mas Madaling Gamitin ang Pampublikong Impormasyon',
+    'Tungkol sa BetterSanFernando',
+  ],
+  ['/accessibility', 'Semantikong Estruktura', 'Accessibility'],
+  ['/sitemap', 'Mga Pangunahing Destinasyon', 'Site Index'],
+  ['/government', 'Unawain ang inyong Pamahalaang Lungsod.', 'Pamahalaan'],
+  [
+    '/government/contact',
+    'Hanapin ang tamang contact sa Pamahalaang Lungsod',
+    'Contact ng Pamahalaan',
+  ],
+  ['/projects', 'Impormasyon at Transparency ng mga Proyekto', 'Mga Proyekto'],
+  ['/statistics', 'Tuklasin ang mga Estadistikang View', 'Estadistika'],
+  ['/transparency', 'Pampublikong datos na matutuntunan mo.', 'Transparency'],
+  ['/legislation', 'Limitadong pampublikong koleksyon', 'Lehislasyon'],
+] as const) {
+  const english = await (await request(path)).text();
+  const filipinoPage = await (await request(`/fil${path}`)).text();
+  assert.ok(filipinoPage.includes(filipino), `/fil${path} needs Filipino copy`);
+  assert.ok(!english.includes(filipino), `${path} must stay English`);
+  assert.ok(
+    filipinoPage.includes(
+      `<title>${filipinoTitle} | BetterSanFernando</title>`
+    ),
+    `/fil${path} needs its Filipino title`
+  );
+  assert.ok(!/href="\/fil/.test(english), `${path} must not link into /fil`);
+  const unprefixed = [...filipinoPage.matchAll(/ href="(\/[^"]*)"/g)]
+    .map(match => match[1])
+    .filter(
+      href =>
+        !/^\/(fil(\/|$)|_next|assets|icon|apple-icon|favicon|sitemap\.xml)/.test(
+          href
+        )
+    );
+  assert.deepEqual(unprefixed, [], `/fil${path} links must keep /fil`);
+  assert.ok(!filipinoPage.includes('/fil/fil'));
+}
+const filipinoNotFound = await request('/fil/definitely-not-a-route');
+assert.equal(filipinoNotFound.status, 404);
+assert.ok(
+  (await filipinoNotFound.text()).includes(
+    'Hindi namin makita ang pahinang iyon.'
+  )
+);
+
 const robotsResponse = await request('/robots.txt');
 assert.equal(robotsResponse.status, 200);
 assert.match(

@@ -268,5 +268,18 @@
     "openDocumentLabel": "Open official document for {{identifier}} (opens in a new tab)",
     "openSourcePageLabel": "Open official source page for {{identifier}} (opens in a new tab)",
     "sourcePageLabel": "Open source page for {{identifier}} (opens in a new tab)"
+  },
+  "projectSearch": {
+    "barangayNotSpecified": "Barangay not specified",
+    "noMatches": "No matching projects found.",
+    "tryAnother": "Try another term or",
+    "browseAll": "browse the complete City Projects directory",
+    "label": "Search project name, barangay, contractor, or bid reference",
+    "placeholder": "Search project name, barangay, contractor...",
+    "clear": "Clear project search",
+    "results": "Project search results",
+    "searchResults": "Search Results",
+    "topMatches": "Top matches for “{{query}}”",
+    "viewAll": "View all matching projects"
   }
 }

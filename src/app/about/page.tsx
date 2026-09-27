@@ -1,7 +1,7 @@
 import Link from '../../components/i18n/LocaleLink';
 import { ArrowDown, ArrowRight, ExternalLink, Globe } from 'lucide-react';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
-import { getLocale } from '../../i18n/server';
+import { getPageT, type PageT } from '../../i18n/server';
 import { buildPageMetadata } from '../../lib/metadata';
 import { getServices } from '../../data/civic/services';
 import { getProjects } from '../../data/civic/projects';
@@ -11,26 +11,26 @@ import { getBarangays } from '../../data/civic/demographics';
 import { getLegislationSummary } from '../../data/civic/legislationSummary';
 
 export async function generateMetadata() {
+  const { t, locale } = await getPageT('about');
   return buildPageMetadata({
-    title: {
-      en: 'About BetterSanFernando',
-      fil: 'Tungkol sa BetterSanFernando',
-    },
-    description: {
-      en: 'BetterSanFernando makes public information about the City of San Fernando, Pampanga easier to find, understand, and verify.',
-      fil: 'Pinadadali ng BetterSanFernando ang paghahanap, pag-unawa, at pagberipika ng pampublikong impormasyon tungkol sa Lungsod ng San Fernando, Pampanga.',
-    },
+    title: t('About BetterSanFernando'),
+    description: t(
+      'BetterSanFernando makes public information about the City of San Fernando, Pampanga easier to find, understand, and verify.'
+    ),
     path: '/about',
-    locale: await getLocale(),
+    locale,
   });
 }
 
 const BETTERGOV_URL = 'https://bettergov.ph';
 
-const COVERAGE_LIMITATION_NOTE =
-  'Each collection uses its own unit, coverage, reference period, and limitations. These figures should not be added together as one combined total. These metrics describe current published scope, not every City dataset or government record. Absence from BetterSanFernando does not mean that a record, office, service, or document does not exist.';
+const COVERAGE_LIMITATION_NOTE = (t: PageT) =>
+  t(
+    'Each collection uses its own unit, coverage, reference period, and limitations. These figures should not be added together as one combined total. These metrics describe current published scope, not every City dataset or government record. Absence from BetterSanFernando does not mean that a record, office, service, or document does not exist.'
+  );
 
-export default function About() {
+export default async function About() {
+  const { t } = await getPageT('about');
   const servicesCount = getServices().length;
   const projectsCount = getProjects().length;
   const evidenceCount = getProcurementStatistics().evidence.total;
@@ -50,27 +50,28 @@ export default function About() {
         <div className="container mx-auto px-4 py-8 sm:py-10 md:py-12 min-[1180px]:py-16">
           <Breadcrumbs
             className="text-xs text-gray-500"
-            items={[{ label: 'Home', href: '/' }, { label: 'About' }]}
+            items={[{ label: t('Home'), href: '/' }, { label: t('About') }]}
           />
 
           <div className="mt-5 grid grid-cols-1 gap-6 sm:gap-8 md:gap-9 min-[1180px]:mt-6 min-[1180px]:grid-cols-[54fr_46fr] min-[1180px]:items-center min-[1180px]:gap-16 xl:gap-20">
             {/* Left Column (Controlled measure on desktop, comfortable measure on tablet/mobile) */}
             <div className="w-full max-w-xl md:max-w-[720px] min-[1180px]:max-w-xl">
               <p className="text-eyebrow text-[#0066EB]">
-                ABOUT BETTERSANFERNANDO
+                {t('ABOUT BETTERSANFERNANDO')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl min-[1180px]:text-5xl">
-                Public Information Should Be Easier to Use
+                {t('Public Information Should Be Easier to Use')}
               </h1>
               <div className="mt-4 space-y-2 md:max-w-[680px] min-[1180px]:max-w-lg">
                 <p className="text-base leading-relaxed text-gray-800 sm:text-lg">
-                  BetterSanFernando makes public information about the City of
-                  San Fernando, Pampanga easier to find, understand, and verify.
+                  {t(
+                    'BetterSanFernando makes public information about the City of San Fernando, Pampanga easier to find, understand, and verify.'
+                  )}
                 </p>
                 <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
-                  An independent civic portal organizing public services,
-                  projects, government information, records, and official-source
-                  data in one place.
+                  {t(
+                    'An independent civic portal organizing public services, projects, government information, records, and official-source data in one place.'
+                  )}
                 </p>
               </div>
 
@@ -79,7 +80,7 @@ export default function About() {
                   href="/services"
                   className="inline-flex items-center gap-1.5 rounded-sm bg-[#0066EB] px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] sm:text-sm"
                 >
-                  <span>Explore BetterSanFernando</span>
+                  <span>{t('Explore BetterSanFernando')}</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
 
@@ -87,7 +88,7 @@ export default function About() {
                   href="/transparency/methodology"
                   className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                 >
-                  <span>How We Publish Data</span>
+                  <span>{t('How We Publish Data')}</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -108,13 +109,13 @@ export default function About() {
                   {/* Step 1 */}
                   <div className="rounded-sm border border-gray-200 bg-white p-3 text-center">
                     <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-gray-500">
-                      ORIGIN
+                      {t('ORIGIN')}
                     </p>
                     <p className="text-xs font-bold text-gray-950 sm:text-sm">
-                      Official Sources
+                      {t('Official Sources')}
                     </p>
                     <p className="text-[11px] text-gray-500">
-                      Charters · Documents · Disclosures · Archives
+                      {t('Charters · Documents · Disclosures · Archives')}
                     </p>
                   </div>
 
@@ -129,26 +130,26 @@ export default function About() {
                   {/* Step 2: 6 Civic Domains */}
                   <div className="rounded-sm border border-[#0066EB]/30 bg-white p-3.5 text-center">
                     <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0066EB]">
-                      BETTERSANFERNANDO ARCHITECTURE
+                      {t('BETTERSANFERNANDO ARCHITECTURE')}
                     </p>
                     <div className="mt-2 grid grid-cols-3 gap-1.5 text-[11px] font-semibold text-gray-800">
                       <span className="rounded bg-gray-50 px-1 py-0.5">
-                        Services
+                        {t('Services')}
                       </span>
                       <span className="rounded bg-gray-50 px-1 py-0.5">
-                        Projects
+                        {t('Projects')}
                       </span>
                       <span className="rounded bg-gray-50 px-1 py-0.5">
-                        Government
+                        {t('Government')}
                       </span>
                       <span className="rounded bg-gray-50 px-1 py-0.5">
-                        Transparency
+                        {t('Transparency')}
                       </span>
                       <span className="rounded bg-gray-50 px-1 py-0.5">
-                        Statistics
+                        {t('Statistics')}
                       </span>
                       <span className="rounded bg-gray-50 px-1 py-0.5">
-                        Legislation
+                        {t('Legislation')}
                       </span>
                     </div>
                   </div>
@@ -164,13 +165,13 @@ export default function About() {
                   {/* Step 3 */}
                   <div className="rounded-sm border border-gray-200 bg-white p-3 text-center">
                     <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0066EB]">
-                      CIVIC RESULT
+                      {t('CIVIC RESULT')}
                     </p>
                     <p className="text-xs font-bold text-gray-950 sm:text-sm">
-                      Clearer Public Information
+                      {t('Clearer Public Information')}
                     </p>
                     <p className="text-[11px] text-gray-500">
-                      Searchable · Structured · Verified to Source
+                      {t('Searchable · Structured · Verified to Source')}
                     </p>
                   </div>
                 </div>
@@ -188,13 +189,14 @@ export default function About() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">WHY IT EXISTS</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('WHY IT EXISTS')}</p>
             <h2
               id="why-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl"
             >
-              Public Information Should Not Be Difficult to Find Just Because It
-              Lives in Different Places
+              {t(
+                'Public Information Should Not Be Difficult to Find Just Because It Lives in Different Places'
+              )}
             </h2>
           </div>
 
@@ -203,26 +205,23 @@ export default function About() {
             <div>
               <div className="space-y-5 text-sm leading-relaxed text-gray-700 sm:space-y-6 sm:text-base sm:leading-7">
                 <p>
-                  In any local government, public civic information is
-                  distributed across many locations. Related facts often reside
-                  in Citizen’s Charters, department offices, Full Disclosure
-                  postings, procurement notices, PDF files, official government
-                  pages, legislation archives, and social accounts.
+                  {t(
+                    'In any local government, public civic information is distributed across many locations. Related facts often reside in Citizen’s Charters, department offices, Full Disclosure postings, procurement notices, PDF files, official government pages, legislation archives, and social accounts.'
+                  )}
                 </p>
                 <p>
-                  BetterSanFernando brings those sources into a clearer
-                  resident-facing structure while keeping the original evidence
-                  visible. It organizes published material so residents,
-                  researchers, and civil society can find what they need without
-                  first knowing the internal department structure.
+                  {t(
+                    'BetterSanFernando brings those sources into a clearer resident-facing structure while keeping the original evidence visible. It organizes published material so residents, researchers, and civil society can find what they need without first knowing the internal department structure.'
+                  )}
                 </p>
               </div>
 
               {/* Concluding Statement: Natural final thought of the narrative */}
               <div className="mt-8 sm:mt-9">
                 <p className="text-xl font-semibold leading-snug tracking-[-0.01em] text-gray-950 sm:text-2xl">
-                  The goal is not to replace official sources. It is to make
-                  them easier to discover, understand, and verify.
+                  {t(
+                    'The goal is not to replace official sources. It is to make them easier to discover, understand, and verify.'
+                  )}
                 </p>
               </div>
             </div>
@@ -230,43 +229,43 @@ export default function About() {
             {/* Right: Grouped Editorial Sources List (Natural Content Height) */}
             <div className="rounded-sm border border-gray-200/80 bg-[#F3F6FB]/40 p-4 sm:p-5">
               <h3 className="text-xs font-bold uppercase tracking-wider text-gray-950 sm:text-sm">
-                Public Information Lives Across Many Sources
+                {t('Public Information Lives Across Many Sources')}
               </h3>
 
               <div className="mt-3 divide-y divide-gray-200/70">
                 <div className="py-2.5 first:pt-0">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0066EB]">
-                    Service Information
+                    {t('Service Information')}
                   </p>
                   <p className="mt-0.5 text-xs text-gray-700 sm:text-sm">
-                    Citizen’s Charters · Department Pages
+                    {t('Citizen’s Charters · Department Pages')}
                   </p>
                 </div>
 
                 <div className="py-2.5">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0066EB]">
-                    Financial &amp; Disclosure Records
+                    {t('Financial & Disclosure Records')}
                   </p>
                   <p className="mt-0.5 text-xs text-gray-700 sm:text-sm">
-                    Full Disclosure Reports · Public Notices
+                    {t('Full Disclosure Reports · Public Notices')}
                   </p>
                 </div>
 
                 <div className="py-2.5">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0066EB]">
-                    Projects &amp; Procurement
+                    {t('Projects & Procurement')}
                   </p>
                   <p className="mt-0.5 text-xs text-gray-700 sm:text-sm">
-                    Procurement Records · Supporting Documents
+                    {t('Procurement Records · Supporting Documents')}
                   </p>
                 </div>
 
                 <div className="py-2.5 last:pb-0">
                   <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0066EB]">
-                    Government &amp; Legislation
+                    {t('Government & Legislation')}
                   </p>
                   <p className="mt-0.5 text-xs text-gray-700 sm:text-sm">
-                    Official Portals · Legislation Archives
+                    {t('Official Portals · Legislation Archives')}
                   </p>
                 </div>
               </div>
@@ -283,16 +282,19 @@ export default function About() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">EXPLORE THE PORTAL</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('EXPLORE THE PORTAL')}
+            </p>
             <h2
               id="organizes-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              What BetterSanFernando Organizes
+              {t('What BetterSanFernando Organizes')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Published municipal information structured into six primary
-              directories:
+              {t(
+                'Published municipal information structured into six primary directories:'
+              )}
             </p>
           </div>
 
@@ -301,20 +303,26 @@ export default function About() {
               {[
                 {
                   num: '01',
-                  title: 'Services',
-                  desc: 'Procedures, requirements, fees, responsible offices, and source references.',
+                  title: t('Services'),
+                  desc: t(
+                    'Procedures, requirements, fees, responsible offices, and source references.'
+                  ),
                   href: '/services',
                 },
                 {
                   num: '02',
-                  title: 'Projects',
-                  desc: 'Published project records, evidence, procurement information, and geography.',
+                  title: t('Projects'),
+                  desc: t(
+                    'Published project records, evidence, procurement information, and geography.'
+                  ),
                   href: '/projects',
                 },
                 {
                   num: '03',
-                  title: 'Government',
-                  desc: 'Offices, contact channels, hotlines, barangay information, and official destinations.',
+                  title: t('Government'),
+                  desc: t(
+                    'Offices, contact channels, hotlines, barangay information, and official destinations.'
+                  ),
                   href: '/government',
                 },
               ].map(item => (
@@ -348,20 +356,26 @@ export default function About() {
               {[
                 {
                   num: '04',
-                  title: 'Transparency',
-                  desc: 'Disclosure records, City finances, official documents, sources, and publication methodology.',
+                  title: t('Transparency'),
+                  desc: t(
+                    'Disclosure records, City finances, official documents, sources, and publication methodology.'
+                  ),
                   href: '/transparency',
                 },
                 {
                   num: '05',
-                  title: 'Statistics',
-                  desc: 'Population, projects, procurement, legislation, government, and public-record views.',
+                  title: t('Statistics'),
+                  desc: t(
+                    'Population, projects, procurement, legislation, government, and public-record views.'
+                  ),
                   href: '/statistics',
                 },
                 {
                   num: '06',
-                  title: 'Legislation',
-                  desc: 'Published Executive Order, Ordinance, and Resolution records.',
+                  title: t('Legislation'),
+                  desc: t(
+                    'Published Executive Order, Ordinance, and Resolution records.'
+                  ),
                   href: '/legislation',
                 },
               ].map(item => (
@@ -403,13 +417,13 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <p className="text-eyebrow text-[#0066EB]">
-              CURRENT PUBLIC COVERAGE
+              {t('CURRENT PUBLIC COVERAGE')}
             </p>
             <h2
               id="coverage-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              BetterSanFernando Today
+              {t('BetterSanFernando Today')}
             </h2>
           </div>
 
@@ -419,32 +433,32 @@ export default function About() {
               {[
                 {
                   count: servicesCount,
-                  label: 'Services',
+                  label: t('Services'),
                   href: '/services',
                 },
                 {
                   count: projectsCount,
-                  label: 'Projects',
+                  label: t('Projects'),
                   href: '/projects',
                 },
                 {
                   count: evidenceCount,
-                  label: 'Evidence Records',
+                  label: t('Evidence Records'),
                   href: '/projects/sources',
                 },
                 {
                   count: officesCount,
-                  label: 'Offices',
+                  label: t('Offices'),
                   href: '/government/offices',
                 },
                 {
                   count: barangaysCount,
-                  label: 'Barangays',
+                  label: t('Barangays'),
                   href: '/barangays',
                 },
                 {
                   count: legislationCount,
-                  label: 'Legislative Records',
+                  label: t('Legislative Records'),
                   href: '/legislation',
                 },
               ].map(metric => (
@@ -466,7 +480,7 @@ export default function About() {
 
           <div className="mt-4">
             <p className="text-xs leading-relaxed text-gray-500 sm:text-sm">
-              {COVERAGE_LIMITATION_NOTE}
+              {COVERAGE_LIMITATION_NOTE(t)}
             </p>
           </div>
         </div>
@@ -480,16 +494,19 @@ export default function About() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">PUBLICATION PROCESS</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('PUBLICATION PROCESS')}
+            </p>
             <h2
               id="process-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              From Official Source to Usable Civic Information
+              {t('From Official Source to Usable Civic Information')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              How civic information moves through verification and structuring
-              before publication:
+              {t(
+                'How civic information moves through verification and structuring before publication:'
+              )}
             </p>
           </div>
 
@@ -498,23 +515,31 @@ export default function About() {
             {[
               {
                 step: '01',
-                title: 'FIND THE SOURCE',
-                desc: 'Official public page, document, archive, dataset, or attributable source.',
+                title: t('FIND THE SOURCE'),
+                desc: t(
+                  'Official public page, document, archive, dataset, or attributable source.'
+                ),
               },
               {
                 step: '02',
-                title: 'VERIFY THE RECORD',
-                desc: 'Authority, identity, dates, references, and supporting facts.',
+                title: t('VERIFY THE RECORD'),
+                desc: t(
+                  'Authority, identity, dates, references, and supporting facts.'
+                ),
               },
               {
                 step: '03',
-                title: 'STRUCTURE THE INFORMATION',
-                desc: 'Normalize fields while preserving what the source actually establishes.',
+                title: t('STRUCTURE THE INFORMATION'),
+                desc: t(
+                  'Normalize fields while preserving what the source actually establishes.'
+                ),
               },
               {
                 step: '04',
-                title: 'PUBLISH WITH CONTEXT',
-                desc: 'Present source, scope, reference period, and limitations.',
+                title: t('PUBLISH WITH CONTEXT'),
+                desc: t(
+                  'Present source, scope, reference period, and limitations.'
+                ),
               },
             ].map(stage => (
               <div key={stage.step} className="space-y-2">
@@ -536,7 +561,7 @@ export default function About() {
               href="/transparency/methodology"
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
             >
-              <span>Read How We Publish Data</span>
+              <span>{t('Read How We Publish Data')}</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
@@ -551,37 +576,45 @@ export default function About() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">OUR APPROACH</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('OUR APPROACH')}</p>
             <h2
               id="approach-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              How BetterSanFernando Approaches Public Information
+              {t('How BetterSanFernando Approaches Public Information')}
             </h2>
           </div>
 
           {/* Tier 1: Principles (4 columns desktop, 2x2 tablet, 1 mobile) */}
           <div className="mt-10 sm:mt-12">
             <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-              PRINCIPLES
+              {t('PRINCIPLES')}
             </p>
             <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               {[
                 {
-                  title: 'Source First',
-                  desc: 'Published facts remain connected to their original public source.',
+                  title: t('Source First'),
+                  desc: t(
+                    'Published facts remain connected to their original public source.'
+                  ),
                 },
                 {
-                  title: 'Scope Stays Visible',
-                  desc: 'A dataset is presented as what it actually covers — not as something broader.',
+                  title: t('Scope Stays Visible'),
+                  desc: t(
+                    'A dataset is presented as what it actually covers — not as something broader.'
+                  ),
                 },
                 {
-                  title: 'Unknown Stays Unknown',
-                  desc: 'Missing or unsupported information is not silently guessed or converted into certainty.',
+                  title: t('Unknown Stays Unknown'),
+                  desc: t(
+                    'Missing or unsupported information is not silently guessed or converted into certainty.'
+                  ),
                 },
                 {
-                  title: 'Residents First',
-                  desc: 'Information is reorganized around what people are trying to understand or accomplish.',
+                  title: t('Residents First'),
+                  desc: t(
+                    'Information is reorganized around what people are trying to understand or accomplish.'
+                  ),
                 },
               ].map(item => (
                 <div key={item.title} className="space-y-1.5">
@@ -599,21 +632,23 @@ export default function About() {
           {/* Tier 2: Role of the Portal (Two equal 50/50 columns) */}
           <div className="mt-10 border-t border-gray-200/80 pt-8 sm:mt-12 sm:pt-10">
             <p className="font-mono text-xs font-bold uppercase tracking-wider text-gray-950">
-              ROLE OF THE PORTAL
+              {t('ROLE OF THE PORTAL')}
             </p>
             <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:gap-16">
               {/* Column 1: What We Do */}
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-950 sm:text-sm">
-                  WHAT WE DO
+                  {t('WHAT WE DO')}
                 </h3>
                 <ul className="mt-4 space-y-3 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
                   {[
-                    'Organize public information from official sources',
-                    'Create resident-friendly directories and statistical views',
-                    'Preserve source links and provenance',
-                    'Make gaps and limitations visible',
-                    'Maintain an independent civic-information portal',
+                    t('Organize public information from official sources'),
+                    t(
+                      'Create resident-friendly directories and statistical views'
+                    ),
+                    t('Preserve source links and provenance'),
+                    t('Make gaps and limitations visible'),
+                    t('Maintain an independent civic-information portal'),
                   ].map(item => (
                     <li key={item} className="flex items-start gap-2.5">
                       <span
@@ -631,15 +666,17 @@ export default function About() {
               {/* Column 2: What We Do Not Do */}
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 sm:text-sm">
-                  WHAT WE DO NOT DO
+                  {t('WHAT WE DO NOT DO')}
                 </h3>
                 <ul className="mt-4 space-y-3 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
                   {[
-                    'Replace the official City Government website',
-                    'Speak on behalf of the City Government',
-                    'Create or alter official government records',
-                    'Infer unsupported facts',
-                    'Receive or process City Government applications, payments, complaints, or emergency requests',
+                    t('Replace the official City Government website'),
+                    t('Speak on behalf of the City Government'),
+                    t('Create or alter official government records'),
+                    t('Infer unsupported facts'),
+                    t(
+                      'Receive or process City Government applications, payments, complaints, or emergency requests'
+                    ),
                   ].map(item => (
                     <li key={item} className="flex items-start gap-2.5">
                       <span
@@ -667,13 +704,13 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <p className="text-eyebrow text-[#0066EB]">
-              TRUST &amp; INDEPENDENCE
+              {t('TRUST & INDEPENDENCE')}
             </p>
             <h2
               id="trust-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              Built for Inspection, Not Authority
+              {t('Built for Inspection, Not Authority')}
             </h2>
           </div>
 
@@ -681,13 +718,12 @@ export default function About() {
             {/* Left: Inspect the Evidence */}
             <div className="space-y-4">
               <h3 className="text-base font-bold text-gray-950 sm:text-lg">
-                Inspect the Evidence
+                {t('Inspect the Evidence')}
               </h3>
               <p className="text-xs leading-relaxed text-gray-600 sm:text-sm">
-                BetterSanFernando keeps the path from published fact to original
-                source visible wherever the current public record allows —
-                tracing FACT (a claim supported by a record) to SOURCE (its
-                provenance) and OFFICIAL LINK (a public inspection path).
+                {t(
+                  'BetterSanFernando keeps the path from published fact to original source visible wherever the current public record allows — tracing FACT (a claim supported by a record) to SOURCE (its provenance) and OFFICIAL LINK (a public inspection path).'
+                )}
               </p>
 
               <div className="divide-y divide-gray-200 border-y border-gray-200 pt-1">
@@ -697,10 +733,10 @@ export default function About() {
                 >
                   <div>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950 group-hover:text-[#0066EB] sm:text-sm">
-                      Data Sources
+                      {t('Data Sources')}
                     </h4>
                     <p className="mt-0.5 text-xs text-gray-500">
-                      See where published datasets and records come from.
+                      {t('See where published datasets and records come from.')}
                     </p>
                   </div>
                   <ArrowRight
@@ -715,11 +751,12 @@ export default function About() {
                 >
                   <div>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950 group-hover:text-[#0066EB] sm:text-sm">
-                      How We Publish Data
+                      {t('How We Publish Data')}
                     </h4>
                     <p className="mt-0.5 text-xs text-gray-500">
-                      Review verification, normalization, publication
-                      boundaries, and limitations.
+                      {t(
+                        'Review verification, normalization, publication boundaries, and limitations.'
+                      )}
                     </p>
                   </div>
                   <ArrowRight
@@ -734,11 +771,12 @@ export default function About() {
                 >
                   <div>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950 group-hover:text-[#0066EB] sm:text-sm">
-                      Public Records Statistics
+                      {t('Public Records Statistics')}
                     </h4>
                     <p className="mt-0.5 text-xs text-gray-500">
-                      See what BetterSanFernando currently publishes and what
-                      those counts represent.
+                      {t(
+                        'See what BetterSanFernando currently publishes and what those counts represent.'
+                      )}
                     </p>
                   </div>
                   <ArrowRight
@@ -752,42 +790,39 @@ export default function About() {
             {/* Right: Independent by Design */}
             <div className="space-y-4">
               <h3 className="text-base font-bold text-gray-950 sm:text-lg">
-                Independent by Design
+                {t('Independent by Design')}
               </h3>
               <div className="divide-y divide-gray-200 border-y border-gray-200 pt-1">
                 <div className="py-3.5">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950 sm:text-sm">
-                    Not an Official City Government Website
+                    {t('Not an Official City Government Website')}
                   </h4>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                    BetterSanFernando is independent and community-run. It is
-                    {'not an official City Government website'} and is
-                    {'not affiliated with or endorsed by the City Government'}
-                    {
-                      ' unless a future verified relationship is explicitly documented.'
-                    }
+                    {t(
+                      'BetterSanFernando is independent and community-run. It is not an official City Government website and is not affiliated with or endorsed by the City Government unless a future verified relationship is explicitly documented.'
+                    )}
                   </p>
                 </div>
 
                 <div className="py-3.5">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950 sm:text-sm">
-                    Source Links Are Attribution, Not Endorsement
+                    {t('Source Links Are Attribution, Not Endorsement')}
                   </h4>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                    Official-source links identify where information came from;
-                    they do not imply government endorsement, partnership, or
-                    authorship of BetterSanFernando.
+                    {t(
+                      'Official-source links identify where information came from; they do not imply government endorsement, partnership, or authorship of BetterSanFernando.'
+                    )}
                   </p>
                 </div>
 
                 <div className="py-3.5">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-950 sm:text-sm">
-                    Use Original Sources for Consequential Decisions
+                    {t('Use Original Sources for Consequential Decisions')}
                   </h4>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                    For legal, administrative, financial, or otherwise
-                    consequential decisions, residents should inspect the linked
-                    original public source.
+                    {t(
+                      'For legal, administrative, financial, or otherwise consequential decisions, residents should inspect the linked original public source.'
+                    )}
                   </p>
                 </div>
               </div>
@@ -806,20 +841,18 @@ export default function About() {
           <div className="grid grid-cols-1 items-center justify-between gap-6 lg:grid-cols-[minmax(0,1fr)_auto]">
             <div className="max-w-2xl">
               <p className="text-eyebrow text-[#0066EB]">
-                BETTERGOV.PH COMMUNITY
+                {t('BETTERGOV.PH COMMUNITY')}
               </p>
               <h2
                 id="community-heading"
                 className="mt-1 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
               >
-                Part of a Wider Civic-Information Effort
+                {t('Part of a Wider Civic-Information Effort')}
               </h2>
               <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                BetterSanFernando is part of the BetterGov.ph community of
-                independent civic-information projects working to make public
-                information easier to access and understand. BetterSanFernando
-                is independently built and publicly maintained as an open
-                civic-information project.
+                {t(
+                  'BetterSanFernando is part of the BetterGov.ph community of independent civic-information projects working to make public information easier to access and understand. BetterSanFernando is independently built and publicly maintained as an open civic-information project.'
+                )}
               </p>
             </div>
 
@@ -831,7 +864,7 @@ export default function About() {
                 className="inline-flex items-center gap-1.5 rounded-sm border border-gray-200 bg-white px-4 py-2.5 text-xs font-semibold text-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 sm:text-sm"
               >
                 <Globe className="h-4 w-4 text-[#0066EB]" aria-hidden="true" />
-                <span>Visit BetterGov.ph</span>
+                <span>{t('Visit BetterGov.ph')}</span>
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               </a>
             </div>
@@ -847,34 +880,43 @@ export default function About() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">START EXPLORING</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('START EXPLORING')}
+            </p>
             <h2
               id="start-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              Start With the Information You Need
+              {t('Start With the Information You Need')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Explore primary public directories and resources across the
-              portal:
+              {t(
+                'Explore primary public directories and resources across the portal:'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
               {
-                title: 'Browse Services',
-                desc: 'Requirements, procedures, and fees for resident transactions.',
+                title: t('Browse Services'),
+                desc: t(
+                  'Requirements, procedures, and fees for resident transactions.'
+                ),
                 href: '/services',
               },
               {
-                title: 'Explore Projects',
-                desc: 'Published municipal projects, contracts, and evidence records.',
+                title: t('Explore Projects'),
+                desc: t(
+                  'Published municipal projects, contracts, and evidence records.'
+                ),
                 href: '/projects',
               },
               {
-                title: 'View Government Information',
-                desc: 'City offices, hotlines, contacts, and official public channels.',
+                title: t('View Government Information'),
+                desc: t(
+                  'City offices, hotlines, contacts, and official public channels.'
+                ),
                 href: '/government',
               },
             ].map(item => (
@@ -892,7 +934,7 @@ export default function About() {
                   </p>
                 </div>
                 <div className="mt-5 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Open Directory</span>
+                  <span>{t('Open Directory')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
                     aria-hidden="true"

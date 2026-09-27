@@ -220,5 +220,18 @@
     "openDocumentLabel": "Buksan ang opisyal na dokumento para sa {{identifier}} (magbubukas sa bagong tab)",
     "openSourcePageLabel": "Buksan ang opisyal na pahina ng source para sa {{identifier}} (magbubukas sa bagong tab)",
     "sourcePageLabel": "Buksan ang pahina ng source para sa {{identifier}} (magbubukas sa bagong tab)"
+  },
+  "projectSearch": {
+    "barangayNotSpecified": "Hindi tinukoy ang barangay",
+    "noMatches": "Walang nakitang tugmang proyekto.",
+    "tryAnother": "Subukan ang ibang termino o",
+    "browseAll": "tingnan ang kumpletong direktoryo ng mga Proyekto ng Lungsod",
+    "label": "Hanapin ang pangalan ng proyekto, barangay, contractor, o bid reference",
+    "placeholder": "Hanapin ang proyekto, barangay, contractor...",
+    "clear": "I-clear ang paghahanap ng proyekto",
+    "results": "Mga resulta ng paghahanap ng proyekto",
+    "searchResults": "Mga Resulta ng Paghahanap",
+    "topMatches": "Mga pinakatugma para sa “{{query}}”",
+    "viewAll": "Tingnan ang lahat ng tugmang proyekto"
   }
 }

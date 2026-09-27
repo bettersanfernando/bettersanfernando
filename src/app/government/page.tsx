@@ -12,13 +12,19 @@ import { getBarangays } from '../../data/civic/demographics';
 import { getGovernmentSummary } from '../../data/civic/governmentSummary';
 import { getOfficialLinks } from '../../data/civic/governmentOfficialLinks';
 import { buildPageMetadata } from '../../lib/metadata';
+import { getPageT, type PageT } from '../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Government',
-  description:
-    'Find currently published government office, contact, legislation, and public-information resources for the City of San Fernando, Pampanga.',
-  path: '/government',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('government');
+  return buildPageMetadata({
+    title: t('Government'),
+    description: t(
+      'Find currently published government office, contact, legislation, and public-information resources for the City of San Fernando, Pampanga.'
+    ),
+    path: '/government',
+    locale,
+  });
+}
 
 const summary = getGovernmentSummary();
 const barangayCount = getBarangays().length;
@@ -43,91 +49,100 @@ interface HubGroup {
   destinations: HubDestination[];
 }
 
-const quickLinks: HubDestination[] = [
+const quickLinks = (t: PageT): HubDestination[] => [
   {
-    title: 'City Offices',
+    title: t('City Offices'),
     href: '/government/offices',
-    description: 'Browse departments and office information.',
+    description: t('Browse departments and office information.'),
   },
   {
-    title: 'Contact the City',
+    title: t('Contact the City'),
     href: '/government/contact',
-    description: 'Find verified official contact channels.',
+    description: t('Find verified official contact channels.'),
   },
   {
-    title: 'Barangay Contacts',
+    title: t('Barangay Contacts'),
     href: '/government/barangay-contacts',
-    description: 'Find Barangay Secretary and BHERT contacts.',
+    description: t('Find Barangay Secretary and BHERT contacts.'),
   },
 ];
 
-const cityGovernmentGroup: HubGroup = {
-  title: 'City Government',
-  blurb: 'Verified office identities and how to reach them.',
+const cityGovernmentGroup = (t: PageT): HubGroup => ({
+  title: t('City Government'),
+  blurb: t('Verified office identities and how to reach them.'),
   destinations: [
     {
-      title: 'City Offices',
+      title: t('City Offices'),
       href: '/government/offices',
-      description: 'Find city departments, offices, and available information.',
+      description: t(
+        'Find city departments, offices, and available information.'
+      ),
     },
     {
-      title: 'Contact the City',
+      title: t('Contact the City'),
       href: '/government/contact',
-      description: 'Find verified official City Government contact channels.',
+      description: t(
+        'Find verified official City Government contact channels.'
+      ),
     },
   ],
-};
+});
 
-const sideGroups: HubGroup[] = [
+const sideGroups = (t: PageT): HubGroup[] => [
   {
-    title: 'Legislation',
-    blurb: 'Bounded executive-order, ordinance, and resolution archives.',
+    title: t('Legislation'),
+    blurb: t('Bounded executive-order, ordinance, and resolution archives.'),
     icon: Scale,
     destinations: [
       {
-        title: 'Executive Orders',
+        title: t('Executive Orders'),
         href: '/legislation/executive-orders',
-        description: 'Browse verified executive-order records.',
+        description: t('Browse verified executive-order records.'),
       },
       {
-        title: 'Ordinances',
+        title: t('Ordinances'),
         href: '/legislation/ordinances',
-        description: 'Browse verified city ordinance records.',
+        description: t('Browse verified city ordinance records.'),
       },
       {
-        title: 'Resolutions',
+        title: t('Resolutions'),
         href: '/legislation/resolutions',
-        description: 'Browse verified city resolution records.',
+        description: t('Browse verified city resolution records.'),
       },
     ],
   },
   {
-    title: 'Public Information',
-    blurb: 'Hotlines, barangay contacts, and official government links.',
+    title: t('Public Information'),
+    blurb: t('Hotlines, barangay contacts, and official government links.'),
     icon: Info,
     destinations: [
       {
-        title: 'Hotlines & Contacts',
+        title: t('Hotlines & Contacts'),
         href: '/government/hotlines',
-        description: 'Access verified official hotlines and public contacts.',
+        description: t(
+          'Access verified official hotlines and public contacts.'
+        ),
       },
       {
-        title: 'Barangay Contacts',
+        title: t('Barangay Contacts'),
         href: '/government/barangay-contacts',
-        description:
-          'Find published Barangay Secretary and BHERT contacts by barangay.',
+        description: t(
+          'Find published Barangay Secretary and BHERT contacts by barangay.'
+        ),
       },
       {
-        title: 'Official Government Links',
+        title: t('Official Government Links'),
         href: '/government/links',
-        description:
-          'Visit verified official government websites and resources.',
+        description: t(
+          'Visit verified official government websites and resources.'
+        ),
       },
     ],
   },
 ];
 
-export default function GovernmentHubPage() {
+export default async function GovernmentHubPage() {
+  const { t } = await getPageT('government');
   return (
     <main className="bg-white pb-16 md:pb-24">
       {/* Editorial page header — white canvas, breadcrumb inline above the intro */}
@@ -135,7 +150,10 @@ export default function GovernmentHubPage() {
         <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-14">
           <Breadcrumbs
             className="text-xs text-gray-500"
-            items={[{ label: 'Home', href: '/' }, { label: 'Government' }]}
+            items={[
+              { label: t('Home'), href: '/' },
+              { label: t('Government') },
+            ]}
           />
 
           <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-12">
@@ -144,38 +162,46 @@ export default function GovernmentHubPage() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                Government
+                {t('Government')}
               </p>
 
               <h1 className="mt-3 text-3xl font-extrabold text-display text-gray-950 sm:text-4xl lg:text-5xl">
-                Understand your City Government.
+                {t('Understand your City Government.')}
               </h1>
 
               <p className="mt-4 text-lg font-medium leading-7 text-gray-800 sm:text-xl">
-                Find City offices, public contacts, legislation, barangay
-                information, and official government resources in one place.
+                {t(
+                  'Find City offices, public contacts, legislation, barangay information, and official government resources in one place.'
+                )}
               </p>
 
               <p className="mt-3 text-base leading-7 text-gray-600 md:text-[17px]">
-                BetterSanFernando is independent and community-run, not the
-                official City Government website.
+                {t(
+                  'BetterSanFernando is independent and community-run, not the official City Government website.'
+                )}
               </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-gray-600">
-                <span>{summary.officeRecords} City offices</span>
-                <span>{barangayCount} barangays</span>
-                <span>{officialLinkCount} official government links</span>
+                <span>
+                  {t('{{n}} City offices', { n: summary.officeRecords })}
+                </span>
+                <span>{t('{{n}} barangays', { n: barangayCount })}</span>
+                <span>
+                  {t('{{n}} official government links', {
+                    n: officialLinkCount,
+                  })}
+                </span>
               </div>
             </div>
 
             {/* Right-side supporting module — pale blue-gray feature panel, sharp, no shadow */}
             <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                Start With What You Need
+                {t('Start With What You Need')}
               </p>
 
               <div className="mt-3 divide-y divide-gray-200/80 border-t border-gray-200/80">
-                {quickLinks.map((link, index) => (
+                {quickLinks(t).map((link, index) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -211,18 +237,19 @@ export default function GovernmentHubPage() {
         {/* Main directory */}
         <section aria-labelledby="government-hub-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            Explore Government
+            {t('Explore Government')}
           </p>
 
           <h2
             id="government-hub-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Government Information &amp; Public Access
+            {t('Government Information & Public Access')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            Browse City offices, legislation, and public-information resources
-            currently published by BetterSanFernando.
+            {t(
+              'Browse City offices, legislation, and public-information resources currently published by BetterSanFernando.'
+            )}
           </p>
 
           {/* City Government — the main feature block: pale blue-gray, thin blue left rule */}
@@ -230,19 +257,21 @@ export default function GovernmentHubPage() {
             <div className="grid gap-6 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-10">
               <div>
                 <h3 className="text-lg font-bold text-gray-950">
-                  {cityGovernmentGroup.title}
+                  {cityGovernmentGroup(t).title}
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  {cityGovernmentGroup.blurb}
+                  {cityGovernmentGroup(t).blurb}
                 </p>
                 <p className="mt-3 text-sm font-medium text-gray-700">
-                  {summary.officeRecords} City offices · {barangayCount}{' '}
-                  barangays
+                  {t('{{offices}} City offices · {{barangays}} barangays', {
+                    offices: summary.officeRecords,
+                    barangays: barangayCount,
+                  })}
                 </p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                {cityGovernmentGroup.destinations.map(destination => (
+                {cityGovernmentGroup(t).destinations.map(destination => (
                   <Link
                     key={destination.href}
                     href={destination.href}
@@ -268,7 +297,7 @@ export default function GovernmentHubPage() {
 
           {/* Legislation + Public Information — sharp bordered sections, one header icon each */}
           <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            {sideGroups.map(group => {
+            {sideGroups(t).map(group => {
               const GroupIcon = group.icon;
               return (
                 <div
@@ -331,19 +360,20 @@ export default function GovernmentHubPage() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                Official Channels
+                {t('Official Channels')}
               </p>
 
               <h2
                 id="official-channels-heading"
                 className="mt-2 text-xl font-bold text-section-title text-gray-950 md:text-2xl"
               >
-                Use the City&rsquo;s official channels when it matters.
+                {t('Use the City’s official channels when it matters.')}
               </h2>
 
               <p className="mt-2 text-sm leading-6 text-gray-600">
-                For formal transactions, requests, and urgent concerns, continue
-                through the appropriate official City or government channel.
+                {t(
+                  'For formal transactions, requests, and urgent concerns, continue through the appropriate official City or government channel.'
+                )}
               </p>
             </div>
 
@@ -352,7 +382,7 @@ export default function GovernmentHubPage() {
                 href="/government/contact"
                 className="inline-flex h-10 items-center gap-2 rounded-sm bg-[#0066EB] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
-                Contact the City
+                {t('Contact the City')}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
 
@@ -360,7 +390,7 @@ export default function GovernmentHubPage() {
                 href="/government/links"
                 className="inline-flex h-10 items-center gap-2 rounded-sm border border-gray-300 bg-white px-4 text-sm font-semibold text-gray-900 transition-colors hover:border-[#0066EB]/40 hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Official Government Links
+                {t('Official Government Links')}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
 
@@ -368,7 +398,7 @@ export default function GovernmentHubPage() {
                 href="/government/hotlines"
                 className="inline-flex h-10 items-center gap-2 rounded-sm border border-gray-300 bg-white px-4 text-sm font-semibold text-gray-900 transition-colors hover:border-[#0066EB]/40 hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Emergency Hotlines
+                {t('Emergency Hotlines')}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
