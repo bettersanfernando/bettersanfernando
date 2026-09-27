@@ -21,7 +21,11 @@ const PAGES: Record<string, string[]> = {
   statistics: [`${STATISTICS}page.tsx`],
   transparency: ['src/app/transparency/page.tsx'],
   legislation: ['src/app/legislation/page.tsx'],
-  home: ['src/app/page.tsx'],
+  home: [
+    'src/app/page.tsx',
+    'src/components/projects/BarangayProjectMap.tsx',
+    `${STATISTICS}enum-labels.ts`,
+  ],
   'statistics-projects': [
     `${STATISTICS}projects/page.tsx`,
     `${STATISTICS}enum-labels.ts`,
@@ -49,6 +53,42 @@ const PAGES: Record<string, string[]> = {
     `${STATISTICS}public-records/PublicRecordsStatistics.tsx`,
   ],
   'statistics-city-profile': [`${STATISTICS}city-profile/page.tsx`],
+  'projects-city-projects': [
+    'src/app/projects/city-projects/Projects.tsx',
+    'src/app/projects/city-projects/page.tsx',
+    `${STATISTICS}enum-labels.ts`,
+  ],
+  'projects-map': [
+    'src/app/projects/map/page.tsx',
+    'src/app/projects/map/project-map-view.tsx',
+    'src/app/projects/map/barangay-table.tsx',
+    'src/components/projects/BarangayProjectMap.tsx',
+    `${STATISTICS}enum-labels.ts`,
+  ],
+  'projects-methodology': [
+    'src/app/projects/methodology/page.tsx',
+    `${STATISTICS}enum-labels.ts`,
+  ],
+  'projects-sources': [
+    'src/app/projects/sources/ProjectSources.tsx',
+    'src/app/projects/sources/page.tsx',
+    // Document-type labels are the data module's own text, translated on display.
+    'DATA:src/data/civic/projectSources.ts',
+  ],
+  'projects-detail': [
+    'src/app/projects/[projectId]/ProjectDetailView.tsx',
+    'src/app/projects/[projectId]/page.tsx',
+    `${STATISTICS}enum-labels.ts`,
+  ],
+  procurement: ['src/app/procurement/page.tsx'],
+  'procurement-bid-results': [
+    'src/app/procurement/bid-results/BidResults.tsx',
+    'src/app/procurement/bid-results/page.tsx',
+  ],
+  'procurement-contracts': [
+    'src/app/procurement/contracts/Contracts.tsx',
+    'src/app/procurement/contracts/page.tsx',
+  ],
 };
 
 // Terms that intentionally read the same in Filipino: 'Home' is localized by
@@ -79,6 +119,15 @@ function literals(node: ts.Expression): string[] | null {
 }
 
 function collectKeys(file: string, keys: Set<string>) {
+  if (file.startsWith('DATA:')) {
+    const text = readFileSync(file.slice(5), 'utf8');
+    for (const match of text.matchAll(
+      /(?:label|shortLabel|description):\s*'([^']+)'/g
+    )) {
+      keys.add(match[1]);
+    }
+    return;
+  }
   const source = readFileSync(file, 'utf8');
   const sf = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true);
   const visit = (node: ts.Node) => {
@@ -89,6 +138,8 @@ function collectKeys(file: string, keys: Set<string>) {
       node.arguments.length > 0
     ) {
       const found = literals(node.arguments[0]);
+      // Data-derived lookups such as t(meta[field]) are covered by DATA: files.
+      if (!found && /^meta\[/.test(node.arguments[0].getText())) return;
       assert.ok(
         found,
         `${file}: t() must take string literals, got ${node.arguments[0].getText()}`
@@ -104,8 +155,21 @@ const placeholders = (text: string) =>
   (text.match(/\{\{\w+\}\}/g) ?? []).sort().join();
 
 const shared = readJson('public/locales/fil/shared.json');
-const statisticsShared = readJson('public/locales/fil/statistics-shared.json');
-const isStatistics = (namespace: string) => namespace.startsWith('statistics-');
+const FAMILIES = ['statistics', 'projects', 'procurement'] as const;
+const familyOf = (namespace: string) =>
+  namespace.startsWith('statistics-')
+    ? 'statistics'
+    : namespace.startsWith('projects-')
+      ? 'projects'
+      : namespace === 'procurement' || namespace.startsWith('procurement-')
+        ? 'procurement'
+        : null;
+const familyShared = Object.fromEntries(
+  FAMILIES.map(family => [
+    family,
+    readJson(`public/locales/fil/${family}-shared.json`),
+  ])
+);
 
 const used = new Map<string, Set<string>>();
 const namespacesByKey = new Map<string, string[]>();
@@ -124,7 +188,9 @@ for (const [namespace, keys] of used) {
     if (KEPT_IN_ENGLISH.has(key)) continue;
     const translation =
       bundle[key] ??
-      (isStatistics(namespace) ? statisticsShared[key] : undefined) ??
+      (familyOf(namespace)
+        ? familyShared[familyOf(namespace)!][key]
+        : undefined) ??
       shared[key];
     assert.ok(translation, `${namespace}: missing Filipino text for "${key}"`);
     assert.equal(
@@ -136,7 +202,7 @@ for (const [namespace, keys] of used) {
   for (const key of Object.keys(bundle)) {
     assert.ok(keys.has(key), `${namespace}.json has unused key "${key}"`);
     assert.ok(
-      !(key in shared) && !(key in statisticsShared),
+      !(key in shared) && !Object.values(familyShared).some(f => key in f),
       `"${key}" is in both ${namespace}.json and a shared bundle`
     );
   }
@@ -147,18 +213,24 @@ for (const key of Object.keys(shared)) {
     `shared.json key "${key}" must be used by more than one page`
   );
 }
-for (const key of Object.keys(statisticsShared)) {
-  const users = namespacesByKey.get(key) ?? [];
-  assert.ok(
-    users.length > 1 && users.every(isStatistics),
-    `statistics-shared.json key "${key}" must be used by several statistics pages only`
-  );
+for (const family of FAMILIES) {
+  for (const key of Object.keys(familyShared[family])) {
+    const users = namespacesByKey.get(key) ?? [];
+    assert.ok(
+      users.length > 1 &&
+        users.every(namespace => familyOf(namespace) === family),
+      `${family}-shared.json key "${key}" must be used by several ${family} pages only`
+    );
+  }
 }
 
 // Wording that matches a navigation label must reuse that navigation wording.
 const en = JSON.parse(readFileSync('public/locales/en/common.json', 'utf8'));
 const fil = JSON.parse(readFileSync('public/locales/fil/common.json', 'utf8'));
-const pageText: Record<string, string> = { ...shared, ...statisticsShared };
+const pageText: Record<string, string> = {
+  ...shared,
+  ...Object.assign({}, ...Object.values(familyShared)),
+};
 for (const namespace of used.keys()) {
   Object.assign(pageText, readJson(`public/locales/fil/${namespace}.json`));
 }

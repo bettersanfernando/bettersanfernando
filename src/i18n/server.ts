@@ -39,13 +39,33 @@ export type PageNamespace =
   | 'statistics-government'
   | 'statistics-legislation'
   | 'statistics-public-records'
-  | 'statistics-city-profile';
+  | 'statistics-city-profile'
+  | 'projects-shared'
+  | 'projects-city-projects'
+  | 'projects-map'
+  | 'projects-methodology'
+  | 'projects-sources'
+  | 'projects-detail'
+  | 'procurement-shared'
+  | 'procurement'
+  | 'procurement-bid-results'
+  | 'procurement-contracts';
+
+// Route families that keep their own shared bundle (`<family>-shared.json`).
+function pageFamily(namespace: string): string | null {
+  if (namespace.startsWith('statistics-')) return 'statistics';
+  if (namespace.startsWith('projects-')) return 'projects';
+  if (namespace === 'procurement' || namespace.startsWith('procurement-')) {
+    return 'procurement';
+  }
+  return null;
+}
 
 /**
  * Filipino messages for BetterSanFernando-authored page copy (English is the
  * key, so English needs none). `fil/shared.json` holds text several routes
- * reuse, `fil/statistics-shared.json` the text shared by the statistics
- * pages, and `fil/<namespace>.json` the route's own. These load on the
+ * reuse, `fil/<family>-shared.json` the text shared by one route family
+ * (statistics, projects, procurement), and `fil/<namespace>.json` the route's own. These load on the
  * server only; client components receive them through <PageMessages>.
  */
 export async function getPageMessages(
@@ -54,8 +74,8 @@ export async function getPageMessages(
   if ((await getLocale()) !== 'fil') return {};
   const load = async (name: string): Promise<Record<string, string>> =>
     (await import(`../../public/locales/fil/${name}.json`)).default;
-  const family = namespace.startsWith('statistics-')
-    ? ['statistics-shared']
+  const family = pageFamily(namespace)
+    ? [`${pageFamily(namespace)}-shared`]
     : [];
   const bundles = await Promise.all(['shared', ...family, namespace].map(load));
   return Object.assign({}, ...bundles);

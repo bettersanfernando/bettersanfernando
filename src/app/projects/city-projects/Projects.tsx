@@ -20,7 +20,11 @@ import {
   type Project,
 } from '../../../data/civic/projects';
 import { getBarangays } from '../../../data/civic/demographics';
-import { formatPeso, titleCaseEnum } from '../../../lib/utils';
+import { formatPeso } from '../../../lib/utils';
+import { enumLabel } from '../../statistics/enum-labels';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
 
 const PAGE_SIZE = 10;
 const UNATTRIBUTED_BARANGAY = 'unattributed';
@@ -39,17 +43,25 @@ const STATUS_STYLES: Record<string, string> = {
   IMPLEMENTATION_REPORTED: 'bg-success-50 text-success-700',
 };
 
-const SORTS = [
-  { value: 'year-desc', label: 'Newest year' },
-  { value: 'year-asc', label: 'Oldest year' },
-  { value: 'name-asc', label: 'Project name A–Z' },
-  { value: 'abc-desc', label: 'Highest ABC' },
-  { value: 'abc-asc', label: 'Lowest ABC' },
-  { value: 'contract-desc', label: 'Highest contract amount' },
-  { value: 'contract-asc', label: 'Lowest contract amount' },
+const SORT_VALUES = [
+  'year-desc',
+  'year-asc',
+  'name-asc',
+  'abc-desc',
+  'abc-asc',
+  'contract-desc',
+  'contract-asc',
 ] as const;
-type SortValue = (typeof SORTS)[number]['value'];
-const SORT_VALUES: readonly string[] = SORTS.map(sort => sort.value);
+type SortValue = (typeof SORT_VALUES)[number];
+const SORTS = (t: PageT): { value: SortValue; label: string }[] => [
+  { value: 'year-desc', label: t('Newest year') },
+  { value: 'year-asc', label: t('Oldest year') },
+  { value: 'name-asc', label: t('Project name A–Z') },
+  { value: 'abc-desc', label: t('Highest ABC') },
+  { value: 'abc-asc', label: t('Lowest ABC') },
+  { value: 'contract-desc', label: t('Highest contract amount') },
+  { value: 'contract-asc', label: t('Lowest contract amount') },
+];
 const DEFAULT_SORT: SortValue = 'year-desc';
 
 function matchesQuery(project: Project, query: string): boolean {
@@ -176,6 +188,8 @@ const selectClass =
   'w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20';
 
 export default function Projects() {
+  const t = usePageT();
+  const locale = useLocale();
   const [q, setQ] = useQueryState('q', { defaultValue: '' });
   const [lifecycle, setLifecycle] = useQueryState('status', {
     defaultValue: '',
@@ -236,7 +250,7 @@ export default function Projects() {
     [allProjects]
   );
 
-  const activeSort = SORT_VALUES.includes(sort)
+  const activeSort = (SORT_VALUES as readonly string[]).includes(sort)
     ? (sort as SortValue)
     : DEFAULT_SORT;
 
@@ -325,7 +339,7 @@ export default function Projects() {
 
   const barangayLabel =
     barangayPsgc === UNATTRIBUTED_BARANGAY
-      ? 'Barangay not attributed'
+      ? t('Barangay not attributed')
       : barangayNameByPsgc.get(barangayPsgc);
 
   return (
@@ -335,21 +349,21 @@ export default function Projects() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Projects', href: '/projects' },
-              { label: 'City Projects' },
+              { label: t('Home'), href: '/' },
+              { label: t('Projects'), href: '/projects' },
+              { label: t('City Projects') },
             ]}
           />
           <div className="mt-6 max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">City Projects</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('City Projects')}</p>
             <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 md:text-5xl">
-              City Projects
+              {t('City Projects')}
             </h1>
             <p className="mt-5 text-base leading-7 text-gray-700 md:text-lg">
-              Browse verified City projects and procurement records.
+              {t('Browse verified City projects and procurement records.')}
             </p>
             <p className="mt-2 text-sm text-gray-600">
-              Every project links to the official evidence behind it.
+              {t('Every project links to the official evidence behind it.')}
             </p>
           </div>
         </div>
@@ -370,8 +384,10 @@ export default function Projects() {
                 setQ(event.target.value || null);
                 resetPage();
               }}
-              placeholder="Search by project, barangay, contractor, bid reference, contract number, or PhilGEPS reference..."
-              aria-label="Search projects"
+              placeholder={t(
+                'Search by project, barangay, contractor, bid reference, contract number, or PhilGEPS reference...'
+              )}
+              aria-label={t('Search projects')}
               className="w-full rounded-sm border border-gray-300 bg-white py-2.5 pl-9 pr-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
             />
           </div>
@@ -384,11 +400,13 @@ export default function Projects() {
               aria-expanded={mobileFiltersOpen}
             >
               <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
-              Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''}
+              {activeFilterCount > 0
+                ? t('Filters ({{count}})', { count: activeFilterCount })
+                : t('Filters')}
             </button>
 
             <label className="flex-1">
-              <span className="sr-only">Sort projects</span>
+              <span className="sr-only">{t('Sort projects')}</span>
               <select
                 value={activeSort}
                 onChange={event => {
@@ -397,9 +415,9 @@ export default function Projects() {
                 }}
                 className={selectClass}
               >
-                {SORTS.map(option => (
+                {SORTS(t).map(option => (
                   <option key={option.value} value={option.value}>
-                    Sort: {option.label}
+                    {t('Sort: {{label}}', { label: option.label })}
                   </option>
                 ))}
               </select>
@@ -410,7 +428,7 @@ export default function Projects() {
             className={`${mobileFiltersOpen ? 'grid' : 'hidden'} mt-4 grid-cols-1 gap-3 md:grid md:grid-cols-2 md:mt-4 lg:grid-cols-5`}
           >
             <label>
-              <span className="sr-only">Filter by status</span>
+              <span className="sr-only">{t('Filter by status')}</span>
               <select
                 value={lifecycle}
                 onChange={event => {
@@ -419,17 +437,17 @@ export default function Projects() {
                 }}
                 className={selectClass}
               >
-                <option value="">All statuses</option>
+                <option value="">{t('All statuses')}</option>
                 {LIFECYCLE_OPTIONS.map(status => (
                   <option key={status} value={status}>
-                    {titleCaseEnum(status)}
+                    {enumLabel(t, status)}
                   </option>
                 ))}
               </select>
             </label>
 
             <label>
-              <span className="sr-only">Filter by barangay</span>
+              <span className="sr-only">{t('Filter by barangay')}</span>
               <select
                 value={barangayPsgc}
                 onChange={event => {
@@ -438,9 +456,9 @@ export default function Projects() {
                 }}
                 className={selectClass}
               >
-                <option value="">All barangays</option>
+                <option value="">{t('All barangays')}</option>
                 <option value={UNATTRIBUTED_BARANGAY}>
-                  Barangay not attributed
+                  {t('Barangay not attributed')}
                 </option>
                 {barangays.map(b => (
                   <option key={b.psgc_code} value={b.psgc_code}>
@@ -451,7 +469,7 @@ export default function Projects() {
             </label>
 
             <label>
-              <span className="sr-only">Filter by year</span>
+              <span className="sr-only">{t('Filter by year')}</span>
               <select
                 value={year}
                 onChange={event => {
@@ -460,7 +478,7 @@ export default function Projects() {
                 }}
                 className={selectClass}
               >
-                <option value="">All years</option>
+                <option value="">{t('All years')}</option>
                 {years.map(y => (
                   <option key={y} value={y}>
                     {y}
@@ -470,7 +488,7 @@ export default function Projects() {
             </label>
 
             <label>
-              <span className="sr-only">Filter by project type</span>
+              <span className="sr-only">{t('Filter by project type')}</span>
               <select
                 value={type}
                 onChange={event => {
@@ -479,17 +497,17 @@ export default function Projects() {
                 }}
                 className={selectClass}
               >
-                <option value="">All project types</option>
-                {TYPE_OPTIONS.map(t => (
-                  <option key={t} value={t}>
-                    {titleCaseEnum(t)}
+                <option value="">{t('All project types')}</option>
+                {TYPE_OPTIONS.map(typeOption => (
+                  <option key={typeOption} value={typeOption}>
+                    {enumLabel(t, typeOption)}
                   </option>
                 ))}
               </select>
             </label>
 
             <label>
-              <span className="sr-only">Filter by project category</span>
+              <span className="sr-only">{t('Filter by project category')}</span>
               <select
                 value={category}
                 onChange={event => {
@@ -498,10 +516,10 @@ export default function Projects() {
                 }}
                 className={selectClass}
               >
-                <option value="">All categories</option>
+                <option value="">{t('All categories')}</option>
                 {CATEGORY_OPTIONS.map(c => (
                   <option key={c} value={c}>
-                    {titleCaseEnum(c)}
+                    {enumLabel(t, c)}
                   </option>
                 ))}
               </select>
@@ -516,13 +534,15 @@ export default function Projects() {
               className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC]"
             >
               <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
-              More filters
+              {t('More filters')}
             </button>
 
             {moreFiltersOpen && (
               <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <label>
-                  <span className="sr-only">Filter by funding source</span>
+                  <span className="sr-only">
+                    {t('Filter by funding source')}
+                  </span>
                   <select
                     value={funding}
                     onChange={event => {
@@ -531,7 +551,7 @@ export default function Projects() {
                     }}
                     className={selectClass}
                   >
-                    <option value="">All funding sources</option>
+                    <option value="">{t('All funding sources')}</option>
                     {fundingSources.map(source => (
                       <option key={source} value={source}>
                         {source}
@@ -541,7 +561,9 @@ export default function Projects() {
                 </label>
 
                 <label>
-                  <span className="sr-only">Filter by procurement mode</span>
+                  <span className="sr-only">
+                    {t('Filter by procurement mode')}
+                  </span>
                   <select
                     value={procurement}
                     onChange={event => {
@@ -550,7 +572,7 @@ export default function Projects() {
                     }}
                     className={selectClass}
                   >
-                    <option value="">All procurement modes</option>
+                    <option value="">{t('All procurement modes')}</option>
                     {procurementModes.map(mode => (
                       <option key={mode} value={mode}>
                         {mode}
@@ -575,7 +597,7 @@ export default function Projects() {
               )}
               {lifecycle && (
                 <FilterChip
-                  label={titleCaseEnum(lifecycle)}
+                  label={enumLabel(t, lifecycle)}
                   onRemove={() => {
                     setLifecycle(null);
                     resetPage();
@@ -602,7 +624,7 @@ export default function Projects() {
               )}
               {type && (
                 <FilterChip
-                  label={titleCaseEnum(type)}
+                  label={enumLabel(t, type)}
                   onRemove={() => {
                     setType(null);
                     resetPage();
@@ -611,7 +633,7 @@ export default function Projects() {
               )}
               {category && (
                 <FilterChip
-                  label={titleCaseEnum(category)}
+                  label={enumLabel(t, category)}
                   onRemove={() => {
                     setCategory(null);
                     resetPage();
@@ -641,7 +663,7 @@ export default function Projects() {
                 onClick={clearAll}
                 className="text-xs font-semibold text-gray-600 underline decoration-gray-300 underline-offset-4 hover:text-[#0066EB]"
               >
-                Clear all
+                {t('Clear all')}
               </button>
             </div>
           )}
@@ -651,17 +673,28 @@ export default function Projects() {
         <div className="mt-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-950">
-              {sorted.length} {sorted.length === 1 ? 'project' : 'projects'}
+              {t(
+                sorted.length === 1
+                  ? '{{count}} project'
+                  : '{{count}} projects',
+                {
+                  count: sorted.length,
+                }
+              )}
             </h2>
             <p className="mt-1 text-sm text-gray-600" aria-live="polite">
               {sorted.length === 0
-                ? 'Showing 0 projects'
-                : `Showing ${rangeStart}–${rangeEnd} of ${sorted.length} projects`}
+                ? t('Showing 0 projects')
+                : t('Showing {{from}}–{{to}} of {{total}} projects', {
+                    from: rangeStart,
+                    to: rangeEnd,
+                    total: sorted.length,
+                  })}
             </p>
           </div>
 
           <label className="hidden md:block">
-            <span className="sr-only">Sort projects</span>
+            <span className="sr-only">{t('Sort projects')}</span>
             <select
               value={activeSort}
               onChange={event => {
@@ -670,9 +703,9 @@ export default function Projects() {
               }}
               className={selectClass}
             >
-              {SORTS.map(option => (
+              {SORTS(t).map(option => (
                 <option key={option.value} value={option.value}>
-                  Sort by {option.label}
+                  {t('Sort by {{label}}', { label: option.label })}
                 </option>
               ))}
             </select>
@@ -687,10 +720,10 @@ export default function Projects() {
               aria-hidden="true"
             />
             <h3 className="mt-4 text-lg font-bold text-gray-900">
-              No projects match these filters.
+              {t('No projects match these filters.')}
             </h3>
             <p className="mt-1 text-sm text-gray-600">
-              Try changing or clearing one or more filters.
+              {t('Try changing or clearing one or more filters.')}
             </p>
             {hasFilters && (
               <button
@@ -698,7 +731,7 @@ export default function Projects() {
                 onClick={clearAll}
                 className="mt-5 inline-flex items-center rounded-sm bg-[#0066EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0052BC]"
               >
-                Clear filters
+                {t('Clear filters')}
               </button>
             )}
           </div>
@@ -714,26 +747,26 @@ export default function Projects() {
                     <span
                       className={`inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-semibold ${STATUS_STYLES[project.lifecycle_status] ?? 'bg-gray-100 text-gray-600'}`}
                     >
-                      {titleCaseEnum(project.lifecycle_status)}
+                      {enumLabel(t, project.lifecycle_status)}
                     </span>
                     <h3 className="mt-1.5 truncate text-lg font-bold leading-tight text-gray-950 group-hover:text-[#0066EB] md:text-xl">
                       {project.project_name}
                     </h3>
                     <p className="mt-1 text-sm text-gray-600">
-                      {project.barangay ?? 'Barangay not attributed'} ·{' '}
-                      {project.year} · {titleCaseEnum(project.project_type)}
+                      {project.barangay ?? t('Barangay not attributed')} ·{' '}
+                      {project.year} · {enumLabel(t, project.project_type)}
                     </p>
                     <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
                       <span className="text-gray-500">
-                        ABC{' '}
+                        {t('ABC')}{' '}
                         <span className="font-semibold text-gray-900">
-                          {formatPeso(project.approved_budget_abc)}
+                          {formatPeso(project.approved_budget_abc, locale)}
                         </span>
                       </span>
                       <span className="text-gray-500">
-                        Contract amount{' '}
+                        {t('Contract amount')}{' '}
                         <span className="font-semibold text-gray-900">
-                          {formatPeso(project.contract_amount)}
+                          {formatPeso(project.contract_amount, locale)}
                         </span>
                       </span>
                     </div>
@@ -756,7 +789,7 @@ export default function Projects() {
         {/* Pagination */}
         {sorted.length > 0 && totalPages > 1 && (
           <nav
-            aria-label="Project pages"
+            aria-label={t('Project pages')}
             className="mt-6 flex items-center justify-between gap-4"
           >
             <button
@@ -766,7 +799,7 @@ export default function Projects() {
               className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
             >
               <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-              Previous
+              {t('Previous')}
             </button>
 
             <div className="hidden items-center gap-1.5 sm:flex">
@@ -798,7 +831,10 @@ export default function Projects() {
             </div>
 
             <p className="text-sm text-gray-600 sm:hidden">
-              Page {currentPage} of {totalPages}
+              {t('Page {{currentPage}} of {{totalPages}}', {
+                currentPage,
+                totalPages,
+              })}
             </p>
 
             <button
@@ -807,7 +843,7 @@ export default function Projects() {
               onClick={() => setPage(currentPage + 1)}
               className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
             >
-              Next
+              {t('Next')}
               <ChevronRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </nav>

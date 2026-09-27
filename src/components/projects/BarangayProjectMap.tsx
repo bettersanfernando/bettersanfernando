@@ -17,7 +17,9 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
 import type { BarangayProjectSummary } from '../../data/civic/projectMap';
 import type { ProjectLifecycleStatus } from '../../data/civic/projects';
-import { titleCaseEnum } from '../../lib/utils';
+import { enumLabel } from '../../app/statistics/enum-labels';
+import { usePageT } from '../i18n/PageMessages';
+import type { PageT } from '../../i18n/page-t';
 
 // Next.js port of BarangayProjectMap.tsx. Rendered only via a client-only
 // dynamic import (see ../../app/projects/map/project-map-view.tsx) so
@@ -71,12 +73,23 @@ function metricFor(
 
 function metricLabel(
   count: number,
-  lifecycleFilter: ProjectLifecycleStatus | null
+  lifecycleFilter: ProjectLifecycleStatus | null,
+  t: PageT
 ): string {
-  const noun = lifecycleFilter
-    ? `${titleCaseEnum(lifecycleFilter).toLowerCase()} record`
-    : 'published project record';
-  return `${count} ${noun}${count === 1 ? '' : 's'}`;
+  if (lifecycleFilter) {
+    return t(
+      count === 1
+        ? '{{count}} {{status}} record'
+        : '{{count}} {{status}} records',
+      { count, status: enumLabel(t, lifecycleFilter).toLowerCase() }
+    );
+  }
+  return t(
+    count === 1
+      ? '{{count}} published project record'
+      : '{{count}} published project records',
+    { count }
+  );
 }
 
 function boundsFromRings(
@@ -123,6 +136,8 @@ export default function BarangayProjectMap({
 }: BarangayProjectMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
+  const t = usePageT();
+  const tRef = useRef(t);
   const onSelectRef = useRef(onSelect);
   const summariesRef = useRef(summaries);
   const lifecycleFilterRef = useRef(lifecycleFilter);
@@ -137,6 +152,9 @@ export default function BarangayProjectMap({
   useEffect(() => {
     lifecycleFilterRef.current = lifecycleFilter;
   }, [lifecycleFilter]);
+  useEffect(() => {
+    tRef.current = t;
+  }, [t]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -259,7 +277,11 @@ export default function BarangayProjectMap({
 
         const name = String(feature.properties?.name ?? 'Barangay');
         const count = Number(feature.properties?.metric_count ?? 0);
-        const label = metricLabel(count, lifecycleFilterRef.current);
+        const label = metricLabel(
+          count,
+          lifecycleFilterRef.current,
+          tRef.current
+        );
 
         const nameEl = document.createElement('p');
         nameEl.className = 'text-sm font-bold text-gray-900';
@@ -287,7 +309,7 @@ export default function BarangayProjectMap({
           .getCanvas()
           .setAttribute(
             'aria-label',
-            'Interactive barangay project distribution map'
+            tRef.current('Interactive barangay project distribution map')
           );
       });
 
@@ -392,7 +414,7 @@ export default function BarangayProjectMap({
         className ??
         'h-[26rem] w-full bg-gray-100 sm:h-[32rem] lg:h-full lg:min-h-[36rem]'
       }
-      aria-label="Interactive barangay project distribution map"
+      aria-label={t('Interactive barangay project distribution map')}
     />
   );
 }

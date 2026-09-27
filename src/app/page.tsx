@@ -40,6 +40,7 @@ import { getLegislationSummary } from '../data/civic/legislationSummary';
 import { getFullDisclosureRecords } from '../data/civic/fullDisclosure';
 import { getFinanceReports } from '../data/civic/finance';
 import { INTL_LOCALES } from '../i18n/locale';
+import { PageMessages } from '../components/i18n/PageMessages';
 import { getLocale, getPageT } from '../i18n/server';
 import { getRootMetadata } from '../lib/metadata';
 
@@ -56,7 +57,18 @@ export const metadata = {
 */
 
 export default async function Home() {
-  const { t, locale } = await getPageT('home');
+  const { t, locale, messages } = await getPageT('home');
+  // HomeProjectMapSection always renders the map with lifecycleFilter={null},
+  // so BarangayProjectMap only ever needs these three keys here — passing the
+  // full home bundle would leak every other English key into the fil HTML.
+  const mapMessages = {
+    'Interactive barangay project distribution map':
+      messages['Interactive barangay project distribution map'],
+    '{{count}} published project record':
+      messages['{{count}} published project record'],
+    '{{count}} published project records':
+      messages['{{count}} published project records'],
+  };
   const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[locale]);
   const summary = getHomeSummary();
   const services = getServices();
@@ -642,14 +654,16 @@ export default async function Home() {
           </div>
 
           <div className="mt-8">
-            <HomeProjectMapSection
-              boundaries={boundaries}
-              cityBoundary={cityBoundary}
-              summaries={distribution.barangays}
-              totalProjects={distribution.totalProjects}
-              attributedProjects={distribution.attributedProjects}
-              unattributedProjects={distribution.unattributedProjects}
-            />
+            <PageMessages messages={mapMessages}>
+              <HomeProjectMapSection
+                boundaries={boundaries}
+                cityBoundary={cityBoundary}
+                summaries={distribution.barangays}
+                totalProjects={distribution.totalProjects}
+                attributedProjects={distribution.attributedProjects}
+                unattributedProjects={distribution.unattributedProjects}
+              />
+            </PageMessages>
           </div>
         </div>
       </section>

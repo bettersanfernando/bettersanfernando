@@ -6,7 +6,8 @@ import {
   getProjects,
 } from '../../../data/civic/projects';
 import { getObservationsForProject } from '../../../data/civic/projectCostUtilization';
-import { titleCaseEnum } from '../../../lib/utils';
+import { getPageT } from '../../../i18n/server';
+import { enumLabel } from '../../statistics/enum-labels';
 import { buildPageMetadata } from '../../../lib/metadata';
 
 // Unknown IDs call notFound() (a real HTTP 404).
@@ -27,6 +28,8 @@ export async function generateMetadata({
   const { projectId } = await params;
   const project = getProjectById(projectId);
   if (!project) return {};
+  const { t, locale } = await getPageT('projects-detail');
+
   const title = getProjects().some(
     candidate =>
       candidate.id !== project.id &&
@@ -35,7 +38,7 @@ export async function generateMetadata({
     ? `${project.project_name} (${project.id})`
     : project.project_name;
 
-  const status = titleCaseEnum(project.lifecycle_status);
+  const status = enumLabel(t, project.lifecycle_status);
   // Leads with the page's own (guaranteed-unique) title: type/barangay/
   // status alone collide constantly (243 of 324 projects share a
   // type+barangay+status tuple with at least one other project), so every
@@ -43,8 +46,18 @@ export async function generateMetadata({
   // distinguishes it — the project's own name does that naturally.
   return buildPageMetadata({
     title,
-    description: `${title} — a ${titleCaseEnum(project.project_type)} project in ${project.barangay ?? 'the City of San Fernando, Pampanga'}, currently ${status.charAt(0).toLowerCase()}${status.slice(1)}.`,
+    // Only the wrapper is authored; the title, barangay and labels come from the record.
+    description: t(
+      '{{title}} — a {{type}} project in {{barangay}}, currently {{status}}.',
+      {
+        title,
+        type: enumLabel(t, project.project_type),
+        barangay: project.barangay ?? t('the City of San Fernando, Pampanga'),
+        status: `${status.charAt(0).toLowerCase()}${status.slice(1)}`,
+      }
+    ),
     path: `/projects/${project.id}`,
+    locale,
   });
 }
 

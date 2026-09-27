@@ -18,221 +18,283 @@ import {
   ProjectLifecycleStatus,
 } from '../../../data/civic/projects';
 import { hasAttachment } from '../../../data/civic/sources';
-import { titleCaseEnum } from '../../../lib/utils';
+import { enumLabel } from '../../statistics/enum-labels';
 import { buildPageMetadata } from '../../../lib/metadata';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Project Methodology',
-  description:
-    'How BetterSanFernando builds and interprets project records: sources, evidence, documentary status, financial fields, geography, and the limits of the dataset.',
-  path: '/projects/methodology',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('projects-methodology');
+  return buildPageMetadata({
+    title: t('Project Methodology'),
+    description: t(
+      'How BetterSanFernando builds and interprets project records: sources, evidence, documentary status, financial fields, geography, and the limits of the dataset.'
+    ),
+    path: '/projects/methodology',
+    locale,
+  });
+}
 
 const eyebrowTracking = { letterSpacing: '0.08em' } as const;
 
-const ON_THIS_PAGE = [
-  ['how-facts-are-built', 'How facts are built'],
-  ['evidence-and-verification', 'Evidence and verification'],
-  ['documentary-status', 'Documentary status'],
-  ['record-linkage', 'Record linkage'],
-  ['money-and-geography', 'Money and geography'],
-  ['missing-information', 'Missing information'],
-  ['coverage-and-limits', 'Coverage and limits'],
-  ['before-you-rely-on-a-record', 'Before you rely on a record'],
-] as const;
+const ON_THIS_PAGE = (t: PageT) =>
+  [
+    ['how-facts-are-built', t('How facts are built')],
+    ['evidence-and-verification', t('Evidence and verification')],
+    ['documentary-status', t('Documentary status')],
+    ['record-linkage', t('Record linkage')],
+    ['money-and-geography', t('Money and geography')],
+    ['missing-information', t('Missing information')],
+    ['coverage-and-limits', t('Coverage and limits')],
+    ['before-you-rely-on-a-record', t('Before you rely on a record')],
+  ] as const;
 
-const PROCESS_STAGES = [
-  {
-    number: '01',
-    title: 'Public source',
-    text: 'Official page or document.',
-    icon: Landmark,
-  },
-  {
-    number: '02',
-    title: 'Evidence record',
-    text: 'Source, date, identifier, and the fields the record establishes.',
-    icon: FileText,
-  },
-  {
-    number: '03',
-    title: 'Project link',
-    text: 'Evidence connected conservatively to the supported project.',
-    icon: Link2,
-  },
-  {
-    number: '04',
-    title: 'Published fact',
-    text: 'Normalized project field with provenance and source links.',
-    icon: BadgeCheck,
-  },
-] as const;
+const PROCESS_STAGES = (t: PageT) =>
+  [
+    {
+      number: '01',
+      title: t('Public source'),
+      text: t('Official page or document.'),
+      icon: Landmark,
+    },
+    {
+      number: '02',
+      title: t('Evidence record'),
+      text: t(
+        'Source, date, identifier, and the fields the record establishes.'
+      ),
+      icon: FileText,
+    },
+    {
+      number: '03',
+      title: t('Project link'),
+      text: t('Evidence connected conservatively to the supported project.'),
+      icon: Link2,
+    },
+    {
+      number: '04',
+      title: t('Published fact'),
+      text: t('Normalized project field with provenance and source links.'),
+      icon: BadgeCheck,
+    },
+  ] as const;
 
-const LIFECYCLE_MEANINGS: Record<
+const LIFECYCLE_MEANINGS = (
+  t: PageT
+): Record<
   (typeof ProjectLifecycleStatus.options)[number],
   { establishes: string; doesNotEstablish: string }
-> = {
+> => ({
   PLANNED: {
-    establishes: 'A published planning record identifies proposed work.',
-    doesNotEstablish: 'That procurement began or the work was approved.',
+    establishes: t('A published planning record identifies proposed work.'),
+    doesNotEstablish: t('That procurement began or the work was approved.'),
   },
   PROCUREMENT: {
-    establishes: 'A procurement-stage record identifies a bidding process.',
-    doesNotEstablish: 'That a bidder won or a contract was executed.',
+    establishes: t('A procurement-stage record identifies a bidding process.'),
+    doesNotEstablish: t('That a bidder won or a contract was executed.'),
   },
   AWARDED: {
-    establishes: 'Award evidence identifies an award decision.',
-    doesNotEstablish:
-      'An executed contract, Notice to Proceed, construction, or payment.',
+    establishes: t('Award evidence identifies an award decision.'),
+    doesNotEstablish: t(
+      'An executed contract, Notice to Proceed, construction, or payment.'
+    ),
   },
   CONTRACTED: {
-    establishes: 'Contract evidence supports contract execution.',
-    doesNotEstablish:
-      'A Notice to Proceed, physical progress, payment, or completion.',
+    establishes: t('Contract evidence supports contract execution.'),
+    doesNotEstablish: t(
+      'A Notice to Proceed, physical progress, payment, or completion.'
+    ),
   },
   IMPLEMENTATION_REPORTED: {
-    establishes:
-      'An official implementation or utilization report describes project activity.',
-    doesNotEstablish:
-      'Procurement award, signed contract, payment, disbursement, or independent physical verification.',
+    establishes: t(
+      'An official implementation or utilization report describes project activity.'
+    ),
+    doesNotEstablish: t(
+      'Procurement award, signed contract, payment, disbursement, or independent physical verification.'
+    ),
   },
-};
+});
 
-const IDENTIFIER_ROWS = [
-  ['BetterSanFernando project ID', 'Stable public route and record identity.'],
-  ['APP Code', 'Planning and procurement-plan reference.'],
-  ['BAC / control reference', 'Bids and Awards Committee process reference.'],
+const IDENTIFIER_ROWS = (t: PageT) =>
   [
-    'PhilGEPS reference',
-    'Philippine Government Electronic Procurement System reference.',
-  ],
-  ['Contract number', 'Contract document reference.'],
-  [
-    'Source identifier',
-    'Identifier of the supporting evidence record or document.',
-  ],
-] as const;
+    [
+      t('BetterSanFernando project ID'),
+      t('Stable public route and record identity.'),
+    ],
+    [t('APP Code'), t('Planning and procurement-plan reference.')],
+    [
+      t('BAC / control reference'),
+      t('Bids and Awards Committee process reference.'),
+    ],
+    [
+      t('PhilGEPS reference'),
+      t('Philippine Government Electronic Procurement System reference.'),
+    ],
+    [t('Contract number'), t('Contract document reference.')],
+    [
+      t('Source identifier'),
+      t('Identifier of the supporting evidence record or document.'),
+    ],
+  ] as const;
 
-const AMOUNT_ROWS = [
-  ['Estimated budget', 'A planning estimate recorded in planning evidence.'],
+const AMOUNT_ROWS = (t: PageT) =>
   [
-    'Approved Budget for the Contract (ABC)',
-    'The approved procurement budget or ceiling for the contract.',
-  ],
-  [
-    'Winning bid amount',
-    'The amount reported for the winning bid in procurement evidence.',
-  ],
-  [
-    'Contract amount',
-    'The amount supported by published contract-related evidence.',
-  ],
-  [
-    'Fund utilization amount',
-    'An amount reported in a separate utilization context.',
-  ],
-  [
-    'Actual expenditure',
-    'Not established by the current published project dataset.',
-  ],
-] as const;
+    [
+      t('Estimated budget'),
+      t('A planning estimate recorded in planning evidence.'),
+    ],
+    [
+      t('Approved Budget for the Contract (ABC)'),
+      t('The approved procurement budget or ceiling for the contract.'),
+    ],
+    [
+      t('Winning bid amount'),
+      t('The amount reported for the winning bid in procurement evidence.'),
+    ],
+    [
+      t('Contract amount'),
+      t('The amount supported by published contract-related evidence.'),
+    ],
+    [
+      t('Fund utilization amount'),
+      t('An amount reported in a separate utilization context.'),
+    ],
+    [
+      t('Actual expenditure'),
+      t('Not established by the current published project dataset.'),
+    ],
+  ] as const;
 
-const ATTRIBUTION_STEPS = [
-  {
-    number: '01',
-    title: 'Published Evidence',
-    text: 'A public source supports a relationship between the project record and a barangay.',
-  },
-  {
-    number: '02',
-    title: 'Barangay Attribution',
-    text: 'The project record is associated with that barangay in BetterSanFernando.',
-  },
-  {
-    number: '03',
-    title: 'Project Map',
-    text: 'The map summarizes how published project records are distributed across barangays.',
-  },
-] as const;
-
-const MISSING_DATA_PRINCIPLES = [
-  {
-    number: '01',
-    title: 'We do not turn missing values into zero.',
-    text: 'A missing contractor, amount, date, reference, or location stays missing unless a published source establishes it.',
-  },
-  {
-    number: '02',
-    title: 'We do not fill gaps from nearby records.',
-    text: 'Similar projects or documents do not supply a missing field for another project record.',
-  },
-  {
-    number: '03',
-    title: 'A missing record is not proof that something never happened.',
-    text: 'It means the current BetterSanFernando dataset has not established that fact from its published evidence.',
-  },
-] as const;
-
-const COVERAGE_BLOCKS = [
-  {
-    title: 'Bounded project collection',
-    text: 'BetterSanFernando currently publishes a bounded collection of infrastructure and public-works project records assembled from identified public sources. It is not a complete legal register of all projects, procurements, contracts, payments, or City Government activity.',
-  },
-  {
-    title: 'Source labels',
-    text: '“Official source” describes the recorded source authority and provenance. It does not mean the source agency endorses BetterSanFernando.',
-  },
-  {
-    title: 'No legal or performance findings',
-    text: 'The presence or absence of a record is not a finding of legality, compliance, wrongdoing, project quality, project completion, or performance.',
-  },
-  {
-    title: 'Records can change',
-    text: 'Published records may be corrected or expanded when stronger or newer source evidence becomes available. For consequential decisions or formal citation, check the linked official document and its date.',
-  },
-] as const;
-
-const CHECKLIST_ROWS = [
-  ['Open the cited official source.'],
-  ['Check the document date and whether newer information exists.'],
-  ['Confirm which project field the source actually establishes.'],
+const ATTRIBUTION_STEPS = (t: PageT) =>
   [
-    'Keep ABC, winning bid, contract amount, utilization, and expenditure separate.',
-  ],
-  ['Treat missing information as unknown, not zero or proof of absence.'],
+    {
+      number: '01',
+      title: t('Published Evidence'),
+      text: t(
+        'A public source supports a relationship between the project record and a barangay.'
+      ),
+    },
+    {
+      number: '02',
+      title: t('Barangay Attribution'),
+      text: t(
+        'The project record is associated with that barangay in BetterSanFernando.'
+      ),
+    },
+    {
+      number: '03',
+      title: t('Project Map'),
+      text: t(
+        'The map summarizes how published project records are distributed across barangays.'
+      ),
+    },
+  ] as const;
+
+const MISSING_DATA_PRINCIPLES = (t: PageT) =>
   [
-    'Treat barangay attribution as area-level unless a verified exact location is published.',
-  ],
-] as const;
+    {
+      number: '01',
+      title: t('We do not turn missing values into zero.'),
+      text: t(
+        'A missing contractor, amount, date, reference, or location stays missing unless a published source establishes it.'
+      ),
+    },
+    {
+      number: '02',
+      title: t('We do not fill gaps from nearby records.'),
+      text: t(
+        'Similar projects or documents do not supply a missing field for another project record.'
+      ),
+    },
+    {
+      number: '03',
+      title: t('A missing record is not proof that something never happened.'),
+      text: t(
+        'It means the current BetterSanFernando dataset has not established that fact from its published evidence.'
+      ),
+    },
+  ] as const;
 
-const RELATED_RESOURCES = [
-  {
-    title: 'Project Map',
-    description:
-      'See how published project records are distributed across San Fernando’s barangays.',
-    href: '/projects/map',
-  },
-  {
-    title: 'Procurement Overview',
-    description:
-      'Understand how project, bid, award, and contract evidence relate.',
-    href: '/procurement',
-  },
-  {
-    title: 'Project Statistics',
-    description:
-      'Explore descriptive statistics for the current published project collection.',
-    href: '/statistics/projects',
-  },
-  {
-    title: 'Transparency Methodology',
-    description:
-      'See how BetterSanFernando handles broader publication, sources, and transparency data.',
-    href: '/transparency/methodology',
-  },
-] as const;
+const COVERAGE_BLOCKS = (t: PageT) =>
+  [
+    {
+      title: t('Bounded project collection'),
+      text: t(
+        'BetterSanFernando currently publishes a bounded collection of infrastructure and public-works project records assembled from identified public sources. It is not a complete legal register of all projects, procurements, contracts, payments, or City Government activity.'
+      ),
+    },
+    {
+      title: t('Source labels'),
+      text: t(
+        '“Official source” describes the recorded source authority and provenance. It does not mean the source agency endorses BetterSanFernando.'
+      ),
+    },
+    {
+      title: t('No legal or performance findings'),
+      text: t(
+        'The presence or absence of a record is not a finding of legality, compliance, wrongdoing, project quality, project completion, or performance.'
+      ),
+    },
+    {
+      title: t('Records can change'),
+      text: t(
+        'Published records may be corrected or expanded when stronger or newer source evidence becomes available. For consequential decisions or formal citation, check the linked official document and its date.'
+      ),
+    },
+  ] as const;
 
-export default function ProjectMethodology() {
+const CHECKLIST_ROWS = (t: PageT) =>
+  [
+    [t('Open the cited official source.')],
+    [t('Check the document date and whether newer information exists.')],
+    [t('Confirm which project field the source actually establishes.')],
+    [
+      t(
+        'Keep ABC, winning bid, contract amount, utilization, and expenditure separate.'
+      ),
+    ],
+    [t('Treat missing information as unknown, not zero or proof of absence.')],
+    [
+      t(
+        'Treat barangay attribution as area-level unless a verified exact location is published.'
+      ),
+    ],
+  ] as const;
+
+const RELATED_RESOURCES = (t: PageT) =>
+  [
+    {
+      title: t('Project Map'),
+      description: t(
+        'See how published project records are distributed across San Fernando’s barangays.'
+      ),
+      href: '/projects/map',
+    },
+    {
+      title: t('Procurement Overview'),
+      description: t(
+        'Understand how project, bid, award, and contract evidence relate.'
+      ),
+      href: '/procurement',
+    },
+    {
+      title: t('Project Statistics'),
+      description: t(
+        'Explore descriptive statistics for the current published project collection.'
+      ),
+      href: '/statistics/projects',
+    },
+    {
+      title: t('Transparency Methodology'),
+      description: t(
+        'See how BetterSanFernando handles broader publication, sources, and transparency data.'
+      ),
+      href: '/transparency/methodology',
+    },
+  ] as const;
+
+export default async function ProjectMethodology() {
+  const { t } = await getPageT('projects-methodology');
   const projects = getProjects();
   const evidence = getAllProjectEvidence();
   const withDocuments = evidence.filter(hasAttachment).length;
@@ -244,26 +306,24 @@ export default function ProjectMethodology() {
         <Breadcrumbs
           className="mb-6"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Projects', href: '/projects' },
-            { label: 'Project Methodology' },
+            { label: t('Home'), href: '/' },
+            { label: t('Projects'), href: '/projects' },
+            { label: t('Project Methodology') },
           ]}
         />
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              PROJECT METHODOLOGY
+              {t('PROJECT METHODOLOGY')}
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
-              How BetterSanFernando builds project records
+              {t('How BetterSanFernando builds project records')}
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-              BetterSanFernando organizes public project records so residents
-              can trace a published fact back to the evidence that supports it.
-              This page explains how records are collected, connected,
-              interpreted, and presented, and where the limits of the current
-              dataset begin.
+              {t(
+                'BetterSanFernando organizes public project records so residents can trace a published fact back to the evidence that supports it. This page explains how records are collected, connected, interpreted, and presented, and where the limits of the current dataset begin.'
+              )}
             </p>
           </div>
 
@@ -272,24 +332,23 @@ export default function ProjectMethodology() {
             className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5"
           >
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              SCOPE
+              {t('SCOPE')}
             </p>
             <h2
               id="scope-module-title"
               className="mt-1.5 text-base font-bold text-gray-950"
             >
-              What this methodology covers
+              {t('What this methodology covers')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600">
-              This methodology applies to BetterSanFernando’s current published
-              infrastructure and public-works project collection. It explains
-              how the portal handles evidence, project relationships,
-              documentary status, financial fields, geography, and missing
-              information.
+              {t(
+                'This methodology applies to BetterSanFernando’s current published infrastructure and public-works project collection. It explains how the portal handles evidence, project relationships, documentary status, financial fields, geography, and missing information.'
+              )}
             </p>
             <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-gray-500">
-              Independent and community-run. Not an official City Government
-              website.
+              {t(
+                'Independent and community-run. Not an official City Government website.'
+              )}
             </p>
           </aside>
         </div>
@@ -297,14 +356,14 @@ export default function ProjectMethodology() {
 
       {/* Current release summary */}
       <section
-        aria-label="Current project release summary"
+        aria-label={t('Current project release summary')}
         className="border-y border-gray-200 bg-gray-50"
       >
         <div className="container mx-auto px-4 py-4 sm:py-6">
           <dl className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
             <div className="py-3 sm:py-0 sm:pr-6">
               <dt className="text-sm font-medium text-gray-600">
-                Published projects
+                {t('Published projects')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
                 {projects.length}
@@ -312,7 +371,7 @@ export default function ProjectMethodology() {
             </div>
             <div className="py-3 sm:py-0 sm:px-6">
               <dt className="text-sm font-medium text-gray-600">
-                Project evidence records
+                {t('Project evidence records')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
                 {evidence.length}
@@ -320,30 +379,34 @@ export default function ProjectMethodology() {
             </div>
             <div className="py-3 sm:py-0 sm:pl-6">
               <dt className="text-sm font-medium text-gray-600">
-                Evidence records with direct documents
+                {t('Evidence records with direct documents')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
-                {withDocuments} of {evidence.length}
+                {t('{{withDocuments}} of {{length}}', {
+                  withDocuments,
+                  length: evidence.length,
+                })}
               </dd>
             </div>
           </dl>
           <p className="mt-4 border-t border-gray-200 pt-3 text-xs text-gray-600 sm:mt-4 sm:pt-4">
-            These figures describe the current published project collection and
-            may change as additional verified source evidence is added.
+            {t(
+              'These figures describe the current published project collection and may change as additional verified source evidence is added.'
+            )}
           </p>
         </div>
       </section>
 
       {/* On this page */}
       <nav
-        aria-label="Methodology sections"
+        aria-label={t('Methodology sections')}
         className="container mx-auto px-4 py-6"
       >
         <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-          ON THIS PAGE
+          {t('ON THIS PAGE')}
         </p>
         <ol className="mt-3 grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
-          {ON_THIS_PAGE.map(([href, label], index) => (
+          {ON_THIS_PAGE(t).map(([href, label], index) => (
             <li
               key={href}
               className={
@@ -376,20 +439,20 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            HOW FACTS ARE BUILT
+            {t('HOW FACTS ARE BUILT')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            From public source to published fact
+            {t('From public source to published fact')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            BetterSanFernando does not treat a project page as an independent
-            source. Published project facts remain connected to the records used
-            to establish them.
+            {t(
+              'BetterSanFernando does not treat a project page as an independent source. Published project facts remain connected to the records used to establish them.'
+            )}
           </p>
 
           {/* Desktop: four stages with connectors */}
           <div className="mt-6 hidden overflow-hidden rounded-sm border border-gray-200 bg-white lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
-            {PROCESS_STAGES.map((stage, index) => {
+            {PROCESS_STAGES(t).map((stage, index) => {
               const Icon = stage.icon;
               return (
                 <div className="contents" key={stage.number}>
@@ -427,7 +490,7 @@ export default function ProjectMethodology() {
 
           {/* Mobile: vertical sequence */}
           <ol className="mt-6 divide-y divide-gray-200 rounded-sm border border-gray-200 bg-white lg:hidden">
-            {PROCESS_STAGES.map((stage, index) => {
+            {PROCESS_STAGES(t).map((stage, index) => {
               const Icon = stage.icon;
               return (
                 <li key={stage.number} className="p-5">
@@ -460,11 +523,9 @@ export default function ProjectMethodology() {
           </ol>
 
           <p className="mt-4 max-w-3xl text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-            Normalization changes structure, not source meaning.
-            BetterSanFernando may standardize labels, dates, identifiers, or
-            field placement so records can be searched consistently, but it does
-            not turn one financial concept, documentary stage, or location into
-            another.
+            {t(
+              'Normalization changes structure, not source meaning. BetterSanFernando may standardize labels, dates, identifiers, or field placement so records can be searched consistently, but it does not turn one financial concept, documentary stage, or location into another.'
+            )}
           </p>
         </section>
 
@@ -474,50 +535,44 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            EVIDENCE AND VERIFICATION
+            {t('EVIDENCE AND VERIFICATION')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            What evidence can and cannot establish
+            {t('What evidence can and cannot establish')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0 md:divide-x">
               <div className="p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-950">
-                  What evidence can establish
+                  {t('What evidence can establish')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  A published source can establish specific facts such as a
-                  project name, procurement reference, approved budget, winning
-                  bidder, contract amount, award date, or barangay attribution
-                  when those facts are explicitly supported by the record.
+                  {t(
+                    'A published source can establish specific facts such as a project name, procurement reference, approved budget, winning bidder, contract amount, award date, or barangay attribution when those facts are explicitly supported by the record.'
+                  )}
                 </p>
               </div>
               <div className="bg-gray-50/40 p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-950">
-                  What evidence does not automatically establish
+                  {t('What evidence does not automatically establish')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  One document does not automatically establish every fact about
-                  a project. A bid result does not prove contract execution. A
-                  contract record does not prove payment or physical completion.
-                  An implementation report does not independently establish an
-                  award or contract.
+                  {t(
+                    'One document does not automatically establish every fact about a project. A bid result does not prove contract execution. A contract record does not prove payment or physical completion. An implementation report does not independently establish an award or contract.'
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="border-t border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
               <h3 className="text-sm font-bold text-gray-950">
-                What “verified” means
+                {t('What “verified” means')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                When BetterSanFernando describes a project fact or evidence
-                record as verified, it means the published value is supported by
-                the cited source and recorded provenance. It does not mean
-                BetterSanFernando independently audited the underlying
-                government activity, inspected the project site, or made a legal
-                or compliance determination.
+                {t(
+                  'When BetterSanFernando describes a project fact or evidence record as verified, it means the published value is supported by the cited source and recorded provenance. It does not mean BetterSanFernando independently audited the underlying government activity, inspected the project site, or made a legal or compliance determination.'
+                )}
               </p>
             </div>
           </div>
@@ -529,34 +584,35 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            DOCUMENTARY STATUS
+            {t('DOCUMENTARY STATUS')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Documentary status, not physical progress
+            {t('Documentary status, not physical progress')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            A project’s status summarizes the strongest documentary stage
-            currently supported by published evidence. It should not be read as
-            a construction-progress indicator.
+            {t(
+              'A project’s status summarizes the strongest documentary stage currently supported by published evidence. It should not be read as a construction-progress indicator.'
+            )}
           </p>
 
           {/* Desktop table */}
           <div className="mt-6 hidden overflow-x-auto border-y border-gray-300 md:block">
             <table className="w-full min-w-[48rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                Current public project lifecycle states and what each does and
-                does not establish
+                {t(
+                  'Current public project lifecycle states and what each does and does not establish'
+                )}
               </caption>
               <thead className="bg-gray-50 text-gray-900">
                 <tr>
                   <th scope="col" className="px-4 py-3 font-bold">
-                    Status
+                    {t('Status')}
                   </th>
                   <th scope="col" className="px-4 py-3 font-bold">
-                    What the evidence establishes
+                    {t('What the evidence establishes')}
                   </th>
                   <th scope="col" className="px-4 py-3 font-bold">
-                    What it does not establish
+                    {t('What it does not establish')}
                   </th>
                 </tr>
               </thead>
@@ -567,13 +623,13 @@ export default function ProjectMethodology() {
                       scope="row"
                       className="px-4 py-4 align-top font-bold text-gray-950"
                     >
-                      {titleCaseEnum(status)}
+                      {enumLabel(t, status)}
                     </th>
                     <td className="px-4 py-4 align-top text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                      {LIFECYCLE_MEANINGS[status].establishes}
+                      {LIFECYCLE_MEANINGS(t)[status].establishes}
                     </td>
                     <td className="px-4 py-4 align-top text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                      {LIFECYCLE_MEANINGS[status].doesNotEstablish}
+                      {LIFECYCLE_MEANINGS(t)[status].doesNotEstablish}
                     </td>
                   </tr>
                 ))}
@@ -586,28 +642,28 @@ export default function ProjectMethodology() {
             {ProjectLifecycleStatus.options.map(status => (
               <li key={status} className="space-y-1.5 py-4">
                 <p className="font-bold text-gray-950">
-                  {titleCaseEnum(status)}
+                  {enumLabel(t, status)}
                 </p>
                 <p className="text-xs leading-relaxed text-gray-700 sm:text-sm">
                   <span className="font-semibold text-gray-900">
-                    Establishes:{' '}
+                    {t('Establishes:')}{' '}
                   </span>
-                  {LIFECYCLE_MEANINGS[status].establishes}
+                  {LIFECYCLE_MEANINGS(t)[status].establishes}
                 </p>
                 <p className="text-xs leading-relaxed text-gray-700 sm:text-sm">
                   <span className="font-semibold text-gray-900">
-                    Does not establish:{' '}
+                    {t('Does not establish:')}{' '}
                   </span>
-                  {LIFECYCLE_MEANINGS[status].doesNotEstablish}
+                  {LIFECYCLE_MEANINGS(t)[status].doesNotEstablish}
                 </p>
               </li>
             ))}
           </ol>
 
           <p className="mt-4 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-            These statuses summarize documentary support. They are not a
-            procurement funnel, a project-completion scale, or a measure of
-            physical work performed on site.
+            {t(
+              'These statuses summarize documentary support. They are not a procurement funnel, a project-completion scale, or a measure of physical work performed on site.'
+            )}
           </p>
         </section>
 
@@ -617,105 +673,107 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            RECORD LINKAGE
+            {t('RECORD LINKAGE')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            How evidence is connected to projects
+            {t('How evidence is connected to projects')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            BetterSanFernando links evidence conservatively. Exact project
-            relationships and namespaced references are stronger identity
-            signals than similar wording.
+            {t(
+              'BetterSanFernando links evidence conservatively. Exact project relationships and namespaced references are stronger identity signals than similar wording.'
+            )}
           </p>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
               <div className="p-5 sm:p-6">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900">
-                  Strong identity signals
+                  {t('Strong identity signals')}
                 </h3>
                 <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>Explicit evidence-to-project relationship</span>
+                    <span>
+                      {t('Explicit evidence-to-project relationship')}
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>Exact canonical project relationship</span>
+                    <span>{t('Exact canonical project relationship')}</span>
                   </li>
                 </ul>
               </div>
 
               <div className="p-5 sm:p-6">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900">
-                  Namespaced references
+                  {t('Namespaced references')}
                 </h3>
                 <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>APP Code</span>
+                    <span>{t('APP Code')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>BAC / control reference</span>
+                    <span>{t('BAC / control reference')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>PhilGEPS reference</span>
+                    <span>{t('PhilGEPS reference')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>Contract number</span>
+                    <span>{t('Contract number')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-[#0066EB]" aria-hidden="true">
                       •
                     </span>
-                    <span>Source identifier</span>
+                    <span>{t('Source identifier')}</span>
                   </li>
                 </ul>
               </div>
 
               <div className="p-5 sm:p-6">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900">
-                  Not enough on their own
+                  {t('Not enough on their own')}
                 </h3>
                 <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
                   <li className="flex items-start gap-2">
                     <span className="text-gray-400" aria-hidden="true">
                       •
                     </span>
-                    <span>Similar project title</span>
+                    <span>{t('Similar project title')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-gray-400" aria-hidden="true">
                       •
                     </span>
-                    <span>Same year</span>
+                    <span>{t('Same year')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-gray-400" aria-hidden="true">
                       •
                     </span>
-                    <span>Same barangay</span>
+                    <span>{t('Same barangay')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-gray-400" aria-hidden="true">
                       •
                     </span>
-                    <span>Similar amount</span>
+                    <span>{t('Similar amount')}</span>
                   </li>
                 </ul>
               </div>
@@ -723,18 +781,18 @@ export default function ProjectMethodology() {
           </div>
 
           <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-            Similar names, years, barangays, or amounts may help identify a
-            candidate match, but they are not enough by themselves to merge
-            records.
+            {t(
+              'Similar names, years, barangays, or amounts may help identify a candidate match, but they are not enough by themselves to merge records.'
+            )}
           </p>
 
           <div className="mt-8">
             <h3 className="text-sm font-bold text-gray-950">
-              Identifiers keep their own namespaces
+              {t('Identifiers keep their own namespaces')}
             </h3>
             <div className="mt-3 overflow-hidden rounded-sm border border-gray-200 bg-white">
               <dl className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-3">
-                {IDENTIFIER_ROWS.map(([term, definition], index) => (
+                {IDENTIFIER_ROWS(t).map(([term, definition], index) => (
                   <div
                     key={term}
                     className={`p-4 sm:p-5 ${
@@ -760,8 +818,9 @@ export default function ProjectMethodology() {
               </dl>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-              These identifiers come from different record systems and should
-              not be treated as interchangeable values.
+              {t(
+                'These identifiers come from different record systems and should not be treated as interchangeable values.'
+              )}
             </p>
           </div>
         </section>
@@ -772,19 +831,19 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            READING PROJECT FIELDS
+            {t('READING PROJECT FIELDS')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Money and geography describe different facts
+            {t('Money and geography describe different facts')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
             <div>
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Money fields are not interchangeable
+                {t('Money fields are not interchangeable')}
               </h3>
               <dl className="mt-3 divide-y divide-gray-200 border-y border-gray-200">
-                {AMOUNT_ROWS.map(([field, meaning]) => (
+                {AMOUNT_ROWS(t).map(([field, meaning]) => (
                   <div key={field} className="py-2.5 sm:py-3">
                     <dt className="text-xs font-semibold text-gray-900 sm:text-sm">
                       {field}
@@ -796,26 +855,27 @@ export default function ProjectMethodology() {
                 ))}
               </dl>
               <p className="mt-3 text-xs font-semibold text-gray-900 sm:text-sm">
-                ABC ≠ winning bid ≠ contract amount ≠ utilization amount ≠
-                actual expenditure.
+                {t(
+                  'ABC ≠ winning bid ≠ contract amount ≠ utilization amount ≠ actual expenditure.'
+                )}
               </p>
             </div>
 
             <div>
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                How Barangay Attribution Works
+                {t('How Barangay Attribution Works')}
               </h3>
 
               <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                Barangay attribution describes the area associated with a
-                published project record. It does not establish an exact project
-                coordinate.
+                {t(
+                  'Barangay attribution describes the area associated with a published project record. It does not establish an exact project coordinate.'
+                )}
               </p>
 
               {/* 3-Step Attribution Flow */}
               <ol className="mt-4 space-y-3.5">
-                {ATTRIBUTION_STEPS.map((step, index) => {
-                  const isLast = index === ATTRIBUTION_STEPS.length - 1;
+                {ATTRIBUTION_STEPS(t).map((step, index) => {
+                  const isLast = index === ATTRIBUTION_STEPS(t).length - 1;
                   return (
                     <li key={step.number} className="flex gap-3">
                       <div className="flex flex-col items-center">
@@ -845,17 +905,17 @@ export default function ProjectMethodology() {
               {/* Boundary Statement & Map Note */}
               <div className="mt-5 border-t border-gray-200 pt-3.5">
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-950">
-                  Not an exact project location
+                  {t('Not an exact project location')}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                  Barangay attribution does not establish a construction site,
-                  parcel, road segment, facility coordinate, or verified project
-                  point.
+                  {t(
+                    'Barangay attribution does not establish a construction site, parcel, road segment, facility coordinate, or verified project point.'
+                  )}
                 </p>
                 <p className="mt-2 text-xs leading-relaxed text-gray-500">
-                  Map shading represents project-record attribution by barangay,
-                  not exact project coordinates; the Project Map is{' '}
-                  {'not an exact project-location map'}.
+                  {t(
+                    'Map shading represents project-record attribution by barangay, not exact project coordinates; the Project Map is not an exact project-location map.'
+                  )}
                 </p>
               </div>
 
@@ -866,7 +926,7 @@ export default function ProjectMethodology() {
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                 >
                   <MapPinned className="h-4 w-4" aria-hidden="true" />
-                  <span>View Project Map →</span>
+                  <span>{t('View Project Map →')}</span>
                 </Link>
               </div>
             </div>
@@ -879,15 +939,15 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            MISSING INFORMATION
+            {t('MISSING INFORMATION')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Missing information stays missing
+            {t('Missing information stays missing')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-[#F3F6FB]">
             <ol className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-              {MISSING_DATA_PRINCIPLES.map(principle => (
+              {MISSING_DATA_PRINCIPLES(t).map(principle => (
                 <li key={principle.number} className="p-5 sm:p-6">
                   <span className="font-mono text-sm font-semibold text-gray-400 sm:text-base">
                     {principle.number}
@@ -905,8 +965,9 @@ export default function ProjectMethodology() {
 
           <div className="mt-3.5 rounded-sm border border-gray-200 bg-gray-50/70 px-4 py-3">
             <p className="text-xs font-semibold text-gray-900 sm:text-sm">
-              Unknown, unavailable, and not established are not the same as
-              zero, false, or not applicable.
+              {t(
+                'Unknown, unavailable, and not established are not the same as zero, false, or not applicable.'
+              )}
             </p>
           </div>
         </section>
@@ -917,15 +978,15 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            COVERAGE AND LIMITS
+            {t('COVERAGE AND LIMITS')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            What this dataset covers
+            {t('What this dataset covers')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-[#F3F6FB]">
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-              {COVERAGE_BLOCKS.map((block, index) => (
+              {COVERAGE_BLOCKS(t).map((block, index) => (
                 <div
                   key={block.title}
                   className={`p-5 sm:p-6 ${
@@ -950,15 +1011,15 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            BEFORE YOU RELY ON A RECORD
+            {t('BEFORE YOU RELY ON A RECORD')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            A quick verification checklist
+            {t('A quick verification checklist')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
             <ol className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-              {CHECKLIST_ROWS.map(([text], index) => (
+              {CHECKLIST_ROWS(t).map(([text], index) => (
                 <li
                   key={text}
                   className={`flex items-start gap-3.5 p-4 sm:p-5 ${
@@ -977,8 +1038,9 @@ export default function ProjectMethodology() {
           </div>
 
           <p className="mt-3 text-xs text-gray-500 sm:text-sm sm:text-gray-600">
-            BetterSanFernando is designed to make public records easier to
-            inspect, not to replace the official source.
+            {t(
+              'BetterSanFernando is designed to make public records easier to inspect, not to replace the official source.'
+            )}
           </p>
         </section>
 
@@ -989,13 +1051,13 @@ export default function ProjectMethodology() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10 lg:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            KEEP EXPLORING
+            {t('KEEP EXPLORING')}
           </p>
           <h2
             id="keep-exploring-heading"
             className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
           >
-            Explore the project data
+            {t('Explore the project data')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
@@ -1004,19 +1066,20 @@ export default function ProjectMethodology() {
                 <div className="flex items-center gap-2 text-[#0066EB]">
                   <FileCheck2 className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                    Project Evidence
+                    {t('Project Evidence')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                  Inspect the official-source records behind published project
-                  facts.
+                  {t(
+                    'Inspect the official-source records behind published project facts.'
+                  )}
                 </p>
                 <div className="mt-3.5">
                   <Link
                     href="/projects/sources"
                     className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
-                    Browse Project Evidence →
+                    {t('Browse Project Evidence →')}
                   </Link>
                 </div>
               </div>
@@ -1028,19 +1091,20 @@ export default function ProjectMethodology() {
                     aria-hidden="true"
                   />
                   <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                    City Projects
+                    {t('City Projects')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                  Browse the current published infrastructure and public-works
-                  project collection.
+                  {t(
+                    'Browse the current published infrastructure and public-works project collection.'
+                  )}
                 </p>
                 <div className="mt-3.5">
                   <Link
                     href="/projects/city-projects"
                     className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
-                    Browse City Projects →
+                    {t('Browse City Projects →')}
                   </Link>
                 </div>
               </div>
@@ -1049,11 +1113,11 @@ export default function ProjectMethodology() {
 
           <div className="mt-8">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              Related resources
+              {t('Related resources')}
             </h3>
             <div className="mt-3 overflow-hidden rounded-sm border border-gray-200 bg-white">
               <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-                {RELATED_RESOURCES.map((item, index) => (
+                {RELATED_RESOURCES(t).map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}

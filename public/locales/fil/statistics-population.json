@@ -53,7 +53,6 @@
   "BetterSanFernando does not add population estimates.": "Hindi nagdaragdag ang BetterSanFernando ng mga pagtataya sa populasyon.",
   "BetterSanFernando does not add projections.": "Hindi nagdaragdag ang BetterSanFernando ng mga projection.",
   "All {{barangays}} barangay populations sum exactly to the published city total.": "Eksaktong nagsusuma sa nailathalang kabuuan ng lungsod ang populasyon ng lahat ng {{barangays}} barangay.",
-  "Sort by {{label}}": "I-sort ayon sa {{label}}",
   "Sort by {{label}}, currently {{direction}}": "I-sort ayon sa {{label}}, kasalukuyang {{direction}}",
   "ascending": "pataas",
   "descending": "pababa",
@@ -69,7 +68,6 @@
   "Reset filters": "I-reset ang mga filter",
   "No barangays found": "Walang nakitang barangay",
   "No barangay matches the selected criteria.": "Walang barangay na tumutugma sa mga napiling pamantayan.",
-  "Clear filters": "I-clear ang mga filter",
   "All {{barangayCount}} San Fernando barangays ranked by population, including population, city share, and urban or rural classification.": "Lahat ng {{barangayCount}} barangay ng San Fernando ayon sa ranggo ng populasyon, kasama ang populasyon, bahagi sa lungsod, at klasipikasyong urban o rural.",
   "City total · {{barangayCount}} barangays": "Kabuuan ng lungsod · {{barangayCount}} barangay",
   "Barangay table pagination": "Pagination ng talahanayan ng barangay"

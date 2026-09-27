@@ -1,13 +1,20 @@
 import ContractsView from './Contracts';
 
 import { buildPageMetadata } from '../../../lib/metadata';
+import { PageMessages } from '../../../components/i18n/PageMessages';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Contracts and Awards',
-  description:
-    "Browse the award and contract lifecycle evidence published for BetterSanFernando's bounded infrastructure and public-works project subset.",
-  path: '/procurement/contracts',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('procurement-contracts');
+  return buildPageMetadata({
+    title: t('Contracts and Awards'),
+    description: t(
+      "Browse the award and contract lifecycle evidence published for BetterSanFernando's bounded infrastructure and public-works project subset."
+    ),
+    path: '/procurement/contracts',
+    locale,
+  });
+}
 
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
@@ -19,6 +26,11 @@ export const metadata = buildPageMetadata({
 // static-generation CSR-bailout path).
 export const dynamic = 'force-dynamic';
 
-export default function ContractsPage() {
-  return <ContractsView />;
+export default async function ContractsPage() {
+  const { messages } = await getPageT('procurement-contracts');
+  return (
+    <PageMessages messages={messages}>
+      <ContractsView />
+    </PageMessages>
+  );
 }

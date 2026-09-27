@@ -1,13 +1,20 @@
 import BidResultsView from './BidResults';
 
 import { buildPageMetadata } from '../../../lib/metadata';
+import { PageMessages } from '../../../components/i18n/PageMessages';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Bid Results',
-  description:
-    "Browse published bid-result evidence connected to BetterSanFernando's verified infrastructure and public-works project subset.",
-  path: '/procurement/bid-results',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('procurement-bid-results');
+  return buildPageMetadata({
+    title: t('Bid Results'),
+    description: t(
+      "Browse published bid-result evidence connected to BetterSanFernando's verified infrastructure and public-works project subset."
+    ),
+    path: '/procurement/bid-results',
+    locale,
+  });
+}
 
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
@@ -19,6 +26,11 @@ export const metadata = buildPageMetadata({
 // static-generation CSR-bailout path).
 export const dynamic = 'force-dynamic';
 
-export default function BidResultsPage() {
-  return <BidResultsView />;
+export default async function BidResultsPage() {
+  const { messages } = await getPageT('procurement-bid-results');
+  return (
+    <PageMessages messages={messages}>
+      <BidResultsView />
+    </PageMessages>
+  );
 }
