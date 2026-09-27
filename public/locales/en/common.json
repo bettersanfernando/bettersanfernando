@@ -22,10 +22,40 @@
   "footer": {
     "copyright": "© 2026 BetterSanFernando. Independent and community-run."
   },
+  "footerCopy": {
+    "helpEyebrow": "Help Keep the Data Useful",
+    "helpTitle": "Found something that needs another look?",
+    "helpDescription": "BetterSanFernando organizes public information from official sources. If you find an outdated record, incorrect detail, missing source, or broken link, send it to us for review.",
+    "reportDataIssue": "Report a data issue",
+    "contribute": "Contribute on GitHub",
+    "description": "BetterSanFernando makes public information about the City of San Fernando easier to find, understand, and verify. Independent and community-run, it is",
+    "notOfficial": "not an official City Government website.",
+    "sections": {
+      "Explore": "Explore",
+      "Public Information": "Public Information"
+    },
+    "links": {
+      "Services": "Services",
+      "Projects": "Projects",
+      "Government": "Government",
+      "Transparency": "Transparency",
+      "Statistics": "Statistics",
+      "City Offices": "City Offices",
+      "Contact the City": "Contact the City",
+      "Emergency Hotlines": "Emergency Hotlines",
+      "Official Government Links": "Official Government Links",
+      "Barangays": "Barangays"
+    },
+    "betterGovProject": "A BetterGov.ph Project",
+    "betterGovDescription": "Part of the BetterGov.ph community of independent civic-information projects.",
+    "visitBetterGov": "Visit BetterGov.ph",
+    "builtBy": "Built by Ian Macabulos",
+    "sitemap": "Sitemap",
+    "accessibility": "Accessibility"
+  },
   "languages": {
     "en": { "short": "EN", "name": "English" },
-    "fil": { "short": "FIL", "name": "Filipino" },
-    "pam": { "short": "PAM", "name": "Kapampangan" }
+    "fil": { "short": "FIL", "name": "Filipino" }
   },
   "navigation": {
     "topLevel": {
@@ -200,5 +230,16 @@
   "plannedPages": {
     "status": "Data integration in progress",
     "statusDescription": "This destination is part of the approved portal structure. Information will be published after its sources and context are ready."
+  },
+  "searchUi": {
+    "homeLabel": "Search BetterSanFernando",
+    "homePlaceholderMobile": "Search public information…",
+    "homePlaceholder": "Search services, projects, offices, barangays, or public records…",
+    "submit": "Search",
+    "clear": "Clear search",
+    "suggestions": "Search suggestions",
+    "viewAllFor": "View all results for “{{query}}”",
+    "noMatches": "No published matches found for “{{query}}”.",
+    "viewAll": "View all search results"
   }
 }

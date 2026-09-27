@@ -1,15 +1,75 @@
 {
   "languages": {
     "en": { "short": "EN", "name": "English" },
-    "fil": { "short": "FIL", "name": "Filipino" },
-    "pam": { "short": "PAM", "name": "Kapampangan" }
+    "fil": { "short": "FIL", "name": "Filipino" }
   },
   "navigation": {
     "topLevel": {
       "home": "Tahanan",
       "services": "Mga Serbisyo",
+      "projects": "Mga Proyekto",
+      "government": "Pamahalaan",
+      "transparency": "Transparency",
       "about": "Tungkol",
       "contact": "Makipag-ugnayan"
+    },
+    "search": "Maghanap",
+    "searchPlaceholder": "Maghanap sa BetterSanFernando",
+    "searchSubmit": "Isumite ang paghahanap",
+    "language": "Wika",
+    "accessibility": {
+      "primary": "Pangunahing nabigasyon",
+      "openMenu": "Buksan ang pangunahing menu",
+      "closeMenu": "Isara ang pangunahing menu",
+      "openSection": "Buksan ang menu ng {{section}}",
+      "closeSection": "Isara ang menu ng {{section}}"
+    },
+    "civicUtility": {
+      "betterGovLink": "BetterGov Philippines",
+      "currencyLabel": "USD/PHP —",
+      "weatherLabel": "Panahon —"
     }
+  },
+  "searchUi": {
+    "homeLabel": "Maghanap sa BetterSanFernando",
+    "homePlaceholderMobile": "Maghanap ng pampublikong impormasyon…",
+    "homePlaceholder": "Maghanap ng serbisyo, proyekto, tanggapan, barangay, o pampublikong rekord…",
+    "submit": "Maghanap",
+    "clear": "I-clear ang paghahanap",
+    "suggestions": "Mga mungkahi sa paghahanap",
+    "viewAllFor": "Tingnan ang lahat ng resulta para sa “{{query}}”",
+    "noMatches": "Walang nakitang inilathalang tugma para sa “{{query}}”.",
+    "viewAll": "Tingnan ang lahat ng resulta ng paghahanap"
+  },
+  "footerCopy": {
+    "helpEyebrow": "Tumulong na Panatilihing Kapaki-pakinabang ang Data",
+    "helpTitle": "May nakita bang kailangang suriin muli?",
+    "helpDescription": "Inaayos ng BetterSanFernando ang pampublikong impormasyon mula sa mga opisyal na sanggunian. Kung may luma, mali, kulang na sanggunian, o sirang link, ipadala ito para masuri.",
+    "reportDataIssue": "Mag-ulat ng isyu sa data",
+    "contribute": "Mag-ambag sa GitHub",
+    "description": "Ginagawang mas madaling hanapin, unawain, at beripikahin ng BetterSanFernando ang pampublikong impormasyon tungkol sa Lungsod ng San Fernando. Ito ay malaya at pinatatakbo ng komunidad, at",
+    "notOfficial": "hindi ito opisyal na website ng Pamahalaang Lungsod.",
+    "sections": {
+      "Explore": "Tuklasin",
+      "Public Information": "Pampublikong Impormasyon"
+    },
+    "links": {
+      "Services": "Mga Serbisyo",
+      "Projects": "Mga Proyekto",
+      "Government": "Pamahalaan",
+      "Transparency": "Transparency",
+      "Statistics": "Istatistika",
+      "City Offices": "Mga Tanggapan ng Lungsod",
+      "Contact the City": "Makipag-ugnayan sa Lungsod",
+      "Emergency Hotlines": "Mga Hotline sa Emerhensiya",
+      "Official Government Links": "Mga Opisyal na Link ng Pamahalaan",
+      "Barangays": "Mga Barangay"
+    },
+    "betterGovProject": "Isang Proyekto ng BetterGov.ph",
+    "betterGovDescription": "Bahagi ng komunidad ng BetterGov.ph ng mga malayang proyektong may pampublikong impormasyong sibiko.",
+    "visitBetterGov": "Bisitahin ang BetterGov.ph",
+    "builtBy": "Ginawa ni Ian Macabulos",
+    "sitemap": "Mapa ng Site",
+    "accessibility": "Accessibility"
   }
 }

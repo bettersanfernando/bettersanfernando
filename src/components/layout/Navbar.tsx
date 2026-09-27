@@ -40,14 +40,18 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import {
   getActiveNavigationId,
   mainNavigation,
   searchNavigation,
 } from '../../data/navigation';
-import { SUPPORTED_LANGUAGES } from '../../i18n/languages';
+import {
+  localeFromPathname,
+  withLocalePrefix,
+  withoutLocalePrefix,
+} from '../../i18n/locale';
 import type {
   LanguageType,
   NavigationDestination,
@@ -126,10 +130,12 @@ function BrandLogo() {
 function DestinationLink({
   destination,
   onNavigate,
+  locale,
   showDescription = false,
 }: {
   destination: NavigationDestination;
   onNavigate: () => void;
+  locale: LanguageType;
   showDescription?: boolean;
 }) {
   const { t } = useTranslation('common');
@@ -174,7 +180,11 @@ function DestinationLink({
   }
 
   return (
-    <Link href={destination.href} className={className} onClick={onNavigate}>
+    <Link
+      href={withLocalePrefix(destination.href, locale)}
+      className={className}
+      onClick={onNavigate}
+    >
       {content}
     </Link>
   );
@@ -195,13 +205,12 @@ export default function Navbar() {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suppressFocusOpenRef = useRef<NavigationId | null>(null);
   const pathname = usePathname() ?? '/';
+  const router = useRouter();
   const { t, i18n } = useTranslation('common');
-  const activeNavigationId = getActiveNavigationId(pathname);
-  const currentLanguage = SUPPORTED_LANGUAGES.some(
-    language => language.code === i18n.resolvedLanguage
-  )
-    ? (i18n.resolvedLanguage as LanguageType)
-    : 'en';
+  const currentLanguage = localeFromPathname(pathname);
+  const activeNavigationId = getActiveNavigationId(
+    withoutLocalePrefix(pathname)
+  );
 
   const cancelDesktopClose = () => {
     if (closeTimerRef.current) {
@@ -307,6 +316,7 @@ export default function Navbar() {
 
   const changeLanguage = (language: LanguageType) => {
     void i18n.changeLanguage(language);
+    router.push(withLocalePrefix(pathname, language));
   };
 
   return (
@@ -326,7 +336,7 @@ export default function Navbar() {
       >
         <div className="container mx-auto flex h-[72px] items-center gap-4 px-4">
           <Link
-            href="/"
+            href={withLocalePrefix('/', currentLanguage)}
             onClick={closeNavigation}
             className={`flex shrink-0 items-center rounded-md ${focusStyles}`}
           >
@@ -366,7 +376,7 @@ export default function Navbar() {
                   }}
                 >
                   <Link
-                    href={item.href}
+                    href={withLocalePrefix(item.href, currentLanguage)}
                     onClick={closeNavigation}
                     aria-current={isActive ? 'page' : undefined}
                     className={`rounded-md p-0 text-sm font-medium whitespace-nowrap transition-colors duration-200 ${isActive || isOpen ? 'font-semibold text-primary-800' : 'text-inherit'} ${focusStyles}`}
@@ -406,7 +416,7 @@ export default function Navbar() {
             })}
 
             <Link
-              href={searchNavigation.href}
+              href={withLocalePrefix(searchNavigation.href, currentLanguage)}
               onClick={closeNavigation}
               aria-label={t(searchNavigation.labelKey)}
               className={`hidden h-10 w-10 items-center justify-center rounded-lg text-gray-700 transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700 xl:flex ${focusStyles}`}
@@ -488,6 +498,7 @@ export default function Navbar() {
                             <DestinationLink
                               destination={destination}
                               onNavigate={closeNavigation}
+                              locale={currentLanguage}
                               showDescription
                             />
                           </li>
@@ -517,7 +528,7 @@ export default function Navbar() {
         >
           <div className="flex h-16 shrink-0 items-center justify-between border-b border-gray-100 bg-white px-5">
             <Link
-              href="/"
+              href={withLocalePrefix('/', currentLanguage)}
               onClick={closeNavigation}
               className={`rounded-md ${focusStyles}`}
             >
@@ -535,7 +546,7 @@ export default function Navbar() {
 
           <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
             <Link
-              href={searchNavigation.href}
+              href={withLocalePrefix(searchNavigation.href, currentLanguage)}
               onClick={closeNavigation}
               className={`group mb-4 flex min-h-[48px] items-center justify-between rounded-md border border-gray-200/90 bg-gray-50/60 px-3.5 py-2.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-primary-300 hover:bg-primary-50/50 hover:text-primary-800 ${focusStyles}`}
             >
@@ -596,7 +607,10 @@ export default function Navbar() {
                           <div className="min-h-0 overflow-hidden">
                             <div className="space-y-4 pt-1 pb-3 pl-3.5 pr-1">
                               <Link
-                                href={item.href}
+                                href={withLocalePrefix(
+                                  item.href,
+                                  currentLanguage
+                                )}
                                 onClick={closeNavigation}
                                 className={`group flex min-h-[44px] items-center justify-between rounded-md px-3 py-2.5 text-sm font-semibold text-primary-700 transition-colors duration-150 hover:bg-primary-50 hover:text-primary-800 ${focusStyles}`}
                               >
@@ -654,7 +668,10 @@ export default function Navbar() {
                                               </a>
                                             ) : (
                                               <Link
-                                                href={destination.href}
+                                                href={withLocalePrefix(
+                                                  destination.href,
+                                                  currentLanguage
+                                                )}
                                                 className={linkClasses}
                                                 onClick={closeNavigation}
                                               >
@@ -684,7 +701,7 @@ export default function Navbar() {
                   return (
                     <div key={item.id}>
                       <Link
-                        href={item.href}
+                        href={withLocalePrefix(item.href, currentLanguage)}
                         onClick={closeNavigation}
                         aria-current={isActive ? 'page' : undefined}
                         className={`group flex min-h-[50px] items-center justify-between rounded-md px-3.5 py-3 text-[15px] font-medium transition-colors duration-200 ${focusStyles} ${

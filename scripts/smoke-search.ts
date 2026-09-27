@@ -313,6 +313,13 @@ assert.ok(
   '"show me business permit" must still surface a real BLPD business-permit service'
 );
 
+assert.ok(
+  searchCivicRecords('permit sa negosyo', 'services').some(result =>
+    /permit for business/i.test(result.title)
+  ),
+  'the Filipino alias "permit sa negosyo" must surface a real BLPD business-permit service'
+);
+
 // C. "please find CHO" — request-phrasing filler ("please", "find") must
 // not weaken the exact-acronym match; CHO must remain the top result.
 assert.equal(

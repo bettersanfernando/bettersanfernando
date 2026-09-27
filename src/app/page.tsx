@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { headers } from 'next/headers';
 import {
   ArrowRight,
   Briefcase,
@@ -39,14 +40,23 @@ import { getProjects } from '../data/civic/projects';
 import { getLegislationSummary } from '../data/civic/legislationSummary';
 import { getFullDisclosureRecords } from '../data/civic/fullDisclosure';
 import { getFinanceReports } from '../data/civic/finance';
-import { absoluteUrl } from '../lib/site-url';
+import { isLanguage } from '../i18n/locale';
+import { getRootMetadata } from '../lib/metadata';
 
+export async function generateMetadata() {
+  const locale = (await headers()).get('x-bsf-locale');
+  return getRootMetadata(
+    isLanguage(locale ?? undefined) ? (locale as 'en' | 'fil') : 'en'
+  );
+}
+
+/*
 export const metadata = {
   title: 'BetterSanFernando — Public Information for San Fernando, Pampanga',
   description:
     'An independent civic transparency portal that makes verified public information about the City of San Fernando, Pampanga easier to find, understand, and trace back to sources.',
-  alternates: { canonical: absoluteUrl('/') },
 };
+*/
 
 const numberFormatter = new Intl.NumberFormat('en-PH');
 

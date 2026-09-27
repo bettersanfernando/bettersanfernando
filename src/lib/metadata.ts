@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { absoluteUrl, getSiteUrl } from './site-url';
+import { withLocalePrefix } from '../i18n/locale';
+import type { LanguageType } from '../types';
 
 // Centralized metadata building blocks. Every page's metadata (static
 // `export const metadata` or dynamic `generateMetadata()`) should build on
@@ -30,34 +32,53 @@ export const DEFAULT_OG_IMAGE = {
   alt: `${SITE_NAME} — Independent Civic Information Portal for the City of San Fernando, Pampanga`,
 } as const;
 
-export function getRootMetadata(): Metadata {
+export function getRootMetadata(locale: LanguageType = 'en'): Metadata {
+  const path = withLocalePrefix('/', locale);
+  const metadataBase = new URL(
+    `${getSiteUrl()}${locale === 'fil' ? '/fil/' : '/'}`
+  );
+  const title =
+    locale === 'fil'
+      ? 'BetterSanFernando â€” Impormasyong Pampubliko para sa San Fernando, Pampanga'
+      : HOME_TITLE;
+  const description =
+    locale === 'fil'
+      ? 'Ang BetterSanFernando ay isang malaya at pinatatakbo-ng-komunidad na portal ng impormasyong pampubliko para sa Lungsod ng San Fernando, Pampanga. Hindi ito ang opisyal na website ng Pamahalaang Lungsod.'
+      : DEFAULT_DESCRIPTION;
   return {
-    metadataBase: new URL(getSiteUrl()),
+    metadataBase,
     title: {
-      default: HOME_TITLE,
+      default: title,
       template: `%s | ${SITE_NAME}`,
     },
-    description: DEFAULT_DESCRIPTION,
+    description,
     applicationName: SITE_NAME,
     // No `icons` entry: favicon.ico, icon.png, and apple-icon.png under
     // src/app/ are picked up automatically by Next's file-convention icons.
     openGraph: {
       type: 'website',
       siteName: SITE_NAME,
-      title: HOME_TITLE,
-      description: DEFAULT_DESCRIPTION,
-      url: absoluteUrl('/'),
+      title,
+      description,
+      url: absoluteUrl(path),
       images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
-      title: HOME_TITLE,
-      description: DEFAULT_DESCRIPTION,
+      title,
+      description,
       images: [DEFAULT_OG_IMAGE_PATH],
     },
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: absoluteUrl(path),
+      languages: {
+        en: absoluteUrl('/'),
+        'fil-PH': absoluteUrl('/fil'),
+      },
     },
   };
 }
@@ -77,11 +98,19 @@ export function buildPageMetadata({
   description?: string;
   path: string;
 }): Metadata {
-  const canonical = absoluteUrl(path);
+  // Page metadata is relative to the locale-specific root metadataBase. That
+  // keeps English canonical URLs at their existing paths while /fil pages
+  // emit their own canonical URLs without duplicating every route module.
+  const canonical = path === '/' ? './' : path.replace(/^\//, '');
+  const english = absoluteUrl(path);
+  const filipino = absoluteUrl(withLocalePrefix(path, 'fil'));
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      languages: { en: english, 'fil-PH': filipino },
+    },
     openGraph: {
       title,
       description,
