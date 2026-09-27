@@ -1,8 +1,11 @@
 import { absoluteUrl } from './site-url';
+import { withLocalePrefix } from '../i18n/locale';
+import type { LanguageType } from '../types';
 import {
   SITE_NAME,
   SITE_ALTERNATE_NAME,
   DEFAULT_DESCRIPTION,
+  DEFAULT_DESCRIPTION_FIL,
 } from './metadata';
 
 // Safe JSON-LD serialization: JSON.stringify can legally produce a
@@ -35,8 +38,15 @@ export function JsonLd({ data }: { data: object }) {
  * repository); the footer's Facebook/LinkedIn links have no href yet and
  * must not be guessed into this list.
  */
-export function OrganizationWebSiteJsonLd() {
+export function OrganizationWebSiteJsonLd({
+  locale = 'en',
+}: {
+  locale?: LanguageType;
+}) {
   const organizationId = absoluteUrl('/#organization');
+  const rootUrl = absoluteUrl(withLocalePrefix('/', locale));
+  const description =
+    locale === 'fil' ? DEFAULT_DESCRIPTION_FIL : DEFAULT_DESCRIPTION;
   return (
     <JsonLd
       data={{
@@ -47,24 +57,24 @@ export function OrganizationWebSiteJsonLd() {
             '@id': organizationId,
             name: SITE_NAME,
             alternateName: SITE_ALTERNATE_NAME,
-            url: absoluteUrl('/'),
+            url: rootUrl,
             logo: {
               '@type': 'ImageObject',
               url: absoluteUrl('/logo-512.png'),
               width: 512,
               height: 512,
             },
-            description: DEFAULT_DESCRIPTION,
+            description,
             sameAs: ['https://github.com/bettersanfernando/bettersanfernando'],
           },
           {
             '@type': 'WebSite',
-            '@id': absoluteUrl('/#website'),
+            '@id': `${rootUrl}#website`,
             name: SITE_NAME,
             alternateName: SITE_ALTERNATE_NAME,
-            url: absoluteUrl('/'),
-            description: DEFAULT_DESCRIPTION,
-            inLanguage: 'en',
+            url: rootUrl,
+            description,
+            inLanguage: locale === 'fil' ? 'fil-PH' : 'en',
             publisher: { '@id': organizationId },
           },
         ],

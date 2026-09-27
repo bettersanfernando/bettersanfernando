@@ -54,8 +54,14 @@
     "accessibility": "Accessibility"
   },
   "languages": {
-    "en": { "short": "EN", "name": "English" },
-    "fil": { "short": "FIL", "name": "Filipino" }
+    "en": {
+      "short": "EN",
+      "name": "English"
+    },
+    "fil": {
+      "short": "FIL",
+      "name": "Filipino"
+    }
   },
   "navigation": {
     "topLevel": {
@@ -211,7 +217,12 @@
     "language": "Language",
     "emergencyStrip": {
       "title": "Emergency Hotlines",
-      "cta": "View verified hotlines"
+      "cta": "View verified hotlines",
+      "label": "Emergency",
+      "contacts": "Emergency contacts",
+      "viewAll": "View all hotlines",
+      "hotlines": "Hotlines",
+      "all": "All"
     },
     "civicUtility": {
       "portalStatus": "BetterSanFernando civic portal active",
@@ -241,5 +252,21 @@
     "viewAllFor": "View all results for “{{query}}”",
     "noMatches": "No published matches found for “{{query}}”.",
     "viewAll": "View all search results"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "label": "Breadcrumb"
+  },
+  "status": {
+    "loading": "Loading…"
+  },
+  "evidenceLinks": {
+    "none": "No public link recorded for this record",
+    "openDocument": "Open document",
+    "openSourcePage": "Open source page",
+    "sourcePage": "Source page",
+    "openDocumentLabel": "Open official document for {{identifier}} (opens in a new tab)",
+    "openSourcePageLabel": "Open official source page for {{identifier}} (opens in a new tab)",
+    "sourcePageLabel": "Open source page for {{identifier}} (opens in a new tab)"
   }
 }

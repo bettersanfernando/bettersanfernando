@@ -21,6 +21,8 @@ import {
   getServices,
   type Service,
 } from '../../../../data/civic/services';
+import { localizeHref } from '../../../../i18n/locale';
+import { getLocale } from '../../../../i18n/server';
 import { buildPageMetadata } from '../../../../lib/metadata';
 
 // Canonical service-detail route.
@@ -227,7 +229,7 @@ export default async function ServiceDetailPage({
 
   const realCategory = getServiceCategory(service);
   if (category !== realCategory) {
-    permanentRedirect(getServiceHref(service));
+    permanentRedirect(localizeHref(getServiceHref(service), await getLocale()));
   }
 
   const categoryNames = {

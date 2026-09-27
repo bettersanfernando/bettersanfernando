@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from 'react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import {
   ArrowRight,
   ChevronLeft,

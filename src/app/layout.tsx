@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { headers } from 'next/headers';
 import '../fonts.css';
 import '../index.css';
 import Providers from './providers';
@@ -8,13 +7,10 @@ import Footer from '../components/layout/Footer';
 import ScrollToTop from '../components/ui/ScrollToTop';
 import { getRootMetadata } from '../lib/metadata';
 import { OrganizationWebSiteJsonLd } from '../lib/json-ld';
-import { isLanguage } from '../i18n/locale';
+import { getLocale } from '../i18n/server';
 
 export async function generateMetadata() {
-  const locale = (await headers()).get('x-bsf-locale');
-  return getRootMetadata(
-    isLanguage(locale ?? undefined) ? (locale as 'en' | 'fil') : 'en'
-  );
+  return getRootMetadata(await getLocale());
 }
 
 // Same shell composition and order as src/App.tsx's
@@ -25,15 +21,12 @@ export async function generateMetadata() {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const locale = (await headers()).get('x-bsf-locale');
-  const language = isLanguage(locale ?? undefined)
-    ? (locale as 'en' | 'fil')
-    : 'en';
+  const language = await getLocale();
 
   return (
     <html lang={language}>
       <body>
-        <OrganizationWebSiteJsonLd />
+        <OrganizationWebSiteJsonLd locale={language} />
         <Providers locale={language}>
           <div className="min-h-screen flex flex-col">
             <Navbar />

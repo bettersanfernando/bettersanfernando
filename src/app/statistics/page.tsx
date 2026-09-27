@@ -7,7 +7,7 @@ import {
   Scale,
   UsersRound,
 } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { getStatisticsSummary } from '../../data/civic/statisticsSummary';
 import { getLegislationSummary } from '../../data/civic/legislationSummary';

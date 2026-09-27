@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '../components/i18n/LocaleLink';
 import { ArrowRight } from 'lucide-react';
 
 // App Router's not-found convention file — rendered for every notFound()

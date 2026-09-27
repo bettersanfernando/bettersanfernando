@@ -54,7 +54,8 @@ export default function CivicUtilityBar({
   const [currencyIndex, setCurrencyIndex] = useState(0);
 
   useEffect(() => {
-    const updatePhtTime = () => setPhtTime(formatPhilippineTime(new Date()));
+    const updatePhtTime = () =>
+      setPhtTime(formatPhilippineTime(new Date(), currentLanguage));
     const frame = window.requestAnimationFrame(updatePhtTime);
     const timer = window.setInterval(() => {
       updatePhtTime();
@@ -63,7 +64,7 @@ export default function CivicUtilityBar({
       window.cancelAnimationFrame(frame);
       window.clearInterval(timer);
     };
-  }, []);
+  }, [currentLanguage]);
 
   useEffect(() => {
     const { latitude, longitude } = SAN_FERNANDO_COORDINATES;

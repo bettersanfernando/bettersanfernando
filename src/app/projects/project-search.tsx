@@ -8,7 +8,9 @@ import {
   type FormEvent,
   type ReactNode,
 } from 'react';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
+import { useLocale } from '../../components/i18n/useLocale';
+import { localizeHref } from '../../i18n/locale';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Search, X } from 'lucide-react';
 import { getProjects, type Project } from '../../data/civic/projects';
@@ -145,6 +147,7 @@ function NoMatches() {
 export default function ProjectSearchInput() {
   const { query, setQuery, results } = useProjectSearchState();
   const router = useRouter();
+  const locale = useLocale();
   const hasQuery = query.trim().length > 0;
   const desktopResults = results.slice(0, DESKTOP_MAX_RESULTS);
 
@@ -152,7 +155,12 @@ export default function ProjectSearchInput() {
     event.preventDefault();
     const trimmed = query.trim();
     if (!trimmed) return;
-    router.push(`/projects/city-projects?q=${encodeURIComponent(trimmed)}`);
+    router.push(
+      localizeHref(
+        `/projects/city-projects?q=${encodeURIComponent(trimmed)}`,
+        locale
+      )
+    );
   }
 
   return (

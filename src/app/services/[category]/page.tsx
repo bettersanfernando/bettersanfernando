@@ -7,6 +7,8 @@ import {
   type PublishedServiceCategory,
 } from '../../../data/civic/services';
 import { categories } from '../categories';
+import { localizeHref } from '../../../i18n/locale';
+import { getLocale } from '../../../i18n/server';
 import { buildPageMetadata } from '../../../lib/metadata';
 import ServiceCategoryView from '../service-category-view';
 
@@ -69,7 +71,7 @@ export default async function ServiceCategoryOrLegacySlugPage({
   //    category-qualified page. Never rendered as its own indexable page.
   const service = getServiceBySlug(segment);
   if (service) {
-    permanentRedirect(getServiceHref(service));
+    permanentRedirect(localizeHref(getServiceHref(service), await getLocale()));
   }
 
   // 3. Neither a category nor a known service slug.

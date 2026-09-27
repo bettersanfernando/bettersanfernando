@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { absoluteUrl, getSiteUrl } from './site-url';
-import { withLocalePrefix } from '../i18n/locale';
+import { OPEN_GRAPH_LOCALES, withLocalePrefix } from '../i18n/locale';
 import type { LanguageType } from '../types';
 
 // Centralized metadata building blocks. Every page's metadata (static
@@ -32,19 +32,27 @@ export const DEFAULT_OG_IMAGE = {
   alt: `${SITE_NAME} — Independent Civic Information Portal for the City of San Fernando, Pampanga`,
 } as const;
 
+export const DEFAULT_DESCRIPTION_FIL =
+  'Ang BetterSanFernando ay isang malaya at pinatatakbo-ng-komunidad na portal ng impormasyong pampubliko para sa Lungsod ng San Fernando, Pampanga. Hindi ito ang opisyal na website ng Pamahalaang Lungsod.';
+
+export const HOME_TITLE_FIL =
+  'BetterSanFernando — Impormasyong Pampubliko para sa San Fernando, Pampanga';
+
+// Absolute on purpose: under the /fil metadataBase a root-relative image path
+// would resolve to /fil/og-default.png, which does not exist.
+const absoluteOgImage = () => ({
+  ...DEFAULT_OG_IMAGE,
+  url: absoluteUrl(DEFAULT_OG_IMAGE_PATH),
+});
+
 export function getRootMetadata(locale: LanguageType = 'en'): Metadata {
   const path = withLocalePrefix('/', locale);
   const metadataBase = new URL(
     `${getSiteUrl()}${locale === 'fil' ? '/fil/' : '/'}`
   );
-  const title =
-    locale === 'fil'
-      ? 'BetterSanFernando â€” Impormasyong Pampubliko para sa San Fernando, Pampanga'
-      : HOME_TITLE;
+  const title = locale === 'fil' ? HOME_TITLE_FIL : HOME_TITLE;
   const description =
-    locale === 'fil'
-      ? 'Ang BetterSanFernando ay isang malaya at pinatatakbo-ng-komunidad na portal ng impormasyong pampubliko para sa Lungsod ng San Fernando, Pampanga. Hindi ito ang opisyal na website ng Pamahalaang Lungsod.'
-      : DEFAULT_DESCRIPTION;
+    locale === 'fil' ? DEFAULT_DESCRIPTION_FIL : DEFAULT_DESCRIPTION;
   return {
     metadataBase,
     title: {
@@ -58,16 +66,17 @@ export function getRootMetadata(locale: LanguageType = 'en'): Metadata {
     openGraph: {
       type: 'website',
       siteName: SITE_NAME,
+      locale: OPEN_GRAPH_LOCALES[locale],
       title,
       description,
       url: absoluteUrl(path),
-      images: [DEFAULT_OG_IMAGE],
+      images: [absoluteOgImage()],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [DEFAULT_OG_IMAGE_PATH],
+      images: [absoluteUrl(DEFAULT_OG_IMAGE_PATH)],
     },
     robots: {
       index: true,
@@ -83,21 +92,39 @@ export function getRootMetadata(locale: LanguageType = 'en'): Metadata {
   };
 }
 
+/** Plain text, or per-locale text for routes that supply Filipino copy. */
+export type LocalizedText = string | Partial<Record<LanguageType, string>>;
+
+function resolveText(
+  text: LocalizedText | undefined,
+  locale: LanguageType
+): string | undefined {
+  if (typeof text === 'string' || text === undefined) return text;
+  return text[locale] ?? text.en;
+}
+
 /**
  * Metadata for one canonical, indexable page. `path` must be the page's
  * own canonical route (no query string) — every canonical URL in the app
- * is derived from this one helper via absoluteUrl().
+ * is derived from this one helper via absoluteUrl(). `title` and
+ * `description` may be per-locale; pass `locale` (from getLocale() in
+ * generateMetadata()) to select the Filipino copy. Text missing for a
+ * locale falls back to English.
  */
 export function buildPageMetadata({
-  title,
-  description = DEFAULT_DESCRIPTION,
+  title: titleText,
+  description: descriptionText = DEFAULT_DESCRIPTION,
   path,
+  locale = 'en',
 }: {
   /** Omit only for the home page, so the root template's default title applies. */
-  title?: string;
-  description?: string;
+  title?: LocalizedText;
+  description?: LocalizedText;
   path: string;
+  locale?: LanguageType;
 }): Metadata {
+  const title = resolveText(titleText, locale);
+  const description = resolveText(descriptionText, locale);
   // Page metadata is relative to the locale-specific root metadataBase. That
   // keeps English canonical URLs at their existing paths while /fil pages
   // emit their own canonical URLs without duplicating every route module.
@@ -116,14 +143,15 @@ export function buildPageMetadata({
       description,
       url: canonical,
       siteName: SITE_NAME,
+      locale: OPEN_GRAPH_LOCALES[locale],
       type: 'website',
-      images: [DEFAULT_OG_IMAGE],
+      images: [absoluteOgImage()],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [DEFAULT_OG_IMAGE_PATH],
+      images: [absoluteUrl(DEFAULT_OG_IMAGE_PATH)],
     },
   };
 }

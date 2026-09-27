@@ -21,8 +21,29 @@ const sitemapXml = await sitemapResponse.text();
 const sitemapUrls = [...sitemapXml.matchAll(/<loc>(.*?)<\/loc>/g)].map(
   match => match[1]
 );
-assert.equal(sitemapUrls.length, 584);
-assert.equal(new Set(sitemapUrls).size, 584);
+const isFilipino = (pathname: string) =>
+  pathname === '/fil' || pathname.startsWith('/fil/');
+const englishSitemapUrls = sitemapUrls.filter(
+  url => !isFilipino(new URL(url).pathname)
+);
+const filipinoSitemapUrls = sitemapUrls.filter(url =>
+  isFilipino(new URL(url).pathname)
+);
+assert.equal(filipinoSitemapUrls.length, englishSitemapUrls.length);
+assert.equal(new Set(sitemapUrls).size, sitemapUrls.length);
+assert.deepEqual(
+  filipinoSitemapUrls.map(url => new URL(url).pathname),
+  englishSitemapUrls.map(url => {
+    const { pathname } = new URL(url);
+    return pathname === '/' ? '/fil' : `/fil${pathname}`;
+  })
+);
+assert.doesNotMatch(sitemapXml, /\/fil\/fil/);
+assert.equal(
+  (sitemapXml.match(/hreflang="fil-PH"/g) ?? []).length,
+  sitemapUrls.length,
+  'every sitemap entry must carry the EN/FIL alternates'
+);
 assert.ok(sitemapUrls.every(url => url.startsWith(`${productionOrigin}/`)));
 assert.doesNotMatch(sitemapXml, /localhost|127\.0\.0\.1/i);
 
@@ -41,6 +62,13 @@ for (let offset = 0; offset < sitemapUrls.length; offset += 25) {
       pages.set(canonical.pathname, html);
       assert.match(html, /<header[ >]/i, `${canonical.pathname} needs header`);
       assert.match(html, /<footer[ >]/i, `${canonical.pathname} needs footer`);
+      assert.match(
+        html,
+        new RegExp(
+          `<html lang="${isFilipino(canonical.pathname) ? 'fil' : 'en'}"`
+        ),
+        `${canonical.pathname} must declare its locale`
+      );
       assert.match(html, /<h1[ >]/i, `${canonical.pathname} needs a heading`);
       assert.ok(
         html.length > 1_000,
@@ -62,20 +90,24 @@ for (let offset = 0; offset < sitemapUrls.length; offset += 25) {
       );
       assert.match(
         html,
-        /independent, community-run civic-information portal/i
+        /independent, community-run civic-information portal|malaya at pinatatakbo-ng-komunidad na portal/i
       );
       assert.doesNotMatch(html, /"@type":"GovernmentOrganization"/);
-      if (/aria-label="Breadcrumb"/.test(html)) {
+      if (/aria-label="(Breadcrumb|Landas ng nabigasyon)"/.test(html)) {
         assert.match(html, /"@type":"BreadcrumbList"/);
       }
     })
   );
 }
 
-const titles = [...pages.entries()].map(([path, html]) => ({
-  path,
-  title: html.match(/<title>(.*?)<\/title>/)?.[1] ?? '',
-}));
+// Untranslated /fil pages intentionally share their English title and
+// description, so uniqueness is enforced per locale over the English set.
+const titles = [...pages.entries()]
+  .filter(([path]) => !isFilipino(path))
+  .map(([path, html]) => ({
+    path,
+    title: html.match(/<title>(.*?)<\/title>/)?.[1] ?? '',
+  }));
 assert.ok(titles.every(entry => entry.title.length >= 10));
 const titlePaths = Map.groupBy(titles, entry => entry.title);
 const duplicateTitles = [...titlePaths.entries()].filter(
@@ -91,9 +123,12 @@ assert.deepEqual(
     )
     .join('; ')}`
 );
-const descriptions = [...pages.values()].map(
-  html => html.match(/<meta name="description" content="(.*?)"\/>/)?.[1] ?? ''
-);
+const descriptions = [...pages.entries()]
+  .filter(([path]) => !isFilipino(path))
+  .map(
+    ([, html]) =>
+      html.match(/<meta name="description" content="(.*?)"\/>/)?.[1] ?? ''
+  );
 assert.ok(descriptions.every(description => description.length >= 40));
 assert.equal(
   new Set(descriptions).size,

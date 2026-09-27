@@ -11,6 +11,9 @@ import {
   Siren,
   TriangleAlert,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { localizeHref } from '../../i18n/locale';
+import { useLocale } from '../i18n/useLocale';
 import { getGovernmentHotlines } from '../../data/civic/governmentHotlines';
 
 const focusStyles =
@@ -102,9 +105,12 @@ function phoneHref(value: string) {
 }
 
 export default function EmergencyStrip() {
+  const { t } = useTranslation('common');
+  const locale = useLocale();
+
   return (
     <section
-      aria-label="Emergency hotlines"
+      aria-label={t('navigation.emergencyStrip.title')}
       className="bg-[#002EAC] text-white"
     >
       <div className="container mx-auto flex h-9.5 items-center justify-between gap-2 px-4 text-xs sm:h-10 sm:gap-3 sm:px-6 lg:px-8">
@@ -113,11 +119,11 @@ export default function EmergencyStrip() {
             className="h-3.5 w-3.5 shrink-0 text-blue-200"
             aria-hidden="true"
           />
-          <span>Emergency</span>
+          <span>{t('navigation.emergencyStrip.label')}</span>
         </div>
 
         <nav
-          aria-label="Emergency contacts"
+          aria-label={t('navigation.emergencyStrip.contacts')}
           className="flex min-w-0 flex-1 items-center justify-center overflow-hidden px-1"
         >
           <div className="flex items-center justify-center gap-1.5 text-[11px] sm:gap-2 lg:gap-1.5 xl:gap-2.5 xl:text-xs">
@@ -170,12 +176,18 @@ export default function EmergencyStrip() {
 
         <div className="flex shrink-0 items-center">
           <Link
-            href="/government/hotlines"
+            href={localizeHref('/government/hotlines', locale)}
             className={`inline-flex items-center gap-1 font-medium text-white transition-colors hover:text-white hover:underline decoration-white/40 underline-offset-2 ${focusStyles}`}
           >
-            <span className="hidden xl:inline">View all hotlines</span>
-            <span className="hidden sm:inline xl:hidden">Hotlines</span>
-            <span className="sm:hidden">All</span>
+            <span className="hidden xl:inline">
+              {t('navigation.emergencyStrip.viewAll')}
+            </span>
+            <span className="hidden sm:inline xl:hidden">
+              {t('navigation.emergencyStrip.hotlines')}
+            </span>
+            <span className="sm:hidden">
+              {t('navigation.emergencyStrip.all')}
+            </span>
             <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
           </Link>
         </div>

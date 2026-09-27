@@ -2,7 +2,9 @@
 
 import { useState, useRef, useEffect, useMemo, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Link from '../i18n/LocaleLink';
+import { useLocale } from '../i18n/useLocale';
+import { localizeHref } from '../../i18n/locale';
 import { ArrowRight, Search, ArrowUpRight } from 'lucide-react';
 import {
   getServices,
@@ -23,6 +25,7 @@ export default function HomeServiceSearch({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const locale = useLocale();
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -58,18 +61,22 @@ export default function HomeServiceSearch({
     e.preventDefault();
     setIsOpen(false);
     if (query.trim()) {
-      router.push(`/services?q=${encodeURIComponent(query.trim())}`);
+      router.push(
+        localizeHref(`/services?q=${encodeURIComponent(query.trim())}`, locale)
+      );
     } else {
-      router.push('/services');
+      router.push(localizeHref('/services', locale));
     }
   }
 
   function handleViewAll() {
     setIsOpen(false);
     if (query.trim()) {
-      router.push(`/services?q=${encodeURIComponent(query.trim())}`);
+      router.push(
+        localizeHref(`/services?q=${encodeURIComponent(query.trim())}`, locale)
+      );
     } else {
-      router.push('/services');
+      router.push(localizeHref('/services', locale));
     }
   }
 

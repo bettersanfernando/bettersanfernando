@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { RotateCcw, Search } from 'lucide-react';
 import PageLoading from '../../../components/ui/PageLoading';
 import type {

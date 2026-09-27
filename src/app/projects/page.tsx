@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import {
   ArrowUpRight,
   Building2,
@@ -11,6 +11,8 @@ import {
 
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { getAllProjectEvidence, getProjects } from '../../data/civic/projects';
+import { localizeHref } from '../../i18n/locale';
+import { getLocale } from '../../i18n/server';
 import { buildPageMetadata } from '../../lib/metadata';
 import ProjectSearchInput, {
   MobileProjectSearchResults,
@@ -154,7 +156,12 @@ export default async function ProjectsHubPage({
       const value = params[key];
       if (typeof value === 'string') query.set(key, value);
     }
-    redirect(`/projects/city-projects?${query.toString()}`);
+    redirect(
+      localizeHref(
+        `/projects/city-projects?${query.toString()}`,
+        await getLocale()
+      )
+    );
   }
 
   return (

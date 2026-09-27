@@ -29,3 +29,27 @@ export function withLocalePrefix(
     ? `${FILIPINO_PREFIX}${normalized === '/' ? '' : normalized}`
     : normalized;
 }
+
+export const INTL_LOCALES: Record<LanguageType, string> = {
+  en: 'en-PH',
+  fil: 'fil-PH',
+};
+
+export const OPEN_GRAPH_LOCALES: Record<LanguageType, string> = {
+  en: 'en_PH',
+  fil: 'fil_PH',
+};
+
+/**
+ * Locale-prefixes an internal href, keeping its query string and fragment.
+ * External, protocol-relative, fragment-only, and non-path hrefs (mailto:,
+ * tel:) are returned untouched, and an already-prefixed href is not
+ * prefixed twice.
+ */
+export function localizeHref(href: string, locale: LanguageType): string {
+  if (!href.startsWith('/') || href.startsWith('//')) return href;
+  const suffixStart = href.search(/[?#]/);
+  const pathname = suffixStart === -1 ? href : href.slice(0, suffixStart);
+  const suffix = suffixStart === -1 ? '' : href.slice(suffixStart);
+  return `${withLocalePrefix(pathname, locale)}${suffix}`;
+}

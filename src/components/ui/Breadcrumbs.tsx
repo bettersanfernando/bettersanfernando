@@ -4,7 +4,14 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { BreadcrumbListJsonLd } from '../../lib/json-ld';
+import {
+  localizeHref,
+  withLocalePrefix,
+  withoutLocalePrefix,
+} from '../../i18n/locale';
+import { useLocale } from '../i18n/useLocale';
 
 // Shared breadcrumb navigation and structured-data companion for App Router pages.
 
@@ -19,7 +26,10 @@ interface BreadcrumbsProps {
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
-  const pathname = usePathname() ?? '/';
+  const locale = useLocale();
+  const { t } = useTranslation('common');
+  // Canonical (unprefixed) path: '/fil' is a locale marker, not a page.
+  const pathname = withoutLocalePrefix(usePathname() ?? '/');
 
   // Generate breadcrumbs from current path if no items provided
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
@@ -46,14 +56,23 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
     return breadcrumbs;
   };
 
-  const breadcrumbItems = items || generateBreadcrumbs();
+  // The root crumb is shared chrome, so it is localized here rather than by
+  // each caller; every other label is the caller's own (entity) name.
+  const breadcrumbItems = (items || generateBreadcrumbs()).map(item => ({
+    ...item,
+    label: item.href === '/' ? t('breadcrumbs.home') : item.label,
+    href: item.href && localizeHref(item.href, locale),
+  }));
 
   return (
     <>
-      <BreadcrumbListJsonLd items={breadcrumbItems} currentPath={pathname} />
+      <BreadcrumbListJsonLd
+        items={breadcrumbItems}
+        currentPath={withLocalePrefix(pathname, locale)}
+      />
       <nav
         className={`flex items-center space-x-1 text-sm text-gray-600 ${className}`}
-        aria-label="Breadcrumb"
+        aria-label={t('breadcrumbs.label')}
       >
         {breadcrumbItems.map((item, index) => (
           <React.Fragment key={index}>

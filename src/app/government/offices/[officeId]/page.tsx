@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import Link from '../../../../components/i18n/LocaleLink';
 import {
   Building2,
   CalendarCheck2,

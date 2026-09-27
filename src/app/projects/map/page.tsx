@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getBarangayBoundaries,

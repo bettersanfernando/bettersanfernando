@@ -3,6 +3,7 @@ import { getServices, getServiceCategory } from '../data/civic/services';
 import { getProjects } from '../data/civic/projects';
 import { getCityOffices } from '../data/civic/government';
 import { absoluteUrl } from '../lib/site-url';
+import { withLocalePrefix } from '../i18n/locale';
 
 // The 28 Batch 3 static routes + 9 Batch 5 interactive routes + 2 Batch 9
 // SEO-pass routes. These are literal App Router pages, not data records, so
@@ -83,5 +84,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Deliberately no per-URL modification date field: none of these routes
   // has a verified publication date, and the build timestamp is not a real
   // modification date for the underlying record.
-  return allPaths.map(path => ({ url: absoluteUrl(path) }));
+  // Every page is listed once per locale (English at its own path, Filipino
+  // under /fil), each entry carrying both alternates.
+  return allPaths.flatMap(path => {
+    const languages = {
+      en: absoluteUrl(path),
+      'fil-PH': absoluteUrl(withLocalePrefix(path, 'fil')),
+    };
+    return [
+      { url: languages.en, alternates: { languages } },
+      { url: languages['fil-PH'], alternates: { languages } },
+    ];
+  });
 }

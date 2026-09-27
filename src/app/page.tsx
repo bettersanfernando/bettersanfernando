@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { headers } from 'next/headers';
+import Link from '../components/i18n/LocaleLink';
 import {
   ArrowRight,
   Briefcase,
@@ -40,14 +39,11 @@ import { getProjects } from '../data/civic/projects';
 import { getLegislationSummary } from '../data/civic/legislationSummary';
 import { getFullDisclosureRecords } from '../data/civic/fullDisclosure';
 import { getFinanceReports } from '../data/civic/finance';
-import { isLanguage } from '../i18n/locale';
+import { getLocale } from '../i18n/server';
 import { getRootMetadata } from '../lib/metadata';
 
 export async function generateMetadata() {
-  const locale = (await headers()).get('x-bsf-locale');
-  return getRootMetadata(
-    isLanguage(locale ?? undefined) ? (locale as 'en' | 'fil') : 'en'
-  );
+  return getRootMetadata(await getLocale());
 }
 
 /*

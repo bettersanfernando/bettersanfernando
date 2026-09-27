@@ -12,7 +12,7 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Link from '../components/i18n/LocaleLink';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Search, X } from 'lucide-react';
 import { getSearchHref } from '../data/navigation';

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { ChevronRight, FolderKanban, MapPinned } from 'lucide-react';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import { aggregateProjectStatistics } from '../../../data/civic/projectStatistics';

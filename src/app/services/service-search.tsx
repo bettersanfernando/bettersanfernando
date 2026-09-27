@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import { ArrowUpRight, Search, X } from 'lucide-react';
 import {
   getServiceCategory,

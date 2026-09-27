@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import Link from '../i18n/LocaleLink';
 import { ArrowRight, ChevronLeft } from 'lucide-react';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
 import type { BarangayProjectSummary } from '../../data/civic/projectMap';

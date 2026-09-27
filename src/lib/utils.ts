@@ -1,12 +1,19 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { INTL_LOCALES } from '../i18n/locale';
+import type { LanguageType } from '../types';
+
+const NOT_AVAILABLE: Record<LanguageType, string> = {
+  en: 'Not available',
+  fil: 'Hindi available',
+};
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-PH', {
+export function formatDate(date: Date, locale: LanguageType = 'en'): string {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -23,9 +30,12 @@ export const getRandomNumber = (min: number, max: number): number => {
 };
 
 /** Formats a peso amount, or a neutral placeholder when the value is genuinely unavailable. */
-export function formatPeso(amount: number | null | undefined): string {
-  if (amount === null || amount === undefined) return 'Not available';
-  return new Intl.NumberFormat('en-PH', {
+export function formatPeso(
+  amount: number | null | undefined,
+  locale: LanguageType = 'en'
+): string {
+  if (amount === null || amount === undefined) return NOT_AVAILABLE[locale];
+  return new Intl.NumberFormat(INTL_LOCALES[locale], {
     style: 'currency',
     currency: 'PHP',
   }).format(amount);
@@ -37,10 +47,11 @@ export function formatPeso(amount: number | null | undefined): string {
  * an explicit "Currency not stated in source" label instead of guessing PHP.
  */
 export function formatUnstatedAmount(
-  amount: number | null | undefined
+  amount: number | null | undefined,
+  locale: LanguageType = 'en'
 ): string {
-  if (amount === null || amount === undefined) return 'Not available';
-  return new Intl.NumberFormat('en-PH', {
+  if (amount === null || amount === undefined) return NOT_AVAILABLE[locale];
+  return new Intl.NumberFormat(INTL_LOCALES[locale], {
     maximumFractionDigits: 2,
   }).format(amount);
 }
@@ -56,10 +67,13 @@ export function titleCaseEnum(value: string): string {
 }
 
 /** Formats a YYYY-MM-DD date string without shifting days across timezones. */
-export function formatIsoDate(iso: string | null | undefined): string {
-  if (!iso) return 'Not available';
+export function formatIsoDate(
+  iso: string | null | undefined,
+  locale: LanguageType = 'en'
+): string {
+  if (!iso) return NOT_AVAILABLE[locale];
   const [year, month, day] = iso.split('-').map(Number);
-  return new Intl.DateTimeFormat('en-PH', {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

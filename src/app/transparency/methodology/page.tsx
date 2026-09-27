@@ -5,7 +5,7 @@ import {
   FileText,
   LockKeyhole,
 } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import { getTransparencySourceInventory } from '../../../data/civic/transparencySources';
 import { buildPageMetadata } from '../../../lib/metadata';

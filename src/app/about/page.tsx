@@ -1,6 +1,7 @@
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import { ArrowDown, ArrowRight, ExternalLink, Globe } from 'lucide-react';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import { getLocale } from '../../i18n/server';
 import { buildPageMetadata } from '../../lib/metadata';
 import { getServices } from '../../data/civic/services';
 import { getProjects } from '../../data/civic/projects';
@@ -9,12 +10,20 @@ import { getCityOffices } from '../../data/civic/government';
 import { getBarangays } from '../../data/civic/demographics';
 import { getLegislationSummary } from '../../data/civic/legislationSummary';
 
-export const metadata = buildPageMetadata({
-  title: 'About BetterSanFernando',
-  description:
-    'BetterSanFernando makes public information about the City of San Fernando, Pampanga easier to find, understand, and verify.',
-  path: '/about',
-});
+export async function generateMetadata() {
+  return buildPageMetadata({
+    title: {
+      en: 'About BetterSanFernando',
+      fil: 'Tungkol sa BetterSanFernando',
+    },
+    description: {
+      en: 'BetterSanFernando makes public information about the City of San Fernando, Pampanga easier to find, understand, and verify.',
+      fil: 'Pinadadali ng BetterSanFernando ang paghahanap, pag-unawa, at pagberipika ng pampublikong impormasyon tungkol sa Lungsod ng San Fernando, Pampanga.',
+    },
+    path: '/about',
+    locale: await getLocale(),
+  });
+}
 
 const BETTERGOV_URL = 'https://bettergov.ph';
 
