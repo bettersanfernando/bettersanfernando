@@ -1,6 +1,12 @@
 #!/usr/bin/env -S node --experimental-strip-types
 import assert from 'node:assert/strict';
-import { getServices, getServiceHref } from '../src/data/civic/services.ts';
+import {
+  getServiceCategory,
+  getServiceHref,
+  getServices,
+} from '../src/data/civic/services.ts';
+import { getProjects } from '../src/data/civic/projects.ts';
+import { getCityOffices } from '../src/data/civic/government.ts';
 
 const baseUrl = process.env.BATCH7_BASE_URL ?? 'http://127.0.0.1:3000';
 const productionOrigin = 'https://bettersanfernando.example';
@@ -28,6 +34,16 @@ const englishSitemapUrls = sitemapUrls.filter(
 );
 const filipinoSitemapUrls = sitemapUrls.filter(url =>
   isFilipino(new URL(url).pathname)
+);
+// Every dataset-backed route is listed: 40 static routes plus one per service
+// category, service, project and office (kept in step with smoke-batch6-seo).
+assert.equal(
+  englishSitemapUrls.length,
+  40 +
+    new Set(getServices().map(getServiceCategory)).size +
+    getServices().length +
+    getProjects().length +
+    getCityOffices().length
 );
 assert.equal(filipinoSitemapUrls.length, englishSitemapUrls.length);
 assert.equal(new Set(sitemapUrls).size, sitemapUrls.length);
@@ -185,7 +201,7 @@ for (const path of [
 
 for (const [path, expectedValue] of [
   ['/search?q=water', 'water'],
-  ['/projects?status=AWARDED', 'AWARDED'],
+  ['/projects/city-projects?status=AWARDED', 'AWARDED'],
   ['/projects/sources?stage=BID_RESULTS', 'BID_RESULTS'],
   ['/barangays?type=Urban', 'Urban'],
   ['/procurement/bid-results?year=2024', '2024'],
@@ -208,6 +224,24 @@ for (const [path, expectedValue] of [
   assert.notEqual(html, pages.get(basePath), `${path} must render URL state`);
 }
 
+// Legacy /projects listing filters redirect to the canonical listing route,
+// keeping the query string and (for Filipino URLs) the /fil prefix.
+for (const [source, destination] of [
+  ['/projects?status=AWARDED', '/projects/city-projects?status=AWARDED'],
+  [
+    '/fil/projects?status=AWARDED',
+    '/fil/projects/city-projects?status=AWARDED',
+  ],
+] as const) {
+  const response = await request(source);
+  assert.ok(
+    [307, 308].includes(response.status),
+    `${source} must redirect, got ${response.status}`
+  );
+  const location = redirectLocation(response);
+  assert.equal(`${location.pathname}${location.search}`, destination);
+}
+
 const robotsResponse = await request('/robots.txt');
 assert.equal(robotsResponse.status, 200);
 assert.match(
@@ -216,5 +250,5 @@ assert.match(
 );
 
 console.log(
-  'Batch 7 HTTP smoke passed: 584 content-bearing shell pages, 16 exact aliases, legacy service redirects, genuine noindex 404s, query-state SSR/canonicals, production-origin SEO, and rendered breadcrumb JSON-LD.'
+  'Batch 7 HTTP smoke passed: content-bearing EN and FIL shell pages for every sitemap URL, 16 exact aliases, legacy service redirects, genuine noindex 404s, query-state SSR/canonicals, production-origin SEO, and rendered breadcrumb JSON-LD.'
 );
