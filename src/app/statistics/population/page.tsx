@@ -11,21 +11,25 @@ import { aggregatePopulationStatistics } from '../../../data/civic/populationSta
 import { buildPageMetadata } from '../../../lib/metadata';
 import { formatIsoDate } from '../../../lib/utils';
 import BarangayTable from './BarangayTable';
+import { PageMessages } from '../../../components/i18n/PageMessages';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
+import { INTL_LOCALES } from '../../../i18n/locale';
 
-export const metadata = buildPageMetadata({
-  title: 'Population Statistics',
-  description:
-    'Explore San Fernando’s 2024 POPCEN population across all 35 barangays, with exact counts, city shares, classifications, and official-source context.',
-  path: '/statistics/population',
-});
+const BARANGAY_COUNT = getBarangays().length;
 
-const numberFormatter = new Intl.NumberFormat('en-PH');
-
-const percentFormatter = new Intl.NumberFormat('en-PH', {
-  style: 'percent',
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1,
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('statistics-population');
+  return buildPageMetadata({
+    title: t('Population Statistics'),
+    description: t(
+      'Explore San Fernando’s 2024 POPCEN population across all {{barangays}} barangays, with exact counts, city shares, classifications, and official-source context.',
+      { barangays: BARANGAY_COUNT }
+    ),
+    path: '/statistics/population',
+    locale,
+  });
+}
 
 const source = getCityDemographicsSource();
 
@@ -63,60 +67,81 @@ const ruralBarangayNames = statistics.ruralBarangays
 
 const topFiveBarangays = statistics.rankedBarangays.slice(0, 5);
 
-const readingGuideItems = [
-  {
-    title: 'Population',
-    description:
-      'The exact 2024 POPCEN population published for each barangay.',
-  },
-  {
-    title: 'City Share',
-    description: `The barangay population as a share of San Fernando’s published city total of ${numberFormatter.format(statistics.totalPopulation)}.`,
-  },
-  {
-    title: 'Classification',
-    description:
-      'The published Urban or Rural classification associated with each barangay.',
-  },
-  {
-    title: 'Reference Period',
-    description:
-      'All comparisons on this page use the same 2024 POPCEN baseline.',
-  },
-] as const;
+const readingGuideItems = (t: PageT, totalPopulation: string) =>
+  [
+    {
+      title: t('Population'),
+      description: t(
+        'The exact 2024 POPCEN population published for each barangay.'
+      ),
+    },
+    {
+      title: t('City Share'),
+      description: t(
+        'The barangay population as a share of San Fernando’s published city total of {{totalPopulation}}.',
+        { totalPopulation }
+      ),
+    },
+    {
+      title: t('Classification'),
+      description: t(
+        'The published Urban or Rural classification associated with each barangay.'
+      ),
+    },
+    {
+      title: t('Reference Period'),
+      description: t(
+        'All comparisons on this page use the same 2024 POPCEN baseline.'
+      ),
+    },
+  ] as const;
 
-const keepExploringLinks = [
-  {
-    href: '/statistics/city-profile',
-    title: 'City Profile',
-    description:
-      'A source-aware overview of verified city facts, boundaries, and office records.',
-    action: 'View city profile',
-  },
-  {
-    href: '/barangays',
-    title: 'Barangay Directory',
-    description:
-      'Search verified PSGC identity, population, and classification records.',
-    action: 'Browse barangays',
-  },
-  {
-    href: '/statistics/public-records',
-    title: 'Public Records Statistics',
-    description:
-      'Track published datasets, coverage periods, and evidence units.',
-    action: 'View public records',
-  },
-  {
-    href: '/transparency/methodology',
-    title: 'How We Publish Data',
-    description:
-      'Learn how BetterSanFernando verifies and documents public data sources.',
-    action: 'Read methodology',
-  },
-] as const;
+const keepExploringLinks = (t: PageT) =>
+  [
+    {
+      href: '/statistics/city-profile',
+      title: t('City Profile'),
+      description: t(
+        'A source-aware overview of verified city facts, boundaries, and office records.'
+      ),
+      action: t('View city profile'),
+    },
+    {
+      href: '/barangays',
+      title: t('Barangay Directory'),
+      description: t(
+        'Search verified PSGC identity, population, and classification records.'
+      ),
+      action: t('Browse barangays'),
+    },
+    {
+      href: '/statistics/public-records',
+      title: t('Public Records Statistics'),
+      description: t(
+        'Track published datasets, coverage periods, and evidence units.'
+      ),
+      action: t('View public records'),
+    },
+    {
+      href: '/transparency/methodology',
+      title: t('How We Publish Data'),
+      description: t(
+        'Learn how BetterSanFernando verifies and documents public data sources.'
+      ),
+      action: t('Read methodology'),
+    },
+  ] as const;
 
-export default function PopulationStatistics() {
+export default async function PopulationStatistics() {
+  const { t, locale, messages } = await getPageT('statistics-population');
+
+  const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[locale]);
+
+  const percentFormatter = new Intl.NumberFormat(INTL_LOCALES[locale], {
+    style: 'percent',
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
   return (
     <main className="flex-grow bg-white">
       {/* 1. EDITORIAL HERO */}
@@ -125,24 +150,28 @@ export default function PopulationStatistics() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Statistics', href: '/statistics' },
-              { label: 'Population Statistics' },
+              { label: t('Home'), href: '/' },
+              { label: t('Statistics'), href: '/statistics' },
+              { label: t('Population Statistics') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                STATISTICS · POPULATION
+                {t('STATISTICS · POPULATION')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                Population Statistics
+                {t('Population Statistics')}
               </h1>
               <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                Explore San Fernando’s {source.census} population across all{' '}
-                {statistics.barangayCount} barangays, with exact counts, city
-                shares, classifications, and official-source context.
+                {t(
+                  'Explore San Fernando’s {{census}} population across all {{barangayCount}} barangays, with exact counts, city shares, classifications, and official-source context.',
+                  {
+                    census: source.census,
+                    barangayCount: statistics.barangayCount,
+                  }
+                )}
               </p>
 
               {/* Prominent primary figure */}
@@ -151,7 +180,7 @@ export default function PopulationStatistics() {
                   {numberFormatter.format(statistics.totalPopulation)}
                 </p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  {source.census} Population
+                  {t('{{census}} Population', { census: source.census })}
                 </p>
               </div>
 
@@ -161,7 +190,7 @@ export default function PopulationStatistics() {
                   href="#distribution"
                   className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
                 >
-                  Explore Population Distribution
+                  {t('Explore Population Distribution')}
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <a
@@ -170,7 +199,7 @@ export default function PopulationStatistics() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  View Official PSA Source
+                  {t('View Official PSA Source')}
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>
@@ -178,18 +207,26 @@ export default function PopulationStatistics() {
 
             {/* RIGHT-SIDE SCOPE MODULE */}
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
-              <p className="text-eyebrow text-[#0066EB]">DATA SCOPE</p>
+              <p className="text-eyebrow text-[#0066EB]">{t('DATA SCOPE')}</p>
               <h2 className="mt-1.5 text-base font-bold text-gray-950">
                 {source.census}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                Official population baseline published by the Philippine
-                Statistics Authority. These figures are census values, not
-                estimates or projections.
+                {t(
+                  'Official population baseline published by the Philippine Statistics Authority. These figures are census values, not estimates or projections.'
+                )}
               </p>
               <div className="mt-4 flex items-center justify-between border-t border-gray-200/80 pt-3 text-xs text-gray-600">
-                <span>{statistics.barangayCount} Barangays</span>
-                <span>Last Verified: {formatIsoDate(source.lastVerified)}</span>
+                <span>
+                  {t('{{barangayCount}} Barangays', {
+                    barangayCount: statistics.barangayCount,
+                  })}
+                </span>
+                <span>
+                  {t('Last Verified: {{lastVerified}}', {
+                    lastVerified: formatIsoDate(source.lastVerified, locale),
+                  })}
+                </span>
               </div>
             </aside>
           </div>
@@ -204,27 +241,27 @@ export default function PopulationStatistics() {
       >
         <div className="container mx-auto px-4 py-8 sm:py-10">
           <h2 id="snapshot-heading" className="sr-only">
-            At a Glance
+            {t('At a Glance')}
           </h2>
 
           <dl className="grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-gray-200">
             {/* Barangays */}
             <div className="lg:pr-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Barangays
+                {t('Barangays')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {statistics.barangayCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Complete published barangay set
+                {t('Complete published barangay set')}
               </p>
             </div>
 
             {/* Largest Barangay */}
             <div className="lg:px-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Largest Barangay
+                {t('Largest Barangay')}
               </dt>
               <dd className="mt-1 text-sm font-semibold text-gray-900">
                 {statistics.largestBarangay?.name}
@@ -235,17 +272,18 @@ export default function PopulationStatistics() {
                 )}
               </p>
               <p className="mt-1 text-xs text-gray-600">
-                {percentFormatter.format(
-                  statistics.largestBarangay?.share ?? 0
-                )}{' '}
-                of city total
+                {t('{{share}} of city total', {
+                  share: percentFormatter.format(
+                    statistics.largestBarangay?.share ?? 0
+                  ),
+                })}
               </p>
             </div>
 
             {/* Smallest Barangay */}
             <div className="lg:px-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Smallest Barangay
+                {t('Smallest Barangay')}
               </dt>
               <dd className="mt-1 text-sm font-semibold text-gray-900">
                 {statistics.smallestBarangay?.name}
@@ -256,23 +294,29 @@ export default function PopulationStatistics() {
                 )}
               </p>
               <p className="mt-1 text-xs text-gray-600">
-                {percentFormatter.format(
-                  statistics.smallestBarangay?.share ?? 0
-                )}{' '}
-                of city total
+                {t('{{share}} of city total', {
+                  share: percentFormatter.format(
+                    statistics.smallestBarangay?.share ?? 0
+                  ),
+                })}
               </p>
             </div>
 
             {/* Classification */}
             <div className="lg:pl-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Classification
+                {t('Classification')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
-                {statistics.urbanBarangayCount} Urban
+                {t('{{urbanBarangayCount}} Urban', {
+                  urbanBarangayCount: statistics.urbanBarangayCount,
+                })}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                {statistics.ruralBarangayCount} Rural · {ruralBarangayNames}
+                {t('{{ruralBarangayCount}} Rural · {{ruralBarangayNames}}', {
+                  ruralBarangayCount: statistics.ruralBarangayCount,
+                  ruralBarangayNames,
+                })}
               </p>
             </div>
           </dl>
@@ -287,16 +331,18 @@ export default function PopulationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">DISTRIBUTION</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('DISTRIBUTION')}</p>
             <h2
               id="distribution-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              How Population Is Distributed
+              {t('How Population Is Distributed')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              The five most populous barangays based on the {source.census}{' '}
-              population baseline.
+              {t(
+                'The five most populous barangays based on the {{census}} population baseline.',
+                { census: source.census }
+              )}
             </p>
           </div>
 
@@ -309,18 +355,23 @@ export default function PopulationStatistics() {
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <h3 className="text-base font-bold text-gray-950">
-                        Top 5 Most Populous Barangays
+                        {t('Top 5 Most Populous Barangays')}
                       </h3>
                       <p className="mt-0.5 text-xs text-gray-500">
-                        Population counts from the {source.census}.
+                        {t('Population counts from the {{census}}.', {
+                          census: source.census,
+                        })}
                       </p>
                     </div>
                     <div className="text-xs text-gray-500 sm:text-right">
                       <p className="font-medium text-gray-600">
-                        {source.census} · {statistics.barangayCount} Barangays
+                        {t('{{census}} · {{barangayCount}} Barangays', {
+                          census: source.census,
+                          barangayCount: statistics.barangayCount,
+                        })}
                       </p>
                       <p className="mt-0.5 text-[11px] text-gray-400">
-                        Population scale · residents
+                        {t('Population scale · residents')}
                       </p>
                     </div>
                   </div>
@@ -329,10 +380,10 @@ export default function PopulationStatistics() {
                 {/* Desktop Column Header */}
                 <div className="hidden border-b border-gray-200 bg-gray-50/70 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500 sm:grid sm:grid-cols-[1.75rem_8.5rem_minmax(0,1fr)_5.5rem_4.5rem] sm:items-center sm:gap-4 sm:px-5">
                   <span>#</span>
-                  <span>Barangay</span>
-                  <span>Barangay Population</span>
-                  <span className="text-right">Population</span>
-                  <span className="text-right">City Share</span>
+                  <span>{t('Barangay')}</span>
+                  <span>{t('Barangay Population')}</span>
+                  <span className="text-right">{t('Population')}</span>
+                  <span className="text-right">{t('City Share')}</span>
                 </div>
 
                 {/* Rows */}
@@ -340,11 +391,15 @@ export default function PopulationStatistics() {
                   {topFiveBarangays.map(barangay => {
                     const barWidthPercent =
                       (barangay.population / populationScale.max) * 100;
-                    const accessibleLabel = `${barangay.name}: ${numberFormatter.format(
-                      barangay.population
-                    )} residents, ${(barangay.share * 100).toFixed(
-                      1
-                    )} percent of San Fernando’s ${source.census} population.`;
+                    const accessibleLabel = t(
+                      '{{name}}: {{population}} residents, {{sharePercent}} percent of San Fernando’s {{census}} population.',
+                      {
+                        name: barangay.name,
+                        population: numberFormatter.format(barangay.population),
+                        sharePercent: (barangay.share * 100).toFixed(1),
+                        census: source.census,
+                      }
+                    );
 
                     return (
                       <li
@@ -411,12 +466,16 @@ export default function PopulationStatistics() {
 
                           <div className="flex items-center justify-between text-xs text-gray-500">
                             <span>
-                              {percentFormatter.format(barangay.share)} of city
-                              population
+                              {t('{{share}} of city population', {
+                                share: percentFormatter.format(barangay.share),
+                              })}
                             </span>
                             <span className="tabular-nums">
-                              0–{numberFormatter.format(populationScale.max)}{' '}
-                              scale
+                              {t('0–{{max}} scale', {
+                                max: numberFormatter.format(
+                                  populationScale.max
+                                ),
+                              })}
                             </span>
                           </div>
                         </div>
@@ -465,7 +524,11 @@ export default function PopulationStatistics() {
                 href="#barangays"
                 className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 text-xs font-semibold text-[#0066EB] transition-colors hover:bg-[#F3F6FB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] sm:px-5"
               >
-                <span>View all {statistics.barangayCount} barangays</span>
+                <span>
+                  {t('View all {{barangayCount}} barangays', {
+                    barangayCount: statistics.barangayCount,
+                  })}
+                </span>
                 <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
               </a>
             </div>
@@ -480,44 +543,55 @@ export default function PopulationStatistics() {
                   id="context-heading"
                   className="text-base font-bold text-gray-950"
                 >
-                  Population Context
+                  {t('Population Context')}
                 </h3>
 
                 <div className="mt-5 space-y-4 text-sm">
                   <div>
                     <h4 className="font-semibold text-gray-950">
-                      Largest to Smallest
+                      {t('Largest to Smallest')}
                     </h4>
                     <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                      {statistics.largestBarangay?.name} has{' '}
-                      {numberFormatter.format(
-                        statistics.largestBarangay?.population ?? 0
-                      )}{' '}
-                      residents, compared with{' '}
-                      {numberFormatter.format(
-                        statistics.smallestBarangay?.population ?? 0
-                      )}{' '}
-                      in {statistics.smallestBarangay?.name}.
+                      {t(
+                        '{{name}} has {{population}} residents, compared with {{population2}} in {{name2}}.',
+                        {
+                          name: statistics.largestBarangay?.name ?? '',
+                          population: numberFormatter.format(
+                            statistics.largestBarangay?.population ?? 0
+                          ),
+                          population2: numberFormatter.format(
+                            statistics.smallestBarangay?.population ?? 0
+                          ),
+                          name2: statistics.smallestBarangay?.name ?? '',
+                        }
+                      )}
                     </p>
                   </div>
 
                   <div className="border-t border-gray-100 pt-4">
                     <h4 className="font-semibold text-gray-950">
-                      Urban and Rural Classification
+                      {t('Urban and Rural Classification')}
                     </h4>
                     <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                      {statistics.urbanBarangayCount} barangays are classified
-                      Urban and {ruralBarangayNames} is classified Rural.
+                      {t(
+                        '{{urbanBarangayCount}} barangays are classified Urban and {{ruralBarangayNames}} is classified Rural.',
+                        {
+                          urbanBarangayCount: statistics.urbanBarangayCount,
+                          ruralBarangayNames,
+                        }
+                      )}
                     </p>
                   </div>
 
                   <div className="border-t border-gray-100 pt-4">
                     <h4 className="font-semibold text-gray-950">
-                      One Census Baseline
+                      {t('One Census Baseline')}
                     </h4>
                     <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                      All barangay comparisons on this page use the same{' '}
-                      {source.census} reference.
+                      {t(
+                        'All barangay comparisons on this page use the same {{census}} reference.',
+                        { census: source.census }
+                      )}
                     </p>
                   </div>
                 </div>
@@ -526,12 +600,13 @@ export default function PopulationStatistics() {
               {/* Pale support module */}
               <div className="mt-6 rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 text-xs leading-relaxed text-gray-700">
                 <p className="text-eyebrow text-[#0066EB]">
-                  VERIFIED POPULATION BASELINE
+                  {t('VERIFIED POPULATION BASELINE')}
                 </p>
                 <p className="mt-1.5 text-gray-700">
-                  Figures come from the Philippine Statistics Authority’s{' '}
-                  {source.census}. BetterSanFernando presents the published
-                  values without adding estimates or projections.
+                  {t(
+                    'Figures come from the Philippine Statistics Authority’s {{census}}. BetterSanFernando presents the published values without adding estimates or projections.',
+                    { census: source.census }
+                  )}
                 </p>
               </div>
             </aside>
@@ -547,26 +622,32 @@ export default function PopulationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">ALL BARANGAYS</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('ALL BARANGAYS')}</p>
             <h2
               id="barangays-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              All Barangays
+              {t('All Barangays')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Search and compare all {statistics.barangayCount} barangays using
-              their official {source.census} population, city share, and
-              classification.
+              {t(
+                'Search and compare all {{barangayCount}} barangays using their official {{census}} population, city share, and classification.',
+                {
+                  barangayCount: statistics.barangayCount,
+                  census: source.census,
+                }
+              )}
             </p>
           </div>
 
-          <BarangayTable
-            barangays={statistics.rankedBarangays}
-            largestPopulation={largestPopulation}
-            totalPopulation={statistics.totalPopulation}
-            barangayCount={statistics.barangayCount}
-          />
+          <PageMessages messages={messages}>
+            <BarangayTable
+              barangays={statistics.rankedBarangays}
+              largestPopulation={largestPopulation}
+              totalPopulation={statistics.totalPopulation}
+              barangayCount={statistics.barangayCount}
+            />
+          </PageMessages>
         </div>
       </section>
 
@@ -577,17 +658,20 @@ export default function PopulationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('READING GUIDE')}</p>
             <h2
               id="reading-guide-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              How to Read These Numbers
+              {t('How to Read These Numbers')}
             </h2>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {readingGuideItems.map(item => (
+            {readingGuideItems(
+              t,
+              numberFormatter.format(statistics.totalPopulation)
+            ).map(item => (
               <div
                 key={item.title}
                 className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6"
@@ -611,12 +695,12 @@ export default function PopulationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">PROVENANCE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('PROVENANCE')}</p>
             <h2
               id="provenance-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Source &amp; Reference Period
+              {t('Source & Reference Period')}
             </h2>
           </div>
 
@@ -630,21 +714,21 @@ export default function PopulationStatistics() {
                 <div className="mt-4 space-y-2 text-sm text-gray-600">
                   <p>
                     <span className="font-semibold text-gray-900">
-                      Reference:
+                      {t('Reference:')}
                     </span>{' '}
                     {source.census}
                   </p>
                   <p>
                     <span className="font-semibold text-gray-900">
-                      Last Verified:
+                      {t('Last Verified:')}
                     </span>{' '}
-                    {formatIsoDate(source.lastVerified)}
+                    {formatIsoDate(source.lastVerified, locale)}
                   </p>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                  BetterSanFernando presents the Philippine Statistics
-                  Authority’s official census release for the City of San
-                  Fernando, Pampanga.
+                  {t(
+                    'BetterSanFernando presents the Philippine Statistics Authority’s official census release for the City of San Fernando, Pampanga.'
+                  )}
                 </p>
               </div>
               <div className="mt-6 border-t border-gray-100 pt-4">
@@ -654,7 +738,7 @@ export default function PopulationStatistics() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  View Official PSA Source
+                  {t('View Official PSA Source')}
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>
@@ -664,7 +748,7 @@ export default function PopulationStatistics() {
             <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  What This Means
+                  {t('What This Means')}
                 </h3>
                 <ul className="mt-4 space-y-3 text-sm leading-relaxed text-gray-600">
                   <li className="flex items-start gap-2">
@@ -673,8 +757,9 @@ export default function PopulationStatistics() {
                       aria-hidden="true"
                     />
                     <span>
-                      Official census values published by the national
-                      statistical agency.
+                      {t(
+                        'Official census values published by the national statistical agency.'
+                      )}
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -683,8 +768,10 @@ export default function PopulationStatistics() {
                       aria-hidden="true"
                     />
                     <span>
-                      One shared census reference across all 35 component
-                      barangays.
+                      {t(
+                        'One shared census reference across all {{barangays}} component barangays.',
+                        { barangays: BARANGAY_COUNT }
+                      )}
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -693,7 +780,9 @@ export default function PopulationStatistics() {
                       aria-hidden="true"
                     />
                     <span>
-                      BetterSanFernando does not add population estimates.
+                      {t(
+                        'BetterSanFernando does not add population estimates.'
+                      )}
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -701,13 +790,17 @@ export default function PopulationStatistics() {
                       className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0066EB]"
                       aria-hidden="true"
                     />
-                    <span>BetterSanFernando does not add projections.</span>
+                    <span>
+                      {t('BetterSanFernando does not add projections.')}
+                    </span>
                   </li>
                 </ul>
               </div>
               <div className="mt-6 border-t border-gray-100 pt-3 text-xs text-gray-500">
-                All 35 barangay populations sum exactly to the published city
-                total.
+                {t(
+                  'All {{barangays}} barangay populations sum exactly to the published city total.',
+                  { barangays: BARANGAY_COUNT }
+                )}
               </div>
             </div>
           </div>
@@ -720,16 +813,18 @@ export default function PopulationStatistics() {
         aria-labelledby="keep-exploring-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="keep-exploring-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {keepExploringLinks.map(item => (
+            {keepExploringLinks(t).map(item => (
               <Link
                 key={item.href}
                 href={item.href}

@@ -26,6 +26,9 @@ import {
 } from '../../../data/civic/projectCostUtilization';
 import { getProjectById, getProjects } from '../../../data/civic/projects';
 import { formatUnstatedAmount } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
 
 const observations = getProjectCostUtilizationObservations();
 const metadata = getProjectCostUtilizationMetadata(getProjects().length);
@@ -54,6 +57,7 @@ function SourceLinkAnchor({
 }: {
   observation: ProjectCostUtilizationObservation;
 }) {
+  const t = usePageT();
   const { url, kind } = sourceLink(observation);
   const name = projectName(observation.canonical_project_id);
   return (
@@ -61,7 +65,14 @@ function SourceLinkAnchor({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Open the official ${kind === 'page' ? 'source page' : 'source attachment'} for ${name}, ${periodLabel(observation)} (opens in a new tab)`}
+      aria-label={t(
+        'Open the official {{value}} for {{name}}, {{observation}} (opens in a new tab)',
+        {
+          value: kind === 'page' ? t('source page') : t('source attachment'),
+          name,
+          observation: periodLabel(observation),
+        }
+      )}
       className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
     >
       {kind === 'page' ? (
@@ -69,7 +80,9 @@ function SourceLinkAnchor({
       ) : (
         <FileText className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       )}
-      {kind === 'page' ? 'Official source page' : 'Official source document'}
+      {kind === 'page'
+        ? t('Official source page')
+        : t('Official source document')}
       <ExternalLink className="h-3 w-3 shrink-0" aria-hidden="true" />
     </a>
   );
@@ -97,13 +110,17 @@ function CoverageBar({
   represented: number;
   total: number;
 }) {
+  const t = usePageT();
   const percent = total > 0 ? (represented / total) * 100 : 0;
   return (
     <div>
       <div
         className="h-3 w-full overflow-hidden rounded-sm bg-gray-100"
         role="img"
-        aria-label={`${represented} of ${total} published projects represented, ${percent.toFixed(1)} percent`}
+        aria-label={t(
+          '{{represented}} of {{total}} published projects represented, {{percent}} percent',
+          { represented, total, percent: percent.toFixed(1) }
+        )}
       >
         <div
           className="h-full rounded-sm bg-[#0066EB]"
@@ -115,12 +132,12 @@ function CoverageBar({
           className="inline-block h-2 w-2 shrink-0 rounded-sm bg-[#0066EB]"
           aria-hidden="true"
         />
-        Represented
+        {t('Represented')}
         <span
           className="ml-3 inline-block h-2 w-2 shrink-0 rounded-sm bg-gray-100"
           aria-hidden="true"
         />
-        Remaining
+        {t('Remaining')}
       </div>
     </div>
   );
@@ -159,19 +176,33 @@ function DistributionBars({
   counts: { label: string; count: number }[];
   unavailableCount?: number;
 }) {
+  const t = usePageT();
   const max = Math.max(1, ...counts.map(c => c.count));
+  // Only the open-ended bucket has words; the numeric ranges stay as they are.
+  const rangeLabel = (label: string) =>
+    label === '100% or more' ? t('100% or more') : label;
   return (
     <div>
       <p className="text-sm font-bold text-gray-900">{title}</p>
       <div
         className="mt-3 space-y-2"
         role="img"
-        aria-label={`${title} distribution: ${counts.map(c => `${c.label}, ${c.count} projects`).join('; ')}`}
+        aria-label={t('{{title}} distribution: {{items}}', {
+          title,
+          items: counts
+            .map(c =>
+              t('{{label}}, {{n}} projects', {
+                label: rangeLabel(c.label),
+                n: c.count,
+              })
+            )
+            .join('; '),
+        })}
       >
         {counts.map(c => (
           <div key={c.label} className="flex items-center gap-3">
             <span className="w-24 shrink-0 text-xs text-gray-600">
-              {c.label}
+              {rangeLabel(c.label)}
             </span>
             <span className="h-4 flex-1 overflow-hidden rounded-sm bg-gray-100">
               <span
@@ -187,8 +218,12 @@ function DistributionBars({
       </div>
       {typeof unavailableCount === 'number' && unavailableCount > 0 && (
         <p className="mt-2 text-xs text-gray-500">
-          Cost percentage unavailable: {unavailableCount} project
-          {unavailableCount === 1 ? '' : 's'}
+          {t(
+            unavailableCount === 1
+              ? 'Cost percentage unavailable: {{unavailableCount}} project'
+              : 'Cost percentage unavailable: {{unavailableCount}} projects',
+            { unavailableCount }
+          )}
         </p>
       )}
     </div>
@@ -204,6 +239,7 @@ function PeriodCoverageChart({
 }: {
   periods: { label: string; count: number }[];
 }) {
+  const t = usePageT();
   const [active, setActive] = useState<number | null>(null);
   const max = Math.max(1, ...periods.map(p => p.count));
 
@@ -212,7 +248,10 @@ function PeriodCoverageChart({
       <div
         className="grid grid-cols-[repeat(auto-fit,minmax(3.5rem,1fr))] items-end gap-3 sm:gap-5"
         role="img"
-        aria-label={`Verified observation counts across ${periods.length} reporting periods`}
+        aria-label={t(
+          'Verified observation counts across {{length}} reporting periods',
+          { length: periods.length }
+        )}
       >
         {periods.map((p, i) => (
           <button
@@ -223,7 +262,12 @@ function PeriodCoverageChart({
             onMouseLeave={() => setActive(null)}
             onFocus={() => setActive(i)}
             onBlur={() => setActive(null)}
-            aria-label={`${p.label}: ${p.count} verified observation${p.count === 1 ? '' : 's'}`}
+            aria-label={t(
+              p.count === 1
+                ? '{{label}}: {{count}} verified observation'
+                : '{{label}}: {{count}} verified observations',
+              { label: p.label, count: p.count }
+            )}
           >
             <span className="text-xs font-semibold tabular-nums text-gray-900">
               {p.count}
@@ -246,12 +290,17 @@ function PeriodCoverageChart({
             <strong className="font-bold text-gray-900">
               {periods[active].label}
             </strong>
-            : {periods[active].count} verified observation
-            {periods[active].count === 1 ? '' : 's'}
+            :{' '}
+            {t(
+              periods[active].count === 1
+                ? '{{n}} verified observation'
+                : '{{n}} verified observations',
+              { n: periods[active].count }
+            )}
           </p>
         ) : (
           <p className="text-xs text-gray-500">
-            Hover or focus a bar for its reporting-period detail.
+            {t('Hover or focus a bar for its reporting-period detail.')}
           </p>
         )}
       </div>
@@ -268,6 +317,7 @@ function ObservationHistoryYearGroup({
   observations: ProjectCostUtilizationObservation[];
   showYear: boolean;
 }) {
+  const t = usePageT();
   return (
     <div>
       {showYear && <p className="text-sm font-bold text-gray-900">{year}</p>}
@@ -286,17 +336,17 @@ function ObservationHistoryYearGroup({
               </p>
               <p>
                 <span className="block text-xs text-gray-500 sm:hidden">
-                  Cost incurred
+                  {t('Cost incurred')}
                 </span>
                 <span className="font-medium tabular-nums text-gray-900">
                   {observation.cost_incurred_to_date_percent_derived === null
-                    ? 'Not available'
+                    ? t('Not available')
                     : `${observation.cost_incurred_to_date_percent_derived}%`}
                 </span>
               </p>
               <p>
                 <span className="block text-xs text-gray-500 sm:hidden">
-                  Physical completion
+                  {t('Physical completion')}
                 </span>
                 <span className="font-medium tabular-nums text-gray-900">
                   {observation.physical_completion_percent}%
@@ -304,7 +354,7 @@ function ObservationHistoryYearGroup({
               </p>
               <p>
                 <span className="block text-xs text-gray-500 sm:hidden">
-                  Status
+                  {t('Status')}
                 </span>
                 <span className="text-gray-700">
                   {observation.status_remarks}
@@ -314,11 +364,14 @@ function ObservationHistoryYearGroup({
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Open official source for ${periodLabel(observation)} (opens in a new tab)`}
+                aria-label={t(
+                  'Open official source for {{observation}} (opens in a new tab)',
+                  { observation: periodLabel(observation) }
+                )}
                 className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC]"
               >
                 <Link2 className="h-3.5 w-3.5" aria-hidden="true" />
-                Official source
+                {t('Official source')}
                 <ExternalLink className="h-3 w-3" aria-hidden="true" />
               </a>
             </li>
@@ -339,13 +392,13 @@ type SnapshotSort =
   | 'cost-desc'
   | 'cost-asc';
 
-const SNAPSHOT_SORTS: { value: SnapshotSort; label: string }[] = [
-  { value: 'period-desc', label: 'Latest reporting period' },
+const SNAPSHOT_SORTS = (t: PageT): { value: SnapshotSort; label: string }[] => [
+  { value: 'period-desc', label: t('Latest reporting period') },
   { value: 'name-asc', label: 'Project A–Z' },
-  { value: 'completion-desc', label: 'Highest physical completion' },
-  { value: 'completion-asc', label: 'Lowest physical completion' },
-  { value: 'cost-desc', label: 'Highest cost-incurred %' },
-  { value: 'cost-asc', label: 'Lowest cost-incurred %' },
+  { value: 'completion-desc', label: t('Highest physical completion') },
+  { value: 'completion-asc', label: t('Lowest physical completion') },
+  { value: 'cost-desc', label: t('Highest cost-incurred %') },
+  { value: 'cost-asc', label: t('Lowest cost-incurred %') },
 ];
 
 const SNAPSHOTS_PER_PAGE = 10;
@@ -355,6 +408,8 @@ const selectClass =
   'h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20';
 
 export default function ProjectSpendingStatistics() {
+  const t = usePageT();
+  const locale = useLocale();
   // Detailed source-observation filters
   const [query, setQuery] = useState('');
   const [year, setYear] = useState<YearFilter>('ALL');
@@ -632,49 +687,59 @@ export default function ProjectSpendingStatistics() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Projects', href: '/projects' },
-              { label: 'Project Cost & Utilization' },
+              { label: t('Home'), href: '/' },
+              { label: t('Projects'), href: '/projects' },
+              { label: t('Project Cost & Utilization') },
             ]}
           />
 
           <div className="mt-6 max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">Project Statistics</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('Project Statistics')}
+            </p>
             <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 md:text-5xl">
-              Project Cost &amp; Utilization
+              {t('Project Cost & Utilization')}
             </h1>
             <p className="mt-5 text-base leading-7 text-gray-700 md:text-lg">
-              Explore source-reported cost-utilization and physical-completion
-              observations for the subset of published City projects with
-              verified records.
+              {t(
+                'Explore source-reported cost-utilization and physical-completion observations for the subset of published City projects with verified records.'
+              )}
             </p>
             <p className="mt-3 text-sm text-gray-600">
-              This is a partial project dataset, not a citywide spending total.
+              {t(
+                'This is a partial project dataset, not a citywide spending total.'
+              )}
             </p>
             <Link
               href="/projects/city-projects"
               className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC]"
             >
-              Browse all {metadata.canonicalProjectCount} projects →
+              {t('Browse all {{canonicalProjectCount}} projects →', {
+                canonicalProjectCount: metadata.canonicalProjectCount,
+              })}
             </Link>
           </div>
 
           <dl className="mt-8 grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-gray-200">
             <div className="sm:pr-6">
-              <dt className="text-sm text-gray-600">Verified observations</dt>
+              <dt className="text-sm text-gray-600">
+                {t('Verified observations')}
+              </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950">
                 {metadata.recordCount}
               </dd>
             </div>
             <div className="sm:px-6">
-              <dt className="text-sm text-gray-600">Projects represented</dt>
+              <dt className="text-sm text-gray-600">
+                {t('Projects represented')}
+              </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950">
                 {metadata.uniqueProjectCount}
               </dd>
             </div>
             <div className="sm:pl-6">
               <dt className="text-sm text-gray-600">
-                Projects with repeated observations
+                {t('Projects with repeated observations')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950">
                 {metadata.repeatedObservationProjectCount}
@@ -691,19 +756,28 @@ export default function ProjectSpendingStatistics() {
             aria-labelledby="coverage-heading"
             className="h-full rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6"
           >
-            <p className="text-eyebrow text-[#0066EB]">Dataset Coverage</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('Dataset Coverage')}
+            </p>
             <h2
               id="coverage-heading"
               className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
             >
-              How much of the project collection is represented?
+              {t('How much of the project collection is represented?')}
             </h2>
             <p className="mt-4 text-2xl font-bold tabular-nums text-gray-950">
-              {metadata.uniqueProjectCount} of {metadata.canonicalProjectCount}{' '}
-              published projects
+              {t(
+                '{{uniqueProjectCount}} of {{canonicalProjectCount}} published projects',
+                {
+                  uniqueProjectCount: metadata.uniqueProjectCount,
+                  canonicalProjectCount: metadata.canonicalProjectCount,
+                }
+              )}
             </p>
             <p className="mt-1 text-sm text-gray-600">
-              {coveragePercent.toFixed(1)}% of the current project collection
+              {t('{{percent}}% of the current project collection', {
+                percent: coveragePercent.toFixed(1),
+              })}
             </p>
             <div className="mt-5">
               <CoverageBar
@@ -713,22 +787,24 @@ export default function ProjectSpendingStatistics() {
             </div>
             <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-gray-200 pt-4">
               <div>
-                <dt className="text-xs text-gray-600">Represented</dt>
+                <dt className="text-xs text-gray-600">{t('Represented')}</dt>
                 <dd className="mt-1 text-xl font-bold tabular-nums text-gray-950">
                   {metadata.uniqueProjectCount}
                 </dd>
               </div>
               <div>
-                <dt className="text-xs text-gray-600">Not represented</dt>
+                <dt className="text-xs text-gray-600">
+                  {t('Not represented')}
+                </dt>
                 <dd className="mt-1 text-xl font-bold tabular-nums text-gray-950">
                   {metadata.canonicalProjectCount - metadata.uniqueProjectCount}
                 </dd>
               </div>
             </dl>
             <p className="mt-5 text-sm leading-6 text-gray-700">
-              Projects without a verified cost-utilization observation are still
-              part of the City Projects collection. They are not included in the
-              analysis on this page.
+              {t(
+                'Projects without a verified cost-utilization observation are still part of the City Projects collection. They are not included in the analysis on this page.'
+              )}
             </p>
           </section>
 
@@ -742,56 +818,58 @@ export default function ProjectSpendingStatistics() {
                 id="about-dataset-heading"
                 className="text-base font-bold text-gray-900"
               >
-                About this dataset
+                {t('About this dataset')}
               </h2>
             </div>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">
-                  What this page covers
+                  {t('What this page covers')}
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-gray-700">
-                  This page includes only projects with a verified
-                  cost-utilization observation. It does not represent all City
-                  projects or total City spending.
+                  {t(
+                    'This page includes only projects with a verified cost-utilization observation. It does not represent all City projects or total City spending.'
+                  )}
                 </p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">
-                  Cost incurred
+                  {t('Cost incurred')}
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-gray-700">
-                  The percentage is calculated from the total cost and cost
-                  incurred to date reported in the official source. It does not
-                  confirm that a payment or disbursement was made.
+                  {t(
+                    'The percentage is calculated from the total cost and cost incurred to date reported in the official source. It does not confirm that a payment or disbursement was made.'
+                  )}
                 </p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">
-                  Physical completion
+                  {t('Physical completion')}
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-gray-700">
-                  The percentage comes directly from the official source.
-                  BetterSanFernando does not independently inspect or verify
-                  construction progress.
+                  {t(
+                    'The percentage comes directly from the official source. BetterSanFernando does not independently inspect or verify construction progress.'
+                  )}
                 </p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">
-                  Reporting periods
+                  {t('Reporting periods')}
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-gray-700">
-                  Each observation shows year-to-date figures for that reporting
-                  period. Quarterly values should not be added together.
+                  {t(
+                    'Each observation shows year-to-date figures for that reporting period. Quarterly values should not be added together.'
+                  )}
                 </p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-900">
-                  Currency
+                  {t('Currency')}
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-gray-700">
-                  The source does not state a currency unit, so monetary amounts
-                  are shown without a currency symbol.
+                  {t(
+                    'The source does not state a currency unit, so monetary amounts are shown without a currency symbol.'
+                  )}
                 </p>
               </div>
             </div>
@@ -802,30 +880,33 @@ export default function ProjectSpendingStatistics() {
           aria-labelledby="distribution-heading"
           className="mt-10 border-t border-gray-200 pt-8"
         >
-          <p className="text-eyebrow text-[#0066EB]">Latest Observations</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('Latest Observations')}
+          </p>
           <h2
             id="distribution-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Where the latest project observations fall
+            {t('Where the latest project observations fall')}
           </h2>
           <p className="mt-2 text-sm leading-6 text-gray-600">
-            Each represented project contributes its most recent verified
-            observation.
+            {t(
+              'Each represented project contributes its most recent verified observation.'
+            )}
           </p>
           <p className="mt-2 text-sm leading-6 text-gray-600">
-            These ranges show where each project&apos;s latest reported
-            percentages fall. The bars show the number of projects in each
-            range, not an assessment of the projects.
+            {t(
+              "These ranges show where each project's latest reported percentages fall. The bars show the number of projects in each range, not an assessment of the projects."
+            )}
           </p>
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2">
             <DistributionBars
-              title="Cost incurred"
+              title={t('Cost incurred')}
               counts={costDistribution.buckets}
               unavailableCount={costDistribution.unavailable}
             />
             <DistributionBars
-              title="Physical completion"
+              title={t('Physical completion')}
               counts={completionDistribution}
             />
           </div>
@@ -835,16 +916,19 @@ export default function ProjectSpendingStatistics() {
           aria-labelledby="period-coverage-heading"
           className="mt-10 border-t border-gray-200 pt-8"
         >
-          <p className="text-eyebrow text-[#0066EB]">Reporting Coverage</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('Reporting Coverage')}
+          </p>
           <h2
             id="period-coverage-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Verified observations by reporting period
+            {t('Verified observations by reporting period')}
           </h2>
           <p className="mt-2 text-sm leading-6 text-gray-600">
-            See how many verified observations are available for each reporting
-            quarter.
+            {t(
+              'See how many verified observations are available for each reporting quarter.'
+            )}
           </p>
           <div className="mt-6">
             <PeriodCoverageChart periods={periodCoverage} />
@@ -860,16 +944,16 @@ export default function ProjectSpendingStatistics() {
             id="explore-heading"
             className="text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Project observation history
+            {t('Project observation history')}
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-            Select a project to compare its verified reporting periods. Each
-            observation contains year-to-date figures, so compare the periods
-            rather than adding them together.
+            {t(
+              'Select a project to compare its verified reporting periods. Each observation contains year-to-date figures, so compare the periods rather than adding them together.'
+            )}
           </p>
           <div className="relative mt-5 max-w-2xl">
             <span className="mb-2 block text-sm font-semibold text-gray-900">
-              Select a project
+              {t('Select a project')}
             </span>
             <input
               id="project-history-picker"
@@ -888,7 +972,7 @@ export default function ProjectSpendingStatistics() {
                   ? projectPickerQuery
                   : projectName(selectedProjectId)
               }
-              placeholder="Search project name..."
+              placeholder={t('Search project name...')}
               onFocus={() => {
                 setProjectPickerQuery('');
                 setProjectPickerOpen(true);
@@ -934,7 +1018,7 @@ export default function ProjectSpendingStatistics() {
               <div
                 id="project-history-options"
                 role="listbox"
-                aria-label="Matching projects"
+                aria-label={t('Matching projects')}
                 className="absolute z-10 mt-1 max-h-80 w-full overflow-y-auto rounded-sm border border-gray-300 bg-white py-1 shadow-sm"
               >
                 {matchingProjects.length > 0 ? (
@@ -962,13 +1046,13 @@ export default function ProjectSpendingStatistics() {
                     ))}
                     {representedProjects.length > matchingProjects.length && (
                       <p className="px-3 py-2 text-xs text-gray-500">
-                        Keep typing to narrow results.
+                        {t('Keep typing to narrow results.')}
                       </p>
                     )}
                   </>
                 ) : (
                   <p className="px-3 py-3 text-sm text-gray-600">
-                    No represented projects match your search.
+                    {t('No represented projects match your search.')}
                   </p>
                 )}
               </div>
@@ -985,7 +1069,7 @@ export default function ProjectSpendingStatistics() {
                     )}
                   </p>
                   <p className="mt-1 text-sm text-gray-600">
-                    Latest period:{' '}
+                    {t('Latest period:')}{' '}
                     <span className="font-semibold text-gray-900">
                       {periodLabel(selectedLatestObservation)}
                     </span>
@@ -993,16 +1077,20 @@ export default function ProjectSpendingStatistics() {
                 </div>
                 <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <p className="text-xs text-gray-500">Cost incurred</p>
+                    <p className="text-xs text-gray-500">
+                      {t('Cost incurred')}
+                    </p>
                     <p className="mt-0.5 text-xl font-bold tabular-nums text-gray-950">
                       {selectedLatestObservation.cost_incurred_to_date_percent_derived ===
                       null
-                        ? 'Not available'
+                        ? t('Not available')
                         : `${selectedLatestObservation.cost_incurred_to_date_percent_derived}%`}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500">Physical completion</p>
+                    <p className="text-xs text-gray-500">
+                      {t('Physical completion')}
+                    </p>
                     <p className="mt-0.5 text-xl font-bold tabular-nums text-gray-950">
                       {selectedLatestObservation.physical_completion_percent}%
                     </p>
@@ -1010,7 +1098,7 @@ export default function ProjectSpendingStatistics() {
                 </div>
                 <p className="mt-4 border-t border-gray-200 pt-3 text-sm text-gray-700">
                   <span className="font-semibold text-gray-900">
-                    Source-reported status
+                    {t('Source-reported status')}
                   </span>{' '}
                   {selectedLatestObservation.status_remarks}
                 </p>
@@ -1018,24 +1106,25 @@ export default function ProjectSpendingStatistics() {
                   href={`/projects/${selectedLatestObservation.canonical_project_id}`}
                   className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  View project details →
+                  {t('View project details →')}
                 </Link>
               </div>
               <div>
                 <p className="text-eyebrow text-[#0066EB]">
-                  Available reporting periods
+                  {t('Available reporting periods')}
                 </p>
                 <div className="mt-4 hidden grid-cols-[5rem_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.25fr)_auto] gap-3 border-y border-gray-200 py-2 text-xs font-semibold text-gray-600 sm:grid">
-                  <span>Period</span>
-                  <span>Cost incurred</span>
-                  <span>Physical completion</span>
-                  <span>Status</span>
-                  <span>Source</span>
+                  <span>{t('Period')}</span>
+                  <span>{t('Cost incurred')}</span>
+                  <span>{t('Physical completion')}</span>
+                  <span>{t('Status')}</span>
+                  <span>{t('Source')}</span>
                 </div>
                 {selectedProjectObservations.length === 1 && (
                   <p className="mt-3 text-sm text-gray-600">
-                    Only one verified observation is currently available for
-                    this project.
+                    {t(
+                      'Only one verified observation is currently available for this project.'
+                    )}
                   </p>
                 )}
                 <div className="mt-4 space-y-6">
@@ -1062,14 +1151,16 @@ export default function ProjectSpendingStatistics() {
             id="snapshots-heading"
             className="text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Browse projects with utilization data
+            {t('Browse projects with utilization data')}
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-            Each project appears once using its most recent verified
-            observation.
+            {t(
+              'Each project appears once using its most recent verified observation.'
+            )}
             <span className="hidden" aria-hidden="true">
-              a ranking of project performance — sort by whichever measure is
-              useful to you.
+              {t(
+                'a ranking of project performance — sort by whichever measure is useful to you.'
+              )}
             </span>
           </p>
 
@@ -1078,12 +1169,12 @@ export default function ProjectSpendingStatistics() {
               type="search"
               value={snapshotQuery}
               onChange={event => updateSnapshotQuery(event.target.value)}
-              placeholder="Search projects…"
-              aria-label="Search projects"
+              placeholder={t('Search projects…')}
+              aria-label={t('Search projects')}
               className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20 sm:max-w-md"
             />
             <label className="w-full sm:w-60">
-              <span className="sr-only">Sort projects</span>
+              <span className="sr-only">{t('Sort projects')}</span>
               <select
                 value={snapshotSort}
                 onChange={event =>
@@ -1091,9 +1182,9 @@ export default function ProjectSpendingStatistics() {
                 }
                 className={selectClass}
               >
-                {SNAPSHOT_SORTS.map(option => (
+                {SNAPSHOT_SORTS(t).map(option => (
                   <option key={option.value} value={option.value}>
-                    Sort: {option.label}
+                    {t('Sort: {{label}}', { label: option.label })}
                   </option>
                 ))}
               </select>
@@ -1107,14 +1198,14 @@ export default function ProjectSpendingStatistics() {
                 aria-hidden="true"
               />
               <h3 className="mt-3 text-base font-bold text-gray-900">
-                No projects match your search.
+                {t('No projects match your search.')}
               </h3>
               <button
                 type="button"
                 onClick={() => updateSnapshotQuery('')}
                 className="mt-4 inline-flex items-center rounded-sm bg-[#0066EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0052BC]"
               >
-                Clear search
+                {t('Clear search')}
               </button>
             </div>
           ) : (
@@ -1137,7 +1228,7 @@ export default function ProjectSpendingStatistics() {
                     <span className="text-xs tabular-nums text-gray-700 sm:text-sm">
                       {observation.cost_incurred_to_date_percent_derived ===
                       null
-                        ? 'Not available'
+                        ? t('Not available')
                         : `${observation.cost_incurred_to_date_percent_derived}%`}
                     </span>
                     <span className="min-w-0 truncate text-xs text-gray-600 sm:text-sm">
@@ -1147,24 +1238,30 @@ export default function ProjectSpendingStatistics() {
                       href={`/projects/${observation.canonical_project_id}`}
                       className="text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:justify-self-end sm:text-sm"
                     >
-                      View project →
+                      {t('View project →')}
                     </Link>
                   </li>
                 ))}
               </ol>
 
               <p className="mt-3 text-sm text-gray-600">
-                Showing {(snapshotCurrentPage - 1) * SNAPSHOTS_PER_PAGE + 1}–
-                {Math.min(
-                  snapshotCurrentPage * SNAPSHOTS_PER_PAGE,
-                  sortedSnapshots.length
-                )}{' '}
-                of {sortedSnapshots.length} projects
+                {t(
+                  'Showing {{snapshotCurrentPage}}–{{snapshotCurrentPage2}} of {{length}} projects',
+                  {
+                    snapshotCurrentPage:
+                      (snapshotCurrentPage - 1) * SNAPSHOTS_PER_PAGE + 1,
+                    snapshotCurrentPage2: Math.min(
+                      snapshotCurrentPage * SNAPSHOTS_PER_PAGE,
+                      sortedSnapshots.length
+                    ),
+                    length: sortedSnapshots.length,
+                  }
+                )}
               </p>
 
               {snapshotTotalPages > 1 && (
                 <nav
-                  aria-label="Project utilization data pagination"
+                  aria-label={t('Project utilization data pagination')}
                   className="mt-4 flex items-center justify-between gap-4"
                 >
                   <button
@@ -1174,10 +1271,13 @@ export default function ProjectSpendingStatistics() {
                     className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   >
                     <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                    Previous
+                    {t('Previous')}
                   </button>
                   <p className="text-sm text-gray-600">
-                    Page {snapshotCurrentPage} of {snapshotTotalPages}
+                    {t(
+                      'Page {{snapshotCurrentPage}} of {{snapshotTotalPages}}',
+                      { snapshotCurrentPage, snapshotTotalPages }
+                    )}
                   </p>
                   <button
                     type="button"
@@ -1185,7 +1285,7 @@ export default function ProjectSpendingStatistics() {
                     onClick={() => setSnapshotPage(snapshotCurrentPage + 1)}
                     className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   >
-                    Next
+                    {t('Next')}
                     <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </nav>
@@ -1199,22 +1299,24 @@ export default function ProjectSpendingStatistics() {
           aria-labelledby="observations-heading"
           className="mt-12 border-t border-gray-200 pt-10"
         >
-          <p className="text-eyebrow text-[#0066EB]">Detailed data</p>
+          <p className="text-eyebrow text-[#0066EB]">{t('Detailed data')}</p>
           <h2
             id="observations-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Detailed source observations
+            {t('Detailed source observations')}
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-            Browse every verified reporting-period observation used on this
-            page. A project may appear more than once when observations were
-            published for different quarters.
+            {t(
+              'Browse every verified reporting-period observation used on this page. A project may appear more than once when observations were published for different quarters.'
+            )}
           </p>
 
           <details className="group mt-5">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm border border-gray-300 bg-[#F3F6FB] px-4 py-3 text-sm font-semibold text-gray-900 hover:border-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]">
-              View all {metadata.recordCount} source observations
+              {t('View all {{count}} source observations', {
+                count: metadata.recordCount,
+              })}
               <ChevronDown
                 className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
                 aria-hidden="true"
@@ -1223,7 +1325,7 @@ export default function ProjectSpendingStatistics() {
             <div className="mt-5 grid grid-cols-1 gap-3 rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 md:grid-cols-[minmax(14rem,1fr)_9rem_9rem_auto] md:items-end">
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold text-gray-700">
-                  Search project
+                  {t('Search project')}
                 </span>
                 <span className="relative block">
                   <Search
@@ -1234,14 +1336,14 @@ export default function ProjectSpendingStatistics() {
                     type="search"
                     value={query}
                     onChange={event => updateQuery(event.target.value)}
-                    placeholder="e.g. Calulut, road, canal"
+                    placeholder={t('e.g. Calulut, road, canal')}
                     className="h-10 w-full rounded-sm border border-gray-300 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
                   />
                 </span>
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold text-gray-700">
-                  Year
+                  {t('Year')}
                 </span>
                 <select
                   value={year}
@@ -1254,7 +1356,7 @@ export default function ProjectSpendingStatistics() {
                   }
                   className={selectClass}
                 >
-                  <option value="ALL">All years</option>
+                  <option value="ALL">{t('All years')}</option>
                   {years.map(y => (
                     <option key={y} value={y}>
                       {y}
@@ -1264,7 +1366,7 @@ export default function ProjectSpendingStatistics() {
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold text-gray-700">
-                  Quarter
+                  {t('Quarter')}
                 </span>
                 <select
                   value={quarter}
@@ -1277,7 +1379,7 @@ export default function ProjectSpendingStatistics() {
                   }
                   className={selectClass}
                 >
-                  <option value="ALL">All quarters</option>
+                  <option value="ALL">{t('All quarters')}</option>
                   {[1, 2, 3, 4].map(q => (
                     <option key={q} value={q}>
                       Q{q}
@@ -1292,25 +1394,27 @@ export default function ProjectSpendingStatistics() {
                 className="inline-flex h-10 items-center justify-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-900 hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                Reset
+                {t('Reset')}
               </button>
             </div>
 
             <p className="mt-4 text-sm text-gray-600" aria-live="polite">
-              Showing {filteredObservations.length} of {metadata.recordCount}{' '}
-              observations
+              {t('Showing {{length}} of {{recordCount}} observations', {
+                length: filteredObservations.length,
+                recordCount: metadata.recordCount,
+              })}
             </p>
             <p className="mt-1 text-xs text-gray-500">
-              Currency unit is not stated in the source.
+              {t('Currency unit is not stated in the source.')}
             </p>
 
             {filteredObservations.length === 0 ? (
               <div className="mt-4 border border-gray-200 px-5 py-12 text-center">
                 <p className="font-medium text-gray-900">
-                  No observation matches these filters
+                  {t('No observation matches these filters')}
                 </p>
                 <p className="mt-1 text-sm text-gray-600">
-                  Try a different search term or reset the filters.
+                  {t('Try a different search term or reset the filters.')}
                 </p>
               </div>
             ) : (
@@ -1321,28 +1425,28 @@ export default function ProjectSpendingStatistics() {
                     <thead className="border-y border-gray-200 text-gray-700">
                       <tr>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Project
+                          {t('Project')}
                         </th>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Period
+                          {t('Period')}
                         </th>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Total cost
+                          {t('Total cost')}
                         </th>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Cost incurred to date
+                          {t('Cost incurred to date')}
                         </th>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Cost incurred %
+                          {t('Cost incurred %')}
                         </th>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Physical completion %
+                          {t('Physical completion %')}
                         </th>
                         <th scope="col" className="py-2.5 pr-4 font-semibold">
-                          Status
+                          {t('Status')}
                         </th>
                         <th scope="col" className="py-2.5 font-semibold">
-                          Source
+                          {t('Source')}
                         </th>
                       </tr>
                     </thead>
@@ -1361,20 +1465,24 @@ export default function ProjectSpendingStatistics() {
                             {periodLabel(observation)}
                           </td>
                           <td className="whitespace-nowrap py-3 pr-4 text-gray-700">
-                            {formatUnstatedAmount(observation.total_cost)}
+                            {formatUnstatedAmount(
+                              observation.total_cost,
+                              locale
+                            )}
                             <span className="block text-xs text-gray-500">
-                              Currency not stated in source
+                              {t('Currency not stated in source')}
                             </span>
                           </td>
                           <td className="whitespace-nowrap py-3 pr-4 text-gray-700">
                             {formatUnstatedAmount(
-                              observation.total_cost_incurred_to_date
+                              observation.total_cost_incurred_to_date,
+                              locale
                             )}
                           </td>
                           <td className="whitespace-nowrap py-3 pr-4 text-gray-700">
                             {observation.cost_incurred_to_date_percent_derived ===
                             null
-                              ? 'Not available'
+                              ? t('Not available')
                               : `${observation.cost_incurred_to_date_percent_derived}%`}
                           </td>
                           <td className="whitespace-nowrap py-3 pr-4 text-gray-700">
@@ -1409,41 +1517,51 @@ export default function ProjectSpendingStatistics() {
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-xs text-gray-700">
                         <div>
-                          <p className="text-gray-500">Cost incurred %</p>
+                          <p className="text-gray-500">
+                            {t('Cost incurred %')}
+                          </p>
                           <p className="font-medium">
                             {observation.cost_incurred_to_date_percent_derived ===
                             null
-                              ? 'Not available'
+                              ? t('Not available')
                               : `${observation.cost_incurred_to_date_percent_derived}%`}
                           </p>
                         </div>
                         <div>
-                          <p className="text-gray-500">Physical completion %</p>
+                          <p className="text-gray-500">
+                            {t('Physical completion %')}
+                          </p>
                           <p className="font-medium">
                             {observation.physical_completion_percent}%
                           </p>
                         </div>
                         <div>
-                          <p className="text-gray-500">Total cost</p>
+                          <p className="text-gray-500">{t('Total cost')}</p>
                           <p className="font-medium">
-                            {formatUnstatedAmount(observation.total_cost)}
+                            {formatUnstatedAmount(
+                              observation.total_cost,
+                              locale
+                            )}
                           </p>
                         </div>
                         <div>
-                          <p className="text-gray-500">Cost incurred to date</p>
+                          <p className="text-gray-500">
+                            {t('Cost incurred to date')}
+                          </p>
                           <p className="font-medium">
                             {formatUnstatedAmount(
-                              observation.total_cost_incurred_to_date
+                              observation.total_cost_incurred_to_date,
+                              locale
                             )}
                           </p>
                         </div>
                       </div>
                       <p className="text-xs text-gray-500">
-                        Currency not stated in source
+                        {t('Currency not stated in source')}
                       </p>
                       <p className="text-xs text-gray-700">
                         <span className="font-semibold text-gray-900">
-                          Status:
+                          {t('Status:')}
                         </span>{' '}
                         {observation.status_remarks}
                       </p>
@@ -1457,7 +1575,7 @@ export default function ProjectSpendingStatistics() {
             {filteredObservations.length > 0 && totalPages > 1 && (
               <nav
                 className="mt-4 flex items-center justify-between gap-3"
-                aria-label="Source observations pagination"
+                aria-label={t('Source observations pagination')}
               >
                 <button
                   type="button"
@@ -1466,10 +1584,13 @@ export default function ProjectSpendingStatistics() {
                   className="inline-flex h-9 items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-900 hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                  Previous
+                  {t('Previous')}
                 </button>
                 <span className="text-sm text-gray-700" aria-hidden="true">
-                  Page {currentPage} of {totalPages}
+                  {t('Page {{currentPage}} of {{totalPages}}', {
+                    currentPage,
+                    totalPages,
+                  })}
                 </span>
                 <button
                   type="button"
@@ -1479,7 +1600,7 @@ export default function ProjectSpendingStatistics() {
                   disabled={currentPage >= totalPages}
                   className="inline-flex h-9 items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-900 hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  Next
+                  {t('Next')}
                   <ChevronRight className="h-4 w-4" aria-hidden="true" />
                 </button>
               </nav>
@@ -1492,78 +1613,89 @@ export default function ProjectSpendingStatistics() {
           aria-labelledby="how-to-read-heading"
           className="mt-12 border-t border-gray-200 pt-10"
         >
-          <p className="text-eyebrow text-[#0066EB]">How To Read This Page</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('How To Read This Page')}
+          </p>
           <h2
             id="how-to-read-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            What these figures mean
+            {t('What these figures mean')}
           </h2>
           <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6 md:grid-cols-2 lg:grid-cols-3">
             <div>
               <h3 className="text-sm font-bold text-gray-900">
-                Cost incurred %
+                {t('Cost incurred %')}
               </h3>
               <p className="mt-1 text-sm leading-6 text-gray-700">
-                Calculated from the total cost and cost incurred to date
-                reported in the official source.
+                {t(
+                  'Calculated from the total cost and cost incurred to date reported in the official source.'
+                )}
               </p>
             </div>
             <div>
               <h3 className="text-sm font-bold text-gray-900">
-                Physical completion %
+                {t('Physical completion %')}
               </h3>
               <p className="mt-1 text-sm leading-6 text-gray-700">
-                Taken directly from the official source. BetterSanFernando does
-                not independently verify physical progress.
+                {t(
+                  'Taken directly from the official source. BetterSanFernando does not independently verify physical progress.'
+                )}
               </p>
             </div>
             <div>
               <h3 className="text-sm font-bold text-gray-900">
-                Reporting periods
+                {t('Reporting periods')}
               </h3>
               <p className="mt-1 text-sm leading-6 text-gray-700">
-                Each observation contains year-to-date figures. Quarterly values
-                should not be added together.
+                {t(
+                  'Each observation contains year-to-date figures. Quarterly values should not be added together.'
+                )}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-bold text-gray-900">Coverage</h3>
+              <h3 className="text-sm font-bold text-gray-900">
+                {t('Coverage')}
+              </h3>
               <p className="mt-1 text-sm leading-6 text-gray-700">
-                Only projects with verified cost-utilization observations are
-                included in this analysis.
+                {t(
+                  'Only projects with verified cost-utilization observations are included in this analysis.'
+                )}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-bold text-gray-900">Currency</h3>
+              <h3 className="text-sm font-bold text-gray-900">
+                {t('Currency')}
+              </h3>
               <p className="mt-1 text-sm leading-6 text-gray-700">
-                The official source does not state a currency unit, so monetary
-                amounts are displayed without a currency symbol.
+                {t(
+                  'The official source does not state a currency unit, so monetary amounts are displayed without a currency symbol.'
+                )}
               </p>
             </div>
           </div>
           <div className="mt-8 border-t border-gray-200 pt-6">
-            <p className="text-eyebrow text-[#0066EB]">Related pages</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('Related pages')}</p>
             <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3 text-[0px]">
               <Link
                 href="/statistics/projects"
                 className="text-sm font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
               >
-                Overall Project Statistics →
+                {t('Overall Project Statistics →')}
               </Link>
               {' · '}
               <Link
                 href="/statistics/procurement"
                 className="text-sm font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
               >
-                Procurement Statistics →
+                {t('Procurement Statistics →')}
               </Link>
               {' · '}
               <Link
                 href="/projects/city-projects"
                 className="text-sm font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
               >
-                Browse City Projects →
+                {t('Browse City Projects →')}
               </Link>
             </div>
           </div>

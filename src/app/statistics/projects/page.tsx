@@ -3,58 +3,77 @@ import { ChevronRight, FolderKanban, MapPinned } from 'lucide-react';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import { aggregateProjectStatistics } from '../../../data/civic/projectStatistics';
 import { getProjects } from '../../../data/civic/projects';
-import { formatIsoDate, titleCaseEnum } from '../../../lib/utils';
+import { formatIsoDate } from '../../../lib/utils';
+import { enumLabel } from '../enum-labels';
 import { buildPageMetadata } from '../../../lib/metadata';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import { getBarangays } from '../../../data/civic/demographics';
 
-export const metadata = buildPageMetadata({
-  title: 'Project Statistics',
-  description:
-    'A high-level descriptive snapshot of San Fernando’s published infrastructure and public-works project collection.',
-  path: '/statistics/projects',
-});
+const BARANGAY_COUNT = getBarangays().length;
+
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('statistics-projects');
+  return buildPageMetadata({
+    title: t('Project Statistics'),
+    description: t(
+      'A high-level descriptive snapshot of San Fernando’s published infrastructure and public-works project collection.'
+    ),
+    path: '/statistics/projects',
+    locale,
+  });
+}
 
 const eyebrowTracking = { letterSpacing: '0.08em' } as const;
 
-const amountLabels = {
-  approved_budget_abc: 'Approved Budget for the Contract (ABC)',
-  winning_bid_amount: 'Winning bid amount',
-  contract_amount: 'Contract amount',
-} as const;
+const amountLabels = (t: PageT) =>
+  ({
+    approved_budget_abc: t('Approved Budget for the Contract (ABC)'),
+    winning_bid_amount: t('Winning bid amount'),
+    contract_amount: t('Contract amount'),
+  }) as const;
 
-const RELATED_RESOURCES = [
-  {
-    title: 'Project Cost & Utilization',
-    description:
-      'Verified, source-reported cost-utilization observations for city projects.',
-    href: '/statistics/project-spending',
-  },
-  {
-    title: 'Procurement Statistics',
-    description:
-      'Explore documentary coverage and descriptive statistics across the project collection.',
-    href: '/statistics/procurement',
-  },
-  {
-    title: 'Project Evidence',
-    description:
-      'Inspect the official-source records behind published project facts.',
-    href: '/projects/sources',
-  },
-  {
-    title: 'Project Methodology',
-    description:
-      'Learn how project records are gathered, verified, normalized, and interpreted.',
-    href: '/projects/methodology',
-  },
-] as const;
+const RELATED_RESOURCES = (t: PageT) =>
+  [
+    {
+      title: t('Project Cost & Utilization'),
+      description: t(
+        'Verified, source-reported cost-utilization observations for city projects.'
+      ),
+      href: '/statistics/project-spending',
+    },
+    {
+      title: t('Procurement Statistics'),
+      description: t(
+        'Explore documentary coverage and descriptive statistics across the project collection.'
+      ),
+      href: '/statistics/procurement',
+    },
+    {
+      title: t('Project Evidence'),
+      description: t(
+        'Inspect the official-source records behind published project facts.'
+      ),
+      href: '/projects/sources',
+    },
+    {
+      title: t('Project Methodology'),
+      description: t(
+        'Learn how project records are gathered, verified, normalized, and interpreted.'
+      ),
+      href: '/projects/methodology',
+    },
+  ] as const;
 
-function formatPercentage(value: number): string {
-  return `${new Intl.NumberFormat('en-PH', {
-    maximumFractionDigits: 1,
-  }).format(value)}%`;
-}
+export default async function ProjectStatisticsPage() {
+  const { t, locale } = await getPageT('statistics-projects');
 
-export default function ProjectStatisticsPage() {
+  function formatPercentage(value: number): string {
+    return `${new Intl.NumberFormat(INTL_LOCALES[locale], {
+      maximumFractionDigits: 1,
+    }).format(value)}%`;
+  }
   const statistics = aggregateProjectStatistics(getProjects());
   const attributedPercentage =
     (statistics.barangayAttribution.attributed / statistics.totalProjects) *
@@ -94,25 +113,24 @@ export default function ProjectStatisticsPage() {
         <Breadcrumbs
           className="mb-6"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Statistics', href: '/statistics' },
-            { label: 'Project Statistics' },
+            { label: t('Home'), href: '/' },
+            { label: t('Statistics'), href: '/statistics' },
+            { label: t('Project Statistics') },
           ]}
         />
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              PROJECT STATISTICS
+              {t('PROJECT STATISTICS')}
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
-              A snapshot of San Fernando’s published project records
+              {t('A snapshot of San Fernando’s published project records')}
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-              Explore how BetterSanFernando’s current infrastructure and
-              public-works project collection is distributed by documentary
-              status, project type, stated year, geography, and available
-              financial fields.
+              {t(
+                'Explore how BetterSanFernando’s current infrastructure and public-works project collection is distributed by documentary status, project type, stated year, geography, and available financial fields.'
+              )}
             </p>
           </div>
 
@@ -121,38 +139,39 @@ export default function ProjectStatisticsPage() {
             className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5"
           >
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              WHAT THIS PAGE SHOWS
+              {t('WHAT THIS PAGE SHOWS')}
             </p>
             <h2
               id="scope-module-title"
               className="mt-1.5 text-base font-bold text-gray-950"
             >
-              Bounded published project collection
+              {t('Bounded published project collection')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600">
-              These statistics describe BetterSanFernando’s current published
-              project collection. They are not totals for all City Government
-              projects, spending, procurement activity, or physical construction
-              progress.
+              {t(
+                'These statistics describe BetterSanFernando’s current published project collection. They are not totals for all City Government projects, spending, procurement activity, or physical construction progress.'
+              )}
             </p>
           </aside>
         </div>
 
         <p className="mt-4 text-xs text-gray-500 sm:text-sm">
-          Status as of {formatIsoDate(statistics.statusAsOf)}
+          {t('Status as of {{statusAsOf}}', {
+            statusAsOf: formatIsoDate(statistics.statusAsOf, locale),
+          })}
         </p>
       </section>
 
       {/* 2. Top Metric Strip */}
       <section
-        aria-label="High-level project metrics"
+        aria-label={t('High-level project metrics')}
         className="border-y border-gray-200 bg-gray-50"
       >
         <div className="container mx-auto px-4 py-4 sm:py-6">
           <dl className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
             <div className="py-3 sm:py-0 sm:pr-6">
               <dt className="text-sm font-medium text-gray-600">
-                Published projects
+                {t('Published projects')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
                 {statistics.totalProjects}
@@ -160,30 +179,34 @@ export default function ProjectStatisticsPage() {
             </div>
             <div className="py-3 sm:py-0 sm:px-6">
               <dt className="text-sm font-medium text-gray-600">
-                With barangay attribution
+                {t('With barangay attribution')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
                 {statistics.barangayAttribution.attributed}{' '}
                 <span className="text-base font-normal text-gray-500 sm:text-lg">
-                  of {statistics.totalProjects}
+                  {t('of {{totalProjects}}', {
+                    totalProjects: statistics.totalProjects,
+                  })}
                 </span>
               </dd>
               <p className="mt-0.5 text-xs text-gray-500">
-                {formatPercentage(attributedPercentage)} of collection
+                {t('{{attributedPercentage}} of collection', {
+                  attributedPercentage: formatPercentage(attributedPercentage),
+                })}
               </p>
             </div>
             <div className="py-3 sm:py-0 sm:pl-6">
               <dt className="text-sm font-medium text-gray-600">
-                Barangays represented
+                {t('Barangays represented')}
               </dt>
               <dd className="mt-1 text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
                 {statistics.barangayAttribution.representedBarangays}{' '}
                 <span className="text-base font-normal text-gray-500 sm:text-lg">
-                  of 35
+                  {t('of {{barangays}}', { barangays: BARANGAY_COUNT })}
                 </span>
               </dd>
               <p className="mt-0.5 text-xs text-gray-500">
-                at least one attributed record
+                {t('at least one attributed record')}
               </p>
             </div>
           </dl>
@@ -195,63 +218,79 @@ export default function ProjectStatisticsPage() {
         {/* 3. Quick Read */}
         <section aria-labelledby="quick-read-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            QUICK READ
+            {t('QUICK READ')}
           </p>
           <h2
             id="quick-read-heading"
             className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
           >
-            What stands out in the current collection
+            {t('What stands out in the current collection')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
             <div className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
               <div className="p-4 sm:p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Documentary status
+                  {t('Documentary status')}
                 </p>
                 <p className="mt-1.5 text-sm font-bold text-gray-950 sm:text-base">
-                  {titleCaseEnum(largestStatus.key)} is the largest group
+                  {t('{{key}} is the largest group', {
+                    key: enumLabel(t, largestStatus.key),
+                  })}
                 </p>
                 <p className="mt-1 text-xs text-gray-600 sm:text-sm">
-                  {largestStatus.count} projects ·{' '}
-                  {formatPercentage(largestStatus.percentage)}
+                  {t('{{count}} projects · {{percentage}}', {
+                    count: largestStatus.count,
+                    percentage: formatPercentage(largestStatus.percentage),
+                  })}
                 </p>
               </div>
               <div className="p-4 sm:p-5 sm:border-l sm:border-gray-200 lg:border-l-0">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Project type
+                  {t('Project type')}
                 </p>
                 <p className="mt-1.5 text-sm font-bold text-gray-950 sm:text-base">
-                  {titleCaseEnum(largestType.key)} is the largest type
+                  {t('{{key}} is the largest type', {
+                    key: enumLabel(t, largestType.key),
+                  })}
                 </p>
                 <p className="mt-1 text-xs text-gray-600 sm:text-sm">
-                  {largestType.count} projects ·{' '}
-                  {formatPercentage(largestType.percentage)}
+                  {t('{{count}} projects · {{percentage}}', {
+                    count: largestType.count,
+                    percentage: formatPercentage(largestType.percentage),
+                  })}
                 </p>
               </div>
               <div className="p-4 sm:p-5 sm:border-t sm:border-gray-200 lg:border-t-0">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Stated project year
+                  {t('Stated project year')}
                 </p>
                 <p className="mt-1.5 text-sm font-bold text-gray-950 sm:text-base">
-                  {largestYear.key} is the largest stated year
+                  {t('{{key}} is the largest stated year', {
+                    key: largestYear.key,
+                  })}
                 </p>
                 <p className="mt-1 text-xs text-gray-600 sm:text-sm">
-                  {largestYear.count} projects ·{' '}
-                  {formatPercentage(largestYear.percentage)}
+                  {t('{{count}} projects · {{percentage}}', {
+                    count: largestYear.count,
+                    percentage: formatPercentage(largestYear.percentage),
+                  })}
                 </p>
               </div>
               <div className="p-4 sm:p-5 sm:border-l sm:border-t sm:border-gray-200 lg:border-t-0">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Geographic attribution
+                  {t('Geographic attribution')}
                 </p>
                 <p className="mt-1.5 text-sm font-bold text-gray-950 sm:text-base">
-                  {statistics.barangayAttribution.attributed} projects
-                  attributed
+                  {t('{{attributed}} projects attributed', {
+                    attributed: statistics.barangayAttribution.attributed,
+                  })}
                 </p>
                 <p className="mt-1 text-xs text-gray-600 sm:text-sm">
-                  {formatPercentage(attributedPercentage)} of collection
+                  {t('{{attributedPercentage}} of collection', {
+                    attributedPercentage:
+                      formatPercentage(attributedPercentage),
+                  })}
                 </p>
               </div>
             </div>
@@ -264,15 +303,15 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            DOCUMENTARY STATUS
+            {t('DOCUMENTARY STATUS')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            How projects are currently documented
+            {t('How projects are currently documented')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            Each project appears once according to its strongest currently
-            published documentary status. These categories describe evidence,
-            not physical construction progress.
+            {t(
+              'Each project appears once according to its strongest currently published documentary status. These categories describe evidence, not physical construction progress.'
+            )}
           </p>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
@@ -281,7 +320,7 @@ export default function ProjectStatisticsPage() {
                 <div key={item.key} className="space-y-1.5">
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="text-sm font-bold text-gray-950">
-                      {titleCaseEnum(item.key)}
+                      {enumLabel(t, item.key)}
                     </span>
                     <span className="text-sm font-semibold tabular-nums text-gray-900">
                       {item.count}{' '}
@@ -293,7 +332,14 @@ export default function ProjectStatisticsPage() {
                   <div
                     className="h-2.5 w-full overflow-hidden rounded-sm bg-gray-100"
                     role="img"
-                    aria-label={`${titleCaseEnum(item.key)}: ${item.count} projects, ${formatPercentage(item.percentage)}`}
+                    aria-label={t(
+                      '{{key}}: {{count}} projects, {{percentage}}',
+                      {
+                        key: enumLabel(t, item.key),
+                        count: item.count,
+                        percentage: formatPercentage(item.percentage),
+                      }
+                    )}
                   >
                     <div
                       className="h-full rounded-sm bg-[#0066EB]"
@@ -306,9 +352,9 @@ export default function ProjectStatisticsPage() {
           </div>
 
           <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-            Award, contract, and implementation evidence establish different
-            documentary facts. This chart is not a procurement funnel or a
-            project-completion scale.
+            {t(
+              'Award, contract, and implementation evidence establish different documentary facts. This chart is not a procurement funnel or a project-completion scale.'
+            )}
           </p>
         </section>
 
@@ -318,19 +364,21 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            PROJECT MIX
+            {t('PROJECT MIX')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            What kinds of projects are in the collection?
+            {t('What kinds of projects are in the collection?')}
           </h2>
 
           {/* Project Type Distribution */}
           <div className="mt-6 rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
             <h3 className="text-base font-bold text-gray-950">
-              Project type distribution
+              {t('Project type distribution')}
             </h3>
             <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Record count by normalized infrastructure or public-works type.
+              {t(
+                'Record count by normalized infrastructure or public-works type.'
+              )}
             </p>
 
             <div className="mt-5 space-y-3">
@@ -341,7 +389,7 @@ export default function ProjectStatisticsPage() {
                 >
                   <div className="flex items-baseline justify-between sm:block">
                     <span className="text-xs font-medium text-gray-900 sm:text-sm">
-                      {titleCaseEnum(item.key)}
+                      {enumLabel(t, item.key)}
                     </span>
                     <span className="tabular-nums text-xs font-semibold text-gray-900 sm:hidden">
                       {item.count}{' '}
@@ -353,7 +401,14 @@ export default function ProjectStatisticsPage() {
                   <div
                     className="h-2 w-full overflow-hidden rounded-sm bg-gray-100"
                     role="img"
-                    aria-label={`${titleCaseEnum(item.key)}: ${item.count} projects, ${formatPercentage(item.percentage)}`}
+                    aria-label={t(
+                      '{{key}}: {{count}} projects, {{percentage}}',
+                      {
+                        key: enumLabel(t, item.key),
+                        count: item.count,
+                        percentage: formatPercentage(item.percentage),
+                      }
+                    )}
                   >
                     <div
                       className="h-full rounded-sm bg-[#0066EB]"
@@ -376,11 +431,12 @@ export default function ProjectStatisticsPage() {
           {/* Project Category */}
           <div className="mt-6 rounded-sm border border-gray-200 bg-white p-5 sm:mt-8 sm:p-6">
             <h3 className="text-base font-bold text-gray-950">
-              Project category
+              {t('Project category')}
             </h3>
             <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Published project records are classified as infrastructure capital
-              or infrastructure maintenance.
+              {t(
+                'Published project records are classified as infrastructure capital or infrastructure maintenance.'
+              )}
             </p>
 
             {/* Horizontal 100% Split Bar */}
@@ -388,7 +444,17 @@ export default function ProjectStatisticsPage() {
               <div
                 className="flex h-3.5 w-full overflow-hidden rounded-sm bg-gray-100"
                 role="img"
-                aria-label={`Project category composition: ${categoryCapital.count} Infrastructure Capital (${formatPercentage(categoryCapital.percentage)}), ${categoryMaintenance.count} Infrastructure Maintenance (${formatPercentage(categoryMaintenance.percentage)})`}
+                aria-label={t(
+                  'Project category composition: {{count}} Infrastructure Capital ({{percentage}}), {{count2}} Infrastructure Maintenance ({{percentage2}})',
+                  {
+                    count: categoryCapital.count,
+                    percentage: formatPercentage(categoryCapital.percentage),
+                    count2: categoryMaintenance.count,
+                    percentage2: formatPercentage(
+                      categoryMaintenance.percentage
+                    ),
+                  }
+                )}
               >
                 <div
                   className="h-full bg-[#0066EB]"
@@ -409,7 +475,7 @@ export default function ProjectStatisticsPage() {
                       aria-hidden="true"
                     />
                     <p className="text-xs font-bold text-gray-950 sm:text-sm">
-                      Infrastructure Capital
+                      {t('Infrastructure Capital')}
                     </p>
                   </div>
                   <p className="mt-1.5 text-lg font-bold tabular-nums text-gray-950 sm:text-xl">
@@ -419,7 +485,7 @@ export default function ProjectStatisticsPage() {
                     </span>
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    New construction, road building, and primary assets
+                    {t('New construction, road building, and primary assets')}
                   </p>
                 </div>
 
@@ -430,7 +496,7 @@ export default function ProjectStatisticsPage() {
                       aria-hidden="true"
                     />
                     <p className="text-xs font-bold text-gray-950 sm:text-sm">
-                      Infrastructure Maintenance
+                      {t('Infrastructure Maintenance')}
                     </p>
                   </div>
                   <p className="mt-1.5 text-lg font-bold tabular-nums text-gray-950 sm:text-xl">
@@ -440,7 +506,7 @@ export default function ProjectStatisticsPage() {
                     </span>
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Repairs, rehabilitation, and preventive upkeep
+                    {t('Repairs, rehabilitation, and preventive upkeep')}
                   </p>
                 </div>
               </div>
@@ -449,9 +515,9 @@ export default function ProjectStatisticsPage() {
             {/* Quiet Explanatory Sentence */}
             <div className="mt-4 border-t border-gray-200 pt-3">
               <p className="text-xs leading-relaxed text-gray-500">
-                Capital projects account for the majority of the current
-                published archive, representing major public-works
-                appropriations.
+                {t(
+                  'Capital projects account for the majority of the current published archive, representing major public-works appropriations.'
+                )}
               </p>
             </div>
           </div>
@@ -463,14 +529,15 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            PROJECT RECORD YEAR
+            {t('PROJECT RECORD YEAR')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            When are the published project records dated?
+            {t('When are the published project records dated?')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            This is the stated project year in the published record. It is not a
-            spending year, completion year, or construction-progress timeline.
+            {t(
+              'This is the stated project year in the published record. It is not a spending year, completion year, or construction-progress timeline.'
+            )}
           </p>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
@@ -492,7 +559,14 @@ export default function ProjectStatisticsPage() {
                       className="w-full max-w-[4.5rem] rounded-t-sm bg-[#0066EB] transition-colors hover:bg-[#0052BC]"
                       style={{ height: `${heightPercent}%` }}
                       role="img"
-                      aria-label={`${item.key}: ${item.count} projects (${formatPercentage(item.percentage)})`}
+                      aria-label={t(
+                        '{{key}}: {{count}} projects ({{percentage}})',
+                        {
+                          key: item.key,
+                          count: item.count,
+                          percentage: formatPercentage(item.percentage),
+                        }
+                      )}
                     />
                   </div>
                 );
@@ -519,10 +593,10 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            GEOGRAPHIC COVERAGE
+            {t('GEOGRAPHIC COVERAGE')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            How much of the collection is attributed to a barangay?
+            {t('How much of the collection is attributed to a barangay?')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
@@ -530,14 +604,14 @@ export default function ProjectStatisticsPage() {
               <div>
                 <div className="flex items-baseline justify-between text-xs sm:text-sm font-semibold">
                   <span className="text-gray-900">
-                    Attributed:{' '}
+                    {t('Attributed:')}{' '}
                     <span className="font-bold text-gray-950">
                       {statistics.barangayAttribution.attributed}
                     </span>{' '}
                     ({formatPercentage(attributedPercentage)})
                   </span>
                   <span className="text-gray-600">
-                    Unattributed:{' '}
+                    {t('Unattributed:')}{' '}
                     <span className="font-bold text-gray-950">
                       {statistics.barangayAttribution.unattributed}
                     </span>{' '}
@@ -547,7 +621,16 @@ export default function ProjectStatisticsPage() {
                 <div
                   className="mt-2 flex h-3 w-full overflow-hidden rounded-sm bg-gray-100"
                   role="img"
-                  aria-label={`Geographic attribution: ${statistics.barangayAttribution.attributed} attributed (${formatPercentage(attributedPercentage)}), ${statistics.barangayAttribution.unattributed} unattributed (${formatPercentage(100 - attributedPercentage)})`}
+                  aria-label={t(
+                    'Geographic attribution: {{attributed}} attributed ({{attributedPercentage}}), {{unattributed}} unattributed ({{value}})',
+                    {
+                      attributed: statistics.barangayAttribution.attributed,
+                      attributedPercentage:
+                        formatPercentage(attributedPercentage),
+                      unattributed: statistics.barangayAttribution.unattributed,
+                      value: formatPercentage(100 - attributedPercentage),
+                    }
+                  )}
                 >
                   <div
                     className="h-full bg-[#0066EB]"
@@ -563,17 +646,20 @@ export default function ProjectStatisticsPage() {
               <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                   <p className="text-base font-bold text-gray-950 sm:text-lg">
-                    {statistics.barangayAttribution.representedBarangays} of 35
-                    barangays
+                    {t('{{representedBarangays}} of {{barangays}} barangays', {
+                      barangays: BARANGAY_COUNT,
+                      representedBarangays:
+                        statistics.barangayAttribution.representedBarangays,
+                    })}
                   </p>
                   <span className="text-xs text-gray-600 font-medium">
-                    represented by at least one attributed project record
+                    {t('represented by at least one attributed project record')}
                   </span>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  Barangay attribution identifies an area association from
-                  published evidence. It does not represent an exact project
-                  coordinate.
+                  {t(
+                    'Barangay attribution identifies an area association from published evidence. It does not represent an exact project coordinate.'
+                  )}
                 </p>
                 <div className="mt-3.5">
                   <Link
@@ -581,7 +667,7 @@ export default function ProjectStatisticsPage() {
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
                     <MapPinned className="h-4 w-4" aria-hidden="true" />
-                    Explore the barangay distribution map →
+                    {t('Explore the barangay distribution map →')}
                   </Link>
                 </div>
               </div>
@@ -595,15 +681,15 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            FINANCIAL FIELD COVERAGE
+            {t('FINANCIAL FIELD COVERAGE')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Which monetary fields are available?
+            {t('Which monetary fields are available?')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            Field coverage shows whether a published project record contains a
-            value. It does not measure spending, project quality, or financial
-            performance.
+            {t(
+              'Field coverage shows whether a published project record contains a value. It does not measure spending, project quality, or financial performance.'
+            )}
           </p>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
@@ -612,15 +698,15 @@ export default function ProjectStatisticsPage() {
                 <div key={item.field} className="space-y-1.5">
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="text-sm font-bold text-gray-950">
-                      {amountLabels[item.field]}
+                      {amountLabels(t)[item.field]}
                     </span>
                     <span className="text-xs sm:text-sm tabular-nums text-gray-700">
                       <strong className="text-gray-950">{item.count}</strong>{' '}
-                      available ·{' '}
+                      {t('available ·')}{' '}
                       <strong className="text-gray-950">
                         {item.unavailableCount}
                       </strong>{' '}
-                      unavailable ·{' '}
+                      {t('unavailable ·')}{' '}
                       <strong className="text-[#0066EB]">
                         {formatPercentage(item.percentage)}
                       </strong>
@@ -629,7 +715,15 @@ export default function ProjectStatisticsPage() {
                   <div
                     className="flex h-3 w-full overflow-hidden rounded-sm bg-gray-200"
                     role="img"
-                    aria-label={`${amountLabels[item.field]}: ${item.count} available (${formatPercentage(item.percentage)}), ${item.unavailableCount} unavailable`}
+                    aria-label={t(
+                      '{{label}}: {{count}} available ({{percentage}}), {{unavailableCount}} unavailable',
+                      {
+                        label: amountLabels(t)[item.field],
+                        count: item.count,
+                        percentage: formatPercentage(item.percentage),
+                        unavailableCount: item.unavailableCount,
+                      }
+                    )}
                   >
                     <div
                       className="h-full bg-[#0066EB]"
@@ -643,15 +737,18 @@ export default function ProjectStatisticsPage() {
             <div className="mt-6 border-t border-gray-200 pt-5">
               <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-900">
-                  Actual expenditure
+                  {t('Actual expenditure')}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-gray-700 sm:text-sm">
-                  Not established by the current published project dataset.
+                  {t(
+                    'Not established by the current published project dataset.'
+                  )}
                 </p>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                ABC, winning bid amount, and contract amount are different
-                financial concepts and should not be combined.
+                {t(
+                  'ABC, winning bid amount, and contract amount are different financial concepts and should not be combined.'
+                )}
               </p>
             </div>
           </div>
@@ -663,50 +760,52 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            HOW TO READ THIS PAGE
+            {t('HOW TO READ THIS PAGE')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            How to interpret these statistics
+            {t('How to interpret these statistics')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-[#F3F6FB]">
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
               <div className="p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-950">
-                  Documentary status
+                  {t('Documentary status')}
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  Describes the strongest published documentary state currently
-                  supported for a project. It is not physical construction
-                  progress.
+                  {t(
+                    'Describes the strongest published documentary state currently supported for a project. It is not physical construction progress.'
+                  )}
                 </p>
               </div>
               <div className="p-5 sm:p-6 md:border-l md:border-gray-200">
                 <h3 className="text-sm font-bold text-gray-950">
-                  Project year
+                  {t('Project year')}
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  Refers to the stated year in the project record. It should not
-                  be interpreted as an expenditure year or completion year.
+                  {t(
+                    'Refers to the stated year in the project record. It should not be interpreted as an expenditure year or completion year.'
+                  )}
                 </p>
               </div>
               <div className="p-5 sm:p-6 md:border-t md:border-gray-200">
                 <h3 className="text-sm font-bold text-gray-950">
-                  Field coverage
+                  {t('Field coverage')}
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  Indicates whether a published project record contains a value.
-                  Missing information remains unknown.
+                  {t(
+                    'Indicates whether a published project record contains a value. Missing information remains unknown.'
+                  )}
                 </p>
               </div>
               <div className="p-5 sm:p-6 md:border-l md:border-t md:border-gray-200">
                 <h3 className="text-sm font-bold text-gray-950">
-                  Collection scope
+                  {t('Collection scope')}
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  These statistics describe BetterSanFernando’s bounded
-                  infrastructure and public-works project collection, not every
-                  City Government project or procurement activity.
+                  {t(
+                    'These statistics describe BetterSanFernando’s bounded infrastructure and public-works project collection, not every City Government project or procurement activity.'
+                  )}
                 </p>
               </div>
             </div>
@@ -720,13 +819,13 @@ export default function ProjectStatisticsPage() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10 lg:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            KEEP EXPLORING
+            {t('KEEP EXPLORING')}
           </p>
           <h2
             id="keep-exploring-heading"
             className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl"
           >
-            Explore the project data
+            {t('Explore the project data')}
           </h2>
 
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
@@ -738,18 +837,18 @@ export default function ProjectStatisticsPage() {
                     aria-hidden="true"
                   />
                   <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                    City Projects
+                    {t('City Projects')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                  Browse individual published project records.
+                  {t('Browse individual published project records.')}
                 </p>
                 <div className="mt-3.5">
                   <Link
                     href="/projects/city-projects"
                     className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
-                    Browse City Projects →
+                    {t('Browse City Projects →')}
                   </Link>
                 </div>
               </div>
@@ -758,19 +857,20 @@ export default function ProjectStatisticsPage() {
                 <div className="flex items-center gap-2 text-[#0066EB]">
                   <MapPinned className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                    Project Map
+                    {t('Project Map')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                  See how published project records are distributed across San
-                  Fernando’s barangays.
+                  {t(
+                    'See how published project records are distributed across San Fernando’s barangays.'
+                  )}
                 </p>
                 <div className="mt-3.5">
                   <Link
                     href="/projects/map"
                     className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                   >
-                    Explore Project Map →
+                    {t('Explore Project Map →')}
                   </Link>
                 </div>
               </div>
@@ -779,11 +879,11 @@ export default function ProjectStatisticsPage() {
 
           <div className="mt-8">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              Related resources
+              {t('Related resources')}
             </h3>
             <div className="mt-3 overflow-hidden rounded-sm border border-gray-200 bg-white">
               <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-                {RELATED_RESOURCES.map((item, index) => (
+                {RELATED_RESOURCES(t).map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}

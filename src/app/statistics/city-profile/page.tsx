@@ -11,15 +11,23 @@ import { getCityOfficesMetadata } from '../../../data/civic/government';
 import { aggregatePopulationStatistics } from '../../../data/civic/populationStatistics';
 import { buildPageMetadata } from '../../../lib/metadata';
 import { formatIsoDate } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
+import { INTL_LOCALES } from '../../../i18n/locale';
 
-export const metadata = buildPageMetadata({
-  title: 'City Profile: San Fernando, Pampanga',
-  description:
-    'A source-aware overview of the verified city facts BetterSanFernando currently publishes, including population, barangays, geographic coverage, and institutional records.',
-  path: '/statistics/city-profile',
-});
+const BARANGAY_COUNT = getBarangays().length;
 
-const numberFormatter = new Intl.NumberFormat('en-PH');
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('statistics-city-profile');
+  return buildPageMetadata({
+    title: t('City Profile: San Fernando, Pampanga'),
+    description: t(
+      'A source-aware overview of the verified city facts BetterSanFernando currently publishes, including population, barangays, geographic coverage, and institutional records.'
+    ),
+    path: '/statistics/city-profile',
+    locale,
+  });
+}
 const populationSource = getCityDemographicsSource();
 const geography = getGeographyMetadata();
 const officesMetadata = getCityOfficesMetadata();
@@ -28,89 +36,108 @@ const population = aggregatePopulationStatistics(
   getCityTotalPopulation()
 );
 
-const exploreDestinations = [
-  {
-    category: 'PEOPLE & BARANGAYS',
-    href: '/statistics/population',
-    title: 'Population Statistics',
-    question:
-      'How is the City’s population distributed across its 35 barangays?',
-  },
-  {
-    category: 'PEOPLE & BARANGAYS',
-    href: '/barangays',
-    title: 'Barangay Directory',
-    question:
-      'Find PSGC identity, population, and classification facts by barangay.',
-  },
-  {
-    category: 'GEOGRAPHY & PROJECTS',
-    href: '/projects/map',
-    title: 'Project Distribution Map',
-    question: 'Explore published project records by barangay boundary.',
-  },
-  {
-    category: 'GEOGRAPHY & PROJECTS',
-    href: '/projects/city-projects',
-    title: 'Published Projects',
-    question: 'Browse BetterSanFernando’s bounded public-works dataset.',
-  },
-] as const;
+const exploreDestinations = (t: PageT) =>
+  [
+    {
+      category: t('PEOPLE & BARANGAYS'),
+      href: '/statistics/population',
+      title: t('Population Statistics'),
+      question: t(
+        'How is the City’s population distributed across its {{barangays}} barangays?',
+        { barangays: BARANGAY_COUNT }
+      ),
+    },
+    {
+      category: t('PEOPLE & BARANGAYS'),
+      href: '/barangays',
+      title: t('Barangay Directory'),
+      question: t(
+        'Find PSGC identity, population, and classification facts by barangay.'
+      ),
+    },
+    {
+      category: t('GEOGRAPHY & PROJECTS'),
+      href: '/projects/map',
+      title: t('Project Distribution Map'),
+      question: t('Explore published project records by barangay boundary.'),
+    },
+    {
+      category: t('GEOGRAPHY & PROJECTS'),
+      href: '/projects/city-projects',
+      title: t('Published Projects'),
+      question: t('Browse BetterSanFernando’s bounded public-works dataset.'),
+    },
+  ] as const;
 
-const readingGuideItems = [
-  {
-    title: 'Population Is a Census Baseline',
-    description:
-      'The population figure comes from the 2024 POPCEN reference and is not a projection or estimate.',
-  },
-  {
-    title: 'Boundary Coverage Has a Separate Geometry Source',
-    description:
-      'Published polygon geometry is community-maintained and is not presented as an official PSA shapefile.',
-  },
-  {
-    title: 'Office Count Is Directory Coverage',
-    description:
-      'The published office-record count describes BetterSanFernando’s current verified directory, not the City’s complete legal organization.',
-  },
-  {
-    title: 'This Is a Bounded Profile',
-    description:
-      'This page does not claim complete coverage of elected officials, historical narrative, economic indicators, or every City statistic.',
-  },
-] as const;
+const readingGuideItems = (t: PageT) =>
+  [
+    {
+      title: t('Population Is a Census Baseline'),
+      description: t(
+        'The population figure comes from the 2024 POPCEN reference and is not a projection or estimate.'
+      ),
+    },
+    {
+      title: t('Boundary Coverage Has a Separate Geometry Source'),
+      description: t(
+        'Published polygon geometry is community-maintained and is not presented as an official PSA shapefile.'
+      ),
+    },
+    {
+      title: t('Office Count Is Directory Coverage'),
+      description: t(
+        'The published office-record count describes BetterSanFernando’s current verified directory, not the City’s complete legal organization.'
+      ),
+    },
+    {
+      title: t('This Is a Bounded Profile'),
+      description: t(
+        'This page does not claim complete coverage of elected officials, historical narrative, economic indicators, or every City statistic.'
+      ),
+    },
+  ] as const;
 
-const keepExploringLinks = [
-  {
-    href: '/statistics/population',
-    title: 'Population Statistics',
-    description: 'Explore 2024 census distribution across all 35 barangays.',
-    action: 'View statistics',
-  },
-  {
-    href: '/barangays',
-    title: 'Barangay Directory',
-    description:
-      'Search verified PSGC, population, and classification records.',
-    action: 'Browse barangays',
-  },
-  {
-    href: '/statistics/government',
-    title: 'Government Statistics',
-    description:
-      'View institutional coverage and verified city office statistics.',
-    action: 'Explore government',
-  },
-  {
-    href: '/statistics/public-records',
-    title: 'Public Records Statistics',
-    description:
-      'Track published datasets, coverage periods, and evidence units.',
-    action: 'View public records',
-  },
-] as const;
+const keepExploringLinks = (t: PageT) =>
+  [
+    {
+      href: '/statistics/population',
+      title: t('Population Statistics'),
+      description: t(
+        'Explore 2024 census distribution across all {{barangays}} barangays.',
+        { barangays: BARANGAY_COUNT }
+      ),
+      action: t('View statistics'),
+    },
+    {
+      href: '/barangays',
+      title: t('Barangay Directory'),
+      description: t(
+        'Search verified PSGC, population, and classification records.'
+      ),
+      action: t('Browse barangays'),
+    },
+    {
+      href: '/statistics/government',
+      title: t('Government Statistics'),
+      description: t(
+        'View institutional coverage and verified city office statistics.'
+      ),
+      action: t('Explore government'),
+    },
+    {
+      href: '/statistics/public-records',
+      title: t('Public Records Statistics'),
+      description: t(
+        'Track published datasets, coverage periods, and evidence units.'
+      ),
+      action: t('View public records'),
+    },
+  ] as const;
 
-export default function CityProfile() {
+export default async function CityProfile() {
+  const { t, locale } = await getPageT('statistics-city-profile');
+
+  const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[locale]);
   return (
     <main className="flex-grow bg-white">
       {/* 1. EDITORIAL HERO */}
@@ -119,27 +146,27 @@ export default function CityProfile() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Statistics', href: '/statistics' },
-              { label: 'City Profile' },
+              { label: t('Home'), href: '/' },
+              { label: t('Statistics'), href: '/statistics' },
+              { label: t('City Profile') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                STATISTICS · CITY PROFILE
+                {t('STATISTICS · CITY PROFILE')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                City of San Fernando
+                {t('City of San Fernando')}
               </h1>
               <p className="mt-2 text-xl font-semibold text-primary-800">
-                Pampanga, Philippines
+                {t('Pampanga, Philippines')}
               </p>
               <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                A source-aware overview of the verified city facts
-                BetterSanFernando currently publishes, including population,
-                barangays, geographic coverage, and institutional records.
+                {t(
+                  'A source-aware overview of the verified city facts BetterSanFernando currently publishes, including population, barangays, geographic coverage, and institutional records.'
+                )}
               </p>
 
               {/* CTA row */}
@@ -148,14 +175,14 @@ export default function CityProfile() {
                   href="#at-a-glance"
                   className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
                 >
-                  Explore the City Profile
+                  {t('Explore the City Profile')}
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/barangays"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Browse Barangays
+                  {t('Browse Barangays')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -163,14 +190,16 @@ export default function CityProfile() {
 
             {/* RIGHT-SIDE SCOPE MODULE */}
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
-              <p className="text-eyebrow text-[#0066EB]">PROFILE SCOPE</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('PROFILE SCOPE')}
+              </p>
               <h2 className="mt-1.5 text-base font-bold text-gray-950">
-                San Fernando, Pampanga
+                {t('San Fernando, Pampanga')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                This profile refers to the City of San Fernando in Pampanga—not
-                San Fernando, La Union. It is a bounded civic profile, not a
-                complete socioeconomic or legal profile of the City.
+                {t(
+                  'This profile refers to the City of San Fernando in Pampanga—not San Fernando, La Union. It is a bounded civic profile, not a complete socioeconomic or legal profile of the City.'
+                )}
               </p>
             </aside>
           </div>
@@ -189,58 +218,66 @@ export default function CityProfile() {
               id="at-a-glance-heading"
               className="text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              At a Glance
+              {t('At a Glance')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Verified baseline measures from BetterSanFernando’s current public
-              datasets. Each figure keeps its own source and scope.
+              {t(
+                'Verified baseline measures from BetterSanFernando’s current public datasets. Each figure keeps its own source and scope.'
+              )}
             </p>
           </div>
 
           <dl className="mt-6 grid grid-cols-1 gap-6 border-y border-gray-200 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-gray-200">
             <div className="lg:pr-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Population
+                {t('Population')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {numberFormatter.format(population.totalPopulation)}
               </dd>
-              <p className="mt-1 text-xs text-gray-600">2024 POPCEN</p>
+              <p className="mt-1 text-xs text-gray-600">{t('2024 POPCEN')}</p>
             </div>
 
             <div className="lg:px-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Barangays
+                {t('Barangays')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {population.barangayCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Complete published barangay set
+                {t('Complete published barangay set')}
               </p>
             </div>
 
             <div className="lg:px-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Barangay Classification
+                {t('Barangay Classification')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
-                {population.urbanBarangayCount} Urban
+                {t('{{urbanBarangayCount}} Urban', {
+                  urbanBarangayCount: population.urbanBarangayCount,
+                })}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                {population.ruralBarangayCount} Rural · Lourdes
+                {t('{{ruralBarangayCount}} Rural · {{ruralBarangayNames}}', {
+                  ruralBarangayCount: population.ruralBarangayCount,
+                  ruralBarangayNames: population.ruralBarangays
+                    .map(barangay => barangay.name)
+                    .join(', '),
+                })}
               </p>
             </div>
 
             <div className="lg:pl-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Published Office Records
+                {t('Published Office Records')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {officesMetadata.officeCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Bounded institutional directory
+                {t('Bounded institutional directory')}
               </p>
             </div>
           </dl>
@@ -255,17 +292,19 @@ export default function CityProfile() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <p className="text-eyebrow text-[#0066EB]">
-              PEOPLE &amp; BARANGAYS
+              {t('PEOPLE & BARANGAYS')}
             </p>
             <h2
               id="people-barangays-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Population and Barangay Classification
+              {t('Population and Barangay Classification')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Population and classification use the PSA 2024 POPCEN baseline and
-              the currently published 35-barangay set.
+              {t(
+                'Population and classification use the PSA 2024 POPCEN baseline and the currently published {{barangays}}-barangay set.',
+                { barangays: BARANGAY_COUNT }
+              )}
             </p>
           </div>
 
@@ -273,7 +312,7 @@ export default function CityProfile() {
             {/* LEFT: Population summary */}
             <div className="flex flex-col rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
               <h3 className="text-base font-bold text-gray-950">
-                Population Summary
+                {t('Population Summary')}
               </h3>
 
               {/* Primary statistic group */}
@@ -282,9 +321,9 @@ export default function CityProfile() {
                   {numberFormatter.format(population.totalPopulation)}
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-700">
-                  Population
+                  {t('Population')}
                 </p>
-                <p className="text-xs text-gray-500">2024 POPCEN</p>
+                <p className="text-xs text-gray-500">{t('2024 POPCEN')}</p>
               </div>
 
               {/* Secondary statistic group */}
@@ -293,14 +332,16 @@ export default function CityProfile() {
                   {population.barangayCount}
                 </p>
                 <p className="mt-0.5 text-sm font-medium text-gray-700">
-                  Barangays
+                  {t('Barangays')}
                 </p>
               </div>
 
               {/* Short contextual explanation */}
               <p className="mt-6 text-sm leading-relaxed text-gray-600">
-                San Fernando’s published population baseline comes from the PSA
-                2024 POPCEN and covers all 35 component barangays.
+                {t(
+                  'San Fernando’s published population baseline comes from the PSA 2024 POPCEN and covers all {{barangays}} component barangays.',
+                  { barangays: BARANGAY_COUNT }
+                )}
               </p>
 
               {/* CTA at bottom */}
@@ -309,7 +350,7 @@ export default function CityProfile() {
                   href="/statistics/population"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Explore Population Statistics
+                  {t('Explore Population Statistics')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -318,7 +359,7 @@ export default function CityProfile() {
             {/* RIGHT: Barangay Classification */}
             <div className="flex flex-col rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
               <h3 className="text-base font-bold text-gray-950">
-                Barangay Classification
+                {t('Barangay Classification')}
               </h3>
 
               {/* Primary statistic group */}
@@ -327,7 +368,7 @@ export default function CityProfile() {
                   {population.urbanBarangayCount}
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-700">
-                  Urban Barangays
+                  {t('Urban Barangays')}
                 </p>
               </div>
 
@@ -337,15 +378,21 @@ export default function CityProfile() {
                   {population.ruralBarangayCount}
                 </p>
                 <p className="mt-0.5 text-sm font-medium text-gray-700">
-                  Rural Barangay
+                  {t('Rural Barangay')}
                 </p>
-                <p className="text-xs text-gray-500">Lourdes</p>
+                <p className="text-xs text-gray-500">
+                  {population.ruralBarangays
+                    .map(barangay => barangay.name)
+                    .join(', ')}
+                </p>
               </div>
 
               {/* Short contextual explanation */}
               <p className="mt-6 text-sm leading-relaxed text-gray-600">
-                Classification applies to the currently published 35-barangay
-                set.
+                {t(
+                  'Classification applies to the currently published {{barangays}}-barangay set.',
+                  { barangays: BARANGAY_COUNT }
+                )}
               </p>
 
               {/* CTA at bottom */}
@@ -354,7 +401,7 @@ export default function CityProfile() {
                   href="/barangays"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Browse Barangay Directory
+                  {t('Browse Barangay Directory')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -370,17 +417,17 @@ export default function CityProfile() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">CITY COVERAGE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('CITY COVERAGE')}</p>
             <h2
               id="coverage-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Published Geographic and Institutional Coverage
+              {t('Published Geographic and Institutional Coverage')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              These figures describe BetterSanFernando’s current published
-              coverage, not the City’s complete legal or organizational
-              structure.
+              {t(
+                'These figures describe BetterSanFernando’s current published coverage, not the City’s complete legal or organizational structure.'
+              )}
             </p>
           </div>
 
@@ -389,7 +436,7 @@ export default function CityProfile() {
             <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Geographic Coverage
+                  {t('Geographic Coverage')}
                 </h3>
                 <dl className="mt-4 grid grid-cols-2 gap-4 border-y border-gray-200 py-4">
                   <div>
@@ -397,7 +444,7 @@ export default function CityProfile() {
                       {geography.cityBoundaryCount}
                     </dd>
                     <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      City Boundary
+                      {t('City Boundary')}
                     </dt>
                   </div>
                   <div>
@@ -405,19 +452,20 @@ export default function CityProfile() {
                       {geography.barangayBoundaryCount}
                     </dd>
                     <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      Barangay Boundaries
+                      {t('Barangay Boundaries')}
                     </dt>
                   </div>
                 </dl>
                 <div className="mt-4 space-y-2 text-sm leading-relaxed text-gray-600">
                   <p>
-                    The frontend-safe geography release contains the verified
-                    City boundary and published barangay boundary features.
+                    {t(
+                      'The frontend-safe geography release contains the verified City boundary and published barangay boundary features.'
+                    )}
                   </p>
                   <p className="text-xs text-gray-500">
-                    Polygon geometry is not an official PSA shapefile. It comes
-                    from a community-maintained source; PSGC codes and names are
-                    matched to PSA identity data.
+                    {t(
+                      'Polygon geometry is not an official PSA shapefile. It comes from a community-maintained source; PSGC codes and names are matched to PSA identity data.'
+                    )}
                   </p>
                 </div>
               </div>
@@ -426,7 +474,7 @@ export default function CityProfile() {
                   href="/projects/map"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Explore Project &amp; Barangay Map
+                  {t('Explore Project & Barangay Map')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -436,7 +484,7 @@ export default function CityProfile() {
             <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Institutional Directory
+                  {t('Institutional Directory')}
                 </h3>
                 <dl className="mt-4 border-y border-gray-200 py-4">
                   <div>
@@ -444,20 +492,20 @@ export default function CityProfile() {
                       {officesMetadata.officeCount}
                     </dd>
                     <dt className="mt-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      Published Office Records
+                      {t('Published Office Records')}
                     </dt>
                   </div>
                   <div className="mt-3 flex items-center justify-between border-t border-gray-100 pt-3 text-xs text-gray-500">
-                    <span>Directory Last Verified</span>
+                    <span>{t('Directory Last Verified')}</span>
                     <span className="font-semibold text-gray-700">
-                      {formatIsoDate(officesMetadata.lastVerified)}
+                      {formatIsoDate(officesMetadata.lastVerified, locale)}
                     </span>
                   </div>
                 </dl>
                 <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                  This is directory coverage, not a claim that the City
-                  Government has only this number of offices or units, and it is
-                  not an organizational hierarchy.
+                  {t(
+                    'This is directory coverage, not a claim that the City Government has only this number of offices or units, and it is not an organizational hierarchy.'
+                  )}
                 </p>
               </div>
               <div className="mt-6 border-t border-gray-100 pt-4">
@@ -465,7 +513,7 @@ export default function CityProfile() {
                   href="/government/offices"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Browse City Offices
+                  {t('Browse City Offices')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -481,23 +529,24 @@ export default function CityProfile() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">EXPLORE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('EXPLORE')}</p>
             <h2
               id="explore-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Explore City Information
+              {t('Explore City Information')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Continue to the page that owns each detailed comparison,
-              directory, map, or dataset.
+              {t(
+                'Continue to the page that owns each detailed comparison, directory, map, or dataset.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 overflow-hidden rounded-sm border border-gray-200 bg-white">
             {/* 2x2 Grid for first 4 destinations */}
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-              {exploreDestinations.map((item, index) => {
+              {exploreDestinations(t).map((item, index) => {
                 const isFirstCol = index % 2 === 0;
                 return (
                   <Link
@@ -538,23 +587,26 @@ export default function CityProfile() {
             >
               <div className="max-w-2xl">
                 <p className="text-eyebrow text-xs text-[#0066EB]">
-                  GOVERNMENT
+                  {t('GOVERNMENT')}
                 </p>
                 <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
-                    City Offices
+                    {t('City Offices')}
                   </h3>
                   <span className="text-xs font-semibold tabular-nums text-gray-500">
-                    {officesMetadata.officeCount} published office records
+                    {t('{{officeCount}} published office records', {
+                      officeCount: officesMetadata.officeCount,
+                    })}
                   </span>
                 </div>
                 <p className="mt-1 text-sm text-gray-600">
-                  Find published institutional office records and their public
-                  sources.
+                  {t(
+                    'Find published institutional office records and their public sources.'
+                  )}
                 </p>
               </div>
               <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[#0066EB]">
-                Browse City Offices
+                {t('Browse City Offices')}
                 <ArrowRight
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden="true"
@@ -572,17 +624,17 @@ export default function CityProfile() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('READING GUIDE')}</p>
             <h2
               id="reading-guide-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              How to Read This Profile
+              {t('How to Read This Profile')}
             </h2>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {readingGuideItems.map(item => (
+            {readingGuideItems(t).map(item => (
               <div
                 key={item.title}
                 className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6"
@@ -606,16 +658,17 @@ export default function CityProfile() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">PROVENANCE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('PROVENANCE')}</p>
             <h2
               id="provenance-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Sources &amp; Reference Dates
+              {t('Sources & Reference Dates')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Different facts rely on different authorities and reference
-              periods. BetterSanFernando keeps those source roles visible.
+              {t(
+                'Different facts rely on different authorities and reference periods. BetterSanFernando keeps those source roles visible.'
+              )}
             </p>
           </div>
 
@@ -623,11 +676,20 @@ export default function CityProfile() {
             {/* POPULATION & PSGC */}
             <article className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4">
               <h3 className="text-sm font-bold text-gray-950">
-                Population &amp; PSGC
+                {t('Population & PSGC')}
               </h3>
               <p className="text-sm leading-relaxed text-gray-600">
-                {populationSource.publisher} · {populationSource.census} · Last
-                verified {formatIsoDate(populationSource.lastVerified)}
+                {t(
+                  '{{publisher}} · {{census}} · Last verified {{lastVerified}}',
+                  {
+                    publisher: populationSource.publisher,
+                    census: populationSource.census,
+                    lastVerified: formatIsoDate(
+                      populationSource.lastVerified,
+                      locale
+                    ),
+                  }
+                )}
               </p>
               <div>
                 <a
@@ -636,7 +698,7 @@ export default function CityProfile() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  Official PSA Source
+                  {t('Official PSA Source')}
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               </div>
@@ -645,11 +707,13 @@ export default function CityProfile() {
             {/* BOUNDARY GEOMETRY */}
             <article className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4">
               <h3 className="text-sm font-bold text-gray-950">
-                Boundary Geometry
+                {t('Boundary Geometry')}
               </h3>
               <p className="text-sm leading-relaxed text-gray-600">
-                {geography.geometryPublisher} · Geometry reference: 31 December
-                2023
+                {t(
+                  '{{geometryPublisher}} · Geometry reference: 31 December 2023',
+                  { geometryPublisher: geography.geometryPublisher }
+                )}
               </p>
               <div>
                 <a
@@ -658,7 +722,7 @@ export default function CityProfile() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  View Geometry Source
+                  {t('View Geometry Source')}
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               </div>
@@ -667,19 +731,25 @@ export default function CityProfile() {
             {/* OFFICE DIRECTORY */}
             <article className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4">
               <h3 className="text-sm font-bold text-gray-950">
-                Office Directory
+                {t('Office Directory')}
               </h3>
               <p className="text-sm leading-relaxed text-gray-600">
-                Published institutional records · Record-specific official
-                source links · Last verified{' '}
-                {formatIsoDate(officesMetadata.lastVerified)}
+                {t(
+                  'Published institutional records · Record-specific official source links · Last verified {{lastVerified}}',
+                  {
+                    lastVerified: formatIsoDate(
+                      officesMetadata.lastVerified,
+                      locale
+                    ),
+                  }
+                )}
               </p>
               <div>
                 <Link
                   href="/government/offices"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  Review Office Sources
+                  {t('Review Office Sources')}
                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </div>
@@ -694,16 +764,18 @@ export default function CityProfile() {
         aria-labelledby="keep-exploring-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="keep-exploring-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {keepExploringLinks.map(item => (
+            {keepExploringLinks(t).map(item => (
               <Link
                 key={item.href}
                 href={item.href}

@@ -12,6 +12,10 @@ import {
 } from 'lucide-react';
 
 import type { RankedBarangayPopulation } from '../../../data/civic/populationStatistics';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { withSlots } from '../../../components/i18n/rich';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import { useLocale } from '../../../components/i18n/useLocale';
 
 type SortKey = 'rank' | 'barangay' | 'population' | 'share' | 'classification';
 
@@ -25,14 +29,6 @@ interface BarangayTableProps {
 }
 
 const PAGE_SIZE = 10;
-
-const numberFormatter = new Intl.NumberFormat('en-PH');
-
-const percentFormatter = new Intl.NumberFormat('en-PH', {
-  style: 'percent',
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1,
-});
 
 function SortIcon({
   active,
@@ -62,6 +58,16 @@ export default function BarangayTable({
   totalPopulation,
   barangayCount,
 }: BarangayTableProps) {
+  const t = usePageT();
+  const locale = useLocale();
+
+  const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[locale]);
+
+  const percentFormatter = new Intl.NumberFormat(INTL_LOCALES[locale], {
+    style: 'percent',
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
   const [query, setQuery] = useState('');
   const [classificationFilter, setClassificationFilter] = useState<
     'ALL' | 'Urban' | 'Rural'
@@ -151,12 +157,13 @@ export default function BarangayTable({
 
   const getSortLabel = (key: SortKey, label: string) => {
     if (sortKey !== key) {
-      return `Sort by ${label}`;
+      return t('Sort by {{label}}', { label });
     }
 
-    return `Sort by ${label}, currently ${
-      sortDirection === 'asc' ? 'ascending' : 'descending'
-    }`;
+    return t('Sort by {{label}}, currently {{direction}}', {
+      label,
+      direction: sortDirection === 'asc' ? t('ascending') : t('descending'),
+    });
   };
 
   const pageNumbers = Array.from(
@@ -207,8 +214,8 @@ export default function BarangayTable({
                 setQuery(event.target.value);
                 setPage(1);
               }}
-              placeholder="Search by barangay name…"
-              aria-label="Search by barangay name"
+              placeholder={t('Search by barangay name…')}
+              aria-label={t('Search by barangay name')}
               className="h-10 w-full rounded-sm border border-gray-300 bg-white pl-9 pr-8 text-sm text-gray-900 outline-none transition-[border-color,box-shadow] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0066EB] focus:ring-1 focus:ring-[#0066EB]"
             />
             {query && (
@@ -218,7 +225,7 @@ export default function BarangayTable({
                   setQuery('');
                   setPage(1);
                 }}
-                aria-label="Clear barangay search"
+                aria-label={t('Clear barangay search')}
                 className="absolute right-2.5 top-1/2 flex h-6 w-6 -translate-y-1/2 cursor-pointer items-center justify-center text-gray-400 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <X className="h-4 w-4" aria-hidden="true" />
@@ -229,7 +236,7 @@ export default function BarangayTable({
           {/* Classification filter */}
           <div>
             <label htmlFor="classification-filter" className="sr-only">
-              Classification filter
+              {t('Classification filter')}
             </label>
             <select
               id="classification-filter"
@@ -240,19 +247,19 @@ export default function BarangayTable({
                 );
                 setPage(1);
               }}
-              aria-label="Filter by classification"
+              aria-label={t('Filter by classification')}
               className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 outline-none transition-[border-color,box-shadow] hover:border-gray-400 focus:border-[#0066EB] focus:ring-1 focus:ring-[#0066EB]"
             >
-              <option value="ALL">All Classifications</option>
-              <option value="Urban">Urban</option>
-              <option value="Rural">Rural</option>
+              <option value="ALL">{t('All Classifications')}</option>
+              <option value="Urban">{t('Urban')}</option>
+              <option value="Rural">{t('Rural')}</option>
             </select>
           </div>
 
           {/* Explicit Sort By control */}
           <div>
             <label htmlFor="sort-control" className="sr-only">
-              Sort barangays
+              {t('Sort barangays')}
             </label>
             <select
               id="sort-control"
@@ -266,15 +273,19 @@ export default function BarangayTable({
                 setSortDirection(dir);
                 setPage(1);
               }}
-              aria-label="Sort barangays"
+              aria-label={t('Sort barangays')}
               className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 outline-none transition-[border-color,box-shadow] hover:border-gray-400 focus:border-[#0066EB] focus:ring-1 focus:ring-[#0066EB]"
             >
-              <option value="population-desc">Population: High to Low</option>
-              <option value="population-asc">Population: Low to High</option>
-              <option value="barangay-asc">Barangay: A–Z</option>
-              <option value="barangay-desc">Barangay: Z–A</option>
-              <option value="share-desc">City Share: High to Low</option>
-              <option value="rank-asc">Rank</option>
+              <option value="population-desc">
+                {t('Population: High to Low')}
+              </option>
+              <option value="population-asc">
+                {t('Population: Low to High')}
+              </option>
+              <option value="barangay-asc">{t('Barangay: A–Z')}</option>
+              <option value="barangay-desc">{t('Barangay: Z–A')}</option>
+              <option value="share-desc">{t('City Share: High to Low')}</option>
+              <option value="rank-asc">{t('Rank')}</option>
             </select>
           </div>
         </div>
@@ -283,30 +294,39 @@ export default function BarangayTable({
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-gray-200/80 pt-3 text-xs text-gray-600">
           <p aria-live="polite">
             {sortedBarangays.length === 0 ? (
-              'No matching barangays'
+              t('No matching barangays')
             ) : isFiltered ? (
               <>
-                Showing{' '}
-                <span className="font-semibold text-gray-900">
-                  {pageStart + 1}–{pageEnd}
-                </span>{' '}
-                of{' '}
-                <span className="font-semibold text-gray-900">
-                  {sortedBarangays.length}
-                </span>{' '}
-                matching barangays
+                {withSlots(
+                  t('Showing {{range}} of {{total}} matching barangays'),
+                  {
+                    range: (
+                      <span className="font-semibold text-gray-900">
+                        {pageStart + 1}–{pageEnd}
+                      </span>
+                    ),
+                    total: (
+                      <span className="font-semibold text-gray-900">
+                        {sortedBarangays.length}
+                      </span>
+                    ),
+                  }
+                )}
               </>
             ) : (
               <>
-                Showing{' '}
-                <span className="font-semibold text-gray-900">
-                  {pageStart + 1}–{pageEnd}
-                </span>{' '}
-                of{' '}
-                <span className="font-semibold text-gray-900">
-                  {sortedBarangays.length}
-                </span>{' '}
-                barangays
+                {withSlots(t('Showing {{range}} of {{total}} barangays'), {
+                  range: (
+                    <span className="font-semibold text-gray-900">
+                      {pageStart + 1}–{pageEnd}
+                    </span>
+                  ),
+                  total: (
+                    <span className="font-semibold text-gray-900">
+                      {sortedBarangays.length}
+                    </span>
+                  ),
+                })}
               </>
             )}
           </p>
@@ -320,7 +340,7 @@ export default function BarangayTable({
               }}
               className="cursor-pointer font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
             >
-              Reset filters
+              {t('Reset filters')}
             </button>
           )}
         </div>
@@ -333,9 +353,11 @@ export default function BarangayTable({
             className="mx-auto h-6 w-6 text-gray-400"
             aria-hidden="true"
           />
-          <p className="mt-4 font-semibold text-gray-950">No barangays found</p>
+          <p className="mt-4 font-semibold text-gray-950">
+            {t('No barangays found')}
+          </p>
           <p className="mt-1 text-sm text-gray-500">
-            No barangay matches the selected criteria.
+            {t('No barangay matches the selected criteria.')}
           </p>
           <button
             type="button"
@@ -345,7 +367,7 @@ export default function BarangayTable({
             }}
             className="mt-5 cursor-pointer rounded-sm bg-[#0066EB] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
           >
-            Clear filters
+            {t('Clear filters')}
           </button>
         </div>
       ) : (
@@ -363,8 +385,9 @@ export default function BarangayTable({
                       {barangay.name}
                     </h3>
                     <p className="mt-0.5 text-xs text-gray-500">
-                      {percentFormatter.format(barangay.share)} of city
-                      population
+                      {t('{{share}} of city population', {
+                        share: percentFormatter.format(barangay.share),
+                      })}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
@@ -378,7 +401,9 @@ export default function BarangayTable({
                           : 'border border-gray-300 bg-gray-100 text-gray-700'
                       }`}
                     >
-                      {barangay.classification}
+                      {barangay.classification === 'Urban'
+                        ? t('Urban')
+                        : t('Rural')}
                     </span>
                   </div>
                 </div>
@@ -391,32 +416,33 @@ export default function BarangayTable({
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-left text-sm">
                 <caption className="sr-only">
-                  All {barangayCount} San Fernando barangays ranked by
-                  population, including population, city share, and urban or
-                  rural classification.
+                  {t(
+                    'All {{barangayCount}} San Fernando barangays ranked by population, including population, city share, and urban or rural classification.',
+                    { barangayCount }
+                  )}
                 </caption>
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50/70">
                     <th scope="col" className="w-20 px-4 py-3">
-                      {renderSortableHeader('rank', 'Rank')}
+                      {renderSortableHeader('rank', t('Rank'))}
                     </th>
                     <th scope="col" className="px-4 py-3">
-                      {renderSortableHeader('barangay', 'Barangay')}
+                      {renderSortableHeader('barangay', t('Barangay'))}
                     </th>
                     <th scope="col" className="px-4 py-3 text-right">
                       {renderSortableHeader(
                         'population',
-                        'Population',
+                        t('Population'),
                         'right'
                       )}
                     </th>
                     <th scope="col" className="px-4 py-3 text-right">
-                      {renderSortableHeader('share', 'City Share', 'right')}
+                      {renderSortableHeader('share', t('City Share'), 'right')}
                     </th>
                     <th scope="col" className="px-4 py-3 text-right">
                       {renderSortableHeader(
                         'classification',
-                        'Classification',
+                        t('Classification'),
                         'right'
                       )}
                     </th>
@@ -451,7 +477,9 @@ export default function BarangayTable({
                               : 'border border-gray-300 bg-gray-100 text-gray-700'
                           }`}
                         >
-                          {barangay.classification}
+                          {barangay.classification === 'Urban'
+                            ? t('Urban')
+                            : t('Rural')}
                         </span>
                       </td>
                     </tr>
@@ -464,7 +492,9 @@ export default function BarangayTable({
                       colSpan={2}
                       className="px-4 py-3 text-left text-sm font-semibold text-gray-700"
                     >
-                      City total · {barangayCount} barangays
+                      {t('City total · {{barangayCount}} barangays', {
+                        barangayCount,
+                      })}
                     </th>
                     <td className="px-4 py-3 text-right font-bold tabular-nums text-gray-950">
                       {numberFormatter.format(totalPopulation)}
@@ -482,20 +512,23 @@ export default function BarangayTable({
           {/* Pagination */}
           <div className="mt-5 flex flex-col gap-4 border-t border-gray-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-gray-500" aria-live="polite">
-              Showing{' '}
-              <span className="font-semibold text-gray-900">
-                {pageStart + 1}–{pageEnd}
-              </span>{' '}
-              of{' '}
-              <span className="font-semibold text-gray-900">
-                {sortedBarangays.length}
-              </span>{' '}
-              barangays
+              {withSlots(t('Showing {{range}} of {{total}} barangays'), {
+                range: (
+                  <span className="font-semibold text-gray-900">
+                    {pageStart + 1}–{pageEnd}
+                  </span>
+                ),
+                total: (
+                  <span className="font-semibold text-gray-900">
+                    {sortedBarangays.length}
+                  </span>
+                ),
+              })}
             </p>
 
             <nav
               className="flex items-center gap-1.5"
-              aria-label="Barangay table pagination"
+              aria-label={t('Barangay table pagination')}
             >
               <button
                 type="button"
@@ -505,11 +538,11 @@ export default function BarangayTable({
                   )
                 }
                 disabled={currentPage === 1}
-                aria-label="Previous page"
+                aria-label={t('Previous page')}
                 className="inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Previous</span>
+                <span className="hidden sm:inline">{t('Previous')}</span>
               </button>
 
               {pageNumbers.map(pageNumber => {
@@ -520,7 +553,7 @@ export default function BarangayTable({
                     key={pageNumber}
                     type="button"
                     onClick={() => setPage(pageNumber)}
-                    aria-label={`Page ${pageNumber}`}
+                    aria-label={t('Page {{pageNumber}}', { pageNumber })}
                     aria-current={active ? 'page' : undefined}
                     className={`h-10 min-w-10 cursor-pointer rounded-sm px-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] ${
                       active
@@ -541,10 +574,10 @@ export default function BarangayTable({
                   )
                 }
                 disabled={currentPage === pageCount}
-                aria-label="Next page"
+                aria-label={t('Next page')}
                 className="inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                <span className="hidden sm:inline">Next</span>
+                <span className="hidden sm:inline">{t('Next')}</span>
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </nav>

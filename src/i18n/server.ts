@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import type { LanguageType } from '../types';
 import { getI18nOptions } from './config';
 import { isLanguage } from './locale';
+import { createPageT, type PageT } from './page-t';
 
 export async function getLocale(): Promise<LanguageType> {
   const locale = (await headers()).get('x-bsf-locale') ?? undefined;
@@ -28,38 +29,44 @@ export type PageNamespace =
   | 'statistics'
   | 'transparency'
   | 'legislation'
-  | 'home';
+  | 'home'
+  | 'statistics-shared'
+  | 'statistics-projects'
+  | 'statistics-procurement'
+  | 'statistics-project-spending'
+  | 'statistics-population'
+  | 'statistics-demographics'
+  | 'statistics-government'
+  | 'statistics-legislation'
+  | 'statistics-public-records'
+  | 'statistics-city-profile';
 
 /**
- * Translations for BetterSanFernando-authored page copy in server
- * components. The English source text is the key, so English needs no
- * resource file and cannot drift from its translation; `fil/<namespace>.json`
- * holds that route's Filipino text and `fil/shared.json` the text several
- * routes reuse. Bundles load on the server only, keeping them out of the
- * client i18n bundle. A missing entry renders the English text.
+ * Filipino messages for BetterSanFernando-authored page copy (English is the
+ * key, so English needs none). `fil/shared.json` holds text several routes
+ * reuse, `fil/statistics-shared.json` the text shared by the statistics
+ * pages, and `fil/<namespace>.json` the route's own. These load on the
+ * server only; client components receive them through <PageMessages>.
  */
-export async function getPageT(namespace: PageNamespace) {
-  const locale = await getLocale();
-  const resources: Record<string, Record<string, string>> = {};
-  if (locale === 'fil') {
-    const load = async (name: string) =>
-      (await import(`../../public/locales/fil/${name}.json`)).default;
-    resources[namespace] = await load(namespace);
-    resources.shared = await load('shared');
-  }
-  const instance = i18next.createInstance();
-  void instance.init({
-    lng: locale,
-    fallbackLng: false,
-    keySeparator: false,
-    nsSeparator: false,
-    defaultNS: namespace,
-    fallbackNS: 'shared',
-    ns: [namespace, 'shared'],
-    resources: { [locale]: resources },
-    interpolation: { escapeValue: false },
-  });
-  return { locale, t: instance.getFixedT(locale, namespace) };
+export async function getPageMessages(
+  namespace: PageNamespace
+): Promise<Record<string, string>> {
+  if ((await getLocale()) !== 'fil') return {};
+  const load = async (name: string): Promise<Record<string, string>> =>
+    (await import(`../../public/locales/fil/${name}.json`)).default;
+  const family = namespace.startsWith('statistics-')
+    ? ['statistics-shared']
+    : [];
+  const bundles = await Promise.all(['shared', ...family, namespace].map(load));
+  return Object.assign({}, ...bundles);
 }
 
-export type PageT = Awaited<ReturnType<typeof getPageT>>['t'];
+export async function getPageT(namespace: PageNamespace) {
+  const [locale, messages] = await Promise.all([
+    getLocale(),
+    getPageMessages(namespace),
+  ]);
+  return { locale, messages, t: createPageT(messages) };
+}
+
+export type { PageT };

@@ -262,6 +262,51 @@ for (const [path, filipino, filipinoTitle] of [
   ['/statistics', 'Tuklasin ang mga Estadistikang View', 'Estadistika'],
   ['/transparency', 'Pampublikong datos na matutuntunan mo.', 'Transparency'],
   ['/legislation', 'Limitadong pampublikong koleksyon', 'Lehislasyon'],
+  [
+    '/statistics/projects',
+    'Isang snapshot ng mga nailathalang talaan ng proyekto ng San Fernando',
+    'Estadistika ng mga Proyekto',
+  ],
+  [
+    '/statistics/procurement',
+    'Nailathalang ebidensya at saklaw ng procurement',
+    'Estadistika ng Procurement',
+  ],
+  [
+    '/statistics/project-spending',
+    'Gaano karami sa koleksyon ng proyekto ang kinakatawan?',
+    'Gastos at Paggamit ng Proyekto',
+  ],
+  [
+    '/statistics/population',
+    'Paano Ipinamamahagi ang Populasyon',
+    'Estadistika ng Populasyon',
+  ],
+  [
+    '/statistics/demographics',
+    'Magkakaibang Sukat, Magkakaibang Panahong Tinutukoy',
+    'Demograpiko',
+  ],
+  [
+    '/statistics/government',
+    'Saklaw ng Pahinang Ito',
+    'Estadistika ng Pamahalaan',
+  ],
+  [
+    '/statistics/legislation',
+    'Nailathalang Saklaw ayon sa Koleksyon',
+    'Estadistika ng Lehislasyon',
+  ],
+  [
+    '/statistics/public-records',
+    'Walang pinagsamang kabuuan ng mga pampublikong talaan',
+    'Estadistika ng mga Pampublikong Talaan',
+  ],
+  [
+    '/statistics/city-profile',
+    'Tuklasin ang Profile ng Lungsod',
+    'Profile ng Lungsod: San Fernando, Pampanga',
+  ],
 ] as const) {
   const english = await (await request(path)).text();
   const filipinoPage = await (await request(`/fil${path}`)).text();

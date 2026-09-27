@@ -11,94 +11,112 @@ import {
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import { getProcurementStatistics } from '../../../data/civic/procurementStatistics';
 import { buildPageMetadata } from '../../../lib/metadata';
-import { titleCaseEnum } from '../../../lib/utils';
+import { enumLabel } from '../enum-labels';
+import { getProjects } from '../../../data/civic/projects';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Procurement Statistics',
-  description:
-    "Descriptive statistics describing BetterSanFernando's bounded, published infrastructure and public-works procurement documentation.",
-  path: '/statistics/procurement',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('statistics-procurement');
+  return buildPageMetadata({
+    title: t('Procurement Statistics'),
+    description: t(
+      "Descriptive statistics describing BetterSanFernando's bounded, published infrastructure and public-works procurement documentation."
+    ),
+    path: '/statistics/procurement',
+    locale,
+  });
+}
 
 const eyebrowTracking = { letterSpacing: '0.08em' } as const;
 
-const PROJECT_FIELD_INFO = [
-  {
-    key: 'approvedBudgetAbc',
-    label: 'Approved Budget for the Contract (ABC)',
-    availableCount: 229,
-    isExpenditure: false,
-  },
-  {
-    key: 'winningBidAmount',
-    label: 'Winning bid amount',
-    availableCount: 232,
-    isExpenditure: false,
-  },
-  {
-    key: 'contractAmount',
-    label: 'Contract amount',
-    availableCount: 8,
-    isExpenditure: false,
-  },
-  {
-    key: 'contractNumber',
-    label: 'Contract number',
-    availableCount: 6,
-    isExpenditure: false,
-  },
-  {
-    key: 'actualExpenditure',
-    label: 'Actual expenditure',
-    availableCount: 0,
-    isExpenditure: true,
-  },
-] as const;
+const PROJECT_FIELD_INFO = (t: PageT) =>
+  [
+    {
+      key: 'approvedBudgetAbc',
+      label: t('Approved Budget for the Contract (ABC)'),
+      availableCount: 229,
+      isExpenditure: false,
+    },
+    {
+      key: 'winningBidAmount',
+      label: t('Winning bid amount'),
+      availableCount: 232,
+      isExpenditure: false,
+    },
+    {
+      key: 'contractAmount',
+      label: t('Contract amount'),
+      availableCount: 8,
+      isExpenditure: false,
+    },
+    {
+      key: 'contractNumber',
+      label: t('Contract number'),
+      availableCount: 6,
+      isExpenditure: false,
+    },
+    {
+      key: 'actualExpenditure',
+      label: t('Actual expenditure'),
+      availableCount: 0,
+      isExpenditure: true,
+    },
+  ] as const;
 
-const BID_RESULT_FIELDS = [
-  { key: 'winningBidder', label: 'Winning bidder available' },
-  { key: 'winningBidAmount', label: 'Winning bid amount available' },
-  { key: 'attachment', label: 'Official document available' },
-  { key: 'approvedBudgetAbc', label: 'Approved budget (ABC) available' },
-] as const;
+const BID_RESULT_FIELDS = (t: PageT) =>
+  [
+    { key: 'winningBidder', label: t('Winning bidder available') },
+    { key: 'winningBidAmount', label: t('Winning bid amount available') },
+    { key: 'attachment', label: t('Official document available') },
+    { key: 'approvedBudgetAbc', label: t('Approved budget (ABC) available') },
+  ] as const;
 
-const LIFECYCLE_DESCRIPTIONS: Record<string, string> = {
-  PLANNED: 'Published evidence establishes a planned project record.',
-  PROCUREMENT: 'Published evidence establishes an active procurement stage.',
-  AWARDED: 'Published evidence establishes an award decision.',
-  CONTRACTED: 'Published evidence supports an executed contract.',
-  IMPLEMENTATION_REPORTED:
-    'An official implementation report describes project activity without establishing an award, contract, or payment.',
-};
+const LIFECYCLE_DESCRIPTIONS = (t: PageT): Record<string, string> => ({
+  PLANNED: t('Published evidence establishes a planned project record.'),
+  PROCUREMENT: t('Published evidence establishes an active procurement stage.'),
+  AWARDED: t('Published evidence establishes an award decision.'),
+  CONTRACTED: t('Published evidence supports an executed contract.'),
+  IMPLEMENTATION_REPORTED: t(
+    'An official implementation report describes project activity without establishing an award, contract, or payment.'
+  ),
+});
 
-const RELATED_RESOURCES = [
-  {
-    title: 'Procurement Overview',
-    description:
-      'Understand how procurement records, stages, and evidence are structured across BetterSanFernando.',
-    href: '/procurement',
-  },
-  {
-    title: 'City Projects',
-    description:
-      'Browse the full published collection of 324 City infrastructure and public-works projects.',
-    href: '/projects/city-projects',
-  },
-  {
-    title: 'Project Evidence',
-    description:
-      'Inspect the official source records and attachments used to establish project facts.',
-    href: '/projects/sources',
-  },
-  {
-    title: 'Project Methodology',
-    description:
-      'Learn how project records are gathered, verified, and interpreted.',
-    href: '/projects/methodology',
-  },
-] as const;
+const RELATED_RESOURCES = (t: PageT) =>
+  [
+    {
+      title: t('Procurement Overview'),
+      description: t(
+        'Understand how procurement records, stages, and evidence are structured across BetterSanFernando.'
+      ),
+      href: '/procurement',
+    },
+    {
+      title: t('City Projects'),
+      description: t(
+        'Browse the full published collection of {{projects}} City infrastructure and public-works projects.',
+        { projects: getProjects().length }
+      ),
+      href: '/projects/city-projects',
+    },
+    {
+      title: t('Project Evidence'),
+      description: t(
+        'Inspect the official source records and attachments used to establish project facts.'
+      ),
+      href: '/projects/sources',
+    },
+    {
+      title: t('Project Methodology'),
+      description: t(
+        'Learn how project records are gathered, verified, and interpreted.'
+      ),
+      href: '/projects/methodology',
+    },
+  ] as const;
 
-export default function ProcurementStatistics() {
+export default async function ProcurementStatistics() {
+  const { t } = await getPageT('statistics-procurement');
   const statistics = getProcurementStatistics();
 
   const totalProjects = statistics.projects.total; // 324
@@ -124,24 +142,24 @@ export default function ProcurementStatistics() {
         <Breadcrumbs
           className="mb-6"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Statistics', href: '/statistics' },
-            { label: 'Procurement Statistics' },
+            { label: t('Home'), href: '/' },
+            { label: t('Statistics'), href: '/statistics' },
+            { label: t('Procurement Statistics') },
           ]}
         />
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              PROCUREMENT STATISTICS
+              {t('PROCUREMENT STATISTICS')}
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
-              Published procurement evidence and coverage
+              {t('Published procurement evidence and coverage')}
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-              Descriptive statistics describing documentation availability,
-              documentary lifecycle states, and bid-result coverage across
-              BetterSanFernando&apos;s published project collection.
+              {t(
+                "Descriptive statistics describing documentation availability, documentary lifecycle states, and bid-result coverage across BetterSanFernando's published project collection."
+              )}
             </p>
           </div>
 
@@ -150,19 +168,18 @@ export default function ProcurementStatistics() {
             className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5"
           >
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              SCOPE
+              {t('SCOPE')}
             </p>
             <h2
               id="scope-module-title"
               className="mt-1.5 text-base font-bold text-gray-950"
             >
-              Bounded published subset
+              {t('Bounded published subset')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600">
-              These measures describe record coverage and documentary
-              representation in BetterSanFernando&apos;s project collection.
-              They are not a complete archive of City Government procurement,
-              and they do not measure financial performance or actual spending.
+              {t(
+                "These measures describe record coverage and documentary representation in BetterSanFernando's project collection. They are not a complete archive of City Government procurement, and they do not measure financial performance or actual spending."
+              )}
             </p>
           </aside>
         </div>
@@ -170,7 +187,7 @@ export default function ProcurementStatistics() {
 
       {/* 2. Structured Summary Metrics Strip */}
       <section
-        aria-label="Procurement summary metrics"
+        aria-label={t('Procurement summary metrics')}
         className="border-y border-gray-200 bg-gray-50"
       >
         <div className="container mx-auto px-4 py-4 sm:py-6">
@@ -179,14 +196,14 @@ export default function ProcurementStatistics() {
             <div className="py-3 sm:py-0 sm:pr-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Published projects
+                  {t('Published projects')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {totalProjects}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                canonical infrastructure and public-works project records
+                {t('canonical infrastructure and public-works project records')}
               </p>
             </div>
 
@@ -194,14 +211,14 @@ export default function ProcurementStatistics() {
             <div className="py-3 sm:py-0 sm:px-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Project evidence records
+                  {t('Project evidence records')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {totalEvidence}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                official documentary records across all stages
+                {t('official documentary records across all stages')}
               </p>
             </div>
 
@@ -209,14 +226,14 @@ export default function ProcurementStatistics() {
             <div className="py-3 sm:py-0 sm:pl-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Bid-result records
+                  {t('Bid-result records')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {totalBidResults}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                published bid-result evidence documents
+                {t('published bid-result evidence documents')}
               </p>
             </div>
           </dl>
@@ -224,19 +241,20 @@ export default function ProcurementStatistics() {
           {/* Quiet supporting status pair */}
           <div className="mt-4 border-t border-gray-200 pt-3 flex flex-wrap items-center justify-between gap-y-2 text-xs text-gray-600 sm:mt-4 sm:pt-4">
             <p>
-              Current project lifecycle status breakdown:{' '}
+              {t('Current project lifecycle status breakdown:')}{' '}
               <strong className="font-semibold text-gray-900">
-                {awardedCount} Awarded
+                {t('{{awardedCount}} Awarded', { awardedCount })}
               </strong>{' '}
               ({((awardedCount / totalProjects) * 100).toFixed(1)}%) &middot;{' '}
               <strong className="font-semibold text-gray-900">
-                {contractedCount} Contracted
+                {t('{{contractedCount}} Contracted', { contractedCount })}
               </strong>{' '}
               ({((contractedCount / totalProjects) * 100).toFixed(1)}%).
             </p>
             <p className="text-gray-500">
-              Documentary status reflects available published evidence, not
-              physical project completion.
+              {t(
+                'Documentary status reflects available published evidence, not physical project completion.'
+              )}
             </p>
           </div>
         </div>
@@ -248,17 +266,18 @@ export default function ProcurementStatistics() {
         <section aria-labelledby="denominators-heading">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              HOW TO READ THIS PAGE
+              {t('HOW TO READ THIS PAGE')}
             </p>
             <h2
               id="denominators-heading"
               className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
             >
-              Two distinct denominators are used
+              {t('Two distinct denominators are used')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600 max-w-3xl">
-              Coverage rates answer two different questions. Every metric on
-              this page explicitly identifies which denominator it uses.
+              {t(
+                'Coverage rates answer two different questions. Every metric on this page explicitly identifies which denominator it uses.'
+              )}
             </p>
           </div>
 
@@ -271,22 +290,22 @@ export default function ProcurementStatistics() {
                   className="text-eyebrow text-[#0066EB]"
                   style={eyebrowTracking}
                 >
-                  PROJECT DENOMINATOR
+                  {t('PROJECT DENOMINATOR')}
                 </p>
               </div>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950">
                 {totalProjects}{' '}
                 <span className="text-base font-medium text-gray-600">
-                  published projects
+                  {t('published projects')}
                 </span>
               </p>
               <h3 className="mt-3 text-sm font-bold text-gray-950">
-                When asking about project records
+                {t('When asking about project records')}
               </h3>
               <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                Used to determine how many published projects contain a
-                particular field (like ABC or contract amount) or currently hold
-                a canonical documentary status (like Awarded or Contracted).
+                {t(
+                  'Used to determine how many published projects contain a particular field (like ABC or contract amount) or currently hold a canonical documentary status (like Awarded or Contracted).'
+                )}
               </p>
             </div>
 
@@ -298,22 +317,22 @@ export default function ProcurementStatistics() {
                   className="text-eyebrow text-[#0066EB]"
                   style={eyebrowTracking}
                 >
-                  BID-RESULT DENOMINATOR
+                  {t('BID-RESULT DENOMINATOR')}
                 </p>
               </div>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950">
                 {totalBidResults}{' '}
                 <span className="text-base font-medium text-gray-600">
-                  published bid-result records
+                  {t('published bid-result records')}
                 </span>
               </p>
               <h3 className="mt-3 text-sm font-bold text-gray-950">
-                When asking about bid-result evidence completeness
+                {t('When asking about bid-result evidence completeness')}
               </h3>
               <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                Used to determine what proportion of published bid-result
-                records contain specific fields such as winning bidders, winning
-                bids, ABC values, or official source documents.
+                {t(
+                  'Used to determine what proportion of published bid-result records contain specific fields such as winning bidders, winning bids, ABC values, or official source documents.'
+                )}
               </p>
             </div>
           </div>
@@ -327,21 +346,23 @@ export default function ProcurementStatistics() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                DOCUMENTARY STATUS
+                {t('DOCUMENTARY STATUS')}
               </p>
               <h2
                 id="lifecycle-heading"
                 className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
               >
-                Current documentary status distribution
+                {t('Current documentary status distribution')}
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Shows the strongest currently published documentary status for
-                each of the {totalProjects} projects, ordered by project count.
+                {t(
+                  'Shows the strongest currently published documentary status for each of the {{totalProjects}} projects, ordered by project count.',
+                  { totalProjects }
+                )}
               </p>
             </div>
             <span className="text-xs font-semibold tabular-nums text-gray-500 shrink-0">
-              Denominator: {totalProjects} projects
+              {t('Denominator: {{totalProjects}} projects', { totalProjects })}
             </span>
           </div>
 
@@ -349,17 +370,30 @@ export default function ProcurementStatistics() {
             <div
               className="space-y-4"
               role="img"
-              aria-label={`Documentary status distribution: ${sortedLifecycle.map(i => `${titleCaseEnum(i.key)}: ${i.count} projects (${i.percentage}%)`).join('; ')}`}
+              aria-label={t('Documentary status distribution: {{items}}', {
+                items: sortedLifecycle
+                  .map(i =>
+                    t('{{status}}: {{n}} projects ({{percentage}}%)', {
+                      status: enumLabel(t, i.key),
+                      n: i.count,
+                      percentage: i.percentage,
+                    })
+                  )
+                  .join('; '),
+              })}
             >
               {sortedLifecycle.map(item => {
-                const label = titleCaseEnum(item.key);
-                const desc = LIFECYCLE_DESCRIPTIONS[item.key];
+                const label = enumLabel(t, item.key);
+                const desc = LIFECYCLE_DESCRIPTIONS(t)[item.key];
                 return (
                   <div key={item.key} className="space-y-1.5">
                     <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs sm:text-sm">
                       <span className="font-bold text-gray-950">{label}</span>
                       <span className="font-semibold tabular-nums text-gray-900">
-                        {item.count} of {item.denominator}{' '}
+                        {t('{{n}} of {{total}}', {
+                          n: item.count,
+                          total: item.denominator,
+                        })}{' '}
                         <span className="font-normal text-gray-500">
                           ({item.percentage.toFixed(1)}%)
                         </span>
@@ -390,9 +424,9 @@ export default function ProcurementStatistics() {
 
             {/* Clarification Note */}
             <p className="mt-6 border-t border-gray-100 pt-3 text-xs leading-relaxed text-gray-500">
-              Each project appears once according to its strongest currently
-              published documentary status. These categories are not a
-              procurement funnel or a measure of physical progress.
+              {t(
+                'Each project appears once according to its strongest currently published documentary status. These categories are not a procurement funnel or a measure of physical progress.'
+              )}
             </p>
           </div>
         </section>
@@ -405,27 +439,29 @@ export default function ProcurementStatistics() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                FIELD COVERAGE
+                {t('FIELD COVERAGE')}
               </p>
               <h2
                 id="field-coverage-heading"
                 className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
               >
-                What procurement fields are available?
+                {t('What procurement fields are available?')}
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Documentary presence across all {totalProjects} published
-                projects.
+                {t(
+                  'Documentary presence across all {{totalProjects}} published projects.',
+                  { totalProjects }
+                )}
               </p>
             </div>
             <span className="text-xs font-semibold tabular-nums text-gray-500 shrink-0">
-              Denominator: {totalProjects} projects
+              {t('Denominator: {{totalProjects}} projects', { totalProjects })}
             </span>
           </div>
 
           <div className="mt-6 rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
             <div className="space-y-5">
-              {PROJECT_FIELD_INFO.map(field => {
+              {PROJECT_FIELD_INFO(t).map(field => {
                 if (field.isExpenditure) {
                   return (
                     <div
@@ -439,13 +475,12 @@ export default function ProcurementStatistics() {
                         />
                         <div>
                           <p className="text-sm font-bold text-gray-950">
-                            Actual expenditure
+                            {t('Actual expenditure')}
                           </p>
                           <p className="mt-1 text-xs leading-relaxed text-amber-900">
-                            Actual expenditure is not currently available in the
-                            published procurement dataset. BetterSanFernando
-                            does not report unverified expenditure or treat
-                            contract values as payment.
+                            {t(
+                              'Actual expenditure is not currently available in the published procurement dataset. BetterSanFernando does not report unverified expenditure or treat contract values as payment.'
+                            )}
                           </p>
                         </div>
                       </div>
@@ -467,9 +502,12 @@ export default function ProcurementStatistics() {
                         <strong className="font-bold text-gray-950">
                           {available}
                         </strong>{' '}
-                        available{' '}
+                        {t('available')}{' '}
                         <span className="text-gray-500">
-                          ({pct}%) &middot; {remaining} not available
+                          {t('({{pct}}%) · {{remaining}} not available', {
+                            pct,
+                            remaining,
+                          })}
                         </span>
                       </span>
                     </div>
@@ -478,7 +516,10 @@ export default function ProcurementStatistics() {
                     <div
                       className="h-3 w-full overflow-hidden rounded-sm bg-gray-100 flex"
                       role="img"
-                      aria-label={`${field.label}: ${available} available (${pct}%), ${remaining} not available`}
+                      aria-label={t(
+                        '{{label}}: {{available}} available ({{pct}}%), {{remaining}} not available',
+                        { label: field.label, available, pct, remaining }
+                      )}
                     >
                       <div
                         className="h-full bg-[#0066EB]"
@@ -502,19 +543,20 @@ export default function ProcurementStatistics() {
                     className="h-2.5 w-2.5 rounded-none bg-[#0066EB]"
                     aria-hidden="true"
                   />
-                  Field published ({'>'}0)
+                  {t('Field published (>0)')}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span
                     className="h-2.5 w-2.5 rounded-none bg-gray-200"
                     aria-hidden="true"
                   />
-                  Not available in published record
+                  {t('Not available in published record')}
                 </span>
               </div>
               <p>
-                Presence of a field indicates published data availability, not
-                data quality or procurement completion.
+                {t(
+                  'Presence of a field indicates published data availability, not data quality or procurement completion.'
+                )}
               </p>
             </div>
           </div>
@@ -524,18 +566,23 @@ export default function ProcurementStatistics() {
         <section aria-labelledby="bid-results-heading">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              BID RESULTS EVIDENCE
+              {t('BID RESULTS EVIDENCE')}
             </p>
             <h2
               id="bid-results-heading"
               className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
             >
-              Bid-result evidence completeness and timeline
+              {t('Bid-result evidence completeness and timeline')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600 max-w-3xl">
-              Analyzed across {totalBidResults} published bid-result records
-              (representing {statistics.bidResults.projectsRepresented}{' '}
-              canonically linked projects).
+              {t(
+                'Analyzed across {{totalBidResults}} published bid-result records (representing {{projectsRepresented}} canonically linked projects).',
+                {
+                  totalBidResults,
+                  projectsRepresented:
+                    statistics.bidResults.projectsRepresented,
+                }
+              )}
             </p>
           </div>
 
@@ -544,15 +591,17 @@ export default function ProcurementStatistics() {
             <div className="flex h-full flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Bid-result evidence completeness
+                  {t('Bid-result evidence completeness')}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  Completeness across {totalBidResults} published bid-result
-                  records.
+                  {t(
+                    'Completeness across {{totalBidResults}} published bid-result records.',
+                    { totalBidResults }
+                  )}
                 </p>
 
                 <div className="mt-5 space-y-4">
-                  {BID_RESULT_FIELDS.map(field => {
+                  {BID_RESULT_FIELDS(t).map(field => {
                     const item = statistics.bidResults.fieldCoverage.find(
                       f => f.key === field.key
                     );
@@ -566,7 +615,10 @@ export default function ProcurementStatistics() {
                             {field.label}
                           </span>
                           <span className="font-medium tabular-nums text-gray-900">
-                            {count} of {totalBidResults}{' '}
+                            {t('{{n}} of {{total}}', {
+                              n: count,
+                              total: totalBidResults,
+                            })}{' '}
                             <span className="text-gray-500 font-normal">
                               ({pct.toFixed(1)}%)
                             </span>
@@ -588,11 +640,12 @@ export default function ProcurementStatistics() {
               <div className="mt-6 rounded-sm bg-[#F3F6FB] p-3.5 text-xs text-gray-700">
                 <p>
                   <strong className="font-semibold text-gray-950">
-                    High documentary completeness:
+                    {t('High documentary completeness:')}
                   </strong>{' '}
-                  All {totalBidResults} published bid-result records contain
-                  winning bidder information, winning bid amounts, and official
-                  source attachments.
+                  {t(
+                    'All {{total}} published bid-result records contain winning bidder information, winning bid amounts, and official source attachments.',
+                    { total: totalBidResults }
+                  )}
                 </p>
               </div>
             </div>
@@ -601,19 +654,28 @@ export default function ProcurementStatistics() {
             <div className="flex h-full flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Bid-result records by document year
+                  {t('Bid-result records by document year')}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  Count of published bid-result records by document year,
-                  including undated records; denominator: {totalBidResults}{' '}
-                  records.
+                  {t(
+                    'Count of published bid-result records by document year, including undated records; denominator: {{totalBidResults}} records.',
+                    { totalBidResults }
+                  )}
                 </p>
 
                 {/* Vertical Bar Chart: 4 Dated Years + 1 Undated Column */}
                 <div
                   className="mt-5 grid grid-cols-5 items-end gap-2 sm:gap-4"
                   role="img"
-                  aria-label={`Bid-results by document date: ${statistics.bidResults.byDocumentYear.map(y => `${y.year}: ${y.count}`).join('; ')}, Undated: ${statistics.bidResults.unknownDocumentDate}`}
+                  aria-label={t(
+                    'Bid-results by document date: {{years}}, Undated: {{undated}}',
+                    {
+                      years: statistics.bidResults.byDocumentYear
+                        .map(y => `${y.year}: ${y.count}`)
+                        .join('; '),
+                      undated: statistics.bidResults.unknownDocumentDate,
+                    }
+                  )}
                 >
                   {statistics.bidResults.byDocumentYear.map(item => {
                     const heightPct = (item.count / largestYearCount) * 100;
@@ -652,7 +714,7 @@ export default function ProcurementStatistics() {
                       />
                     </span>
                     <span className="text-xs font-medium text-gray-500">
-                      Undated
+                      {t('Undated')}
                     </span>
                   </div>
                 </div>
@@ -666,19 +728,20 @@ export default function ProcurementStatistics() {
                       className="h-2.5 w-2.5 rounded-none bg-[#0066EB]"
                       aria-hidden="true"
                     />
-                    Documented year
+                    {t('Documented year')}
                   </span>
                   <span className="inline-flex items-center gap-1.5">
                     <span
                       className="h-2.5 w-2.5 rounded-none bg-slate-400"
                       aria-hidden="true"
                     />
-                    Undated ({statistics.bidResults.unknownDocumentDate}{' '}
-                    records)
+                    {t('Undated ({{n}} records)', {
+                      n: statistics.bidResults.unknownDocumentDate,
+                    })}
                   </span>
                 </div>
                 <span className="tabular-nums font-medium text-gray-900">
-                  {totalBidResults} total records
+                  {t('{{totalBidResults}} total records', { totalBidResults })}
                 </span>
               </div>
             </div>
@@ -689,18 +752,19 @@ export default function ProcurementStatistics() {
         <section aria-labelledby="award-contract-heading">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              AWARD &amp; CONTRACT EVIDENCE
+              {t('AWARD & CONTRACT EVIDENCE')}
             </p>
             <h2
               id="award-contract-heading"
               className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
             >
-              Award and contract evidence remain distinct
+              {t('Award and contract evidence remain distinct')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600 max-w-3xl">
-              Descriptive field and lifecycle counts across the {totalProjects}
-              -project collection. Award decisions and contract execution are
-              different legal and documentary milestones.
+              {t(
+                'Descriptive field and lifecycle counts across the {{totalProjects}}-project collection. Award decisions and contract execution are different legal and documentary milestones.',
+                { totalProjects }
+              )}
             </p>
           </div>
 
@@ -708,49 +772,49 @@ export default function ProcurementStatistics() {
             <dl className="grid grid-cols-2 gap-4 divide-y sm:divide-y-0 sm:grid-cols-4 sm:divide-x divide-gray-200">
               <div className="py-2 sm:py-0 sm:pr-4">
                 <dt className="text-xs font-medium text-gray-600">
-                  Awarded projects
+                  {t('Awarded projects')}
                 </dt>
                 <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                   {statistics.awardsAndContracts.awarded}
                 </dd>
                 <p className="mt-0.5 text-[11px] text-gray-500">
-                  published award decision
+                  {t('published award decision')}
                 </p>
               </div>
 
               <div className="pt-3 sm:pt-0 sm:px-4">
                 <dt className="text-xs font-medium text-gray-600">
-                  Contracted projects
+                  {t('Contracted projects')}
                 </dt>
                 <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                   {statistics.awardsAndContracts.contracted}
                 </dd>
                 <p className="mt-0.5 text-[11px] text-gray-500">
-                  canonical contract execution
+                  {t('canonical contract execution')}
                 </p>
               </div>
 
               <div className="pt-3 sm:pt-0 sm:px-4">
                 <dt className="text-xs font-medium text-gray-600">
-                  With contract amount
+                  {t('With contract amount')}
                 </dt>
                 <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                   {statistics.awardsAndContracts.withContractAmount}
                 </dd>
                 <p className="mt-0.5 text-[11px] text-gray-500">
-                  6 Contracted + 2 Awarded
+                  {t('6 Contracted + 2 Awarded')}
                 </p>
               </div>
 
               <div className="pt-3 sm:pt-0 sm:pl-4">
                 <dt className="text-xs font-medium text-gray-600">
-                  With contract number
+                  {t('With contract number')}
                 </dt>
                 <dd className="mt-1 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                   {statistics.awardsAndContracts.withContractNumber}
                 </dd>
                 <p className="mt-0.5 text-[11px] text-gray-500">
-                  all 6 Contracted projects
+                  {t('all 6 Contracted projects')}
                 </p>
               </div>
             </dl>
@@ -759,26 +823,29 @@ export default function ProcurementStatistics() {
               <p>
                 &bull;{' '}
                 <strong className="font-semibold text-gray-950">
-                  Award evidence
+                  {t('Award evidence')}
                 </strong>{' '}
-                establishes an award decision. It does not by itself establish
-                contract execution.
+                {t(
+                  'establishes an award decision. It does not by itself establish contract execution.'
+                )}
               </p>
               <p>
                 &bull;{' '}
                 <strong className="font-semibold text-gray-950">
-                  Contract evidence
+                  {t('Contract evidence')}
                 </strong>{' '}
-                requires separate documentation supporting contract execution
-                before a project holds Contracted status.
+                {t(
+                  'requires separate documentation supporting contract execution before a project holds Contracted status.'
+                )}
               </p>
               <p>
                 &bull;{' '}
                 <strong className="font-semibold text-gray-950">
-                  Execution boundaries
+                  {t('Execution boundaries')}
                 </strong>
-                : Contract evidence does not establish Notice to Proceed,
-                physical completion, disbursement, or actual expenditure.
+                {t(
+                  ': Contract evidence does not establish Notice to Proceed, physical completion, disbursement, or actual expenditure.'
+                )}
               </p>
             </div>
           </div>
@@ -787,17 +854,18 @@ export default function ProcurementStatistics() {
         {/* 8. How to Interpret These Statistics (2x2 Editorial Layout) */}
         <section aria-labelledby="interpret-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            METHODOLOGY &amp; INTERPRETATION
+            {t('METHODOLOGY & INTERPRETATION')}
           </p>
           <h2
             id="interpret-heading"
             className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
           >
-            How to interpret these statistics
+            {t('How to interpret these statistics')}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-600 max-w-3xl">
-            Guidelines for understanding what published procurement data can and
-            cannot establish.
+            {t(
+              'Guidelines for understanding what published procurement data can and cannot establish.'
+            )}
           </p>
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -806,14 +874,13 @@ export default function ProcurementStatistics() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <FolderKanban className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Documentary status
+                  {t('Documentary status')}
                 </h3>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                Documentary lifecycle reflects published records, not physical
-                construction progress. A project marked Awarded or Contracted
-                documents an administrative state supported by official source
-                evidence.
+                {t(
+                  'Documentary lifecycle reflects published records, not physical construction progress. A project marked Awarded or Contracted documents an administrative state supported by official source evidence.'
+                )}
               </p>
             </div>
 
@@ -822,13 +889,13 @@ export default function ProcurementStatistics() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Database className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Field coverage
+                  {t('Field coverage')}
                 </h3>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                Field coverage indicates that a published value is available in
-                the current collection. It is not a data-quality audit, a
-                performance score, or an evaluation of procurement compliance.
+                {t(
+                  'Field coverage indicates that a published value is available in the current collection. It is not a data-quality audit, a performance score, or an evaluation of procurement compliance.'
+                )}
               </p>
             </div>
 
@@ -837,13 +904,13 @@ export default function ProcurementStatistics() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Info className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Missing information
+                  {t('Missing information')}
                 </h3>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                When a field or document is missing, it remains unknown in the
-                dataset unless another published official source establishes it.
-                Absence of a record does not prove an event never took place.
+                {t(
+                  'When a field or document is missing, it remains unknown in the dataset unless another published official source establishes it. Absence of a record does not prove an event never took place.'
+                )}
               </p>
             </div>
 
@@ -852,14 +919,13 @@ export default function ProcurementStatistics() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Scale className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Financial concepts
+                  {t('Financial concepts')}
                 </h3>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                ABC, winning bid, and contract amount are distinct procurement
-                figures. None of them represent actual disbursement, payment, or
-                expenditure. No monetary totals are summed across partial
-                collections.
+                {t(
+                  'ABC, winning bid, and contract amount are distinct procurement figures. None of them represent actual disbursement, payment, or expenditure. No monetary totals are summed across partial collections.'
+                )}
               </p>
             </div>
           </div>
@@ -871,17 +937,18 @@ export default function ProcurementStatistics() {
           className="border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            KEEP EXPLORING
+            {t('KEEP EXPLORING')}
           </p>
           <h2
             id="keep-exploring-heading"
             className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
           >
-            Explore procurement records and evidence
+            {t('Explore procurement records and evidence')}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-600">
-            Navigate to individual record explorers, published project
-            collections, and official documentation sources.
+            {t(
+              'Navigate to individual record explorers, published project collections, and official documentation sources.'
+            )}
           </p>
 
           {/* Two Featured Equal Destinations */}
@@ -892,12 +959,14 @@ export default function ProcurementStatistics() {
                 <div className="flex items-center gap-2.5 text-[#0066EB]">
                   <FileSearch className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <h3 className="text-base font-bold text-gray-950">
-                    Bid Results
+                    {t('Bid Results')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Review published bidders, winning bids, ABC values, and
-                  official procurement attachments for 233 bid-result records.
+                  {t(
+                    'Review published bidders, winning bids, ABC values, and official procurement attachments for {{total}} bid-result records.',
+                    { total: totalBidResults }
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -905,7 +974,7 @@ export default function ProcurementStatistics() {
                   href="/procurement/bid-results"
                   className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  Browse Bid Results &rarr;
+                  {t('Browse Bid Results →')}
                 </Link>
               </div>
             </article>
@@ -916,12 +985,13 @@ export default function ProcurementStatistics() {
                 <div className="flex items-center gap-2.5 text-[#0066EB]">
                   <FileCheck2 className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <h3 className="text-base font-bold text-gray-950">
-                    Contracts and Awards
+                    {t('Contracts and Awards')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Explore project-linked award records, contract evidence,
-                  contractors, contract references, and verified amounts.
+                  {t(
+                    'Explore project-linked award records, contract evidence, contractors, contract references, and verified amounts.'
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -929,7 +999,7 @@ export default function ProcurementStatistics() {
                   href="/procurement/contracts"
                   className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  Browse Contracts and Awards &rarr;
+                  {t('Browse Contracts and Awards →')}
                 </Link>
               </div>
             </article>
@@ -938,10 +1008,10 @@ export default function ProcurementStatistics() {
           {/* Related resources: 2x2 Directory */}
           <div className="mt-8">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              Related resources
+              {t('Related resources')}
             </h3>
             <div className="mt-3 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 border-y border-gray-200">
-              {RELATED_RESOURCES.map((item, idx) => (
+              {RELATED_RESOURCES(t).map((item, idx) => (
                 <Link
                   key={item.href}
                   href={item.href}
