@@ -20,6 +20,21 @@ const PAGES: Record<string, string[]> = {
   projects: ['src/app/projects/page.tsx'],
   statistics: [`${STATISTICS}page.tsx`],
   transparency: ['src/app/transparency/page.tsx'],
+  'transparency-sources': ['src/app/transparency/sources/page.tsx'],
+  'transparency-methodology': ['src/app/transparency/methodology/page.tsx'],
+  'transparency-documents': [
+    'src/app/transparency/documents/OfficialDocuments.tsx',
+    'src/app/transparency/documents/page.tsx',
+  ],
+  'transparency-full-disclosure': [
+    'src/app/transparency/full-disclosure/FullDisclosure.tsx',
+    'src/app/transparency/full-disclosure/page.tsx',
+  ],
+  'transparency-finance': [
+    'src/app/transparency/finance/CityFinances.tsx',
+    'src/app/transparency/finance/page.tsx',
+  ],
+  search: ['src/app/search/page.tsx', 'src/app/search/Search.tsx'],
   legislation: ['src/app/legislation/page.tsx'],
   home: [
     'src/app/page.tsx',
@@ -186,6 +201,7 @@ const FAMILIES = [
   'procurement',
   'government',
   'legislation',
+  'transparency',
 ] as const;
 const familyOf = (namespace: string) =>
   namespace.startsWith('statistics-')
@@ -198,7 +214,10 @@ const familyOf = (namespace: string) =>
           ? 'government'
           : namespace === 'legislation' || namespace.startsWith('legislation-')
             ? 'legislation'
-            : null;
+            : namespace === 'transparency' ||
+                namespace.startsWith('transparency-')
+              ? 'transparency'
+              : null;
 const familyShared = Object.fromEntries(
   FAMILIES.map(family => [
     family,

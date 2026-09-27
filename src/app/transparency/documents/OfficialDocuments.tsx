@@ -20,62 +20,71 @@ import {
   type OfficialDocument,
 } from '../../../data/civic/officialDocuments';
 import { formatIsoDate, titleCaseEnum } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
 
 const eyebrowTracking = { letterSpacing: '0.08em' };
 
 const selectClass =
   'h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20';
 
-const GROUPS: ReadonlyArray<{
+const GROUPS = (
+  t: PageT
+): ReadonlyArray<{
   title: string;
   types: readonly OfficialDocument['document_type'][];
-}> = [
+}> => [
   {
-    title: 'Citizen’s Charters',
+    title: t('Citizen’s Charters'),
     types: ['CITIZENS_CHARTER'],
   },
   {
-    title: 'Business Forms',
+    title: t('Business Forms'),
     types: ['BUSINESS_FORM'],
   },
   {
-    title: 'Privacy Documents',
+    title: t('Privacy Documents'),
     types: ['PRIVACY_MANUAL', 'PRIVACY_POLICY', 'PRIVACY_NOTICE'],
   },
 ];
 
-const RELATED_RECORDS = [
-  {
-    title: 'Laws and issuances',
-    description: 'Browse verified executive orders and ordinances.',
-    links: [{ label: 'Browse legislation', href: '/legislation' }],
-  },
-  {
-    title: 'Full Disclosure reports',
-    description:
-      'Review the bounded collection of published disclosure reports.',
-    links: [
-      {
-        label: 'Browse Full Disclosure',
-        href: '/transparency/full-disclosure',
-      },
-    ],
-  },
-  {
-    title: 'Procurement and project records',
-    description: 'Explore procurement records and their linked city projects.',
-    links: [
-      { label: 'Browse procurement', href: '/procurement' },
-      { label: 'Browse projects', href: '/projects' },
-    ],
-  },
-  {
-    title: 'City services and Charter procedures',
-    description:
-      'Find reviewed service requirements, steps, fees, and offices.',
-    links: [{ label: 'Browse city services', href: '/services' }],
-  },
-] as const;
+const RELATED_RECORDS = (t: PageT) =>
+  [
+    {
+      title: t('Laws and issuances'),
+      description: t('Browse verified executive orders and ordinances.'),
+      links: [{ label: t('Browse legislation'), href: '/legislation' }],
+    },
+    {
+      title: t('Full Disclosure reports'),
+      description: t(
+        'Review the bounded collection of published disclosure reports.'
+      ),
+      links: [
+        {
+          label: t('Browse Full Disclosure'),
+          href: '/transparency/full-disclosure',
+        },
+      ],
+    },
+    {
+      title: t('Procurement and project records'),
+      description: t(
+        'Explore procurement records and their linked city projects.'
+      ),
+      links: [
+        { label: t('Browse procurement'), href: '/procurement' },
+        { label: t('Browse projects'), href: '/projects' },
+      ],
+    },
+    {
+      title: t('City services and Charter procedures'),
+      description: t(
+        'Find reviewed service requirements, steps, fees, and offices.'
+      ),
+      links: [{ label: t('Browse city services'), href: '/services' }],
+    },
+  ] as const;
 
 function formatVerifiedDate(dateStr: string): string {
   return new Intl.DateTimeFormat('en-PH', {
@@ -101,6 +110,7 @@ function searchableText(record: OfficialDocument) {
 }
 
 export default function OfficialDocuments() {
+  const t = usePageT();
   const records = getOfficialDocuments();
   const metadata = getOfficialDocumentsMetadata();
   const [query, setQuery] = useState('');
@@ -139,9 +149,9 @@ export default function OfficialDocuments() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Transparency', href: '/transparency' },
-              { label: 'Official Documents' },
+              { label: t('Home'), href: '/' },
+              { label: t('Transparency'), href: '/transparency' },
+              { label: t('Official Documents') },
             ]}
           />
 
@@ -151,15 +161,15 @@ export default function OfficialDocuments() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                TRANSPARENCY · OFFICIAL DOCUMENTS
+                {t('TRANSPARENCY · OFFICIAL DOCUMENTS')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                Official Documents
+                {t('Official Documents')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Browse a verified, bounded collection of City Government
-                documents with direct links to official pages and available
-                files.
+                {t(
+                  'Browse a verified, bounded collection of City Government documents with direct links to official pages and available files.'
+                )}
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -167,14 +177,14 @@ export default function OfficialDocuments() {
                   href="#document-library"
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition hover:bg-[#0052BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066EB]"
                 >
-                  <span>Browse document library</span>
+                  <span>{t('Browse document library')}</span>
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/transparency"
                   className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition hover:text-[#0052BC] hover:underline focus-visible:outline-none focus-visible:underline"
                 >
-                  <span>Transparency overview</span>
+                  <span>{t('Transparency overview')}</span>
                   <ArrowRight
                     className="h-4 w-4 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -185,20 +195,21 @@ export default function OfficialDocuments() {
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                COLLECTION SCOPE
+                {t('COLLECTION SCOPE')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                Verified, bounded index
+                {t('Verified, bounded index')}
               </h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                BetterSanFernando currently publishes {metadata.recordCount}{' '}
-                verified document records across selected City document
-                collections. Related legislation, Full Disclosure, procurement,
-                projects, and services remain in their own canonical sections.
+                {t(
+                  'BetterSanFernando currently publishes {{recordCount}} verified document records across selected City document collections. Related legislation, Full Disclosure, procurement, projects, and services remain in their own canonical sections.',
+                  { recordCount: metadata.recordCount }
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -209,59 +220,61 @@ export default function OfficialDocuments() {
         {/* 2. Collection Snapshot */}
         <section aria-labelledby="snapshot-heading" className="pt-8 sm:pt-10">
           <h2 id="snapshot-heading" className="sr-only">
-            Collection snapshot
+            {t('Collection snapshot')}
           </h2>
           <dl className="grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 py-6 sm:grid-cols-2 sm:divide-y-0 sm:gap-6 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:py-7">
             <div className="pb-4 sm:pb-0 lg:pr-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Published documents
+                {t('Published documents')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {metadata.recordCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Verified official records
+                {t('Verified official records')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 lg:px-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Citizen’s Charters
+                {t('Citizen’s Charters')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {metadata.documentTypeBreakdown['CITIZENS_CHARTER'] ?? 0}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Current &amp; reference editions
+                {t('Current & reference editions')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 lg:px-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Business Forms
+                {t('Business Forms')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {metadata.documentTypeBreakdown['BUSINESS_FORM'] ?? 0}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Permit &amp; renewal templates
+                {t('Permit & renewal templates')}
               </p>
             </div>
 
             <div className="pt-4 sm:pt-0 lg:pl-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Privacy documents
+                {t('Privacy documents')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {privacyDocCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Manual, policy &amp; notice
+                {t('Manual, policy & notice')}
               </p>
             </div>
           </dl>
           <p className="mt-3 text-xs text-gray-500 sm:text-sm">
-            Last verified: {formatVerifiedDate(metadata.lastVerified)}
+            {t('Last verified: {{lastVerified}}', {
+              lastVerified: formatVerifiedDate(metadata.lastVerified),
+            })}
           </p>
         </section>
 
@@ -269,44 +282,42 @@ export default function OfficialDocuments() {
         <section aria-labelledby="scope-explanation-heading">
           <div className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              COLLECTION SCOPE
+              {t('COLLECTION SCOPE')}
             </p>
             <h2
               id="scope-explanation-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Understanding this collection
+              {t('Understanding this collection')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  What belongs here
+                  {t('What belongs here')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  This index contains selected standalone official documents
-                  issued by City Government offices, including Citizen’s
-                  Charters, business licensing forms, and data privacy
-                  instruments.
+                  {t(
+                    'This index contains selected standalone official documents issued by City Government offices, including Citizen’s Charters, business licensing forms, and data privacy instruments.'
+                  )}
                 </p>
               </div>
 
               <div className="md:border-l md:border-gray-200 md:pl-8">
                 <h3 className="text-base font-bold text-gray-950">
-                  What stays elsewhere
+                  {t('What stays elsewhere')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  Laws and issuances, Full Disclosure filings, procurement and
-                  contract awards, project observations, and city service
-                  catalogs remain in their canonical BetterSanFernando sections
-                  rather than being duplicated here.
+                  {t(
+                    'Laws and issuances, Full Disclosure filings, procurement and contract awards, project observations, and city service catalogs remain in their canonical BetterSanFernando sections rather than being duplicated here.'
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="mt-6 border-t border-gray-200/80 pt-4 text-xs leading-relaxed text-gray-500 sm:text-sm">
               <p className="font-semibold text-gray-700">
-                Document provenance note:
+                {t('Document provenance note:')}
               </p>
               <p className="mt-1">{metadata.overallPublicLimitation}</p>
             </div>
@@ -317,10 +328,10 @@ export default function OfficialDocuments() {
         <section id="document-library" aria-labelledby="library-heading">
           <div className="mb-3">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              DOCUMENT LIBRARY
+              {t('DOCUMENT LIBRARY')}
             </p>
             <h2 id="library-heading" className="sr-only">
-              Browse official documents
+              {t('Browse official documents')}
             </h2>
           </div>
 
@@ -331,7 +342,7 @@ export default function OfficialDocuments() {
                   htmlFor="documents-search"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Search documents
+                  {t('Search documents')}
                 </label>
                 <div className="relative mt-1.5">
                   <Search
@@ -343,7 +354,9 @@ export default function OfficialDocuments() {
                     type="search"
                     value={query}
                     onChange={event => setQuery(event.target.value)}
-                    placeholder="Search title, type, office, collection, edition..."
+                    placeholder={t(
+                      'Search title, type, office, collection, edition...'
+                    )}
                     className="h-10 w-full rounded-sm border border-gray-300 bg-white pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
                   />
                 </div>
@@ -354,7 +367,7 @@ export default function OfficialDocuments() {
                   htmlFor="document-type-select"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Document type
+                  {t('Document type')}
                 </label>
                 <div className="mt-1.5">
                   <select
@@ -363,7 +376,7 @@ export default function OfficialDocuments() {
                     onChange={event => setType(event.target.value)}
                     className={selectClass}
                   >
-                    <option value="ALL">All document types</option>
+                    <option value="ALL">{t('All document types')}</option>
                     {OfficialDocumentType.options.map(option => (
                       <option key={option} value={option}>
                         {titleCaseEnum(option)}
@@ -378,7 +391,7 @@ export default function OfficialDocuments() {
                   htmlFor="status-select"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Status
+                  {t('Status')}
                 </label>
                 <div className="mt-1.5">
                   <select
@@ -387,7 +400,7 @@ export default function OfficialDocuments() {
                     onChange={event => setStatus(event.target.value)}
                     className={selectClass}
                   >
-                    <option value="ALL">All statuses</option>
+                    <option value="ALL">{t('All statuses')}</option>
                     {OfficialDocumentStatus.options.map(option => (
                       <option key={option} value={option}>
                         {titleCaseEnum(option)}
@@ -405,7 +418,7 @@ export default function OfficialDocuments() {
                   className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-sm border border-gray-300 bg-white px-4 text-xs font-semibold text-gray-700 transition hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066EB] disabled:cursor-not-allowed disabled:opacity-45 md:w-auto"
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  Reset
+                  {t('Reset')}
                 </button>
               </div>
             </div>
@@ -413,7 +426,10 @@ export default function OfficialDocuments() {
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <p className="text-xs text-gray-600 sm:text-sm" aria-live="polite">
-              Showing {filtered.length} of {metadata.recordCount} documents
+              {t('Showing {{length}} of {{recordCount}} documents', {
+                length: filtered.length,
+                recordCount: metadata.recordCount,
+              })}
             </p>
           </div>
         </section>
@@ -421,7 +437,7 @@ export default function OfficialDocuments() {
         {/* 5. Document Groups */}
         <section aria-labelledby="groups-list-heading">
           <h2 id="groups-list-heading" className="sr-only">
-            Official document groups
+            {t('Official document groups')}
           </h2>
 
           {filtered.length === 0 ? (
@@ -431,10 +447,10 @@ export default function OfficialDocuments() {
                 aria-hidden="true"
               />
               <p className="mt-2 text-base font-semibold text-gray-950">
-                No documents match these filters
+                {t('No documents match these filters')}
               </p>
               <p className="mt-1 text-sm text-gray-600">
-                Try another search or reset the filters.
+                {t('Try another search or reset the filters.')}
               </p>
               <button
                 type="button"
@@ -442,12 +458,12 @@ export default function OfficialDocuments() {
                 className="mt-4 inline-flex items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50"
               >
                 <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                Reset filters
+                {t('Reset filters')}
               </button>
             </div>
           ) : (
             <div className="space-y-12 sm:space-y-16">
-              {GROUPS.map(group => {
+              {GROUPS(t).map(group => {
                 const groupRecords = filtered.filter(record =>
                   group.types.includes(record.document_type)
                 );
@@ -474,9 +490,9 @@ export default function OfficialDocuments() {
                       </div>
                       {group.types[0] === 'CITIZENS_CHARTER' && (
                         <p className="mt-1.5 text-xs text-gray-600 sm:text-sm">
-                          The 2026 2nd Edition is the current published Charter.
-                          Earlier editions are retained for reference and marked
-                          superseded.
+                          {t(
+                            'The 2026 2nd Edition is the current published Charter. Earlier editions are retained for reference and marked superseded.'
+                          )}
                         </p>
                       )}
                     </div>
@@ -508,11 +524,11 @@ export default function OfficialDocuments() {
                                           className="h-3.5 w-3.5 text-emerald-600"
                                           aria-hidden="true"
                                         />
-                                        Current
+                                        {t('Current')}
                                       </span>
                                     ) : (
                                       <span className="inline-flex items-center gap-1 rounded-xs bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
-                                        Superseded &middot; Reference only
+                                        {t('Superseded · Reference only')}
                                       </span>
                                     )}
                                   </div>
@@ -535,7 +551,7 @@ export default function OfficialDocuments() {
                                     {record.edition && (
                                       <div>
                                         <dt className="text-gray-500">
-                                          Edition
+                                          {t('Edition')}
                                         </dt>
                                         <dd className="font-medium text-gray-900">
                                           {record.edition}
@@ -545,7 +561,7 @@ export default function OfficialDocuments() {
                                     {record.revision && (
                                       <div>
                                         <dt className="text-gray-500">
-                                          Revision
+                                          {t('Revision')}
                                         </dt>
                                         <dd className="font-medium text-gray-900">
                                           {record.revision}
@@ -553,17 +569,19 @@ export default function OfficialDocuments() {
                                       </div>
                                     )}
                                     <div>
-                                      <dt className="text-gray-500">Date</dt>
+                                      <dt className="text-gray-500">
+                                        {t('Date')}
+                                      </dt>
                                       <dd className="font-medium text-gray-900">
                                         {statedDate
                                           ? formatIsoDate(statedDate)
-                                          : 'Date not stated'}
+                                          : t('Date not stated')}
                                       </dd>
                                     </div>
                                     {record.covered_year && (
                                       <div>
                                         <dt className="text-gray-500">
-                                          Covered year
+                                          {t('Covered year')}
                                         </dt>
                                         <dd className="font-medium text-gray-900">
                                           {record.covered_year}
@@ -573,7 +591,7 @@ export default function OfficialDocuments() {
                                     {record.document_number && (
                                       <div>
                                         <dt className="text-gray-500">
-                                          Document number
+                                          {t('Document number')}
                                         </dt>
                                         <dd className="font-medium text-gray-900">
                                           {record.document_number}
@@ -586,17 +604,17 @@ export default function OfficialDocuments() {
                                 {/* Right Rail: Source & Document */}
                                 <div className="border-t border-gray-200 pt-4 text-xs sm:text-sm lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
                                   <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-gray-500">
-                                    SOURCE &amp; DOCUMENT
+                                    {t('SOURCE & DOCUMENT')}
                                   </p>
                                   <p className="mt-1.5 text-gray-700">
                                     <span className="text-gray-500">
-                                      Collection:
+                                      {t('Collection:')}
                                     </span>{' '}
                                     {titleCaseEnum(record.source_collection)}
                                   </p>
                                   <p className="mt-0.5 text-gray-600">
                                     <span className="text-gray-500">
-                                      File format:
+                                      {t('File format:')}
                                     </span>{' '}
                                     {record.file_type}
                                   </p>
@@ -606,10 +624,13 @@ export default function OfficialDocuments() {
                                       href={record.official_page_url}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      aria-label={`View the official page for ${record.title} (opens in a new tab)`}
+                                      aria-label={t(
+                                        'View the official page for {{title}} (opens in a new tab)',
+                                        { title: record.title }
+                                      )}
                                       className="inline-flex items-center gap-1 text-[#0066EB] hover:text-[#0052BC] hover:underline"
                                     >
-                                      View official page
+                                      {t('View official page')}
                                       <ExternalLink
                                         className="h-3.5 w-3.5 shrink-0"
                                         aria-hidden="true"
@@ -620,10 +641,18 @@ export default function OfficialDocuments() {
                                         href={record.official_attachment_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label={`Open official ${record.file_type} for ${record.title} (opens in a new tab)`}
+                                        aria-label={t(
+                                          'Open official {{file_type}} for {{title}} (opens in a new tab)',
+                                          {
+                                            file_type: record.file_type,
+                                            title: record.title,
+                                          }
+                                        )}
                                         className="inline-flex items-center gap-1 text-[#0066EB] hover:text-[#0052BC] hover:underline"
                                       >
-                                        Open official {record.file_type}
+                                        {t('Open official {{file_type}}', {
+                                          file_type: record.file_type,
+                                        })}
                                         <ExternalLink
                                           className="h-3.5 w-3.5 shrink-0"
                                           aria-hidden="true"
@@ -651,41 +680,46 @@ export default function OfficialDocuments() {
           className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            ABOUT THIS INDEX
+            {t('ABOUT THIS INDEX')}
           </p>
           <h2
             id="about-index-heading"
             className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
           >
-            How to read this document library
+            {t('How to read this document library')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-3 md:gap-8">
             <div>
               <h3 className="text-base font-bold text-gray-950">
-                Verification
+                {t('Verification')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Each published document is directly tied to an official City
-                Government webpage and verified source attachment file.
+                {t(
+                  'Each published document is directly tied to an official City Government webpage and verified source attachment file.'
+                )}
               </p>
             </div>
 
             <div className="md:border-l md:border-gray-200 md:pl-8">
-              <h3 className="text-base font-bold text-gray-950">Coverage</h3>
+              <h3 className="text-base font-bold text-gray-950">
+                {t('Coverage')}
+              </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                This index is intentionally bounded to standalone reference
-                documents and does not duplicate records cataloged in other
-                BetterSanFernando archives.
+                {t(
+                  'This index is intentionally bounded to standalone reference documents and does not duplicate records cataloged in other BetterSanFernando archives.'
+                )}
               </p>
             </div>
 
             <div className="md:border-l md:border-gray-200 md:pl-8">
-              <h3 className="text-base font-bold text-gray-950">Currency</h3>
+              <h3 className="text-base font-bold text-gray-950">
+                {t('Currency')}
+              </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Documents marked CURRENT reflect the in-effect editions in this
-                dataset. Superseded documents are retained for reference where
-                officially accessible.
+                {t(
+                  'Documents marked CURRENT reflect the in-effect editions in this dataset. Superseded documents are retained for reference where officially accessible.'
+                )}
               </p>
             </div>
           </div>
@@ -695,17 +729,17 @@ export default function OfficialDocuments() {
         <section aria-labelledby="keep-exploring-heading">
           <div className="border-t border-gray-200 pt-10 sm:pt-12">
             <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-              KEEP EXPLORING
+              {t('KEEP EXPLORING')}
             </p>
             <h2
               id="keep-exploring-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Related public records
+              {t('Related public records')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {RELATED_RECORDS.map(item => (
+              {RELATED_RECORDS(t).map(item => (
                 <div
                   key={item.title}
                   className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 transition hover:border-[#0066EB] hover:bg-[#F3F6FB]/40"

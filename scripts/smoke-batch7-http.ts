@@ -373,6 +373,31 @@ for (const [path, filipino, filipinoTitle] of [
     'Mga beripikadong paksa ng resolusyon',
     'Mga Resolusyon',
   ],
+  [
+    '/transparency/sources',
+    'Ang mga Pampublikong Source sa Likod ng BetterSanFernando',
+    'Mga Source ng Transparency',
+  ],
+  [
+    '/transparency/methodology',
+    'Ang Proseso ng Paglalathala',
+    'Paano Namin Inilalathala ang Datos',
+  ],
+  [
+    '/transparency/documents',
+    'beripikado ngunit bahagyang koleksyon',
+    'Mga Opisyal na Dokumento',
+  ],
+  [
+    '/transparency/full-disclosure',
+    'Beripikadong metadata ng ulat ng Full Disclosure Policy',
+    'Mga Ulat ng Full Disclosure',
+  ],
+  [
+    '/transparency/finance',
+    'source-reported na opisyal na aggregate na ulat sa pananalapi',
+    'Pananalapi ng Lungsod',
+  ],
 ] as const) {
   const english = await (await request(path)).text();
   const filipinoPage = await (await request(`/fil${path}`)).text();
@@ -396,6 +421,38 @@ for (const [path, filipino, filipinoTitle] of [
   assert.deepEqual(unprefixed, [], `/fil${path} links must keep /fil`);
   assert.ok(!filipinoPage.includes('/fil/fil'));
 }
+
+// Search: /fil/search keeps identical matching behavior to /search — an
+// English query still matches, an existing Filipino alias still expands to
+// its English-indexed results, and the no-results state renders Filipino
+// chrome without requiring canonical result titles to be translated.
+{
+  const englishQuery = await (await request('/fil/search?q=water')).text();
+  assert.ok(
+    englishQuery.includes('water'),
+    '/fil/search must still match an English query'
+  );
+
+  const aliasQuery = await (await request('/fil/search?q=kalusugan')).text();
+  const englishAliasQuery = await (await request('/search?q=kalusugan')).text();
+  assert.ok(
+    aliasQuery.includes('Health'),
+    '/fil/search must expand the existing "kalusugan" alias to its English-indexed results'
+  );
+  assert.ok(
+    englishAliasQuery.includes('Health'),
+    '/search must also expand the same alias — Filipino must not change matching behavior'
+  );
+
+  const noResults = await (
+    await request('/fil/search?q=zzzznonexistentqueryxyz')
+  ).text();
+  assert.ok(
+    noResults.includes('Walang nailathalang talaan'),
+    '/fil/search must render the Filipino empty-state copy'
+  );
+}
+
 // Homepage: Filipino copy and metadata on /fil, English untouched on /.
 {
   const english = await (await request('/')).text();

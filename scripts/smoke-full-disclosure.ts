@@ -173,8 +173,13 @@ assert.match(
 );
 assert.match(
   pageSource,
-  /aria-label=\{`Open the official/,
+  /aria-label=\{t\(\s*['"]Open the official/,
   'external links must carry an accessible label stating their destination and that they open in a new tab'
+);
+assert.match(
+  pageSource,
+  /opens in a new tab/,
+  'the accessible label must state that the link opens in a new tab'
 );
 assert.match(
   pageSource,

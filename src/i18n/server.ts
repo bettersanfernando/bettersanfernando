@@ -28,6 +28,12 @@ export type PageNamespace =
   | 'projects'
   | 'statistics'
   | 'transparency'
+  | 'transparency-sources'
+  | 'transparency-methodology'
+  | 'transparency-documents'
+  | 'transparency-full-disclosure'
+  | 'transparency-finance'
+  | 'search'
   | 'legislation'
   | 'home'
   | 'statistics-shared'
@@ -74,6 +80,9 @@ function pageFamily(namespace: string): string | null {
   if (namespace === 'legislation' || namespace.startsWith('legislation-')) {
     return 'legislation';
   }
+  if (namespace === 'transparency' || namespace.startsWith('transparency-')) {
+    return 'transparency';
+  }
   return null;
 }
 
@@ -81,7 +90,7 @@ function pageFamily(namespace: string): string | null {
  * Filipino messages for BetterSanFernando-authored page copy (English is the
  * key, so English needs none). `fil/shared.json` holds text several routes
  * reuse, `fil/<family>-shared.json` the text shared by one route family
- * (statistics, projects, procurement), and `fil/<namespace>.json` the route's own. These load on the
+ * (statistics, projects, procurement, government, legislation, transparency), and `fil/<namespace>.json` the route's own. These load on the
  * server only; client components receive them through <PageMessages>.
  */
 export async function getPageMessages(
