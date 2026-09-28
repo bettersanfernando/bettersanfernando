@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { PageT } from '../../i18n/page-t.ts';
 import { IsoDateString, PsgcCode } from './schemas.ts';
 import fullDisclosureJson from '../generated/civic/transparency/full-disclosure.json' with { type: 'json' };
 
@@ -109,4 +110,22 @@ export function getFullDisclosureRecords(): readonly FullDisclosureRecord[] {
 
 export function getFullDisclosureMetadata(): FullDisclosureMetadata {
   return metadata;
+}
+
+// Localized display for the authored overall_public_limitation caveat in the
+// generated dataset — canonical/generated data is untouched; only display
+// is translated, and only when the value still matches the exact text this
+// translation was written against.
+export function getFullDisclosureOverallPublicLimitationDisplay(
+  t: PageT
+): string {
+  if (
+    metadata.overallPublicLimitation ===
+    "This is a bounded metadata-only export of 10 Full Disclosure Policy report records (2023-2026) with complete, documented verification already present in this repository as of 2026-09-11. It is not a complete Full Disclosure archive: the canonical inventory separately tracks approximately 200 official source records across 2020-2026, of which only these 13 have individual record-level metadata, and only 10 of those 13 have a verified official URL. No report's financial contents (amounts, line items, disbursements) are extracted, summarized, or published anywhere in this repository."
+  ) {
+    return t(
+      "This is a bounded metadata-only export of 10 Full Disclosure Policy report records (2023-2026) with complete, documented verification already present in this repository as of 2026-09-11. It is not a complete Full Disclosure archive: the canonical inventory separately tracks approximately 200 official source records across 2020-2026, of which only these 13 have individual record-level metadata, and only 10 of those 13 have a verified official URL. No report's financial contents (amounts, line items, disbursements) are extracted, summarized, or published anywhere in this repository."
+    );
+  }
+  return metadata.overallPublicLimitation;
 }

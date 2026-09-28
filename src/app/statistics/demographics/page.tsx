@@ -1226,7 +1226,8 @@ export default async function DemographicsStatistics() {
                   {t('Household Population & Households')}
                 </p>
                 <h3 className="mt-1 text-base font-bold text-gray-950">
-                  {t('Philippine Statistics Authority')}
+                  {/* Official organization name — rendered verbatim, never translated. */}
+                  Philippine Statistics Authority
                 </h3>
                 <p className="mt-1 text-xs text-gray-600">
                   {t(
@@ -1253,7 +1254,8 @@ export default async function DemographicsStatistics() {
                   {t('Age & Sex Structure')}
                 </p>
                 <h3 className="mt-1 text-base font-bold text-gray-950">
-                  {t('Philippine Statistics Authority')}
+                  {/* Official organization name — rendered verbatim, never translated. */}
+                  Philippine Statistics Authority
                 </h3>
                 <p className="mt-1 text-xs text-gray-600">
                   {t(
@@ -1279,7 +1281,8 @@ export default async function DemographicsStatistics() {
                   {t('Poverty Incidence')}
                 </p>
                 <h3 className="mt-1 text-base font-bold text-gray-950">
-                  {t('Philippine Statistics Authority')}
+                  {/* Official organization name — rendered verbatim, never translated. */}
+                  Philippine Statistics Authority
                 </h3>
                 <p className="mt-1 text-xs text-gray-600">
                   {t(

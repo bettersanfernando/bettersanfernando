@@ -15,6 +15,7 @@ import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getOfficialDocuments,
   getOfficialDocumentsMetadata,
+  getOfficialDocumentsOverallPublicLimitationDisplay,
   OfficialDocumentStatus,
   OfficialDocumentType,
   type OfficialDocument,
@@ -319,7 +320,9 @@ export default function OfficialDocuments() {
               <p className="font-semibold text-gray-700">
                 {t('Document provenance note:')}
               </p>
-              <p className="mt-1">{metadata.overallPublicLimitation}</p>
+              <p className="mt-1">
+                {getOfficialDocumentsOverallPublicLimitationDisplay(t)}
+              </p>
             </div>
           </div>
         </section>

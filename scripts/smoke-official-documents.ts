@@ -133,7 +133,7 @@ for (const forbidden of [
   );
 
 const pageSource = readNextRoute('/transparency/documents');
-assert.match(pageSource, /overallPublicLimitation/);
+assert.match(pageSource, /getOfficialDocumentsOverallPublicLimitationDisplay/);
 assert.match(pageSource, /target="_blank"/);
 assert.match(pageSource, /rel="noopener noreferrer"/);
 assert.match(pageSource, /opens in a new tab/);

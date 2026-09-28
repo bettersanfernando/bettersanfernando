@@ -16,6 +16,7 @@ import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getFinanceMetadata,
   getFinanceObservations,
+  getFinanceOverallPublicLimitationDisplay,
   getFinanceReports,
   type FinanceObservation,
   type FinanceReport,
@@ -1591,7 +1592,7 @@ export default function CityFinances() {
                   {t('STRICT COMPARABILITY SAFEGUARDS')}
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-900">
-                  {metadata.overallPublicLimitation}
+                  {getFinanceOverallPublicLimitationDisplay(t)}
                 </p>
                 <ul className="mt-3 grid grid-cols-1 gap-1.5 text-xs text-gray-600 sm:grid-cols-2">
                   {metadata.prohibitedComparisons.map((item, idx) => (

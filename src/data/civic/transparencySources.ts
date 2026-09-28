@@ -7,10 +7,23 @@ import executiveOrdersJson from '../generated/civic/legislation/executive-orders
 import ordinancesJson from '../generated/civic/legislation/ordinances.json' with { type: 'json' };
 import resolutionsJson from '../generated/civic/legislation/resolutions.json' with { type: 'json' };
 import { getAllProjectEvidence, getProjects } from './projects.ts';
-import { getFullDisclosureMetadata } from './fullDisclosure.ts';
-import { getOfficialDocumentsMetadata } from './officialDocuments.ts';
-import { getProjectCostUtilizationMetadata } from './projectCostUtilization.ts';
-import { getFinanceMetadata, getFinanceReports } from './finance.ts';
+import {
+  getFullDisclosureMetadata,
+  getFullDisclosureOverallPublicLimitationDisplay,
+} from './fullDisclosure.ts';
+import {
+  getOfficialDocumentsMetadata,
+  getOfficialDocumentsOverallPublicLimitationDisplay,
+} from './officialDocuments.ts';
+import {
+  getProjectCostUtilizationCoverageLimitationDisplay,
+  getProjectCostUtilizationMetadata,
+} from './projectCostUtilization.ts';
+import {
+  getFinanceMetadata,
+  getFinanceOverallPublicLimitationDisplay,
+  getFinanceReports,
+} from './finance.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
@@ -566,7 +579,7 @@ export function getPublishedDomainDisplayText(
         description: t(
           'Source-reported, year-to-date cost-utilization observations (Total Cost Incurred to Date and physical completion) for a bounded subset of published projects.'
         ),
-        coverageNote: domain.coverageNote,
+        coverageNote: getProjectCostUtilizationCoverageLimitationDisplay(t),
         recordLabel: t('observation records'),
       };
     case 'population':
@@ -641,7 +654,7 @@ export function getPublishedDomainDisplayText(
         description: t(
           'Selected official aggregate finance reports and their non-additive, source-reported observations.'
         ),
-        coverageNote: domain.coverageNote,
+        coverageNote: getFinanceOverallPublicLimitationDisplay(t),
         recordLabel: t('finance reports'),
       };
     case 'full-disclosure':
@@ -650,7 +663,7 @@ export function getPublishedDomainDisplayText(
         description: t(
           'Individually verified Full Disclosure Policy report metadata: Annual Procurement Plans, Procurement Monitoring Reports, and Trust Fund and Special Education Fund utilization reports.'
         ),
-        coverageNote: domain.coverageNote,
+        coverageNote: getFullDisclosureOverallPublicLimitationDisplay(t),
         recordLabel: t('report records'),
       };
     case 'official-documents':
@@ -659,7 +672,7 @@ export function getPublishedDomainDisplayText(
         description: t(
           'A bounded index of Citizen’s Charters, business forms, and privacy documents from verified official sources.'
         ),
-        coverageNote: domain.coverageNote,
+        coverageNote: getOfficialDocumentsOverallPublicLimitationDisplay(t),
         recordLabel: t('official documents'),
       };
   }

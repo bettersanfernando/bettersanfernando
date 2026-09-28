@@ -198,7 +198,7 @@ assert.match(
 );
 assert.match(
   pageSource,
-  /overallPublicLimitation/,
+  /getFullDisclosureOverallPublicLimitationDisplay/,
   'the page must display the coverage limitation'
 );
 for (const forbidden of [

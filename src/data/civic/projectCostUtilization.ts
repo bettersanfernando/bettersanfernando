@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { PageT } from '../../i18n/page-t.ts';
 import { IsoDateString, PsgcCode } from './schemas.ts';
 import projectCostUtilizationJson from '../generated/civic/projects/project-cost-utilization.json' with { type: 'json' };
 import { getProjectById } from './projects.ts';
@@ -148,6 +149,23 @@ export function getProjectCostUtilizationMetadata(
     jurisdictionPsgc: file.jurisdiction_psgc,
     title: file.title,
   });
+}
+
+// Localized display for the authored coverage_limitation caveat in the
+// generated dataset — canonical/generated data is untouched; only display
+// is translated, and only when the value still matches the exact text this
+// translation was written against.
+export function getProjectCostUtilizationCoverageLimitationDisplay(
+  t: PageT
+): string {
+  const known =
+    "Covers only 298 verified observations connected to 106 of the 303 canonical projects in projects/city-projects.json. Coverage is incomplete and does not represent all city projects. All observations are year-to-date figures from the source's own 'Total Cost Incurred to Date' field, which is not proof of cash payment or disbursement. Observations from different reporting quarters are separate and non-additive -- they must never be summed together, and no citywide total is published here. Currency is not stated in the official source documents (currency_unit is null throughout, not an inferred PHP value). Physical-completion and status fields are documentary observations transcribed from the official source, not independent field verification. Some observations are connected to a canonical project whose lifecycle_status is IMPLEMENTATION_REPORTED -- see projects/city-projects.json for what that status does and does not establish. No chart derived from this dataset may be titled or described as citywide spending, actual spending, or amount paid.";
+  if (file.coverage_limitation === known) {
+    return t(
+      "Covers only 298 verified observations connected to 106 of the 303 canonical projects in projects/city-projects.json. Coverage is incomplete and does not represent all city projects. All observations are year-to-date figures from the source's own 'Total Cost Incurred to Date' field, which is not proof of cash payment or disbursement. Observations from different reporting quarters are separate and non-additive -- they must never be summed together, and no citywide total is published here. Currency is not stated in the official source documents (currency_unit is null throughout, not an inferred PHP value). Physical-completion and status fields are documentary observations transcribed from the official source, not independent field verification. Some observations are connected to a canonical project whose lifecycle_status is IMPLEMENTATION_REPORTED -- see projects/city-projects.json for what that status does and does not establish. No chart derived from this dataset may be titled or described as citywide spending, actual spending, or amount paid."
+    );
+  }
+  return file.coverage_limitation;
 }
 
 export function getCoveredProjectIds(): readonly string[] {

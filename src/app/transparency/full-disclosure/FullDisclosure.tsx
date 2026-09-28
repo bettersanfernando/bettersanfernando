@@ -14,6 +14,7 @@ import {
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getFullDisclosureMetadata,
+  getFullDisclosureOverallPublicLimitationDisplay,
   getFullDisclosureRecords,
   type FullDisclosureRecord,
 } from '../../../data/civic/fullDisclosure';
@@ -309,7 +310,7 @@ export default function FullDisclosure() {
                   {t('What is not included')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  {metadata.overallPublicLimitation}
+                  {getFullDisclosureOverallPublicLimitationDisplay(t)}
                 </p>
               </div>
             </div>

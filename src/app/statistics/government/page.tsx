@@ -781,7 +781,8 @@ export default async function GovernmentStatistics() {
                   {t('Official Departments Directory')}
                 </p>
                 <h3 className="mt-1 text-base font-bold text-gray-950">
-                  {t('City Government of San Fernando Official Portal')}
+                  {/* Official organization name — rendered verbatim, never translated. */}
+                  City Government of San Fernando Official Portal
                 </h3>
                 <p className="mt-1 text-xs text-gray-600">
                   {t(
