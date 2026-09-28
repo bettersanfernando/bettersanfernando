@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import {
   ArrowRight,
@@ -20,6 +20,11 @@ import {
   getOfficialLinksMetadata,
   type OfficialLink,
 } from '../../../data/civic/governmentOfficialLinks';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import type { LanguageType } from '../../../types';
 
 type DestinationTypeFilter =
   'all' | 'OFFICIAL_WEBSITE' | 'OFFICIAL_DIGITAL_SERVICE';
@@ -44,35 +49,41 @@ const digitalServiceCount = visibleLinks.filter(
   link => link.channel_type === 'OFFICIAL_DIGITAL_SERVICE'
 ).length;
 
-const TYPE_OPTIONS: Array<{ value: DestinationTypeFilter; label: string }> = [
-  { value: 'all', label: 'All destinations' },
-  { value: 'OFFICIAL_WEBSITE', label: 'Official websites' },
-  { value: 'OFFICIAL_DIGITAL_SERVICE', label: 'Digital services' },
+const TYPE_OPTIONS = (
+  t: PageT
+): Array<{ value: DestinationTypeFilter; label: string }> => [
+  { value: 'all', label: t('All destinations') },
+  { value: 'OFFICIAL_WEBSITE', label: t('Official websites') },
+  { value: 'OFFICIAL_DIGITAL_SERVICE', label: t('Digital services') },
 ];
 
-const SORT_OPTIONS: Array<{ value: SortOption; label: string }> = [
+const SORT_OPTIONS = (
+  t: PageT
+): Array<{ value: SortOption; label: string }> => [
   { value: 'name-asc', label: 'A–Z' },
-  { value: 'recently-verified', label: 'Recently verified' },
-  { value: 'entity-asc', label: 'Owning entity A–Z' },
+  { value: 'recently-verified', label: t('Recently verified') },
+  { value: 'entity-asc', label: t('Owning entity A–Z') },
 ];
 
-const RELATED_RESOURCES = [
+const RELATED_RESOURCES = (t: PageT) => [
   {
-    title: 'Government Hotlines',
-    description:
-      'Find citywide emergency, disaster-response, police, fire, and related institutional numbers.',
+    title: t('Government Hotlines'),
+    description: t(
+      'Find citywide emergency, disaster-response, police, fire, and related institutional numbers.'
+    ),
     href: '/government/hotlines',
   },
   {
-    title: 'Barangay Contacts',
-    description:
-      'Find published Barangay Secretary and BHERT contacts across San Fernando.',
+    title: t('Barangay Contacts'),
+    description: t(
+      'Find published Barangay Secretary and BHERT contacts across San Fernando.'
+    ),
     href: '/government/barangay-contacts',
   },
 ];
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-PH', {
+function formatDate(value: string, locale: LanguageType) {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -120,15 +131,19 @@ function getPageWindow(current: number, total: number): (number | '…')[] {
 }
 
 function DestinationRow({ link }: { link: OfficialLink }) {
+  const t = usePageT();
+  const locale = useLocale();
   const isDigitalService = link.channel_type === 'OFFICIAL_DIGITAL_SERVICE';
   const hasConflict =
     link.verification_status ===
     'CURRENT_VERIFIED_NAMING_OR_REORG_CONFLICT_UNRESOLVED';
 
-  const typeLabel = isDigitalService ? 'DIGITAL SERVICE' : 'OFFICIAL WEBSITE';
+  const typeLabel = isDigitalService
+    ? t('DIGITAL SERVICE')
+    : t('OFFICIAL WEBSITE');
   const actionLabel = isDigitalService
-    ? 'Open digital service'
-    : 'Open official website';
+    ? t('Open digital service')
+    : t('Open official website');
 
   return (
     <div className="flex flex-col justify-between gap-4 p-4 transition-colors hover:bg-[#F3F6FB] sm:gap-6 sm:p-5 lg:flex-row lg:items-center">
@@ -166,9 +181,9 @@ function DestinationRow({ link }: { link: OfficialLink }) {
             />
             <span>
               <strong className="font-semibold text-gray-700">
-                Naming note:
+                {t('Naming note:')}
               </strong>{' '}
-              Current source naming differs across published references.
+              {t('Current source naming differs across published references.')}
             </span>
           </div>
         )}
@@ -184,7 +199,9 @@ function DestinationRow({ link }: { link: OfficialLink }) {
         <div className="text-left text-xs text-gray-500 lg:text-right">
           <p className="font-mono">{hostnameOf(link.url)}</p>
           <p className="mt-0.5 text-[11px] text-gray-400">
-            Verified {formatDate(link.verified_at)}
+            {t('Verified {{verified_at}}', {
+              verified_at: formatDate(link.verified_at, locale),
+            })}
           </p>
         </div>
 
@@ -192,7 +209,10 @@ function DestinationRow({ link }: { link: OfficialLink }) {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`${actionLabel}: ${link.label} (opens in a new tab)`}
+          aria-label={t('{{actionLabel}}: {{label}} (opens in a new tab)', {
+            actionLabel,
+            label: link.label,
+          })}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] underline underline-offset-4 hover:text-[#002EAC] sm:text-sm"
         >
           {actionLabel}
@@ -204,6 +224,8 @@ function DestinationRow({ link }: { link: OfficialLink }) {
 }
 
 export default function GovernmentOfficialLinks() {
+  const t = usePageT();
+  const locale = useLocale();
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [typeFilter, setTypeFilter] = useQueryState('type', {
     defaultValue: 'all',
@@ -276,9 +298,9 @@ export default function GovernmentOfficialLinks() {
         <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
           <Breadcrumbs
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Government', href: '/government' },
-              { label: 'Official Government Links' },
+              { label: t('Home'), href: '/' },
+              { label: t('Government'), href: '/government' },
+              { label: t('Official Government Links') },
             ]}
           />
 
@@ -288,32 +310,34 @@ export default function GovernmentOfficialLinks() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                OFFICIAL GOVERNMENT LINKS
+                {t('OFFICIAL GOVERNMENT LINKS')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                Official City websites and online services
+                {t('Official City websites and online services')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Find verified City Government websites and digital-service
-                portals without having to search across multiple sources.
+                {t(
+                  'Find verified City Government websites and digital-service portals without having to search across multiple sources.'
+                )}
               </p>
             </div>
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                ABOUT THIS DIRECTORY
+                {t('ABOUT THIS DIRECTORY')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                Verified official destinations
+                {t('Verified official destinations')}
               </h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                BetterSanFernando organizes official City Government web
-                destinations for easier access. Each link opens an external
-                government-operated destination.
+                {t(
+                  'BetterSanFernando organizes official City Government web destinations for easier access. Each link opens an external government-operated destination.'
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -324,47 +348,49 @@ export default function GovernmentOfficialLinks() {
         {/* 2. Top Summary Metrics */}
         <section aria-labelledby="metrics-heading" className="pt-8 sm:pt-10">
           <h2 id="metrics-heading" className="sr-only">
-            Official links overview
+            {t('Official links overview')}
           </h2>
           <div className="grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 py-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-7">
             <div className="pb-4 sm:pb-0 sm:pr-6">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Verified online destinations
+                {t('Verified online destinations')}
               </p>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {visibleLinks.length}
               </p>
               <p className="mt-1 text-xs text-gray-600">
-                Websites and digital-service portals
+                {t('Websites and digital-service portals')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 sm:px-6">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Official websites
+                {t('Official websites')}
               </p>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {websiteCount}
               </p>
               <p className="mt-1 text-xs text-gray-600">
-                Office and department sites
+                {t('Office and department sites')}
               </p>
             </div>
 
             <div className="pt-4 sm:pt-0 sm:pl-6">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Digital services
+                {t('Digital services')}
               </p>
               <p className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {digitalServiceCount}
               </p>
               <p className="mt-1 text-xs text-gray-600">
-                Citizen transaction portals
+                {t('Citizen transaction portals')}
               </p>
             </div>
           </div>
           <p className="mt-3 text-xs text-gray-500 sm:text-sm">
-            Last verified: {formatDate(metadata.lastVerified)}
+            {t('Last verified: {{lastVerified}}', {
+              lastVerified: formatDate(metadata.lastVerified, locale),
+            })}
           </p>
         </section>
 
@@ -372,13 +398,13 @@ export default function GovernmentOfficialLinks() {
         <section aria-labelledby="what-youll-find-heading">
           <div className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              WHAT YOU’LL FIND
+              {t('WHAT YOU’LL FIND')}
             </p>
             <h2
               id="what-youll-find-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Two kinds of official destinations
+              {t('Two kinds of official destinations')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
@@ -388,11 +414,12 @@ export default function GovernmentOfficialLinks() {
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-gray-950">
-                    Official websites
+                    {t('Official websites')}
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                    Office and institutional websites published for City
-                    Government departments and units.
+                    {t(
+                      'Office and institutional websites published for City Government departments and units.'
+                    )}
                   </p>
                 </div>
               </div>
@@ -403,11 +430,12 @@ export default function GovernmentOfficialLinks() {
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-gray-950">
-                    Digital services
+                    {t('Digital services')}
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                    Online portals used to access City Government services or
-                    transactions.
+                    {t(
+                      'Online portals used to access City Government services or transactions.'
+                    )}
                   </p>
                 </div>
               </div>
@@ -419,17 +447,18 @@ export default function GovernmentOfficialLinks() {
         <section aria-labelledby="directory-heading" className="space-y-6">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              OFFICIAL DIRECTORY
+              {t('OFFICIAL DIRECTORY')}
             </p>
             <h2
               id="directory-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Find an official destination
+              {t('Find an official destination')}
             </h2>
             <p className="mt-1 text-sm text-gray-600">
-              Search verified websites and online services by office, acronym,
-              service, purpose, or web address.
+              {t(
+                'Search verified websites and online services by office, acronym, service, purpose, or web address.'
+              )}
             </p>
           </div>
 
@@ -449,7 +478,9 @@ export default function GovernmentOfficialLinks() {
                     void setQuery(e.target.value || null);
                     void setPage(1);
                   }}
-                  placeholder="Search office, acronym, website, service, or purpose..."
+                  placeholder={t(
+                    'Search office, acronym, website, service, or purpose...'
+                  )}
                   className="h-10 w-full rounded-sm border border-gray-300 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-500 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 />
               </div>
@@ -457,7 +488,7 @@ export default function GovernmentOfficialLinks() {
               {/* Destination Type Select */}
               <div>
                 <label htmlFor="destination-type-select" className="sr-only">
-                  Filter by destination type
+                  {t('Filter by destination type')}
                 </label>
                 <select
                   id="destination-type-select"
@@ -472,7 +503,7 @@ export default function GovernmentOfficialLinks() {
                   }}
                   className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  {TYPE_OPTIONS.map(opt => (
+                  {TYPE_OPTIONS(t).map(opt => (
                     <option key={opt.value} value={opt.value}>
                       {opt.label}
                     </option>
@@ -483,7 +514,7 @@ export default function GovernmentOfficialLinks() {
               {/* Sort Select */}
               <div>
                 <label htmlFor="sort-select" className="sr-only">
-                  Sort destinations
+                  {t('Sort destinations')}
                 </label>
                 <select
                   id="sort-select"
@@ -498,7 +529,7 @@ export default function GovernmentOfficialLinks() {
                   }}
                   className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  {SORT_OPTIONS.map(opt => (
+                  {SORT_OPTIONS(t).map(opt => (
                     <option key={opt.value} value={opt.value}>
                       {opt.label}
                     </option>
@@ -515,7 +546,7 @@ export default function GovernmentOfficialLinks() {
                   className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40 md:w-auto"
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  Reset
+                  {t('Reset')}
                 </button>
               </div>
             </div>
@@ -525,9 +556,9 @@ export default function GovernmentOfficialLinks() {
           <div className="flex items-center justify-between text-xs font-semibold text-gray-600 sm:text-sm">
             <p aria-live="polite">
               {filteredLinks.length === 0
-                ? 'Showing 0 destinations'
+                ? t('Showing 0 destinations')
                 : filteredLinks.length === 1
-                  ? 'Showing 1 of 1 destination'
+                  ? t('Showing 1 of 1 destination')
                   : `Showing ${startIndex}–${endIndex} of ${filteredLinks.length} destinations`}
             </p>
           </div>
@@ -540,10 +571,10 @@ export default function GovernmentOfficialLinks() {
                 aria-hidden="true"
               />
               <h3 className="mt-3 text-base font-bold text-gray-950">
-                No matching destinations
+                {t('No matching destinations')}
               </h3>
               <p className="mt-1.5 text-sm text-gray-600">
-                Try another office, acronym, service, or website name.
+                {t('Try another office, acronym, service, or website name.')}
               </p>
               <div className="mt-5">
                 <button
@@ -551,7 +582,7 @@ export default function GovernmentOfficialLinks() {
                   onClick={resetFilters}
                   className="inline-flex h-9 items-center justify-center rounded-sm border border-gray-300 bg-white px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  Clear filters
+                  {t('Clear filters')}
                 </button>
               </div>
             </div>
@@ -566,7 +597,7 @@ export default function GovernmentOfficialLinks() {
           {/* Pagination */}
           {totalPages > 1 && (
             <nav
-              aria-label="Official links directory pagination"
+              aria-label={t('Official links directory pagination')}
               className="flex items-center justify-between gap-4 border-t border-gray-200 pt-5"
             >
               <button
@@ -576,7 +607,7 @@ export default function GovernmentOfficialLinks() {
                 className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                Previous
+                {t('Previous')}
               </button>
 
               {/* Desktop Page Window */}
@@ -610,7 +641,10 @@ export default function GovernmentOfficialLinks() {
 
               {/* Mobile Page Indicator */}
               <p className="text-sm font-medium text-gray-700 sm:hidden">
-                Page {currentPage} of {totalPages}
+                {t('Page {{currentPage}} of {{totalPages}}', {
+                  currentPage,
+                  totalPages,
+                })}
               </p>
 
               <button
@@ -619,7 +653,7 @@ export default function GovernmentOfficialLinks() {
                 onClick={() => setPage(currentPage + 1)}
                 className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Next
+                {t('Next')}
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </nav>
@@ -630,41 +664,43 @@ export default function GovernmentOfficialLinks() {
         <section aria-labelledby="source-coverage-heading">
           <div className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              SOURCE AND COVERAGE
+              {t('SOURCE AND COVERAGE')}
             </p>
             <h2
               id="source-coverage-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              About these links
+              {t('About these links')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  What is verified
+                  {t('What is verified')}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
-                  Each displayed destination was reviewed against the official
-                  sources recorded by BetterSanFernando.
+                  {t(
+                    'Each displayed destination was reviewed against the official sources recorded by BetterSanFernando.'
+                  )}
                 </p>
               </div>
 
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  What this does not mean
+                  {t('What this does not mean')}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
-                  The directory does not guarantee that every City office has
-                  its own website or that every government web destination has
-                  already been identified.
+                  {t(
+                    'The directory does not guarantee that every City office has its own website or that every government web destination has already been identified.'
+                  )}
                 </p>
               </div>
             </div>
 
             <p className="mt-6 border-t border-gray-200 pt-4 text-xs text-gray-500 sm:text-sm">
-              A missing office or service does not prove that an official online
-              destination does not exist.
+              {t(
+                'A missing office or service does not prove that an official online destination does not exist.'
+              )}
             </p>
           </div>
         </section>
@@ -673,13 +709,13 @@ export default function GovernmentOfficialLinks() {
         <section aria-labelledby="keep-exploring-heading" className="space-y-8">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              KEEP EXPLORING
+              {t('KEEP EXPLORING')}
             </p>
             <h2
               id="keep-exploring-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Find another government channel
+              {t('Find another government channel')}
             </h2>
           </div>
 
@@ -687,11 +723,12 @@ export default function GovernmentOfficialLinks() {
             <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  City Offices
+                  {t('City Offices')}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
-                  Find office phone numbers, email addresses, locations, and
-                  official pages.
+                  {t(
+                    'Find office phone numbers, email addresses, locations, and official pages.'
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -699,7 +736,7 @@ export default function GovernmentOfficialLinks() {
                   href="/government/offices"
                   className="inline-flex items-center gap-1 text-sm font-semibold text-[#0066EB] hover:text-[#002EAC]"
                 >
-                  Browse City Offices
+                  {t('Browse City Offices')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -708,10 +745,10 @@ export default function GovernmentOfficialLinks() {
             <div className="flex flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Contact the City
+                  {t('Contact the City')}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
-                  Start with general City Government contact routes.
+                  {t('Start with general City Government contact routes.')}
                 </p>
               </div>
               <div className="mt-5">
@@ -719,7 +756,7 @@ export default function GovernmentOfficialLinks() {
                   href="/government/contact"
                   className="inline-flex items-center gap-1 text-sm font-semibold text-[#0066EB] hover:text-[#002EAC]"
                 >
-                  Contact the City
+                  {t('Contact the City')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -728,10 +765,10 @@ export default function GovernmentOfficialLinks() {
 
           <div>
             <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              RELATED RESOURCES
+              {t('RELATED RESOURCES')}
             </p>
             <div className="mt-3 divide-y divide-gray-200 border-y border-gray-200 bg-white sm:rounded-sm sm:border">
-              {RELATED_RESOURCES.map(resource => (
+              {RELATED_RESOURCES(t).map(resource => (
                 <div
                   key={resource.href}
                   className="flex flex-col justify-between gap-3 p-4 sm:flex-row sm:items-center sm:gap-6 sm:p-5"
@@ -748,7 +785,7 @@ export default function GovernmentOfficialLinks() {
                     href={resource.href}
                     className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#002EAC] sm:text-sm"
                   >
-                    View directory
+                    {t('View directory')}
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </Link>
                 </div>

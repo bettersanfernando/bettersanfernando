@@ -1,13 +1,20 @@
 import ProjectsView from './Projects';
 
 import { buildPageMetadata } from '../../../lib/metadata';
+import { PageMessages } from '../../../components/i18n/PageMessages';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'City Projects',
-  description:
-    'Browse the full list of infrastructure and procurement projects of the City of San Fernando, Pampanga, with sourced evidence for every fact.',
-  path: '/projects/city-projects',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('projects-city-projects');
+  return buildPageMetadata({
+    title: t('City Projects'),
+    description: t(
+      'Browse the full list of infrastructure and procurement projects of the City of San Fernando, Pampanga, with sourced evidence for every fact.'
+    ),
+    path: '/projects/city-projects',
+    locale,
+  });
+}
 
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
@@ -19,6 +26,11 @@ export const metadata = buildPageMetadata({
 // static-generation CSR-bailout path).
 export const dynamic = 'force-dynamic';
 
-export default function ProjectsPage() {
-  return <ProjectsView />;
+export default async function ProjectsPage() {
+  const { messages } = await getPageT('projects-city-projects');
+  return (
+    <PageMessages messages={messages}>
+      <ProjectsView />
+    </PageMessages>
+  );
 }

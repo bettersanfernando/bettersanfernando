@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import {
   ArrowDown,
   ArrowRight,
@@ -16,6 +16,7 @@ import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getFinanceMetadata,
   getFinanceObservations,
+  getFinanceOverallPublicLimitationDisplay,
   getFinanceReports,
   type FinanceObservation,
   type FinanceReport,
@@ -25,47 +26,67 @@ import {
   formatUnstatedAmount,
   titleCaseEnum,
 } from '../../../lib/utils';
+import { getProjectCostUtilizationMetadata } from '../../../data/civic/projectCostUtilization';
+import { getProjects } from '../../../data/civic/projects';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
 
 const reports = getFinanceReports();
 const observations = getFinanceObservations();
 const metadata = getFinanceMetadata();
+// Record count for the separate Project Cost & Utilization collection,
+// referenced only as a "do not merge these" caveat below — never combined
+// with the finance observation count above.
+const projectCostUtilizationRecordCount = getProjectCostUtilizationMetadata(
+  getProjects().length
+).recordCount;
 
 // Curated public-facing report type display labels
-const REPORT_TYPE_LABELS: Record<FinanceReport['report_type'], string> = {
-  annual_budget: 'Annual Budget',
-  statement_of_receipts_and_expenditures:
-    'Statement of Receipts and Expenditures',
-  statement_of_cash_flows: 'Statement of Cash Flows',
-  statement_of_indebtedness_payments_and_balances:
-    'Statement of Indebtedness, Payments and Balances',
-  nta_ira_utilization: '20% NTA/IRA Utilization',
-  ldrrmf_utilization: 'LDRRMF Utilization',
-  sef_utilization: 'SEF Utilization',
-  trust_fund_utilization: 'Trust Fund Utilization',
-  unliquidated_cash_advances: 'Unliquidated Cash Advances',
-  statement_of_financial_performance: 'Statement of Financial Performance',
-};
+const REPORT_TYPE_LABELS = (
+  t: PageT
+): Record<FinanceReport['report_type'], string> => ({
+  annual_budget: t('Annual Budget'),
+  statement_of_receipts_and_expenditures: t(
+    'Statement of Receipts and Expenditures'
+  ),
+  statement_of_cash_flows: t('Statement of Cash Flows'),
+  statement_of_indebtedness_payments_and_balances: t(
+    'Statement of Indebtedness, Payments and Balances'
+  ),
+  nta_ira_utilization: t('20% NTA/IRA Utilization'),
+  ldrrmf_utilization: t('LDRRMF Utilization'),
+  sef_utilization: t('SEF Utilization'),
+  trust_fund_utilization: t('Trust Fund Utilization'),
+  unliquidated_cash_advances: t('Unliquidated Cash Advances'),
+  statement_of_financial_performance: t('Statement of Financial Performance'),
+});
 
-function formatReportType(type: FinanceReport['report_type']): string {
-  return REPORT_TYPE_LABELS[type] ?? titleCaseEnum(type);
+function formatReportType(
+  type: FinanceReport['report_type'],
+  t: PageT
+): string {
+  return REPORT_TYPE_LABELS(t)[type] ?? titleCaseEnum(type);
 }
 
 // Curated public-facing fund display labels
-const FUND_TYPE_LABELS: Record<FinanceReport['fund_type'], string> = {
-  general_fund: 'General Fund',
-  general_fund_and_sef: 'General Fund / Special Education Fund',
-  citywide_debt: 'Citywide Debt',
-  '20_percent_nta_ira':
-    '20% National Tax Allotment / Internal Revenue Allotment',
+const FUND_TYPE_LABELS = (
+  t: PageT
+): Record<FinanceReport['fund_type'], string> => ({
+  general_fund: t('General Fund'),
+  general_fund_and_sef: t('General Fund / Special Education Fund'),
+  citywide_debt: t('Citywide Debt'),
+  '20_percent_nta_ira': t(
+    '20% National Tax Allotment / Internal Revenue Allotment'
+  ),
   ldrrmf: 'LDRRMF',
-  special_education_fund: 'Special Education Fund',
-  trust_fund: 'Trust Fund',
-  source_stated_fund: 'Source-Stated Fund',
-};
+  special_education_fund: t('Special Education Fund'),
+  trust_fund: t('Trust Fund'),
+  source_stated_fund: t('Source-Stated Fund'),
+});
 
-function formatFundDisplay(report: FinanceReport): string {
+function formatFundDisplay(report: FinanceReport, t: PageT): string {
   if (report.fund_type === 'citywide_debt') {
-    return 'Citywide Debt';
+    return t('Citywide Debt');
   }
   if (report.fund_type === 'ldrrmf') {
     return 'LDRRMF';
@@ -73,31 +94,33 @@ function formatFundDisplay(report: FinanceReport): string {
   if (report.fund_name_exact) {
     return report.fund_name_exact;
   }
-  return FUND_TYPE_LABELS[report.fund_type] ?? titleCaseEnum(report.fund_type);
+  return (
+    FUND_TYPE_LABELS(t)[report.fund_type] ?? titleCaseEnum(report.fund_type)
+  );
 }
 
-function formatProhibitedComparison(item: string): string {
+function formatProhibitedComparison(item: string, t: PageT): string {
   const lower = item.toLowerCase();
   if (lower.includes('generic') && lower.includes('total')) {
-    return 'Generic City spending total';
+    return t('Generic City spending total');
   }
   if (lower.startsWith('budgets plus')) {
-    return 'Budgets plus obligations, disbursements, or expenditures';
+    return t('Budgets plus obligations, disbursements, or expenditures');
   }
   if (lower.startsWith('different funds')) {
-    return 'Different funds combined';
+    return t('Different funds combined');
   }
   if (lower.startsWith('cumulative quarterly')) {
-    return 'Cumulative quarterly reports summed';
+    return t('Cumulative quarterly reports summed');
   }
   if (lower.startsWith('audited and unaudited')) {
-    return 'Audited and unaudited figures mixed';
+    return t('Audited and unaudited figures mixed');
   }
   if (lower.includes('project') && lower.includes('contracts')) {
-    return 'Project ABC/contracts combined with aggregate finance';
+    return t('Project ABC/contracts combined with aggregate finance');
   }
   if (lower.includes('incompatible or unstated')) {
-    return 'Values with incompatible or unstated units compared';
+    return t('Values with incompatible or unstated units compared');
   }
   return item.charAt(0).toUpperCase() + item.slice(1);
 }
@@ -263,16 +286,18 @@ function sourceLink(report: FinanceReport): {
 // Chart Component: Receipts vs. Expenditures (2-Column on Desktop / 1-Col Mobile)
 // ---------------------------------------------------------------------------
 function ReceiptsVsExpendituresSection() {
+  const t = usePageT();
   return (
     <article className="rounded-sm border border-gray-200 bg-white p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-5 sm:flex-row sm:items-start">
         <div>
           <h3 className="text-xl font-bold text-gray-950">
-            Receipts vs. Expenditures
+            {t('Receipts vs. Expenditures')}
           </h3>
           <p className="mt-1 text-sm text-gray-600">
-            Statement of Receipts and Expenditures · compatible report pairs
-            only
+            {t(
+              'Statement of Receipts and Expenditures · compatible report pairs only'
+            )}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600">
@@ -281,17 +306,17 @@ function ReceiptsVsExpendituresSection() {
               className="h-3 w-3 rounded-sm bg-[#0066EB]"
               aria-hidden="true"
             />
-            Receipts
+            {t('Receipts')}
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span
               className="h-3 w-3 rounded-sm bg-slate-500"
               aria-hidden="true"
             />
-            Expenditures
+            {t('Expenditures')}
           </span>
           <span className="rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-            Source-reported amount · unit not stated
+            {t('Source-reported amount · unit not stated')}
           </span>
         </div>
       </div>
@@ -313,12 +338,12 @@ function ReceiptsVsExpendituresSection() {
                   {periodLabel(entry.report)}
                   {entry.report.is_cumulative && (
                     <span className="ml-1.5 inline-block font-normal text-gray-500">
-                      (cumulative YTD)
+                      {t('(cumulative YTD)')}
                     </span>
                   )}
                 </span>
                 <span className="text-[11px] text-gray-500">
-                  Compare within this report only
+                  {t('Compare within this report only')}
                 </span>
               </div>
 
@@ -327,7 +352,7 @@ function ReceiptsVsExpendituresSection() {
                 <div>
                   <div className="flex items-baseline justify-between gap-2 text-xs">
                     <span className="font-semibold text-gray-700">
-                      Receipts
+                      {t('Receipts')}
                     </span>
                     <span className="font-bold tabular-nums text-gray-950">
                       {formatUnstatedAmount(entry.receipt.amount)}
@@ -336,7 +361,13 @@ function ReceiptsVsExpendituresSection() {
                   <div
                     className="mt-1 h-3 w-full overflow-hidden rounded-sm bg-gray-200"
                     role="img"
-                    aria-label={`Receipts for ${periodLabel(entry.report)}: ${formatUnstatedAmount(entry.receipt.amount)}, unit not stated`}
+                    aria-label={t(
+                      'Receipts for {{report}}: {{amount}}, unit not stated',
+                      {
+                        report: periodLabel(entry.report),
+                        amount: formatUnstatedAmount(entry.receipt.amount),
+                      }
+                    )}
                   >
                     <div
                       className="h-full rounded-sm bg-[#0066EB]"
@@ -349,7 +380,7 @@ function ReceiptsVsExpendituresSection() {
                 <div>
                   <div className="flex items-baseline justify-between gap-2 text-xs">
                     <span className="font-semibold text-gray-700">
-                      Expenditures
+                      {t('Expenditures')}
                     </span>
                     <span className="font-bold tabular-nums text-gray-950">
                       {formatUnstatedAmount(entry.expenditure.amount)}
@@ -358,7 +389,13 @@ function ReceiptsVsExpendituresSection() {
                   <div
                     className="mt-1 h-3 w-full overflow-hidden rounded-sm bg-gray-200"
                     role="img"
-                    aria-label={`Expenditures for ${periodLabel(entry.report)}: ${formatUnstatedAmount(entry.expenditure.amount)}, unit not stated`}
+                    aria-label={t(
+                      'Expenditures for {{report}}: {{amount}}, unit not stated',
+                      {
+                        report: periodLabel(entry.report),
+                        amount: formatUnstatedAmount(entry.expenditure.amount),
+                      }
+                    )}
                   >
                     <div
                       className="h-full rounded-sm bg-slate-500"
@@ -375,14 +412,19 @@ function ReceiptsVsExpendituresSection() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
         <div>
           <span className="font-semibold text-gray-900">
-            What you’re seeing:{' '}
+            {t('What you’re seeing:')}
           </span>
-          Receipts and expenditures reported within the same source report.
+          {t(
+            'Receipts and expenditures reported within the same source report.'
+          )}
         </div>
         <div>
-          <span className="font-semibold text-gray-900">How to read it: </span>
-          Compare the two values within each report. Cumulative quarterly
-          reports are not added together.
+          <span className="font-semibold text-gray-900">
+            {t('How to read it:')}
+          </span>
+          {t(
+            'Compare the two values within each report. Cumulative quarterly reports are not added together.'
+          )}
         </div>
       </div>
     </article>
@@ -393,6 +435,7 @@ function ReceiptsVsExpendituresSection() {
 // Snapshot Component: Budget Authority (Responsive 1-col mobile / 2-col desktop)
 // ---------------------------------------------------------------------------
 function BudgetAuthoritySection() {
+  const t = usePageT();
   const budgetEntry = authorizedBudget[0];
   if (!budgetEntry) return null;
 
@@ -400,44 +443,50 @@ function BudgetAuthoritySection() {
     <article className="rounded-sm border border-gray-200 bg-white p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-5 sm:flex-row sm:items-start">
         <div>
-          <h3 className="text-xl font-bold text-gray-950">Budget Authority</h3>
+          <h3 className="text-xl font-bold text-gray-950">
+            {t('Budget Authority')}
+          </h3>
           <p className="mt-1 text-sm text-gray-600">
-            Annual General Fund · {periodLabel(budgetEntry.report)}
+            {t('Annual General Fund · {{report}}', {
+              report: periodLabel(budgetEntry.report),
+            })}
           </p>
         </div>
         <span className="self-start rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-          Source-reported amount · unit not stated
+          {t('Source-reported amount · unit not stated')}
         </span>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
         <div className="rounded-sm border border-gray-200/80 bg-[#F9FAFB] p-4 sm:p-5">
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
-            Authorized receipts — proposed
+            {t('Authorized receipts — proposed')}
           </span>
           <p className="mt-2 text-xl font-bold tabular-nums text-gray-950 sm:text-2xl lg:text-3xl break-words">
             {budgetEntry.authorized
               ? formatUnstatedAmount(budgetEntry.authorized.amount)
-              : 'Not reported'}
+              : t('Not reported')}
           </p>
           <p className="mt-2 text-xs text-gray-500">
-            Proposed budget authorization ceiling in official annual budget
-            report.
+            {t(
+              'Proposed budget authorization ceiling in official annual budget report.'
+            )}
           </p>
         </div>
 
         <div className="rounded-sm border border-gray-200/80 bg-[#F9FAFB] p-4 sm:p-5">
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
-            Authorized expenditures — proposed
+            {t('Authorized expenditures — proposed')}
           </span>
           <p className="mt-2 text-xl font-bold tabular-nums text-gray-950 sm:text-2xl lg:text-3xl break-words">
             {budgetEntry.appropriation
               ? formatUnstatedAmount(budgetEntry.appropriation.amount)
-              : 'Not reported'}
+              : t('Not reported')}
           </p>
           <p className="mt-2 text-xs text-gray-500">
-            Proposed expenditure appropriation ceiling in official annual budget
-            report.
+            {t(
+              'Proposed expenditure appropriation ceiling in official annual budget report.'
+            )}
           </p>
         </div>
       </div>
@@ -445,12 +494,12 @@ function BudgetAuthoritySection() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
         <div>
           <span className="font-semibold text-gray-900">
-            Important distinction:{' '}
+            {t('Important distinction:')}
           </span>
-          Budget authority, not actual receipts or spending.
+          {t('Budget authority, not actual receipts or spending.')}
         </div>
         <div className="text-gray-500">
-          Source-reported amount · unit not stated
+          {t('Source-reported amount · unit not stated')}
         </div>
       </div>
     </article>
@@ -461,6 +510,7 @@ function BudgetAuthoritySection() {
 // Chart Component: Ending Cash Balance (Responsive SVG Line Chart)
 // ---------------------------------------------------------------------------
 function EndingCashBalanceChart() {
+  const t = usePageT();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   const points = useMemo(() => {
@@ -511,14 +561,14 @@ function EndingCashBalanceChart() {
         <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-4 sm:flex-row sm:items-start">
           <div>
             <h3 className="text-lg font-bold text-gray-950">
-              Ending Cash Balance
+              {t('Ending Cash Balance')}
             </h3>
             <p className="mt-0.5 text-xs text-gray-600">
-              General Fund · comparable reported periods
+              {t('General Fund · comparable reported periods')}
             </p>
           </div>
           <span className="self-start rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-            Source-reported amount · unit not stated
+            {t('Source-reported amount · unit not stated')}
           </span>
         </div>
 
@@ -526,7 +576,7 @@ function EndingCashBalanceChart() {
         <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <span className="text-gray-600">
-              Selected period:{' '}
+              {t('Selected period:')}{' '}
               <strong className="text-gray-950">{activePoint?.period}</strong>
             </span>
             <span className="font-mono font-bold text-gray-950">
@@ -541,7 +591,9 @@ function EndingCashBalanceChart() {
             viewBox={`0 0 ${width} ${height}`}
             className="h-auto w-full max-w-full overflow-visible"
             role="img"
-            aria-label="Ending cash balance line chart showing General Fund balances over reported periods"
+            aria-label={t(
+              'Ending cash balance line chart showing General Fund balances over reported periods'
+            )}
           >
             {/* Subtle grid lines */}
             {[0, 0.33, 0.66, 1].map((ratio, i) => {
@@ -589,7 +641,10 @@ function EndingCashBalanceChart() {
                     onClick={() => setActiveIdx(idx)}
                     tabIndex={0}
                     onFocus={() => setActiveIdx(idx)}
-                    aria-label={`${c.period}: ${formatUnstatedAmount(c.amount)}`}
+                    aria-label={t('{{period}}: {{amount}}', {
+                      period: c.period,
+                      amount: formatUnstatedAmount(c.amount),
+                    })}
                   />
                   <text
                     x={c.x}
@@ -614,14 +669,19 @@ function EndingCashBalanceChart() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600">
         <p>
           <span className="font-semibold text-gray-900">
-            What you’re seeing:{' '}
+            {t('What you’re seeing:')}
           </span>
-          General Fund ending cash balances reported at comparable period ends.
+          {t(
+            'General Fund ending cash balances reported at comparable period ends.'
+          )}
         </p>
         <p className="mt-1">
-          <span className="font-semibold text-gray-900">How to read it: </span>
-          Each point is the reported ending balance for that period. Values are
-          not added together.
+          <span className="font-semibold text-gray-900">
+            {t('How to read it:')}
+          </span>
+          {t(
+            'Each point is the reported ending balance for that period. Values are not added together.'
+          )}
         </p>
       </div>
     </article>
@@ -632,6 +692,7 @@ function EndingCashBalanceChart() {
 // Chart Component: Outstanding Debt (Matching Responsive SVG Column Chart)
 // ---------------------------------------------------------------------------
 function OutstandingDebtChart() {
+  const t = usePageT();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   const points = useMemo(() => {
@@ -673,14 +734,14 @@ function OutstandingDebtChart() {
         <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-4 sm:flex-row sm:items-start">
           <div>
             <h3 className="text-lg font-bold text-gray-950">
-              Outstanding Debt
+              {t('Outstanding Debt')}
             </h3>
             <p className="mt-0.5 text-xs text-gray-600">
-              Citywide debt · point-in-time snapshots
+              {t('Citywide debt · point-in-time snapshots')}
             </p>
           </div>
           <span className="self-start rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-            Source-reported amount · unit not stated
+            {t('Source-reported amount · unit not stated')}
           </span>
         </div>
 
@@ -688,7 +749,7 @@ function OutstandingDebtChart() {
         <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <span className="text-gray-600">
-              Snapshot as of:{' '}
+              {t('Snapshot as of:')}{' '}
               <strong className="text-gray-950">{activePoint?.label}</strong>
             </span>
             <span className="font-mono font-bold text-gray-950">
@@ -703,7 +764,9 @@ function OutstandingDebtChart() {
             viewBox={`0 0 ${width} ${height}`}
             className="h-auto w-full max-w-full overflow-visible"
             role="img"
-            aria-label="Outstanding debt column chart showing point-in-time balances"
+            aria-label={t(
+              'Outstanding debt column chart showing point-in-time balances'
+            )}
           >
             {/* Subtle grid lines matching Ending Cash Balance */}
             {[0, 0.33, 0.66, 1].map((ratio, i) => {
@@ -754,7 +817,10 @@ function OutstandingDebtChart() {
                     onClick={() => setActiveIdx(idx)}
                     tabIndex={0}
                     onFocus={() => setActiveIdx(idx)}
-                    aria-label={`As of ${p.label}: ${formatUnstatedAmount(p.amount)}, unit not stated`}
+                    aria-label={t(
+                      'As of {{label}}: {{amount}}, unit not stated',
+                      { label: p.label, amount: formatUnstatedAmount(p.amount) }
+                    )}
                   />
                   <text
                     x={x + barW / 2}
@@ -775,13 +841,17 @@ function OutstandingDebtChart() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600">
         <p>
           <span className="font-semibold text-gray-900">
-            What you’re seeing:{' '}
+            {t('What you’re seeing:')}
           </span>
-          Outstanding debt reported as of specific dates.
+          {t('Outstanding debt reported as of specific dates.')}
         </p>
         <p className="mt-1">
-          <span className="font-semibold text-gray-900">How to read it: </span>
-          Each bar is an independent point-in-time balance. Do not sum the bars.
+          <span className="font-semibold text-gray-900">
+            {t('How to read it:')}
+          </span>
+          {t(
+            'Each bar is an independent point-in-time balance. Do not sum the bars.'
+          )}
         </p>
       </div>
     </article>
@@ -792,15 +862,16 @@ function OutstandingDebtChart() {
 // Chart Component: SEF Receipts vs. Disbursements (Grouped Bar Chart)
 // ---------------------------------------------------------------------------
 function SefUtilizationSection() {
+  const t = usePageT();
   return (
     <article className="rounded-sm border border-gray-200 bg-white p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-5 sm:flex-row sm:items-start">
         <div>
           <h3 className="text-xl font-bold text-gray-950">
-            SEF Receipts vs. Disbursements
+            {t('SEF Receipts vs. Disbursements')}
           </h3>
           <p className="mt-1 text-sm text-gray-600">
-            Special Education Fund only · compatible reported periods
+            {t('Special Education Fund only · compatible reported periods')}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600">
@@ -809,17 +880,17 @@ function SefUtilizationSection() {
               className="h-3 w-3 rounded-sm bg-[#0066EB]"
               aria-hidden="true"
             />
-            Receipts
+            {t('Receipts')}
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span
               className="h-3 w-3 rounded-sm bg-slate-500"
               aria-hidden="true"
             />
-            Disbursements
+            {t('Disbursements')}
           </span>
           <span className="rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-            Source-reported amount · unit not stated
+            {t('Source-reported amount · unit not stated')}
           </span>
         </div>
       </div>
@@ -846,7 +917,7 @@ function SefUtilizationSection() {
                 </span>
                 {entry.report.is_cumulative && (
                   <span className="text-[11px] text-gray-500">
-                    cumulative YTD
+                    {t('cumulative YTD')}
                   </span>
                 )}
               </div>
@@ -855,7 +926,7 @@ function SefUtilizationSection() {
                 {entry.receipt && (
                   <div>
                     <div className="flex items-baseline justify-between gap-2 text-xs">
-                      <span className="text-gray-600">Receipts</span>
+                      <span className="text-gray-600">{t('Receipts')}</span>
                       <span className="font-bold tabular-nums text-gray-950">
                         {formatUnstatedAmount(entry.receipt.amount)}
                       </span>
@@ -863,7 +934,10 @@ function SefUtilizationSection() {
                     <div
                       className="mt-1 h-2.5 w-full overflow-hidden rounded-sm bg-gray-200"
                       role="img"
-                      aria-label={`SEF Receipts for ${periodLabel(entry.report)}: ${formatUnstatedAmount(entry.receipt.amount)}`}
+                      aria-label={t('SEF Receipts for {{report}}: {{amount}}', {
+                        report: periodLabel(entry.report),
+                        amount: formatUnstatedAmount(entry.receipt.amount),
+                      })}
                     >
                       <div
                         className="h-full rounded-sm bg-[#0066EB]"
@@ -876,7 +950,9 @@ function SefUtilizationSection() {
                 {entry.disbursement && (
                   <div>
                     <div className="flex items-baseline justify-between gap-2 text-xs">
-                      <span className="text-gray-600">Disbursements</span>
+                      <span className="text-gray-600">
+                        {t('Disbursements')}
+                      </span>
                       <span className="font-bold tabular-nums text-gray-950">
                         {formatUnstatedAmount(entry.disbursement.amount)}
                       </span>
@@ -884,7 +960,15 @@ function SefUtilizationSection() {
                     <div
                       className="mt-1 h-2.5 w-full overflow-hidden rounded-sm bg-gray-200"
                       role="img"
-                      aria-label={`SEF Disbursements for ${periodLabel(entry.report)}: ${formatUnstatedAmount(entry.disbursement.amount)}`}
+                      aria-label={t(
+                        'SEF Disbursements for {{report}}: {{amount}}',
+                        {
+                          report: periodLabel(entry.report),
+                          amount: formatUnstatedAmount(
+                            entry.disbursement.amount
+                          ),
+                        }
+                      )}
                     >
                       <div
                         className="h-full rounded-sm bg-slate-500"
@@ -902,14 +986,19 @@ function SefUtilizationSection() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
         <div>
           <span className="font-semibold text-gray-900">
-            What you’re seeing:{' '}
+            {t('What you’re seeing:')}
           </span>
-          Receipts and disbursements reported for the Special Education Fund.
+          {t(
+            'Receipts and disbursements reported for the Special Education Fund.'
+          )}
         </div>
         <div>
-          <span className="font-semibold text-gray-900">How to read it: </span>
-          Compare within compatible periods only. Values are never combined with
-          the General Fund.
+          <span className="font-semibold text-gray-900">
+            {t('How to read it:')}
+          </span>
+          {t(
+            'Compare within compatible periods only. Values are never combined with the General Fund.'
+          )}
         </div>
       </div>
     </article>
@@ -920,6 +1009,7 @@ function SefUtilizationSection() {
 // Chart Component: LDRRMF Utilization (Compact Two-Period Comparison View)
 // ---------------------------------------------------------------------------
 function LdrrmfUtilizationCard() {
+  const t = usePageT();
   const row1 = ldrrmfUtilization[0]; // 2025 Q3
   const row2 = ldrrmfUtilization[1]; // 2026 Q2
 
@@ -934,14 +1024,14 @@ function LdrrmfUtilizationCard() {
         <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-4 sm:flex-row sm:items-start">
           <div>
             <h3 className="text-lg font-bold text-gray-950">
-              LDRRMF Utilization
+              {t('LDRRMF Utilization')}
             </h3>
             <p className="mt-0.5 text-xs text-gray-600">
-              Derived within each report as utilization ÷ appropriation
+              {t('Derived within each report as utilization ÷ appropriation')}
             </p>
           </div>
           <span className="self-start rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-            0–100% scale
+            {t('0–100% scale')}
           </span>
         </div>
 
@@ -949,7 +1039,7 @@ function LdrrmfUtilizationCard() {
         <div className="mt-4 grid grid-cols-1 gap-2 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs sm:grid-cols-3 sm:gap-3">
           <div>
             <span className="block text-[11px] text-gray-500">
-              Latest reported
+              {t('Latest reported')}
             </span>
             <span className="font-semibold text-gray-950">{row2.percent}%</span>
             <span className="ml-1 text-gray-500">
@@ -958,7 +1048,7 @@ function LdrrmfUtilizationCard() {
           </div>
           <div>
             <span className="block text-[11px] text-gray-500">
-              Previous reported
+              {t('Previous reported')}
             </span>
             <span className="font-semibold text-gray-950">{row1.percent}%</span>
             <span className="ml-1 text-gray-500">
@@ -966,7 +1056,9 @@ function LdrrmfUtilizationCard() {
             </span>
           </div>
           <div>
-            <span className="block text-[11px] text-gray-500">Change</span>
+            <span className="block text-[11px] text-gray-500">
+              {t('Change')}
+            </span>
             <span className="font-mono font-bold text-gray-900">
               {deltaFormatted}
             </span>
@@ -997,7 +1089,10 @@ function LdrrmfUtilizationCard() {
             <div
               className="mt-2 h-3.5 w-full overflow-hidden rounded-sm bg-gray-200"
               role="img"
-              aria-label={`${periodLabel(row1.report)} utilization: ${row1.percent} percent`}
+              aria-label={t('{{report}} utilization: {{percent}} percent', {
+                report: periodLabel(row1.report),
+                percent: row1.percent,
+              })}
             >
               <div
                 className="h-full rounded-sm bg-slate-400"
@@ -1006,8 +1101,10 @@ function LdrrmfUtilizationCard() {
             </div>
             {row1.utilization && row1.appropriation && (
               <p className="mt-1.5 text-[11px] text-gray-500 truncate">
-                {formatUnstatedAmount(row1.utilization.amount)} utilization ÷{' '}
-                {formatUnstatedAmount(row1.appropriation.amount)} appropriation
+                {t('{{amount}} utilization ÷ {{amount2}} appropriation', {
+                  amount: formatUnstatedAmount(row1.utilization.amount),
+                  amount2: formatUnstatedAmount(row1.appropriation.amount),
+                })}
               </p>
             )}
           </div>
@@ -1025,7 +1122,10 @@ function LdrrmfUtilizationCard() {
             <div
               className="mt-2 h-3.5 w-full overflow-hidden rounded-sm bg-gray-200"
               role="img"
-              aria-label={`${periodLabel(row2.report)} utilization: ${row2.percent} percent`}
+              aria-label={t('{{report}} utilization: {{percent}} percent', {
+                report: periodLabel(row2.report),
+                percent: row2.percent,
+              })}
             >
               <div
                 className="h-full rounded-sm bg-[#0066EB]"
@@ -1034,8 +1134,10 @@ function LdrrmfUtilizationCard() {
             </div>
             {row2.utilization && row2.appropriation && (
               <p className="mt-1.5 text-[11px] text-gray-500 truncate">
-                {formatUnstatedAmount(row2.utilization.amount)} utilization ÷{' '}
-                {formatUnstatedAmount(row2.appropriation.amount)} appropriation
+                {t('{{amount}} utilization ÷ {{amount2}} appropriation', {
+                  amount: formatUnstatedAmount(row2.utilization.amount),
+                  amount2: formatUnstatedAmount(row2.appropriation.amount),
+                })}
               </p>
             )}
           </div>
@@ -1045,16 +1147,19 @@ function LdrrmfUtilizationCard() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600">
         <p>
           <span className="font-semibold text-gray-900">
-            What you’re seeing:{' '}
+            {t('What you’re seeing:')}
           </span>
-          Reported LDRRMF utilization as a share of appropriation for each
-          reported period.
+          {t(
+            'Reported LDRRMF utilization as a share of appropriation for each reported period.'
+          )}
         </p>
         <p className="mt-1">
-          <span className="font-semibold text-gray-900">How to read it: </span>
-          Each percentage is derived within its own source report. Horizontal
-          bars compare reported utilization on a 0–100% scale without implying
-          an uninterrupted trend between distant quarters.
+          <span className="font-semibold text-gray-900">
+            {t('How to read it:')}
+          </span>
+          {t(
+            'Each percentage is derived within its own source report. Horizontal bars compare reported utilization on a 0–100% scale without implying an uninterrupted trend between distant quarters.'
+          )}
         </p>
       </div>
     </article>
@@ -1065,6 +1170,7 @@ function LdrrmfUtilizationCard() {
 // Chart Component: 20% NTA/IRA Utilization (Standard Percentage Line Chart)
 // ---------------------------------------------------------------------------
 function NtaIraUtilizationChart() {
+  const t = usePageT();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   const points = useMemo(() => {
@@ -1106,14 +1212,14 @@ function NtaIraUtilizationChart() {
         <div className="flex flex-col justify-between gap-3 border-b border-gray-100 pb-4 sm:flex-row sm:items-start">
           <div>
             <h3 className="text-lg font-bold text-gray-950">
-              20% NTA/IRA Utilization
+              {t('20% NTA/IRA Utilization')}
             </h3>
             <p className="mt-0.5 text-xs text-gray-600">
-              Derived within each report as utilization ÷ appropriation
+              {t('Derived within each report as utilization ÷ appropriation')}
             </p>
           </div>
           <span className="self-start rounded-sm border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-gray-600">
-            0–100% scale
+            {t('0–100% scale')}
           </span>
         </div>
 
@@ -1121,7 +1227,7 @@ function NtaIraUtilizationChart() {
         <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <span className="text-gray-600">
-              Period:{' '}
+              {t('Period:')}{' '}
               <strong className="text-gray-950">{activePoint?.period}</strong>
             </span>
             <span className="font-mono text-sm font-bold text-[#0066EB]">
@@ -1136,7 +1242,7 @@ function NtaIraUtilizationChart() {
             viewBox={`0 0 ${width} ${height}`}
             className="h-auto w-full max-w-full overflow-visible"
             role="img"
-            aria-label="20% NTA/IRA utilization percentage line chart"
+            aria-label={t('20% NTA/IRA utilization percentage line chart')}
           >
             {/* Horizontal Grid lines at 0%, 25%, 50%, 75%, 100% */}
             {[0, 25, 50, 75, 100].map(pct => {
@@ -1195,7 +1301,10 @@ function NtaIraUtilizationChart() {
                     onClick={() => setActiveIdx(idx)}
                     tabIndex={0}
                     onFocus={() => setActiveIdx(idx)}
-                    aria-label={`${c.period}: ${c.percent}%`}
+                    aria-label={t('{{period}}: {{percent}}%', {
+                      period: c.period,
+                      percent: c.percent,
+                    })}
                   />
                   <text
                     x={c.x}
@@ -1220,15 +1329,19 @@ function NtaIraUtilizationChart() {
       <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600">
         <p>
           <span className="font-semibold text-gray-900">
-            What you’re seeing:{' '}
+            {t('What you’re seeing:')}
           </span>
-          Reported 20% NTA/IRA utilization as a share of appropriation across
-          reported periods.
+          {t(
+            'Reported 20% NTA/IRA utilization as a share of appropriation across reported periods.'
+          )}
         </p>
         <p className="mt-1">
-          <span className="font-semibold text-gray-900">How to read it: </span>
-          Each percentage is derived within its own source report on a 0–100%
-          scale.
+          <span className="font-semibold text-gray-900">
+            {t('How to read it:')}
+          </span>
+          {t(
+            'Each percentage is derived within its own source report on a 0–100% scale.'
+          )}
         </p>
       </div>
     </article>
@@ -1243,6 +1356,7 @@ type YearFilter = 'ALL' | number;
 const REPORTS_PER_PAGE = 10;
 
 export default function CityFinances() {
+  const t = usePageT();
   const [query, setQuery] = useState('');
   const [reportType, setReportType] = useState<ReportTypeFilter>('ALL');
   const [year, setYear] = useState<YearFilter>('ALL');
@@ -1276,13 +1390,13 @@ export default function CityFinances() {
         (report.fund_name_exact ?? '')
           .toLowerCase()
           .includes(normalizedQuery) ||
-        formatReportType(report.report_type)
+        formatReportType(report.report_type, t)
           .toLowerCase()
           .includes(normalizedQuery) ||
-        formatFundDisplay(report).toLowerCase().includes(normalizedQuery);
+        formatFundDisplay(report, t).toLowerCase().includes(normalizedQuery);
       return matchesType && matchesYear && matchesQuery;
     });
-  }, [query, reportType, year]);
+  }, [query, reportType, year, t]);
 
   function resetFilters() {
     setQuery('');
@@ -1311,25 +1425,24 @@ export default function CityFinances() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Transparency', href: '/transparency' },
-              { label: 'City Finances' },
+              { label: t('Home'), href: '/' },
+              { label: t('Transparency'), href: '/transparency' },
+              { label: t('City Finances') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                TRANSPARENCY · CITY FINANCES
+                {t('TRANSPARENCY · CITY FINANCES')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                City Finances
+                {t('City Finances')}
               </h1>
               <p className="mt-4 text-base leading-7 text-gray-700 sm:mt-5 md:text-lg">
-                Explore selected official aggregate City finance reports and
-                source-reported observations, with comparisons shown only where
-                fund, period, accounting basis, and reporting treatment are
-                compatible.
+                {t(
+                  'Explore selected official aggregate City finance reports and source-reported observations, with comparisons shown only where fund, period, accounting basis, and reporting treatment are compatible.'
+                )}
               </p>
 
               {/* CTA Row */}
@@ -1338,7 +1451,7 @@ export default function CityFinances() {
                   href="#comparable-views"
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-sm bg-[#0066EB] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
                 >
-                  Explore comparable views
+                  {t('Explore comparable views')}
                   <ArrowDown className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </a>
 
@@ -1346,7 +1459,7 @@ export default function CityFinances() {
                   href="#report-catalog"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-gray-950"
                 >
-                  Browse official reports
+                  {t('Browse official reports')}
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </a>
               </div>
@@ -1355,16 +1468,20 @@ export default function CityFinances() {
             {/* Right-Side Scope Module */}
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                COVERAGE SCOPE
+                {t('COVERAGE SCOPE')}
               </p>
               <h2 className="mt-1 text-base font-bold text-gray-950">
-                Verified Partial Coverage
+                {t('Verified Partial Coverage')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                {metadata.reportCount} official reports and{' '}
-                {metadata.observationCount} observations across{' '}
-                {reportTypes.length} report families. This is not an audited
-                financial statement or a complete history of City finances.
+                {t(
+                  '{{reportCount}} official reports and {{observationCount}} observations across {{length}} report families. This is not an audited financial statement or a complete history of City finances.',
+                  {
+                    reportCount: metadata.reportCount,
+                    observationCount: metadata.observationCount,
+                    length: reportTypes.length,
+                  }
+                )}
               </p>
             </aside>
           </div>
@@ -1378,33 +1495,41 @@ export default function CityFinances() {
                 <dd className="text-2xl font-extrabold tabular-nums text-gray-950 sm:text-3xl">
                   {metadata.reportCount}
                 </dd>
-                <dt className="mt-1 text-sm text-gray-600">Reports</dt>
+                <dt className="mt-1 text-sm text-gray-600">{t('Reports')}</dt>
               </div>
 
               <div className="sm:px-6">
                 <dd className="text-2xl font-extrabold tabular-nums text-gray-950 sm:text-3xl">
                   {metadata.observationCount}
                 </dd>
-                <dt className="mt-1 text-sm text-gray-600">Observations</dt>
+                <dt className="mt-1 text-sm text-gray-600">
+                  {t('Observations')}
+                </dt>
               </div>
 
               <div className="sm:px-6">
                 <dd className="text-2xl font-extrabold tabular-nums text-gray-950 sm:text-3xl">
                   {reportTypes.length}
                 </dd>
-                <dt className="mt-1 text-sm text-gray-600">Report families</dt>
+                <dt className="mt-1 text-sm text-gray-600">
+                  {t('Report families')}
+                </dt>
               </div>
 
               <div className="sm:pl-6">
                 <dd className="text-2xl font-extrabold tabular-nums text-gray-950 sm:text-3xl">
                   {Math.min(...years)}–{Math.max(...years)}
                 </dd>
-                <dt className="mt-1 text-sm text-gray-600">Reporting years</dt>
+                <dt className="mt-1 text-sm text-gray-600">
+                  {t('Reporting years')}
+                </dt>
               </div>
             </dl>
 
             <p className="mt-4 text-xs text-gray-500">
-              Last verified: {formatIsoDate(metadata.lastVerified)}
+              {t('Last verified: {{lastVerified}}', {
+                lastVerified: formatIsoDate(metadata.lastVerified),
+              })}
             </p>
           </div>
         </div>
@@ -1419,46 +1544,46 @@ export default function CityFinances() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('READING GUIDE')}</p>
             <h2
               id="reading-guide-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              How to Read These Figures
+              {t('How to Read These Figures')}
             </h2>
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
             <div className="rounded-sm border border-gray-200 bg-white p-4 sm:p-5">
               <h3 className="text-base font-bold text-gray-950">
-                Source-Reported Amounts
+                {t('Source-Reported Amounts')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Source documents do not state a normalized currency or unit.
-                Amounts remain plain source-reported numbers, never assumed to
-                be PHP, pesos, thousands, or millions.
+                {t(
+                  'Source documents do not state a normalized currency or unit. Amounts remain plain source-reported numbers, never assumed to be PHP, pesos, thousands, or millions.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-4 sm:p-5">
               <h3 className="text-base font-bold text-gray-950">
-                Compatibility Matters
+                {t('Compatibility Matters')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Fund, period, accounting basis, and reporting treatment must
-                match before any comparison is valid. Unaudited reports and
-                separate funds are kept strictly distinct.
+                {t(
+                  'Fund, period, accounting basis, and reporting treatment must match before any comparison is valid. Unaudited reports and separate funds are kept strictly distinct.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-4 sm:p-5">
               <h3 className="text-base font-bold text-gray-950">
-                Cumulative Does Not Mean Additive
+                {t('Cumulative Does Not Mean Additive')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Cumulative year-to-date quarterly reports are snapshots through
-                each quarter. They are not additive and are{' '}
-                {'never summed into an annual or citywide total'}.
+                {t(
+                  'Cumulative year-to-date quarterly reports are snapshots through each quarter. They are not additive and are never summed into an annual or citywide total.'
+                )}
               </p>
             </div>
           </div>
@@ -1472,16 +1597,16 @@ export default function CityFinances() {
               />
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  STRICT COMPARABILITY SAFEGUARDS
+                  {t('STRICT COMPARABILITY SAFEGUARDS')}
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-900">
-                  {metadata.overallPublicLimitation}
+                  {getFinanceOverallPublicLimitationDisplay(t)}
                 </p>
                 <ul className="mt-3 grid grid-cols-1 gap-1.5 text-xs text-gray-600 sm:grid-cols-2">
                   {metadata.prohibitedComparisons.map((item, idx) => (
                     <li key={idx} className="flex items-baseline gap-2">
                       <span className="text-gray-400">•</span>
-                      <span>{formatProhibitedComparison(item)}</span>
+                      <span>{formatProhibitedComparison(item, t)}</span>
                     </li>
                   ))}
                 </ul>
@@ -1501,16 +1626,19 @@ export default function CityFinances() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">COMPARABLE VIEWS</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('COMPARABLE VIEWS')}
+            </p>
             <h2
               id="comparable-views-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Financial Views Supported by the Source Data
+              {t('Financial Views Supported by the Source Data')}
             </h2>
             <p className="mt-3 text-base text-gray-600">
-              Only pre-vetted compatible series are visualized below. Each view
-              explains exactly what can and cannot be inferred.
+              {t(
+                'Only pre-vetted compatible series are visualized below. Each view explains exactly what can and cannot be inferred.'
+              )}
             </p>
           </div>
 
@@ -1549,16 +1677,17 @@ export default function CityFinances() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">SOURCE REPORTS</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('SOURCE REPORTS')}</p>
             <h2
               id="catalog-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Official Report Catalog
+              {t('Official Report Catalog')}
             </h2>
             <p className="mt-3 text-base text-gray-600">
-              Browse every verified source report used in the City Finances
-              collection.
+              {t(
+                'Browse every verified source report used in the City Finances collection.'
+              )}
             </p>
           </div>
 
@@ -1567,7 +1696,7 @@ export default function CityFinances() {
             <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-[minmax(12rem,1fr)_13rem_10rem_auto] md:items-end">
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold text-gray-700">
-                  Search Title or Fund
+                  {t('Search Title or Fund')}
                 </span>
                 <span className="relative block">
                   <Search
@@ -1581,7 +1710,7 @@ export default function CityFinances() {
                       setQuery(event.target.value);
                       setPage(1);
                     }}
-                    placeholder="e.g. SEF, LDRRMF, cash flow"
+                    placeholder={t('e.g. SEF, LDRRMF, cash flow')}
                     className="min-h-11 w-full rounded-sm border border-gray-300 bg-white py-2 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   />
                 </span>
@@ -1589,7 +1718,7 @@ export default function CityFinances() {
 
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold text-gray-700">
-                  Report Type
+                  {t('Report Type')}
                 </span>
                 <select
                   value={reportType}
@@ -1599,10 +1728,10 @@ export default function CityFinances() {
                   }}
                   className="min-h-11 w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  <option value="ALL">All types</option>
+                  <option value="ALL">{t('All types')}</option>
                   {reportTypes.map(type => (
                     <option key={type} value={type}>
-                      {formatReportType(type)}
+                      {formatReportType(type, t)}
                     </option>
                   ))}
                 </select>
@@ -1610,7 +1739,7 @@ export default function CityFinances() {
 
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold text-gray-700">
-                  Year
+                  {t('Year')}
                 </span>
                 <select
                   value={year}
@@ -1624,7 +1753,7 @@ export default function CityFinances() {
                   }}
                   className="min-h-11 w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  <option value="ALL">All years</option>
+                  <option value="ALL">{t('All years')}</option>
                   {years.map(y => (
                     <option key={y} value={y}>
                       {y}
@@ -1640,7 +1769,7 @@ export default function CityFinances() {
                 className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-sm border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] disabled:cursor-not-allowed disabled:opacity-45"
               >
                 <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                Reset
+                {t('Reset')}
               </button>
             </div>
           </div>
@@ -1649,16 +1778,19 @@ export default function CityFinances() {
             className="mt-4 text-xs font-semibold text-gray-600"
             aria-live="polite"
           >
-            Showing {filteredReports.length} of {metadata.reportCount} reports
+            {t('Showing {{length}} of {{reportCount}} reports', {
+              length: filteredReports.length,
+              reportCount: metadata.reportCount,
+            })}
           </p>
 
           {filteredReports.length === 0 ? (
             <div className="mt-4 rounded-sm border border-dashed border-gray-300 bg-white px-5 py-12 text-center">
               <p className="font-semibold text-gray-950">
-                No report matches these filters
+                {t('No report matches these filters')}
               </p>
               <p className="mt-1 text-sm text-gray-600">
-                Try a different search term or reset the filters.
+                {t('Try a different search term or reset the filters.')}
               </p>
             </div>
           ) : (
@@ -1669,22 +1801,22 @@ export default function CityFinances() {
                   <thead className="border-b border-gray-200 bg-gray-50/75 text-xs uppercase tracking-wider text-gray-600">
                     <tr>
                       <th scope="col" className="px-4 py-3 font-semibold">
-                        Report
+                        {t('Report')}
                       </th>
                       <th scope="col" className="px-4 py-3 font-semibold">
-                        Type
+                        {t('Type')}
                       </th>
                       <th scope="col" className="px-4 py-3 font-semibold">
-                        Fund
+                        {t('Fund')}
                       </th>
                       <th scope="col" className="px-4 py-3 font-semibold">
-                        Period
+                        {t('Period')}
                       </th>
                       <th scope="col" className="px-4 py-3 font-semibold">
-                        File
+                        {t('File')}
                       </th>
                       <th scope="col" className="px-4 py-3 font-semibold">
-                        Source
+                        {t('Source')}
                       </th>
                     </tr>
                   </thead>
@@ -1700,10 +1832,10 @@ export default function CityFinances() {
                             {report.report_title_exact}
                           </td>
                           <td className="whitespace-nowrap px-4 py-3 text-gray-600">
-                            {formatReportType(report.report_type)}
+                            {formatReportType(report.report_type, t)}
                           </td>
                           <td className="max-w-[14rem] px-4 py-3 text-gray-600">
-                            {formatFundDisplay(report)}
+                            {formatFundDisplay(report, t)}
                           </td>
                           <td className="whitespace-nowrap px-4 py-3 text-gray-600">
                             {periodLabel(report)}
@@ -1719,10 +1851,16 @@ export default function CityFinances() {
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`Open the official page for ${report.report_title_exact} (opens in a new tab)`}
+                                aria-label={t(
+                                  'Open the official page for {{report_title_exact}} (opens in a new tab)',
+                                  {
+                                    report_title_exact:
+                                      report.report_title_exact,
+                                  }
+                                )}
                                 className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
                               >
-                                View official page
+                                {t('View official page')}
                                 <ExternalLink
                                   className="h-3 w-3 shrink-0"
                                   aria-hidden="true"
@@ -1732,10 +1870,19 @@ export default function CityFinances() {
                                 href={report.official_attachment_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`Open the official ${report.file_type} attachment for ${report.report_title_exact} (opens in a new tab)`}
+                                aria-label={t(
+                                  'Open the official {{file_type}} attachment for {{report_title_exact}} (opens in a new tab)',
+                                  {
+                                    file_type: report.file_type,
+                                    report_title_exact:
+                                      report.report_title_exact,
+                                  }
+                                )}
                                 className="inline-flex items-center gap-1 text-xs text-gray-600 hover:text-gray-950"
                               >
-                                Open {report.file_type}
+                                {t('Open {{file_type}}', {
+                                  file_type: report.file_type,
+                                })}
                                 <ExternalLink
                                   className="h-3 w-3 shrink-0"
                                   aria-hidden="true"
@@ -1766,16 +1913,16 @@ export default function CityFinances() {
                       </div>
                       <div className="grid grid-cols-1 gap-1 text-xs text-gray-600 sm:grid-cols-2">
                         <div>
-                          <span className="text-gray-400">Type: </span>
-                          {formatReportType(report.report_type)}
+                          <span className="text-gray-400">{t('Type:')}</span>
+                          {formatReportType(report.report_type, t)}
                         </div>
                         <div>
-                          <span className="text-gray-400">Period: </span>
+                          <span className="text-gray-400">{t('Period:')}</span>
                           {periodLabel(report)}
                         </div>
                         <div className="sm:col-span-2">
-                          <span className="text-gray-400">Fund: </span>
-                          {formatFundDisplay(report)}
+                          <span className="text-gray-400">{t('Fund:')}</span>
+                          {formatFundDisplay(report, t)}
                         </div>
                       </div>
                       <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-gray-100 text-xs">
@@ -1785,7 +1932,7 @@ export default function CityFinances() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 font-semibold text-[#0066EB]"
                         >
-                          View official page
+                          {t('View official page')}
                           <ExternalLink
                             className="h-3 w-3"
                             aria-hidden="true"
@@ -1797,7 +1944,9 @@ export default function CityFinances() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 text-gray-600"
                         >
-                          Open {report.file_type}
+                          {t('Open {{file_type}}', {
+                            file_type: report.file_type,
+                          })}
                           <ExternalLink
                             className="h-3 w-3"
                             aria-hidden="true"
@@ -1815,7 +1964,7 @@ export default function CityFinances() {
           {filteredReports.length > 0 && totalPages > 1 && (
             <nav
               className="mt-6 flex items-center justify-between gap-3 border-t border-gray-200 pt-4"
-              aria-label="Official report catalog pagination"
+              aria-label={t('Official report catalog pagination')}
             >
               <button
                 type="button"
@@ -1824,10 +1973,13 @@ export default function CityFinances() {
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-45"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                Previous
+                {t('Previous')}
               </button>
               <span className="text-xs text-gray-600" aria-hidden="true">
-                Page {currentPage} of {totalPages}
+                {t('Page {{currentPage}} of {{totalPages}}', {
+                  currentPage,
+                  totalPages,
+                })}
               </span>
               <button
                 type="button"
@@ -1837,7 +1989,7 @@ export default function CityFinances() {
                 disabled={currentPage >= totalPages}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-45"
               >
-                Next
+                {t('Next')}
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </nav>
@@ -1854,57 +2006,60 @@ export default function CityFinances() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">INTERPRETATION</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('INTERPRETATION')}</p>
             <h2
               id="methodology-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              How to Interpret the Finance Data
+              {t('How to Interpret the Finance Data')}
             </h2>
           </div>
 
           <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
             <div className="rounded-sm border border-gray-200 bg-[#F9FAFB] p-4 sm:p-5">
               <h3 className="text-base font-bold text-gray-950">
-                Comparable Only When Compatible
+                {t('Comparable Only When Compatible')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Each observation retains the accounting basis, fund, period, and
-                reporting treatment of its source document. Unaudited quarterly
-                figures are never combined with annual statements, and distinct
-                funds are never merged.
+                {t(
+                  'Each observation retains the accounting basis, fund, period, and reporting treatment of its source document. Unaudited quarterly figures are never combined with annual statements, and distinct funds are never merged.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-[#F9FAFB] p-4 sm:p-5">
               <h3 className="text-base font-bold text-gray-950">
-                No Assumed Currency or Unit
+                {t('No Assumed Currency or Unit')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Because source documents omit explicit currency and unit
-                specifications, every figure is presented strictly as a
-                source-reported number without inferring ₱, PHP, pesos,
-                thousands, or millions.
+                {t(
+                  'Because source documents omit explicit currency and unit specifications, every figure is presented strictly as a source-reported number without inferring ₱, PHP, pesos, thousands, or millions.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-[#F9FAFB] p-4 sm:p-5">
               <h3 className="text-base font-bold text-gray-950">
-                Separate From Project Spending
+                {t('Separate From Project Spending')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                The {metadata.observationCount} aggregate finance observations
-                must never be merged with the 298 project-utilization
-                observations published under Project Cost &amp; Utilization.
-                Cumulative year-to-date quarters are{' '}
-                {'never summed into an annual or citywide total'}.
+                {t(
+                  'The {{observationCount}} aggregate finance observations must never be merged with the {{projectCostUtilizationCount}} project-utilization observations published under Project Cost & Utilization. Cumulative year-to-date quarters are never summed into an annual or citywide total.',
+                  {
+                    observationCount: metadata.observationCount,
+                    projectCostUtilizationCount:
+                      projectCostUtilizationRecordCount,
+                  }
+                )}
               </p>
             </div>
           </div>
 
           {/* Privacy Boundary */}
           <div className="mt-6 sm:mt-8 rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5 text-xs leading-relaxed text-gray-600">
-            <p className="font-semibold text-gray-900">Privacy boundary:</p>
+            <p className="font-semibold text-gray-900">
+              {t('Privacy boundary:')}
+            </p>
             <p className="mt-1">{metadata.privacyBoundary}</p>
           </div>
         </div>
@@ -1918,12 +2073,14 @@ export default function CityFinances() {
         aria-labelledby="explore-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="explore-heading"
             className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -1933,18 +2090,19 @@ export default function CityFinances() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Transparency
+                  {t('Transparency')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Full Disclosure Reports
+                  {t('Full Disclosure Reports')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  DILG Full Disclosure Policy portal documents and statutory
-                  compliance reports.
+                  {t(
+                    'DILG Full Disclosure Policy portal documents and statutory compliance reports.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View reports
+                {t('View reports')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -1955,18 +2113,19 @@ export default function CityFinances() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Projects
+                  {t('Projects')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Project Cost &amp; Utilization
+                  {t('Project Cost & Utilization')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Detailed cost-utilization and completion metrics for verified
-                  City projects.
+                  {t(
+                    'Detailed cost-utilization and completion metrics for verified City projects.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View project statistics
+                {t('View project statistics')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -1977,18 +2136,19 @@ export default function CityFinances() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Provenance
+                  {t('Provenance')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Data Sources
+                  {t('Data Sources')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Complete directory of primary government portals, document
-                  origins, and verification links.
+                  {t(
+                    'Complete directory of primary government portals, document origins, and verification links.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View source directory
+                {t('View source directory')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -1999,18 +2159,19 @@ export default function CityFinances() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Methodology
+                  {t('Methodology')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Verification Methodology
+                  {t('Verification Methodology')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Standards and criteria used for document classification,
-                  reconciliation, and audit safeguards.
+                  {t(
+                    'Standards and criteria used for document classification, reconciliation, and audit safeguards.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Read methodology
+                {t('Read methodology')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>

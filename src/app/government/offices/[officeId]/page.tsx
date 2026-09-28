@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import Link from '../../../../components/i18n/LocaleLink';
 import {
   Building2,
   CalendarCheck2,
@@ -19,13 +19,16 @@ import {
   getParentOffice,
 } from '../../../../data/civic/government';
 import { buildPageMetadata } from '../../../../lib/metadata';
+import { getPageT } from '../../../../i18n/server';
+import { INTL_LOCALES } from '../../../../i18n/locale';
+import type { LanguageType } from '../../../../types';
 
 // Unknown office IDs call notFound() (a real HTTP 404).
 
 const metadata = getCityOfficesMetadata();
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-PH', {
+function formatDate(value: string, locale: LanguageType) {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -49,10 +52,15 @@ export async function generateMetadata({
   const office = getCityOfficeById(officeId);
   if (!office) return {};
 
+  const { t, locale } = await getPageT('government-offices-detail');
   return buildPageMetadata({
     title: office.office_name,
-    description: `Published office directory record for ${office.office_name} in the City of San Fernando, Pampanga.`,
+    description: t(
+      'Published office directory record for {{name}} in the City of San Fernando, Pampanga.',
+      { name: office.office_name }
+    ),
     path: `/government/offices/${office.office_id}`,
+    locale,
   });
 }
 
@@ -61,6 +69,7 @@ export default async function GovernmentOfficeDetailPage({
 }: {
   params: Promise<{ officeId: string }>;
 }) {
+  const { t, locale } = await getPageT('government-offices-detail');
   const { officeId } = await params;
   const office = getCityOfficeById(officeId);
 
@@ -87,9 +96,9 @@ export default async function GovernmentOfficeDetailPage({
           <Breadcrumbs
             className="mb-8"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Government', href: '/government' },
-              { label: 'City Offices', href: '/government/offices' },
+              { label: t('Home'), href: '/' },
+              { label: t('Government'), href: '/government' },
+              { label: t('City Offices'), href: '/government/offices' },
               { label: office.office_name },
             ]}
           />
@@ -109,17 +118,19 @@ export default async function GovernmentOfficeDetailPage({
             </div>
             {office.alternate_names?.length ? (
               <p className="mt-4 text-sm leading-6 text-gray-700">
-                Also published as: {office.alternate_names.join(', ')}
+                {t('Also published as: {{join}}', {
+                  join: office.alternate_names.join(', '),
+                })}
               </p>
             ) : null}
             {office.name_status && (
               <p className="mt-3 text-sm leading-6 text-gray-700">
-                Naming status: Alternate current usage
+                {t('Naming status: Alternate current usage')}
               </p>
             )}
             {office.organization_status && (
               <p className="mt-3 text-sm leading-6 text-gray-700">
-                Organization status: Possible reorganization
+                {t('Organization status: Possible reorganization')}
               </p>
             )}
           </div>
@@ -131,15 +142,17 @@ export default async function GovernmentOfficeDetailPage({
           {(parent || children.length > 0) && (
             <section className="rounded-xl bg-white p-5 shadow-[0_8px_28px_rgba(0,41,94,0.08)] md:p-7">
               <h2 className="text-2xl font-bold text-gray-900">
-                Verified office relationships
+                {t('Verified office relationships')}
               </h2>
               <p className="mt-2 text-sm leading-6 text-gray-700">
-                Only relationships published in the current directory are shown.
+                {t(
+                  'Only relationships published in the current directory are shown.'
+                )}
               </p>
               {parent && (
                 <div className="mt-5">
                   <h3 className="text-sm font-semibold text-gray-900">
-                    Parent office
+                    {t('Parent office')}
                   </h3>
                   <Link
                     className="mt-1 inline-flex text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
@@ -152,7 +165,7 @@ export default async function GovernmentOfficeDetailPage({
               {children.length > 0 && (
                 <div className="mt-5">
                   <h3 className="text-sm font-semibold text-gray-900">
-                    Verified subunits
+                    {t('Verified subunits')}
                   </h3>
                   <ul className="mt-2 space-y-2">
                     {children.map(child => (
@@ -177,7 +190,7 @@ export default async function GovernmentOfficeDetailPage({
             office.emergency_hotlines?.length) && (
             <section className="rounded-xl bg-white p-5 shadow-[0_8px_28px_rgba(0,41,94,0.08)] md:p-7">
               <h2 className="text-2xl font-bold text-gray-900">
-                Location and contact
+                {t('Location and contact')}
               </h2>
               <div className="mt-5 grid gap-6 sm:grid-cols-2">
                 {office.physical_address && (
@@ -187,7 +200,9 @@ export default async function GovernmentOfficeDetailPage({
                       aria-hidden="true"
                     />
                     <div>
-                      <p className="font-semibold text-gray-900">Location</p>
+                      <p className="font-semibold text-gray-900">
+                        {t('Location')}
+                      </p>
                       <p className="text-gray-700">{office.physical_address}</p>
                     </div>
                   </div>
@@ -200,7 +215,7 @@ export default async function GovernmentOfficeDetailPage({
                     />
                     <div>
                       <p className="font-semibold text-gray-900">
-                        Office phone
+                        {t('Office phone')}
                       </p>
                       <a
                         className="text-primary-700 underline decoration-primary-300 underline-offset-4 hover:text-primary-900"
@@ -210,9 +225,11 @@ export default async function GovernmentOfficeDetailPage({
                       </a>
                       {office.phone_extensions?.length ? (
                         <p className="mt-1 text-gray-700">
-                          Extension
-                          {office.phone_extensions.length > 1 ? 's' : ''}:{' '}
-                          {office.phone_extensions.join(', ')}
+                          {t('Extension{{value}}: {{join}}', {
+                            value:
+                              office.phone_extensions.length > 1 ? 's' : '',
+                            join: office.phone_extensions.join(', '),
+                          })}
                         </p>
                       ) : null}
                     </div>
@@ -226,7 +243,7 @@ export default async function GovernmentOfficeDetailPage({
                     />
                     <div className="min-w-0">
                       <p className="font-semibold text-gray-900">
-                        Office email
+                        {t('Office email')}
                       </p>
                       <ul className="space-y-1">
                         {emails.map(email => (
@@ -251,7 +268,7 @@ export default async function GovernmentOfficeDetailPage({
                     />
                     <div>
                       <p className="font-semibold text-gray-900">
-                        Institutional hotline
+                        {t('Institutional hotline')}
                       </p>
                       <ul className="space-y-1">
                         {office.emergency_hotlines.map(hotline => (
@@ -275,7 +292,7 @@ export default async function GovernmentOfficeDetailPage({
           {(office.social_accounts.length > 0 || office.official_page_url) && (
             <section className="rounded-xl bg-white p-5 shadow-[0_8px_28px_rgba(0,41,94,0.08)] md:p-7">
               <h2 className="text-2xl font-bold text-gray-900">
-                Institutional links
+                {t('Institutional links')}
               </h2>
               <ul className="mt-4 space-y-3">
                 {office.social_accounts.map(account => (
@@ -299,7 +316,7 @@ export default async function GovernmentOfficeDetailPage({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Official office page
+                      {t('Official office page')}
                       <ExternalLink className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </li>
@@ -310,17 +327,18 @@ export default async function GovernmentOfficeDetailPage({
         </div>
 
         <aside className="h-fit rounded-xl bg-primary-50 p-5 text-sm leading-6 text-primary-900">
-          <p className="font-semibold">Independent civic directory</p>
+          <p className="font-semibold">{t('Independent civic directory')}</p>
           <p className="mt-1">
-            BetterSanFernando is not the official City Government website. Use
-            the published sources below to confirm information with the City.
+            {t(
+              'BetterSanFernando is not the official City Government website. Use the published sources below to confirm information with the City.'
+            )}
           </p>
           <div className="mt-5 flex items-start gap-2">
             <ShieldCheck
               className="mt-0.5 h-4 w-4 shrink-0"
               aria-hidden="true"
             />
-            <span>Verified record</span>
+            <span>{t('Verified record')}</span>
           </div>
           <div className="mt-2 flex items-start gap-2">
             <CalendarCheck2
@@ -328,11 +346,15 @@ export default async function GovernmentOfficeDetailPage({
               aria-hidden="true"
             />
             <span>
-              Checked{' '}
-              {formatDate(office.last_verified_at ?? metadata.lastVerified)}
+              {t('Checked {{last_verified_at}}', {
+                last_verified_at: formatDate(
+                  office.last_verified_at ?? metadata.lastVerified,
+                  locale
+                ),
+              })}
             </span>
           </div>
-          <h2 className="mt-6 font-semibold">Sources</h2>
+          <h2 className="mt-6 font-semibold">{t('Sources')}</h2>
           <ul className="mt-2 space-y-3">
             {office.source_urls.map((url, index) => (
               <li key={url}>
@@ -342,7 +364,9 @@ export default async function GovernmentOfficeDetailPage({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span>Official source {index + 1}</span>
+                  <span>
+                    {t('Official source {{index}}', { index: index + 1 })}
+                  </span>
                   <ExternalLink
                     className="mt-1 h-3.5 w-3.5 shrink-0"
                     aria-hidden="true"

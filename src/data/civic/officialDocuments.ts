@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { PageT } from '../../i18n/page-t.ts';
 import { IsoDateString, PsgcCode } from './schemas.ts';
 import officialDocumentsJson from '../generated/civic/transparency/official-documents.json' with { type: 'json' };
 
@@ -111,4 +112,22 @@ export function getOfficialDocumentsMetadata() {
     route: file.route,
     statusBreakdown: Object.freeze({ ...file.status_breakdown }),
   });
+}
+
+// Localized display for the authored overall_public_limitation caveat in the
+// generated dataset — canonical/generated data is untouched; only display
+// is translated, and only when the value still matches the exact text this
+// translation was written against.
+export function getOfficialDocumentsOverallPublicLimitationDisplay(
+  t: PageT
+): string {
+  if (
+    file.overall_public_limitation ===
+    'This is a bounded document-level index, not a dump of every city file. Laws and issuances, Full Disclosure, procurement plans and monitoring, project evidence, and service records remain in their canonical datasets and should be linked by the frontend rather than copied here. Publication and effective dates remain null unless stated by the document; WordPress upload paths are not dates. The 2022 renewal form remains linked from the current official forms page and is not represented as newly issued in 2026. The Privacy Manual describes itself as a living document that may be revised; users should confirm the current official version.'
+  ) {
+    return t(
+      'This is a bounded document-level index, not a dump of every city file. Laws and issuances, Full Disclosure, procurement plans and monitoring, project evidence, and service records remain in their canonical datasets and should be linked by the frontend rather than copied here. Publication and effective dates remain null unless stated by the document; WordPress upload paths are not dates. The 2022 renewal form remains linked from the current official forms page and is not represented as newly issued in 2026. The Privacy Manual describes itself as a living document that may be revised; users should confirm the current official version.'
+    );
+  }
+  return file.overall_public_limitation;
 }

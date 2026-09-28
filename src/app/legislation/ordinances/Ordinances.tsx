@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { useQueryState } from 'nuqs';
 import {
   ArrowDown,
@@ -21,6 +21,11 @@ import {
   hasLegislationFullText,
   type LegislationRecord,
 } from '../../../data/civic/legislation';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import type { PageT } from '../../../i18n/page-t';
+import { useLocale } from '../../../components/i18n/useLocale';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import type { LanguageType } from '../../../types';
 
 type AvailabilityFilter = 'all' | 'full-text' | 'reference-only';
 type SortOrder = 'newest' | 'oldest' | 'identifier';
@@ -30,8 +35,8 @@ const eyebrowTracking = { letterSpacing: '0.08em' };
 const selectClass =
   'h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20';
 
-function formatDate(date: string): string {
-  return new Intl.DateTimeFormat('en-PH', {
+function formatDate(date: string, locale: LanguageType): string {
+  return new Intl.DateTimeFormat(INTL_LOCALES[locale], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -56,10 +61,13 @@ function matchesQuery(ordinance: LegislationRecord, query: string): boolean {
   ].some(value => value?.toLowerCase().includes(normalizedQuery));
 }
 
-function getSourceAuthorityLabel(ordinance: LegislationRecord): string {
+function getSourceAuthorityLabel(
+  ordinance: LegislationRecord,
+  t: PageT
+): string {
   return ordinance.source_authority === 'PRIMARY_OFFICIAL'
-    ? 'Primary official source'
-    : 'Secondary official source';
+    ? t('Primary official source')
+    : t('Secondary official source');
 }
 
 const ordinances = getOrdinances();
@@ -68,6 +76,8 @@ const fullTextCount = ordinances.filter(hasLegislationFullText).length;
 const referenceOnlyCount = ordinances.length - fullTextCount;
 
 export default function Ordinances() {
+  const t = usePageT();
+  const locale = useLocale();
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [availability, setAvailability] = useQueryState('availability', {
     defaultValue: 'all' as AvailabilityFilter,
@@ -126,9 +136,9 @@ export default function Ordinances() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Legislation', href: '/legislation' },
-              { label: 'Ordinances' },
+              { label: t('Home'), href: '/' },
+              { label: t('Legislation'), href: '/legislation' },
+              { label: t('Ordinances') },
             ]}
           />
 
@@ -138,15 +148,15 @@ export default function Ordinances() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                LEGISLATION · ORDINANCE ARCHIVE
+                {t('LEGISLATION · ORDINANCE ARCHIVE')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                Ordinances
+                {t('Ordinances')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Browse ordinance records BetterSanFernando has verified for
-                public release, with official-source evidence and full text
-                where available.
+                {t(
+                  'Browse ordinance records BetterSanFernando has verified for public release, with official-source evidence and full text where available.'
+                )}
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -154,14 +164,14 @@ export default function Ordinances() {
                   href="#archive-records"
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition hover:bg-[#0052BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066EB]"
                 >
-                  <span>Browse ordinance records</span>
+                  <span>{t('Browse ordinance records')}</span>
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/legislation"
                   className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition hover:text-[#0052BC] hover:underline focus-visible:outline-none focus-visible:underline"
                 >
-                  <span>Legislation overview</span>
+                  <span>{t('Legislation overview')}</span>
                   <ArrowRight
                     className="h-4 w-4 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -172,20 +182,20 @@ export default function Ordinances() {
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                ABOUT THIS ARCHIVE
+                {t('ABOUT THIS ARCHIVE')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                Verified, bounded collection
+                {t('Verified, bounded collection')}
               </h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                This archive contains ordinance records currently verified from
-                official City sources. It is not a complete historical register,
-                and an ordinance missing here may still have been enacted by the
-                City.
+                {t(
+                  'This archive contains ordinance records currently verified from official City sources. It is not a complete historical register, and an ordinance missing here may still have been enacted by the City.'
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -196,47 +206,49 @@ export default function Ordinances() {
         {/* 2. Archive Snapshot */}
         <section aria-labelledby="snapshot-heading" className="pt-8 sm:pt-10">
           <h2 id="snapshot-heading" className="sr-only">
-            Archive snapshot
+            {t('Archive snapshot')}
           </h2>
           <dl className="grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 py-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-7">
             <div className="pb-4 sm:pb-0 sm:pr-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Published records
+                {t('Published records')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {ordinances.length}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Verified City ordinance subset
+                {t('Verified City ordinance subset')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 sm:px-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Full text available
+                {t('Full text available')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {fullTextCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Official PDF documents attached
+                {t('Official PDF documents attached')}
               </p>
             </div>
 
             <div className="pt-4 sm:pt-0 sm:pl-6">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Reference record only
+                {t('Reference record only')}
               </dt>
               <dd className="mt-2 text-3xl font-bold tabular-nums text-gray-950 sm:text-4xl">
                 {referenceOnlyCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Official source references without text
+                {t('Official source references without text')}
               </p>
             </div>
           </dl>
           <p className="mt-3 text-xs text-gray-500 sm:text-sm">
-            Last verified: {formatDate(metadata.lastVerified)}
+            {t('Last verified: {{lastVerified}}', {
+              lastVerified: formatDate(metadata.lastVerified, locale),
+            })}
           </p>
         </section>
 
@@ -244,13 +256,13 @@ export default function Ordinances() {
         <section aria-labelledby="evidence-levels-heading">
           <div className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              EVIDENCE LEVELS
+              {t('EVIDENCE LEVELS')}
             </p>
             <h2
               id="evidence-levels-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Two levels of published evidence
+              {t('Two levels of published evidence')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
@@ -260,10 +272,10 @@ export default function Ordinances() {
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-gray-950">
-                    Full text available
+                    {t('Full text available')}
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                    An official PDF can be opened from the record.
+                    {t('An official PDF can be opened from the record.')}
                   </p>
                 </div>
               </div>
@@ -274,12 +286,12 @@ export default function Ordinances() {
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-gray-950">
-                    Reference record only
+                    {t('Reference record only')}
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                    An official source supports the record, but
-                    BetterSanFernando does not currently publish/recover the
-                    full ordinance text.
+                    {t(
+                      'An official source supports the record, but BetterSanFernando does not currently publish/recover the full ordinance text.'
+                    )}
                   </p>
                 </div>
               </div>
@@ -293,7 +305,7 @@ export default function Ordinances() {
           aria-labelledby="directory-controls-heading"
         >
           <h2 id="directory-controls-heading" className="sr-only">
-            Search and filter ordinances
+            {t('Search and filter ordinances')}
           </h2>
 
           <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
@@ -303,7 +315,7 @@ export default function Ordinances() {
                   htmlFor="ordinance-search"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Search records
+                  {t('Search records')}
                 </label>
                 <div className="relative mt-1.5">
                   <Search
@@ -315,7 +327,7 @@ export default function Ordinances() {
                     type="search"
                     value={query}
                     onChange={event => setQuery(event.target.value || null)}
-                    placeholder="Search number, title, subject, or year..."
+                    placeholder={t('Search number, title, subject, or year...')}
                     className="h-10 w-full rounded-sm border border-gray-300 bg-white pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
                   />
                 </div>
@@ -326,7 +338,7 @@ export default function Ordinances() {
                   htmlFor="availability-select"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Availability
+                  {t('Availability')}
                 </label>
                 <div className="mt-1.5">
                   <select
@@ -339,10 +351,12 @@ export default function Ordinances() {
                     }
                     className={selectClass}
                   >
-                    <option value="all">All records</option>
-                    <option value="full-text">Full text available</option>
+                    <option value="all">{t('All records')}</option>
+                    <option value="full-text">
+                      {t('Full text available')}
+                    </option>
                     <option value="reference-only">
-                      Reference record only
+                      {t('Reference record only')}
                     </option>
                   </select>
                 </div>
@@ -353,7 +367,7 @@ export default function Ordinances() {
                   htmlFor="sort-select"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Sort by
+                  {t('Sort by')}
                 </label>
                 <div className="mt-1.5">
                   <select
@@ -364,9 +378,9 @@ export default function Ordinances() {
                     }
                     className={selectClass}
                   >
-                    <option value="newest">Newest first</option>
-                    <option value="oldest">Oldest first</option>
-                    <option value="identifier">Ordinance number</option>
+                    <option value="newest">{t('Newest first')}</option>
+                    <option value="oldest">{t('Oldest first')}</option>
+                    <option value="identifier">{t('Ordinance number')}</option>
                   </select>
                 </div>
               </div>
@@ -380,7 +394,7 @@ export default function Ordinances() {
                   className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
                 >
                   <RotateCcw className="h-3 w-3" aria-hidden="true" />
-                  Reset filters
+                  {t('Reset filters')}
                 </button>
               </div>
             )}
@@ -388,8 +402,10 @@ export default function Ordinances() {
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <p className="text-xs text-gray-600 sm:text-sm" aria-live="polite">
-              Showing {visibleOrdinances.length} of {ordinances.length}{' '}
-              published records
+              {t('Showing {{length}} of {{length2}} published records', {
+                length: visibleOrdinances.length,
+                length2: ordinances.length,
+              })}
             </p>
           </div>
         </section>
@@ -397,7 +413,7 @@ export default function Ordinances() {
         {/* 5. Ordinance Record List or Empty State */}
         <section aria-labelledby="ordinance-list-heading">
           <h2 id="ordinance-list-heading" className="sr-only">
-            Ordinance records list
+            {t('Ordinance records list')}
           </h2>
 
           {visibleOrdinances.length === 0 ? (
@@ -407,11 +423,12 @@ export default function Ordinances() {
                 aria-hidden="true"
               />
               <p className="mt-2 text-base font-semibold text-gray-950">
-                No ordinances found
+                {t('No ordinances found')}
               </p>
               <p className="mt-1 text-sm text-gray-600">
-                No published ordinances matched your search or availability
-                filter.
+                {t(
+                  'No published ordinances matched your search or availability filter.'
+                )}
               </p>
               <button
                 type="button"
@@ -419,7 +436,7 @@ export default function Ordinances() {
                 className="mt-4 inline-flex items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50"
               >
                 <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                Reset search and filters
+                {t('Reset search and filters')}
               </button>
             </div>
           ) : (
@@ -443,7 +460,9 @@ export default function Ordinances() {
                           {/* Top row: Ordinance number + Evidence Status */}
                           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                             <span className="font-mono text-xs font-bold uppercase tracking-wider text-gray-700">
-                              ORDINANCE NO. {ordinance.document_number}
+                              {t('ORDINANCE NO. {{document_number}}', {
+                                document_number: ordinance.document_number,
+                              })}
                             </span>
                             <span
                               className={`inline-flex items-center gap-1 text-xs font-medium ${
@@ -464,8 +483,8 @@ export default function Ordinances() {
                                 />
                               )}
                               {hasFullText
-                                ? 'Full text available'
-                                : 'Reference record only'}
+                                ? t('Full text available')
+                                : t('Reference record only')}
                             </span>
                           </div>
 
@@ -489,13 +508,13 @@ export default function Ordinances() {
                             <div>
                               <dt className="text-gray-500">
                                 {ordinance.date_adopted
-                                  ? 'Date adopted'
+                                  ? t('Date adopted')
                                   : 'Year'}
                               </dt>
                               <dd className="font-medium text-gray-900">
                                 {ordinance.date_adopted ? (
                                   <time dateTime={ordinance.date_adopted}>
-                                    {formatDate(ordinance.date_adopted)}
+                                    {formatDate(ordinance.date_adopted, locale)}
                                   </time>
                                 ) : (
                                   ordinance.year
@@ -503,7 +522,9 @@ export default function Ordinances() {
                               </dd>
                             </div>
                             <div>
-                              <dt className="text-gray-500">Issuing body</dt>
+                              <dt className="text-gray-500">
+                                {t('Issuing body')}
+                              </dt>
                               <dd className="font-medium text-gray-900">
                                 {ordinance.issuing_body}
                               </dd>
@@ -514,16 +535,20 @@ export default function Ordinances() {
                         {/* Source & Document Rail */}
                         <div className="border-t border-gray-200 pt-4 text-xs sm:text-sm lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
                           <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-gray-500">
-                            SOURCE &amp; DOCUMENT
+                            {t('SOURCE & DOCUMENT')}
                           </p>
                           <p className="mt-1.5 text-gray-700">
-                            <span className="text-gray-500">Evidence:</span>{' '}
-                            {getSourceAuthorityLabel(ordinance)}
+                            <span className="text-gray-500">
+                              {t('Evidence:')}
+                            </span>{' '}
+                            {getSourceAuthorityLabel(ordinance, t)}
                           </p>
                           <p className="mt-1 text-gray-600">
                             {hasFullText
-                              ? 'Full text is available as an official PDF.'
-                              : 'Full text is not currently available in BetterSanFernando.'}
+                              ? t('Full text is available as an official PDF.')
+                              : t(
+                                  'Full text is not currently available in BetterSanFernando.'
+                                )}
                           </p>
 
                           <div className="mt-3 flex flex-col items-start gap-2">
@@ -534,7 +559,7 @@ export default function Ordinances() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC] hover:underline"
                               >
-                                View source evidence
+                                {t('View source evidence')}
                                 <ExternalLink
                                   className="h-3.5 w-3.5 shrink-0"
                                   aria-hidden="true"
@@ -548,7 +573,7 @@ export default function Ordinances() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC] hover:underline"
                               >
-                                Read official PDF
+                                {t('Read official PDF')}
                                 <ExternalLink
                                   className="h-3.5 w-3.5 shrink-0"
                                   aria-hidden="true"
@@ -572,35 +597,35 @@ export default function Ordinances() {
           className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            COVERAGE &amp; SCOPE
+            {t('COVERAGE & SCOPE')}
           </p>
           <h2
             id="understanding-heading"
             className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
           >
-            Understanding this archive
+            {t('Understanding this archive')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
             <div>
               <h3 className="text-base font-bold text-gray-950">
-                What is included
+                {t('What is included')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                This archive includes ordinance records that BetterSanFernando
-                can currently verify and publish safely from official sources.
-                It is not a complete history of City ordinances.
+                {t(
+                  'This archive includes ordinance records that BetterSanFernando can currently verify and publish safely from official sources. It is not a complete history of City ordinances.'
+                )}
               </p>
             </div>
 
             <div className="md:border-l md:border-gray-200 md:pl-8">
               <h3 className="text-base font-bold text-gray-950">
-                What absence means
+                {t('What absence means')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Absence from this archive does not prove that an ordinance does
-                not exist. Some records have supporting official references
-                without current full text in the public export.
+                {t(
+                  'Absence from this archive does not prove that an ordinance does not exist. Some records have supporting official references without current full text in the public export.'
+                )}
               </p>
             </div>
           </div>
@@ -610,13 +635,13 @@ export default function Ordinances() {
         <section aria-labelledby="keep-exploring-heading">
           <div className="border-t border-gray-200 pt-10 sm:pt-12">
             <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-              KEEP EXPLORING
+              {t('KEEP EXPLORING')}
             </p>
             <h2
               id="keep-exploring-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Related legislative resources
+              {t('Related legislative resources')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -626,14 +651,16 @@ export default function Ordinances() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Legislation overview
+                    {t('Legislation overview')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    City ordinances, executive orders, and legislative tracking.
+                    {t(
+                      'City ordinances, executive orders, and legislative tracking.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse overview</span>
+                  <span>{t('Browse overview')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -647,15 +674,16 @@ export default function Ordinances() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Executive Orders
+                    {t('Executive Orders')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Verified mayoral and executive order records with source
-                    documents.
+                    {t(
+                      'Verified mayoral and executive order records with source documents.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse Executive Orders</span>
+                  <span>{t('Browse Executive Orders')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -669,14 +697,16 @@ export default function Ordinances() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Resolutions
+                    {t('Resolutions')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    City council resolutions and verified official source files.
+                    {t(
+                      'City council resolutions and verified official source files.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse Resolutions</span>
+                  <span>{t('Browse Resolutions')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"

@@ -22,10 +22,49 @@
   "footer": {
     "copyright": "© 2026 BetterSanFernando. Independent and community-run."
   },
+  "footerCopy": {
+    "helpEyebrow": "Help Keep the Data Useful",
+    "helpTitle": "Found something that needs another look?",
+    "helpDescription": "BetterSanFernando organizes public information from official sources. If you find an outdated record, incorrect detail, missing source, or broken link, send it to us for review.",
+    "reportDataIssue": "Report a data issue",
+    "contribute": "Contribute on GitHub",
+    "description": "BetterSanFernando makes public information about the City of San Fernando easier to find, understand, and verify. Independent and community-run, it is",
+    "notOfficial": "not an official City Government website.",
+    "sections": {
+      "Explore": "Explore",
+      "Public Information": "Public Information"
+    },
+    "links": {
+      "Services": "Services",
+      "Projects": "Projects",
+      "Government": "Government",
+      "Transparency": "Transparency",
+      "Statistics": "Statistics",
+      "City Offices": "City Offices",
+      "Contact the City": "Contact the City",
+      "Emergency Hotlines": "Emergency Hotlines",
+      "Official Government Links": "Official Government Links",
+      "Barangays": "Barangays"
+    },
+    "betterGovProject": "A BetterGov.ph Project",
+    "betterGovDescription": "Part of the BetterGov.ph community of independent civic-information projects.",
+    "visitBetterGov": "Visit BetterGov.ph",
+    "builtBy": "Built by Ian Macabulos",
+    "sitemap": "Sitemap",
+    "accessibility": "Accessibility",
+    "linkUnavailable": "{{label}} link unavailable",
+    "linkNotConfigured": "{{label}} link not configured",
+    "builtFor": "Built for"
+  },
   "languages": {
-    "en": { "short": "EN", "name": "English" },
-    "fil": { "short": "FIL", "name": "Filipino" },
-    "pam": { "short": "PAM", "name": "Kapampangan" }
+    "en": {
+      "short": "EN",
+      "name": "English"
+    },
+    "fil": {
+      "short": "FIL",
+      "name": "Filipino"
+    }
   },
   "navigation": {
     "topLevel": {
@@ -181,7 +220,26 @@
     "language": "Language",
     "emergencyStrip": {
       "title": "Emergency Hotlines",
-      "cta": "View verified hotlines"
+      "cta": "View verified hotlines",
+      "label": "Emergency",
+      "contacts": "Emergency contacts",
+      "viewAll": "View all hotlines",
+      "hotlines": "Hotlines",
+      "all": "All",
+      "names": {
+        "national911": "National Emergency Hotline 911",
+        "cdrrmoHelp": "CDRRMO Command Center Help Line",
+        "safru": "CDRRMO SAFRU Rescue Hotline",
+        "police": "San Fernando Police Station Hotline",
+        "fire": "San Fernando Fire Station Hotline"
+      },
+      "labels": {
+        "national": "National",
+        "police": "Police",
+        "fire": "Fire",
+        "cityPrefix": "San Fernando ",
+        "citySuffix": ""
+      }
     },
     "civicUtility": {
       "portalStatus": "BetterSanFernando civic portal active",
@@ -195,10 +253,101 @@
       "closeMenu": "Close main menu",
       "openSection": "Open {{section}} menu",
       "closeSection": "Close {{section}} menu"
+    },
+    "viewOverview": "View {{section}} Overview",
+    "brandPanel": {
+      "tagline": "Public information, made easier."
     }
   },
   "plannedPages": {
     "status": "Data integration in progress",
     "statusDescription": "This destination is part of the approved portal structure. Information will be published after its sources and context are ready."
+  },
+  "searchUi": {
+    "homeLabel": "Search BetterSanFernando",
+    "homePlaceholderMobile": "Search public information…",
+    "homePlaceholder": "Search services, projects, offices, barangays, or public records…",
+    "submit": "Search",
+    "clear": "Clear search",
+    "suggestions": "Search suggestions",
+    "viewAllFor": "View all results for “{{query}}”",
+    "noMatches": "No published matches found for “{{query}}”.",
+    "viewAll": "View all search results"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "label": "Breadcrumb"
+  },
+  "status": {
+    "loading": "Loading…"
+  },
+  "evidenceLinks": {
+    "none": "No public link recorded for this record",
+    "openDocument": "Open document",
+    "openSourcePage": "Open source page",
+    "sourcePage": "Source page",
+    "openDocumentLabel": "Open official document for {{identifier}} (opens in a new tab)",
+    "openSourcePageLabel": "Open official source page for {{identifier}} (opens in a new tab)",
+    "sourcePageLabel": "Open source page for {{identifier}} (opens in a new tab)"
+  },
+  "projectSearch": {
+    "barangayNotSpecified": "Barangay not specified",
+    "noMatches": "No matching projects found.",
+    "tryAnother": "Try another term or",
+    "browseAll": "browse the complete City Projects directory",
+    "label": "Search project name, barangay, contractor, or bid reference",
+    "placeholder": "Search project name, barangay, contractor...",
+    "clear": "Clear project search",
+    "results": "Project search results",
+    "searchResults": "Search Results",
+    "topMatches": "Top matches for “{{query}}”",
+    "viewAll": "View all matching projects"
+  },
+  "home": {
+    "metrics": {
+      "population": "Population",
+      "barangays": "Barangays",
+      "barangaysQualifier": "PUBLISHED SET",
+      "projects": "Published Project Records",
+      "projectsQualifier": "PUBLISHED RECORDS",
+      "services": "Resident-Facing Services",
+      "servicesQualifier": "RESIDENT-FACING"
+    },
+    "search": {
+      "placeholder": "Search permits, certificates, assistance, health services, requirements…",
+      "label": "Search services",
+      "find": "Find",
+      "matching": "Matching services",
+      "viewAll": "View all results for “{{query}}”"
+    },
+    "map": {
+      "back": "Back to Citywide Overview",
+      "selectedBarangay": "Selected Barangay",
+      "projectRecordOne": "Published Project Record",
+      "projectRecordMany": "Published Project Records",
+      "ofAttributed": "of barangay-attributed published project records ({{total}} total)",
+      "browseFor": "Browse Projects for {{name}}",
+      "density": "Project-Record Density",
+      "fewer": "Fewer records",
+      "more": "More records",
+      "legend": {
+        "none": "0 records",
+        "low": "1–4 records",
+        "mid": "5–9 records",
+        "high": "10–19 records",
+        "top": "20+ records"
+      },
+      "distribution": "Project Distribution",
+      "citywide": "Citywide Overview",
+      "attributed": "Barangay-Attributed",
+      "unassigned": "Citywide / Unassigned",
+      "breakdown": "{{attributed}} attributed across {{barangays}} barangays + {{unassigned}} citywide / unassigned = {{total}} published project records.",
+      "shading": "Shading represents the number of published project records attributed to each barangay.",
+      "howToRead": "How to Read This Map",
+      "readOne": "Project records may be associated with a barangay when published evidence supports that relationship.",
+      "readTwo": "Barangay shading represents project-record attribution and does not indicate an exact project coordinate, construction site, parcel, or road segment.",
+      "exploreFull": "Explore Full Project Map",
+      "browseDirectory": "Browse Barangay Directory"
+    }
   }
 }

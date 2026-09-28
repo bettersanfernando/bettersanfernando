@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { PageT } from '../../i18n/page-t.ts';
 import { IsoDateString, PsgcCode } from './schemas.ts';
 import financeReportsJson from '../generated/civic/finance/finance-reports.json' with { type: 'json' };
 import financeObservationsJson from '../generated/civic/finance/finance-observations.json' with { type: 'json' };
@@ -237,4 +238,21 @@ export function getFinanceMetadata(): FinanceMetadata {
     jurisdictionPsgc: reportsFile.jurisdiction_psgc,
     title: reportsFile.title,
   });
+}
+
+// Localized display for the authored overall_public_limitation caveat in the
+// generated dataset. The canonical/generated value itself is never edited —
+// only its display is translated, and only when it still matches the exact
+// text this translation was written against; otherwise it falls back to the
+// raw (English) value, same as any other unrecognized data-derived string.
+export function getFinanceOverallPublicLimitationDisplay(t: PageT): string {
+  const value = getFinanceMetadata().overallPublicLimitation;
+  const known =
+    'City Finances is a selected set of official aggregate reports, not audited financial statements or complete City financial history. Source accounting concepts, funds, periods, cumulative treatment, accounting basis, and units remain distinct and must not be combined without explicit compatibility.';
+  if (value === known) {
+    return t(
+      'City Finances is a selected set of official aggregate reports, not audited financial statements or complete City financial history. Source accounting concepts, funds, periods, cumulative treatment, accounting basis, and units remain distinct and must not be combined without explicit compatibility.'
+    );
+  }
+  return value;
 }

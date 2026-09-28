@@ -1,0 +1,21 @@
+{
+  "View Bid Results →": "Tingnan ang Resulta ng Bid →",
+  "View Contracts and Awards →": "Tingnan ang mga Kontrata at Award →",
+  "View Procurement Statistics →": "Tingnan ang Estadistika ng Procurement →",
+  "See how project records are collected, structured, and interpreted.": "Alamin kung paano kinukuha, inaayos, at binibigyang-kahulugan ang mga talaan ng proyekto.",
+  "Procurement overview": "Pangkalahatang-tanaw ng Procurement",
+  "Understand the procurement records and evidence available across BetterSanFernando.": "Unawain ang mga talaan at ebidensya ng procurement na available sa BetterSanFernando.",
+  "Browse the full published City project collection.": "Tingnan ang buong nailathalang koleksyon ng mga Proyekto ng Lungsod.",
+  "Inspect the official-source records used to establish project facts.": "Suriin ang mga talaang mula sa opisyal na source na ginamit para itatag ang mga katotohanan tungkol sa proyekto.",
+  "Hover or focus a year to view details.": "I-hover o i-focus ang isang taon para makita ang detalye.",
+  "0 matching records": "0 tugmang talaan",
+  "Actions": "Mga aksyon",
+  "View project: {{project_name}}": "Tingnan ang proyekto: {{project_name}}",
+  "Not specified": "Hindi tinukoy",
+  "Unavailable": "Hindi available",
+  "Open official source for {{project_name}} (opens in a new tab)": "Buksan ang opisyal na source para sa {{project_name}} (magbubukas sa bagong tab)",
+  "Approved Budget (ABC)": "Approved Budget (ABC)",
+  "Record ID: {{id}}": "Record ID: {{id}}",
+  "HOW TO READ THESE RECORDS": "PAANO BASAHIN ANG MGA TALAANG ITO",
+  "Continue exploring procurement data": "Ipagpatuloy ang pagtuklas sa datos ng procurement"
+}

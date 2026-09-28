@@ -11,10 +11,12 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import Link from '../components/i18n/LocaleLink';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, Search, X } from 'lucide-react';
 import { getSearchHref } from '../data/navigation';
+import { localeFromPathname, withLocalePrefix } from '../i18n/locale';
 import {
   searchCivicRecordsDetailed,
   type CivicSearchResult,
@@ -61,6 +63,9 @@ export default function HomeSearchForm() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const pathname = usePathname() ?? '/';
+  const locale = localeFromPathname(pathname);
+  const { t } = useTranslation('common');
 
   const isMobile = useSyncExternalStore(
     subscribeMobile,
@@ -136,7 +141,7 @@ export default function HomeSearchForm() {
   const submitSearch = (event: FormEvent) => {
     event.preventDefault();
     closeDropdown();
-    router.push(getSearchHref(searchQuery));
+    router.push(withLocalePrefix(getSearchHref(searchQuery), locale));
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -186,12 +191,14 @@ export default function HomeSearchForm() {
 
       if (searchResults.length > 0) {
         if (highlightedIndex < searchResults.length) {
-          router.push(searchResults[highlightedIndex].href);
+          router.push(
+            withLocalePrefix(searchResults[highlightedIndex].href, locale)
+          );
         } else {
-          router.push(getSearchHref(searchQuery));
+          router.push(withLocalePrefix(getSearchHref(searchQuery), locale));
         }
       } else {
-        router.push(getSearchHref(searchQuery));
+        router.push(withLocalePrefix(getSearchHref(searchQuery), locale));
       }
     }
   };
@@ -210,9 +217,9 @@ export default function HomeSearchForm() {
     viewAllId,
   ]);
 
-  const searchPlaceholder = isMobile
-    ? 'Search public information…'
-    : 'Search services, projects, offices, barangays, or public records…';
+  const searchPlaceholder = t(
+    isMobile ? 'searchUi.homePlaceholderMobile' : 'searchUi.homePlaceholder'
+  );
 
   return (
     <div
@@ -222,7 +229,7 @@ export default function HomeSearchForm() {
       {/* Robust Flexbox Search Control: Icon, Flexible Input, Clear X Button, Submit Button */}
       <form onSubmit={submitSearch} role="search">
         <label htmlFor="home-search" className="sr-only">
-          Search BetterSanFernando
+          {t('searchUi.homeLabel')}
         </label>
         <div className="flex h-14 sm:h-[58px] 2xl:h-[64px] w-full items-center rounded-sm bg-white pl-3.5 pr-1.5 sm:pl-5 sm:pr-2 shadow-lg border border-transparent transition focus-within:border-[#002EAC] focus-within:ring-4 focus-within:ring-[#0066EB]/30">
           <div className="shrink-0 text-gray-400 mr-2 sm:mr-3.5 2xl:mr-4">
@@ -262,7 +269,7 @@ export default function HomeSearchForm() {
               type="button"
               onClick={handleClear}
               className="shrink-0 mx-0.5 sm:mx-1 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-sm text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#0066EB]"
-              aria-label="Clear search"
+              aria-label={t('searchUi.clear')}
             >
               <X className="h-4 w-4 sm:h-4.5 sm:w-4.5" aria-hidden="true" />
             </button>
@@ -273,7 +280,7 @@ export default function HomeSearchForm() {
             type="submit"
             className="shrink-0 inline-flex h-11 sm:h-11.5 2xl:h-12 items-center gap-1.5 sm:gap-2 rounded-sm bg-[#002EAC] hover:bg-[#002488] active:bg-[#001c6d] px-3 sm:px-5 2xl:px-6 text-xs sm:text-sm 2xl:text-base font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] cursor-pointer"
           >
-            <span>Search</span>
+            <span>{t('searchUi.submit')}</span>
             <ArrowRight
               className="h-3.5 w-3.5 sm:h-4 sm:w-4 2xl:h-5 2xl:w-5"
               aria-hidden="true"
@@ -287,7 +294,7 @@ export default function HomeSearchForm() {
         <div
           id={listboxId}
           role="listbox"
-          aria-label="Search suggestions"
+          aria-label={t('searchUi.suggestions')}
           className="absolute left-0 right-0 top-full z-40 mt-1.5 w-full overflow-hidden rounded-sm border border-gray-200 bg-white text-left shadow-xl"
         >
           {searchResults.length > 0 ? (
@@ -305,7 +312,7 @@ export default function HomeSearchForm() {
                       aria-selected={isHighlighted}
                     >
                       <Link
-                        href={result.href}
+                        href={withLocalePrefix(result.href, locale)}
                         onClick={closeDropdown}
                         onMouseEnter={() => setHighlightedIndex(index)}
                         className={`group flex items-center justify-between gap-3 px-3.5 py-2 sm:px-4 sm:py-2.5 transition-colors ${
@@ -349,7 +356,7 @@ export default function HomeSearchForm() {
                 className="border-t border-gray-100 bg-[#F9FAFB] p-1 sm:p-1.5"
               >
                 <Link
-                  href={getSearchHref(searchQuery)}
+                  href={withLocalePrefix(getSearchHref(searchQuery), locale)}
                   onClick={closeDropdown}
                   onMouseEnter={() => setHighlightedIndex(searchResults.length)}
                   className={`group flex items-center justify-between rounded-xs px-3 py-1.5 sm:py-2 text-xs sm:text-[13px] font-semibold transition-colors ${
@@ -359,7 +366,7 @@ export default function HomeSearchForm() {
                   }`}
                 >
                   <span className="truncate pr-2">
-                    View all results for &ldquo;{normalizedQuery}&rdquo;
+                    {t('searchUi.viewAllFor', { query: normalizedQuery })}
                   </span>
                   <ArrowRight
                     className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5"
@@ -372,7 +379,7 @@ export default function HomeSearchForm() {
             /* Compact no-results state */
             <div className="px-4 py-3 sm:px-4.5 sm:py-3.5">
               <p className="text-xs sm:text-sm font-semibold text-gray-900">
-                No published matches found for &ldquo;{normalizedQuery}&rdquo;.
+                {t('searchUi.noMatches', { query: normalizedQuery })}
               </p>
               <div
                 id={viewAllId}
@@ -381,14 +388,14 @@ export default function HomeSearchForm() {
                 className="mt-1.5"
               >
                 <Link
-                  href={getSearchHref(searchQuery)}
+                  href={withLocalePrefix(getSearchHref(searchQuery), locale)}
                   onClick={closeDropdown}
                   onMouseEnter={() => setHighlightedIndex(0)}
                   className={`group inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] transition-colors ${
                     highlightedIndex === 0 ? 'underline' : ''
                   }`}
                 >
-                  <span>View all search results</span>
+                  <span>{t('searchUi.viewAll')}</span>
                   <ArrowRight
                     className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform group-hover:translate-x-0.5"
                     aria-hidden="true"

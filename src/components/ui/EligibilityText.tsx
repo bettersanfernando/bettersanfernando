@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { usePageT } from '../i18n/PageMessages';
 
 // Long who_may_avail values would otherwise stretch the At A Glance panel;
 // this clamps to ~3 lines with a disclosure, isolated as a client component
@@ -8,6 +9,7 @@ import { useState } from 'react';
 const CLAMP_THRESHOLD = 160;
 
 export default function EligibilityText({ text }: { text: string }) {
+  const t = usePageT();
   const [expanded, setExpanded] = useState(false);
   const isLong = text.length > CLAMP_THRESHOLD;
 
@@ -26,7 +28,7 @@ export default function EligibilityText({ text }: { text: string }) {
           onClick={() => setExpanded(prev => !prev)}
           className="mt-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
         >
-          {expanded ? 'Show less' : 'Show full eligibility'}
+          {expanded ? t('Show less') : t('Show full eligibility')}
         </button>
       )}
     </>

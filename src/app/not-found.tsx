@@ -1,57 +1,67 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '../components/i18n/LocaleLink';
 import { ArrowRight } from 'lucide-react';
+import { getPageT, type PageT } from '../i18n/server';
 
 // App Router's not-found convention file — rendered for every notFound()
 // call (unknown service/project/office/category) and for any unmatched
 // URL, always with a real HTTP 404 status. Named not-found.page.tsx, not
 // not-found.tsx, per the temporary pageExtensions workaround (next.config.ts).
-export const metadata: Metadata = {
-  title: 'Page not found',
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { t } = await getPageT('not-found');
+  return {
+    title: t('Page not found'),
+    robots: { index: false, follow: true },
+  };
+}
 
-const RECOVERY_ACTIONS = [
-  {
-    href: '/search',
-    label: 'Search BetterSanFernando',
-    primary: true,
-  },
-  {
-    href: '/',
-    label: 'Return home',
-    primary: false,
-  },
-] as const;
+const RECOVERY_ACTIONS = (t: PageT) =>
+  [
+    {
+      href: '/search',
+      label: t('Search BetterSanFernando'),
+      primary: true,
+    },
+    {
+      href: '/',
+      label: t('Return home'),
+      primary: false,
+    },
+  ] as const;
 
-const EXPLORATION_DESTINATIONS = [
-  {
-    href: '/services',
-    title: 'Services',
-    description:
-      'Browse published procedures, requirements, fees, and processing information.',
-  },
-  {
-    href: '/projects',
-    title: 'Projects',
-    description:
-      'Explore published municipal project records and supporting evidence.',
-  },
-  {
-    href: '/government',
-    title: 'Government',
-    description:
-      'Find City offices, contacts, hotlines, and government information.',
-  },
-  {
-    href: '/barangays',
-    title: 'Barangays',
-    description: 'Explore San Fernando’s published barangay information.',
-  },
-] as const;
+const EXPLORATION_DESTINATIONS = (t: PageT) =>
+  [
+    {
+      href: '/services',
+      title: t('Services'),
+      description: t(
+        'Browse published procedures, requirements, fees, and processing information.'
+      ),
+    },
+    {
+      href: '/projects',
+      title: t('Projects'),
+      description: t(
+        'Explore published municipal project records and supporting evidence.'
+      ),
+    },
+    {
+      href: '/government',
+      title: t('Government'),
+      description: t(
+        'Find City offices, contacts, hotlines, and government information.'
+      ),
+    },
+    {
+      href: '/barangays',
+      title: t('Barangays'),
+      description: t('Explore San Fernando’s published barangay information.'),
+    },
+  ] as const;
 
-export default function NotFound() {
-  const [primaryAction, secondaryAction] = RECOVERY_ACTIONS;
+export default async function NotFound() {
+  const { t } = await getPageT('not-found');
+  const [primaryAction, secondaryAction] = RECOVERY_ACTIONS(t);
 
   return (
     <main className="flex-grow bg-white">
@@ -66,12 +76,12 @@ export default function NotFound() {
               404
             </p>
             <h1 className="mt-3 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl lg:text-4xl">
-              We couldn’t find that page.
+              {t('We couldn’t find that page.')}
             </h1>
             <p className="mt-3.5 text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-              The address may have changed, the page may no longer be published,
-              or the record may not be part of BetterSanFernando’s current
-              public collection.
+              {t(
+                'The address may have changed, the page may no longer be published, or the record may not be part of BetterSanFernando’s current public collection.'
+              )}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
@@ -102,11 +112,11 @@ export default function NotFound() {
           {/* Right Column: Keep Exploring navigation panel */}
           <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6 lg:p-7">
             <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-              KEEP EXPLORING
+              {t('KEEP EXPLORING')}
             </p>
 
             <div className="mt-4 divide-y divide-gray-100">
-              {EXPLORATION_DESTINATIONS.map(item => (
+              {EXPLORATION_DESTINATIONS(t).map(item => (
                 <Link
                   key={item.href}
                   href={item.href}

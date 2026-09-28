@@ -11,18 +11,25 @@ import {
   ShieldCheck,
   type LucideIcon,
 } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { getTransparencySummary } from '../../data/civic/transparencySummary';
+import { getUnavailableDomainDisplayText } from '../../data/civic/transparencySources';
 
 import { buildPageMetadata } from '../../lib/metadata';
+import { getPageT, type PageT } from '../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Transparency',
-  description:
-    'Explore the bounded public civic datasets, source records, methodology, and current publication gaps documented by BetterSanFernando.',
-  path: '/transparency',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('transparency');
+  return buildPageMetadata({
+    title: t('Transparency'),
+    description: t(
+      'Explore the bounded public civic datasets, source records, methodology, and current publication gaps documented by BetterSanFernando.'
+    ),
+    path: '/transparency',
+    locale,
+  });
+}
 
 const summary = getTransparencySummary();
 
@@ -40,73 +47,102 @@ interface CatalogRow {
   links: readonly (readonly [string, string])[];
 }
 
-const catalog: CatalogRow[] = [
-  {
-    title: 'Projects & Procurement',
-    icon: FileSearch,
-    description: `${summary.projects.total} published project records, backed by ${summary.projects.evidence} evidence records including ${summary.projects.bidResults} bid results.`,
-    links: [
-      ['/projects', 'Browse projects'],
-      ['/procurement', 'Explore procurement'],
-      ['/projects/sources', 'Inspect project evidence'],
-      ['/statistics/procurement', 'View procurement statistics'],
-    ],
-  },
-  {
-    title: 'Government Directory',
-    icon: Building2,
-    description: `Published City office and contact information available on BetterSanFernando (${summary.government.officeRecords} office records). This is not a complete organizational chart.`,
-    links: [
-      ['/government/offices', 'Browse City offices'],
-      ['/government/contact', 'Find institutional contacts'],
-    ],
-  },
-  {
-    title: 'Legislation',
-    icon: Scale,
-    description: `${summary.legislation.executiveOrders} Executive Orders, ${summary.legislation.ordinances} ordinances, and ${summary.legislation.resolutions} resolutions, published as separate record types.`,
-    links: [
-      ['/legislation', 'Explore legislation'],
-      ['/legislation/executive-orders', 'View Executive Orders'],
-      ['/legislation/ordinances', 'View ordinances'],
-      ['/legislation/resolutions', 'View resolutions'],
-    ],
-  },
-  {
-    title: 'City Finances',
-    icon: Landmark,
-    description:
-      'Selected official aggregate finance reports, shown as reported by their source rather than combined into one total.',
-    links: [['/transparency/finance', 'Explore City Finances']],
-  },
-  {
-    title: 'Population & Geography',
-    icon: Map,
-    description: `${summary.population.total.toLocaleString()} residents in the ${summary.population.census} baseline across ${summary.population.barangays} barangays, with city and barangay boundary maps.`,
-    links: [
-      ['/statistics/population', 'View population statistics'],
-      ['/statistics/city-profile', 'View the city profile'],
-      ['/barangays', 'Explore barangays'],
-      ['/projects/map', 'View the project coverage map'],
-    ],
-  },
-] as const;
+const catalog = (t: PageT): CatalogRow[] =>
+  [
+    {
+      title: t('Projects & Procurement'),
+      icon: FileSearch,
+      description: t(
+        '{{projects}} published project records, backed by {{evidence}} evidence records including {{bidResults}} bid results.',
+        {
+          projects: summary.projects.total,
+          evidence: summary.projects.evidence,
+          bidResults: summary.projects.bidResults,
+        }
+      ),
+      links: [
+        ['/projects', t('Browse projects')],
+        ['/procurement', t('Explore procurement')],
+        ['/projects/sources', t('Inspect project evidence')],
+        ['/statistics/procurement', t('View procurement statistics')],
+      ],
+    },
+    {
+      title: t('Government Directory'),
+      icon: Building2,
+      description: t(
+        'Published City office and contact information available on BetterSanFernando ({{offices}} office records). This is not a complete organizational chart.',
+        { offices: summary.government.officeRecords }
+      ),
+      links: [
+        ['/government/offices', t('Browse City offices')],
+        ['/government/contact', t('Find institutional contacts')],
+      ],
+    },
+    {
+      title: t('Legislation'),
+      icon: Scale,
+      description: t(
+        '{{eo}} Executive Orders, {{ord}} ordinances, and {{res}} resolutions, published as separate record types.',
+        {
+          eo: summary.legislation.executiveOrders,
+          ord: summary.legislation.ordinances,
+          res: summary.legislation.resolutions,
+        }
+      ),
+      links: [
+        ['/legislation', t('Explore legislation')],
+        ['/legislation/executive-orders', t('View Executive Orders')],
+        ['/legislation/ordinances', t('View ordinances')],
+        ['/legislation/resolutions', t('View resolutions')],
+      ],
+    },
+    {
+      title: t('City Finances'),
+      icon: Landmark,
+      description: t(
+        'Selected official aggregate finance reports, shown as reported by their source rather than combined into one total.'
+      ),
+      links: [['/transparency/finance', t('Explore City Finances')]],
+    },
+    {
+      title: t('Population & Geography'),
+      icon: Map,
+      description: t(
+        '{{residents}} residents in the {{census}} baseline across {{barangays}} barangays, with city and barangay boundary maps.',
+        {
+          residents: summary.population.total.toLocaleString('en-PH'),
+          census: summary.population.census,
+          barangays: summary.population.barangays,
+        }
+      ),
+      links: [
+        ['/statistics/population', t('View population statistics')],
+        ['/statistics/city-profile', t('View the city profile')],
+        ['/barangays', t('Explore barangays')],
+        ['/projects/map', t('View the project coverage map')],
+      ],
+    },
+  ] as const;
 
-const unavailableLabels = {
-  NOT_EXPORTED: 'Not currently exported',
-  NOT_VERIFIED: 'Not verified for publication',
-} as const;
+const unavailableLabels = (t: PageT) =>
+  ({
+    NOT_EXPORTED: t('Not currently exported'),
+    NOT_VERIFIED: t('Not verified for publication'),
+  }) as const;
 
 // Three headline metrics carry the release summary; published domains and
 // office records are real but secondary, so they read as supporting text
 // rather than competing for the same visual weight (Design System v2 §9).
-const primaryStats = [
-  { label: 'Dataset files', value: summary.release.datasetFiles },
-  { label: 'Project records', value: summary.projects.total },
-  { label: 'Evidence records', value: summary.projects.evidence },
-] as const;
+const primaryStats = (t: PageT) =>
+  [
+    { label: t('Dataset files'), value: summary.release.datasetFiles },
+    { label: t('Project records'), value: summary.projects.total },
+    { label: t('Evidence records'), value: summary.projects.evidence },
+  ] as const;
 
-export default function Transparency() {
+export default async function Transparency() {
+  const { t } = await getPageT('transparency');
   return (
     <main className="bg-white pb-16 md:pb-24">
       {/* Editorial page header — white canvas, breadcrumb inline above the intro */}
@@ -114,7 +150,10 @@ export default function Transparency() {
         <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-14">
           <Breadcrumbs
             className="text-xs text-gray-500"
-            items={[{ label: 'Home', href: '/' }, { label: 'Transparency' }]}
+            items={[
+              { label: t('Home'), href: '/' },
+              { label: t('Transparency') },
+            ]}
           />
 
           <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-12">
@@ -123,40 +162,43 @@ export default function Transparency() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                Transparency
+                {t('Transparency')}
               </p>
 
               <h1 className="mt-3 text-3xl font-extrabold text-display text-gray-950 sm:text-4xl lg:text-5xl">
-                Public data you can trace.
+                {t('Public data you can trace.')}
               </h1>
 
               <p className="mt-4 text-lg font-medium leading-7 text-gray-800 sm:text-xl">
-                BetterSanFernando makes public information about the City of San
-                Fernando easier to find, understand, and verify.
+                {t(
+                  'BetterSanFernando makes public information about the City of San Fernando easier to find, understand, and verify.'
+                )}
               </p>
 
               <p className="mt-3 text-base leading-7 text-gray-600 md:text-[17px]">
-                Explore published records, see where the information comes from,
-                and understand what is not yet available.
+                {t(
+                  'Explore published records, see where the information comes from, and understand what is not yet available.'
+                )}
               </p>
             </div>
 
             {/* Trust / info module — pale blue-gray feature panel, thin blue left rule, no shadow */}
             <div className="mt-8 rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5 lg:mt-0">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                Independent civic portal
+                {t('Independent civic portal')}
               </p>
               <p className="mt-2 text-sm font-bold leading-6 text-gray-950">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
               <p className="mt-2 text-sm leading-6 text-gray-600">
-                BetterSanFernando organizes public services, projects,
-                government information, records, and official-source data in one
-                place.
+                {t(
+                  'BetterSanFernando organizes public services, projects, government information, records, and official-source data in one place.'
+                )}
               </p>
               <p className="mt-2 text-xs text-gray-500">
-                Local public information, made easier to use.
+                {t('Local public information, made easier to use.')}
               </p>
             </div>
           </div>
@@ -167,21 +209,22 @@ export default function Transparency() {
         {/* Current public release */}
         <section aria-labelledby="summary-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            Current Public Release
+            {t('Current Public Release')}
           </p>
           <h2
             id="summary-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            What BetterSanFernando publishes today
+            {t('What BetterSanFernando publishes today')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            Representative counts from the current frontend-safe data release,
-            not citywide totals.
+            {t(
+              'Representative counts from the current frontend-safe data release, not citywide totals.'
+            )}
           </p>
 
           <dl className="mt-6 grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {primaryStats.map(stat => (
+            {primaryStats(t).map(stat => (
               <div
                 key={stat.label}
                 className="flex items-baseline justify-between gap-4 py-4 sm:block sm:px-6 sm:py-5 sm:first:pl-0"
@@ -197,29 +240,32 @@ export default function Transparency() {
           </dl>
 
           <p className="mt-4 text-sm text-gray-500">
-            {summary.release.publishedDomains} published domains ·{' '}
-            {summary.government.officeRecords} office records
+            {t('{{domains}} published domains · {{offices}} office records', {
+              domains: summary.release.publishedDomains,
+              offices: summary.government.officeRecords,
+            })}
           </p>
         </section>
 
         {/* Published data catalog */}
         <section aria-labelledby="explore-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            Explore Published Data
+            {t('Explore Published Data')}
           </p>
           <h2
             id="explore-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Find the information you need.
+            {t('Find the information you need.')}
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
-            Each area covers a distinct part of the City. Follow a link for
-            record-level detail, sources, and dates.
+            {t(
+              'Each area covers a distinct part of the City. Follow a link for record-level detail, sources, and dates.'
+            )}
           </p>
 
           <div className="mt-7 overflow-hidden rounded-sm border border-gray-200 bg-white">
-            {catalog.map((domain, index) => {
+            {catalog(t).map((domain, index) => {
               const Icon = domain.icon;
               return (
                 <div
@@ -263,17 +309,18 @@ export default function Transparency() {
         {/* Sources & Methodology — open editorial section, no outer card */}
         <section aria-labelledby="sources-heading">
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            Sources &amp; Methodology
+            {t('Sources & Methodology')}
           </p>
           <h2
             id="sources-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Know where the data comes from.
+            {t('Know where the data comes from.')}
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-600">
-            See how records are sourced, reviewed, and presented, and understand
-            the limitations behind the public release.
+            {t(
+              'See how records are sourced, reviewed, and presented, and understand the limitations behind the public release.'
+            )}
           </p>
 
           <div className="mt-7 grid gap-8 border-t border-gray-200 pt-7 sm:grid-cols-2 sm:gap-10 sm:divide-x sm:divide-gray-200">
@@ -283,17 +330,18 @@ export default function Transparency() {
                   className="h-4 w-4 shrink-0 text-[#0066EB]"
                   aria-hidden="true"
                 />
-                Sources
+                {t('Sources')}
               </h3>
               <p className="mt-2 text-sm leading-6 text-gray-600">
-                See what each dataset covers, who publishes it, and where the
-                original public record lives.
+                {t(
+                  'See what each dataset covers, who publishes it, and where the original public record lives.'
+                )}
               </p>
               <Link
                 href="/transparency/sources"
                 className="group mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:text-[#0052BC] hover:decoration-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
-                Explore published data sources
+                {t('Explore published data sources')}
                 <ArrowUpRight
                   className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
@@ -307,17 +355,18 @@ export default function Transparency() {
                   className="h-4 w-4 shrink-0 text-[#0066EB]"
                   aria-hidden="true"
                 />
-                Methodology
+                {t('Methodology')}
               </h3>
               <p className="mt-2 text-sm leading-6 text-gray-600">
-                Read how records are reviewed and normalized, and how missing
-                values and limitations are handled.
+                {t(
+                  'Read how records are reviewed and normalized, and how missing values and limitations are handled.'
+                )}
               </p>
               <Link
                 href="/transparency/methodology"
                 className="group mt-3 inline-flex min-h-8 items-center gap-1.5 text-sm font-semibold text-[#0066EB] underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:text-[#0052BC] hover:decoration-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:ring-offset-2"
               >
-                Read the transparency methodology
+                {t('Read the transparency methodology')}
                 <ArrowUpRight
                   className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
@@ -331,63 +380,66 @@ export default function Transparency() {
         <section aria-labelledby="availability-heading">
           <div className="max-w-2xl">
             <p className="text-eyebrow text-gray-600" style={eyebrowTracking}>
-              Publication Gaps
+              {t('Publication Gaps')}
             </p>
             <h2
               id="availability-heading"
               className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
             >
-              Important publication gaps
+              {t('Important publication gaps')}
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              These notes describe what is and is not currently available on
-              BetterSanFernando. They do not mean the City has no records for
-              these areas.
+              {t(
+                'These notes describe what is and is not currently available on BetterSanFernando. They do not mean the City has no records for these areas.'
+              )}
             </p>
           </div>
 
           <ul className="mt-7 divide-y divide-gray-200 border-t border-gray-200">
-            {summary.unavailable.map(domain => (
-              <li key={domain.id} className="py-5">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="font-bold text-gray-950">{domain.name}</h3>
-                  <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
-                    {unavailableLabels[domain.status]}
-                  </span>
-                </div>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-                  {domain.note}
-                </p>
-              </li>
-            ))}
+            {summary.unavailable.map(domain => {
+              const display = getUnavailableDomainDisplayText(domain, t);
+              return (
+                <li key={domain.id} className="py-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="font-bold text-gray-950">{display.name}</h3>
+                    <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
+                      {unavailableLabels(t)[domain.status]}
+                    </span>
+                  </div>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
+                    {display.note}
+                  </p>
+                </li>
+              );
+            })}
             <li className="py-5">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-bold text-gray-950">
-                  Unified transparency documents
+                  {t('Unified transparency documents')}
                 </h3>
                 <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
-                  Not currently exported
+                  {t('Not currently exported')}
                 </span>
               </div>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-                A unified, frontend-safe document projection is not currently
-                part of the public release. Published record-specific documents
-                remain available through their existing archives.
+                {t(
+                  'A unified, frontend-safe document projection is not currently part of the public release. Published record-specific documents remain available through their existing archives.'
+                )}
               </p>
             </li>
             <li className="py-5">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-bold text-gray-950">
-                  Broader demographics
+                  {t('Broader demographics')}
                 </h3>
                 <span className="shrink-0 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-900">
-                  Partial
+                  {t('Partial')}
                 </span>
               </div>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-                The public release currently supports the population baseline
-                and barangay classifications, not broader age, sex, household,
-                or density measures.
+                {t(
+                  'The public release currently supports the population baseline and barangay classifications, not broader age, sex, household, or density measures.'
+                )}
               </p>
             </li>
           </ul>
@@ -402,7 +454,7 @@ export default function Transparency() {
             id="limits-heading"
             className="text-xl font-bold text-section-title text-gray-950"
           >
-            How to read this coverage
+            {t('How to read this coverage')}
           </h2>
           <div className="mt-5 grid gap-6 md:grid-cols-2">
             <div>
@@ -411,13 +463,12 @@ export default function Transparency() {
                   className="h-4 w-4 shrink-0 text-[#0066EB]"
                   aria-hidden="true"
                 />
-                Published does not mean complete.
+                {t('Published does not mean complete.')}
               </h3>
               <p className="mt-1.5 text-sm leading-6 text-gray-600">
-                BetterSanFernando publishes bounded datasets, not every City
-                Government record. A document moving through its lifecycle — an
-                award, a contract — does not by itself establish completion,
-                payment, or physical progress.
+                {t(
+                  'BetterSanFernando publishes bounded datasets, not every City Government record. A document moving through its lifecycle — an award, a contract — does not by itself establish completion, payment, or physical progress.'
+                )}
               </p>
             </div>
             <div>
@@ -426,13 +477,12 @@ export default function Transparency() {
                   className="h-4 w-4 shrink-0 text-[#0066EB]"
                   aria-hidden="true"
                 />
-                Records are not interchangeable.
+                {t('Records are not interchangeable.')}
               </h3>
               <p className="mt-1.5 text-sm leading-6 text-gray-600">
-                Project, procurement, contract, and spending records describe
-                different things and should not be treated as equivalent.
-                Missing fields remain unknown, and an item&rsquo;s absence from
-                a dataset does not prove it doesn&rsquo;t exist.
+                {t(
+                  'Project, procurement, contract, and spending records describe different things and should not be treated as equivalent. Missing fields remain unknown, and an item’s absence from a dataset does not prove it doesn’t exist.'
+                )}
               </p>
             </div>
           </div>

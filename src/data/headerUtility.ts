@@ -1,3 +1,5 @@
+import type { LanguageType } from '../types';
+
 // Config for the header's emergency and civic-utility strips, kept separate
 // from Navbar.tsx so real hotline/currency/weather providers can be dropped
 // in later without touching layout markup.
@@ -26,13 +28,17 @@ export const SAN_FERNANDO_COORDINATES = {
 
 const PHT_TIME_ZONE = 'Asia/Manila';
 
-export function formatPhilippineTime(date: Date): string {
-  return `${new Intl.DateTimeFormat('en-US', {
+export function formatPhilippineTime(
+  date: Date,
+  locale: LanguageType = 'en'
+): string {
+  const intlLocale = locale === 'fil' ? 'fil-PH' : 'en-US';
+  return `${new Intl.DateTimeFormat(intlLocale, {
     timeZone: PHT_TIME_ZONE,
     month: 'short',
     day: 'numeric',
     year: 'numeric',
-  }).format(date)} • ${new Intl.DateTimeFormat('en-US', {
+  }).format(date)} • ${new Intl.DateTimeFormat(intlLocale, {
     timeZone: PHT_TIME_ZONE,
     hour: 'numeric',
     minute: '2-digit',

@@ -1,20 +1,27 @@
 import SearchView from './Search';
 
 import { buildPageMetadata } from '../../lib/metadata';
+import { PageMessages } from '../../components/i18n/PageMessages';
+import { getPageT } from '../../i18n/server';
 
 // NOINDEX: this page's content is entirely a function of the request's own
 // ?q=/?domain= query string, so an empty /search is a bare input box with
 // no indexable content — a thin/duplicate search-results surface. `follow`
 // stays true so link equity still flows through any result links.
-export const metadata = {
-  ...buildPageMetadata({
-    title: 'Search BetterSanFernando',
-    description:
-      'Search currently published BetterSanFernando projects, barangays, government offices, legislation, and project-source records.',
-    path: '/search',
-  }),
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('search');
+  return {
+    ...buildPageMetadata({
+      title: t('Search BetterSanFernando'),
+      description: t(
+        'Search currently published BetterSanFernando projects, barangays, government offices, legislation, and project-source records.'
+      ),
+      path: '/search',
+      locale,
+    }),
+    robots: { index: false, follow: true },
+  };
+}
 
 // This page's entire content depends on the request's own query string
 // (?q=, ?domain=), so it is rendered per request rather than statically
@@ -25,6 +32,11 @@ export const metadata = {
 // requirement is specific to the static-generation CSR-bailout path).
 export const dynamic = 'force-dynamic';
 
-export default function SearchPage() {
-  return <SearchView />;
+export default async function SearchPage() {
+  const { messages } = await getPageT('search');
+  return (
+    <PageMessages messages={messages}>
+      <SearchView />
+    </PageMessages>
+  );
 }

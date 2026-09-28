@@ -7,15 +7,17 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import { ArrowUpRight, Search, X } from 'lucide-react';
+import { usePageT } from '../../components/i18n/PageMessages';
+import type { PageT } from '../../i18n/page-t';
 import {
   getServiceCategory,
   getServiceHref,
   getServices,
   type Service,
 } from '../../data/civic/services';
-import { categories } from './categories';
+import { getCategoryDisplay } from './categories';
 
 // Narrow client search feature for the /services hub, filtering and ranking
 // the existing published service dataset in memory and linking straight to
@@ -37,9 +39,6 @@ import { categories } from './categories';
 // see the same query and results.
 
 const services = getServices();
-const categoryNameBySlug = new Map(
-  categories.map(([name, slug]) => [slug, name])
-);
 
 const MOBILE_MAX_RESULTS = 5;
 const DESKTOP_MAX_RESULTS = 6;
@@ -49,10 +48,11 @@ const DESKTOP_MAX_RESULTS = 6;
 // field a prefix ("starts with") match beats a later substring match — e.g.
 // "civil" surfaces Civil Registry services before something that merely
 // mentions "civil" deep in its description. Lower score = stronger match;
-// null means no match at all. Deterministic, no search dependency.
+// null means no match at all. Deterministic, no search dependency. Ranks
+// against the canonical English category name — search matching stays
+// identical regardless of locale.
 function matchRank(service: Service, query: string): number | null {
-  const categoryName =
-    categoryNameBySlug.get(getServiceCategory(service)) ?? '';
+  const categoryName = canonicalCategoryName(getServiceCategory(service));
   const fields = [
     service.title,
     categoryName,
@@ -67,6 +67,14 @@ function matchRank(service: Service, query: string): number | null {
   }
 
   return null;
+}
+
+// Canonical (English) category name for matching — reuses getCategoryDisplay
+// with a no-op translator, so search always ranks against the untranslated
+// English name regardless of the page's locale.
+const identityT: PageT = key => key;
+function canonicalCategoryName(slug: string): string {
+  return getCategoryDisplay(slug, identityT).name;
 }
 
 interface SearchState {
@@ -121,19 +129,21 @@ function ResultsPanelContent({
   totalCount: number;
   wrapTitles?: boolean;
 }) {
+  const t = usePageT();
+
   if (visibleResults.length === 0) {
     return (
       <div className="p-4">
         <p className="font-semibold text-gray-900">
-          No matching services found.
+          {t('No matching services found.')}
         </p>
         <p className="mt-1 text-sm text-gray-600">
-          Try another term or{' '}
+          {t('Try another term or')}{' '}
           <a
             href="#categories"
             className="font-semibold text-[#0066EB] hover:text-[#0052BC]"
           >
-            browse the service categories below
+            {t('browse the service categories below')}
           </a>
           .
         </p>
@@ -157,7 +167,7 @@ function ResultsPanelContent({
                   {service.title}
                 </span>
                 <span className="block text-xs text-gray-500">
-                  {categoryNameBySlug.get(getServiceCategory(service))} ·{' '}
+                  {getCategoryDisplay(getServiceCategory(service), t).name} ·{' '}
                   {service.office.acronym}
                 </span>
               </span>
@@ -172,7 +182,10 @@ function ResultsPanelContent({
 
       {hiddenCount > 0 && (
         <p className="border-t border-gray-100 px-4 py-2.5 text-xs text-gray-500">
-          Showing {visibleResults.length} of {totalCount} matching services
+          {t('Showing {{count}} of {{total}} matching services', {
+            count: visibleResults.length,
+            total: totalCount,
+          })}
         </p>
       )}
     </>
@@ -184,6 +197,7 @@ function ResultsPanelContent({
 // compact; matching services on mobile render in <MobileSearchResults/>
 // instead, mounted separately by page.tsx.
 export default function ServiceSearchInput() {
+  const t = usePageT();
   const { query, setQuery, results } = useSearchState();
   const hasQuery = query.trim().length > 0;
 
@@ -207,7 +221,9 @@ export default function ServiceSearchInput() {
             if (event.key === 'Escape') setQuery('');
           }}
           aria-labelledby="service-finder-heading"
-          placeholder="Search permits, certificates, health services, taxes..."
+          placeholder={t(
+            'Search permits, certificates, health services, taxes...'
+          )}
           className="h-12 w-full rounded-sm border border-gray-300 bg-white pl-12 pr-12 text-base text-gray-900 outline-none placeholder:text-gray-500 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
         />
 
@@ -215,7 +231,7 @@ export default function ServiceSearchInput() {
           <button
             type="button"
             onClick={() => setQuery('')}
-            aria-label="Clear search"
+            aria-label={t('Clear search')}
             className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-sm text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
           >
             <X className="h-4 w-4" aria-hidden="true" />
@@ -228,7 +244,7 @@ export default function ServiceSearchInput() {
           <div
             className="absolute left-0 right-0 top-full z-40 mt-2 hidden max-h-[20rem] overflow-y-auto rounded-sm border border-gray-200 bg-white shadow-lg lg:block"
             role="region"
-            aria-label="Search results"
+            aria-label={t('Search results')}
           >
             <ResultsPanelContent
               visibleResults={desktopResults}
@@ -241,15 +257,22 @@ export default function ServiceSearchInput() {
 
       {!hasQuery && (
         <p className="mt-3 text-sm text-gray-500">
-          Search by service name, document, permit, or need. Try &ldquo;birth
-          certificate&rdquo;, &ldquo;business permit&rdquo;, &ldquo;PWD
-          ID&rdquo;, or &ldquo;real property tax&rdquo;.
+          {t(
+            'Search by service name, document, permit, or need. Try “birth certificate”, “business permit”, “PWD ID”, or “real property tax”.'
+          )}
         </p>
       )}
 
       <p className="sr-only" aria-live="polite">
         {hasQuery
-          ? `${results.length} ${results.length === 1 ? 'service' : 'services'} found`
+          ? t(
+              results.length === 1
+                ? '{{count}} service found'
+                : '{{count}} services found',
+              {
+                count: results.length,
+              }
+            )
           : ''}
       </p>
     </div>
@@ -260,6 +283,7 @@ export default function ServiceSearchInput() {
 // page.tsx as a sibling right after the hero and before the category
 // directory. Renders nothing while the query is empty.
 export function MobileSearchResults() {
+  const t = usePageT();
   const { query, results } = useSearchState();
   const hasQuery = query.trim().length > 0;
 
@@ -271,15 +295,19 @@ export function MobileSearchResults() {
   return (
     <section
       className="border-b border-gray-200 bg-white lg:hidden"
-      aria-label="Search results"
+      aria-label={t('Search results')}
     >
       <div className="container mx-auto px-4 py-6">
-        <p className="text-eyebrow text-[#0066EB]">Search Results</p>
+        <p className="text-eyebrow text-[#0066EB]">{t('Search Results')}</p>
 
         {results.length > 0 && (
           <p className="mt-2 text-sm font-semibold text-gray-900">
-            {results.length} {results.length === 1 ? 'match' : 'matches'} for
-            &ldquo;{query}&rdquo;
+            {t(
+              results.length === 1
+                ? '{{count}} match for “{{query}}”'
+                : '{{count}} matches for “{{query}}”',
+              { count: results.length, query }
+            )}
           </p>
         )}
 

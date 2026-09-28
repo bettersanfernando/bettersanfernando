@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { RotateCcw, Search } from 'lucide-react';
 import PageLoading from '../../../components/ui/PageLoading';
 import type {
@@ -14,7 +14,8 @@ import {
   ProjectLifecycleStatus,
   type ProjectLifecycleStatus as ProjectLifecycleStatusType,
 } from '../../../data/civic/projects';
-import { titleCaseEnum } from '../../../lib/utils';
+import { enumLabel } from '../../statistics/enum-labels';
+import { usePageT } from '../../../components/i18n/PageMessages';
 
 // The only browser-only piece of /projects/map: the MapLibre canvas itself.
 // next/dynamic's ssr:false is only usable inside a Client Component, which
@@ -52,6 +53,7 @@ export default function ProjectMapView({
   attributedProjects: number;
   unattributedProjects: number;
 }) {
+  const t = usePageT();
   const [selectedPsgc, setSelectedPsgc] = useState<string | null>(null);
   const [lifecycleFilter, setLifecycleFilter] =
     useState<ProjectLifecycleStatusType | null>(null);
@@ -106,7 +108,7 @@ export default function ProjectMapView({
       {/* Toolbar */}
       <div className="flex flex-col gap-3 rounded-sm border border-gray-200 bg-[#F3F6FB] p-3 sm:flex-row sm:flex-wrap sm:items-center">
         <label className="flex-1 sm:min-w-[14rem]">
-          <span className="sr-only">Find a barangay</span>
+          <span className="sr-only">{t('Find a barangay')}</span>
           <div className="relative">
             <Search
               className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
@@ -117,7 +119,7 @@ export default function ProjectMapView({
               onChange={event => setSelectedPsgc(event.target.value || null)}
               className={`${selectClass} w-full pl-9`}
             >
-              <option value="">Find a barangay…</option>
+              <option value="">{t('Find a barangay…')}</option>
               {barangays.map(barangay => (
                 <option key={barangay.psgcCode} value={barangay.psgcCode}>
                   {barangay.name}
@@ -128,7 +130,7 @@ export default function ProjectMapView({
         </label>
 
         <label className="sm:min-w-[13rem]">
-          <span className="sr-only">View project records by status</span>
+          <span className="sr-only">{t('View project records by status')}</span>
           <select
             value={lifecycleFilter ?? ''}
             onChange={event =>
@@ -139,10 +141,10 @@ export default function ProjectMapView({
             }
             className={`${selectClass} w-full sm:w-auto`}
           >
-            <option value="">View: All project records</option>
+            <option value="">{t('View: All project records')}</option>
             {LIFECYCLE_OPTIONS.map(status => (
               <option key={status} value={status}>
-                View: {titleCaseEnum(status)}
+                {t('View: {{status}}', { status: enumLabel(t, status) })}
               </option>
             ))}
           </select>
@@ -154,7 +156,7 @@ export default function ProjectMapView({
           className="inline-flex h-10 items-center justify-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-900 hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
         >
           <RotateCcw className="h-4 w-4" aria-hidden="true" />
-          Reset view
+          {t('Reset view')}
         </button>
       </div>
 
@@ -174,7 +176,9 @@ export default function ProjectMapView({
         <aside className="flex flex-col rounded-sm border border-gray-200 bg-white p-5 lg:h-full">
           {selected ? (
             <div aria-live="polite">
-              <p className="text-eyebrow text-[#0066EB]">Selected Barangay</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('Selected Barangay')}
+              </p>
               <p className="mt-2 text-xl font-bold text-gray-950">
                 {selected.name}
               </p>
@@ -183,22 +187,33 @@ export default function ProjectMapView({
                   {selectedCount}
                 </strong>{' '}
                 {lifecycleFilter
-                  ? `${titleCaseEnum(lifecycleFilter).toLowerCase()} record${selectedCount === 1 ? '' : 's'}`
-                  : `project record${selectedCount === 1 ? '' : 's'}`}
+                  ? t(
+                      selectedCount === 1
+                        ? '{{status}} record'
+                        : '{{status}} records',
+                      { status: enumLabel(t, lifecycleFilter).toLowerCase() }
+                    )
+                  : t(
+                      selectedCount === 1 ? 'project record' : 'project records'
+                    )}
               </p>
               {lifecycleFilter && (
                 <p className="mt-1 text-xs text-gray-500">
-                  Showing {titleCaseEnum(lifecycleFilter).toLowerCase()} records
-                  only. Reset view to see all records.
+                  {t(
+                    'Showing {{status}} records only. Reset view to see all records.',
+                    {
+                      status: enumLabel(t, lifecycleFilter).toLowerCase(),
+                    }
+                  )}
                 </p>
               )}
 
               <h3 className="mt-5 border-t border-gray-200 pt-4 text-xs font-semibold text-gray-700">
-                Current stages
+                {t('Current stages')}
               </h3>
               {selected.projectCount === 0 ? (
                 <p className="mt-2 text-sm text-gray-600">
-                  No attributed project records.
+                  {t('No attributed project records.')}
                 </p>
               ) : (
                 <dl className="mt-2 space-y-1.5 text-sm">
@@ -207,7 +222,7 @@ export default function ProjectMapView({
                     .map(([status, count]) => (
                       <div key={status} className="flex justify-between gap-4">
                         <dt className="text-gray-600">
-                          {titleCaseEnum(status)}
+                          {enumLabel(t, status)}
                         </dt>
                         <dd className="font-medium tabular-nums text-gray-900">
                           {count}
@@ -220,7 +235,7 @@ export default function ProjectMapView({
               {selected.projectCount > 0 && (
                 <>
                   <h3 className="mt-5 border-t border-gray-200 pt-4 text-xs font-semibold text-gray-700">
-                    Project categories
+                    {t('Project categories')}
                   </h3>
                   <dl className="mt-2 space-y-1.5 text-sm">
                     {Object.entries(selected.categoryCounts)
@@ -231,7 +246,7 @@ export default function ProjectMapView({
                           className="flex justify-between gap-4"
                         >
                           <dt className="text-gray-600">
-                            {titleCaseEnum(category)}
+                            {enumLabel(t, category)}
                           </dt>
                           <dd className="font-medium tabular-nums text-gray-900">
                             {count}
@@ -246,14 +261,14 @@ export default function ProjectMapView({
                 href={`/projects/city-projects?barangay=${selected.psgcCode}`}
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC]"
               >
-                View project records →
+                {t('View project records →')}
               </Link>
             </div>
           ) : (
             <div>
-              <p className="text-eyebrow text-[#0066EB]">Map Overview</p>
+              <p className="text-eyebrow text-[#0066EB]">{t('Map Overview')}</p>
               <h2 className="mt-2 text-xl font-bold text-gray-950">
-                Citywide project distribution
+                {t('Citywide project distribution')}
               </h2>
 
               <div className="mt-5">
@@ -261,7 +276,7 @@ export default function ProjectMapView({
                   {attributedProjects}
                 </p>
                 <p className="mt-0.5 text-xs text-gray-600">
-                  project records attributed to a barangay
+                  {t('project records attributed to a barangay')}
                 </p>
               </div>
 
@@ -270,14 +285,14 @@ export default function ProjectMapView({
                   {unattributedProjects}
                 </p>
                 <p className="mt-0.5 text-xs text-gray-600">
-                  records without a verified barangay attribution
+                  {t('records without a verified barangay attribution')}
                 </p>
                 {unattributedProjects > 0 && (
                   <Link
                     href="/projects/city-projects?barangay=unattributed"
                     className="mt-1 inline-flex text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
                   >
-                    View unattributed projects →
+                    {t('View unattributed projects →')}
                   </Link>
                 )}
               </div>
@@ -285,7 +300,7 @@ export default function ProjectMapView({
               {top3.length > 0 && (
                 <div className="mt-5 border-t border-gray-200 pt-4">
                   <h3 className="text-xs font-semibold text-gray-700">
-                    Most represented barangays
+                    {t('Most represented barangays')}
                   </h3>
                   <ol className="mt-2 space-y-1.5 text-sm">
                     {top3.map((barangay, index) => (
@@ -311,13 +326,13 @@ export default function ProjectMapView({
               {cityLifecycleTotals.length > 0 && (
                 <div className="mt-5 border-t border-gray-200 pt-4">
                   <h3 className="text-xs font-semibold text-gray-700">
-                    Current project stages
+                    {t('Current project stages')}
                   </h3>
                   <dl className="mt-2 space-y-1.5 text-sm">
                     {cityLifecycleTotals.map(([status, count]) => (
                       <div key={status} className="flex justify-between gap-4">
                         <dt className="text-gray-600">
-                          {titleCaseEnum(status)}
+                          {enumLabel(t, status)}
                         </dt>
                         <dd className="font-medium tabular-nums text-gray-900">
                           {count}
@@ -332,7 +347,7 @@ export default function ProjectMapView({
 
           <div className="mt-6 border-t border-gray-200 pt-4 lg:mt-auto">
             <p className="text-xs font-semibold text-gray-700">
-              Project records
+              {t('Project records')}
             </p>
             <ul className="mt-2 space-y-1.5 text-xs text-gray-600">
               {LEGEND.map(item => (
@@ -347,7 +362,7 @@ export default function ProjectMapView({
               ))}
             </ul>
             <p className="mt-2 text-xs text-gray-500">
-              Darker areas have more attributed project records.
+              {t('Darker areas have more attributed project records.')}
             </p>
           </div>
         </aside>

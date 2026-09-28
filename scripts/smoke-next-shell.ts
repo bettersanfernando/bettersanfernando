@@ -9,7 +9,11 @@ import { plannedPages } from '../src/data/plannedPages.ts';
 
 const layoutSource = readFileSync('src/app/layout.tsx', 'utf8');
 const providersSource = readFileSync('src/app/providers.tsx', 'utf8');
-const i18nSource = readFileSync('src/i18n.ts', 'utf8');
+// The i18next options (resources, lng) live in src/i18n/config.ts, shared by
+// src/i18n.ts (client) and src/i18n/server.ts.
+const i18nSource =
+  readFileSync('src/i18n.ts', 'utf8') +
+  readFileSync('src/i18n/config.ts', 'utf8');
 const navbarSource = readFileSync('src/components/layout/Navbar.tsx', 'utf8');
 const footerSource = readFileSync('src/components/layout/Footer.tsx', 'utf8');
 const scrollToTopSource = readFileSync(
@@ -104,12 +108,17 @@ assert.ok(
 );
 assert.match(
   i18nSource,
-  /import enCommon from '\.\.\/public\/locales\/en\/common\.json'/,
+  /import enCommon from '(\.\.\/)+public\/locales\/en\/common\.json'/,
   'src/i18n.ts must import the real public/locales/en/common.json file, not duplicate its text'
 );
 assert.match(
   i18nSource,
-  /resources:\s*\{\s*en:\s*\{\s*common:\s*enCommon\s*\}\s*\}/,
+  /import filCommon from '(\.\.\/)+public\/locales\/fil\/common\.json'/,
+  'src/i18n.ts must import the real public/locales/fil/common.json file'
+);
+assert.match(
+  i18nSource,
+  /resources:\s*\{[\s\S]*en:\s*\{\s*common:\s*enCommon\s*\}[\s\S]*fil:\s*\{\s*common:\s*filCommon\s*\}/,
   'src/i18n.ts must initialize with the real imported English resource bundle'
 );
 assert.ok(
@@ -118,7 +127,7 @@ assert.ok(
 );
 assert.match(
   i18nSource,
-  /^\s*lng: 'en',/m,
+  /lng: language/,
   'src/i18n.ts must set an unconditional initial language of "en" — identical on the server and the first client render, before any browser-only detection can run'
 );
 assert.ok(
@@ -132,13 +141,13 @@ assert.ok(
 // post-mount effect in the client provider, never module-eval time.
 assert.match(
   providersSource,
-  /useEffect\(\(\) => \{[\s\S]*detectSupportedLanguage\(\)/,
-  'language detection must run inside a useEffect in providers.tsx, so it only ever runs after hydration'
+  /createI18n\(locale\)/,
+  'providers.tsx must create an i18n instance for the request-selected locale'
 );
 assert.match(
   providersSource,
-  /navigator\.language/,
-  "providers.tsx must still detect the user's browser language after hydration"
+  /persistLanguage\(locale\)/,
+  'providers.tsx must persist the URL-selected language'
 );
 
 // suppressHydrationWarning must never be used to paper over a mismatch.

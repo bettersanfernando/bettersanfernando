@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import {
   ChevronLeft,
@@ -30,35 +30,42 @@ import {
 import { getProjects } from '../../../data/civic/projects';
 import { getEvidenceSourceUrl } from '../../../data/civic/sources';
 import { formatIsoDate, formatPeso } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
 
 const PAGE_SIZE = 10;
 const eyebrowTracking = { letterSpacing: '0.14em' };
 
-const RELATED_RESOURCES = [
-  {
-    title: 'Procurement overview',
-    description:
-      'Understand the procurement records and evidence available across BetterSanFernando.',
-    href: '/procurement',
-  },
-  {
-    title: 'City Projects',
-    description: 'Browse the full published City project collection.',
-    href: '/projects/city-projects',
-  },
-  {
-    title: 'Project Evidence',
-    description:
-      'Inspect the official-source records used to establish project facts.',
-    href: '/projects/sources',
-  },
-  {
-    title: 'Project Methodology',
-    description:
-      'See how project records are collected, structured, and interpreted.',
-    href: '/projects/methodology',
-  },
-] as const;
+const RELATED_RESOURCES = (t: PageT) =>
+  [
+    {
+      title: t('Procurement overview'),
+      description: t(
+        'Understand the procurement records and evidence available across BetterSanFernando.'
+      ),
+      href: '/procurement',
+    },
+    {
+      title: t('City Projects'),
+      description: t('Browse the full published City project collection.'),
+      href: '/projects/city-projects',
+    },
+    {
+      title: t('Project Evidence'),
+      description: t(
+        'Inspect the official-source records used to establish project facts.'
+      ),
+      href: '/projects/sources',
+    },
+    {
+      title: t('Project Methodology'),
+      description: t(
+        'See how project records are collected, structured, and interpreted.'
+      ),
+      href: '/projects/methodology',
+    },
+  ] as const;
 
 function getPageWindow(current: number, total: number): (number | '…')[] {
   if (total <= 7) {
@@ -79,6 +86,8 @@ function getPageWindow(current: number, total: number): (number | '…')[] {
 }
 
 export default function Contracts() {
+  const t = usePageT();
+  const locale = useLocale();
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [lifecycle, setLifecycle] = useQueryState('status', {
     defaultValue: '',
@@ -335,25 +344,25 @@ export default function Contracts() {
         <Breadcrumbs
           className="mb-6"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Projects', href: '/projects' },
-            { label: 'Procurement', href: '/procurement' },
-            { label: 'Contracts and Awards' },
+            { label: t('Home'), href: '/' },
+            { label: t('Projects'), href: '/projects' },
+            { label: t('Procurement'), href: '/procurement' },
+            { label: t('Contracts and Awards') },
           ]}
         />
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              CONTRACTS &amp; AWARDS
+              {t('CONTRACTS & AWARDS')}
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
-              Published award and contract evidence
+              {t('Published award and contract evidence')}
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-              Browse project-linked award records, contract evidence,
-              contractors, contract references, financial amounts, and official
-              source documents.
+              {t(
+                'Browse project-linked award records, contract evidence, contractors, contract references, financial amounts, and official source documents.'
+              )}
             </p>
           </div>
 
@@ -362,18 +371,18 @@ export default function Contracts() {
             className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5"
           >
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              SCOPE
+              {t('SCOPE')}
             </p>
             <h2
               id="scope-module-title"
               className="mt-1.5 text-base font-bold text-gray-950"
             >
-              Project-linked award and contract records
+              {t('Project-linked award and contract records')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600">
-              These records document award and contract-related evidence
-              connected to BetterSanFernando’s current project collection. They
-              are not a complete archive of all City Government procurement.
+              {t(
+                'These records document award and contract-related evidence connected to BetterSanFernando’s current project collection. They are not a complete archive of all City Government procurement.'
+              )}
             </p>
           </aside>
         </div>
@@ -381,7 +390,7 @@ export default function Contracts() {
 
       {/* 2. Non-Repetitive Summary Metrics Strip */}
       <section
-        aria-label="Award and contract metrics"
+        aria-label={t('Award and contract metrics')}
         className="border-y border-gray-200 bg-gray-50"
       >
         <div className="container mx-auto px-4 py-4 sm:py-6">
@@ -390,14 +399,14 @@ export default function Contracts() {
             <div className="py-3 sm:py-0 sm:pr-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Awarded projects
+                  {t('Awarded projects')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {summary.awarded}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                projects with published award evidence
+                {t('projects with published award evidence')}
               </p>
             </div>
 
@@ -405,14 +414,16 @@ export default function Contracts() {
             <div className="py-3 sm:py-0 sm:px-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Contracted projects
+                  {t('Contracted projects')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {summary.contracted}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                projects whose canonical records support contract execution
+                {t(
+                  'projects whose canonical records support contract execution'
+                )}
               </p>
             </div>
 
@@ -420,22 +431,28 @@ export default function Contracts() {
             <div className="py-3 sm:py-0 sm:pl-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Contract evidence coverage
+                  {t('Contract evidence coverage')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
-                  {summary.contracted} of {summary.awarded}
+                  {t('{{contracted}} of {{awarded}}', {
+                    contracted: summary.contracted,
+                    awarded: summary.awarded,
+                  })}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                {contractCoveragePct}% documentary status coverage
+                {t('{{contractCoveragePct}}% documentary status coverage', {
+                  contractCoveragePct,
+                })}
               </p>
             </div>
           </dl>
 
           {allContractedHaveDetails && (
             <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-gray-500 sm:mt-4 sm:pt-4">
-              All currently Contracted projects include a published contract
-              number and contract amount.
+              {t(
+                'All currently Contracted projects include a published contract number and contract amount.'
+              )}
             </p>
           )}
         </div>
@@ -447,17 +464,18 @@ export default function Contracts() {
         <section aria-labelledby="overview-heading">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              DOCUMENTARY OVERVIEW
+              {t('DOCUMENTARY OVERVIEW')}
             </p>
             <h2
               id="overview-heading"
               className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
             >
-              Overview of award and contract evidence
+              {t('Overview of award and contract evidence')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              See how published award and contract-related records are
-              represented across the current project collection.
+              {t(
+                'See how published award and contract-related records are represented across the current project collection.'
+              )}
             </p>
           </div>
 
@@ -467,18 +485,36 @@ export default function Contracts() {
               {/* Left Top: Evidence by document year */}
               <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
                 <h3 className="text-base font-bold text-gray-950">
-                  Award and contract evidence by document year
+                  {t('Award and contract evidence by document year')}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  See when the published award and contract-related evidence in
-                  this collection was documented.
+                  {t(
+                    'See when the published award and contract-related evidence in this collection was documented.'
+                  )}
                 </p>
 
                 {/* Vertical Stacked Bar Chart */}
                 <div
                   className="mt-5 grid grid-cols-5 items-end gap-2 sm:gap-4 border-b border-gray-200 pb-3"
                   role="img"
-                  aria-label={`Award and contract projects by year: ${recordsByYear.map(y => `${y.year}: ${y.total} projects (${y.awarded} awarded, ${y.contracted} contracted)`).join('; ')}`}
+                  aria-label={t(
+                    'Award and contract projects by year: {{items}}',
+                    {
+                      items: recordsByYear
+                        .map(y =>
+                          t(
+                            '{{year}}: {{total}} projects ({{awarded}} awarded, {{contracted}} contracted)',
+                            {
+                              year: y.year,
+                              total: y.total,
+                              awarded: y.awarded,
+                              contracted: y.contracted,
+                            }
+                          )
+                        )
+                        .join('; '),
+                    }
+                  )}
                 >
                   {recordsByYear.map(item => {
                     const isHovered = activeChartYear === item.year;
@@ -497,7 +533,15 @@ export default function Contracts() {
                         onFocus={() => setActiveChartYear(item.year)}
                         onBlur={() => setActiveChartYear(null)}
                         className="group flex flex-col items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:rounded-sm"
-                        aria-label={`${item.year}: ${item.total} projects (${item.awarded} awarded, ${item.contracted} contracted)`}
+                        aria-label={t(
+                          '{{year}}: {{total}} projects ({{awarded}} awarded, {{contracted}} contracted)',
+                          {
+                            year: item.year,
+                            total: item.total,
+                            awarded: item.awarded,
+                            contracted: item.contracted,
+                          }
+                        )}
                       >
                         {/* Count label above bar */}
                         <span className="text-xs font-bold tabular-nums text-gray-950 group-hover:text-[#0066EB]">
@@ -549,14 +593,19 @@ export default function Contracts() {
                           <strong className="font-semibold text-gray-950">
                             {activeItem.year}
                           </strong>{' '}
-                          &middot; {activeItem.total} projects &middot;{' '}
+                          {t('· {{total}} projects ·', {
+                            total: activeItem.total,
+                          })}{' '}
                           <span className="text-[#0066EB] font-medium">
-                            {activeItem.awarded} awarded
+                            {t('{{awarded}} awarded', {
+                              awarded: activeItem.awarded,
+                            })}
                           </span>
                           {activeItem.contracted > 0 && (
                             <span className="text-[#0F766E] font-medium">
-                              {' '}
-                              &middot; {activeItem.contracted} contracted
+                              {t('· {{contracted}} contracted', {
+                                contracted: activeItem.contracted,
+                              })}
                             </span>
                           )}
                         </p>
@@ -564,7 +613,7 @@ export default function Contracts() {
                     })()
                   ) : (
                     <p className="text-gray-500">
-                      Hover or focus a year to view details.
+                      {t('Hover or focus a year to view details.')}
                     </p>
                   )}
                 </div>
@@ -576,14 +625,14 @@ export default function Contracts() {
                       className="h-2.5 w-2.5 rounded-none bg-[#0066EB]"
                       aria-hidden="true"
                     />
-                    Awarded status
+                    {t('Awarded status')}
                   </span>
                   <span className="inline-flex items-center gap-1.5">
                     <span
                       className="h-2.5 w-2.5 rounded-none bg-[#0F766E]"
                       aria-hidden="true"
                     />
-                    Contracted status
+                    {t('Contracted status')}
                   </span>
                 </div>
               </div>
@@ -594,10 +643,10 @@ export default function Contracts() {
                   className="text-eyebrow text-[#0066EB]"
                   style={eyebrowTracking}
                 >
-                  QUICK READ
+                  {t('QUICK READ')}
                 </p>
                 <h4 className="mt-1 text-sm font-bold text-gray-950">
-                  What the documentary timeline shows
+                  {t('What the documentary timeline shows')}
                 </h4>
                 <div className="mt-3 grid grid-cols-1 divide-y divide-gray-200/80 sm:grid-cols-2 sm:divide-y-0 border-t border-gray-200/80 pt-1">
                   {/* Top-Left: Records represented */}
@@ -606,7 +655,7 @@ export default function Contracts() {
                       {timelineQuickRead.totalRecordsRepresented}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      records represented across timeline
+                      {t('records represented across timeline')}
                     </p>
                   </div>
 
@@ -616,9 +665,11 @@ export default function Contracts() {
                       {timelineQuickRead.highestYear.year}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      highest-volume year &middot;{' '}
+                      {t('highest-volume year ·')}{' '}
                       <span className="tabular-nums font-medium text-gray-900">
-                        {timelineQuickRead.highestYear.total} records
+                        {t('{{total}} records', {
+                          total: timelineQuickRead.highestYear.total,
+                        })}
                       </span>
                     </p>
                   </div>
@@ -629,7 +680,7 @@ export default function Contracts() {
                       {timelineQuickRead.yearsRepresented}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      document years represented
+                      {t('document years represented')}
                     </p>
                   </div>
 
@@ -639,7 +690,7 @@ export default function Contracts() {
                       {timelineQuickRead.yearsWithContracted}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      document years include Contracted-status records
+                      {t('document years include Contracted-status records')}
                     </p>
                   </div>
                 </div>
@@ -655,25 +706,28 @@ export default function Contracts() {
                     className="text-eyebrow text-[#0066EB]"
                     style={eyebrowTracking}
                   >
-                    CONTRACT EVIDENCE
+                    {t('CONTRACT EVIDENCE')}
                   </p>
                   <span className="text-xs font-semibold text-gray-500">
-                    {summary.contracted} verified projects
+                    {t('{{contracted}} verified projects', {
+                      contracted: summary.contracted,
+                    })}
                   </span>
                 </div>
                 <h3 className="mt-1 text-base font-bold text-gray-950">
-                  Current contract evidence snapshot
+                  {t('Current contract evidence snapshot')}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  Factual summary and financial comparison for the{' '}
-                  {summary.contracted} projects with verified contract
-                  execution.
+                  {t(
+                    'Factual summary and financial comparison for the {{contracted}} projects with verified contract execution.',
+                    { contracted: summary.contracted }
+                  )}
                 </p>
 
                 {/* Contract Amount Compared with ABC */}
                 <div className="mt-4">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                    Contract amount compared with ABC
+                    {t('Contract amount compared with ABC')}
                   </h4>
                   <div className="mt-2.5 divide-y divide-gray-100 border-y border-gray-100 text-xs">
                     {contractedProjects.map(cp => (
@@ -696,12 +750,12 @@ export default function Contracts() {
                         <div className="text-right shrink-0">
                           <span className="font-semibold tabular-nums text-gray-900">
                             {cp.contractAmount !== null
-                              ? formatPeso(cp.contractAmount)
+                              ? formatPeso(cp.contractAmount, locale)
                               : 'Unavailable'}
                           </span>
                           {cp.pct && (
                             <span className="block text-[11px] font-medium tabular-nums text-gray-500">
-                              {cp.pct}% of ABC
+                              {t('{{pct}}% of ABC', { pct: cp.pct })}
                             </span>
                           )}
                         </div>
@@ -712,8 +766,9 @@ export default function Contracts() {
 
                 {/* Clarification Note immediately following */}
                 <p className="mt-4 border-t border-gray-100 pt-3 text-xs leading-relaxed text-gray-500">
-                  This compares published contract amounts with ABC. It does not
-                  represent actual expenditure, payment, or savings.
+                  {t(
+                    'This compares published contract amounts with ABC. It does not represent actual expenditure, payment, or savings.'
+                  )}
                 </p>
               </div>
 
@@ -723,39 +778,48 @@ export default function Contracts() {
                   className="text-eyebrow text-[#0066EB]"
                   style={eyebrowTracking}
                 >
-                  EVIDENCE COVERAGE
+                  {t('EVIDENCE COVERAGE')}
                 </p>
                 <h4 className="mt-1 text-sm font-bold text-gray-950">
-                  What is available for the Contracted projects
+                  {t('What is available for the Contracted projects')}
                 </h4>
                 <div className="mt-3 grid grid-cols-1 gap-4 divide-y divide-gray-200/80 sm:grid-cols-3 sm:divide-y-0 sm:divide-x sm:divide-gray-200/80">
                   <div className="sm:pr-3">
                     <p className="text-lg font-bold tabular-nums text-gray-950">
-                      {contractedEvidenceCoverage.withContractNumber} of{' '}
-                      {contractedEvidenceCoverage.total}
+                      {t('{{withContractNumber}} of {{total}}', {
+                        withContractNumber:
+                          contractedEvidenceCoverage.withContractNumber,
+                        total: contractedEvidenceCoverage.total,
+                      })}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      include a published contract number
+                      {t('include a published contract number')}
                     </p>
                   </div>
 
                   <div className="pt-3 sm:pt-0 sm:px-3">
                     <p className="text-lg font-bold tabular-nums text-gray-950">
-                      {contractedEvidenceCoverage.withContractAmount} of{' '}
-                      {contractedEvidenceCoverage.total}
+                      {t('{{withContractAmount}} of {{total}}', {
+                        withContractAmount:
+                          contractedEvidenceCoverage.withContractAmount,
+                        total: contractedEvidenceCoverage.total,
+                      })}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      include a published contract amount
+                      {t('include a published contract amount')}
                     </p>
                   </div>
 
                   <div className="pt-3 sm:pt-0 sm:pl-3">
                     <p className="text-lg font-bold tabular-nums text-gray-950">
-                      {contractedEvidenceCoverage.withOfficialSource} of{' '}
-                      {contractedEvidenceCoverage.total}
+                      {t('{{withOfficialSource}} of {{total}}', {
+                        withOfficialSource:
+                          contractedEvidenceCoverage.withOfficialSource,
+                        total: contractedEvidenceCoverage.total,
+                      })}
                     </p>
                     <p className="mt-0.5 text-xs text-gray-600">
-                      include contract-related official evidence
+                      {t('include contract-related official evidence')}
                     </p>
                   </div>
                 </div>
@@ -775,17 +839,18 @@ export default function Contracts() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                AWARD AND CONTRACT RECORDS
+                {t('AWARD AND CONTRACT RECORDS')}
               </p>
               <h2
                 id="records-browser-heading"
                 className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
               >
-                Published records
+                {t('Published records')}
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Search and filter award and contract-related evidence linked to
-                published City projects.
+                {t(
+                  'Search and filter award and contract-related evidence linked to published City projects.'
+                )}
               </p>
             </div>
 
@@ -795,10 +860,21 @@ export default function Contracts() {
                 aria-live="polite"
               >
                 {filtered.length === 0
-                  ? '0 matching records'
+                  ? t('0 matching records')
                   : hasActiveFilters
-                    ? `Showing ${fromCount}–${toCount} of ${filtered.length} matching records`
-                    : `Showing ${fromCount}–${toCount} of ${filtered.length} records`}
+                    ? t(
+                        'Showing {{from}}–{{to}} of {{total}} matching records',
+                        {
+                          from: fromCount,
+                          to: toCount,
+                          total: filtered.length,
+                        }
+                      )
+                    : t('Showing {{from}}–{{to}} of {{total}} records', {
+                        from: fromCount,
+                        to: toCount,
+                        total: filtered.length,
+                      })}
               </span>
 
               {hasActiveFilters && (
@@ -808,7 +884,7 @@ export default function Contracts() {
                   className="inline-flex items-center gap-1 rounded-sm border border-gray-300 bg-white px-2.5 py-1 text-xs font-semibold text-gray-700 hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  Clear filters
+                  {t('Clear filters')}
                 </button>
               )}
             </div>
@@ -818,12 +894,12 @@ export default function Contracts() {
           <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
             <div className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide uppercase text-gray-700">
               <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
-              Filter award and contract records
+              {t('Filter award and contract records')}
             </div>
 
             {/* Primary Search Input */}
             <div className="relative">
-              <span className="sr-only">Search records</span>
+              <span className="sr-only">{t('Search records')}</span>
               <Search
                 className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
                 aria-hidden="true"
@@ -832,7 +908,9 @@ export default function Contracts() {
                 type="search"
                 value={query}
                 onChange={e => handleQueryChange(e.target.value)}
-                placeholder="Search project, contractor, contract number, or reference..."
+                placeholder={t(
+                  'Search project, contractor, contract number, or reference...'
+                )}
                 className="w-full rounded-sm border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
               />
             </div>
@@ -845,7 +923,7 @@ export default function Contracts() {
                   htmlFor="filter-status"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Documentary status
+                  {t('Documentary status')}
                 </label>
                 <select
                   id="filter-status"
@@ -853,9 +931,9 @@ export default function Contracts() {
                   onChange={e => handleStatusChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All statuses</option>
-                  <option value="AWARDED">Awarded</option>
-                  <option value="CONTRACTED">Contracted</option>
+                  <option value="">{t('All statuses')}</option>
+                  <option value="AWARDED">{t('Awarded')}</option>
+                  <option value="CONTRACTED">{t('Contracted')}</option>
                 </select>
               </div>
 
@@ -865,7 +943,7 @@ export default function Contracts() {
                   htmlFor="filter-year"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Document year
+                  {t('Document year')}
                 </label>
                 <select
                   id="filter-year"
@@ -873,7 +951,7 @@ export default function Contracts() {
                   onChange={e => handleYearChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All years</option>
+                  <option value="">{t('All years')}</option>
                   {years.map(y => (
                     <option key={y} value={y.toString()}>
                       {y}
@@ -888,7 +966,7 @@ export default function Contracts() {
                   htmlFor="filter-barangay"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Barangay
+                  {t('Barangay')}
                 </label>
                 <select
                   id="filter-barangay"
@@ -896,7 +974,7 @@ export default function Contracts() {
                   onChange={e => handleBarangayChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All barangays</option>
+                  <option value="">{t('All barangays')}</option>
                   {barangays.map(b => (
                     <option key={b} value={b}>
                       {b}
@@ -911,7 +989,7 @@ export default function Contracts() {
                   htmlFor="filter-funding"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Funding source
+                  {t('Funding source')}
                 </label>
                 <select
                   id="filter-funding"
@@ -919,7 +997,7 @@ export default function Contracts() {
                   onChange={e => handleFundingChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All funding sources</option>
+                  <option value="">{t('All funding sources')}</option>
                   {fundingSources.map(f => (
                     <option key={f} value={f}>
                       {f}
@@ -934,7 +1012,7 @@ export default function Contracts() {
                   htmlFor="filter-sort"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Sort order
+                  {t('Sort order')}
                 </label>
                 <select
                   id="filter-sort"
@@ -942,19 +1020,19 @@ export default function Contracts() {
                   onChange={e => handleSortChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="date-desc">Newest document</option>
-                  <option value="date-asc">Oldest document</option>
-                  <option value="title-asc">Project name A–Z</option>
-                  <option value="abc-desc">ABC: high to low</option>
-                  <option value="abc-asc">ABC: low to high</option>
+                  <option value="date-desc">{t('Newest document')}</option>
+                  <option value="date-asc">{t('Oldest document')}</option>
+                  <option value="title-asc">{t('Project name A–Z')}</option>
+                  <option value="abc-desc">{t('ABC: high to low')}</option>
+                  <option value="abc-asc">{t('ABC: low to high')}</option>
                   <option value="contract-amount-desc">
-                    Contract amount: high to low
+                    {t('Contract amount: high to low')}
                   </option>
                   <option value="contract-amount-asc">
-                    Contract amount: low to high
+                    {t('Contract amount: low to high')}
                   </option>
                   <option value="contract-number-asc">
-                    Contract number A–Z
+                    {t('Contract number A–Z')}
                   </option>
                 </select>
               </div>
@@ -969,10 +1047,10 @@ export default function Contracts() {
                 aria-hidden="true"
               />
               <h3 className="mt-3 text-base font-bold text-gray-950">
-                No award or contract records match these filters.
+                {t('No award or contract records match these filters.')}
               </h3>
               <p className="mt-1 text-sm text-gray-600">
-                Try changing or clearing one or more filters.
+                {t('Try changing or clearing one or more filters.')}
               </p>
               <button
                 type="button"
@@ -980,7 +1058,7 @@ export default function Contracts() {
                 className="mt-4 inline-flex items-center gap-1.5 rounded-sm bg-[#0066EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                Clear filters
+                {t('Clear filters')}
               </button>
             </div>
           ) : (
@@ -991,32 +1069,34 @@ export default function Contracts() {
                   <thead>
                     <tr className="border-b border-gray-200 bg-[#F3F6FB] text-xs font-semibold text-gray-700">
                       <th scope="col" className="py-3 px-4 w-[26%]">
-                        Project
+                        {t('Project')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[11%]">
-                        Status
+                        {t('Status')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[17%]">
-                        Contractor
+                        {t('Contractor')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[14%]">
-                        Reference
+                        {t('Reference')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[10%]">
-                        Date
+                        {t('Date')}
                       </th>
                       <th scope="col" className="py-3 px-4 text-right w-[11%]">
                         <span className="sr-only">
-                          Approved Budget for the Contract (ABC)
+                          {t('Approved Budget for the Contract (ABC)')}
                         </span>
-                        ABC
+                        {t('ABC')}
                       </th>
                       <th scope="col" className="py-3 px-4 text-right w-[11%]">
-                        <span className="sr-only">Winning bid amount</span>
-                        Contract amount
+                        <span className="sr-only">
+                          {t('Winning bid amount')}
+                        </span>
+                        {t('Contract amount')}
                       </th>
                       <th scope="col" className="py-3 px-4 text-right w-[5%]">
-                        Actions
+                        {t('Actions')}
                       </th>
                     </tr>
                   </thead>
@@ -1039,7 +1119,10 @@ export default function Contracts() {
                               <Link
                                 href={`/projects/${project.id}`}
                                 className="font-semibold text-gray-950 hover:text-[#0066EB] line-clamp-2"
-                                aria-label={`View project: ${project.project_name}`}
+                                aria-label={t(
+                                  'View project: {{project_name}}',
+                                  { project_name: project.project_name }
+                                )}
                               >
                                 {project.project_name}
                               </Link>
@@ -1057,14 +1140,14 @@ export default function Contracts() {
                                     : 'border border-blue-200 bg-blue-50 text-blue-800'
                                 }`}
                               >
-                                {isContracted ? 'Contracted' : 'Awarded'}
+                                {isContracted ? t('Contracted') : t('Awarded')}
                               </span>
                             </td>
 
                             {/* Contractor Cell */}
                             <td className="py-3 px-4 align-top text-gray-900">
                               <span className="line-clamp-2">
-                                {project.contractor ?? 'Not specified'}
+                                {project.contractor ?? t('Not specified')}
                               </span>
                             </td>
 
@@ -1076,26 +1159,26 @@ export default function Contracts() {
                                 </span>
                               ) : (
                                 <span className="text-xs italic text-gray-400">
-                                  Not available
+                                  {t('Not available')}
                                 </span>
                               )}
                               <span className="mt-0.5 block font-mono text-[11px] text-gray-400 break-words">
-                                ID: {project.id}
+                                {t('ID: {{id}}', { id: project.id })}
                               </span>
                             </td>
 
                             {/* Document Date Cell */}
                             <td className="py-3 px-4 align-top text-xs text-gray-700 whitespace-nowrap">
-                              {formatIsoDate(relevantDate)}
+                              {formatIsoDate(relevantDate, locale)}
                             </td>
 
                             {/* ABC Cell */}
                             <td className="py-3 px-4 align-top text-right font-semibold tabular-nums text-gray-900">
                               {project.approved_budget_abc !== null ? (
-                                formatPeso(project.approved_budget_abc)
+                                formatPeso(project.approved_budget_abc, locale)
                               ) : (
                                 <span className="font-normal italic text-gray-400">
-                                  Unavailable
+                                  {t('Unavailable')}
                                 </span>
                               )}
                             </td>
@@ -1103,10 +1186,10 @@ export default function Contracts() {
                             {/* Contract Amount Cell */}
                             <td className="py-3 px-4 align-top text-right font-semibold tabular-nums text-gray-900">
                               {hasContractAmount(project) ? (
-                                formatPeso(project.contract_amount)
+                                formatPeso(project.contract_amount, locale)
                               ) : (
                                 <span className="font-normal italic text-gray-400">
-                                  Unavailable
+                                  {t('Unavailable')}
                                 </span>
                               )}
                             </td>
@@ -1120,9 +1203,12 @@ export default function Contracts() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC] hover:underline"
-                                    aria-label={`Open official source for ${project.project_name} (opens in a new tab)`}
+                                    aria-label={t(
+                                      'Open official source for {{project_name}} (opens in a new tab)',
+                                      { project_name: project.project_name }
+                                    )}
                                   >
-                                    Official source
+                                    {t('Official source')}
                                     <ExternalLink
                                       className="h-3 w-3"
                                       aria-hidden="true"
@@ -1133,7 +1219,7 @@ export default function Contracts() {
                                   href={`/projects/${project.id}`}
                                   className="inline-flex items-center text-gray-600 hover:text-gray-950 hover:underline"
                                 >
-                                  View project &rarr;
+                                  {t('View project →')}
                                 </Link>
                               </div>
                             </td>
@@ -1166,7 +1252,7 @@ export default function Contracts() {
                                 : 'border border-blue-200 bg-blue-50 text-blue-800'
                             }`}
                           >
-                            {isContracted ? 'Contracted' : 'Awarded'}
+                            {isContracted ? t('Contracted') : t('Awarded')}
                           </span>
                           <Link
                             href={`/projects/${project.id}`}
@@ -1183,23 +1269,23 @@ export default function Contracts() {
                         <dl className="grid grid-cols-2 gap-3 text-xs">
                           <div className="col-span-2">
                             <dt className="font-medium text-gray-500">
-                              Contractor
+                              {t('Contractor')}
                             </dt>
                             <dd className="mt-0.5 text-sm font-semibold text-gray-950">
-                              {project.contractor ?? 'Not specified'}
+                              {project.contractor ?? t('Not specified')}
                             </dd>
                           </div>
 
                           <div>
                             <dt className="font-medium text-gray-500">
-                              Contract number
+                              {t('Contract number')}
                             </dt>
                             <dd className="mt-0.5 font-mono font-medium text-gray-900 break-words">
                               {hasContractNumber(project) ? (
                                 project.identifiers.contract_number
                               ) : (
                                 <span className="font-sans italic text-gray-400">
-                                  Not available
+                                  {t('Not available')}
                                 </span>
                               )}
                             </dd>
@@ -1207,23 +1293,23 @@ export default function Contracts() {
 
                           <div>
                             <dt className="font-medium text-gray-500">
-                              Document date
+                              {t('Document date')}
                             </dt>
                             <dd className="mt-0.5 font-medium text-gray-900">
-                              {formatIsoDate(relevantDate)}
+                              {formatIsoDate(relevantDate, locale)}
                             </dd>
                           </div>
 
                           <div>
                             <dt className="font-medium text-gray-500">
-                              Approved Budget (ABC)
+                              {t('Approved Budget (ABC)')}
                             </dt>
                             <dd className="mt-0.5 font-semibold tabular-nums text-gray-950">
                               {project.approved_budget_abc !== null ? (
-                                formatPeso(project.approved_budget_abc)
+                                formatPeso(project.approved_budget_abc, locale)
                               ) : (
                                 <span className="font-normal italic text-gray-400">
-                                  Unavailable
+                                  {t('Unavailable')}
                                 </span>
                               )}
                             </dd>
@@ -1231,14 +1317,14 @@ export default function Contracts() {
 
                           <div>
                             <dt className="font-medium text-gray-500">
-                              Contract amount
+                              {t('Contract amount')}
                             </dt>
                             <dd className="mt-0.5 font-semibold tabular-nums text-gray-950">
                               {hasContractAmount(project) ? (
-                                formatPeso(project.contract_amount)
+                                formatPeso(project.contract_amount, locale)
                               ) : (
                                 <span className="font-normal italic text-gray-400">
-                                  Unavailable
+                                  {t('Unavailable')}
                                 </span>
                               )}
                             </dd>
@@ -1247,7 +1333,7 @@ export default function Contracts() {
 
                         {/* Provenance ID */}
                         <p className="font-mono text-[11px] text-gray-400">
-                          Record ID: {project.id}
+                          {t('Record ID: {{id}}', { id: project.id })}
                         </p>
 
                         {/* Mobile Actions */}
@@ -1256,7 +1342,7 @@ export default function Contracts() {
                             href={`/projects/${project.id}`}
                             className="text-gray-700 hover:text-gray-950"
                           >
-                            View project &rarr;
+                            {t('View project →')}
                           </Link>
                           {sourceUrl && (
                             <a
@@ -1265,7 +1351,7 @@ export default function Contracts() {
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1 text-[#0066EB] hover:text-[#0052BC]"
                             >
-                              Official source
+                              {t('Official source')}
                               <ExternalLink
                                 className="h-3 w-3"
                                 aria-hidden="true"
@@ -1282,7 +1368,7 @@ export default function Contracts() {
               {/* 5. Real Pagination (10 per page) */}
               {totalPages > 1 && (
                 <nav
-                  aria-label="Award and contract pagination"
+                  aria-label={t('Award and contract pagination')}
                   className="mt-6 flex items-center justify-between gap-4 border-t border-gray-200 pt-5"
                 >
                   <button
@@ -1292,7 +1378,7 @@ export default function Contracts() {
                     className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   >
                     <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                    Previous
+                    {t('Previous')}
                   </button>
 
                   {/* Desktop Page Window */}
@@ -1329,7 +1415,10 @@ export default function Contracts() {
 
                   {/* Mobile Page Indicator */}
                   <p className="text-sm font-medium text-gray-700 sm:hidden">
-                    Page {currentPage} of {totalPages}
+                    {t('Page {{currentPage}} of {{totalPages}}', {
+                      currentPage,
+                      totalPages,
+                    })}
                   </p>
 
                   <button
@@ -1338,7 +1427,7 @@ export default function Contracts() {
                     onClick={() => setPage(currentPage + 1)}
                     className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   >
-                    Next
+                    {t('Next')}
                     <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </nav>
@@ -1353,17 +1442,18 @@ export default function Contracts() {
           className="border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            HOW TO READ THESE RECORDS
+            {t('HOW TO READ THESE RECORDS')}
           </p>
           <h2
             id="how-to-read-heading"
             className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
           >
-            Understanding award and contract evidence
+            {t('Understanding award and contract evidence')}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-600">
-            Key rules for interpreting published procurement facts and figures.
-            Award does not equal contract execution.
+            {t(
+              'Key rules for interpreting published procurement facts and figures. Award does not equal contract execution.'
+            )}
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -1371,12 +1461,13 @@ export default function Contracts() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Info className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Award evidence
+                  {t('Award evidence')}
                 </h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600">
-                Published award evidence establishes an award decision. It does
-                not by itself establish contract execution.
+                {t(
+                  'Published award evidence establishes an award decision. It does not by itself establish contract execution.'
+                )}
               </p>
             </div>
 
@@ -1384,12 +1475,13 @@ export default function Contracts() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Scale className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Contract evidence
+                  {t('Contract evidence')}
                 </h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600">
-                Contracted status requires separate evidence supporting contract
-                execution.
+                {t(
+                  'Contracted status requires separate evidence supporting contract execution.'
+                )}
               </p>
             </div>
 
@@ -1397,13 +1489,13 @@ export default function Contracts() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <HelpCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Financial amounts
+                  {t('Financial amounts')}
                 </h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600">
-                ABC, winning bid, contract amount, payment, and actual
-                expenditure are different financial concepts. Missing values
-                remain unknown unless another published source establishes it.
+                {t(
+                  'ABC, winning bid, contract amount, payment, and actual expenditure are different financial concepts. Missing values remain unknown unless another published source establishes it.'
+                )}
               </p>
             </div>
           </div>
@@ -1415,17 +1507,18 @@ export default function Contracts() {
           className="border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            KEEP EXPLORING
+            {t('KEEP EXPLORING')}
           </p>
           <h2
             id="keep-exploring-heading"
             className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
           >
-            Continue exploring procurement data
+            {t('Continue exploring procurement data')}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-600">
-            Compare published bidders, winning bids, ABC values, and descriptive
-            procurement statistics across San Fernando public works.
+            {t(
+              'Compare published bidders, winning bids, ABC values, and descriptive procurement statistics across San Fernando public works.'
+            )}
           </p>
 
           {/* Two Featured Equal Destinations */}
@@ -1436,12 +1529,13 @@ export default function Contracts() {
                 <div className="flex items-center gap-2.5 text-[#0066EB]">
                   <FileSearch className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <h3 className="text-base font-bold text-gray-950">
-                    Bid Results
+                    {t('Bid Results')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Review published bidders, winning bids, ABC values, and
-                  procurement references.
+                  {t(
+                    'Review published bidders, winning bids, ABC values, and procurement references.'
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -1449,7 +1543,7 @@ export default function Contracts() {
                   href="/procurement/bid-results"
                   className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  View Bid Results &rarr;
+                  {t('View Bid Results →')}
                 </Link>
               </div>
             </article>
@@ -1460,12 +1554,13 @@ export default function Contracts() {
                 <div className="flex items-center gap-2.5 text-[#0066EB]">
                   <FileCheck2 className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <h3 className="text-base font-bold text-gray-950">
-                    Procurement Statistics
+                    {t('Procurement Statistics')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Explore documentary coverage and descriptive procurement
-                  statistics across the project collection.
+                  {t(
+                    'Explore documentary coverage and descriptive procurement statistics across the project collection.'
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -1473,7 +1568,7 @@ export default function Contracts() {
                   href="/statistics/procurement"
                   className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  View Procurement Statistics &rarr;
+                  {t('View Procurement Statistics →')}
                 </Link>
               </div>
             </article>
@@ -1482,10 +1577,10 @@ export default function Contracts() {
           {/* Related resources: 2x2 Directory */}
           <div className="mt-8 border-t border-gray-200 pt-6">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              Related resources
+              {t('Related resources')}
             </h3>
             <div className="mt-3 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 border-y border-gray-200">
-              {RELATED_RESOURCES.map((item, idx) => (
+              {RELATED_RESOURCES(t).map((item, idx) => (
                 <Link
                   key={item.href}
                   href={item.href}

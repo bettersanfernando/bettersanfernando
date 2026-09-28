@@ -10,6 +10,10 @@ import {
   Search,
   X,
 } from 'lucide-react';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { withSlots } from '../../../components/i18n/rich';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import { useLocale } from '../../../components/i18n/useLocale';
 
 export interface BarangayHouseholdRecord {
   psgc: string;
@@ -24,7 +28,6 @@ interface HouseholdBarangayTableProps {
 type SortOption = 'pop-desc' | 'pop-asc' | 'name-asc' | 'name-desc';
 
 const PAGE_SIZE = 10;
-const numberFormatter = new Intl.NumberFormat('en-PH');
 
 function SortIcon({
   active,
@@ -52,6 +55,10 @@ function SortIcon({
 export default function HouseholdBarangayTable({
   barangays,
 }: HouseholdBarangayTableProps) {
+  const t = usePageT();
+  const locale = useLocale();
+
+  const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[locale]);
   const [query, setQuery] = useState('');
   const [sortOption, setSortOption] = useState<SortOption>('pop-desc');
   const [page, setPage] = useState(1);
@@ -125,8 +132,8 @@ export default function HouseholdBarangayTable({
                 setQuery(event.target.value);
                 setPage(1);
               }}
-              placeholder="Search barangay…"
-              aria-label="Search barangay"
+              placeholder={t('Search barangay…')}
+              aria-label={t('Search barangay')}
               className="h-10 w-full rounded-sm border border-gray-300 bg-white pl-9 pr-8 text-sm text-gray-900 outline-none transition-[border-color,box-shadow] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0066EB] focus:ring-1 focus:ring-[#0066EB]"
             />
             {query && (
@@ -136,7 +143,7 @@ export default function HouseholdBarangayTable({
                   setQuery('');
                   setPage(1);
                 }}
-                aria-label="Clear barangay search"
+                aria-label={t('Clear barangay search')}
                 className="absolute right-2.5 top-1/2 flex h-6 w-6 -translate-y-1/2 cursor-pointer items-center justify-center text-gray-400 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <X className="h-4 w-4" aria-hidden="true" />
@@ -147,7 +154,7 @@ export default function HouseholdBarangayTable({
           {/* Sort By control */}
           <div>
             <label htmlFor="household-sort-control" className="sr-only">
-              Sort barangays
+              {t('Sort barangays')}
             </label>
             <select
               id="household-sort-control"
@@ -156,15 +163,17 @@ export default function HouseholdBarangayTable({
                 setSortOption(e.target.value as SortOption);
                 setPage(1);
               }}
-              aria-label="Sort barangays"
+              aria-label={t('Sort barangays')}
               className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 outline-none transition-[border-color,box-shadow] hover:border-gray-400 focus:border-[#0066EB] focus:ring-1 focus:ring-[#0066EB]"
             >
               <option value="pop-desc">
-                Household Population: High to Low
+                {t('Household Population: High to Low')}
               </option>
-              <option value="pop-asc">Household Population: Low to High</option>
-              <option value="name-asc">Barangay: A–Z</option>
-              <option value="name-desc">Barangay: Z–A</option>
+              <option value="pop-asc">
+                {t('Household Population: Low to High')}
+              </option>
+              <option value="name-asc">{t('Barangay: A–Z')}</option>
+              <option value="name-desc">{t('Barangay: Z–A')}</option>
             </select>
           </div>
         </div>
@@ -173,30 +182,39 @@ export default function HouseholdBarangayTable({
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-gray-200/80 pt-3 text-xs text-gray-600">
           <p aria-live="polite">
             {sortedBarangays.length === 0 ? (
-              'No matching barangays'
+              t('No matching barangays')
             ) : isFiltered ? (
               <>
-                Showing{' '}
-                <span className="font-semibold text-gray-950">
-                  {pageStart + 1}–{pageEnd}
-                </span>{' '}
-                of{' '}
-                <span className="font-semibold text-gray-950">
-                  {sortedBarangays.length}
-                </span>{' '}
-                matching barangays
+                {withSlots(
+                  t('Showing {{range}} of {{total}} matching barangays'),
+                  {
+                    range: (
+                      <span className="font-semibold text-gray-950">
+                        {pageStart + 1}–{pageEnd}
+                      </span>
+                    ),
+                    total: (
+                      <span className="font-semibold text-gray-950">
+                        {sortedBarangays.length}
+                      </span>
+                    ),
+                  }
+                )}
               </>
             ) : (
               <>
-                Showing{' '}
-                <span className="font-semibold text-gray-950">
-                  {pageStart + 1}–{pageEnd}
-                </span>{' '}
-                of{' '}
-                <span className="font-semibold text-gray-950">
-                  {sortedBarangays.length}
-                </span>{' '}
-                barangays
+                {withSlots(t('Showing {{range}} of {{total}} barangays'), {
+                  range: (
+                    <span className="font-semibold text-gray-950">
+                      {pageStart + 1}–{pageEnd}
+                    </span>
+                  ),
+                  total: (
+                    <span className="font-semibold text-gray-950">
+                      {sortedBarangays.length}
+                    </span>
+                  ),
+                })}
               </>
             )}
           </p>
@@ -210,7 +228,7 @@ export default function HouseholdBarangayTable({
               }}
               className="font-medium text-[#0066EB] hover:text-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
             >
-              Reset search
+              {t('Reset search')}
             </button>
           )}
         </div>
@@ -218,7 +236,7 @@ export default function HouseholdBarangayTable({
 
       {sortedBarangays.length === 0 ? (
         <div className="mt-4 rounded-sm border border-gray-200 bg-white p-8 text-center text-sm text-gray-500">
-          No barangays match your search.
+          {t('No barangays match your search.')}
         </div>
       ) : (
         <>
@@ -227,7 +245,7 @@ export default function HouseholdBarangayTable({
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-left text-sm">
                 <caption className="sr-only">
-                  Household population by barangay (2024 POPCEN)
+                  {t('Household population by barangay (2024 POPCEN)')}
                 </caption>
                 <thead className="border-b border-gray-200 bg-gray-50/70 text-xs font-semibold uppercase tracking-wider text-gray-500">
                   <tr>
@@ -237,7 +255,7 @@ export default function HouseholdBarangayTable({
                         onClick={() => handleHeaderSort('name')}
                         className="group inline-flex cursor-pointer items-center gap-1.5 rounded-sm py-1 text-xs font-semibold uppercase tracking-wider transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                       >
-                        <span>Barangay</span>
+                        <span>{t('Barangay')}</span>
                         <SortIcon
                           active={
                             sortOption === 'name-asc' ||
@@ -255,7 +273,7 @@ export default function HouseholdBarangayTable({
                         onClick={() => handleHeaderSort('pop')}
                         className="group inline-flex cursor-pointer items-center justify-end gap-1.5 rounded-sm py-1 text-xs font-semibold uppercase tracking-wider transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                       >
-                        <span>Household Population</span>
+                        <span>{t('Household Population')}</span>
                         <SortIcon
                           active={
                             sortOption === 'pop-desc' ||
@@ -302,7 +320,7 @@ export default function HouseholdBarangayTable({
                   </span>
                 </div>
                 <p className="mt-0.5 text-xs text-gray-500">
-                  2024 POPCEN Household Population
+                  {t('2024 POPCEN Household Population')}
                 </p>
               </div>
             ))}
@@ -311,20 +329,23 @@ export default function HouseholdBarangayTable({
           {/* Pagination Controls */}
           <div className="mt-4 flex flex-col gap-4 border-t border-gray-200 pt-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-gray-500" aria-live="polite">
-              Showing{' '}
-              <span className="font-semibold text-gray-900">
-                {pageStart + 1}–{pageEnd}
-              </span>{' '}
-              of{' '}
-              <span className="font-semibold text-gray-900">
-                {sortedBarangays.length}
-              </span>{' '}
-              barangays
+              {withSlots(t('Showing {{range}} of {{total}} barangays'), {
+                range: (
+                  <span className="font-semibold text-gray-900">
+                    {pageStart + 1}–{pageEnd}
+                  </span>
+                ),
+                total: (
+                  <span className="font-semibold text-gray-900">
+                    {sortedBarangays.length}
+                  </span>
+                ),
+              })}
             </p>
 
             <nav
               className="flex items-center gap-1.5"
-              aria-label="Barangay household table pagination"
+              aria-label={t('Barangay household table pagination')}
             >
               <button
                 type="button"
@@ -334,11 +355,11 @@ export default function HouseholdBarangayTable({
                   )
                 }
                 disabled={currentPage === 1}
-                aria-label="Previous page"
+                aria-label={t('Previous page')}
                 className="inline-flex h-9 cursor-pointer items-center gap-1 rounded-sm border border-gray-300 bg-white px-2.5 text-xs font-semibold text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="hidden sm:inline">Previous</span>
+                <span className="hidden sm:inline">{t('Previous')}</span>
               </button>
 
               {pageNumbers.map(pageNumber => {
@@ -349,7 +370,7 @@ export default function HouseholdBarangayTable({
                     key={pageNumber}
                     type="button"
                     onClick={() => setPage(pageNumber)}
-                    aria-label={`Page ${pageNumber}`}
+                    aria-label={t('Page {{pageNumber}}', { pageNumber })}
                     aria-current={active ? 'page' : undefined}
                     className={`h-9 min-w-9 cursor-pointer rounded-sm px-2.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] ${
                       active
@@ -370,10 +391,10 @@ export default function HouseholdBarangayTable({
                   )
                 }
                 disabled={currentPage === pageCount}
-                aria-label="Next page"
+                aria-label={t('Next page')}
                 className="inline-flex h-9 cursor-pointer items-center gap-1 rounded-sm border border-gray-300 bg-white px-2.5 text-xs font-semibold text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                <span className="hidden sm:inline">Next</span>
+                <span className="hidden sm:inline">{t('Next')}</span>
                 <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
               </button>
             </nav>

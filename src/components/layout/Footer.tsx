@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ArrowUpRight,
   Facebook,
@@ -8,6 +10,9 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
+import { localeFromPathname, withLocalePrefix } from '../../i18n/locale';
 import { footerNavigation } from '../../data/navigation';
 
 const externalLinkProps = {
@@ -38,6 +43,11 @@ const socialLinks: readonly {
 ];
 
 export default function Footer() {
+  const locale = localeFromPathname(usePathname() ?? '/');
+  const { t } = useTranslation('common');
+  const footerLabel = (label: string) =>
+    t(`footerCopy.links.${label}`, { defaultValue: label });
+
   return (
     <footer className="bg-[#0B1730] text-white">
       <div className="container mx-auto px-4">
@@ -59,15 +69,13 @@ export default function Footer() {
           <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
             <div className="max-w-2xl">
               <p className="text-eyebrow text-blue-100">
-                Help Keep the Data Useful
+                {t('footerCopy.helpEyebrow')}
               </p>
               <h2 className="mt-3 text-2xl font-bold leading-tight sm:text-3xl">
-                Found something that needs another look?
+                {t('footerCopy.helpTitle')}
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-blue-50 sm:text-base">
-                BetterSanFernando organizes public information from official
-                sources. If you find an outdated record, incorrect detail,
-                missing source, or broken link, send it to us for review.
+                {t('footerCopy.helpDescription')}
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch lg:justify-center">
@@ -77,7 +85,7 @@ export default function Footer() {
                 className="inline-flex h-10 items-center justify-center gap-2 rounded-sm bg-white px-4 text-sm font-semibold text-[#0052BC] transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0066EB]"
               >
                 <TriangleAlert className="h-4 w-4" aria-hidden="true" />
-                Report a data issue
+                {t('footerCopy.reportDataIssue')}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
@@ -86,7 +94,7 @@ export default function Footer() {
                 className="inline-flex h-10 items-center justify-center gap-2 rounded-sm border border-white/70 bg-[#0052BC] px-4 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-[#00449d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 <Github className="h-4 w-4" aria-hidden="true" />
-                Contribute on GitHub
+                {t('footerCopy.contribute')}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
@@ -102,11 +110,9 @@ export default function Footer() {
                 className="h-auto w-[230px] max-w-full"
               />
               <p className="mt-5 max-w-sm text-sm leading-6 text-slate-300">
-                BetterSanFernando makes public information about the City of San
-                Fernando easier to find, understand, and verify. Independent and
-                community-run, it is{' '}
+                {t('footerCopy.description')}{' '}
                 <span className="font-medium text-slate-200">
-                  not an official City Government website.
+                  {t('footerCopy.notOfficial')}
                 </span>
               </p>
               <div className="mt-5 flex items-center gap-2">
@@ -124,9 +130,9 @@ export default function Footer() {
                   ) : (
                     <span
                       key={label}
-                      aria-label={`${label} link unavailable`}
+                      aria-label={t('footerCopy.linkUnavailable', { label })}
                       aria-disabled="true"
-                      title={`${label} link not configured`}
+                      title={t('footerCopy.linkNotConfigured', { label })}
                       className="inline-flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-sm border border-white/10 text-slate-500"
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
@@ -138,15 +144,19 @@ export default function Footer() {
 
             {footerNavigation.mainSections.map(section => (
               <div key={section.title}>
-                <p className="text-eyebrow text-slate-400">{section.title}</p>
+                <p className="text-eyebrow text-slate-400">
+                  {t(`footerCopy.sections.${section.title}`, {
+                    defaultValue: section.title,
+                  })}
+                </p>
                 <ul className="mt-4 space-y-3">
                   {section.links.map(link => (
                     <li key={link.label}>
                       <Link
-                        href={link.href}
+                        href={withLocalePrefix(link.href, locale)}
                         className="text-sm text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                       >
-                        {link.label}
+                        {footerLabel(link.label)}
                       </Link>
                     </li>
                   ))}
@@ -156,7 +166,7 @@ export default function Footer() {
 
             <div>
               <p className="text-eyebrow text-slate-400">
-                A BetterGov.ph Project
+                {t('footerCopy.betterGovProject')}
               </p>
               <img
                 src="/assets/brand/logos/bettergov/bettergov-horizontal-onblack.webp"
@@ -164,15 +174,14 @@ export default function Footer() {
                 className="mt-4 h-10 w-[170px] max-w-full object-contain object-left"
               />
               <p className="mt-4 text-sm leading-6 text-slate-300">
-                Part of the BetterGov.ph community of independent
-                civic-information projects.
+                {t('footerCopy.betterGovDescription')}
               </p>
               <a
                 href="https://bettergov.ph"
                 {...externalLinkProps}
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Visit BetterGov.ph
+                {t('footerCopy.visitBetterGov')}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
@@ -189,7 +198,7 @@ export default function Footer() {
                 {...externalLinkProps}
                 className="group/creator inline-flex items-center gap-1.5 font-medium text-slate-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Built by Ian Macabulos
+                {t('footerCopy.builtBy')}
                 <Heart
                   className="h-3.5 w-3.5 fill-transparent text-white/40 opacity-0 transition-[opacity,color,fill] duration-300 ease-in-out group-hover/creator:fill-white group-hover/creator:text-white group-hover/creator:opacity-100 group-focus-visible/creator:fill-white group-focus-visible/creator:text-white group-focus-visible/creator:opacity-100"
                   aria-hidden="true"
@@ -198,19 +207,19 @@ export default function Footer() {
             </div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-300">
-                Built for ₱435.39
+                {`${t('footerCopy.builtFor')} ₱435.39`}
               </span>
               <Link
-                href="/sitemap"
+                href={withLocalePrefix('/sitemap', locale)}
                 className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Sitemap
+                {t('footerCopy.sitemap')}
               </Link>
               <Link
-                href="/accessibility"
+                href={withLocalePrefix('/accessibility', locale)}
                 className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Accessibility
+                {t('footerCopy.accessibility')}
               </Link>
             </div>
           </div>

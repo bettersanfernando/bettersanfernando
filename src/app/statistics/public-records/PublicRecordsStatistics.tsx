@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { ArrowDown, ArrowRight, ExternalLink, RotateCcw } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getPublicRecordsArchiveCoverage,
@@ -10,6 +10,10 @@ import {
   getPublicRecordsMetrics,
   getPublicRecordsRelatedCollections,
 } from '../../../data/civic/publicRecordsCoverage';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
+import type { LanguageType } from '../../../types';
 
 const metrics = getPublicRecordsMetrics();
 const archiveCoverage = getPublicRecordsArchiveCoverage();
@@ -19,61 +23,63 @@ const metadata = getPublicRecordsCoverageMetadata();
 type SourceFamilyFilter = 'ALL' | (typeof metrics)[number]['source_family'];
 
 // Curated UI display labels for known source families
-const SOURCE_FAMILY_LABELS: Record<string, string> = {
-  csfp_procurement: 'Procurement & Projects',
-  csfp_citizens_charter: 'Citizen’s Charter',
-  csfp_full_disclosure: 'Full Disclosure',
-  multiple_official_csfp_collections: 'Multiple Official Collections',
-  csfp_executive_orders: 'Executive Orders',
-  csfp_legislation: 'Legislation',
-  csfp_osp_archive_books: 'OSP Archive Books',
-};
+const SOURCE_FAMILY_LABELS = (t: PageT): Record<string, string> => ({
+  csfp_procurement: t('Procurement & Projects'),
+  csfp_citizens_charter: t('Citizen’s Charter'),
+  csfp_full_disclosure: t('Full Disclosure'),
+  multiple_official_csfp_collections: t('Multiple Official Collections'),
+  csfp_executive_orders: t('Executive Orders'),
+  csfp_legislation: t('Legislation'),
+  csfp_osp_archive_books: t('OSP Archive Books'),
+});
 
-function formatSourceFamily(family: string): string {
-  return SOURCE_FAMILY_LABELS[family] ?? family.replaceAll('_', ' ');
+function formatSourceFamily(t: PageT, family: string): string {
+  return SOURCE_FAMILY_LABELS(t)[family] ?? family.replaceAll('_', ' ');
 }
 
 // Curated UI display labels for published dataset record types
-const DATASET_LABELS: Record<string, string> = {
-  project: 'Projects',
-  project_evidence: 'Project Evidence',
-  service: 'Resident-Facing Services',
-  full_disclosure_document: 'Full Disclosure Reports',
-  official_document: 'Official Documents',
-  executive_order: 'Executive Orders',
-  ordinance: 'Ordinances',
-  resolution: 'Resolutions',
-};
+const DATASET_LABELS = (t: PageT): Record<string, string> => ({
+  project: t('Projects'),
+  project_evidence: t('Project Evidence'),
+  service: t('Resident-Facing Services'),
+  full_disclosure_document: t('Full Disclosure Reports'),
+  official_document: t('Official Documents'),
+  executive_order: t('Executive Orders'),
+  ordinance: t('Ordinances'),
+  resolution: t('Resolutions'),
+});
 
-function formatDatasetName(recordType: string): string {
-  return DATASET_LABELS[recordType] ?? recordType.replaceAll('_', ' ');
+function formatDatasetName(t: PageT, recordType: string): string {
+  return DATASET_LABELS(t)[recordType] ?? recordType.replaceAll('_', ' ');
 }
 
 // Contextual action labels for browsing collections
-const BROWSE_LABELS: Record<string, string> = {
-  project: 'Browse Projects',
-  project_evidence: 'Browse Project Sources',
-  service: 'Browse Services',
-  full_disclosure_document: 'Browse Full Disclosure',
-  official_document: 'Browse Official Documents',
-  executive_order: 'Browse Executive Orders',
-  ordinance: 'Browse Ordinances',
-  resolution: 'Browse Resolutions',
-};
+const BROWSE_LABELS = (t: PageT): Record<string, string> => ({
+  project: t('Browse Projects'),
+  project_evidence: t('Browse Project Sources'),
+  service: t('Browse Services'),
+  full_disclosure_document: t('Browse Full Disclosure'),
+  official_document: t('Browse Official Documents'),
+  executive_order: t('Browse Executive Orders'),
+  ordinance: t('Browse Ordinances'),
+  resolution: t('Browse Resolutions'),
+});
 
-function formatBrowseLabel(recordType: string): string {
-  return BROWSE_LABELS[recordType] ?? 'Browse collection';
+function formatBrowseLabel(t: PageT, recordType: string): string {
+  return BROWSE_LABELS(t)[recordType] ?? t('Browse collection');
 }
 
 // Curated UI display labels for archive range evidence record types
-const ARCHIVE_RECORD_LABELS: Record<string, string> = {
-  resolution_archive_range: 'Resolution archive',
-  ordinance_archive_range: 'Ordinance archive',
-  appropriation_ordinance_archive_range: 'Appropriation ordinance archive',
-};
+const ARCHIVE_RECORD_LABELS = (t: PageT): Record<string, string> => ({
+  resolution_archive_range: t('Resolution archive'),
+  ordinance_archive_range: t('Ordinance archive'),
+  appropriation_ordinance_archive_range: t('Appropriation ordinance archive'),
+});
 
-function formatArchiveRecordType(recordType: string): string {
-  return ARCHIVE_RECORD_LABELS[recordType] ?? recordType.replaceAll('_', ' ');
+function formatArchiveRecordType(t: PageT, recordType: string): string {
+  return (
+    ARCHIVE_RECORD_LABELS(t)[recordType] ?? recordType.replaceAll('_', ' ')
+  );
 }
 
 // Formats coverage periods; lists gaps accurately without implying contiguous coverage
@@ -122,10 +128,10 @@ function formatPeriodCoverage(period: {
   return ranges.join(', ');
 }
 
-function formatVerificationDate(dateStr: string): string {
+function formatVerificationDate(dateStr: string, locale: LanguageType): string {
   const [year, month, day] = dateStr.split('-').map(Number);
   const date = new Date(Date.UTC(year, month - 1, day));
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString(locale === 'fil' ? 'fil-PH' : 'en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -134,6 +140,8 @@ function formatVerificationDate(dateStr: string): string {
 }
 
 export default function PublicRecordsStatistics() {
+  const t = usePageT();
+  const locale = useLocale();
   const [sourceFamily, setSourceFamily] = useState<SourceFamilyFilter>('ALL');
 
   const sourceFamilies = useMemo(
@@ -157,24 +165,24 @@ export default function PublicRecordsStatistics() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Statistics', href: '/statistics' },
-              { label: 'Public Records Statistics' },
+              { label: t('Home'), href: '/' },
+              { label: t('Statistics'), href: '/statistics' },
+              { label: t('Public Records Statistics') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                STATISTICS · PUBLIC RECORDS
+                {t('STATISTICS · PUBLIC RECORDS')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                Public Records Statistics
+                {t('Public Records Statistics')}
               </h1>
               <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                Explore the verified datasets BetterSanFernando currently
-                publishes, with each collection shown in its own unit and
-                coverage period.
+                {t(
+                  'Explore the verified datasets BetterSanFernando currently publishes, with each collection shown in its own unit and coverage period.'
+                )}
               </p>
 
               {/* CTA row */}
@@ -183,14 +191,14 @@ export default function PublicRecordsStatistics() {
                   href="#published-datasets"
                   className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
                 >
-                  Explore published datasets
+                  {t('Explore published datasets')}
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/transparency"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Transparency overview
+                  {t('Transparency overview')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -198,18 +206,21 @@ export default function PublicRecordsStatistics() {
 
             {/* Coverage Rule Module */}
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
-              <p className="text-eyebrow text-[#0066EB]">COVERAGE RULE</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('COVERAGE RULE')}
+              </p>
               <h2 className="mt-1.5 text-base font-bold text-gray-950">
-                No combined public-record total
+                {t('No combined public-record total')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                Projects, evidence records, services, documents, and legislation
-                describe different things. Their counts remain separate and must
-                not be added together.
+                {t(
+                  'Projects, evidence records, services, documents, and legislation describe different things. Their counts remain separate and must not be added together.'
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-3 text-xs leading-relaxed text-gray-600">
-                Counts describe BetterSanFernando’s current published coverage,
-                not every record held or produced by the City Government.
+                {t(
+                  'Counts describe BetterSanFernando’s current published coverage, not every record held or produced by the City Government.'
+                )}
               </p>
             </aside>
           </div>
@@ -223,51 +234,51 @@ export default function PublicRecordsStatistics() {
       >
         <div className="container mx-auto px-4 py-8">
           <h2 id="snapshot-heading" className="sr-only">
-            Coverage snapshot
+            {t('Coverage snapshot')}
           </h2>
           <dl className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-gray-200">
             <div className="lg:pr-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Published datasets
+                {t('Published datasets')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950">
                 {metrics.length}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Distinct collections in own units
+                {t('Distinct collections in own units')}
               </p>
             </div>
             <div className="lg:px-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Related specialized collections
+                {t('Related specialized collections')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950">
                 {relatedCollections.length}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Separately maintained series
+                {t('Separately maintained series')}
               </p>
             </div>
             <div className="border-t border-gray-200 pt-4 sm:border-t-0 sm:pt-0 lg:border-t-0 lg:px-6 lg:pt-0">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Archive-range entries
+                {t('Archive-range entries')}
               </dt>
               <dd className="mt-1.5 text-3xl font-extrabold tabular-nums text-gray-950">
                 {archiveCoverage.length}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Numbered positions as evidence only
+                {t('Numbered positions as evidence only')}
               </p>
             </div>
             <div className="border-t border-gray-200 pt-4 sm:border-t-0 sm:pt-0 lg:border-t-0 lg:pl-6 lg:pt-0">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Coverage verified
+                {t('Coverage verified')}
               </dt>
               <dd className="mt-1.5 text-2xl font-extrabold text-gray-950 sm:text-3xl">
-                {formatVerificationDate(metadata.verificationDate)}
+                {formatVerificationDate(metadata.verificationDate, locale)}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Official source audit baseline
+                {t('Official source audit baseline')}
               </p>
             </div>
           </dl>
@@ -281,53 +292,51 @@ export default function PublicRecordsStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('READING GUIDE')}</p>
             <h2
               id="guide-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              How to read these statistics
+              {t('How to read these statistics')}
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Three core principles governing how public records and published
-              counts are structured on BetterSanFernando.
+              {t(
+                'Three core principles governing how public records and published counts are structured on BetterSanFernando.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Each dataset keeps its own unit
+                {t('Each dataset keeps its own unit')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Projects, evidence records, documents, services, and legislation
-                describe fundamentally different things and are not
-                interchangeable counts. Different units are never added together
-                into a single total.
+                {t(
+                  'Projects, evidence records, documents, services, and legislation describe fundamentally different things and are not interchangeable counts. Different units are never added together into a single total.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Coverage is BetterSanFernando’s
+                {t('Coverage is BetterSanFernando’s')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Counts describe what BetterSanFernando currently verifies and
-                publishes from official sources, not every record ever produced
-                or held by the City Government. Absence indicates unrecovered or
-                unverified materials.
+                {t(
+                  'Counts describe what BetterSanFernando currently verifies and publishes from official sources, not every record ever produced or held by the City Government. Absence indicates unrecovered or unverified materials.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Archive ranges are evidence only
+                {t('Archive ranges are evidence only')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Numbered archive positions observed in official summary
-                documents verify archive range coverage only. They do not create
-                individually published records and are never added to dataset
-                counts.
+                {t(
+                  'Numbered archive positions observed in official summary documents verify archive range coverage only. They do not create individually published records and are never added to dataset counts.'
+                )}
               </p>
             </div>
           </div>
@@ -343,16 +352,19 @@ export default function PublicRecordsStatistics() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p className="text-eyebrow text-[#0066EB]">PUBLISHED DATASETS</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('PUBLISHED DATASETS')}
+              </p>
               <h2
                 id="datasets-heading"
                 className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
               >
-                Published coverage by dataset
+                {t('Published coverage by dataset')}
               </h2>
               <p className="mt-2 text-sm text-gray-600">
-                Each collection keeps its own count, unit, coverage period, and
-                official source.
+                {t(
+                  'Each collection keeps its own count, unit, coverage period, and official source.'
+                )}
               </p>
             </div>
 
@@ -360,7 +372,7 @@ export default function PublicRecordsStatistics() {
             <div className="w-full sm:w-auto">
               <label className="block">
                 <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-gray-600">
-                  Source family
+                  {t('Source family')}
                 </span>
                 <select
                   value={sourceFamily}
@@ -370,11 +382,13 @@ export default function PublicRecordsStatistics() {
                   className="h-10 w-full min-w-[240px] rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
                 >
                   <option value="ALL">
-                    All source families ({metrics.length})
+                    {t('All source families ({{length}})', {
+                      length: metrics.length,
+                    })}
                   </option>
                   {sourceFamilies.map(family => (
                     <option key={family} value={family}>
-                      {formatSourceFamily(family)}
+                      {formatSourceFamily(t, family)}
                     </option>
                   ))}
                 </select>
@@ -388,7 +402,10 @@ export default function PublicRecordsStatistics() {
               className="text-xs font-semibold text-gray-700"
               aria-live="polite"
             >
-              Showing {visibleMetrics.length} of {metrics.length} datasets
+              {t('Showing {{length}} of {{length2}} datasets', {
+                length: visibleMetrics.length,
+                length2: metrics.length,
+              })}
             </p>
             {sourceFamily !== 'ALL' && (
               <button
@@ -397,7 +414,7 @@ export default function PublicRecordsStatistics() {
                 className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
               >
                 <RotateCcw className="h-3 w-3" />
-                Reset filter
+                {t('Reset filter')}
               </button>
             )}
           </div>
@@ -405,9 +422,9 @@ export default function PublicRecordsStatistics() {
           {/* 5. 2-Column Editorial Dataset Directory */}
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
             {visibleMetrics.map(metric => {
-              const datasetName = formatDatasetName(metric.record_type);
+              const datasetName = formatDatasetName(t, metric.record_type);
               const periodText = formatPeriodCoverage(metric.period_coverage);
-              const browseLabel = formatBrowseLabel(metric.record_type);
+              const browseLabel = formatBrowseLabel(t, metric.record_type);
 
               return (
                 <article
@@ -417,10 +434,10 @@ export default function PublicRecordsStatistics() {
                   <div>
                     <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-gray-100 pb-3">
                       <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                        {formatSourceFamily(metric.source_family)}
+                        {formatSourceFamily(t, metric.source_family)}
                       </span>
                       <span className="font-mono text-xs text-gray-500">
-                        Coverage · {periodText}
+                        {t('Coverage · {{periodText}}', { periodText })}
                       </span>
                     </div>
 
@@ -454,10 +471,13 @@ export default function PublicRecordsStatistics() {
                       href={metric.official_source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Official source for ${datasetName} (opens in new tab)`}
+                      aria-label={t(
+                        'Official source for {{datasetName}} (opens in new tab)',
+                        { datasetName }
+                      )}
                       className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-900"
                     >
-                      Official source
+                      {t('Official source')}
                       <ExternalLink className="h-3 w-3" aria-hidden="true" />
                     </a>
                   </div>
@@ -476,17 +496,19 @@ export default function PublicRecordsStatistics() {
         >
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
-              <p className="text-eyebrow text-[#0066EB]">RELATED COLLECTION</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('RELATED COLLECTION')}
+              </p>
               <h2
                 id="related-heading"
                 className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
               >
-                Related, but not part of the dataset counts
+                {t('Related, but not part of the dataset counts')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Specialized collections may reference artifacts already
-                represented elsewhere and are never added to the published
-                dataset counts above.
+                {t(
+                  'Specialized collections may reference artifacts already represented elsewhere and are never added to the published dataset counts above.'
+                )}
               </p>
             </div>
 
@@ -494,11 +516,11 @@ export default function PublicRecordsStatistics() {
               {relatedCollections.map(collection => {
                 const isFinance = collection.record_type === 'finance_report';
                 const collectionTitle = isFinance
-                  ? 'City Finances'
+                  ? t('City Finances')
                   : collection.record_type.replaceAll('_', ' ');
                 const ctaLabel = isFinance
-                  ? 'Explore City Finances'
-                  : 'Browse collection';
+                  ? t('Explore City Finances')
+                  : t('Browse collection');
 
                 return (
                   <div
@@ -507,7 +529,7 @@ export default function PublicRecordsStatistics() {
                   >
                     <div>
                       <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                        Specialized Financial Reporting
+                        {t('Specialized Financial Reporting')}
                       </span>
                       <div className="mt-3 flex items-baseline gap-2">
                         <span className="text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
@@ -553,17 +575,19 @@ export default function PublicRecordsStatistics() {
         >
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
-              <p className="text-eyebrow text-[#0066EB]">ARCHIVE EVIDENCE</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('ARCHIVE EVIDENCE')}
+              </p>
               <h2
                 id="archive-heading"
                 className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
               >
-                Archive-range evidence
+                {t('Archive-range evidence')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Numbered positions observed in official archive materials. These
-                describe archive coverage only and do not create individual
-                published legislation records.
+                {t(
+                  'Numbered positions observed in official archive materials. These describe archive coverage only and do not create individual published legislation records.'
+                )}
               </p>
             </div>
 
@@ -573,25 +597,25 @@ export default function PublicRecordsStatistics() {
                 <thead className="border-b border-gray-200 bg-gray-50 text-gray-900">
                   <tr>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Record type
+                      {t('Record type')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Year
+                      {t('Year')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Numbered range
+                      {t('Numbered range')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Archive positions
+                      {t('Archive positions')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Calendar coverage
+                      {t('Calendar coverage')}
                     </th>
                     <th
                       scope="col"
                       className="px-4 py-3 font-semibold text-right"
                     >
-                      Source
+                      {t('Source')}
                     </th>
                   </tr>
                 </thead>
@@ -602,7 +626,7 @@ export default function PublicRecordsStatistics() {
                       className="hover:bg-gray-50/75"
                     >
                       <td className="px-4 py-3 font-medium text-gray-950">
-                        {formatArchiveRecordType(entry.record_type)}
+                        {formatArchiveRecordType(t, entry.record_type)}
                       </td>
                       <td className="px-4 py-3 text-gray-700">{entry.year}</td>
                       <td className="px-4 py-3 font-mono text-gray-800">
@@ -620,8 +644,8 @@ export default function PublicRecordsStatistics() {
                           }`}
                         >
                           {entry.complete_calendar_year
-                            ? 'Complete year'
-                            : 'Partial year'}
+                            ? t('Complete year')
+                            : t('Partial year')}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-right">
@@ -629,10 +653,19 @@ export default function PublicRecordsStatistics() {
                           href={entry.official_source_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Official source PDF for ${formatArchiveRecordType(entry.record_type)} ${entry.year} (opens in new tab)`}
+                          aria-label={t(
+                            'Official source PDF for {{record_type}} {{year}} (opens in new tab)',
+                            {
+                              record_type: formatArchiveRecordType(
+                                t,
+                                entry.record_type
+                              ),
+                              year: entry.year,
+                            }
+                          )}
                           className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-900"
                         >
-                          PDF
+                          {t('PDF')}
                           <ExternalLink
                             className="h-3 w-3"
                             aria-hidden="true"
@@ -654,7 +687,7 @@ export default function PublicRecordsStatistics() {
                 >
                   <div className="flex items-start justify-between gap-2">
                     <span className="font-bold text-gray-950">
-                      {formatArchiveRecordType(entry.record_type)}
+                      {formatArchiveRecordType(t, entry.record_type)}
                     </span>
                     <span
                       className={`rounded-sm px-2 py-0.5 text-[11px] font-medium ${
@@ -664,15 +697,15 @@ export default function PublicRecordsStatistics() {
                       }`}
                     >
                       {entry.complete_calendar_year
-                        ? 'Complete year'
-                        : 'Partial year'}
+                        ? t('Complete year')
+                        : t('Partial year')}
                     </span>
                   </div>
 
                   <div className="mt-3 grid grid-cols-3 gap-2 border-y border-gray-100 py-2.5">
                     <div>
                       <span className="block text-[11px] text-gray-500">
-                        Year
+                        {t('Year')}
                       </span>
                       <span className="font-semibold text-gray-900">
                         {entry.year}
@@ -680,7 +713,7 @@ export default function PublicRecordsStatistics() {
                     </div>
                     <div>
                       <span className="block text-[11px] text-gray-500">
-                        Numbered range
+                        {t('Numbered range')}
                       </span>
                       <span className="font-mono text-gray-900">
                         {entry.range_start}–{entry.range_end}
@@ -688,7 +721,7 @@ export default function PublicRecordsStatistics() {
                     </div>
                     <div>
                       <span className="block text-[11px] text-gray-500">
-                        Positions
+                        {t('Positions')}
                       </span>
                       <span className="font-mono font-semibold text-gray-950">
                         {entry.count}
@@ -706,7 +739,7 @@ export default function PublicRecordsStatistics() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 font-semibold text-[#0066EB]"
                     >
-                      Official PDF
+                      {t('Official PDF')}
                       <ExternalLink className="h-3 w-3" aria-hidden="true" />
                     </a>
                   </div>
@@ -725,53 +758,52 @@ export default function PublicRecordsStatistics() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <p className="text-eyebrow text-[#0066EB]">
-              COVERAGE &amp; PROVENANCE
+              {t('COVERAGE & PROVENANCE')}
             </p>
             <h2
               id="interpretation-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Understanding published coverage
+              {t('Understanding published coverage')}
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Methodological standards protecting civic information clarity and
-              publication integrity.
+              {t(
+                'Methodological standards protecting civic information clarity and publication integrity.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Published holdings
+                {t('Published holdings')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Counts reflect BetterSanFernando’s currently verified and
-                published holdings. They represent an expanding public civic
-                archive rather than an exhaustive catalog of every City
-                transaction.
+                {t(
+                  'Counts reflect BetterSanFernando’s currently verified and published holdings. They represent an expanding public civic archive rather than an exhaustive catalog of every City transaction.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Official evidence
+                {t('Official evidence')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Each collection is tied to identified official City sources.
-                Records are published only when backed by accessible public
-                documentation, audit releases, or statutory portal filings.
+                {t(
+                  'Each collection is tied to identified official City sources. Records are published only when backed by accessible public documentation, audit releases, or statutory portal filings.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                No combined total
+                {t('No combined total')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Different record units remain separate by design and must not be
-                added together. Combining projects, evidence records, and
-                services produces a misleading and mathematically meaningless
-                figure.
+                {t(
+                  'Different record units remain separate by design and must not be added together. Combining projects, evidence records, and services produces a misleading and mathematically meaningless figure.'
+                )}
               </p>
             </div>
           </div>
@@ -784,12 +816,14 @@ export default function PublicRecordsStatistics() {
         aria-labelledby="explore-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="explore-heading"
             className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -799,18 +833,19 @@ export default function PublicRecordsStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Provenance
+                  {t('Provenance')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Data Sources
+                  {t('Data Sources')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Complete directory of primary government portals, document
-                  origins, and verification links.
+                  {t(
+                    'Complete directory of primary government portals, document origins, and verification links.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View sources
+                {t('View sources')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -821,18 +856,19 @@ export default function PublicRecordsStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Methodology
+                  {t('Methodology')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Verification Methodology
+                  {t('Verification Methodology')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Standards and criteria used for document classification,
-                  reconciliation, and audit safeguards.
+                  {t(
+                    'Standards and criteria used for document classification, reconciliation, and audit safeguards.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Read methodology
+                {t('Read methodology')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -843,18 +879,19 @@ export default function PublicRecordsStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Transparency
+                  {t('Transparency')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Full Disclosure Reports
+                  {t('Full Disclosure Reports')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  DILG Full Disclosure Policy portal documents and statutory
-                  compliance reports.
+                  {t(
+                    'DILG Full Disclosure Policy portal documents and statutory compliance reports.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View reports
+                {t('View reports')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -865,18 +902,19 @@ export default function PublicRecordsStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Archive
+                  {t('Archive')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Official Documents
+                  {t('Official Documents')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Executive summaries, administrative orders, and verified City
-                  documentation.
+                  {t(
+                    'Executive summaries, administrative orders, and verified City documentation.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Browse documents
+                {t('Browse documents')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>

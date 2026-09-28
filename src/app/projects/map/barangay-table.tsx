@@ -1,20 +1,22 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
 import type { BarangayProjectSummary } from '../../../data/civic/projectMap';
-import { titleCaseEnum } from '../../../lib/utils';
+import { enumLabel } from '../../statistics/enum-labels';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
 
 const PAGE_SIZE = 10;
 
-const SORTS = [
-  { value: 'most', label: 'Most project records' },
-  { value: 'fewest', label: 'Fewest project records' },
-  { value: 'name-asc', label: 'Barangay A–Z' },
-  { value: 'name-desc', label: 'Barangay Z–A' },
-] as const;
-type SortValue = (typeof SORTS)[number]['value'];
+type SortValue = 'most' | 'fewest' | 'name-asc' | 'name-desc';
+const SORTS = (t: PageT): { value: SortValue; label: string }[] => [
+  { value: 'most', label: t('Most project records') },
+  { value: 'fewest', label: t('Fewest project records') },
+  { value: 'name-asc', label: t('Barangay A–Z') },
+  { value: 'name-desc', label: t('Barangay Z–A') },
+];
 
 const selectClass =
   'h-10 rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20';
@@ -22,11 +24,13 @@ const selectClass =
 // Lifecycle counts are current-state, not cumulative milestones, so most
 // cells would read "0" if every status got its own column — only the
 // non-zero statuses are worth showing per row.
-function statusBreakdown(barangay: BarangayProjectSummary): string {
+function statusBreakdown(barangay: BarangayProjectSummary, t: PageT): string {
   const parts = Object.entries(barangay.lifecycleCounts)
     .filter(([, count]) => count > 0)
-    .map(([status, count]) => `${titleCaseEnum(status)} ${count}`);
-  return parts.length > 0 ? parts.join(' · ') : 'No attributed project records';
+    .map(([status, count]) => `${enumLabel(t, status)} ${count}`);
+  return parts.length > 0
+    ? parts.join(' · ')
+    : t('No attributed project records');
 }
 
 // Compact page-number window with first/last + ellipsis — same pattern as
@@ -54,6 +58,7 @@ export default function BarangayDistributionTable({
 }: {
   barangays: readonly BarangayProjectSummary[];
 }) {
+  const t = usePageT();
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<SortValue>('most');
   const [page, setPage] = useState(1);
@@ -114,20 +119,20 @@ export default function BarangayDistributionTable({
           type="search"
           value={search}
           onChange={event => updateSearch(event.target.value)}
-          placeholder="Search barangays…"
-          aria-label="Search barangays"
+          placeholder={t('Search barangays…')}
+          aria-label={t('Search barangays')}
           className="h-10 w-full rounded-sm border border-gray-300 bg-white px-3 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20 sm:max-w-md"
         />
         <label className="w-full sm:w-60">
-          <span className="sr-only">Sort barangays</span>
+          <span className="sr-only">{t('Sort barangays')}</span>
           <select
             value={sort}
             onChange={event => updateSort(event.target.value as SortValue)}
             className={`${selectClass} w-full`}
           >
-            {SORTS.map(option => (
+            {SORTS(t).map(option => (
               <option key={option.value} value={option.value}>
-                Sort: {option.label}
+                {t('Sort: {{label}}', { label: option.label })}
               </option>
             ))}
           </select>
@@ -141,21 +146,21 @@ export default function BarangayDistributionTable({
             aria-hidden="true"
           />
           <h3 className="mt-3 text-base font-bold text-gray-900">
-            No barangays match your search.
+            {t('No barangays match your search.')}
           </h3>
           <button
             type="button"
             onClick={() => updateSearch('')}
             className="mt-4 inline-flex items-center rounded-sm bg-[#0066EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0052BC]"
           >
-            Clear search
+            {t('Clear search')}
           </button>
         </div>
       ) : (
         <>
           <ol
             className="mt-5 divide-y divide-gray-200 border-y border-gray-200"
-            aria-label="Barangays ranked by project record count"
+            aria-label={t('Barangays ranked by project record count')}
           >
             {pageRows.map(({ barangay, rank }) => (
               <li
@@ -177,21 +182,25 @@ export default function BarangayDistributionTable({
                     {barangay.name}
                   </Link>
                   <p className="mt-0.5 text-sm font-semibold tabular-nums text-gray-900">
-                    {barangay.projectCount} project
-                    {barangay.projectCount === 1 ? '' : 's'}
+                    {t(
+                      barangay.projectCount === 1
+                        ? '{{projectCount}} project'
+                        : '{{projectCount}} projects',
+                      { projectCount: barangay.projectCount }
+                    )}
                   </p>
                   {barangay.projectCount > 0 ? (
                     <div className="mt-2">
                       <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400">
-                        Current stages
+                        {t('Current stages')}
                       </p>
                       <p className="mt-0.5 text-xs leading-5 text-gray-600">
-                        {statusBreakdown(barangay)}
+                        {statusBreakdown(barangay, t)}
                       </p>
                     </div>
                   ) : (
                     <p className="mt-2 text-xs leading-5 text-gray-500">
-                      No attributed project records
+                      {t('No attributed project records')}
                     </p>
                   )}
                 </div>
@@ -201,7 +210,7 @@ export default function BarangayDistributionTable({
                     href={`/projects/city-projects?barangay=${barangay.psgcCode}`}
                     className="group inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC] sm:justify-self-end sm:pt-0.5"
                   >
-                    View projects
+                    {t('View projects')}
                     <span
                       className="transition-transform group-hover:translate-x-0.5"
                       aria-hidden="true"
@@ -215,14 +224,19 @@ export default function BarangayDistributionTable({
           </ol>
 
           <p className="mt-3 text-sm text-gray-600">
-            Showing {(currentPage - 1) * PAGE_SIZE + 1}–
-            {Math.min(currentPage * PAGE_SIZE, ranked.length)} of{' '}
-            {ranked.length} barangays
+            {t(
+              'Showing {{currentPage}}–{{currentPage2}} of {{length}} barangays',
+              {
+                currentPage: (currentPage - 1) * PAGE_SIZE + 1,
+                currentPage2: Math.min(currentPage * PAGE_SIZE, ranked.length),
+                length: ranked.length,
+              }
+            )}
           </p>
 
           {totalPages > 1 && (
             <nav
-              aria-label="Barangay directory pages"
+              aria-label={t('Barangay directory pages')}
               className="mt-4 flex items-center justify-between gap-4"
             >
               <button
@@ -232,7 +246,7 @@ export default function BarangayDistributionTable({
                 className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                Previous
+                {t('Previous')}
               </button>
 
               <div className="hidden items-center gap-1.5 sm:flex">
@@ -264,7 +278,10 @@ export default function BarangayDistributionTable({
               </div>
 
               <p className="text-sm text-gray-600 sm:hidden">
-                Page {currentPage} of {totalPages}
+                {t('Page {{currentPage}} of {{totalPages}}', {
+                  currentPage,
+                  totalPages,
+                })}
               </p>
 
               <button
@@ -273,7 +290,7 @@ export default function BarangayDistributionTable({
                 onClick={() => setPage(currentPage + 1)}
                 className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
-                Next
+                {t('Next')}
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </nav>

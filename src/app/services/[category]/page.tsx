@@ -6,7 +6,10 @@ import {
   getServices,
   type PublishedServiceCategory,
 } from '../../../data/civic/services';
-import { categories } from '../categories';
+import { getCategoryDisplay } from '../categories';
+import { PageMessages } from '../../../components/i18n/PageMessages';
+import { localizeHref } from '../../../i18n/locale';
+import { getLocale, getPageT } from '../../../i18n/server';
 import { buildPageMetadata } from '../../../lib/metadata';
 import ServiceCategoryView from '../service-category-view';
 
@@ -44,11 +47,20 @@ export async function generateMetadata({
   // matter, and notFound()'s own metadata (noindex) takes over then.
   if (!isValidCategory(segment)) return { robots: { index: false } };
 
-  const [name, , description] = categories.find(item => item[1] === segment)!;
+  const { t, locale } = await getPageT('services-category');
+  const display = getCategoryDisplay(segment, t);
+  // Category descriptions are their own sentence ("Reviewed local
+  // civil-registration and certification procedures."). Strip the trailing
+  // period before folding it into this wrapper sentence, or the result
+  // reads as two sentence fragments stitched together mid-clause.
+  const description = display.description.replace(/\.+$/, '');
   return buildPageMetadata({
-    title: name,
-    description: `Browse ${description.toLowerCase()} published by BetterSanFernando.`,
+    title: display.name,
+    description: t('Browse {{description}} published by BetterSanFernando.', {
+      description: description.charAt(0).toLowerCase() + description.slice(1),
+    }),
     path: `/services/${segment}`,
+    locale,
   });
 }
 
@@ -62,14 +74,19 @@ export default async function ServiceCategoryOrLegacySlugPage({
   // 1. Category match takes precedence — verified collision-free against
   //    every service slug (see docs/NEXTJS-MIGRATION-SPEC.md §5).
   if (isValidCategory(segment)) {
-    return <ServiceCategoryView category={segment} />;
+    const { messages } = await getPageT('services-category');
+    return (
+      <PageMessages messages={messages}>
+        <ServiceCategoryView category={segment} />
+      </PageMessages>
+    );
   }
 
   // 2. Legacy one-segment service-slug URL: redirect to the canonical
   //    category-qualified page. Never rendered as its own indexable page.
   const service = getServiceBySlug(segment);
   if (service) {
-    permanentRedirect(getServiceHref(service));
+    permanentRedirect(localizeHref(getServiceHref(service), await getLocale()));
   }
 
   // 3. Neither a category nor a known service slug.

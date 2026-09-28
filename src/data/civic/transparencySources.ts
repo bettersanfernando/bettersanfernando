@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { PageT } from '../../i18n/page-t.ts';
 import manifestJson from '../generated/civic/manifest.json' with { type: 'json' };
 import demographicsJson from '../generated/civic/demographics/barangays.json' with { type: 'json' };
 import officesJson from '../generated/civic/directories/city-offices.json' with { type: 'json' };
@@ -6,10 +7,23 @@ import executiveOrdersJson from '../generated/civic/legislation/executive-orders
 import ordinancesJson from '../generated/civic/legislation/ordinances.json' with { type: 'json' };
 import resolutionsJson from '../generated/civic/legislation/resolutions.json' with { type: 'json' };
 import { getAllProjectEvidence, getProjects } from './projects.ts';
-import { getFullDisclosureMetadata } from './fullDisclosure.ts';
-import { getOfficialDocumentsMetadata } from './officialDocuments.ts';
-import { getProjectCostUtilizationMetadata } from './projectCostUtilization.ts';
-import { getFinanceMetadata, getFinanceReports } from './finance.ts';
+import {
+  getFullDisclosureMetadata,
+  getFullDisclosureOverallPublicLimitationDisplay,
+} from './fullDisclosure.ts';
+import {
+  getOfficialDocumentsMetadata,
+  getOfficialDocumentsOverallPublicLimitationDisplay,
+} from './officialDocuments.ts';
+import {
+  getProjectCostUtilizationCoverageLimitationDisplay,
+  getProjectCostUtilizationMetadata,
+} from './projectCostUtilization.ts';
+import {
+  getFinanceMetadata,
+  getFinanceOverallPublicLimitationDisplay,
+  getFinanceReports,
+} from './finance.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
@@ -510,4 +524,238 @@ export function getTransparencySourceInventory() {
     publishedDomains: Object.freeze(publishedDomains),
     unavailableDomains: Object.freeze(unavailableDomains),
   });
+}
+
+// ---------------------------------------------------------------------------
+// Locale-aware display text
+// ---------------------------------------------------------------------------
+// getTransparencySourceInventory() above is unchanged and keeps returning the
+// same canonical English name/description/coverageNote/link-label values it
+// always has. The functions below translate that authored BetterSanFernando
+// copy for display only; `authority`, `referencePeriod`, `recordCount`,
+// `lastVerified`, dataset paths, and URLs are canonical/source-derived and
+// are rendered directly by callers, never through these functions.
+
+/** Localized name/description/coverage text for a published source domain.
+ * `coverageNote` for the four domains whose note is itself sourced from
+ * another data module (project-cost-utilization, finance, full-disclosure,
+ * official-documents) is passed through unmodified — that copy lives in
+ * those modules, outside this function's scope. */
+export function getPublishedDomainDisplayText(
+  domain: PublishedSourceDomain,
+  t: PageT
+): {
+  name: string;
+  description: string;
+  coverageNote: string;
+  recordLabel: string;
+} {
+  switch (domain.id) {
+    case 'projects':
+      return {
+        name: t('City Projects'),
+        description: t(
+          'A bounded infrastructure and public-works project collection with lifecycle, location, procurement, and amount fields.'
+        ),
+        coverageNote: t(
+          'Covers the verified infrastructure and public-works subset, not every City project or all historical activity.'
+        ),
+        recordLabel: t('project records'),
+      };
+    case 'project-evidence':
+      return {
+        name: t('Project Evidence'),
+        description: t(
+          'Record-level evidence supporting published project facts, including APP, invitation, bid-result, award, and monitoring stages.'
+        ),
+        coverageNote: t(
+          'Authorities and links vary by documentary stage. This inventory does not repeat all evidence records.'
+        ),
+        recordLabel: t('evidence records'),
+      };
+    case 'project-cost-utilization':
+      return {
+        name: t('Project Cost And Utilization'),
+        description: t(
+          'Source-reported, year-to-date cost-utilization observations (Total Cost Incurred to Date and physical completion) for a bounded subset of published projects.'
+        ),
+        coverageNote: getProjectCostUtilizationCoverageLimitationDisplay(t),
+        recordLabel: t('observation records'),
+      };
+    case 'population':
+      return {
+        name: t('Population And Barangay Demographics'),
+        description: t(
+          'Official city and barangay population, names, PSGC codes, and urban or rural classifications.'
+        ),
+        coverageNote: t(
+          'Uses the 2024 POPCEN baseline: 377,534 residents across all 35 barangays.'
+        ),
+        recordLabel: t('barangay records'),
+      };
+    case 'geography':
+      return {
+        name: t('City And Barangay Geography'),
+        description: t(
+          'One city boundary and 35 barangay polygon boundaries matched to official PSGC identity records.'
+        ),
+        coverageNote: t(
+          'The polygon source is not an official PSA shapefile. PSA supports the codes, names, and classifications—not the polygon geometry.'
+        ),
+        recordLabel: t('geographic features'),
+      };
+    case 'city-offices':
+      return {
+        name: t('City Offices'),
+        description: t(
+          'Verified office identities, locations, institutional contacts, facilities, and record-specific public source links.'
+        ),
+        coverageNote: t(
+          'A bounded directory of published office records; it is not presented as a complete organizational chart.'
+        ),
+        recordLabel: t('office records'),
+      };
+    case 'executive-orders':
+      return {
+        name: t('Executive Orders'),
+        description: t(
+          'Executive-order metadata and public links captured from the visible City Government archive.'
+        ),
+        coverageNote: t(
+          'Complete capture of the 11 entries visible in the audited archive, plus 2 subject-verified 2023 cross-references, not a claim of complete historical coverage.'
+        ),
+        recordLabel: t('executive orders'),
+      };
+    case 'ordinances':
+      return {
+        name: t('Ordinances'),
+        description: t(
+          'Verified ordinance metadata with full text where an official document has been recovered.'
+        ),
+        coverageNote: t(
+          'Eleven verified records are published; two include full text and nine currently establish metadata or existence only.'
+        ),
+        recordLabel: t('ordinances'),
+      };
+    case 'resolutions':
+      return {
+        name: t('Resolutions'),
+        description: t(
+          'A bounded, subject-verified resolution subset identified by official City cross-references, without full text or exact adoption dates.'
+        ),
+        coverageNote: t(
+          'Two subject-verified records only — never a claim of the number of resolutions the City has adopted.'
+        ),
+        recordLabel: t('resolutions'),
+      };
+    case 'finance':
+      return {
+        name: t('City Finances'),
+        description: t(
+          'Selected official aggregate finance reports and their non-additive, source-reported observations.'
+        ),
+        coverageNote: getFinanceOverallPublicLimitationDisplay(t),
+        recordLabel: t('finance reports'),
+      };
+    case 'full-disclosure':
+      return {
+        name: t('Full Disclosure Policy Reports'),
+        description: t(
+          'Individually verified Full Disclosure Policy report metadata: Annual Procurement Plans, Procurement Monitoring Reports, and Trust Fund and Special Education Fund utilization reports.'
+        ),
+        coverageNote: getFullDisclosureOverallPublicLimitationDisplay(t),
+        recordLabel: t('report records'),
+      };
+    case 'official-documents':
+      return {
+        name: t('Official Documents'),
+        description: t(
+          'A bounded index of Citizen’s Charters, business forms, and privacy documents from verified official sources.'
+        ),
+        coverageNote: getOfficialDocumentsOverallPublicLimitationDisplay(t),
+        recordLabel: t('official documents'),
+      };
+  }
+}
+
+/** Localized name/note for a domain that is not currently exported or not
+ * yet verified for publication. */
+export function getUnavailableDomainDisplayText(
+  domain: UnavailableSourceDomain,
+  t: PageT
+): { name: string; note: string } {
+  switch (domain.id) {
+    case 'person-directories':
+      return {
+        name: t('BHERT and person-level directories'),
+        note: t('Not currently included in the public frontend export.'),
+      };
+  }
+}
+
+// Base labels for the numbered per-URL source links uniqueLinks() produces
+// (e.g. "View public ordinance source 2") — translated by base, then
+// re-suffixed with whatever index the canonical label already carries.
+const NUMBERED_LINK_BASE_LABELS = [
+  'View City Government office source',
+  'View public ordinance source',
+  'View public resolution cross-reference',
+] as const;
+
+function translateNumberedLinkBase(
+  base: (typeof NUMBERED_LINK_BASE_LABELS)[number],
+  t: PageT
+): string {
+  switch (base) {
+    case 'View City Government office source':
+      return t('View City Government office source');
+    case 'View public ordinance source':
+      return t('View public ordinance source');
+    case 'View public resolution cross-reference':
+      return t('View public resolution cross-reference');
+  }
+}
+
+/** Localized label for a single source link. Static labels are translated
+ * directly; the three uniqueLinks()-generated bases keep their trailing
+ * " N" index (added only when a domain has more than one recovered URL). */
+export function getSourceLinkLabel(label: string, t: PageT): string {
+  for (const base of NUMBERED_LINK_BASE_LABELS) {
+    if (label === base) return translateNumberedLinkBase(base, t);
+    if (label.startsWith(`${base} `)) {
+      return `${translateNumberedLinkBase(base, t)} ${label.slice(base.length + 1)}`;
+    }
+  }
+  switch (label) {
+    case 'Browse published projects':
+      return t('Browse published projects');
+    case 'Inspect record-level project evidence':
+      return t('Inspect record-level project evidence');
+    case 'Browse Project Cost & Utilization':
+      return t('Browse Project Cost & Utilization');
+    case 'View the official PSA population and PSGC source':
+      return t('View the official PSA population and PSGC source');
+    case 'Explore population statistics':
+      return t('Explore population statistics');
+    case 'View the community-maintained polygon source':
+      return t('View the community-maintained polygon source');
+    case 'View the official PSA identity source':
+      return t('View the official PSA identity source');
+    case 'Browse the verified office directory':
+      return t('Browse the verified office directory');
+    case 'View the official executive-orders archive':
+      return t('View the official executive-orders archive');
+    case 'Browse published executive orders':
+      return t('Browse published executive orders');
+    case 'Browse published resolutions':
+      return t('Browse published resolutions');
+    case 'Browse City Finances':
+      return t('Browse City Finances');
+    case 'Browse Full Disclosure Reports':
+      return t('Browse Full Disclosure Reports');
+    case 'Browse Official Documents':
+      return t('Browse Official Documents');
+    default:
+      return label;
+  }
 }

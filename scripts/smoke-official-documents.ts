@@ -133,13 +133,17 @@ for (const forbidden of [
   );
 
 const pageSource = readNextRoute('/transparency/documents');
-assert.match(pageSource, /overallPublicLimitation/);
+assert.match(pageSource, /getOfficialDocumentsOverallPublicLimitationDisplay/);
 assert.match(pageSource, /target="_blank"/);
 assert.match(pageSource, /rel="noopener noreferrer"/);
 assert.match(pageSource, /opens in a new tab/);
 assert.match(
   pageSource,
-  /Showing \{filtered\.length\} of \{metadata\.recordCount\}/
+  /Showing \{\{length\}\} of \{\{recordCount\}\} documents/
+);
+assert.match(
+  pageSource,
+  /length: filtered\.length,\s*recordCount: metadata\.recordCount,/
 );
 assert.doesNotMatch(pageSource, /pagination/i);
 for (const route of [

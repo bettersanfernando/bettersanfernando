@@ -5,7 +5,7 @@ import {
   ExternalLink,
   ShieldCheck,
 } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
@@ -16,17 +16,24 @@ import {
 } from '../../../data/civic/governmentStructureSummary';
 import { buildPageMetadata } from '../../../lib/metadata';
 import { formatIsoDate, titleCaseEnum } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
+import { INTL_LOCALES } from '../../../i18n/locale';
+import { getBarangays } from '../../../data/civic/demographics';
 
-export function generateMetadata() {
+const BARANGAY_COUNT = getBarangays().length;
+
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('statistics-government');
   return buildPageMetadata({
-    title: 'Government Statistics',
-    description:
-      'A verified, partial summary of City Government of San Fernando organizational entities, official directory matches, and explicitly verified relationships — not a complete organizational chart.',
+    title: t('Government Statistics'),
+    description: t(
+      'A verified, partial summary of City Government of San Fernando organizational entities, official directory matches, and explicitly verified relationships — not a complete organizational chart.'
+    ),
     path: '/statistics/government',
+    locale,
   });
 }
-
-const numberFormatter = new Intl.NumberFormat('en-PH');
 
 const metadata = getGovernmentStructureMetadata();
 const entities = getGovernmentEntities();
@@ -72,43 +79,14 @@ const groupedRelationships = relationships.reduce<
 const parentGroups = Object.values(groupedRelationships);
 
 // Display label mappings
-const ENTITY_TYPE_LABELS: Record<string, string> = {
+const ENTITY_TYPE_LABELS = (t: PageT): Record<string, string> => ({
   office: 'Office',
   institution: 'Institution',
   division: 'Division',
   board: 'Board',
   facility: 'Facility',
-  service_unit: 'Service Unit',
-};
-
-function formatEntityType(type: string): string {
-  return ENTITY_TYPE_LABELS[type] ?? titleCaseEnum(type);
-}
-
-function formatRelationshipType(type: string): string {
-  switch (type) {
-    case 'division_of':
-      return 'Division of';
-    case 'facility_of':
-      return 'Facility of';
-    case 'unit_of':
-      return 'Unit of';
-    default:
-      return titleCaseEnum(type);
-  }
-}
-
-// Entity Type breakdown sorted descending by count
-const entityTypeBreakdownSorted = Object.entries(metadata.entityTypeBreakdown)
-  .map(([type, count]) => ({
-    type,
-    label: formatEntityType(type),
-    count,
-  }))
-  .sort((a, b) => b.count - a.count);
-
-const maxEntityCount = entityTypeBreakdownSorted[0]?.count ?? 30;
-const entityScaleMax = Math.ceil(maxEntityCount / 5) * 5; // 30
+  service_unit: t('Service Unit'),
+}); // 30
 const entityTicks = [0, 5, 10, 15, 20, 25, 30];
 
 // Check unrepresented facilities or service units
@@ -117,30 +95,67 @@ const unrepresentedFacilities = facilitiesAndServiceUnits.filter(
   f => !relChildIds.has(f.id)
 );
 
-const readingGuidePrinciples = [
-  {
-    title: 'COVERAGE IS BOUNDED',
-    description:
-      'Published records describe BetterSanFernando’s current directory coverage and do not represent a complete legal organizational chart.',
-  },
-  {
-    title: 'RELATIONSHIPS ARE EVIDENCE-BASED',
-    description:
-      'A parent-child relationship is shown only when supported by the current verified source data.',
-  },
-  {
-    title: 'COUNTS ARE NOT STAFFING MEASURES',
-    description:
-      'Record counts do not describe employees, vacancies, office size, budget, workload, or departmental importance.',
-  },
-  {
-    title: 'UNRESOLVED STRUCTURE STAYS UNRESOLVED',
-    description:
-      'BetterSanFernando does not infer missing hierarchy from office names or assumptions.',
-  },
-] as const;
+const readingGuidePrinciples = (t: PageT) =>
+  [
+    {
+      title: t('COVERAGE IS BOUNDED'),
+      description: t(
+        'Published records describe BetterSanFernando’s current directory coverage and do not represent a complete legal organizational chart.'
+      ),
+    },
+    {
+      title: t('RELATIONSHIPS ARE EVIDENCE-BASED'),
+      description: t(
+        'A parent-child relationship is shown only when supported by the current verified source data.'
+      ),
+    },
+    {
+      title: t('COUNTS ARE NOT STAFFING MEASURES'),
+      description: t(
+        'Record counts do not describe employees, vacancies, office size, budget, workload, or departmental importance.'
+      ),
+    },
+    {
+      title: t('UNRESOLVED STRUCTURE STAYS UNRESOLVED'),
+      description: t(
+        'BetterSanFernando does not infer missing hierarchy from office names or assumptions.'
+      ),
+    },
+  ] as const;
 
-export default function GovernmentStatistics() {
+export default async function GovernmentStatistics() {
+  const { t, locale } = await getPageT('statistics-government');
+
+  const entityTypeBreakdownSorted = Object.entries(metadata.entityTypeBreakdown)
+    .map(([type, count]) => ({
+      type,
+      label: formatEntityType(type),
+      count,
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  const maxEntityCount = entityTypeBreakdownSorted[0]?.count ?? 30;
+
+  const entityScaleMax = Math.ceil(maxEntityCount / 5) * 5;
+
+  const numberFormatter = new Intl.NumberFormat(INTL_LOCALES[locale]);
+
+  function formatEntityType(type: string): string {
+    return ENTITY_TYPE_LABELS(t)[type] ?? titleCaseEnum(type);
+  }
+
+  function formatRelationshipType(type: string): string {
+    switch (type) {
+      case 'division_of':
+        return t('Division of');
+      case 'facility_of':
+        return t('Facility of');
+      case 'unit_of':
+        return t('Unit of');
+      default:
+        return titleCaseEnum(type);
+    }
+  }
   return (
     <main className="flex-grow bg-white">
       {/* 1. EDITORIAL HERO */}
@@ -149,26 +164,24 @@ export default function GovernmentStatistics() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Statistics', href: '/statistics' },
-              { label: 'Government Statistics' },
+              { label: t('Home'), href: '/' },
+              { label: t('Statistics'), href: '/statistics' },
+              { label: t('Government Statistics') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                STATISTICS · GOVERNMENT
+                {t('STATISTICS · GOVERNMENT')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                Government Statistics
+                {t('Government Statistics')}
               </h1>
               <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                Explore BetterSanFernando’s verified government-directory
-                coverage, including published entities, entity types,
-                source-supported relationships, and public service units. This
-                is a verified, partial directory summary rather than a full
-                organizational roster.
+                {t(
+                  'Explore BetterSanFernando’s verified government-directory coverage, including published entities, entity types, source-supported relationships, and public service units. This is a verified, partial directory summary rather than a full organizational roster.'
+                )}
               </p>
 
               {/* CTA row */}
@@ -177,7 +190,7 @@ export default function GovernmentStatistics() {
                   href="#at-a-glance"
                   className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
-                  <span>Explore Published Coverage</span>
+                  <span>{t('Explore Published Coverage')}</span>
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
 
@@ -185,7 +198,7 @@ export default function GovernmentStatistics() {
                   href="/government/offices"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  <span>Browse City Offices</span>
+                  <span>{t('Browse City Offices')}</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -193,19 +206,19 @@ export default function GovernmentStatistics() {
 
             {/* Right-Side Scope Module */}
             <aside
-              aria-label="Government directory scope"
+              aria-label={t('Government directory scope')}
               className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6"
             >
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Scope of This Page
+                {t('Scope of This Page')}
               </p>
               <h2 className="mt-1 text-base font-bold text-gray-950">
-                Published Directory Coverage
+                {t('Published Directory Coverage')}
               </h2>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                These figures describe BetterSanFernando’s currently verified
-                government records. They are not a complete legal organizational
-                chart, staffing roster, or measure of office importance.
+                {t(
+                  'These figures describe BetterSanFernando’s currently verified government records. They are not a complete legal organizational chart, staffing roster, or measure of office importance.'
+                )}
               </p>
 
               <div className="mt-4 border-t border-gray-200/80 pt-3">
@@ -226,16 +239,17 @@ export default function GovernmentStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">SUMMARY</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('SUMMARY')}</p>
             <h2
               id="at-a-glance-heading"
               className="mt-1 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl"
             >
-              At a Glance
+              {t('At a Glance')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Verified summary of BetterSanFernando’s current published
-              government-directory records.
+              {t(
+                'Verified summary of BetterSanFernando’s current published government-directory records.'
+              )}
             </p>
           </div>
 
@@ -245,7 +259,7 @@ export default function GovernmentStatistics() {
             <div className="space-y-1 lg:pr-6">
               <div className="h-0.5 w-7 bg-[#0066EB]" aria-hidden="true" />
               <dt className="pt-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Published Government Records
+                {t('Published Government Records')}
               </dt>
               <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {numberFormatter.format(
@@ -253,7 +267,7 @@ export default function GovernmentStatistics() {
                 )}
               </dd>
               <p className="text-xs text-gray-600">
-                Reconciled entities in directory
+                {t('Reconciled entities in directory')}
               </p>
             </div>
 
@@ -261,7 +275,7 @@ export default function GovernmentStatistics() {
             <div className="space-y-1 pt-6 sm:pt-0 lg:px-6">
               <div className="h-0.5 w-7 bg-[#0066EB]" aria-hidden="true" />
               <dt className="pt-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Official Directory Matches
+                {t('Official Directory Matches')}
               </dt>
               <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {numberFormatter.format(
@@ -269,7 +283,7 @@ export default function GovernmentStatistics() {
                 )}
               </dd>
               <p className="text-xs text-gray-600">
-                Matched with official portal
+                {t('Matched with official portal')}
               </p>
             </div>
 
@@ -277,13 +291,13 @@ export default function GovernmentStatistics() {
             <div className="space-y-1 pt-6 sm:pt-0 lg:px-6">
               <div className="h-0.5 w-7 bg-[#0066EB]" aria-hidden="true" />
               <dt className="pt-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Published Facilities &amp; Service Units
+                {t('Published Facilities & Service Units')}
               </dt>
               <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {facilitiesAndServiceUnits.length}
               </dd>
               <p className="text-xs text-gray-600">
-                Verified public service locations
+                {t('Verified public service locations')}
               </p>
             </div>
 
@@ -291,30 +305,34 @@ export default function GovernmentStatistics() {
             <div className="space-y-1 pt-6 sm:pt-0 lg:pl-6">
               <div className="h-0.5 w-7 bg-[#0066EB]" aria-hidden="true" />
               <dt className="pt-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Verified Relationships
+                {t('Verified Relationships')}
               </dt>
               <dd className="text-3xl font-extrabold tabular-nums text-gray-950 sm:text-4xl">
                 {relationships.length}
               </dd>
               <p className="text-xs text-gray-600">
-                Source-supported parent-child links
+                {t('Source-supported parent-child links')}
               </p>
             </div>
           </dl>
 
           {/* Explanatory sentence */}
           <p className="mt-4 text-xs leading-relaxed text-gray-600 sm:text-sm">
-            Of the {metadata.officialDepartmentDirectoryCount} official
-            directory matches, {metadata.officialDepartmentTopLevelCount} are
-            top-level entries and {metadata.officialDepartmentNestedCount} are
-            explicitly nested under a top-level entry, per the{' '}
+            {t(
+              'Of the {{total}} official directory matches, {{topLevel}} are top-level entries and {{nested}} are explicitly nested under a top-level entry, per the',
+              {
+                total: metadata.officialDepartmentDirectoryCount,
+                topLevel: metadata.officialDepartmentTopLevelCount,
+                nested: metadata.officialDepartmentNestedCount,
+              }
+            )}{' '}
             <a
               href={metadata.officialDepartmentDirectoryUrl}
               target="_blank"
               rel="noreferrer"
               className="font-semibold text-[#0066EB] underline underline-offset-4 hover:text-[#0052BC]"
             >
-              current official Departments directory
+              {t('current official Departments directory')}
             </a>
             .
           </p>
@@ -329,15 +347,19 @@ export default function GovernmentStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">DIRECTORY COMPOSITION</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('DIRECTORY COMPOSITION')}
+            </p>
             <h2
               id="entity-types-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Entity Type Breakdown
+              {t('Entity Type Breakdown')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Published government records grouped by their current entity type.
+              {t(
+                'Published government records grouped by their current entity type.'
+              )}
             </p>
           </div>
 
@@ -348,19 +370,26 @@ export default function GovernmentStatistics() {
               <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 className="text-sm font-bold text-gray-950">
-                    Entity Counts by Classification
+                    {t('Entity Counts by Classification')}
                   </h3>
                   <p className="mt-0.5 text-xs text-gray-500">
-                    Standardized public-facing classifications
+                    {t('Standardized public-facing classifications')}
                   </p>
                 </div>
                 <div className="text-xs text-gray-500 sm:text-right">
                   <p className="font-semibold text-gray-950">
-                    {metadata.betterSanFernandoDirectoryRecordCount} Total
-                    Entities
+                    {t(
+                      '{{betterSanFernandoDirectoryRecordCount}} Total Entities',
+                      {
+                        betterSanFernandoDirectoryRecordCount:
+                          metadata.betterSanFernandoDirectoryRecordCount,
+                      }
+                    )}
                   </p>
                   <p className="mt-0.5 text-[11px] text-gray-400">
-                    Count scale · 0 to {entityScaleMax}
+                    {t('Count scale · 0 to {{entityScaleMax}}', {
+                      entityScaleMax,
+                    })}
                   </p>
                 </div>
               </div>
@@ -368,16 +397,19 @@ export default function GovernmentStatistics() {
 
             {/* Desktop Column Header */}
             <div className="hidden border-b border-gray-200 bg-gray-50/70 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500 sm:grid sm:grid-cols-[9.5rem_minmax(0,1fr)_4rem] sm:items-center sm:gap-4 sm:px-5">
-              <span>Entity Type</span>
-              <span>Count Scale</span>
-              <span className="text-right">Count</span>
+              <span>{t('Entity Type')}</span>
+              <span>{t('Count Scale')}</span>
+              <span className="text-right">{t('Count')}</span>
             </div>
 
             {/* Rows */}
             <ol className="divide-y divide-gray-100">
               {entityTypeBreakdownSorted.map(item => {
                 const barWidthPercent = (item.count / entityScaleMax) * 100;
-                const accessibleLabel = `${item.label}: ${item.count} published records.`;
+                const accessibleLabel = t(
+                  '{{label}}: {{count}} published records.',
+                  { label: item.label, count: item.count }
+                );
 
                 return (
                   <li key={item.type} className="px-4 py-3 sm:px-5">
@@ -470,21 +502,23 @@ export default function GovernmentStatistics() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                  What You’re Seeing
+                  {t('What You’re Seeing')}
                 </p>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm">
-                  Published BetterSanFernando government records grouped by
-                  entity type.
+                  {t(
+                    'Published BetterSanFernando government records grouped by entity type.'
+                  )}
                 </p>
               </div>
 
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                  How to Read It
+                  {t('How to Read It')}
                 </p>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-700 sm:text-sm">
-                  These counts describe directory coverage, not staffing,
-                  budget, office importance, or legal hierarchy.
+                  {t(
+                    'These counts describe directory coverage, not staffing, budget, office importance, or legal hierarchy.'
+                  )}
                 </p>
               </div>
             </div>
@@ -495,7 +529,11 @@ export default function GovernmentStatistics() {
                 href="/government/offices"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
               >
-                <span>Explore all {entities.length} office records</span>
+                <span>
+                  {t('Explore all {{length}} office records', {
+                    length: entities.length,
+                  })}
+                </span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
@@ -512,17 +550,18 @@ export default function GovernmentStatistics() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <p className="text-eyebrow text-[#0066EB]">
-              ORGANIZATIONAL STRUCTURE
+              {t('ORGANIZATIONAL STRUCTURE')}
             </p>
             <h2
               id="relationships-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Verified Relationships
+              {t('Verified Relationships')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Only source-supported relationships are shown. Unresolved or
-              unsupported hierarchy remains unassigned.
+              {t(
+                'Only source-supported relationships are shown. Unresolved or unsupported hierarchy remains unassigned.'
+              )}
             </p>
           </div>
 
@@ -530,8 +569,8 @@ export default function GovernmentStatistics() {
           <div className="mt-8 border-b border-gray-200">
             {/* Shared Column Header (Desktop & Tablet) */}
             <div className="hidden border-b border-gray-200 pb-3 text-xs font-semibold uppercase tracking-wider text-gray-500 md:grid md:grid-cols-[3fr_7fr] md:gap-8 lg:gap-12">
-              <span>Parent Entity</span>
-              <span>Verified Child Relationships</span>
+              <span>{t('Parent Entity')}</span>
+              <span>{t('Verified Child Relationships')}</span>
             </div>
 
             {/* Natural-height rows per parent group */}
@@ -551,8 +590,8 @@ export default function GovernmentStatistics() {
                     <p className="mt-1 text-xs font-medium text-gray-500">
                       {group.children.length}{' '}
                       {group.children.length === 1
-                        ? 'Verified Relationship'
-                        : 'Verified Relationships'}
+                        ? t('Verified Relationship')
+                        : t('Verified Relationships')}
                     </p>
                   </div>
 
@@ -578,10 +617,10 @@ export default function GovernmentStatistics() {
 
           {/* Section Footnote */}
           <p className="mt-6 text-xs leading-relaxed text-gray-500">
-            These {relationships.length} parent-child links are shown only
-            because the export explicitly verifies them. Entities with an
-            unresolved or held classification are excluded here and are not
-            shown as part of any hierarchy.
+            {t(
+              'These {{length}} parent-child links are shown only because the export explicitly verifies them. Entities with an unresolved or held classification are excluded here and are not shown as part of any hierarchy.',
+              { length: relationships.length }
+            )}
           </p>
         </div>
       </section>
@@ -604,14 +643,17 @@ export default function GovernmentStatistics() {
                   id="facilities-summary-heading"
                   className="text-base font-bold text-gray-950"
                 >
-                  Public Facilities &amp; Service Units
+                  {t('Public Facilities & Service Units')}
                 </h3>
                 <p className="mt-1 text-xs text-gray-600 sm:text-sm">
                   <span className="font-semibold text-gray-900">
-                    {facilitiesAndServiceUnits.length} Published Records.
+                    {t('{{length}} Published Records.', {
+                      length: facilitiesAndServiceUnits.length,
+                    })}
                   </span>{' '}
-                  Verified facility and service-unit records are represented in
-                  the relationship view above.
+                  {t(
+                    'Verified facility and service-unit records are represented in the relationship view above.'
+                  )}
                 </p>
               </div>
             </div>
@@ -620,7 +662,7 @@ export default function GovernmentStatistics() {
               href="/government/offices"
               className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
             >
-              <span>Browse City Offices</span>
+              <span>{t('Browse City Offices')}</span>
               <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
@@ -629,7 +671,7 @@ export default function GovernmentStatistics() {
           {unrepresentedFacilities.length > 0 && (
             <div className="mt-6">
               <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Other Published Facilities &amp; Service Units
+                {t('Other Published Facilities & Service Units')}
               </h4>
               <ul className="mt-2 grid gap-2 sm:grid-cols-2">
                 {unrepresentedFacilities.map(entity => (
@@ -653,22 +695,23 @@ export default function GovernmentStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('READING GUIDE')}</p>
             <h2
               id="reading-guide-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              How to Read These Numbers
+              {t('How to Read These Numbers')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Guidance on understanding the strict boundaries of this directory
-              coverage report.
+              {t(
+                'Guidance on understanding the strict boundaries of this directory coverage report.'
+              )}
             </p>
           </div>
 
           {/* 2 x 2 Desktop Grid */}
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {readingGuidePrinciples.map(item => (
+            {readingGuidePrinciples(t).map(item => (
               <div
                 key={item.title}
                 className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6"
@@ -691,7 +734,7 @@ export default function GovernmentStatistics() {
                 aria-hidden="true"
               />
               <h4 className="text-xs font-bold uppercase tracking-wider text-gray-900">
-                Acknowledged Scope Limitations
+                {t('Acknowledged Scope Limitations')}
               </h4>
             </div>
             <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-gray-600">
@@ -716,16 +759,17 @@ export default function GovernmentStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">PROVENANCE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('PROVENANCE')}</p>
             <h2
               id="provenance-heading"
               className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
             >
-              Sources &amp; Coverage
+              {t('Sources & Coverage')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Official reference links and verification methodology supporting
-              these records.
+              {t(
+                'Official reference links and verification methodology supporting these records.'
+              )}
             </p>
           </div>
 
@@ -734,17 +778,27 @@ export default function GovernmentStatistics() {
             <div className="flex flex-col justify-between gap-4 rounded-sm border border-gray-200 bg-white p-5 sm:flex-row sm:items-center sm:p-6">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                  Official Departments Directory
+                  {t('Official Departments Directory')}
                 </p>
                 <h3 className="mt-1 text-base font-bold text-gray-950">
+                  {/* Official organization name — rendered verbatim, never translated. */}
                   City Government of San Fernando Official Portal
                 </h3>
                 <p className="mt-1 text-xs text-gray-600">
-                  {metadata.officialDepartmentDirectoryCount} matched records (
-                  {metadata.officialDepartmentTopLevelCount} top-level,{' '}
-                  {metadata.officialDepartmentNestedCount} nested) · Verified{' '}
-                  {formatIsoDate(
-                    metadata.officialDepartmentDirectoryVerifiedAt
+                  {t(
+                    '{{officialDepartmentDirectoryCount}} matched records ({{officialDepartmentTopLevelCount}} top-level, {{officialDepartmentNestedCount}} nested) · Verified {{officialDepartmentDirectoryVerifiedAt}}',
+                    {
+                      officialDepartmentDirectoryCount:
+                        metadata.officialDepartmentDirectoryCount,
+                      officialDepartmentTopLevelCount:
+                        metadata.officialDepartmentTopLevelCount,
+                      officialDepartmentNestedCount:
+                        metadata.officialDepartmentNestedCount,
+                      officialDepartmentDirectoryVerifiedAt: formatIsoDate(
+                        metadata.officialDepartmentDirectoryVerifiedAt,
+                        locale
+                      ),
+                    }
                   )}
                 </p>
               </div>
@@ -754,7 +808,7 @@ export default function GovernmentStatistics() {
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
               >
-                <span>View Official Departments Directory</span>
+                <span>{t('View Official Departments Directory')}</span>
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               </a>
             </div>
@@ -762,31 +816,35 @@ export default function GovernmentStatistics() {
             {/* Record-Specific Official Sources */}
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <p className="text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                Record-Specific Official Sources
+                {t('Record-Specific Official Sources')}
               </p>
               <h3 className="mt-1 text-base font-bold text-gray-950">
-                Departmental and Unit Pages
+                {t('Departmental and Unit Pages')}
               </h3>
               <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                Individual office identities, contact information, and supported
-                relationships may rely on the specific official source attached
-                to each record in the directory.
+                {t(
+                  'Individual office identities, contact information, and supported relationships may rely on the specific official source attached to each record in the directory.'
+                )}
               </p>
             </div>
 
             {/* BetterSanFernando Directory Dataset */}
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <p className="text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                BetterSanFernando Directory
+                {t('BetterSanFernando Directory')}
               </p>
               <h3 className="mt-1 text-base font-bold text-gray-950">
-                Verified Civic Directory Dataset
+                {t('Verified Civic Directory Dataset')}
               </h3>
               <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                The {metadata.betterSanFernandoDirectoryRecordCount} published
-                records describe the current verified directory dataset and are
-                not a claim about the City’s complete legal organization. Last
-                verified {formatIsoDate(metadata.lastVerified)}.
+                {t(
+                  'The {{betterSanFernandoDirectoryRecordCount}} published records describe the current verified directory dataset and are not a claim about the City’s complete legal organization. Last verified {{lastVerified}}.',
+                  {
+                    betterSanFernandoDirectoryRecordCount:
+                      metadata.betterSanFernandoDirectoryRecordCount,
+                    lastVerified: formatIsoDate(metadata.lastVerified, locale),
+                  }
+                )}
               </p>
             </div>
           </div>
@@ -799,12 +857,14 @@ export default function GovernmentStatistics() {
         aria-labelledby="keep-exploring-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="keep-exploring-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.02em] text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -815,15 +875,16 @@ export default function GovernmentStatistics() {
             >
               <div>
                 <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
-                  Government Overview
+                  {t('Government Overview')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Comprehensive portal to city leadership, branches, and civic
-                  structures.
+                  {t(
+                    'Comprehensive portal to city leadership, branches, and civic structures.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                <span>View government overview</span>
+                <span>{t('View government overview')}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -834,15 +895,16 @@ export default function GovernmentStatistics() {
             >
               <div>
                 <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
-                  City Offices
+                  {t('City Offices')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Detailed directory of city departments, divisions, and public
-                  facilities.
+                  {t(
+                    'Detailed directory of city departments, divisions, and public facilities.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                <span>Browse city offices</span>
+                <span>{t('Browse city offices')}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -854,15 +916,16 @@ export default function GovernmentStatistics() {
             >
               <div>
                 <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
-                  Hotlines &amp; Contacts
+                  {t('Hotlines & Contacts')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Emergency numbers, direct department phone lines, and official
-                  emails.
+                  {t(
+                    'Emergency numbers, direct department phone lines, and official emails.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                <span>View contact numbers</span>
+                <span>{t('View contact numbers')}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -873,15 +936,17 @@ export default function GovernmentStatistics() {
             >
               <div>
                 <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
-                  Barangay Contacts
+                  {t('Barangay Contacts')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Hall locations and official contact information for all 35
-                  barangays.
+                  {t(
+                    'Hall locations and official contact information for all {{barangays}} barangays.',
+                    { barangays: BARANGAY_COUNT }
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                <span>Browse barangay contacts</span>
+                <span>{t('Browse barangay contacts')}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -893,15 +958,16 @@ export default function GovernmentStatistics() {
             >
               <div>
                 <h3 className="text-base font-bold text-gray-950 transition-colors group-hover:text-[#0066EB]">
-                  Official Government Links
+                  {t('Official Government Links')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Verified outbound links to national agencies, provincial
-                  offices, and regional government websites.
+                  {t(
+                    'Verified outbound links to national agencies, provincial offices, and regional government websites.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                <span>View official links</span>
+                <span>{t('View official links')}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>

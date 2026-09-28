@@ -84,7 +84,7 @@ assert.deepEqual(
 );
 assert.match(
   categoryPageSource,
-  /permanentRedirect\(getServiceHref\(service\)\)/
+  /permanentRedirect\(\s*localizeHref\(getServiceHref\(service\), await getLocale\(\)\)\s*\)/
 );
 assert.match(detailPageSource, /generateStaticParams/);
 for (const slug of canonicalCategories) {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import {
   ArrowDown,
   ArrowRight,
@@ -14,9 +14,12 @@ import {
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getFullDisclosureMetadata,
+  getFullDisclosureOverallPublicLimitationDisplay,
   getFullDisclosureRecords,
   type FullDisclosureRecord,
 } from '../../../data/civic/fullDisclosure';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
 
 type ReportTypeFilter = 'ALL' | FullDisclosureRecord['report_type'];
 
@@ -28,12 +31,33 @@ const selectClass =
 const records = getFullDisclosureRecords();
 const metadata = getFullDisclosureMetadata();
 
+// Canonical stored values — never translated, since they are compared
+// against `record.report_type` for filtering. Only their displayed label
+// (reportTypeLabel below) is localized.
 const reportTypeOrder: FullDisclosureRecord['report_type'][] = [
   'Annual Procurement Plan',
   'Procurement Monitoring Report',
   'Trust Fund Utilization',
   'Special Education Fund Utilization',
 ];
+
+function reportTypeLabel(
+  type: FullDisclosureRecord['report_type'],
+  t: PageT
+): string {
+  switch (type) {
+    case 'Annual Procurement Plan':
+      return t('Annual Procurement Plan');
+    case 'Procurement Monitoring Report':
+      return t('Procurement Monitoring Report');
+    case 'Trust Fund Utilization':
+      return t('Trust Fund Utilization');
+    case 'Special Education Fund Utilization':
+      return t('Special Education Fund Utilization');
+    default:
+      return type;
+  }
+}
 
 function formatDate(date: string): string {
   return new Intl.DateTimeFormat('en-PH', {
@@ -60,6 +84,7 @@ function matchesQuery(record: FullDisclosureRecord, query: string): boolean {
 }
 
 export default function FullDisclosure() {
+  const t = usePageT();
   const [query, setQuery] = useState('');
   const [reportType, setReportType] = useState<ReportTypeFilter>('ALL');
   const [year, setYear] = useState<'ALL' | number>('ALL');
@@ -114,9 +139,9 @@ export default function FullDisclosure() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Transparency', href: '/transparency' },
-              { label: 'Full Disclosure Reports' },
+              { label: t('Home'), href: '/' },
+              { label: t('Transparency'), href: '/transparency' },
+              { label: t('Full Disclosure Reports') },
             ]}
           />
 
@@ -126,15 +151,15 @@ export default function FullDisclosure() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                TRANSPARENCY · FULL DISCLOSURE
+                {t('TRANSPARENCY · FULL DISCLOSURE')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                Full Disclosure Reports
+                {t('Full Disclosure Reports')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Browse individually verified Full Disclosure Policy report
-                records, with direct links to each official City page and
-                available attachment.
+                {t(
+                  'Browse individually verified Full Disclosure Policy report records, with direct links to each official City page and available attachment.'
+                )}
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -142,14 +167,14 @@ export default function FullDisclosure() {
                   href="#browse-reports"
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition hover:bg-[#0052BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066EB]"
                 >
-                  <span>Browse verified reports</span>
+                  <span>{t('Browse verified reports')}</span>
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/transparency"
                   className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition hover:text-[#0052BC] hover:underline focus-visible:outline-none focus-visible:underline"
                 >
-                  <span>Transparency overview</span>
+                  <span>{t('Transparency overview')}</span>
                   <ArrowRight
                     className="h-4 w-4 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -160,19 +185,21 @@ export default function FullDisclosure() {
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                ARCHIVE SCOPE
+                {t('ARCHIVE SCOPE')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                Verified, bounded collection
+                {t('Verified, bounded collection')}
               </h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                BetterSanFernando currently publishes {metadata.recordCount}{' '}
-                individually verified Full Disclosure report records. This is
-                not a complete Full Disclosure archive.
+                {t(
+                  'BetterSanFernando currently publishes {{recordCount}} individually verified Full Disclosure report records. This is not a complete Full Disclosure archive.',
+                  { recordCount: metadata.recordCount }
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run. Not an official City Government
-                website.
+                {t(
+                  'Independent and community-run. Not an official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -183,67 +210,73 @@ export default function FullDisclosure() {
         {/* 2. Archive Snapshot */}
         <section aria-labelledby="snapshot-heading" className="pt-8 sm:pt-10">
           <h2 id="snapshot-heading" className="sr-only">
-            Archive snapshot
+            {t('Archive snapshot')}
           </h2>
           <dl className="grid grid-cols-1 divide-y divide-gray-200 border-y border-gray-200 py-6 sm:grid-cols-2 sm:divide-y-0 sm:gap-6 lg:grid-cols-5 lg:gap-0 lg:divide-x lg:py-7">
             <div className="pb-4 sm:pb-0 lg:pr-5">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Total reports
+                {t('Total reports')}
               </dt>
               <dd className="mt-2 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                 {metadata.recordCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Verified report records
+                {t('Verified report records')}
               </p>
             </div>
 
             <div className="py-4 sm:py-0 lg:px-5">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Annual Procurement Plans
+                {t('Annual Procurement Plans')}
               </dt>
               <dd className="mt-2 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                 {metadata.reportTypeBreakdown['Annual Procurement Plan'] ?? 0}
               </dd>
-              <p className="mt-1 text-xs text-gray-600">APP documents</p>
+              <p className="mt-1 text-xs text-gray-600">{t('APP documents')}</p>
             </div>
 
             <div className="py-4 sm:py-0 lg:px-5">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Procurement Monitoring Reports
+                {t('Procurement Monitoring Reports')}
               </dt>
               <dd className="mt-2 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                 {metadata.reportTypeBreakdown[
                   'Procurement Monitoring Report'
                 ] ?? 0}
               </dd>
-              <p className="mt-1 text-xs text-gray-600">PMR filings</p>
+              <p className="mt-1 text-xs text-gray-600">{t('PMR filings')}</p>
             </div>
 
             <div className="py-4 sm:py-0 lg:px-5">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Trust Fund Utilization
+                {t('Trust Fund Utilization')}
               </dt>
               <dd className="mt-2 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                 {metadata.reportTypeBreakdown['Trust Fund Utilization'] ?? 0}
               </dd>
-              <p className="mt-1 text-xs text-gray-600">Quarterly reports</p>
+              <p className="mt-1 text-xs text-gray-600">
+                {t('Quarterly reports')}
+              </p>
             </div>
 
             <div className="pt-4 sm:pt-0 lg:pl-5">
               <dt className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                SEF Utilization
+                {t('SEF Utilization')}
               </dt>
               <dd className="mt-2 text-2xl font-bold tabular-nums text-gray-950 sm:text-3xl">
                 {metadata.reportTypeBreakdown[
                   'Special Education Fund Utilization'
                 ] ?? 0}
               </dd>
-              <p className="mt-1 text-xs text-gray-600">Quarterly reports</p>
+              <p className="mt-1 text-xs text-gray-600">
+                {t('Quarterly reports')}
+              </p>
             </div>
           </dl>
           <p className="mt-3 text-xs text-gray-500 sm:text-sm">
-            Last verified: {formatDate(metadata.lastVerified)}
+            {t('Last verified: {{lastVerified}}', {
+              lastVerified: formatDate(metadata.lastVerified),
+            })}
           </p>
         </section>
 
@@ -251,34 +284,33 @@ export default function FullDisclosure() {
         <section aria-labelledby="collection-scope-heading">
           <div className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              COLLECTION SCOPE
+              {t('COLLECTION SCOPE')}
             </p>
             <h2
               id="collection-scope-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              What this archive contains
+              {t('What this archive contains')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Published here
+                  {t('Published here')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  BetterSanFernando publishes metadata for individually verified
-                  Full Disclosure Policy report records, accompanied by direct
-                  links to each official City Government web page and available
-                  official file attachment.
+                  {t(
+                    'BetterSanFernando publishes metadata for individually verified Full Disclosure Policy report records, accompanied by direct links to each official City Government web page and available official file attachment.'
+                  )}
                 </p>
               </div>
 
               <div className="md:border-l md:border-gray-200 md:pl-8">
                 <h3 className="text-base font-bold text-gray-950">
-                  What is not included
+                  {t('What is not included')}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  {metadata.overallPublicLimitation}
+                  {getFullDisclosureOverallPublicLimitationDisplay(t)}
                 </p>
               </div>
             </div>
@@ -289,10 +321,10 @@ export default function FullDisclosure() {
         <section id="browse-reports" aria-labelledby="browse-reports-heading">
           <div className="mb-3">
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              BROWSE REPORTS
+              {t('BROWSE REPORTS')}
             </p>
             <h2 id="browse-reports-heading" className="sr-only">
-              Search and filter reports
+              {t('Search and filter reports')}
             </h2>
           </div>
 
@@ -303,7 +335,7 @@ export default function FullDisclosure() {
                   htmlFor="reports-search"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Search reports
+                  {t('Search reports')}
                 </label>
                 <div className="relative mt-1.5">
                   <Search
@@ -315,7 +347,9 @@ export default function FullDisclosure() {
                     type="search"
                     value={query}
                     onChange={event => setQuery(event.target.value)}
-                    placeholder="Search title, report type, agency, year, or period..."
+                    placeholder={t(
+                      'Search title, report type, agency, year, or period...'
+                    )}
                     className="h-10 w-full rounded-sm border border-gray-300 bg-white pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
                   />
                 </div>
@@ -326,7 +360,7 @@ export default function FullDisclosure() {
                   htmlFor="report-type-select"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Report type
+                  {t('Report type')}
                 </label>
                 <div className="mt-1.5">
                   <select
@@ -337,10 +371,10 @@ export default function FullDisclosure() {
                     }
                     className={selectClass}
                   >
-                    <option value="ALL">All types</option>
+                    <option value="ALL">{t('All types')}</option>
                     {reportTypeOrder.map(type => (
                       <option key={type} value={type}>
-                        {type}
+                        {reportTypeLabel(type, t)}
                       </option>
                     ))}
                   </select>
@@ -352,7 +386,7 @@ export default function FullDisclosure() {
                   htmlFor="year-select"
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-600"
                 >
-                  Year
+                  {t('Year')}
                 </label>
                 <div className="mt-1.5">
                   <select
@@ -367,7 +401,7 @@ export default function FullDisclosure() {
                     }
                     className={selectClass}
                   >
-                    <option value="ALL">All years</option>
+                    <option value="ALL">{t('All years')}</option>
                     {years.map(y => (
                       <option key={y} value={y}>
                         {y}
@@ -385,7 +419,7 @@ export default function FullDisclosure() {
                   className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-sm border border-gray-300 bg-white px-4 text-xs font-semibold text-gray-700 transition hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066EB] disabled:cursor-not-allowed disabled:opacity-45 md:w-auto"
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  Reset
+                  {t('Reset')}
                 </button>
               </div>
             </div>
@@ -393,8 +427,10 @@ export default function FullDisclosure() {
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <p className="text-xs text-gray-600 sm:text-sm" aria-live="polite">
-              Showing {filteredRecords.length} of {metadata.recordCount}{' '}
-              verified records
+              {t('Showing {{length}} of {{recordCount}} verified records', {
+                length: filteredRecords.length,
+                recordCount: metadata.recordCount,
+              })}
             </p>
           </div>
         </section>
@@ -402,7 +438,7 @@ export default function FullDisclosure() {
         {/* 5. Report Archive Grouped by Year */}
         <section aria-labelledby="archive-list-heading">
           <h2 id="archive-list-heading" className="sr-only">
-            Full Disclosure reports list
+            {t('Full Disclosure reports list')}
           </h2>
 
           {groupedByYear.length === 0 ? (
@@ -412,10 +448,10 @@ export default function FullDisclosure() {
                 aria-hidden="true"
               />
               <p className="mt-2 text-base font-semibold text-gray-950">
-                No reports match these filters
+                {t('No reports match these filters')}
               </p>
               <p className="mt-1 text-sm text-gray-600">
-                Try a different search term or reset the filters.
+                {t('Try a different search term or reset the filters.')}
               </p>
               <button
                 type="button"
@@ -423,7 +459,7 @@ export default function FullDisclosure() {
                 className="mt-4 inline-flex items-center gap-1.5 rounded-sm border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50"
               >
                 <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                Reset filters
+                {t('Reset filters')}
               </button>
             </div>
           ) : (
@@ -455,14 +491,15 @@ export default function FullDisclosure() {
                               {/* Top row: Report type + Period + Verified badge */}
                               <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-gray-700">
-                                  {record.report_type} · {periodLabel(record)}
+                                  {reportTypeLabel(record.report_type, t)} ·{' '}
+                                  {periodLabel(record)}
                                 </span>
                                 <span className="inline-flex items-center gap-1 rounded-xs bg-[#F3F6FB] px-2 py-0.5 text-xs font-medium text-emerald-800">
                                   <ShieldCheck
                                     className="h-3.5 w-3.5 text-emerald-600"
                                     aria-hidden="true"
                                   />
-                                  Verified
+                                  {t('Verified')}
                                 </span>
                               </div>
 
@@ -482,13 +519,17 @@ export default function FullDisclosure() {
                               {/* Structured Metadata */}
                               <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-xs sm:text-sm">
                                 <div>
-                                  <dt className="text-gray-500">File type</dt>
+                                  <dt className="text-gray-500">
+                                    {t('File type')}
+                                  </dt>
                                   <dd className="font-medium text-gray-900">
                                     {record.file_type}
                                   </dd>
                                 </div>
                                 <div>
-                                  <dt className="text-gray-500">Verified</dt>
+                                  <dt className="text-gray-500">
+                                    {t('Verified')}
+                                  </dt>
                                   <dd className="font-medium text-gray-900">
                                     {formatDate(record.verification_date)}
                                   </dd>
@@ -499,15 +540,15 @@ export default function FullDisclosure() {
                             {/* Right Rail: Source & File */}
                             <div className="border-t border-gray-200 pt-4 text-xs sm:text-sm lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
                               <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-gray-500">
-                                SOURCE &amp; FILE
+                                {t('SOURCE & FILE')}
                               </p>
                               <p className="mt-1.5 text-gray-700">
-                                Official City page
+                                {t('Official City page')}
                               </p>
                               <p className="mt-0.5 text-gray-600">
                                 {record.official_attachment_url
                                   ? `${record.file_type} attachment available`
-                                  : 'No direct attachment published'}
+                                  : t('No direct attachment published')}
                               </p>
 
                               <div className="mt-3.5 flex flex-col items-start gap-2 font-semibold">
@@ -515,10 +556,13 @@ export default function FullDisclosure() {
                                   href={record.official_page_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  aria-label={`Open the official page for ${record.title} (opens in a new tab)`}
+                                  aria-label={t(
+                                    'Open the official page for {{title}} (opens in a new tab)',
+                                    { title: record.title }
+                                  )}
                                   className="inline-flex items-center gap-1 text-[#0066EB] hover:text-[#0052BC] hover:underline"
                                 >
-                                  View official page
+                                  {t('View official page')}
                                   <ExternalLink
                                     className="h-3.5 w-3.5 shrink-0"
                                     aria-hidden="true"
@@ -529,10 +573,18 @@ export default function FullDisclosure() {
                                     href={record.official_attachment_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    aria-label={`Open the official ${record.file_type} attachment for ${record.title} on the City Government's website (opens in a new tab)`}
+                                    aria-label={t(
+                                      "Open the official {{file_type}} attachment for {{title}} on the City Government's website (opens in a new tab)",
+                                      {
+                                        file_type: record.file_type,
+                                        title: record.title,
+                                      }
+                                    )}
                                     className="inline-flex items-center gap-1 text-[#0066EB] hover:text-[#0052BC] hover:underline"
                                   >
-                                    Open {record.file_type} attachment
+                                    {t('Open {{file_type}} attachment', {
+                                      file_type: record.file_type,
+                                    })}
                                     <ExternalLink
                                       className="h-3.5 w-3.5 shrink-0"
                                       aria-hidden="true"
@@ -558,44 +610,47 @@ export default function FullDisclosure() {
           className="rounded-sm border border-gray-200 bg-white p-6 sm:p-8"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            COVERAGE &amp; VERIFICATION
+            {t('COVERAGE & VERIFICATION')}
           </p>
           <h2
             id="understanding-archive-heading"
             className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
           >
-            Understanding this archive
+            {t('Understanding this archive')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-6 border-t border-gray-200 pt-6 md:grid-cols-3 md:gap-8">
             <div>
               <h3 className="text-base font-bold text-gray-950">
-                Verification
+                {t('Verification')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Each published record has been individually verified and
-                directly tied to an official City Government webpage and/or
-                official file attachment.
-              </p>
-            </div>
-
-            <div className="md:border-l md:border-gray-200 md:pl-8">
-              <h3 className="text-base font-bold text-gray-950">Coverage</h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                The current {metadata.recordCount}-record collection is bounded
-                and represents verified public records. It is not presented as
-                the complete Full Disclosure archive.
+                {t(
+                  'Each published record has been individually verified and directly tied to an official City Government webpage and/or official file attachment.'
+                )}
               </p>
             </div>
 
             <div className="md:border-l md:border-gray-200 md:pl-8">
               <h3 className="text-base font-bold text-gray-950">
-                Document contents
+                {t('Coverage')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                This page publishes verified report metadata and direct links to
-                official sources. It does not extract, calculate, aggregate, or
-                summarize financial figures from within the attached documents.
+                {t(
+                  'The current {{recordCount}}-record collection is bounded and represents verified public records. It is not presented as the complete Full Disclosure archive.',
+                  { recordCount: metadata.recordCount }
+                )}
+              </p>
+            </div>
+
+            <div className="md:border-l md:border-gray-200 md:pl-8">
+              <h3 className="text-base font-bold text-gray-950">
+                {t('Document contents')}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                {t(
+                  'This page publishes verified report metadata and direct links to official sources. It does not extract, calculate, aggregate, or summarize financial figures from within the attached documents.'
+                )}
               </p>
             </div>
           </div>
@@ -605,13 +660,13 @@ export default function FullDisclosure() {
         <section aria-labelledby="keep-exploring-heading">
           <div className="border-t border-gray-200 pt-10 sm:pt-12">
             <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-              KEEP EXPLORING
+              {t('KEEP EXPLORING')}
             </p>
             <h2
               id="keep-exploring-heading"
               className="mt-1.5 text-xl font-bold tracking-[-0.02em] text-gray-950 sm:text-2xl"
             >
-              Related transparency resources
+              {t('Related transparency resources')}
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -621,15 +676,16 @@ export default function FullDisclosure() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Transparency overview
+                    {t('Transparency overview')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    City transparency portal, disclosure policies, and public
-                    information.
+                    {t(
+                      'City transparency portal, disclosure policies, and public information.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse overview</span>
+                  <span>{t('Browse overview')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -643,15 +699,16 @@ export default function FullDisclosure() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    City Finances
+                    {t('City Finances')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Verified municipal budget, expenditure, and fund utilization
-                    summaries.
+                    {t(
+                      'Verified municipal budget, expenditure, and fund utilization summaries.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Browse finances</span>
+                  <span>{t('Browse finances')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -665,15 +722,16 @@ export default function FullDisclosure() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Public Records Statistics
+                    {t('Public Records Statistics')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Metrics, coverage depth, and verification rates across
-                    public archives.
+                    {t(
+                      'Metrics, coverage depth, and verification rates across public archives.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>View statistics</span>
+                  <span>{t('View statistics')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -687,15 +745,16 @@ export default function FullDisclosure() {
               >
                 <div>
                   <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#0066EB]">
-                    Data Sources
+                    {t('Data Sources')}
                   </h3>
                   <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                    Full registry of official City web origins, portals, and
-                    gazettes.
+                    {t(
+                      'Full registry of official City web origins, portals, and gazettes.'
+                    )}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                  <span>Explore sources</span>
+                  <span>{t('Explore sources')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
                     aria-hidden="true"

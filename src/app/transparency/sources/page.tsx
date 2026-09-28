@@ -1,77 +1,83 @@
 import { ArrowDown, ArrowRight, ChevronDown, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
+  getPublishedDomainDisplayText,
+  getSourceLinkLabel,
   getTransparencySourceInventory,
+  getUnavailableDomainDisplayText,
   type PublishedSourceDomain,
   type TransparencySourceLink,
 } from '../../../data/civic/transparencySources';
 import { buildPageMetadata } from '../../../lib/metadata';
 import { formatIsoDate } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Transparency Sources',
-  description:
-    'See the public datasets, publishers, reference periods, and source links supporting information published by BetterSanFernando.',
-  path: '/transparency/sources',
-});
-
-// UI-only presentation grouping for the 12 published domains
-const DOMAIN_GROUPS = [
-  {
-    id: 'projects-procurement',
-    label: 'Projects & Procurement',
-    description:
-      'Infrastructure projects, procurement evidence records, and verified cost-utilization observations.',
-    domainIds: ['projects', 'project-evidence', 'project-cost-utilization'],
-  },
-  {
-    id: 'community-geography',
-    label: 'Community & Geography',
-    description:
-      'Official census counts, demographic profiles, and open civic geographic boundaries.',
-    domainIds: ['population', 'geography'],
-  },
-  {
-    id: 'government-legislation',
-    label: 'Government & Legislation',
-    description:
-      'Verified city offices directory, executive orders, ordinances, and resolutions.',
-    domainIds: [
-      'city-offices',
-      'executive-orders',
-      'ordinances',
-      'resolutions',
-    ],
-  },
-  {
-    id: 'transparency-finance',
-    label: 'Transparency & Finance',
-    description:
-      'City finances, statutory Full Disclosure reports, and general official documents.',
-    domainIds: ['finance', 'full-disclosure', 'official-documents'],
-  },
-] as const;
-
-function formatDomainTitle(name: string): string {
-  return name
-    .split(' ')
-    .map(word => {
-      if (word.toLowerCase() === '&') return '&';
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(' ');
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('transparency-sources');
+  return buildPageMetadata({
+    title: t('Transparency Sources'),
+    description: t(
+      'See the public datasets, publishers, reference periods, and source links supporting information published by BetterSanFernando.'
+    ),
+    path: '/transparency/sources',
+    locale,
+  });
 }
 
-function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
+// UI-only presentation grouping for the 12 published domains
+const DOMAIN_GROUPS = (t: PageT) =>
+  [
+    {
+      id: 'projects-procurement',
+      label: t('Projects & Procurement'),
+      description: t(
+        'Infrastructure projects, procurement evidence records, and verified cost-utilization observations.'
+      ),
+      domainIds: ['projects', 'project-evidence', 'project-cost-utilization'],
+    },
+    {
+      id: 'community-geography',
+      label: t('Community & Geography'),
+      description: t(
+        'Official census counts, demographic profiles, and open civic geographic boundaries.'
+      ),
+      domainIds: ['population', 'geography'],
+    },
+    {
+      id: 'government-legislation',
+      label: t('Government & Legislation'),
+      description: t(
+        'Verified city offices directory, executive orders, ordinances, and resolutions.'
+      ),
+      domainIds: [
+        'city-offices',
+        'executive-orders',
+        'ordinances',
+        'resolutions',
+      ],
+    },
+    {
+      id: 'transparency-finance',
+      label: t('Transparency & Finance'),
+      description: t(
+        'City finances, statutory Full Disclosure reports, and general official documents.'
+      ),
+      domainIds: ['finance', 'full-disclosure', 'official-documents'],
+    },
+  ] as const;
+
+async function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
+  const { t } = await getPageT('transparency-sources');
   const isInternal = link.type === 'internal';
 
   const typeBadgeLabel =
     link.type === 'official'
-      ? 'Official Source'
+      ? t('Official Source')
       : link.type === 'community'
-        ? 'Community Source'
-        : 'BetterSanFernando Page';
+        ? t('Community Source')
+        : t('BetterSanFernando Page');
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-1.5 text-xs">
@@ -80,7 +86,7 @@ function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
           href={link.url}
           className="inline-flex items-center gap-1.5 font-semibold text-[#0066EB] hover:text-[#0052BC]"
         >
-          <span>{link.label}</span>
+          <span>{getSourceLinkLabel(link.label, t)}</span>
           <ArrowRight className="h-3 w-3 shrink-0" aria-hidden="true" />
         </Link>
       ) : (
@@ -90,7 +96,9 @@ function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 font-semibold text-gray-800 hover:text-[#0066EB]"
         >
-          <span className="truncate max-w-[28rem]">{link.label}</span>
+          <span className="truncate max-w-[28rem]">
+            {getSourceLinkLabel(link.label, t)}
+          </span>
           <ExternalLink
             className="h-3 w-3 shrink-0 text-gray-400"
             aria-hidden="true"
@@ -104,7 +112,12 @@ function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
   );
 }
 
-function DomainLinksSection({ domain }: { domain: PublishedSourceDomain }) {
+async function DomainLinksSection({
+  domain,
+}: {
+  domain: PublishedSourceDomain;
+}) {
+  const { t } = await getPageT('transparency-sources');
   const internalLink = domain.links.find(l => l.type === 'internal');
   const otherLinks = domain.links.filter(l => l !== internalLink);
 
@@ -136,11 +149,12 @@ function DomainLinksSection({ domain }: { domain: PublishedSourceDomain }) {
       <details className="group mt-2 rounded-sm border border-gray-200 bg-[#F9FAFB] p-3 text-xs">
         <summary className="cursor-pointer font-semibold text-gray-800 hover:text-[#0066EB] list-none flex items-center justify-between">
           <span>
-            Source Links (
-            {internalLink ? otherLinks.length : otherLinks.length - 1})
+            {t('Source Links ({{length}})', {
+              length: internalLink ? otherLinks.length : otherLinks.length - 1,
+            })}
           </span>
           <span className="text-gray-400 text-[11px] font-normal flex items-center gap-1">
-            Click to inspect
+            {t('Click to inspect')}
             <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
           </span>
         </summary>
@@ -154,7 +168,8 @@ function DomainLinksSection({ domain }: { domain: PublishedSourceDomain }) {
   );
 }
 
-export default function TransparencySources() {
+export default async function TransparencySources() {
+  const { t } = await getPageT('transparency-sources');
   const inventory = getTransparencySourceInventory();
 
   return (
@@ -165,24 +180,24 @@ export default function TransparencySources() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Transparency', href: '/transparency' },
-              { label: 'Sources' },
+              { label: t('Home'), href: '/' },
+              { label: t('Transparency'), href: '/transparency' },
+              { label: t('Sources') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                TRANSPARENCY · DATA SOURCES
+                {t('TRANSPARENCY · DATA SOURCES')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                The Public Sources Behind BetterSanFernando
+                {t('The Public Sources Behind BetterSanFernando')}
               </h1>
               <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                See which datasets BetterSanFernando currently publishes, who
-                supports their facts, what periods they cover, and where the
-                original public sources can be inspected.
+                {t(
+                  'See which datasets BetterSanFernando currently publishes, who supports their facts, what periods they cover, and where the original public sources can be inspected.'
+                )}
               </p>
 
               {/* CTA row */}
@@ -191,14 +206,14 @@ export default function TransparencySources() {
                   href="#source-registry"
                   className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
                 >
-                  Browse source registry
+                  {t('Browse source registry')}
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/transparency/methodology"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  How We Publish Data
+                  {t('How We Publish Data')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -207,19 +222,27 @@ export default function TransparencySources() {
             {/* Right-Side Release Module */}
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6 text-sm">
               <p className="text-eyebrow text-[#0066EB]">
-                CURRENT PUBLIC RELEASE
+                {t('CURRENT PUBLIC RELEASE')}
               </p>
               <h2 className="mt-1.5 text-base font-bold text-gray-950">
-                Export {inventory.release.exportVersion}
+                {t('Export {{exportVersion}}', {
+                  exportVersion: inventory.release.exportVersion,
+                })}
               </h2>
               <p className="mt-2 text-xs font-semibold tabular-nums text-gray-900">
-                {inventory.release.datasetCount} dataset files ·{' '}
-                {inventory.publishedDomains.length} published domains
+                {t(
+                  '{{datasetCount}} dataset files · {{length}} published domains',
+                  {
+                    datasetCount: inventory.release.datasetCount,
+                    length: inventory.publishedDomains.length,
+                  }
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-3 text-xs leading-relaxed text-gray-600">
-                Source data version {inventory.release.sourceDataVersion}.
-                Release dates are not exposed by the manifest; verification
-                dates are shown per domain where available.
+                {t(
+                  'Source data version {{sourceDataVersion}}. Release dates are not exposed by the manifest; verification dates are shown per domain where available.',
+                  { sourceDataVersion: inventory.release.sourceDataVersion }
+                )}
               </p>
             </aside>
           </div>
@@ -233,40 +256,44 @@ export default function TransparencySources() {
       >
         <div className="container mx-auto px-4 py-8">
           <h2 id="snapshot-heading" className="sr-only">
-            Release snapshot
+            {t('Release snapshot')}
           </h2>
           <dl className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x border-y border-gray-200 py-6">
             <div className="sm:pr-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Dataset Files
+                {t('Dataset Files')}
               </dt>
               <dd className="mt-1.5 text-3xl sm:text-4xl font-extrabold tabular-nums text-gray-950">
                 {inventory.release.datasetCount}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Declared by the public manifest
+                {t('Declared by the public manifest')}
               </p>
             </div>
             <div className="pt-4 sm:pt-0 sm:px-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Published Domains
+                {t('Published Domains')}
               </dt>
               <dd className="mt-1.5 text-3xl sm:text-4xl font-extrabold tabular-nums text-gray-950">
                 {inventory.publishedDomains.length}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                With verified public records
+                {t('With verified public records')}
               </p>
             </div>
             <div className="pt-4 sm:pt-0 sm:pl-6">
               <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Current Export
+                {t('Current Export')}
               </dt>
               <dd className="mt-1.5 text-2xl sm:text-3xl font-extrabold text-gray-950">
-                Export {inventory.release.exportVersion}
+                {t('Export {{exportVersion}}', {
+                  exportVersion: inventory.release.exportVersion,
+                })}
               </dd>
               <p className="mt-1 text-xs text-gray-600">
-                Source data {inventory.release.sourceDataVersion}
+                {t('Source data {{sourceDataVersion}}', {
+                  sourceDataVersion: inventory.release.sourceDataVersion,
+                })}
               </p>
             </div>
           </dl>
@@ -280,63 +307,70 @@ export default function TransparencySources() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">HOW SOURCING WORKS</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('HOW SOURCING WORKS')}
+            </p>
             <h2
               id="provenance-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              From Published Fact to Public Source
+              {t('From Published Fact to Public Source')}
             </h2>
             <p className="mt-1.5 text-sm text-gray-600">
-              Every data point follows an auditable provenance chain back to
-              public government documentation.
+              {t(
+                'Every data point follows an auditable provenance chain back to public government documentation.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
             <div className="rounded-sm border border-gray-200 bg-white p-5">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                Step 1 · Fact
+                {t('Step 1 · Fact')}
               </span>
               <h3 className="mt-1.5 text-base font-bold text-gray-950">
-                Published Civic Fact
+                {t('Published Civic Fact')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                A civic record, expenditure observation, or statistic published
-                on BetterSanFernando.
+                {t(
+                  'A civic record, expenditure observation, or statistic published on BetterSanFernando.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                Step 2 · Source
+                {t('Step 2 · Source')}
               </span>
               <h3 className="mt-1.5 text-base font-bold text-gray-950">
-                Named Authority
+                {t('Named Authority')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                The official government body, statutory disclosure portal, or
-                audit release supporting that information.
+                {t(
+                  'The official government body, statutory disclosure portal, or audit release supporting that information.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                Step 3 · Public Link
+                {t('Step 3 · Public Link')}
               </span>
               <h3 className="mt-1.5 text-base font-bold text-gray-950">
-                Verifiable Public Link
+                {t('Verifiable Public Link')}
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                A public page, portal filing, or official document file that
-                residents can directly inspect.
+                {t(
+                  'A public page, portal filing, or official document file that residents can directly inspect.'
+                )}
               </p>
             </div>
           </div>
 
           <p className="mt-6 text-xs text-gray-600">
-            Authority is stated per domain and is never assumed from a generic
-            government label.
+            {t(
+              'Authority is stated per domain and is never assumed from a generic government label.'
+            )}
           </p>
         </div>
       </section>
@@ -349,26 +383,28 @@ export default function TransparencySources() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <p className="text-eyebrow text-[#0066EB]">SOURCE REGISTRY</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('SOURCE REGISTRY')}
+            </p>
             <h2
               id="registry-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Published Datasets and Domains
+              {t('Published Datasets and Domains')}
             </h2>
             <p className="mt-1.5 text-sm leading-relaxed text-gray-600">
-              Dataset files serving the same public purpose are grouped into
-              source domains while preserving distinct authority and coverage
-              information.
+              {t(
+                'Dataset files serving the same public purpose are grouped into source domains while preserving distinct authority and coverage information.'
+              )}
             </p>
           </div>
 
           {/* Jump Index */}
           <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-gray-200 pb-4">
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 mr-1">
-              Jump to group:
+              {t('Jump to group:')}
             </span>
-            {DOMAIN_GROUPS.map(group => (
+            {DOMAIN_GROUPS(t).map(group => (
               <a
                 key={group.id}
                 href={`#group-${group.id}`}
@@ -381,7 +417,7 @@ export default function TransparencySources() {
 
           {/* Domain Groups Container */}
           <div className="mt-8 space-y-12">
-            {DOMAIN_GROUPS.map(group => {
+            {DOMAIN_GROUPS(t).map(group => {
               const groupDomains = inventory.publishedDomains.filter(domain =>
                 (group.domainIds as readonly string[]).includes(domain.id)
               );
@@ -402,83 +438,86 @@ export default function TransparencySources() {
                   </div>
 
                   <div className="divide-y divide-gray-200">
-                    {groupDomains.map(domain => (
-                      <article
-                        key={domain.id}
-                        id={`domain-${domain.id}`}
-                        className="grid grid-cols-1 gap-6 py-8 first:pt-6 last:pb-6 lg:grid-cols-[minmax(14rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10"
-                        aria-labelledby={`heading-${domain.id}`}
-                      >
-                        {/* LEFT COLUMN */}
-                        <div>
-                          <h4
-                            id={`heading-${domain.id}`}
-                            className="text-lg sm:text-xl font-bold tracking-tight text-gray-950"
-                          >
-                            {formatDomainTitle(domain.name)}
-                          </h4>
+                    {groupDomains.map(domain => {
+                      const display = getPublishedDomainDisplayText(domain, t);
+                      return (
+                        <article
+                          key={domain.id}
+                          id={`domain-${domain.id}`}
+                          className="grid grid-cols-1 gap-6 py-8 first:pt-6 last:pb-6 lg:grid-cols-[minmax(14rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10"
+                          aria-labelledby={`heading-${domain.id}`}
+                        >
+                          {/* LEFT COLUMN */}
+                          <div>
+                            <h4
+                              id={`heading-${domain.id}`}
+                              className="text-lg sm:text-xl font-bold tracking-tight text-gray-950"
+                            >
+                              {display.name}
+                            </h4>
 
-                          <div className="mt-2 flex items-baseline gap-2">
-                            <span className="text-xl sm:text-2xl font-extrabold tabular-nums text-gray-950">
-                              {domain.recordCount.toLocaleString()}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
-                              {domain.recordLabel}
-                            </span>
-                          </div>
+                            <div className="mt-2 flex items-baseline gap-2">
+                              <span className="text-xl sm:text-2xl font-extrabold tabular-nums text-gray-950">
+                                {domain.recordCount.toLocaleString()}
+                              </span>
+                              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
+                                {display.recordLabel}
+                              </span>
+                            </div>
 
-                          <p className="mt-3 text-xs sm:text-sm leading-relaxed text-gray-700">
-                            {domain.description}
-                          </p>
-
-                          <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs text-gray-600">
-                            <span className="font-semibold text-gray-900 block mb-0.5">
-                              Coverage
-                            </span>
-                            <p className="leading-relaxed">
-                              {domain.coverageNote}
+                            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-gray-700">
+                              {display.description}
                             </p>
+
+                            <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs text-gray-600">
+                              <span className="font-semibold text-gray-900 block mb-0.5">
+                                {t('Coverage')}
+                              </span>
+                              <p className="leading-relaxed">
+                                {display.coverageNote}
+                              </p>
+                            </div>
                           </div>
-                        </div>
 
-                        {/* RIGHT COLUMN */}
-                        <div className="flex flex-col justify-between">
-                          <dl className="divide-y divide-gray-100 text-xs sm:text-sm border-t border-gray-100">
-                            <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                              <dt className="font-semibold text-gray-600">
-                                Publisher / Authority
-                              </dt>
-                              <dd className="font-medium text-gray-900 leading-relaxed">
-                                {domain.authority}
-                              </dd>
-                            </div>
+                          {/* RIGHT COLUMN */}
+                          <div className="flex flex-col justify-between">
+                            <dl className="divide-y divide-gray-100 text-xs sm:text-sm border-t border-gray-100">
+                              <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                                <dt className="font-semibold text-gray-600">
+                                  {t('Publisher / Authority')}
+                                </dt>
+                                <dd className="font-medium text-gray-900 leading-relaxed">
+                                  {domain.authority}
+                                </dd>
+                              </div>
 
-                            <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                              <dt className="font-semibold text-gray-600">
-                                Reference Period
-                              </dt>
-                              <dd className="font-mono text-gray-800">
-                                {domain.referencePeriod}
-                              </dd>
-                            </div>
+                              <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                                <dt className="font-semibold text-gray-600">
+                                  {t('Reference Period')}
+                                </dt>
+                                <dd className="font-mono text-gray-800">
+                                  {domain.referencePeriod}
+                                </dd>
+                              </div>
 
-                            <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                              <dt className="font-semibold text-gray-600">
-                                Last Verified
-                              </dt>
-                              <dd className="font-mono text-gray-800">
-                                {domain.lastVerified
-                                  ? formatIsoDate(domain.lastVerified)
-                                  : 'Recorded per source entry'}
-                              </dd>
-                            </div>
-                          </dl>
+                              <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                                <dt className="font-semibold text-gray-600">
+                                  {t('Last Verified')}
+                                </dt>
+                                <dd className="font-mono text-gray-800">
+                                  {domain.lastVerified
+                                    ? formatIsoDate(domain.lastVerified)
+                                    : t('Recorded per source entry')}
+                                </dd>
+                              </div>
+                            </dl>
 
-                          {/* Collapsible Source Links Section */}
-                          <DomainLinksSection domain={domain} />
-                        </div>
-                      </article>
-                    ))}
+                            {/* Collapsible Source Links Section */}
+                            <DomainLinksSection domain={domain} />
+                          </div>
+                        </article>
+                      );
+                    })}
                   </div>
                 </div>
               );
@@ -494,38 +533,43 @@ export default function TransparencySources() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">PUBLIC EXPORT STATUS</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('PUBLIC EXPORT STATUS')}
+            </p>
             <h2
               id="not-published-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Not in This Public Export
+              {t('Not in This Public Export')}
             </h2>
             <p className="mt-1.5 text-sm text-gray-600">
-              These labels describe the current BetterSanFernando frontend
-              release only. They do not mean the records do not exist or that
-              the City has no records.
+              {t(
+                'These labels describe the current BetterSanFernando frontend release only. They do not mean the records do not exist or that the City has no records.'
+              )}
             </p>
           </div>
 
           <div className="mt-6 divide-y divide-gray-200 border-y border-gray-200 bg-white">
-            {inventory.unavailableDomains.map(domain => (
-              <div key={domain.id} className="p-5 sm:p-6">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-base font-bold text-gray-950">
-                    {formatDomainTitle(domain.name)}
-                  </h3>
-                  <span className="rounded-sm border border-gray-200 bg-gray-50 px-2.5 py-0.5 font-mono text-xs font-semibold text-gray-600">
-                    {domain.status === 'NOT_EXPORTED'
-                      ? 'Not Exported'
-                      : 'Not Verified for Publication'}
-                  </span>
+            {inventory.unavailableDomains.map(domain => {
+              const display = getUnavailableDomainDisplayText(domain, t);
+              return (
+                <div key={domain.id} className="p-5 sm:p-6">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-base font-bold text-gray-950">
+                      {display.name}
+                    </h3>
+                    <span className="rounded-sm border border-gray-200 bg-gray-50 px-2.5 py-0.5 font-mono text-xs font-semibold text-gray-600">
+                      {domain.status === 'NOT_EXPORTED'
+                        ? t('Not Exported')
+                        : t('Not Verified for Publication')}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
+                    {display.note}
+                  </p>
                 </div>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
-                  {domain.note}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -537,45 +581,53 @@ export default function TransparencySources() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">ABOUT THIS REGISTRY</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('ABOUT THIS REGISTRY')}
+            </p>
             <h2
               id="about-registry-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Understanding the Source Registry
+              {t('Understanding the Source Registry')}
             </h2>
             <p className="mt-1.5 text-sm text-gray-600">
-              Core standards governing source identification, authority
-              attribution, and publication integrity.
+              {t(
+                'Core standards governing source identification, authority attribution, and publication integrity.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-[#F9FAFB] p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Published Scope
+                {t('Published Scope')}
               </h3>
               <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
-                The registry describes datasets available in the current public
-                frontend export. Every domain is backed by versioned, public
-                JSON data artifacts.
+                {t(
+                  'The registry describes datasets available in the current public frontend export. Every domain is backed by versioned, public JSON data artifacts.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-[#F9FAFB] p-5 sm:p-6">
-              <h3 className="text-base font-bold text-gray-950">Authority</h3>
+              <h3 className="text-base font-bold text-gray-950">
+                {t('Authority')}
+              </h3>
               <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
-                Each domain identifies the relevant official or community source
-                rather than assuming provenance from a generic government label.
+                {t(
+                  'Each domain identifies the relevant official or community source rather than assuming provenance from a generic government label.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-[#F9FAFB] p-5 sm:p-6">
-              <h3 className="text-base font-bold text-gray-950">Coverage</h3>
+              <h3 className="text-base font-bold text-gray-950">
+                {t('Coverage')}
+              </h3>
               <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
-                Published coverage may be bounded or partial and does not
-                automatically imply completeness. Absence indicates unrecovered
-                or unverified materials.
+                {t(
+                  'Published coverage may be bounded or partial and does not automatically imply completeness. Absence indicates unrecovered or unverified materials.'
+                )}
               </p>
             </div>
           </div>
@@ -588,12 +640,14 @@ export default function TransparencySources() {
         aria-labelledby="explore-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="explore-heading"
             className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -603,18 +657,19 @@ export default function TransparencySources() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Projects
+                  {t('Projects')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Project Evidence
+                  {t('Project Evidence')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Inspect individual project source attachments, procurement
-                  contracts, and verified records.
+                  {t(
+                    'Inspect individual project source attachments, procurement contracts, and verified records.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Browse evidence
+                {t('Browse evidence')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -625,18 +680,19 @@ export default function TransparencySources() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Methodology
+                  {t('Methodology')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  How We Publish Data
+                  {t('How We Publish Data')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Standards used for document classification, reconciliation,
-                  and audit safeguards.
+                  {t(
+                    'Standards used for document classification, reconciliation, and audit safeguards.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Read guide
+                {t('Read guide')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -647,18 +703,19 @@ export default function TransparencySources() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Statistics
+                  {t('Statistics')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Public Records Statistics
+                  {t('Public Records Statistics')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Overview of published dataset record counts, units, and
-                  coverage periods.
+                  {t(
+                    'Overview of published dataset record counts, units, and coverage periods.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View statistics
+                {t('View statistics')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -669,18 +726,19 @@ export default function TransparencySources() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Archive
+                  {t('Archive')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Official Documents
+                  {t('Official Documents')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Executive summaries, administrative orders, and verified City
-                  documentation.
+                  {t(
+                    'Executive summaries, administrative orders, and verified City documentation.'
+                  )}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Browse documents
+                {t('Browse documents')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>

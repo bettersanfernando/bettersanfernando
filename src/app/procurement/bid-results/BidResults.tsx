@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import {
   ChevronLeft,
@@ -27,35 +27,42 @@ import {
 } from '../../../data/civic/bidResults';
 import { getEvidenceSourceUrl } from '../../../data/civic/sources';
 import { formatIsoDate, formatPeso } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { usePageT } from '../../../components/i18n/PageMessages';
+import { useLocale } from '../../../components/i18n/useLocale';
 
 const PAGE_SIZE = 10;
 const eyebrowTracking = { letterSpacing: '0.14em' };
 
-const RELATED_RESOURCES = [
-  {
-    title: 'Procurement overview',
-    description:
-      'Understand the procurement records and evidence available across BetterSanFernando.',
-    href: '/procurement',
-  },
-  {
-    title: 'City Projects',
-    description: 'Browse the full published City project collection.',
-    href: '/projects/city-projects',
-  },
-  {
-    title: 'Project Evidence',
-    description:
-      'Inspect the official-source records used to establish project facts.',
-    href: '/projects/sources',
-  },
-  {
-    title: 'Project Methodology',
-    description:
-      'See how project records are collected, structured, and interpreted.',
-    href: '/projects/methodology',
-  },
-] as const;
+const RELATED_RESOURCES = (t: PageT) =>
+  [
+    {
+      title: t('Procurement overview'),
+      description: t(
+        'Understand the procurement records and evidence available across BetterSanFernando.'
+      ),
+      href: '/procurement',
+    },
+    {
+      title: t('City Projects'),
+      description: t('Browse the full published City project collection.'),
+      href: '/projects/city-projects',
+    },
+    {
+      title: t('Project Evidence'),
+      description: t(
+        'Inspect the official-source records used to establish project facts.'
+      ),
+      href: '/projects/sources',
+    },
+    {
+      title: t('Project Methodology'),
+      description: t(
+        'See how project records are collected, structured, and interpreted.'
+      ),
+      href: '/projects/methodology',
+    },
+  ] as const;
 
 function getPageWindow(current: number, total: number): (number | '…')[] {
   if (total <= 7) {
@@ -76,6 +83,8 @@ function getPageWindow(current: number, total: number): (number | '…')[] {
 }
 
 export default function BidResults() {
+  const t = usePageT();
+  const locale = useLocale();
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [year, setYear] = useQueryState('year', { defaultValue: '' });
   const [barangay, setBarangay] = useQueryState('barangay', {
@@ -285,25 +294,25 @@ export default function BidResults() {
         <Breadcrumbs
           className="mb-6"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Projects', href: '/projects' },
-            { label: 'Procurement', href: '/procurement' },
-            { label: 'Bid Results' },
+            { label: t('Home'), href: '/' },
+            { label: t('Projects'), href: '/projects' },
+            { label: t('Procurement'), href: '/procurement' },
+            { label: t('Bid Results') },
           ]}
         />
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              BID RESULTS
+              {t('BID RESULTS')}
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl">
-              Published bid-result evidence
+              {t('Published bid-result evidence')}
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-              Browse project-linked bid-result records, winning bidders,
-              Approved Budget for the Contract (ABC), winning-bid amounts,
-              procurement references, and official source documents.
+              {t(
+                'Browse project-linked bid-result records, winning bidders, Approved Budget for the Contract (ABC), winning-bid amounts, procurement references, and official source documents.'
+              )}
             </p>
           </div>
 
@@ -312,18 +321,18 @@ export default function BidResults() {
             className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5"
           >
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              SCOPE
+              {t('SCOPE')}
             </p>
             <h2
               id="scope-module-title"
               className="mt-1.5 text-base font-bold text-gray-950"
             >
-              Project-linked bid-result records
+              {t('Project-linked bid-result records')}
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-600">
-              These are published BID_RESULTS evidence records connected to
-              BetterSanFernando’s current project collection. They are not a
-              complete archive of all City Government procurement.
+              {t(
+                'These are published BID_RESULTS evidence records connected to BetterSanFernando’s current project collection. They are not a complete archive of all City Government procurement.'
+              )}
             </p>
           </aside>
         </div>
@@ -331,7 +340,7 @@ export default function BidResults() {
 
       {/* 2. Non-Repetitive Metric Strip */}
       <section
-        aria-label="Bid result collection metrics"
+        aria-label={t('Bid result collection metrics')}
         className="border-y border-gray-200 bg-gray-50"
       >
         <div className="container mx-auto px-4 py-4 sm:py-6">
@@ -340,14 +349,16 @@ export default function BidResults() {
             <div className="py-3 sm:py-0 sm:pr-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  Bid-result records
+                  {t('Bid-result records')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {summary.totalRecords}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                across {summary.projectsRepresented} represented projects
+                {t('across {{projectsRepresented}} represented projects', {
+                  projectsRepresented: summary.projectsRepresented,
+                })}
               </p>
             </div>
 
@@ -355,14 +366,14 @@ export default function BidResults() {
             <div className="py-3 sm:py-0 sm:px-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  ABC available
+                  {t('ABC available')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {summary.withApprovedBudget}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                {abcAvailablePct}% of records
+                {t('{{abcAvailablePct}}% of records', { abcAvailablePct })}
               </p>
             </div>
 
@@ -370,22 +381,23 @@ export default function BidResults() {
             <div className="py-3 sm:py-0 sm:pl-6">
               <div className="flex items-baseline justify-between sm:block">
                 <dt className="text-sm font-medium text-gray-600">
-                  ABC unavailable
+                  {t('ABC unavailable')}
                 </dt>
                 <dd className="text-2xl font-bold tabular-nums tracking-tight text-gray-950 sm:mt-1 sm:text-3xl lg:text-4xl">
                   {abcUnavailableCount}
                 </dd>
               </div>
               <p className="mt-0.5 text-xs text-gray-500">
-                {abcUnavailablePct}% of records
+                {t('{{abcUnavailablePct}}% of records', { abcUnavailablePct })}
               </p>
             </div>
           </dl>
 
           {isCompleteCollection && (
             <p className="mt-3 border-t border-gray-200 pt-3 text-xs leading-relaxed text-gray-500 sm:mt-4 sm:pt-4">
-              All current bid-result records include a winning bid, winning
-              bidder, and source document.
+              {t(
+                'All current bid-result records include a winning bid, winning bidder, and source document.'
+              )}
             </p>
           )}
         </div>
@@ -397,17 +409,18 @@ export default function BidResults() {
         <section aria-labelledby="overview-heading">
           <div>
             <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-              BID-RESULT OVERVIEW
+              {t('BID-RESULT OVERVIEW')}
             </p>
             <h2
               id="overview-heading"
               className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
             >
-              Overview of published bid results
+              {t('Overview of published bid results')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-gray-600">
-              Analytical breakdown of documentary years and winning bid
-              comparisons across this evidence collection.
+              {t(
+                'Analytical breakdown of documentary years and winning bid comparisons across this evidence collection.'
+              )}
             </p>
           </div>
 
@@ -416,18 +429,36 @@ export default function BidResults() {
             <div className="flex h-full flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  Bid-result records by document year
+                  {t('Bid-result records by document year')}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  See when the published bid-result evidence in this collection
-                  was documented.
+                  {t(
+                    'See when the published bid-result evidence in this collection was documented.'
+                  )}
                 </p>
 
                 {/* Vertical Bar Chart */}
                 <div
                   className="mt-5 grid grid-cols-4 items-end gap-3 sm:gap-6 border-b border-gray-200 pb-3"
                   role="img"
-                  aria-label={`Bid result records by document year: ${recordsByYear.map(y => `${y.year}: ${y.total} records (${y.withAbc} with ABC, ${y.withoutAbc} without ABC)`).join('; ')}`}
+                  aria-label={t(
+                    'Bid result records by document year: {{items}}',
+                    {
+                      items: recordsByYear
+                        .map(y =>
+                          t(
+                            '{{year}}: {{total}} records ({{withAbc}} with ABC, {{withoutAbc}} without ABC)',
+                            {
+                              year: y.year,
+                              total: y.total,
+                              withAbc: y.withAbc,
+                              withoutAbc: y.withoutAbc,
+                            }
+                          )
+                        )
+                        .join('; '),
+                    }
+                  )}
                 >
                   {recordsByYear.map(item => {
                     const isHovered = activeChartYear === item.year;
@@ -446,7 +477,15 @@ export default function BidResults() {
                         onFocus={() => setActiveChartYear(item.year)}
                         onBlur={() => setActiveChartYear(null)}
                         className="group flex flex-col items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB] focus-visible:rounded-sm"
-                        aria-label={`${item.year}: ${item.total} bid-result records (${item.withAbc} with ABC, ${item.withoutAbc} without ABC)`}
+                        aria-label={t(
+                          '{{year}}: {{total}} bid-result records ({{withAbc}} with ABC, {{withoutAbc}} without ABC)',
+                          {
+                            year: item.year,
+                            total: item.total,
+                            withAbc: item.withAbc,
+                            withoutAbc: item.withoutAbc,
+                          }
+                        )}
                       >
                         {/* Count label above bar */}
                         <span className="text-xs font-bold tabular-nums text-gray-950 group-hover:text-[#0066EB]">
@@ -498,14 +537,19 @@ export default function BidResults() {
                           <strong className="font-semibold text-gray-950">
                             {activeItem.year}
                           </strong>{' '}
-                          &middot; {activeItem.total} records &middot;{' '}
+                          {t('· {{total}} records ·', {
+                            total: activeItem.total,
+                          })}{' '}
                           <span className="text-[#0066EB] font-medium">
-                            {activeItem.withAbc} with ABC
+                            {t('{{withAbc}} with ABC', {
+                              withAbc: activeItem.withAbc,
+                            })}
                           </span>
                           {activeItem.withoutAbc > 0 && (
                             <span className="text-gray-600 font-medium">
-                              {' '}
-                              &middot; {activeItem.withoutAbc} without ABC
+                              {t('· {{withoutAbc}} without ABC', {
+                                withoutAbc: activeItem.withoutAbc,
+                              })}
                             </span>
                           )}
                         </p>
@@ -513,7 +557,7 @@ export default function BidResults() {
                     })()
                   ) : (
                     <p className="text-gray-500">
-                      Hover or focus a year to view details.
+                      {t('Hover or focus a year to view details.')}
                     </p>
                   )}
                 </div>
@@ -526,14 +570,14 @@ export default function BidResults() {
                     className="h-2.5 w-2.5 rounded-none bg-[#0066EB]"
                     aria-hidden="true"
                   />
-                  ABC available
+                  {t('ABC available')}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span
                     className="h-2.5 w-2.5 rounded-none bg-[#94A3B8]"
                     aria-hidden="true"
                   />
-                  ABC unavailable
+                  {t('ABC unavailable')}
                 </span>
               </div>
             </div>
@@ -542,18 +586,31 @@ export default function BidResults() {
             <div className="flex h-full flex-col justify-between rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div>
                 <h3 className="text-base font-bold text-gray-950">
-                  How winning bids compare with ABC
+                  {t('How winning bids compare with ABC')}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-gray-600">
-                  Shows the winning bid as a percentage of ABC for records where
-                  both amounts are available.
+                  {t(
+                    'Shows the winning bid as a percentage of ABC for records where both amounts are available.'
+                  )}
                 </p>
 
                 {/* Horizontal Distribution Bars */}
                 <div
                   className="mt-4 space-y-2"
                   role="img"
-                  aria-label={`Winning bid as percentage of ABC distribution: ${abcRatioDistribution.map(b => `${b.label}: ${b.count} records`).join('; ')}`}
+                  aria-label={t(
+                    'Winning bid as percentage of ABC distribution: {{items}}',
+                    {
+                      items: abcRatioDistribution
+                        .map(b =>
+                          t('{{label}}: {{count}} records', {
+                            label: b.label,
+                            count: b.count,
+                          })
+                        )
+                        .join('; '),
+                    }
+                  )}
                 >
                   {abcRatioDistribution.map(band => (
                     <div key={band.label} className="flex items-center gap-3">
@@ -584,7 +641,7 @@ export default function BidResults() {
                     className="text-eyebrow text-[#0066EB]"
                     style={eyebrowTracking}
                   >
-                    QUICK READ
+                    {t('QUICK READ')}
                   </p>
                   <div className="mt-2.5 grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
                     <div>
@@ -592,28 +649,34 @@ export default function BidResults() {
                         {comparableCount}
                       </p>
                       <p className="mt-0.5 text-xs text-gray-600">
-                        records have both ABC and winning-bid values
+                        {t('records have both ABC and winning-bid values')}
                       </p>
                     </div>
 
                     <div>
                       <p className="text-lg font-bold tabular-nums text-gray-950">
-                        {mainConcentrationCount} of {comparableCount}{' '}
+                        {t('{{count}} of {{total}}', {
+                          count: mainConcentrationCount,
+                          total: comparableCount,
+                        })}{' '}
                         <span className="text-xs font-semibold text-gray-500">
                           ({mainConcentrationPct}%)
                         </span>
                       </p>
                       <p className="mt-0.5 text-xs text-gray-600">
-                        fall between 95% and 99.9% of ABC
+                        {t('fall between 95% and 99.9% of ABC')}
                       </p>
                     </div>
 
                     <div>
                       <p className="text-lg font-bold tabular-nums text-gray-950">
-                        {below95Count} of {comparableCount}
+                        {t('{{below95Count}} of {{comparableCount}}', {
+                          below95Count,
+                          comparableCount,
+                        })}
                       </p>
                       <p className="mt-0.5 text-xs text-gray-600">
-                        fall below 95% of ABC
+                        {t('fall below 95% of ABC')}
                       </p>
                     </div>
 
@@ -622,7 +685,7 @@ export default function BidResults() {
                         {atOrAbove100Count}
                       </p>
                       <p className="mt-0.5 text-xs text-gray-600">
-                        are at or above 100% of ABC
+                        {t('are at or above 100% of ABC')}
                       </p>
                     </div>
                   </div>
@@ -631,8 +694,9 @@ export default function BidResults() {
 
               {/* Clarification Note immediately following */}
               <p className="mt-4 border-t border-gray-100 pt-3 text-xs leading-relaxed text-gray-500">
-                This compares published bid amounts with ABC. It does not
-                represent actual expenditure or project savings.
+                {t(
+                  'This compares published bid amounts with ABC. It does not represent actual expenditure or project savings.'
+                )}
               </p>
             </div>
           </div>
@@ -646,17 +710,18 @@ export default function BidResults() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                BID-RESULT RECORDS
+                {t('BID-RESULT RECORDS')}
               </p>
               <h2
                 id="bid-records-heading"
                 className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
               >
-                Published records
+                {t('Published records')}
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Search and filter the published bid-result evidence in this
-                collection.
+                {t(
+                  'Search and filter the published bid-result evidence in this collection.'
+                )}
               </p>
             </div>
 
@@ -666,10 +731,21 @@ export default function BidResults() {
                 aria-live="polite"
               >
                 {filtered.length === 0
-                  ? '0 matching records'
+                  ? t('0 matching records')
                   : hasActiveFilters
-                    ? `Showing ${fromCount}–${toCount} of ${filtered.length} matching records`
-                    : `Showing ${fromCount}–${toCount} of ${filtered.length} records`}
+                    ? t(
+                        'Showing {{from}}–{{to}} of {{total}} matching records',
+                        {
+                          from: fromCount,
+                          to: toCount,
+                          total: filtered.length,
+                        }
+                      )
+                    : t('Showing {{from}}–{{to}} of {{total}} records', {
+                        from: fromCount,
+                        to: toCount,
+                        total: filtered.length,
+                      })}
               </span>
 
               {hasActiveFilters && (
@@ -679,7 +755,7 @@ export default function BidResults() {
                   className="inline-flex items-center gap-1 rounded-sm border border-gray-300 bg-white px-2.5 py-1 text-xs font-semibold text-gray-700 hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  Clear filters
+                  {t('Clear filters')}
                 </button>
               )}
             </div>
@@ -689,12 +765,12 @@ export default function BidResults() {
           <div className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
             <div className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide uppercase text-gray-700">
               <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
-              Filter bid results
+              {t('Filter bid results')}
             </div>
 
             {/* Primary Search Input */}
             <div className="relative">
-              <span className="sr-only">Search bid-result records</span>
+              <span className="sr-only">{t('Search bid-result records')}</span>
               <Search
                 className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
                 aria-hidden="true"
@@ -703,7 +779,9 @@ export default function BidResults() {
                 type="search"
                 value={query}
                 onChange={e => handleQueryChange(e.target.value)}
-                placeholder="Search project, bidder, BAC reference, or record ID..."
+                placeholder={t(
+                  'Search project, bidder, BAC reference, or record ID...'
+                )}
                 className="w-full rounded-sm border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
               />
             </div>
@@ -716,7 +794,7 @@ export default function BidResults() {
                   htmlFor="filter-year"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Document year
+                  {t('Document year')}
                 </label>
                 <select
                   id="filter-year"
@@ -724,7 +802,7 @@ export default function BidResults() {
                   onChange={e => handleYearChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All document years</option>
+                  <option value="">{t('All document years')}</option>
                   {years.map(y => (
                     <option key={y} value={y.toString()}>
                       {y}
@@ -739,7 +817,7 @@ export default function BidResults() {
                   htmlFor="filter-barangay"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Barangay
+                  {t('Barangay')}
                 </label>
                 <select
                   id="filter-barangay"
@@ -747,7 +825,7 @@ export default function BidResults() {
                   onChange={e => handleBarangayChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All barangays</option>
+                  <option value="">{t('All barangays')}</option>
                   {barangays.map(b => (
                     <option key={b} value={b}>
                       {b}
@@ -762,7 +840,7 @@ export default function BidResults() {
                   htmlFor="filter-abc"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  ABC availability
+                  {t('ABC availability')}
                 </label>
                 <select
                   id="filter-abc"
@@ -770,9 +848,9 @@ export default function BidResults() {
                   onChange={e => handleAbcChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="">All records</option>
-                  <option value="available">ABC available</option>
-                  <option value="unavailable">ABC unavailable</option>
+                  <option value="">{t('All records')}</option>
+                  <option value="available">{t('ABC available')}</option>
+                  <option value="unavailable">{t('ABC unavailable')}</option>
                 </select>
               </div>
 
@@ -782,7 +860,7 @@ export default function BidResults() {
                   htmlFor="filter-sort"
                   className="mb-1 block text-xs font-medium text-gray-700"
                 >
-                  Sort order
+                  {t('Sort order')}
                 </label>
                 <select
                   id="filter-sort"
@@ -790,12 +868,18 @@ export default function BidResults() {
                   onChange={e => handleSortChange(e.target.value)}
                   className="w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-[#0066EB] focus:outline-none focus:ring-1 focus:ring-[#0066EB]"
                 >
-                  <option value="date-desc">Newest document</option>
-                  <option value="date-asc">Oldest document</option>
-                  <option value="bid-desc">Winning bid: high to low</option>
-                  <option value="bid-asc">Winning bid: low to high</option>
-                  <option value="name-asc">Project name A–Z</option>
-                  <option value="reference-asc">BAC / reference A–Z</option>
+                  <option value="date-desc">{t('Newest document')}</option>
+                  <option value="date-asc">{t('Oldest document')}</option>
+                  <option value="bid-desc">
+                    {t('Winning bid: high to low')}
+                  </option>
+                  <option value="bid-asc">
+                    {t('Winning bid: low to high')}
+                  </option>
+                  <option value="name-asc">{t('Project name A–Z')}</option>
+                  <option value="reference-asc">
+                    {t('BAC / reference A–Z')}
+                  </option>
                 </select>
               </div>
             </div>
@@ -809,10 +893,10 @@ export default function BidResults() {
                 aria-hidden="true"
               />
               <h3 className="mt-3 text-base font-bold text-gray-950">
-                No bid-result records match these filters.
+                {t('No bid-result records match these filters.')}
               </h3>
               <p className="mt-1 text-sm text-gray-600">
-                Try changing or clearing one or more filters.
+                {t('Try changing or clearing one or more filters.')}
               </p>
               <button
                 type="button"
@@ -820,7 +904,7 @@ export default function BidResults() {
                 className="mt-4 inline-flex items-center gap-1.5 rounded-sm bg-[#0066EB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0052BC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
               >
                 <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                Clear filters
+                {t('Clear filters')}
               </button>
             </div>
           ) : (
@@ -831,29 +915,31 @@ export default function BidResults() {
                   <thead>
                     <tr className="border-b border-gray-200 bg-[#F3F6FB] text-xs font-semibold text-gray-700">
                       <th scope="col" className="py-3 px-4 w-[28%]">
-                        Project
+                        {t('Project')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[18%]">
-                        Winning bidder
+                        {t('Winning bidder')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[16%]">
-                        BAC / reference
+                        {t('BAC / reference')}
                       </th>
                       <th scope="col" className="py-3 px-4 w-[11%]">
-                        Document date
+                        {t('Document date')}
                       </th>
                       <th scope="col" className="py-3 px-4 text-right w-[11%]">
                         <span className="sr-only">
-                          Approved Budget for the Contract (ABC)
+                          {t('Approved Budget for the Contract (ABC)')}
                         </span>
-                        ABC
+                        {t('ABC')}
                       </th>
                       <th scope="col" className="py-3 px-4 text-right w-[11%]">
-                        <span className="sr-only">Winning bid amount</span>
-                        Winning bid
+                        <span className="sr-only">
+                          {t('Winning bid amount')}
+                        </span>
+                        {t('Winning bid')}
                       </th>
                       <th scope="col" className="py-3 px-4 text-right w-[5%]">
-                        Actions
+                        {t('Actions')}
                       </th>
                     </tr>
                   </thead>
@@ -871,7 +957,9 @@ export default function BidResults() {
                             <Link
                               href={`/projects/${project.id}`}
                               className="font-semibold text-gray-950 hover:text-[#0066EB] line-clamp-2"
-                              aria-label={`View project: ${project.project_name}`}
+                              aria-label={t('View project: {{project_name}}', {
+                                project_name: project.project_name,
+                              })}
                             >
                               {project.project_name}
                             </Link>
@@ -883,7 +971,7 @@ export default function BidResults() {
                           {/* Winning Bidder Cell */}
                           <td className="py-3 px-4 align-top text-gray-900">
                             <span className="line-clamp-2">
-                              {facts.winningBidder ?? 'Not specified'}
+                              {facts.winningBidder ?? t('Not specified')}
                             </span>
                           </td>
 
@@ -893,22 +981,22 @@ export default function BidResults() {
                               {facts.bacReference}
                             </span>
                             <span className="mt-0.5 block font-mono text-[11px] text-gray-400 break-words">
-                              ID: {evidence.id}
+                              {t('ID: {{id}}', { id: evidence.id })}
                             </span>
                           </td>
 
                           {/* Document Date Cell */}
                           <td className="py-3 px-4 align-top text-xs text-gray-700 whitespace-nowrap">
-                            {formatIsoDate(facts.biddingDate)}
+                            {formatIsoDate(facts.biddingDate, locale)}
                           </td>
 
                           {/* ABC Cell */}
                           <td className="py-3 px-4 align-top text-right font-semibold tabular-nums text-gray-900">
                             {facts.approvedBudgetAbc !== null ? (
-                              formatPeso(facts.approvedBudgetAbc)
+                              formatPeso(facts.approvedBudgetAbc, locale)
                             ) : (
                               <span className="font-normal italic text-gray-400">
-                                Unavailable
+                                {t('Unavailable')}
                               </span>
                             )}
                           </td>
@@ -916,10 +1004,10 @@ export default function BidResults() {
                           {/* Winning Bid Cell */}
                           <td className="py-3 px-4 align-top text-right font-semibold tabular-nums text-gray-900">
                             {facts.winningBidAmount !== null ? (
-                              formatPeso(facts.winningBidAmount)
+                              formatPeso(facts.winningBidAmount, locale)
                             ) : (
                               <span className="font-normal italic text-gray-400">
-                                Unavailable
+                                {t('Unavailable')}
                               </span>
                             )}
                           </td>
@@ -933,9 +1021,12 @@ export default function BidResults() {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC] hover:underline"
-                                  aria-label={`Open official source for ${project.project_name} (opens in a new tab)`}
+                                  aria-label={t(
+                                    'Open official source for {{project_name}} (opens in a new tab)',
+                                    { project_name: project.project_name }
+                                  )}
                                 >
-                                  Official source
+                                  {t('Official source')}
                                   <ExternalLink
                                     className="h-3 w-3"
                                     aria-hidden="true"
@@ -946,7 +1037,7 @@ export default function BidResults() {
                                 href={`/projects/${project.id}`}
                                 className="inline-flex items-center text-gray-600 hover:text-gray-950 hover:underline"
                               >
-                                View project &rarr;
+                                {t('View project →')}
                               </Link>
                             </div>
                           </td>
@@ -981,16 +1072,16 @@ export default function BidResults() {
                       <dl className="grid grid-cols-2 gap-3 text-xs">
                         <div className="col-span-2">
                           <dt className="font-medium text-gray-500">
-                            Winning bidder
+                            {t('Winning bidder')}
                           </dt>
                           <dd className="mt-0.5 text-sm font-semibold text-gray-950">
-                            {facts.winningBidder ?? 'Not specified'}
+                            {facts.winningBidder ?? t('Not specified')}
                           </dd>
                         </div>
 
                         <div>
                           <dt className="font-medium text-gray-500">
-                            BAC / reference
+                            {t('BAC / reference')}
                           </dt>
                           <dd className="mt-0.5 font-mono font-medium text-gray-900 break-words">
                             {facts.bacReference}
@@ -999,23 +1090,23 @@ export default function BidResults() {
 
                         <div>
                           <dt className="font-medium text-gray-500">
-                            Document date
+                            {t('Document date')}
                           </dt>
                           <dd className="mt-0.5 font-medium text-gray-900">
-                            {formatIsoDate(facts.biddingDate)}
+                            {formatIsoDate(facts.biddingDate, locale)}
                           </dd>
                         </div>
 
                         <div>
                           <dt className="font-medium text-gray-500">
-                            Approved Budget (ABC)
+                            {t('Approved Budget (ABC)')}
                           </dt>
                           <dd className="mt-0.5 font-semibold tabular-nums text-gray-950">
                             {facts.approvedBudgetAbc !== null ? (
-                              formatPeso(facts.approvedBudgetAbc)
+                              formatPeso(facts.approvedBudgetAbc, locale)
                             ) : (
                               <span className="font-normal italic text-gray-400">
-                                Unavailable
+                                {t('Unavailable')}
                               </span>
                             )}
                           </dd>
@@ -1023,14 +1114,14 @@ export default function BidResults() {
 
                         <div>
                           <dt className="font-medium text-gray-500">
-                            Winning bid amount
+                            {t('Winning bid amount')}
                           </dt>
                           <dd className="mt-0.5 font-semibold tabular-nums text-gray-950">
                             {facts.winningBidAmount !== null ? (
-                              formatPeso(facts.winningBidAmount)
+                              formatPeso(facts.winningBidAmount, locale)
                             ) : (
                               <span className="font-normal italic text-gray-400">
-                                Unavailable
+                                {t('Unavailable')}
                               </span>
                             )}
                           </dd>
@@ -1039,7 +1130,7 @@ export default function BidResults() {
 
                       {/* Provenance ID */}
                       <p className="font-mono text-[11px] text-gray-400">
-                        Record ID: {evidence.id}
+                        {t('Record ID: {{id}}', { id: evidence.id })}
                       </p>
 
                       {/* Mobile Actions */}
@@ -1048,7 +1139,7 @@ export default function BidResults() {
                           href={`/projects/${project.id}`}
                           className="text-gray-700 hover:text-gray-950"
                         >
-                          View project &rarr;
+                          {t('View project →')}
                         </Link>
                         {sourceUrl && (
                           <a
@@ -1057,7 +1148,7 @@ export default function BidResults() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-[#0066EB] hover:text-[#0052BC]"
                           >
-                            Official source
+                            {t('Official source')}
                             <ExternalLink
                               className="h-3 w-3"
                               aria-hidden="true"
@@ -1073,7 +1164,7 @@ export default function BidResults() {
               {/* 5. Real Pagination (10 per page) */}
               {totalPages > 1 && (
                 <nav
-                  aria-label="Bid result pagination"
+                  aria-label={t('Bid result pagination')}
                   className="mt-6 flex items-center justify-between gap-4 border-t border-gray-200 pt-5"
                 >
                   <button
@@ -1083,7 +1174,7 @@ export default function BidResults() {
                     className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   >
                     <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                    Previous
+                    {t('Previous')}
                   </button>
 
                   {/* Desktop Page Window */}
@@ -1120,7 +1211,10 @@ export default function BidResults() {
 
                   {/* Mobile Page Indicator */}
                   <p className="text-sm font-medium text-gray-700 sm:hidden">
-                    Page {currentPage} of {totalPages}
+                    {t('Page {{currentPage}} of {{totalPages}}', {
+                      currentPage,
+                      totalPages,
+                    })}
                   </p>
 
                   <button
@@ -1129,7 +1223,7 @@ export default function BidResults() {
                     onClick={() => setPage(currentPage + 1)}
                     className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
                   >
-                    Next
+                    {t('Next')}
                     <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </nav>
@@ -1144,39 +1238,46 @@ export default function BidResults() {
           className="border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            HOW TO READ THESE RECORDS
+            {t('HOW TO READ THESE RECORDS')}
           </p>
           <h2
             id="how-to-read-heading"
             className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
           >
-            Understanding bid-result evidence
+            {t('Understanding bid-result evidence')}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-600">
-            Key rules for interpreting published procurement facts and figures.
+            {t(
+              'Key rules for interpreting published procurement facts and figures.'
+            )}
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Info className="h-5 w-5 shrink-0" aria-hidden="true" />
-                <h3 className="text-sm font-bold text-gray-950">Coverage</h3>
+                <h3 className="text-sm font-bold text-gray-950">
+                  {t('Coverage')}
+                </h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600">
-                This archive contains BID_RESULTS evidence linked to
-                BetterSanFernando’s current project collection. It does not
-                represent all City procurement.
+                {t(
+                  'This archive contains BID_RESULTS evidence linked to BetterSanFernando’s current project collection. It does not represent all City procurement.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <Scale className="h-5 w-5 shrink-0" aria-hidden="true" />
-                <h3 className="text-sm font-bold text-gray-950">Winning bid</h3>
+                <h3 className="text-sm font-bold text-gray-950">
+                  {t('Winning bid')}
+                </h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600">
-                A winning bid is not the same as an award, contract amount,
-                payment, or actual expenditure.
+                {t(
+                  'A winning bid is not the same as an award, contract amount, payment, or actual expenditure.'
+                )}
               </p>
             </div>
 
@@ -1184,12 +1285,13 @@ export default function BidResults() {
               <div className="flex items-center gap-2 text-[#0066EB]">
                 <HelpCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-gray-950">
-                  Missing values
+                  {t('Missing values')}
                 </h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-gray-600">
-                Missing information remains unknown unless another published
-                source establishes it.
+                {t(
+                  'Missing information remains unknown unless another published source establishes it.'
+                )}
               </p>
             </div>
           </div>
@@ -1201,17 +1303,18 @@ export default function BidResults() {
           className="border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            KEEP EXPLORING
+            {t('KEEP EXPLORING')}
           </p>
           <h2
             id="keep-exploring-heading"
             className="mt-1.5 text-2xl font-bold tracking-tight text-gray-950 sm:text-3xl"
           >
-            Continue exploring procurement data
+            {t('Continue exploring procurement data')}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-600">
-            Compare published contracts, awards, and broader documentary
-            statistics across San Fernando public works.
+            {t(
+              'Compare published contracts, awards, and broader documentary statistics across San Fernando public works.'
+            )}
           </p>
 
           {/* Two Featured Equal Destinations */}
@@ -1222,12 +1325,13 @@ export default function BidResults() {
                 <div className="flex items-center gap-2.5 text-[#0066EB]">
                   <FileCheck2 className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <h3 className="text-base font-bold text-gray-950">
-                    Contracts and Awards
+                    {t('Contracts and Awards')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Review published award and contract evidence linked to City
-                  projects.
+                  {t(
+                    'Review published award and contract evidence linked to City projects.'
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -1235,7 +1339,7 @@ export default function BidResults() {
                   href="/procurement/contracts"
                   className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  View Contracts and Awards &rarr;
+                  {t('View Contracts and Awards →')}
                 </Link>
               </div>
             </article>
@@ -1246,12 +1350,13 @@ export default function BidResults() {
                 <div className="flex items-center gap-2.5 text-[#0066EB]">
                   <FileSearch className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <h3 className="text-base font-bold text-gray-950">
-                    Procurement Statistics
+                    {t('Procurement Statistics')}
                   </h3>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Explore documentary coverage and descriptive statistics across
-                  the project collection.
+                  {t(
+                    'Explore documentary coverage and descriptive statistics across the project collection.'
+                  )}
                 </p>
               </div>
               <div className="mt-5">
@@ -1259,7 +1364,7 @@ export default function BidResults() {
                   href="/statistics/procurement"
                   className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC]"
                 >
-                  View Procurement Statistics &rarr;
+                  {t('View Procurement Statistics →')}
                 </Link>
               </div>
             </article>
@@ -1268,10 +1373,10 @@ export default function BidResults() {
           {/* Related resources: 2x2 Directory */}
           <div className="mt-8 border-t border-gray-200 pt-6">
             <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-              Related resources
+              {t('Related resources')}
             </h3>
             <div className="mt-3 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 border-y border-gray-200">
-              {RELATED_RESOURCES.map((item, idx) => (
+              {RELATED_RESOURCES(t).map((item, idx) => (
                 <Link
                   key={item.href}
                   href={item.href}

@@ -15,7 +15,7 @@ import {
   Users,
 } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import {

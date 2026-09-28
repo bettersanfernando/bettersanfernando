@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import {
   ExternalLink,
   Gavel,
@@ -19,9 +19,12 @@ import {
 import {
   formatPeso,
   formatIsoDate,
-  titleCaseEnum,
   formatUnstatedAmount,
 } from '../../../lib/utils';
+import type { PageT } from '../../../i18n/page-t';
+import { enumLabel } from '../../statistics/enum-labels';
+import { getPageT } from '../../../i18n/server';
+import type { LanguageType } from '../../../types';
 
 const STATUS_STYLES: Record<string, string> = {
   PLANNED: 'bg-gray-100 text-gray-600',
@@ -31,12 +34,12 @@ const STATUS_STYLES: Record<string, string> = {
   IMPLEMENTATION_REPORTED: 'bg-success-50 text-success-700',
 };
 
-const IDENTIFIER_LABELS: Record<string, string> = {
-  bid_reference: 'Bid Reference',
-  contract_number: 'Contract Number',
-  philgeps_reference: 'PhilGEPS Reference',
-  app_code: 'APP Code',
-};
+const IDENTIFIER_LABELS = (t: PageT): Record<string, string> => ({
+  bid_reference: t('Bid Reference'),
+  contract_number: t('Contract Number'),
+  philgeps_reference: t('PhilGEPS Reference'),
+  app_code: t('APP Code'),
+});
 
 function costUtilizationSourceLink(
   observation: ProjectCostUtilizationObservation
@@ -46,7 +49,7 @@ function costUtilizationSourceLink(
     : { url: observation.official_attachment_url, kind: 'attachment' };
 }
 
-function FinancialMetric({
+async function FinancialMetric({
   label,
   amount,
   supporting,
@@ -55,18 +58,20 @@ function FinancialMetric({
   amount: number | null;
   supporting?: string | null;
 }) {
+  const { locale } = await getPageT('projects-detail');
   return (
     <div>
       <p className="text-sm text-gray-500">{label}</p>
       <p className="mt-1 text-xl font-bold tabular-nums text-gray-900 md:text-2xl">
-        {formatPeso(amount)}
+        {formatPeso(amount, locale)}
       </p>
       {supporting && <p className="mt-1 text-xs text-gray-500">{supporting}</p>}
     </div>
   );
 }
 
-function FinancialOverview({ project }: { project: Project }) {
+async function FinancialOverview({ project }: { project: Project }) {
+  const { t } = await getPageT('projects-detail');
   const {
     estimated_budget,
     approved_budget_abc: abc,
@@ -93,9 +98,9 @@ function FinancialOverview({ project }: { project: Project }) {
 
   return (
     <div className="min-w-0">
-      <p className="text-eyebrow text-[#0066EB]">Financial Overview</p>
+      <p className="text-eyebrow text-[#0066EB]">{t('Financial Overview')}</p>
       <h2 className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl">
-        Budget and contract amounts
+        {t('Budget and contract amounts')}
       </h2>
 
       {allUnavailable ? (
@@ -105,8 +110,9 @@ function FinancialOverview({ project }: { project: Project }) {
             aria-hidden="true"
           />
           <p>
-            Financial amounts are not yet established in the published project
-            record.
+            {t(
+              'Financial amounts are not yet established in the published project record.'
+            )}
           </p>
         </div>
       ) : (
@@ -142,14 +148,15 @@ function FinancialOverview({ project }: { project: Project }) {
   );
 }
 
-function ProjectTimeline({ project }: { project: Project }) {
+async function ProjectTimeline({ project }: { project: Project }) {
+  const { t, locale } = await getPageT('projects-detail');
   const milestones = [
-    { label: 'Award date', date: project.award_date },
+    { label: t('Award date'), date: project.award_date },
     {
-      label: 'Contract effectivity',
+      label: t('Contract effectivity'),
       date: project.contract_effectivity_date,
     },
-    { label: 'Contract end', date: project.contract_end_date },
+    { label: t('Contract end'), date: project.contract_end_date },
   ].filter(
     (milestone): milestone is { label: string; date: string } =>
       milestone.date !== null
@@ -157,9 +164,9 @@ function ProjectTimeline({ project }: { project: Project }) {
 
   return (
     <div className="min-w-0">
-      <p className="text-eyebrow text-[#0066EB]">Timeline</p>
+      <p className="text-eyebrow text-[#0066EB]">{t('Timeline')}</p>
       <h2 className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl">
-        Project timeline
+        {t('Project timeline')}
       </h2>
 
       {milestones.length === 0 ? (
@@ -169,8 +176,9 @@ function ProjectTimeline({ project }: { project: Project }) {
             aria-hidden="true"
           />
           <p>
-            Award and contract milestone dates are not yet established in the
-            published project record.
+            {t(
+              'Award and contract milestone dates are not yet established in the published project record.'
+            )}
           </p>
         </div>
       ) : (
@@ -197,7 +205,7 @@ function ProjectTimeline({ project }: { project: Project }) {
                 </div>
                 <div className={`-mt-1 ${isLast ? '' : 'pb-8'}`}>
                   <p className="text-base font-bold text-gray-900">
-                    {formatIsoDate(milestone.date)}
+                    {formatIsoDate(milestone.date, locale)}
                   </p>
                   <p className="text-xs text-gray-500">{milestone.label}</p>
                 </div>
@@ -210,7 +218,7 @@ function ProjectTimeline({ project }: { project: Project }) {
   );
 }
 
-function UtilizationProgress({
+async function UtilizationProgress({
   label,
   percent,
   colorClass,
@@ -223,11 +231,12 @@ function UtilizationProgress({
   subtext?: string;
   footnote?: string;
 }) {
+  const { t } = await getPageT('projects-detail');
   if (percent === null) {
     return (
       <div>
         <p className="text-sm font-medium text-gray-700">{label}</p>
-        <p className="mt-1 text-sm text-gray-500">Not available</p>
+        <p className="mt-1 text-sm text-gray-500">{t('Not available')}</p>
       </div>
     );
   }
@@ -257,46 +266,60 @@ function UtilizationProgress({
   );
 }
 
-function ObservationSourceLink({
+async function ObservationSourceLink({
   observation,
 }: {
   observation: ProjectCostUtilizationObservation;
 }) {
+  const { t } = await getPageT('projects-detail');
   const { url, kind } = costUtilizationSourceLink(observation);
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Open the official ${kind === 'page' ? 'source page' : 'source attachment'} for this observation (opens in a new tab)`}
+      aria-label={t(
+        'Open the official {{value}} for this observation (opens in a new tab)',
+        {
+          value: kind === 'page' ? t('source page') : t('source attachment'),
+        }
+      )}
       className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-700 underline decoration-primary-200 underline-offset-4 hover:text-primary-800"
     >
       <Link2 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-      Official source
+      {t('Official source')}
       <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
     </a>
   );
 }
 
 function costIncurredSupporting(
-  observation: ProjectCostUtilizationObservation
+  observation: ProjectCostUtilizationObservation,
+  t: PageT,
+  locale: LanguageType
 ): string | undefined {
   const { total_cost_incurred_to_date: incurred, total_cost: total } =
     observation;
   if (incurred !== null && total !== null) {
-    return `${formatUnstatedAmount(incurred)} of ${formatUnstatedAmount(total)} total cost`;
+    return t('{{incurred}} of {{total}} total cost', {
+      incurred: formatUnstatedAmount(incurred, locale),
+      total: formatUnstatedAmount(total, locale),
+    });
   }
   if (incurred !== null) {
-    return `${formatUnstatedAmount(incurred)} incurred to date`;
+    return t('{{incurred}} incurred to date', {
+      incurred: formatUnstatedAmount(incurred, locale),
+    });
   }
   return undefined;
 }
 
-function CostUtilizationSection({
+async function CostUtilizationSection({
   observations,
 }: {
   observations: readonly ProjectCostUtilizationObservation[];
 }) {
+  const { t, locale } = await getPageT('projects-detail');
   if (observations.length === 0) return null;
 
   const latest = observations.at(-1)!;
@@ -316,39 +339,42 @@ function CostUtilizationSection({
       aria-labelledby="cost-utilization-heading"
       className="mt-12 border-t border-gray-200 pt-10"
     >
-      <p className="text-eyebrow text-[#0066EB]">Utilization</p>
+      <p className="text-eyebrow text-[#0066EB]">{t('Utilization')}</p>
       <h2
         id="cost-utilization-heading"
         className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
       >
-        Project Cost &amp; Utilization
+        {t('Project Cost & Utilization')}
       </h2>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-        Source-reported, year-to-date figures for a bounded subset of published
-        projects — not proof of cash payment, disbursement, or completion.{' '}
+        {t(
+          'Source-reported, year-to-date figures for a bounded subset of published projects — not proof of cash payment, disbursement, or completion.'
+        )}{' '}
         <Link
           href="/statistics/project-spending"
           className="font-semibold text-[#0066EB] hover:text-[#0052BC]"
         >
-          View the full Project Cost &amp; Utilization statistics
+          {t('View the full Project Cost & Utilization statistics')}
         </Link>
         .
       </p>
 
       <div className="mt-6 rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
         <p className="text-sm font-semibold text-gray-900">
-          Latest observation — {latest.reporting_year} Q
-          {latest.reporting_quarter}
+          {t('Latest observation — {{reporting_year}} Q{{reporting_quarter}}', {
+            reporting_year: latest.reporting_year,
+            reporting_quarter: latest.reporting_quarter,
+          })}
         </p>
         <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <UtilizationProgress
             label="Cost incurred to date"
             percent={latest.cost_incurred_to_date_percent_derived}
             colorClass="bg-[#0066EB]"
-            subtext={costIncurredSupporting(latest)}
+            subtext={costIncurredSupporting(latest, t, locale)}
             footnote={
               latest.cost_incurred_to_date_percent_derived !== null
-                ? 'Derived from the source-reported cost figures.'
+                ? t('Derived from the source-reported cost figures.')
                 : undefined
             }
           />
@@ -363,7 +389,7 @@ function CostUtilizationSection({
         <div className="mt-5 flex flex-col gap-4 border-t border-gray-200 pt-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-semibold text-gray-700">
-              Source-reported status
+              {t('Source-reported status')}
             </p>
             <p className="mt-1 text-sm leading-6 text-gray-800">
               {latest.status_remarks}
@@ -378,34 +404,39 @@ function CostUtilizationSection({
         aria-labelledby="utilization-history-heading"
         className="mt-8 border-t border-gray-200 pt-8"
       >
-        <p className="text-eyebrow text-[#0066EB]">Observation history</p>
+        <p className="text-eyebrow text-[#0066EB]">
+          {t('Observation history')}
+        </p>
         <h3
           id="utilization-history-heading"
           className="mt-2 text-xl font-bold text-gray-950"
         >
-          Project utilization history
+          {t('Project utilization history')}
         </h3>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-          Compare the verified year-to-date figures published for this project
-          across reporting periods.
+          {t(
+            'Compare the verified year-to-date figures published for this project across reporting periods.'
+          )}
         </p>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600">
-          Each observation is year-to-date, so the figures should be compared
-          across periods rather than added together.
+          {t(
+            'Each observation is year-to-date, so the figures should be compared across periods rather than added together.'
+          )}
         </p>
         {observations.length === 1 ? (
           <p className="mt-4 text-sm text-gray-600">
-            Only one verified utilization observation is currently available for
-            this project.
+            {t(
+              'Only one verified utilization observation is currently available for this project.'
+            )}
           </p>
         ) : (
           <div className="mt-5">
             <div className="hidden grid-cols-[5rem_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.25fr)_auto] gap-3 border-y border-gray-200 py-2 text-xs font-semibold text-gray-600 sm:grid">
-              <span>Period</span>
-              <span>Cost incurred</span>
-              <span>Physical completion</span>
-              <span>Source-reported status</span>
-              <span>Source</span>
+              <span>{t('Period')}</span>
+              <span>{t('Cost incurred')}</span>
+              <span>{t('Physical completion')}</span>
+              <span>{t('Source-reported status')}</span>
+              <span>{t('Source')}</span>
             </div>
             {observationYears.map(([year, yearObservations]) => (
               <div key={year} className="mt-5 first:mt-0">
@@ -424,24 +455,24 @@ function CostUtilizationSection({
                           : `${observation.reporting_year} Q${observation.reporting_quarter}`}
                         {observation.id === latest.id && (
                           <span className="ml-2 text-xs font-medium text-gray-500">
-                            Latest
+                            {t('Latest')}
                           </span>
                         )}
                       </p>
                       <p>
                         <span className="block text-xs text-gray-500 sm:hidden">
-                          Cost incurred
+                          {t('Cost incurred')}
                         </span>
                         <span className="font-medium tabular-nums text-gray-900">
                           {observation.cost_incurred_to_date_percent_derived ===
                           null
-                            ? 'Not available'
+                            ? t('Not available')
                             : `${observation.cost_incurred_to_date_percent_derived}%`}
                         </span>
                       </p>
                       <p>
                         <span className="block text-xs text-gray-500 sm:hidden">
-                          Physical completion
+                          {t('Physical completion')}
                         </span>
                         <span className="font-medium tabular-nums text-gray-900">
                           {observation.physical_completion_percent}%
@@ -449,7 +480,7 @@ function CostUtilizationSection({
                       </p>
                       <p>
                         <span className="block text-xs text-gray-500 sm:hidden">
-                          Source-reported status
+                          {t('Source-reported status')}
                         </span>
                         <span className="text-gray-700">
                           {observation.status_remarks}
@@ -466,45 +497,48 @@ function CostUtilizationSection({
       </section>
 
       <p className="mt-5 text-xs leading-5 text-gray-500">
-        These are year-to-date figures from the official source, not proof of
-        cash payment or disbursement. Currency is not stated in the source;
-        amounts are shown as plain numbers. Coverage is limited to a bounded
-        subset of published projects.
+        {t(
+          'These are year-to-date figures from the official source, not proof of cash payment or disbursement. Currency is not stated in the source; amounts are shown as plain numbers. Coverage is limited to a bounded subset of published projects.'
+        )}
       </p>
     </section>
   );
 }
 
-function EvidenceRow({ evidence }: { evidence: ProjectEvidence }) {
+async function EvidenceRow({ evidence }: { evidence: ProjectEvidence }) {
+  const { t, locale } = await getPageT('projects-detail');
   const officialLabel = isPrimaryOfficialSource(evidence)
-    ? 'Official source'
+    ? t('Official source')
     : evidence.source_authority;
 
   return (
     <li className="grid gap-4 py-6 lg:grid-cols-[minmax(0,1fr)_14rem_14rem] lg:items-start lg:gap-6">
       <div className="min-w-0">
         <p className="text-base font-bold text-gray-900">
-          {titleCaseEnum(evidence.stage)}
+          {enumLabel(t, evidence.stage)}
         </p>
         <p className="mt-1 text-xs text-gray-500">
           {officialLabel} · {getEvidenceSourceLabel(evidence)}
         </p>
         {evidence.fields_established.length > 0 && (
           <p className="mt-2 text-xs leading-5 text-gray-600">
-            Establishes:{' '}
-            {evidence.fields_established.map(titleCaseEnum).join(', ')}
+            {t('Establishes: {{join}}', {
+              join: evidence.fields_established
+                .map(field => enumLabel(t, field))
+                .join(', '),
+            })}
           </p>
         )}
       </div>
 
       <div className="min-w-0 text-sm">
-        <p className="text-xs text-gray-500">Source identifier</p>
+        <p className="text-xs text-gray-500">{t('Source identifier')}</p>
         <p className="mt-0.5 break-words font-mono text-xs text-gray-900">
           {evidence.source_identifier}
         </p>
-        <p className="mt-2 text-xs text-gray-500">Document date</p>
+        <p className="mt-2 text-xs text-gray-500">{t('Document date')}</p>
         <p className="mt-0.5 text-gray-900">
-          {formatIsoDate(evidence.document_date)}
+          {formatIsoDate(evidence.document_date, locale)}
         </p>
       </div>
 
@@ -515,7 +549,7 @@ function EvidenceRow({ evidence }: { evidence: ProjectEvidence }) {
   );
 }
 
-export default function ProjectDetailView({
+export default async function ProjectDetailView({
   project,
   evidence,
   costUtilizationObservations,
@@ -524,6 +558,7 @@ export default function ProjectDetailView({
   evidence: readonly ProjectEvidence[];
   costUtilizationObservations: readonly ProjectCostUtilizationObservation[];
 }) {
+  const { t, locale } = await getPageT('projects-detail');
   const identifiers = Object.entries(project.identifiers).filter(
     ([, value]) => value !== null
   ) as [keyof typeof IDENTIFIER_LABELS, string][];
@@ -544,9 +579,9 @@ export default function ProjectDetailView({
             <Breadcrumbs
               className="text-xs text-gray-500"
               items={[
-                { label: 'Home', href: '/' },
-                { label: 'Projects', href: '/projects' },
-                { label: 'City Projects', href: '/projects/city-projects' },
+                { label: t('Home'), href: '/' },
+                { label: t('Projects'), href: '/projects' },
+                { label: t('City Projects'), href: '/projects/city-projects' },
                 { label: project.project_name },
               ]}
             />
@@ -556,22 +591,24 @@ export default function ProjectDetailView({
             <span
               className={`inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-semibold ${STATUS_STYLES[project.lifecycle_status] ?? 'bg-gray-100 text-gray-600'}`}
             >
-              {titleCaseEnum(project.lifecycle_status)}
+              {enumLabel(t, project.lifecycle_status)}
             </span>
             <h1 className="mt-3 max-w-full break-words text-3xl font-extrabold leading-[1.08] tracking-[-0.02em] text-gray-950 sm:text-4xl lg:text-5xl">
               {project.project_name}
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-gray-600">
-              <span>{project.barangay ?? 'Barangay not attributed'}</span>
+              <span>{project.barangay ?? t('Barangay not attributed')}</span>
               <span aria-hidden="true">·</span>
               <span>{project.year}</span>
               <span aria-hidden="true">·</span>
-              <span>{titleCaseEnum(project.project_type)}</span>
+              <span>{enumLabel(t, project.project_type)}</span>
               <span aria-hidden="true">·</span>
-              <span>{titleCaseEnum(project.project_category)}</span>
+              <span>{enumLabel(t, project.project_category)}</span>
             </div>
             <p className="mt-1 text-sm text-gray-500">
-              Status as of {formatIsoDate(project.status_as_of)}
+              {t('Status as of {{status_as_of}}', {
+                status_as_of: formatIsoDate(project.status_as_of, locale),
+              })}
             </p>
           </div>
 
@@ -582,16 +619,18 @@ export default function ProjectDetailView({
                 aria-hidden="true"
               />
               <p>
-                <strong>Implementation reported.</strong> An official
-                implementation or utilization report describes project activity.
-                This does not independently establish procurement award, signed
-                contract, payment, disbursement, or physical verification.
+                <strong>{t('Implementation reported.')}</strong>{' '}
+                {t(
+                  'An official implementation or utilization report describes project activity. This does not independently establish procurement award, signed contract, payment, disbursement, or physical verification.'
+                )}
               </p>
             </div>
           )}
 
           <div className="mt-8 rounded-sm border border-gray-200 bg-[#F3F6FB] px-5 py-5 sm:px-6">
-            <p className="text-eyebrow text-[#0066EB]">Project at a Glance</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('Project at a Glance')}
+            </p>
             <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
               <div>
                 <dt className="flex items-center gap-1.5 text-eyebrow text-gray-500">
@@ -599,10 +638,10 @@ export default function ProjectDetailView({
                     className="h-3.5 w-3.5 text-[#0066EB]"
                     aria-hidden="true"
                   />
-                  Barangay
+                  {t('Barangay')}
                 </dt>
                 <dd className="mt-1.5 text-sm leading-6 text-gray-900">
-                  {project.barangay ?? 'Not available'}
+                  {project.barangay ?? t('Not available')}
                 </dd>
               </div>
               <div>
@@ -611,10 +650,10 @@ export default function ProjectDetailView({
                     className="h-3.5 w-3.5 text-[#0066EB]"
                     aria-hidden="true"
                   />
-                  Contractor
+                  {t('Contractor')}
                 </dt>
                 <dd className="mt-1.5 text-sm leading-6 text-gray-900">
-                  {project.contractor ?? 'Not available'}
+                  {project.contractor ?? t('Not available')}
                 </dd>
               </div>
               <div>
@@ -623,10 +662,10 @@ export default function ProjectDetailView({
                     className="h-3.5 w-3.5 text-[#0066EB]"
                     aria-hidden="true"
                   />
-                  Funding source
+                  {t('Funding source')}
                 </dt>
                 <dd className="mt-1.5 text-sm leading-6 text-gray-900">
-                  {project.funding_source ?? 'Not available'}
+                  {project.funding_source ?? t('Not available')}
                 </dd>
               </div>
               <div>
@@ -635,10 +674,10 @@ export default function ProjectDetailView({
                     className="h-3.5 w-3.5 text-[#0066EB]"
                     aria-hidden="true"
                   />
-                  Procurement mode
+                  {t('Procurement mode')}
                 </dt>
                 <dd className="mt-1.5 text-sm leading-6 text-gray-900">
-                  {project.procurement_mode ?? 'Not available'}
+                  {project.procurement_mode ?? t('Not available')}
                 </dd>
               </div>
             </div>
@@ -662,12 +701,12 @@ export default function ProjectDetailView({
             aria-labelledby="identifiers-heading"
             className="mt-12 border-t border-gray-200 pt-10"
           >
-            <p className="text-eyebrow text-[#0066EB]">Reference</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('Reference')}</p>
             <h2
               id="identifiers-heading"
               className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
             >
-              Project Identifiers
+              {t('Project Identifiers')}
             </h2>
             <div
               className={`mt-6 grid gap-x-8 gap-y-5 rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 ${identifierColsClass}`}
@@ -675,7 +714,7 @@ export default function ProjectDetailView({
               {identifiers.map(([key, value]) => (
                 <div key={key} className="min-w-0">
                   <dt className="text-eyebrow text-gray-500">
-                    {IDENTIFIER_LABELS[key] ?? key}
+                    {IDENTIFIER_LABELS(t)[key] ?? key}
                   </dt>
                   <dd className="mt-1.5 break-words text-sm font-medium text-gray-900">
                     {value}
@@ -691,20 +730,20 @@ export default function ProjectDetailView({
           aria-labelledby="evidence-heading"
           className="mt-12 border-t border-gray-200 pt-10"
         >
-          <p className="text-eyebrow text-[#0066EB]">Provenance</p>
+          <p className="text-eyebrow text-[#0066EB]">{t('Provenance')}</p>
           <h2
             id="evidence-heading"
             className="mt-2 text-2xl font-bold text-section-title text-gray-950 md:text-3xl"
           >
-            Evidence &amp; official sources
+            {t('Evidence & official sources')}
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Official documents used to establish project facts.
+            {t('Official documents used to establish project facts.')}
           </p>
 
           {evidence.length === 0 ? (
             <p className="mt-6 text-sm text-gray-500">
-              No evidence records are available for this project yet.
+              {t('No evidence records are available for this project yet.')}
             </p>
           ) : (
             <ol className="mt-6 divide-y divide-gray-200 border-y border-gray-200">
@@ -719,7 +758,7 @@ export default function ProjectDetailView({
           href="/projects/city-projects"
           className="mt-12 inline-flex text-sm font-semibold text-gray-600 hover:text-[#0066EB]"
         >
-          ← Back to City Projects
+          {t('← Back to City Projects')}
         </Link>
       </div>
     </main>

@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from 'react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
 import {
   ArrowRight,
   ChevronLeft,
@@ -11,6 +11,8 @@ import {
   X,
 } from 'lucide-react';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
+import { usePageT } from '../../components/i18n/PageMessages';
+import type { PageT } from '../../i18n/page-t';
 import {
   CIVIC_SEARCH_DOMAINS,
   searchCivicRecordsDetailed,
@@ -26,29 +28,37 @@ type VisibleSearchFilter =
   | 'barangays'
   | 'public-records';
 
-const VISIBLE_FILTERS: ReadonlyArray<{
+const visibleFilters = (
+  t: PageT
+): ReadonlyArray<{
   value: VisibleSearchFilter;
   label: string;
-}> = [
-  { value: 'all', label: 'All' },
-  { value: 'services', label: 'Services' },
-  { value: 'projects', label: 'Projects' },
-  { value: 'government', label: 'Government' },
-  { value: 'barangays', label: 'Barangays' },
-  { value: 'public-records', label: 'Public Records' },
+}> => [
+  { value: 'all', label: t('All') },
+  { value: 'services', label: t('Services') },
+  { value: 'projects', label: t('Projects') },
+  { value: 'government', label: t('Government') },
+  { value: 'barangays', label: t('Barangays') },
+  { value: 'public-records', label: t('Public Records') },
 ];
 
 const PAGE_SIZE = 10;
 
-const DISCOVERY_SUGGESTIONS: ReadonlyArray<{
+const discoverySuggestions = (
+  t: PageT
+): ReadonlyArray<{
   category: string;
   label: string;
   query: string;
-}> = [
-  { category: 'SERVICE', label: 'Business permit', query: 'Business permit' },
-  { category: 'OFFICE', label: 'CHO', query: 'CHO' },
-  { category: 'PLACE', label: 'Sindalan', query: 'Sindalan' },
-  { category: 'TOPIC', label: 'Population', query: 'Population' },
+}> => [
+  {
+    category: t('SERVICE'),
+    label: t('Business permit'),
+    query: 'Business permit',
+  },
+  { category: t('OFFICE'), label: 'CHO', query: 'CHO' },
+  { category: t('PLACE'), label: 'Sindalan', query: 'Sindalan' },
+  { category: t('TOPIC'), label: t('Population'), query: 'Population' },
 ];
 
 function isSearchFilter(
@@ -75,7 +85,175 @@ function getPaginationItems(
   return [1, '...', current - 1, current, current + 1, '...', total];
 }
 
-function ResultRow({ result }: { result: CivicSearchResult }) {
+function resultKindLabel(kind: string, t: PageT) {
+  const labels: Record<string, string> = {
+    Service: t('Service'),
+    Project: t('Project'),
+    Barangay: t('Barangay'),
+    'Government office': t('Government office'),
+    Hotline: t('Hotline'),
+    'Executive Order': t('Executive Order'),
+    Ordinance: t('Ordinance'),
+    Resolution: t('Resolution'),
+    'Bid Result': t('Bid Result'),
+    Contract: t('Contract'),
+    'Full Disclosure Report': t('Full Disclosure Report'),
+    'Finance Report': t('Finance Report'),
+    'Project source': t('Project source'),
+    'Site page': t('Site page'),
+    'Business Form': t('Business Form'),
+    'Service Reference Document': t('Service Reference Document'),
+    'Privacy Manual': t('Privacy Manual'),
+    'Privacy Notice': t('Privacy Notice'),
+    'Privacy Policy': t('Privacy Policy'),
+  };
+  return labels[kind] ?? kind;
+}
+
+// Display-only overrides for the curated site-hub "Site page" results: the
+// indexed title/description (searched against in English on every locale)
+// never changes — only what's shown here does. Keyed by the same stable
+// `href` the search index already uses as that document's identity.
+function siteDestinationDisplay(
+  href: string,
+  t: PageT
+): { title: string; description: string } | null {
+  switch (href) {
+    case '/services':
+      return {
+        title: t('Services'),
+        description: t('Browse City service guidance by need.'),
+      };
+    case '/projects':
+      return {
+        title: t('Projects'),
+        description: t('City infrastructure and public-works projects hub.'),
+      };
+    case '/government':
+      return {
+        title: t('Government'),
+        description: t('City Government offices, contacts, and legislation.'),
+      };
+    case '/barangays':
+      return {
+        title: t('Barangay directory'),
+        description: t('All 35 barangays with population and classification.'),
+      };
+    case '/legislation':
+      return {
+        title: t('Legislation'),
+        description: t('Executive Orders, Ordinances, and Resolutions hub.'),
+      };
+    case '/transparency':
+      return {
+        title: t('Transparency'),
+        description: t('Published-record inventory, sources, and methodology.'),
+      };
+    case '/statistics':
+      return {
+        title: t('Statistics'),
+        description: t(
+          'Population, project, procurement, and city-profile statistics.'
+        ),
+      };
+    case '/statistics/population':
+      return {
+        title: t('Population Statistics'),
+        description: t(
+          'PSA population baseline compared across all 35 barangays.'
+        ),
+      };
+    case '/statistics/demographics':
+      return {
+        title: t('Demographics'),
+        description: t(
+          'Household population, age/sex structure, and poverty estimates.'
+        ),
+      };
+    case '/statistics/project-spending':
+      return {
+        title: t('Project Cost & Utilization'),
+        description: t(
+          'Source-reported project cost-utilization observations.'
+        ),
+      };
+    case '/statistics/projects':
+      return {
+        title: t('Project Statistics'),
+        description: t(
+          'Descriptive snapshot of the published project collection.'
+        ),
+      };
+    case '/statistics/procurement':
+      return {
+        title: t('Procurement Statistics'),
+        description: t(
+          'Descriptive statistics for published procurement records.'
+        ),
+      };
+    case '/statistics/government':
+      return {
+        title: t('Government Statistics'),
+        description: t('Verified, partial City Government entity summary.'),
+      };
+    case '/transparency/finance':
+      return {
+        title: t('City Finances'),
+        description: t('Aggregate revenue, budget, and expenditure reports.'),
+      };
+    case '/transparency/sources':
+      return {
+        title: t('Transparency Sources'),
+        description: t(
+          "BetterSanFernando's published evidence and source inventory."
+        ),
+      };
+    case '/transparency/methodology':
+      return {
+        title: t('How We Publish Data'),
+        description: t('Verification standards and publication methodology.'),
+      };
+    default:
+      return null;
+  }
+}
+
+// Display-only overrides for fallback metadata/description text baked into
+// the search index for records missing their usual field (e.g. an office
+// without a recorded acronym). The indexed value itself is never changed —
+// only what's rendered is. The ordinance "<number> · <year> · <state>"
+// composite keeps its number/year verbatim and only swaps the trailing
+// state, reusing the same "Reference record only" term used elsewhere.
+function resultMetadataDisplay(metadata: string, t: PageT): string {
+  if (metadata === 'Published office record') {
+    return t('Published office record');
+  }
+  const fullTextSuffix = ' · Full text available';
+  const referenceOnlySuffix = ' · Reference only';
+  if (metadata.endsWith(fullTextSuffix)) {
+    return `${metadata.slice(0, -fullTextSuffix.length)} · ${t('Full text available')}`;
+  }
+  if (metadata.endsWith(referenceOnlySuffix)) {
+    return `${metadata.slice(0, -referenceOnlySuffix.length)} · ${t('Reference record only')}`;
+  }
+  return metadata;
+}
+
+function resultDescriptionDisplay(description: string, t: PageT): string {
+  if (description === 'Published office record.') {
+    return t('Published office record.');
+  }
+  return description;
+}
+
+function ResultRow({ result, t }: { result: CivicSearchResult; t: PageT }) {
+  const siteDisplay =
+    result.kind === 'Site page' ? siteDestinationDisplay(result.href, t) : null;
+  const displayTitle = siteDisplay?.title ?? result.title;
+  const displayDescription =
+    siteDisplay?.description ?? resultDescriptionDisplay(result.description, t);
+  const displayMetadata = resultMetadataDisplay(result.metadata, t);
+
   return (
     <li className="border-b border-gray-100 last:border-b-0">
       <Link
@@ -85,25 +263,25 @@ function ResultRow({ result }: { result: CivicSearchResult }) {
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
             <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#0066EB]">
-              {result.kind}
+              {resultKindLabel(result.kind, t)}
             </span>
-            {result.metadata && (
+            {displayMetadata && (
               <>
                 <span className="text-gray-300" aria-hidden="true">
                   •
                 </span>
                 <span className="font-mono text-[11px] text-gray-500">
-                  {result.metadata}
+                  {displayMetadata}
                 </span>
               </>
             )}
           </div>
           <h3 className="mt-1 text-sm font-bold text-gray-950 transition-colors group-hover:text-[#0066EB] sm:text-base">
-            {result.title}
+            {displayTitle}
           </h3>
-          {result.description && (
+          {displayDescription && (
             <p className="mt-1 max-w-3xl text-xs leading-relaxed text-gray-600 sm:text-sm">
-              {result.description}
+              {displayDescription}
             </p>
           )}
         </div>
@@ -122,16 +300,18 @@ function Pagination({
   currentPage,
   totalPages,
   onPageChange,
+  t,
 }: {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  t: PageT;
 }) {
   const items = getPaginationItems(currentPage, totalPages);
 
   return (
     <nav
-      aria-label="Search results pagination"
+      aria-label={t('Search results pagination')}
       className="mt-6 border-t border-gray-100 pt-5 sm:mt-8 sm:pt-6"
     >
       {/* Mobile Pagination */}
@@ -143,11 +323,14 @@ function Pagination({
           className="inline-flex items-center gap-1 rounded-sm border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 transition-colors hover:bg-[#F3F6FB] hover:text-[#0066EB] disabled:pointer-events-none disabled:opacity-30"
         >
           <ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />
-          <span>Previous</span>
+          <span>{t('Previous')}</span>
         </button>
 
         <span className="font-mono text-xs text-gray-600">
-          Page {currentPage} of {totalPages}
+          {t('Page {{currentPage}} of {{totalPages}}', {
+            currentPage,
+            totalPages,
+          })}
         </span>
 
         <button
@@ -156,7 +339,7 @@ function Pagination({
           onClick={() => onPageChange(currentPage + 1)}
           className="inline-flex items-center gap-1 rounded-sm border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 transition-colors hover:bg-[#F3F6FB] hover:text-[#0066EB] disabled:pointer-events-none disabled:opacity-30"
         >
-          <span>Next</span>
+          <span>{t('Next')}</span>
           <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
         </button>
       </div>
@@ -170,7 +353,7 @@ function Pagination({
           className="inline-flex items-center gap-1 rounded-sm px-2.5 py-1.5 text-xs font-semibold text-gray-700 transition-colors hover:bg-[#F3F6FB] hover:text-[#0066EB] disabled:pointer-events-none disabled:opacity-30"
         >
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-          <span>Previous</span>
+          <span>{t('Previous')}</span>
         </button>
 
         <div className="flex items-center gap-1">
@@ -211,7 +394,7 @@ function Pagination({
           onClick={() => onPageChange(currentPage + 1)}
           className="inline-flex items-center gap-1 rounded-sm px-2.5 py-1.5 text-xs font-semibold text-gray-700 transition-colors hover:bg-[#F3F6FB] hover:text-[#0066EB] disabled:pointer-events-none disabled:opacity-30"
         >
-          <span>Next</span>
+          <span>{t('Next')}</span>
           <ChevronRight className="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
@@ -220,6 +403,9 @@ function Pagination({
 }
 
 export default function Search() {
+  const t = usePageT();
+  const filters = visibleFilters(t);
+  const suggestions = discoverySuggestions(t);
   const [query, setQuery] = useQueryState('q', { defaultValue: '' });
   const [filterValue, setFilter] = useQueryState('domain', {
     defaultValue: 'all',
@@ -302,28 +488,29 @@ export default function Search() {
         {/* 1. Breadcrumbs (Aligned to container) */}
         <Breadcrumbs
           className="mb-7 sm:mb-8"
-          items={[{ label: 'Home', href: '/' }, { label: 'Search' }]}
+          items={[{ label: t('Home'), href: '/' }, { label: t('Search') }]}
         />
 
         {/* Centered Intro Column */}
         <header className="mx-auto max-w-[780px] text-center">
           <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-            SEARCH
+            {t('SEARCH')}
           </p>
           <h1 className="mt-2 text-[32px] font-bold tracking-[-0.02em] text-gray-950 sm:text-[38px] lg:text-[44px] lg:leading-[1.15]">
-            Find public information across <br className="hidden sm:inline" />
-            San Fernando
+            {t('Find public information across')}{' '}
+            <br className="hidden sm:inline" /> {t('San Fernando')}
           </h1>
           <p className="mx-auto mt-2.5 max-w-[620px] text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-            Search published civic records across services, projects, government
-            offices, barangays, and public records.
+            {t(
+              'Search published civic records across services, projects, government offices, barangays, and public records.'
+            )}
           </p>
         </header>
 
         {/* 2. Centered Primary Search Input */}
         <div className="mx-auto mt-6 max-w-[740px]">
           <label htmlFor="civic-search" className="sr-only">
-            Search published civic records
+            {t('Search published civic records')}
           </label>
           <div className="relative">
             <SearchIcon
@@ -339,7 +526,9 @@ export default function Search() {
               spellCheck={false}
               value={query}
               onChange={event => handleQueryChange(event.target.value)}
-              placeholder="Search services, projects, offices, barangays, or public records…"
+              placeholder={t(
+                'Search services, projects, offices, barangays, or public records…'
+              )}
               className="h-[58px] w-full rounded-sm border border-gray-300 bg-white pl-12 pr-12 text-base text-gray-950 placeholder:text-gray-400 outline-none transition focus:border-[#0066EB] focus:ring-1 focus:ring-[#0066EB] sm:h-[60px] sm:pl-14"
             />
             {query && (
@@ -347,15 +536,16 @@ export default function Search() {
                 type="button"
                 onClick={clearSearch}
                 className="absolute right-3.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-sm text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#0066EB]"
-                aria-label="Clear search"
+                aria-label={t('Clear search')}
               >
                 <X className="h-4 w-4" aria-hidden="true" />
               </button>
             )}
           </div>
           <p className="mt-2.5 text-center text-xs text-gray-500">
-            Try a service, office acronym, barangay, project, document number,
-            or topic.
+            {t(
+              'Try a service, office acronym, barangay, project, document number, or topic.'
+            )}
           </p>
         </div>
 
@@ -367,21 +557,22 @@ export default function Search() {
                 {/* Left 40%: Editorial Discovery Intro */}
                 <div>
                   <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                    SEARCH BY WHAT YOU KNOW
+                    {t('SEARCH BY WHAT YOU KNOW')}
                   </p>
                   <h2 className="mt-2 text-base font-bold tracking-tight text-gray-950 sm:text-lg lg:text-xl lg:leading-snug">
-                    Start with one detail you already have
+                    {t('Start with one detail you already have')}
                   </h2>
                   <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                    Search by service, office, barangay, project, document
-                    number, or topic.
+                    {t(
+                      'Search by service, office, barangay, project, document number, or topic.'
+                    )}
                     {/* Start with a name, title, location, or identifier */}
                   </p>
                 </div>
 
                 {/* Right 60%: 2x2 Navigation Grid */}
                 <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
-                  {DISCOVERY_SUGGESTIONS.map(item => (
+                  {suggestions.map(item => (
                     <button
                       key={item.query}
                       type="button"
@@ -412,10 +603,12 @@ export default function Search() {
         {queryIsTooShort && (
           <div className="mx-auto mt-8 max-w-[740px] py-6 text-center">
             <p className="text-sm font-semibold text-gray-900">
-              Enter at least 2 characters to search.
+              {t('Enter at least 2 characters to search.')}
             </p>
             <p className="mt-1 text-xs text-gray-500">
-              A slightly longer query keeps typo-tolerant results relevant.
+              {t(
+                'A slightly longer query keeps typo-tolerant results relevant.'
+              )}
             </p>
           </div>
         )}
@@ -424,40 +617,42 @@ export default function Search() {
         {hasSearchQuery && activeTotal === 0 && (
           <div className="mx-auto mt-8 max-w-[740px] py-8 text-center">
             <h2 className="text-xl font-bold tracking-tight text-gray-950 sm:text-2xl">
-              No published BetterSanFernando records matched &ldquo;
-              {normalizedQuery}&rdquo;
+              {t('No published BetterSanFernando records matched “{{query}}”', {
+                query: normalizedQuery,
+              })}
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Check the spelling, try fewer words, or switch to All domains. You
-              can also explore directories directly:
+              {t(
+                'Check the spelling, try fewer words, or switch to All domains. You can also explore directories directly:'
+              )}
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold sm:text-sm">
               <Link
                 href="/services"
                 className="inline-flex items-center gap-1 text-[#0066EB] hover:underline"
               >
-                <span>Services</span>
+                <span>{t('Services')}</span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-1 text-[#0066EB] hover:underline"
               >
-                <span>Projects</span>
+                <span>{t('Projects')}</span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
               <Link
                 href="/government"
                 className="inline-flex items-center gap-1 text-[#0066EB] hover:underline"
               >
-                <span>Government</span>
+                <span>{t('Government')}</span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
               <Link
                 href="/legislation"
                 className="inline-flex items-center gap-1 text-[#0066EB] hover:underline"
               >
-                <span>Public Records</span>
+                <span>{t('Public Records')}</span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
@@ -470,10 +665,10 @@ export default function Search() {
             {/* Tablet & Mobile Filter Rail */}
             <div className="mb-5 lg:hidden">
               <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-wider text-gray-400">
-                FILTER RESULTS
+                {t('FILTER RESULTS')}
               </p>
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                {VISIBLE_FILTERS.map(item => {
+                {filters.map(item => {
                   const selected = item.value === filter;
                   const count =
                     item.value === 'all'
@@ -513,13 +708,13 @@ export default function Search() {
               <aside className="hidden w-56 shrink-0 lg:block xl:w-64">
                 <div className="sticky top-20">
                   <h2 className="mb-3 px-3 font-mono text-[11px] font-bold uppercase tracking-wider text-gray-400">
-                    FILTER RESULTS
+                    {t('FILTER RESULTS')}
                   </h2>
                   <nav
-                    aria-label="Filter results by domain"
+                    aria-label={t('Filter results by domain')}
                     className="space-y-1"
                   >
-                    {VISIBLE_FILTERS.map(item => {
+                    {filters.map(item => {
                       const selected = item.value === filter;
                       const count =
                         item.value === 'all'
@@ -563,7 +758,7 @@ export default function Search() {
                       id="search-results-heading"
                       className="text-lg font-bold tracking-tight text-gray-950 sm:text-xl"
                     >
-                      Search Results
+                      {t('Search Results')}
                     </h2>
                     <p
                       className="mt-1 text-xs text-gray-600 sm:text-sm"
@@ -572,31 +767,35 @@ export default function Search() {
                       <span className="font-semibold text-gray-900">
                         {activeTotal}
                       </span>{' '}
-                      {activeTotal === 1
-                        ? 'matching record'
-                        : 'matching records'}{' '}
-                      for{' '}
+                      {t(
+                        activeTotal === 1
+                          ? 'matching record for'
+                          : 'matching records for'
+                      )}{' '}
                       <span className="font-semibold text-gray-900">
                         &ldquo;{normalizedQuery}&rdquo;
                       </span>
                       {filter !== 'all' && (
                         <span className="text-gray-500">
                           {' '}
-                          in{' '}
-                          {VISIBLE_FILTERS.find(f => f.value === filter)?.label}
+                          in {filters.find(f => f.value === filter)?.label}
                         </span>
                       )}
                     </p>
                   </div>
 
                   <p className="font-mono text-xs tabular-nums text-gray-500">
-                    Showing {showingStart}–{showingEnd} of {activeTotal}
+                    {t('Showing {{start}}–{{end}} of {{total}}', {
+                      start: showingStart,
+                      end: showingEnd,
+                      total: activeTotal,
+                    })}
                   </p>
                 </div>
 
                 <ul className="mt-1 divide-y divide-gray-100">
                   {paginatedResults.map(result => (
-                    <ResultRow key={result.id} result={result} />
+                    <ResultRow key={result.id} result={result} t={t} />
                   ))}
                 </ul>
 
@@ -605,6 +804,7 @@ export default function Search() {
                     currentPage={safePage}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
+                    t={t}
                   />
                 )}
               </div>
@@ -619,16 +819,17 @@ export default function Search() {
               {/* Left 70%: Eyebrow and Copy */}
               <div>
                 <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#0066EB]">
-                  ABOUT SEARCH COVERAGE
+                  {t('ABOUT SEARCH COVERAGE')}
                 </p>
                 <p className="mt-2 text-xs leading-relaxed text-gray-900 sm:text-sm sm:leading-6">
-                  Search covers public information currently published by
-                  BetterSanFernando across services, projects, government
-                  offices, barangays, and official records.
+                  {t(
+                    'Search covers public information currently published by BetterSanFernando across services, projects, government offices, barangays, and official records.'
+                  )}
                 </p>
                 <p className="mt-2 text-xs leading-relaxed text-gray-700 sm:text-sm sm:leading-6">
-                  A missing result does not mean the City Government record does
-                  not exist.
+                  {t(
+                    'A missing result does not mean the City Government record does not exist.'
+                  )}
                   {/* Absence from search does not mean a City record, office, or document does not exist. */}
                 </p>
               </div>
@@ -639,7 +840,7 @@ export default function Search() {
                   href="/transparency/sources"
                   className="group inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
                 >
-                  <span>Explore Sources</span>
+                  <span>{t('Explore Sources')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
                     aria-hidden="true"
@@ -649,7 +850,7 @@ export default function Search() {
                   href="/transparency/methodology"
                   className="group inline-flex items-center gap-1.5 text-xs font-medium text-gray-700 hover:text-gray-950 sm:text-sm"
                 >
-                  <span>How We Publish Data</span>
+                  <span>{t('How We Publish Data')}</span>
                   <ArrowRight
                     className="h-3.5 w-3.5 text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-gray-700"
                     aria-hidden="true"

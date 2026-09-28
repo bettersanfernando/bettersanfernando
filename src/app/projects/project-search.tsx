@@ -8,8 +8,11 @@ import {
   type FormEvent,
   type ReactNode,
 } from 'react';
-import Link from 'next/link';
+import Link from '../../components/i18n/LocaleLink';
+import { useLocale } from '../../components/i18n/useLocale';
+import { localizeHref } from '../../i18n/locale';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, Search, X } from 'lucide-react';
 import { getProjects, type Project } from '../../data/civic/projects';
 
@@ -99,6 +102,7 @@ export function ProjectSearchProvider({ children }: { children: ReactNode }) {
 }
 
 function ProjectResultRow({ project }: { project: Project }) {
+  const { t } = useTranslation('common');
   return (
     <Link
       href={`/projects/${project.id}`}
@@ -109,7 +113,8 @@ function ProjectResultRow({ project }: { project: Project }) {
           {project.project_name}
         </span>
         <span className="block text-xs text-gray-500">
-          {project.barangay ?? 'Barangay not specified'} · {project.year}
+          {project.barangay ?? t('projectSearch.barangayNotSpecified')} ·{' '}
+          {project.year}
         </span>
       </span>
       <ArrowRight
@@ -121,16 +126,19 @@ function ProjectResultRow({ project }: { project: Project }) {
 }
 
 function NoMatches() {
+  const { t } = useTranslation('common');
   return (
     <div className="p-4">
-      <p className="font-semibold text-gray-900">No matching projects found.</p>
+      <p className="font-semibold text-gray-900">
+        {t('projectSearch.noMatches')}
+      </p>
       <p className="mt-1 text-sm text-gray-600">
-        Try another term or{' '}
+        {t('projectSearch.tryAnother')}{' '}
         <Link
           href="/projects/city-projects"
           className="font-semibold text-[#0066EB] hover:text-[#0052BC]"
         >
-          browse the complete City Projects directory
+          {t('projectSearch.browseAll')}
         </Link>
         .
       </p>
@@ -143,8 +151,10 @@ function NoMatches() {
 // matching projects on mobile render in <MobileProjectSearchResults/>
 // instead, mounted separately by page.tsx.
 export default function ProjectSearchInput() {
+  const { t } = useTranslation('common');
   const { query, setQuery, results } = useProjectSearchState();
   const router = useRouter();
+  const locale = useLocale();
   const hasQuery = query.trim().length > 0;
   const desktopResults = results.slice(0, DESKTOP_MAX_RESULTS);
 
@@ -152,13 +162,18 @@ export default function ProjectSearchInput() {
     event.preventDefault();
     const trimmed = query.trim();
     if (!trimmed) return;
-    router.push(`/projects/city-projects?q=${encodeURIComponent(trimmed)}`);
+    router.push(
+      localizeHref(
+        `/projects/city-projects?q=${encodeURIComponent(trimmed)}`,
+        locale
+      )
+    );
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="project-search" className="sr-only">
-        Search project name, barangay, contractor, or bid reference
+        {t('projectSearch.label')}
       </label>
 
       <div className="relative">
@@ -175,7 +190,7 @@ export default function ProjectSearchInput() {
           onKeyDown={event => {
             if (event.key === 'Escape') setQuery('');
           }}
-          placeholder="Search project name, barangay, contractor..."
+          placeholder={t('projectSearch.placeholder')}
           className="h-11 w-full rounded-lg border border-gray-200 bg-white pl-10 pr-10 text-sm text-gray-900 outline-none placeholder:text-gray-500 focus:border-[#0066EB] focus:outline-none focus:ring-2 focus:ring-[#0066EB]/20"
         />
 
@@ -183,7 +198,7 @@ export default function ProjectSearchInput() {
           <button
             type="button"
             onClick={() => setQuery('')}
-            aria-label="Clear project search"
+            aria-label={t('projectSearch.clear')}
             className="absolute right-2.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
           >
             <X className="h-4 w-4" aria-hidden="true" />
@@ -196,7 +211,7 @@ export default function ProjectSearchInput() {
           <div
             className="absolute left-0 right-0 top-full z-40 mt-2 hidden max-h-[20rem] overflow-y-auto rounded-xl border border-gray-200 bg-white text-left shadow-lg lg:block"
             role="region"
-            aria-label="Project search results"
+            aria-label={t('projectSearch.results')}
           >
             {desktopResults.length === 0 ? (
               <NoMatches />
@@ -226,6 +241,7 @@ export default function ProjectSearchInput() {
 // by page.tsx as a sibling right after the page header. Renders nothing
 // while the query is empty.
 export function MobileProjectSearchResults() {
+  const { t } = useTranslation('common');
   const { query, results } = useProjectSearchState();
   const hasQuery = query.trim().length > 0;
 
@@ -236,14 +252,16 @@ export function MobileProjectSearchResults() {
   return (
     <section
       className="border-b border-gray-200 bg-white lg:hidden"
-      aria-label="Project search results"
+      aria-label={t('projectSearch.results')}
     >
       <div className="container mx-auto px-4 py-6">
-        <p className="text-eyebrow text-[#0066EB]">Search Results</p>
+        <p className="text-eyebrow text-[#0066EB]">
+          {t('projectSearch.searchResults')}
+        </p>
 
         {mobileResults.length > 0 && (
           <p className="mt-2 text-sm font-semibold text-gray-900">
-            Top matches for &ldquo;{query}&rdquo;
+            {t('projectSearch.topMatches', { query })}
           </p>
         )}
 
@@ -270,7 +288,7 @@ export function MobileProjectSearchResults() {
             href={`/projects/city-projects?q=${encodeURIComponent(query.trim())}`}
             className="mt-3 inline-flex items-center gap-1.5 border-t border-gray-100 pt-3 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC]"
           >
-            View all matching projects
+            {t('projectSearch.viewAll')}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         )}

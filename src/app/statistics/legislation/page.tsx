@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowRight, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
   getExecutiveOrders,
@@ -12,13 +12,20 @@ import {
   getPublicRecordsMetrics,
 } from '../../../data/civic/publicRecordsCoverage';
 import { buildPageMetadata } from '../../../lib/metadata';
+import type { PageT } from '../../../i18n/page-t';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Legislation Statistics',
-  description:
-    "Coverage statistics for BetterSanFernando's published Executive Order, Ordinance, and Resolution collections.",
-  path: '/statistics/legislation',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('statistics-legislation');
+  return buildPageMetadata({
+    title: t('Legislation Statistics'),
+    description: t(
+      "Coverage statistics for BetterSanFernando's published Executive Order, Ordinance, and Resolution collections."
+    ),
+    path: '/statistics/legislation',
+    locale,
+  });
+}
 
 // Dynamic canonical datasets
 const executiveOrders = getExecutiveOrders();
@@ -38,21 +45,24 @@ const archiveRanges = getPublicRecordsArchiveCoverage().filter(entry =>
 );
 
 // Curated UI display labels for archive range evidence record types
-const ARCHIVE_RECORD_LABELS: Record<string, string> = {
-  resolution_archive_range: 'Resolution archive',
-  ordinance_archive_range: 'Ordinance archive',
-  appropriation_ordinance_archive_range: 'Appropriation ordinance archive',
-};
+const ARCHIVE_RECORD_LABELS = (t: PageT): Record<string, string> => ({
+  resolution_archive_range: t('Resolution archive'),
+  ordinance_archive_range: t('Ordinance archive'),
+  appropriation_ordinance_archive_range: t('Appropriation ordinance archive'),
+});
 
-function formatArchiveRecordType(recordType: string): string {
-  return ARCHIVE_RECORD_LABELS[recordType] ?? recordType.replaceAll('_', ' ');
-}
+export default async function LegislationStatistics() {
+  const { t } = await getPageT('statistics-legislation');
 
-export default function LegislationStatistics() {
+  function formatArchiveRecordType(recordType: string): string {
+    return (
+      ARCHIVE_RECORD_LABELS(t)[recordType] ?? recordType.replaceAll('_', ' ')
+    );
+  }
   const collections = [
     {
       id: 'executive_order',
-      label: 'Executive Orders',
+      label: t('Executive Orders'),
       count: executiveOrders.length,
       fullTextCount: executiveOrders.filter(hasLegislationFullText).length,
       href: '/legislation/executive-orders',
@@ -60,7 +70,7 @@ export default function LegislationStatistics() {
     },
     {
       id: 'ordinance',
-      label: 'Ordinances',
+      label: t('Ordinances'),
       count: ordinances.length,
       fullTextCount: ordinances.filter(hasLegislationFullText).length,
       href: '/legislation/ordinances',
@@ -68,7 +78,7 @@ export default function LegislationStatistics() {
     },
     {
       id: 'resolution',
-      label: 'Resolutions',
+      label: t('Resolutions'),
       count: resolutions.length,
       fullTextCount: resolutions.filter(hasLegislationFullText).length,
       href: '/legislation/resolutions',
@@ -88,24 +98,24 @@ export default function LegislationStatistics() {
           <Breadcrumbs
             className="text-xs text-gray-500"
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Statistics', href: '/statistics' },
-              { label: 'Legislation Statistics' },
+              { label: t('Home'), href: '/' },
+              { label: t('Statistics'), href: '/statistics' },
+              { label: t('Legislation Statistics') },
             ]}
           />
 
           <div className="mt-6 grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
             <div className="max-w-3xl">
               <p className="text-eyebrow text-[#0066EB]">
-                STATISTICS · LEGISLATION
+                {t('STATISTICS · LEGISLATION')}
               </p>
               <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.02em] text-gray-950 sm:text-4xl md:text-5xl">
-                Legislation Statistics
+                {t('Legislation Statistics')}
               </h1>
               <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                Explore the coverage of BetterSanFernando’s verified Executive
-                Order, Ordinance, and Resolution collections, including
-                published years, document availability, and archive evidence.
+                {t(
+                  'Explore the coverage of BetterSanFernando’s verified Executive Order, Ordinance, and Resolution collections, including published years, document availability, and archive evidence.'
+                )}
               </p>
 
               {/* CTA row */}
@@ -114,14 +124,14 @@ export default function LegislationStatistics() {
                   href="#published-holdings"
                   className="inline-flex h-11 items-center gap-2 rounded-sm bg-[#0066EB] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#0052BC]"
                 >
-                  Explore published coverage
+                  {t('Explore published coverage')}
                   <ArrowDown className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <Link
                   href="/legislation"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] transition-colors hover:text-[#0052BC]"
                 >
-                  Browse legislation
+                  {t('Browse legislation')}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -129,18 +139,21 @@ export default function LegislationStatistics() {
 
             {/* Coverage Scope Module */}
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-5 sm:p-6">
-              <p className="text-eyebrow text-[#0066EB]">COVERAGE SCOPE</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('COVERAGE SCOPE')}
+              </p>
               <h2 className="mt-1.5 text-base font-bold text-gray-950">
-                Published holdings, not the City’s full record
+                {t('Published holdings, not the City’s full record')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                These figures describe records BetterSanFernando currently
-                verifies and publishes. They are{' '}
-                {'not the complete legislative output'} of the City.
+                {t(
+                  'These figures describe records BetterSanFernando currently verifies and publishes. They are not the complete legislative output of the City.'
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-3 text-xs leading-relaxed text-gray-600">
-                Archive ranges represent catalog positions in source summaries
-                and are never added to published counts.
+                {t(
+                  'Archive ranges represent catalog positions in source summaries and are never added to published counts.'
+                )}
               </p>
             </aside>
           </div>
@@ -154,7 +167,7 @@ export default function LegislationStatistics() {
       >
         <div className="container mx-auto px-4 py-8">
           <h2 id="snapshot-heading" className="sr-only">
-            Core snapshot
+            {t('Core snapshot')}
           </h2>
           <dl className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x border-y border-gray-200 py-6">
             {collections.map((collection, index) => (
@@ -171,14 +184,15 @@ export default function LegislationStatistics() {
                   {collection.count}
                 </dd>
                 <p className="mt-1 text-xs text-gray-600">
-                  Individually published records
+                  {t('Individually published records')}
                 </p>
               </div>
             ))}
           </dl>
           <p className="mt-3 text-xs text-gray-500">
-            Counts refer to individually published BetterSanFernando records
-            only.
+            {t(
+              'Counts refer to individually published BetterSanFernando records only.'
+            )}
           </p>
         </div>
       </section>
@@ -190,50 +204,51 @@ export default function LegislationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">READING GUIDE</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('READING GUIDE')}</p>
             <h2
               id="guide-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              How to read these statistics
+              {t('How to read these statistics')}
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Three core principles governing how legislative records and
-              holdings are verified and presented on BetterSanFernando.
+              {t(
+                'Three core principles governing how legislative records and holdings are verified and presented on BetterSanFernando.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Published holdings
+                {t('Published holdings')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Counts describe BetterSanFernando’s verified published records,
-                not every measure issued by the City. The archive grows as
-                documents are systematically digitized and reconciled.
+                {t(
+                  'Counts describe BetterSanFernando’s verified published records, not every measure issued by the City. The archive grows as documents are systematically digitized and reconciled.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Year coverage
+                {t('Year coverage')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                A listed year means BetterSanFernando has at least one
-                individually published record from that year. Missing years do
-                not establish that no measure was issued.
+                {t(
+                  'A listed year means BetterSanFernando has at least one individually published record from that year. Missing years do not establish that no measure was issued.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Legal status
+                {t('Legal status')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Publication here does not determine whether a measure remains
-                legally effective, has been amended or repealed, or who
-                sponsored or authored it.
+                {t(
+                  'Publication here does not determine whether a measure remains legally effective, has been amended or repealed, or who sponsored or authored it.'
+                )}
               </p>
             </div>
           </div>
@@ -248,16 +263,19 @@ export default function LegislationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">PUBLISHED COVERAGE</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('PUBLISHED COVERAGE')}
+            </p>
             <h2
               id="coverage-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Published Coverage by Collection
+              {t('Published Coverage by Collection')}
             </h2>
             <p className="mt-1.5 text-sm text-gray-600">
-              Compare how many records BetterSanFernando currently publishes and
-              which years those records represent.
+              {t(
+                'Compare how many records BetterSanFernando currently publishes and which years those records represent.'
+              )}
             </p>
           </div>
 
@@ -267,20 +285,21 @@ export default function LegislationStatistics() {
               <div>
                 <div className="border-b border-gray-100 pb-3">
                   <h3 className="text-base font-bold text-gray-950">
-                    Published Holdings
+                    {t('Published Holdings')}
                   </h3>
                   <p className="mt-0.5 text-xs text-gray-600">
-                    Individually published BetterSanFernando legislation
-                    records.
+                    {t(
+                      'Individually published BetterSanFernando legislation records.'
+                    )}
                   </p>
                 </div>
 
                 <div className="mt-2 flex items-baseline justify-between py-1 text-xs text-gray-500">
                   <span className="font-semibold uppercase tracking-wider text-[11px]">
-                    Collection
+                    {t('Collection')}
                   </span>
                   <span className="font-mono text-[11px]">
-                    Shared scale · 0–{chartMax} records
+                    {t('Shared scale · 0–{{chartMax}} records', { chartMax })}
                   </span>
                 </div>
 
@@ -296,7 +315,7 @@ export default function LegislationStatistics() {
                           <span className="font-mono font-bold text-[#0066EB]">
                             {item.count}{' '}
                             <span className="text-xs font-normal text-gray-500">
-                              records
+                              {t('records')}
                             </span>
                           </span>
                         </div>
@@ -318,7 +337,10 @@ export default function LegislationStatistics() {
                             className="relative z-10 h-full bg-[#0066EB]"
                             style={{ width: barWidth }}
                             role="img"
-                            aria-label={`${item.label}: ${item.count} published records`}
+                            aria-label={t(
+                              '{{label}}: {{count}} published records',
+                              { label: item.label, count: item.count }
+                            )}
                           />
                         </div>
                       </div>
@@ -338,17 +360,19 @@ export default function LegislationStatistics() {
               <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-600">
                 <p>
                   <span className="font-semibold text-gray-900">
-                    What you’re seeing:{' '}
+                    {t('What you’re seeing:')}{' '}
                   </span>
-                  Published record counts across BetterSanFernando’s three
-                  legislation collections.
+                  {t(
+                    'Published record counts across BetterSanFernando’s three legislation collections.'
+                  )}
                 </p>
                 <p className="mt-1">
                   <span className="font-semibold text-gray-900">
-                    How to read it:{' '}
+                    {t('How to read it:')}{' '}
                   </span>
-                  These counts are directly comparable as published records, but
-                  they do not represent the City’s complete legislative output.
+                  {t(
+                    'These counts are directly comparable as published records, but they do not represent the City’s complete legislative output.'
+                  )}
                 </p>
               </div>
             </div>
@@ -358,12 +382,12 @@ export default function LegislationStatistics() {
               <div>
                 <div className="border-b border-gray-100 pb-3">
                   <h3 className="text-base font-bold text-gray-950">
-                    Published Year Coverage
+                    {t('Published Year Coverage')}
                   </h3>
                   <p className="mt-0.5 text-xs text-gray-600">
-                    A listed year has at least one individually published
-                    record. Missing years do not prove that no measure was
-                    issued.
+                    {t(
+                      'A listed year has at least one individually published record. Missing years do not prove that no measure was issued.'
+                    )}
                   </p>
                 </div>
 
@@ -382,7 +406,7 @@ export default function LegislationStatistics() {
                             {item.label}
                           </span>
                           <span className="font-mono text-xs text-gray-500">
-                            {item.count} records
+                            {t('{{count}} records', { count: item.count })}
                           </span>
                         </div>
 
@@ -415,9 +439,9 @@ export default function LegislationStatistics() {
 
               <div className="mt-6 border-t border-gray-100 pt-4 text-xs leading-relaxed text-gray-500">
                 <p>
-                  Discrete year markers indicate verifiable source recovery
-                  only. They do not imply continuous activity across intervening
-                  years.
+                  {t(
+                    'Discrete year markers indicate verifiable source recovery only. They do not imply continuous activity across intervening years.'
+                  )}
                 </p>
               </div>
             </div>
@@ -432,17 +456,19 @@ export default function LegislationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">DOCUMENT AVAILABILITY</p>
+            <p className="text-eyebrow text-[#0066EB]">
+              {t('DOCUMENT AVAILABILITY')}
+            </p>
             <h2
               id="availability-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Evidence Availability
+              {t('Evidence Availability')}
             </h2>
             <p className="mt-1.5 text-sm text-gray-600">
-              Breakdown of individually published records with verified official
-              PDF attachments versus records verified through official
-              cross-references.
+              {t(
+                'Breakdown of individually published records with verified official PDF attachments versus records verified through official cross-references.'
+              )}
             </p>
           </div>
 
@@ -452,22 +478,22 @@ export default function LegislationStatistics() {
               <thead className="border-b border-gray-200 bg-gray-50 text-gray-900">
                 <tr>
                   <th scope="col" className="px-5 py-3.5 font-semibold">
-                    Collection
+                    {t('Collection')}
                   </th>
                   <th scope="col" className="px-5 py-3.5 font-semibold">
-                    Published
+                    {t('Published')}
                   </th>
                   <th scope="col" className="px-5 py-3.5 font-semibold">
-                    Full Text Available
+                    {t('Full Text Available')}
                   </th>
                   <th scope="col" className="px-5 py-3.5 font-semibold">
-                    Without Recovered Full Text
+                    {t('Without Recovered Full Text')}
                   </th>
                   <th
                     scope="col"
                     className="px-5 py-3.5 font-semibold text-right"
                   >
-                    Action
+                    {t('Action')}
                   </th>
                 </tr>
               </thead>
@@ -494,7 +520,7 @@ export default function LegislationStatistics() {
                           href={item.href}
                           className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB] hover:text-[#0052BC]"
                         >
-                          Browse records
+                          {t('Browse records')}
                           <ArrowRight className="h-3 w-3" aria-hidden="true" />
                         </Link>
                       </td>
@@ -520,14 +546,14 @@ export default function LegislationStatistics() {
                       {item.label}
                     </span>
                     <span className="font-mono text-gray-500">
-                      {item.count} total
+                      {t('{{count}} total', { count: item.count })}
                     </span>
                   </div>
 
                   <div className="mt-3 grid grid-cols-2 gap-2">
                     <div className="rounded-sm bg-emerald-50/50 p-2 border border-emerald-100">
                       <span className="block text-[11px] text-emerald-800">
-                        Full text available
+                        {t('Full text available')}
                       </span>
                       <span className="font-mono text-sm font-bold text-emerald-700">
                         {item.fullTextCount}
@@ -535,7 +561,7 @@ export default function LegislationStatistics() {
                     </div>
                     <div className="rounded-sm bg-gray-50 p-2 border border-gray-100">
                       <span className="block text-[11px] text-gray-600">
-                        Without recovered text
+                        {t('Without recovered text')}
                       </span>
                       <span className="font-mono text-sm font-bold text-gray-800">
                         {withoutFullText}
@@ -548,7 +574,7 @@ export default function LegislationStatistics() {
                       href={item.href}
                       className="inline-flex items-center gap-1 font-semibold text-[#0066EB]"
                     >
-                      Browse records
+                      {t('Browse records')}
                       <ArrowRight className="h-3 w-3" aria-hidden="true" />
                     </Link>
                   </div>
@@ -558,9 +584,9 @@ export default function LegislationStatistics() {
           </div>
 
           <p className="mt-4 text-xs leading-relaxed text-gray-500">
-            Without recovered full text does not mean the record is unverified.
-            Some records are supported through official references even when
-            BetterSanFernando has not recovered the complete document.
+            {t(
+              'Without recovered full text does not mean the record is unverified. Some records are supported through official references even when BetterSanFernando has not recovered the complete document.'
+            )}
           </p>
         </div>
       </section>
@@ -572,16 +598,17 @@ export default function LegislationStatistics() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
-            <p className="text-eyebrow text-[#0066EB]">COLLECTIONS</p>
+            <p className="text-eyebrow text-[#0066EB]">{t('COLLECTIONS')}</p>
             <h2
               id="collections-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Explore the Published Collections
+              {t('Explore the Published Collections')}
             </h2>
             <p className="mt-1.5 text-sm text-gray-600">
-              Direct access to verified records, full-text attachments, and
-              legislative details.
+              {t(
+                'Direct access to verified records, full-text attachments, and legislative details.'
+              )}
             </p>
           </div>
 
@@ -602,7 +629,9 @@ export default function LegislationStatistics() {
                         </span>
                         <span className="text-xs text-gray-400">·</span>
                         <span className="font-mono text-xs text-gray-500">
-                          Published years · {years.join(', ')}
+                          {t('Published years · {{join}}', {
+                            join: years.join(', '),
+                          })}
                         </span>
                       </div>
 
@@ -611,7 +640,7 @@ export default function LegislationStatistics() {
                           {item.count}
                         </span>
                         <span className="text-sm font-semibold text-gray-700">
-                          published records
+                          {t('published records')}
                         </span>
                       </div>
 
@@ -625,7 +654,7 @@ export default function LegislationStatistics() {
                         href={item.href}
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066EB] hover:text-[#0052BC]"
                       >
-                        Browse {item.label}
+                        {t('Browse {{label}}', { label: item.label })}
                         <ArrowRight className="h-4 w-4" aria-hidden="true" />
                       </Link>
                     </div>
@@ -645,17 +674,19 @@ export default function LegislationStatistics() {
         >
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
-              <p className="text-eyebrow text-[#0066EB]">ARCHIVE EVIDENCE</p>
+              <p className="text-eyebrow text-[#0066EB]">
+                {t('ARCHIVE EVIDENCE')}
+              </p>
               <h2
                 id="archive-heading"
                 className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
               >
-                Archive-range Evidence
+                {t('Archive-range Evidence')}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Numbered positions observed in official City archive materials.
-                These describe archive coverage only and are not individually
-                published legislation records.
+                {t(
+                  'Numbered positions observed in official City archive materials. These describe archive coverage only and are not individually published legislation records.'
+                )}
               </p>
             </div>
 
@@ -665,25 +696,25 @@ export default function LegislationStatistics() {
                 <thead className="border-b border-gray-200 bg-gray-50 text-gray-900">
                   <tr>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Record Type
+                      {t('Record Type')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Year
+                      {t('Year')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Numbered Range
+                      {t('Numbered Range')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Archive Positions
+                      {t('Archive Positions')}
                     </th>
                     <th scope="col" className="px-4 py-3 font-semibold">
-                      Calendar Coverage
+                      {t('Calendar Coverage')}
                     </th>
                     <th
                       scope="col"
                       className="px-4 py-3 font-semibold text-right"
                     >
-                      Source
+                      {t('Source')}
                     </th>
                   </tr>
                 </thead>
@@ -712,8 +743,8 @@ export default function LegislationStatistics() {
                           }`}
                         >
                           {entry.complete_calendar_year
-                            ? 'Complete Year'
-                            : 'Partial Year'}
+                            ? t('Complete Year')
+                            : t('Partial Year')}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-right">
@@ -721,10 +752,18 @@ export default function LegislationStatistics() {
                           href={entry.official_source_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Official source PDF for ${formatArchiveRecordType(entry.record_type)} ${entry.year} (opens in new tab)`}
+                          aria-label={t(
+                            'Official source PDF for {{record_type}} {{year}} (opens in new tab)',
+                            {
+                              record_type: formatArchiveRecordType(
+                                entry.record_type
+                              ),
+                              year: entry.year,
+                            }
+                          )}
                           className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-900"
                         >
-                          PDF
+                          {t('PDF')}
                           <ExternalLink
                             className="h-3 w-3"
                             aria-hidden="true"
@@ -756,15 +795,15 @@ export default function LegislationStatistics() {
                       }`}
                     >
                       {entry.complete_calendar_year
-                        ? 'Complete Year'
-                        : 'Partial Year'}
+                        ? t('Complete Year')
+                        : t('Partial Year')}
                     </span>
                   </div>
 
                   <div className="mt-3 grid grid-cols-3 gap-2 border-y border-gray-100 py-2.5">
                     <div>
                       <span className="block text-[11px] text-gray-500">
-                        Year
+                        {t('Year')}
                       </span>
                       <span className="font-semibold text-gray-900">
                         {entry.year}
@@ -772,7 +811,7 @@ export default function LegislationStatistics() {
                     </div>
                     <div>
                       <span className="block text-[11px] text-gray-500">
-                        Numbered range
+                        {t('Numbered range')}
                       </span>
                       <span className="font-mono text-gray-900">
                         {entry.range_start}–{entry.range_end}
@@ -780,7 +819,7 @@ export default function LegislationStatistics() {
                     </div>
                     <div>
                       <span className="block text-[11px] text-gray-500">
-                        Positions
+                        {t('Positions')}
                       </span>
                       <span className="font-mono font-semibold text-gray-950">
                         {entry.count}
@@ -798,7 +837,7 @@ export default function LegislationStatistics() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 font-semibold text-[#0066EB]"
                     >
-                      Official PDF
+                      {t('Official PDF')}
                       <ExternalLink className="h-3 w-3" aria-hidden="true" />
                     </a>
                   </div>
@@ -817,49 +856,52 @@ export default function LegislationStatistics() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <p className="text-eyebrow text-[#0066EB]">
-              COVERAGE &amp; INTERPRETATION
+              {t('COVERAGE & INTERPRETATION')}
             </p>
             <h2
               id="interpretation-heading"
               className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
             >
-              Understanding the Legislation Data
+              {t('Understanding the Legislation Data')}
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Safeguards and standards governing publication boundaries, legal
-              interpretation, and archive evidence.
+              {t(
+                'Safeguards and standards governing publication boundaries, legal interpretation, and archive evidence.'
+              )}
             </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
-              <h3 className="text-base font-bold text-gray-950">Coverage</h3>
+              <h3 className="text-base font-bold text-gray-950">
+                {t('Coverage')}
+              </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                These are BetterSanFernando’s currently verified holdings,{' '}
-                {'not the complete legislative output'} of the City. Absence
-                from this archive does not prove a measure was never enacted.
+                {t(
+                  'These are BetterSanFernando’s currently verified holdings, not the complete legislative output of the City. Absence from this archive does not prove a measure was never enacted.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Archive evidence
+                {t('Archive evidence')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Archive ranges are supporting coverage evidence and are never
-                added to published record counts. Range numbers describe catalog
-                boundaries only.
+                {t(
+                  'Archive ranges are supporting coverage evidence and are never added to published record counts. Range numbers describe catalog boundaries only.'
+                )}
               </p>
             </div>
 
             <div className="rounded-sm border border-gray-200 bg-white p-5 sm:p-6">
               <h3 className="text-base font-bold text-gray-950">
-                Legal interpretation
+                {t('Legal interpretation')}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                BetterSanFernando does not determine {'legal effect'}, current
-                validity, {'repeal status'}, sponsorship, or authorship for any
-                record shown here.
+                {t(
+                  'BetterSanFernando does not determine legal effect, current validity, repeal status, sponsorship, or authorship for any record shown here.'
+                )}
               </p>
             </div>
           </div>
@@ -872,12 +914,14 @@ export default function LegislationStatistics() {
         aria-labelledby="explore-heading"
       >
         <div className="container mx-auto px-4">
-          <p className="text-eyebrow text-[#0066EB]">RELATED RESOURCES</p>
+          <p className="text-eyebrow text-[#0066EB]">
+            {t('RELATED RESOURCES')}
+          </p>
           <h2
             id="explore-heading"
             className="mt-2 text-2xl font-bold text-gray-950 md:text-3xl"
           >
-            Keep Exploring
+            {t('Keep Exploring')}
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -887,17 +931,17 @@ export default function LegislationStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Overview
+                  {t('Overview')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Legislation Overview
+                  {t('Legislation Overview')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Central directory for verified City legislative acts.
+                  {t('Central directory for verified City legislative acts.')}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View overview
+                {t('View overview')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -908,17 +952,17 @@ export default function LegislationStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Mayoral
+                  {t('Mayoral')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Executive Orders
+                  {t('Executive Orders')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Directives issued by the City Mayor of San Fernando.
+                  {t('Directives issued by the City Mayor of San Fernando.')}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Browse EOs
+                {t('Browse EOs')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -929,17 +973,17 @@ export default function LegislationStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Council
+                  {t('Council')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Ordinances
+                  {t('Ordinances')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  City laws passed by the Sangguniang Panlungsod.
+                  {t('City laws passed by the Sangguniang Panlungsod.')}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Browse ordinances
+                {t('Browse ordinances')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -950,17 +994,17 @@ export default function LegislationStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Council
+                  {t('Council')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Resolutions
+                  {t('Resolutions')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Formal expressions of opinion or will by the Council.
+                  {t('Formal expressions of opinion or will by the Council.')}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                Browse resolutions
+                {t('Browse resolutions')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -971,17 +1015,17 @@ export default function LegislationStatistics() {
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  Holdings
+                  {t('Holdings')}
                 </span>
                 <h3 className="mt-1.5 text-base font-bold text-gray-950 group-hover:text-[#0066EB]">
-                  Public Records
+                  {t('Public Records')}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-gray-600">
-                  Complete dataset units, coverage periods, and evidence.
+                  {t('Complete dataset units, coverage periods, and evidence.')}
                 </p>
               </div>
               <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0066EB]">
-                View statistics
+                {t('View statistics')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>

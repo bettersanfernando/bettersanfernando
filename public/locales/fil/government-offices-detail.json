@@ -1,0 +1,21 @@
+{
+  "Published office directory record for {{name}} in the City of San Fernando, Pampanga.": "Nailathalang talaan ng direktoryo ng tanggapan para sa {{name}} sa Lungsod ng San Fernando, Pampanga.",
+  "Also published as: {{join}}": "Nakalista rin bilang: {{join}}",
+  "Naming status: Alternate current usage": "Status ng pangalan: Alternatibong kasalukuyang gamit",
+  "Organization status: Possible reorganization": "Status ng organisasyon: Posibleng muling pag-oorganisa",
+  "Verified office relationships": "Mga beripikadong ugnayan ng tanggapan",
+  "Only relationships published in the current directory are shown.": "Ipinapakita lamang ang mga ugnayang nailathala sa kasalukuyang direktoryo.",
+  "Parent office": "Parent office",
+  "Location and contact": "Lokasyon at contact",
+  "Office phone": "Telepono ng tanggapan",
+  "Extension{{value}}: {{join}}": "Extension{{value}}: {{join}}",
+  "Office email": "Email ng tanggapan",
+  "Institutional hotline": "Institusyonal na hotline",
+  "Institutional links": "Institusyonal na link",
+  "Official office page": "Opisyal na pahina ng tanggapan",
+  "Independent civic directory": "Malayang direktoryong sibiko",
+  "BetterSanFernando is not the official City Government website. Use the published sources below to confirm information with the City.": "Hindi opisyal na website ng Pamahalaang Lungsod ang BetterSanFernando. Gamitin ang mga nailathalang source sa ibaba para kumpirmahin ang impormasyon sa Lungsod.",
+  "Verified record": "Beripikadong talaan",
+  "Checked {{last_verified_at}}": "Naberipika {{last_verified_at}}",
+  "Official source {{index}}": "Opisyal na source {{index}}"
+}

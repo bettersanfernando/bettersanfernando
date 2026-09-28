@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import {
   mainNavigation,
   getActiveNavigationId,
@@ -463,7 +463,7 @@ assert.ok(
   'no Livelihood navigation destination may remain'
 );
 
-function readLocale(locale: 'en' | 'fil' | 'pam') {
+function readLocale(locale: 'en' | 'fil') {
   return JSON.parse(
     readFileSync(`public/locales/${locale}/common.json`, 'utf8')
   ) as Record<string, unknown>;
@@ -471,7 +471,10 @@ function readLocale(locale: 'en' | 'fil' | 'pam') {
 
 const english = readLocale('en');
 readLocale('fil');
-readLocale('pam');
+assert.ok(
+  !existsSync('public/locales/pam/common.json'),
+  'Kapampangan must not remain as a supported public locale'
+);
 
 function hasTranslationKey(resource: Record<string, unknown>, key: string) {
   return key.split('.').every(segment => {
@@ -553,5 +556,5 @@ assert.equal(
 );
 
 console.log(
-  `Navigation smoke passed: ${mainNavigation.length} top-level entries, ${plannedPages.length} planned routes, EN/FIL/PAM resources valid.`
+  `Navigation smoke passed: ${mainNavigation.length} top-level entries, ${plannedPages.length} planned routes, EN/FIL resources valid.`
 );

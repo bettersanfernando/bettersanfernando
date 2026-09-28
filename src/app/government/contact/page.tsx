@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../../components/i18n/LocaleLink';
 import { ChevronRight, Flame, Radio, Shield, Siren } from 'lucide-react';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
@@ -11,13 +11,19 @@ import {
   type CityOffice,
 } from '../../../data/civic/government';
 import { buildPageMetadata } from '../../../lib/metadata';
+import { getPageT, type PageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Government Contact',
-  description:
-    'A quick, verified starting point for reaching the right City Government of San Fernando, Pampanga contact channel — emergency hotlines, general offices, and related directories.',
-  path: '/government/contact',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('government-contact');
+  return buildPageMetadata({
+    title: t('Government Contact'),
+    description: t(
+      'A quick, verified starting point for reaching the right City Government of San Fernando, Pampanga contact channel — emergency hotlines, general offices, and related directories.'
+    ),
+    path: '/government/contact',
+    locale,
+  });
+}
 
 // Stable dataset IDs resolved against reviewed datasets so contacts never drift
 const EMERGENCY_CONTACT_IDS = [
@@ -75,38 +81,43 @@ const EMERGENCY_ICONS: Record<string, typeof Siren> = {
   'san-fernando-fire-station-hotline': Flame,
 };
 
-const CONTACT_ROUTING_ITEMS = [
+const CONTACT_ROUTING_ITEMS = (t: PageT) => [
   {
-    title: 'A Specific City Office',
-    description:
-      'Find office phone numbers, email addresses, locations, and official pages.',
-    cta: 'Browse City Offices →',
+    title: t('A Specific City Office'),
+    description: t(
+      'Find office phone numbers, email addresses, locations, and official pages.'
+    ),
+    cta: t('Browse City Offices →'),
     href: '/government/offices',
   },
   {
-    title: 'A Barangay Contact',
-    description:
-      "Find published contact information for San Fernando's barangays.",
-    cta: 'Browse Barangay Contacts →',
+    title: t('A Barangay Contact'),
+    description: t(
+      "Find published contact information for San Fernando's barangays."
+    ),
+    cta: t('Browse Barangay Contacts →'),
     href: '/government/barangay-contacts',
   },
   {
-    title: 'Emergency or Institutional Numbers',
-    description:
-      'Review the full set of verified emergency and institutional hotlines.',
-    cta: 'View Government Hotlines →',
+    title: t('Emergency or Institutional Numbers'),
+    description: t(
+      'Review the full set of verified emergency and institutional hotlines.'
+    ),
+    cta: t('View Government Hotlines →'),
     href: '/government/hotlines',
   },
   {
-    title: 'An Official Website or Online Channel',
-    description:
-      'Open verified City Government websites, portals, and official public channels.',
-    cta: 'Browse Official Government Links →',
+    title: t('An Official Website or Online Channel'),
+    description: t(
+      'Open verified City Government websites, portals, and official public channels.'
+    ),
+    cta: t('Browse Official Government Links →'),
     href: '/government/links',
   },
 ];
 
-export default function GovernmentContact() {
+export default async function GovernmentContact() {
+  const { t } = await getPageT('government-contact');
   return (
     <main className="bg-white text-gray-900">
       {/* 1. Header / Editorial Intro */}
@@ -114,9 +125,9 @@ export default function GovernmentContact() {
         <div className="container mx-auto px-4 py-8 sm:py-10 lg:py-12">
           <Breadcrumbs
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Government', href: '/government' },
-              { label: 'Contact' },
+              { label: t('Home'), href: '/' },
+              { label: t('Government'), href: '/government' },
+              { label: t('Contact') },
             ]}
           />
 
@@ -126,32 +137,34 @@ export default function GovernmentContact() {
                 className="text-eyebrow text-[#0066EB]"
                 style={eyebrowTracking}
               >
-                CONTACT THE CITY
+                {t('CONTACT THE CITY')}
               </p>
               <h1 className="mt-1.5 text-2xl font-bold tracking-[-0.02em] text-gray-950 sm:text-3xl lg:text-4xl">
-                Find the right City Government contact
+                {t('Find the right City Government contact')}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base sm:leading-7">
-                Start with emergency numbers, general City Government contacts,
-                or the directory that matches what you need.
+                {t(
+                  'Start with emergency numbers, general City Government contacts, or the directory that matches what you need.'
+                )}
               </p>
             </div>
 
             <aside className="rounded-sm border border-gray-200 bg-[#F3F6FB] p-4 sm:p-5">
               <p className="text-eyebrow text-gray-500" style={eyebrowTracking}>
-                ABOUT THIS PAGE
+                {t('ABOUT THIS PAGE')}
               </p>
               <h2 className="mt-1 text-sm font-bold text-gray-950">
-                A starting point for public contact
+                {t('A starting point for public contact')}
               </h2>
               <p className="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-                BetterSanFernando organizes official public contact channels for
-                easier access. It does not receive, answer, or forward calls,
-                emails, requests, complaints, or emergency messages.
+                {t(
+                  'BetterSanFernando organizes official public contact channels for easier access. It does not receive, answer, or forward calls, emails, requests, complaints, or emergency messages.'
+                )}
               </p>
               <p className="mt-3 border-t border-gray-200/80 pt-2 text-[11px] text-gray-500">
-                Independent and community-run, not the official City Government
-                website.
+                {t(
+                  'Independent and community-run, not the official City Government website.'
+                )}
               </p>
             </aside>
           </div>
@@ -162,14 +175,15 @@ export default function GovernmentContact() {
         {/* 2. Emergency Contacts */}
         <section id="emergency-contacts" className="scroll-mt-24 pt-8 sm:pt-10">
           <p className="text-eyebrow text-red-600" style={eyebrowTracking}>
-            NEED HELP NOW?
+            {t('NEED HELP NOW?')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Emergency contacts
+            {t('Emergency contacts')}
           </h2>
           <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
-            For an immediate emergency, call 911 or the appropriate local
-            response number directly.
+            {t(
+              'For an immediate emergency, call 911 or the appropriate local response number directly.'
+            )}
           </p>
 
           {/* Coordinated emergency surface */}
@@ -220,7 +234,7 @@ export default function GovernmentContact() {
 
                       {isPositiveTwentyFourSeven(contact) && (
                         <span className="mt-2 inline-block rounded-sm bg-red-100/80 px-1.5 py-0.5 text-[11px] font-semibold text-red-800">
-                          24/7 emergency dispatch
+                          {t('24/7 emergency dispatch')}
                         </span>
                       )}
                     </div>
@@ -229,9 +243,12 @@ export default function GovernmentContact() {
                       <a
                         href={phoneHref(contact.number)}
                         className="inline-flex items-center gap-1 text-xs font-bold text-red-700 hover:text-red-900 sm:text-sm"
-                        aria-label={`Call ${displayName} at ${contact.number}`}
+                        aria-label={t('Call {{name}} at {{number}}', {
+                          name: displayName,
+                          number: contact.number,
+                        })}
                       >
-                        Call →
+                        {t('Call →')}
                       </a>
                     </div>
                   </article>
@@ -248,7 +265,7 @@ export default function GovernmentContact() {
               href="/government/hotlines"
               className="shrink-0 text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
             >
-              View all verified hotlines →
+              {t('View all verified hotlines →')}
             </Link>
           </div>
         </section>
@@ -259,14 +276,15 @@ export default function GovernmentContact() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            GENERAL CITY CONTACTS
+            {t('GENERAL CITY CONTACTS')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Start with a main City office
+            {t('Start with a main City office')}
           </h2>
           <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
-            For general City Government inquiries, these two published contacts
-            are useful starting points.
+            {t(
+              'For general City Government inquiries, these two published contacts are useful starting points.'
+            )}
           </p>
 
           {/* Shared two-column white editorial surface */}
@@ -298,7 +316,10 @@ export default function GovernmentContact() {
                           office.phone_extensions.length > 0 && (
                             <span className="text-xs font-normal text-gray-500 sm:text-sm">
                               {' '}
-                              · Ext. {office.phone_extensions.join(', ')}
+                              ·{' '}
+                              {t('Ext. {{numbers}}', {
+                                numbers: office.phone_extensions.join(', '),
+                              })}
                             </span>
                           )}
                       </p>
@@ -310,16 +331,19 @@ export default function GovernmentContact() {
                       <a
                         href={phoneHref(office.primary_phone)}
                         className="inline-flex items-center text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
-                        aria-label={`Call ${building} at ${office.primary_phone}`}
+                        aria-label={t('Call {{name}} at {{number}}', {
+                          name: building,
+                          number: office.primary_phone,
+                        })}
                       >
-                        Call {building} →
+                        {t('Call {{name}} →', { name: building })}
                       </a>
                     ) : null}
                     <Link
                       href={`/government/offices/${office.office_id}`}
                       className="text-xs text-gray-500 underline underline-offset-2 hover:text-gray-900"
                     >
-                      Office details
+                      {t('Office details')}
                     </Link>
                   </div>
                 </article>
@@ -328,12 +352,14 @@ export default function GovernmentContact() {
           </div>
 
           <div className="mt-4 flex items-baseline gap-2 text-xs sm:text-sm">
-            <span className="text-gray-600">Need a specific department?</span>
+            <span className="text-gray-600">
+              {t('Need a specific department?')}
+            </span>
             <Link
               href="/government/offices"
               className="font-bold text-[#0066EB] hover:text-[#0052BC]"
             >
-              Browse all City Offices →
+              {t('Browse all City Offices →')}
             </Link>
           </div>
         </section>
@@ -344,20 +370,21 @@ export default function GovernmentContact() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            FIND THE RIGHT CONTACT
+            {t('FIND THE RIGHT CONTACT')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            What are you looking for?
+            {t('What are you looking for?')}
           </h2>
           <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
-            Choose the directory that best matches who or what you need to
-            reach.
+            {t(
+              'Choose the directory that best matches who or what you need to reach.'
+            )}
           </p>
 
           {/* Unified 2x2 editorial directory */}
           <div className="mt-6 overflow-hidden rounded-sm border border-gray-200 bg-white">
             <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0">
-              {CONTACT_ROUTING_ITEMS.map((item, index) => (
+              {CONTACT_ROUTING_ITEMS(t).map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -392,42 +419,44 @@ export default function GovernmentContact() {
           className="scroll-mt-24 border-t border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-12"
         >
           <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
-            BEFORE YOU REACH OUT
+            {t('BEFORE YOU REACH OUT')}
           </p>
           <h2 className="mt-1.5 text-2xl font-bold text-section-title text-gray-950 sm:text-3xl">
-            Before You Contact the City
+            {t('Before You Contact the City')}
           </h2>
 
           {/* 3 editorial columns - whitespace first, no card boxes */}
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             <div className="space-y-1.5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Use the Direct Channel
+                {t('Use the Direct Channel')}
               </h3>
               <p className="text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                BetterSanFernando does not receive or forward calls, emails,
-                requests, complaints, or emergency messages.
+                {t(
+                  'BetterSanFernando does not receive or forward calls, emails, requests, complaints, or emergency messages.'
+                )}
               </p>
             </div>
 
             <div className="space-y-1.5">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Check the Office Directory
+                {t('Check the Office Directory')}
               </h3>
               <p className="text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                For department-specific contact details, use the City Offices
-                directory to review the currently published phone, email,
-                location, or official page.
+                {t(
+                  'For department-specific contact details, use the City Offices directory to review the currently published phone, email, location, or official page.'
+                )}
               </p>
             </div>
 
             <div className="space-y-1.5 sm:col-span-2 lg:col-span-1">
               <h3 className="text-sm font-bold text-gray-950 sm:text-base">
-                Published Details Can Change
+                {t('Published Details Can Change')}
               </h3>
               <p className="text-xs leading-relaxed text-gray-600 sm:text-sm sm:leading-6">
-                Contact information reflects the latest official public sources
-                currently verified by BetterSanFernando.
+                {t(
+                  'Contact information reflects the latest official public sources currently verified by BetterSanFernando.'
+                )}
               </p>
             </div>
           </div>
@@ -435,9 +464,9 @@ export default function GovernmentContact() {
           {/* Provenance note directly beneath the three guidance items */}
           <div className="mt-8 border-t border-gray-100 pt-4">
             <p className="text-xs leading-relaxed text-gray-500 sm:text-sm">
-              Verified from official sources. Phone numbers and contact channels
-              are not independently call-tested, and a published listing does
-              not guarantee that a line is currently staffed or reachable.
+              {t(
+                'Verified from official sources. Phone numbers and contact channels are not independently call-tested, and a published listing does not guarantee that a line is currently staffed or reachable.'
+              )}
             </p>
           </div>
 
@@ -447,7 +476,7 @@ export default function GovernmentContact() {
               href="/government/offices"
               className="inline-flex items-center gap-1 text-xs font-bold text-[#0066EB] hover:text-[#0052BC] sm:text-sm"
             >
-              <span>Browse City Offices →</span>
+              <span>{t('Browse City Offices →')}</span>
             </Link>
           </div>
         </section>

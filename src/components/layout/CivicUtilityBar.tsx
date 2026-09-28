@@ -40,7 +40,6 @@ export default function CivicUtilityBar({
   onChangeLanguage: (language: LanguageType) => void;
 }) {
   const { t } = useTranslation('common');
-  void onChangeLanguage;
   // Server and client first render must produce identical HTML: `new Date()`
   // evaluated at render time gives a different, format-precision-crossing
   // wall-clock moment on the server than on the client (React error #418).
@@ -55,12 +54,17 @@ export default function CivicUtilityBar({
   const [currencyIndex, setCurrencyIndex] = useState(0);
 
   useEffect(() => {
-    setPhtTime(formatPhilippineTime(new Date()));
+    const updatePhtTime = () =>
+      setPhtTime(formatPhilippineTime(new Date(), currentLanguage));
+    const frame = window.requestAnimationFrame(updatePhtTime);
     const timer = window.setInterval(() => {
-      setPhtTime(formatPhilippineTime(new Date()));
+      updatePhtTime();
     }, 60_000);
-    return () => window.clearInterval(timer);
-  }, []);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearInterval(timer);
+    };
+  }, [currentLanguage]);
 
   useEffect(() => {
     const { latitude, longitude } = SAN_FERNANDO_COORDINATES;
@@ -173,19 +177,26 @@ export default function CivicUtilityBar({
             <Globe className="h-3.5 w-3.5 text-slate-500" aria-hidden="true" />
             <div
               className="hidden items-center gap-0.5 rounded-full border border-slate-200 bg-white p-0.5 sm:flex"
-              aria-label="Language selection"
+              aria-label={t('navigation.language')}
             >
-              {['EN', 'FIL', 'PAM'].map(language => (
-                <span
+              {(['en', 'fil'] as const).map(language => (
+                <button
                   key={language}
-                  className={`rounded-full px-2 py-0.5 font-medium ${language === 'EN' ? 'bg-slate-100 text-primary-800' : 'text-slate-500'}`}
+                  type="button"
+                  onClick={() => onChangeLanguage(language)}
+                  aria-pressed={currentLanguage === language}
+                  className={`rounded-full px-2 py-0.5 font-medium transition-colors ${
+                    currentLanguage === language
+                      ? 'bg-slate-100 text-primary-800'
+                      : 'text-slate-500 hover:text-slate-900'
+                  } ${focusStyles}`}
                 >
-                  {language}
-                </span>
+                  {t(`languages.${language}.short`)}
+                </button>
               ))}
             </div>
             <span className="rounded-full border border-slate-200 bg-white px-2 py-1 font-medium text-primary-800 sm:hidden">
-              EN
+              {t(`languages.${currentLanguage}.short`)}
             </span>
           </div>
         </div>
