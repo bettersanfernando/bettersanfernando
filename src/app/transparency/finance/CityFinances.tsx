@@ -26,12 +26,20 @@ import {
   formatUnstatedAmount,
   titleCaseEnum,
 } from '../../../lib/utils';
+import { getProjectCostUtilizationMetadata } from '../../../data/civic/projectCostUtilization';
+import { getProjects } from '../../../data/civic/projects';
 import type { PageT } from '../../../i18n/page-t';
 import { usePageT } from '../../../components/i18n/PageMessages';
 
 const reports = getFinanceReports();
 const observations = getFinanceObservations();
 const metadata = getFinanceMetadata();
+// Record count for the separate Project Cost & Utilization collection,
+// referenced only as a "do not merge these" caveat below — never combined
+// with the finance observation count above.
+const projectCostUtilizationRecordCount = getProjectCostUtilizationMetadata(
+  getProjects().length
+).recordCount;
 
 // Curated public-facing report type display labels
 const REPORT_TYPE_LABELS = (
@@ -2036,8 +2044,12 @@ export default function CityFinances() {
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
                 {t(
-                  'The {{observationCount}} aggregate finance observations must never be merged with the 298 project-utilization observations published under Project Cost & Utilization. Cumulative year-to-date quarters are never summed into an annual or citywide total.',
-                  { observationCount: metadata.observationCount }
+                  'The {{observationCount}} aggregate finance observations must never be merged with the {{projectCostUtilizationCount}} project-utilization observations published under Project Cost & Utilization. Cumulative year-to-date quarters are never summed into an annual or citywide total.',
+                  {
+                    observationCount: metadata.observationCount,
+                    projectCostUtilizationCount:
+                      projectCostUtilizationRecordCount,
+                  }
                 )}
               </p>
             </div>

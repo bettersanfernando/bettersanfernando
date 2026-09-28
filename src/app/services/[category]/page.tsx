@@ -49,12 +49,15 @@ export async function generateMetadata({
 
   const { t, locale } = await getPageT('services-category');
   const display = getCategoryDisplay(segment, t);
+  // Category descriptions are their own sentence ("Reviewed local
+  // civil-registration and certification procedures."). Strip the trailing
+  // period before folding it into this wrapper sentence, or the result
+  // reads as two sentence fragments stitched together mid-clause.
+  const description = display.description.replace(/\.+$/, '');
   return buildPageMetadata({
     title: display.name,
     description: t('Browse {{description}} published by BetterSanFernando.', {
-      description:
-        display.description.charAt(0).toLowerCase() +
-        display.description.slice(1),
+      description: description.charAt(0).toLowerCase() + description.slice(1),
     }),
     path: `/services/${segment}`,
     locale,

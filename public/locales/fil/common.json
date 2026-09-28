@@ -184,7 +184,7 @@
   "searchUi": {
     "homeLabel": "Maghanap sa BetterSanFernando",
     "homePlaceholderMobile": "Maghanap ng pampublikong impormasyon…",
-    "homePlaceholder": "Maghanap ng serbisyo, proyekto, tanggapan, barangay, o pampublikong rekord…",
+    "homePlaceholder": "Maghanap ng serbisyo, proyekto, tanggapan, o barangay…",
     "submit": "Maghanap",
     "clear": "I-clear ang paghahanap",
     "suggestions": "Mga mungkahi sa paghahanap",
@@ -260,9 +260,9 @@
       "population": "Populasyon",
       "barangays": "Mga Barangay",
       "barangaysQualifier": "NAILATHALANG SET",
-      "projects": "Mga Nailathalang Talaan ng Proyekto",
+      "projects": "Nailathalang Proyekto",
       "projectsQualifier": "MGA NAILATHALANG TALAAN",
-      "services": "Mga Serbisyo para sa Residente",
+      "services": "Serbisyong Pang-Residente",
       "servicesQualifier": "PARA SA RESIDENTE"
     },
     "search": {

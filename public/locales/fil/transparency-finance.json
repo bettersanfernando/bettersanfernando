@@ -119,7 +119,7 @@
   "Statement of Receipts and Expenditures": "Statement of Receipts and Expenditures",
   "Statement of Receipts and Expenditures · compatible report pairs only": "Statement of Receipts and Expenditures · mga compatible na pares ng ulat lamang",
   "TRANSPARENCY · CITY FINANCES": "TRANSPARENCY · PANANALAPI NG LUNGSOD",
-  "The {{observationCount}} aggregate finance observations must never be merged with the 298 project-utilization observations published under Project Cost & Utilization. Cumulative year-to-date quarters are never summed into an annual or citywide total.": "Ang {{observationCount}} na aggregate na obserbasyon sa pananalapi ay hindi kailanman dapat pagsamahin sa 298 obserbasyon sa project-utilization na inilathala sa ilalim ng Project Cost & Utilization. Hindi kailanman pinagsasama ang cumulative year-to-date na quarter sa isang taunan o pangkalungsod na kabuuan.",
+  "The {{observationCount}} aggregate finance observations must never be merged with the {{projectCostUtilizationCount}} project-utilization observations published under Project Cost & Utilization. Cumulative year-to-date quarters are never summed into an annual or citywide total.": "Ang {{observationCount}} na aggregate na obserbasyon sa pananalapi ay hindi kailanman dapat pagsamahin sa {{projectCostUtilizationCount}} obserbasyon sa project-utilization na inilathala sa ilalim ng Project Cost & Utilization. Hindi kailanman pinagsasama ang cumulative year-to-date na quarter sa isang taunan o pangkalungsod na kabuuan.",
   "Trust Fund": "Trust Fund",
   "Trust Fund Utilization": "Trust Fund Utilization",
   "Try a different search term or reset the filters.": "Subukan ang ibang termino sa paghahanap o i-reset ang mga filter.",

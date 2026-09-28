@@ -49,6 +49,7 @@ import {
 } from '../../data/navigation';
 import {
   localeFromPathname,
+  localizeHref,
   withLocalePrefix,
   withoutLocalePrefix,
 } from '../../i18n/locale';
@@ -316,7 +317,23 @@ export default function Navbar() {
 
   const changeLanguage = (language: LanguageType) => {
     void i18n.changeLanguage(language);
-    router.push(withLocalePrefix(pathname, language));
+    // pathname (from usePathname()) never carries the query string or hash,
+    // so switching locale on e.g. /search?q=x must read those from the
+    // browser location directly or the query gets silently dropped.
+    const currentHref =
+      pathname + window.location.search + window.location.hash;
+    router.push(localizeHref(currentHref, language));
+    // Locale is conveyed only via the x-bsf-locale header the proxy sets on
+    // a path-prefix rewrite (see src/proxy.ts) — not by the URL Next's
+    // Router Cache actually keys on post-rewrite, and not by any React
+    // props/state. Without this, router.push() alone can leave Server
+    // Component output (e.g. the homepage hero, rendered through
+    // getPageT()) showing the previous locale until a hard refresh, even
+    // though client-only i18next consumers (useTranslation) update at
+    // once. router.refresh() forces Next to discard that cached render and
+    // re-fetch the RSC payload for the current segment under the new
+    // locale header.
+    router.refresh();
   };
 
   return (

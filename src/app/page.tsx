@@ -272,65 +272,6 @@ export default async function Home() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. TRUST / IDENTITY STRIP                                                 */}
-      {/* ========================================================================= */}
-      <section
-        className="bg-white text-gray-700"
-        aria-label={t('Civic portal trust and independence notice')}
-      >
-        <div className="container mx-auto px-4 py-5 sm:py-6">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-0 md:divide-x md:divide-gray-200/80">
-            {/* Column 1: Independent */}
-            <div className="text-left md:pr-8 lg:pr-10 xl:pr-12">
-              <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400">
-                {t('INDEPENDENT')}
-              </p>
-              <h2 className="mt-1.5 text-sm sm:text-base font-bold tracking-tight text-gray-950">
-                {t('Independent & Community-Run')}
-              </h2>
-              <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-gray-600">
-                {t('BetterSanFernando is')}{' '}
-                <strong className="font-semibold text-gray-800">
-                  {t('not an official City Government website')}
-                </strong>
-                .
-              </p>
-            </div>
-
-            {/* Column 2: Place */}
-            <div className="text-left md:px-8 lg:px-10 xl:px-12">
-              <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400">
-                {t('PLACE')}
-              </p>
-              <h2 className="mt-1.5 text-sm sm:text-base font-bold tracking-tight text-gray-950">
-                {t('City of San Fernando, Pampanga')}
-              </h2>
-              <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-gray-600">
-                {t(
-                  'A resident-facing civic-information portal focused on published public information about San Fernando.'
-                )}
-              </p>
-            </div>
-
-            {/* Column 3: Source Approach */}
-            <div className="text-left md:pl-8 lg:pl-10 xl:pl-12">
-              <p className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400">
-                {t('SOURCE APPROACH')}
-              </p>
-              <h2 className="mt-1.5 text-sm sm:text-base font-bold tracking-tight text-gray-950">
-                {t('Official-Source Information')}
-              </h2>
-              <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-gray-600">
-                {t(
-                  'Published information remains connected to inspectable public sources and visible scope.'
-                )}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
       {/* 3. START HERE — WHAT DO YOU NEED TODAY?                                   */}
       {/* ========================================================================= */}
       <section

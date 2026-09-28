@@ -27,7 +27,7 @@ assert.equal(summary.government.officeRecords, 44);
 
 assert.match(pageSource, /BetterSanFernando/);
 assert.match(pageSource, /City of San Fernando, Pampanga/);
-assert.match(pageSource, /not an official City\s+Government website/i);
+assert.match(pageSource, /not the official City\s+Government website/i);
 assert.match(pageSource, /published project records/i);
 assert.doesNotMatch(pageSource, /324 City projects/i);
 assert.doesNotMatch(pageSource, /22 City Government offices/i);
