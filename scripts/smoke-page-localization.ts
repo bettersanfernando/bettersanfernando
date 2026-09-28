@@ -19,8 +19,14 @@ const PAGES: Record<string, string[]> = {
   'government-contact': ['src/app/government/contact/page.tsx'],
   projects: ['src/app/projects/page.tsx'],
   statistics: [`${STATISTICS}page.tsx`],
-  transparency: ['src/app/transparency/page.tsx'],
-  'transparency-sources': ['src/app/transparency/sources/page.tsx'],
+  transparency: [
+    'src/app/transparency/page.tsx',
+    'src/data/civic/transparencySources.ts',
+  ],
+  'transparency-sources': [
+    'src/app/transparency/sources/page.tsx',
+    'src/data/civic/transparencySources.ts',
+  ],
   'transparency-methodology': ['src/app/transparency/methodology/page.tsx'],
   'transparency-documents': [
     'src/app/transparency/documents/OfficialDocuments.tsx',

@@ -2,7 +2,10 @@ import { ArrowDown, ArrowRight, ChevronDown, ExternalLink } from 'lucide-react';
 import Link from '../../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
 import {
+  getPublishedDomainDisplayText,
+  getSourceLinkLabel,
   getTransparencySourceInventory,
+  getUnavailableDomainDisplayText,
   type PublishedSourceDomain,
   type TransparencySourceLink,
 } from '../../../data/civic/transparencySources';
@@ -65,16 +68,6 @@ const DOMAIN_GROUPS = (t: PageT) =>
     },
   ] as const;
 
-function formatDomainTitle(name: string): string {
-  return name
-    .split(' ')
-    .map(word => {
-      if (word.toLowerCase() === '&') return '&';
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(' ');
-}
-
 async function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
   const { t } = await getPageT('transparency-sources');
   const isInternal = link.type === 'internal';
@@ -93,7 +86,7 @@ async function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
           href={link.url}
           className="inline-flex items-center gap-1.5 font-semibold text-[#0066EB] hover:text-[#0052BC]"
         >
-          <span>{link.label}</span>
+          <span>{getSourceLinkLabel(link.label, t)}</span>
           <ArrowRight className="h-3 w-3 shrink-0" aria-hidden="true" />
         </Link>
       ) : (
@@ -103,7 +96,9 @@ async function SourceLinkItem({ link }: { link: TransparencySourceLink }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 font-semibold text-gray-800 hover:text-[#0066EB]"
         >
-          <span className="truncate max-w-[28rem]">{link.label}</span>
+          <span className="truncate max-w-[28rem]">
+            {getSourceLinkLabel(link.label, t)}
+          </span>
           <ExternalLink
             className="h-3 w-3 shrink-0 text-gray-400"
             aria-hidden="true"
@@ -443,83 +438,86 @@ export default async function TransparencySources() {
                   </div>
 
                   <div className="divide-y divide-gray-200">
-                    {groupDomains.map(domain => (
-                      <article
-                        key={domain.id}
-                        id={`domain-${domain.id}`}
-                        className="grid grid-cols-1 gap-6 py-8 first:pt-6 last:pb-6 lg:grid-cols-[minmax(14rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10"
-                        aria-labelledby={`heading-${domain.id}`}
-                      >
-                        {/* LEFT COLUMN */}
-                        <div>
-                          <h4
-                            id={`heading-${domain.id}`}
-                            className="text-lg sm:text-xl font-bold tracking-tight text-gray-950"
-                          >
-                            {formatDomainTitle(domain.name)}
-                          </h4>
+                    {groupDomains.map(domain => {
+                      const display = getPublishedDomainDisplayText(domain, t);
+                      return (
+                        <article
+                          key={domain.id}
+                          id={`domain-${domain.id}`}
+                          className="grid grid-cols-1 gap-6 py-8 first:pt-6 last:pb-6 lg:grid-cols-[minmax(14rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10"
+                          aria-labelledby={`heading-${domain.id}`}
+                        >
+                          {/* LEFT COLUMN */}
+                          <div>
+                            <h4
+                              id={`heading-${domain.id}`}
+                              className="text-lg sm:text-xl font-bold tracking-tight text-gray-950"
+                            >
+                              {display.name}
+                            </h4>
 
-                          <div className="mt-2 flex items-baseline gap-2">
-                            <span className="text-xl sm:text-2xl font-extrabold tabular-nums text-gray-950">
-                              {domain.recordCount.toLocaleString()}
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
-                              {domain.recordLabel}
-                            </span>
-                          </div>
+                            <div className="mt-2 flex items-baseline gap-2">
+                              <span className="text-xl sm:text-2xl font-extrabold tabular-nums text-gray-950">
+                                {domain.recordCount.toLocaleString()}
+                              </span>
+                              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
+                                {display.recordLabel}
+                              </span>
+                            </div>
 
-                          <p className="mt-3 text-xs sm:text-sm leading-relaxed text-gray-700">
-                            {domain.description}
-                          </p>
-
-                          <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs text-gray-600">
-                            <span className="font-semibold text-gray-900 block mb-0.5">
-                              {t('Coverage')}
-                            </span>
-                            <p className="leading-relaxed">
-                              {domain.coverageNote}
+                            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-gray-700">
+                              {display.description}
                             </p>
+
+                            <div className="mt-4 rounded-sm border border-gray-100 bg-[#F9FAFB] p-3 text-xs text-gray-600">
+                              <span className="font-semibold text-gray-900 block mb-0.5">
+                                {t('Coverage')}
+                              </span>
+                              <p className="leading-relaxed">
+                                {display.coverageNote}
+                              </p>
+                            </div>
                           </div>
-                        </div>
 
-                        {/* RIGHT COLUMN */}
-                        <div className="flex flex-col justify-between">
-                          <dl className="divide-y divide-gray-100 text-xs sm:text-sm border-t border-gray-100">
-                            <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                              <dt className="font-semibold text-gray-600">
-                                {t('Publisher / Authority')}
-                              </dt>
-                              <dd className="font-medium text-gray-900 leading-relaxed">
-                                {domain.authority}
-                              </dd>
-                            </div>
+                          {/* RIGHT COLUMN */}
+                          <div className="flex flex-col justify-between">
+                            <dl className="divide-y divide-gray-100 text-xs sm:text-sm border-t border-gray-100">
+                              <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                                <dt className="font-semibold text-gray-600">
+                                  {t('Publisher / Authority')}
+                                </dt>
+                                <dd className="font-medium text-gray-900 leading-relaxed">
+                                  {domain.authority}
+                                </dd>
+                              </div>
 
-                            <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                              <dt className="font-semibold text-gray-600">
-                                {t('Reference Period')}
-                              </dt>
-                              <dd className="font-mono text-gray-800">
-                                {domain.referencePeriod}
-                              </dd>
-                            </div>
+                              <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                                <dt className="font-semibold text-gray-600">
+                                  {t('Reference Period')}
+                                </dt>
+                                <dd className="font-mono text-gray-800">
+                                  {domain.referencePeriod}
+                                </dd>
+                              </div>
 
-                            <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                              <dt className="font-semibold text-gray-600">
-                                {t('Last Verified')}
-                              </dt>
-                              <dd className="font-mono text-gray-800">
-                                {domain.lastVerified
-                                  ? formatIsoDate(domain.lastVerified)
-                                  : t('Recorded per source entry')}
-                              </dd>
-                            </div>
-                          </dl>
+                              <div className="grid grid-cols-1 gap-1 py-2.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                                <dt className="font-semibold text-gray-600">
+                                  {t('Last Verified')}
+                                </dt>
+                                <dd className="font-mono text-gray-800">
+                                  {domain.lastVerified
+                                    ? formatIsoDate(domain.lastVerified)
+                                    : t('Recorded per source entry')}
+                                </dd>
+                              </div>
+                            </dl>
 
-                          {/* Collapsible Source Links Section */}
-                          <DomainLinksSection domain={domain} />
-                        </div>
-                      </article>
-                    ))}
+                            {/* Collapsible Source Links Section */}
+                            <DomainLinksSection domain={domain} />
+                          </div>
+                        </article>
+                      );
+                    })}
                   </div>
                 </div>
               );
@@ -552,23 +550,26 @@ export default async function TransparencySources() {
           </div>
 
           <div className="mt-6 divide-y divide-gray-200 border-y border-gray-200 bg-white">
-            {inventory.unavailableDomains.map(domain => (
-              <div key={domain.id} className="p-5 sm:p-6">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-base font-bold text-gray-950">
-                    {formatDomainTitle(domain.name)}
-                  </h3>
-                  <span className="rounded-sm border border-gray-200 bg-gray-50 px-2.5 py-0.5 font-mono text-xs font-semibold text-gray-600">
-                    {domain.status === 'NOT_EXPORTED'
-                      ? t('Not Exported')
-                      : t('Not Verified for Publication')}
-                  </span>
+            {inventory.unavailableDomains.map(domain => {
+              const display = getUnavailableDomainDisplayText(domain, t);
+              return (
+                <div key={domain.id} className="p-5 sm:p-6">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-base font-bold text-gray-950">
+                      {display.name}
+                    </h3>
+                    <span className="rounded-sm border border-gray-200 bg-gray-50 px-2.5 py-0.5 font-mono text-xs font-semibold text-gray-600">
+                      {domain.status === 'NOT_EXPORTED'
+                        ? t('Not Exported')
+                        : t('Not Verified for Publication')}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
+                    {display.note}
+                  </p>
                 </div>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-600">
-                  {domain.note}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

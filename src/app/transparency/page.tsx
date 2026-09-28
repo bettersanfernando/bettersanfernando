@@ -14,6 +14,7 @@ import {
 import Link from '../../components/i18n/LocaleLink';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 import { getTransparencySummary } from '../../data/civic/transparencySummary';
+import { getUnavailableDomainDisplayText } from '../../data/civic/transparencySources';
 
 import { buildPageMetadata } from '../../lib/metadata';
 import { getPageT, type PageT } from '../../i18n/server';
@@ -395,19 +396,22 @@ export default async function Transparency() {
           </div>
 
           <ul className="mt-7 divide-y divide-gray-200 border-t border-gray-200">
-            {summary.unavailable.map(domain => (
-              <li key={domain.id} className="py-5">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="font-bold text-gray-950">{domain.name}</h3>
-                  <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
-                    {unavailableLabels(t)[domain.status]}
-                  </span>
-                </div>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
-                  {domain.note}
-                </p>
-              </li>
-            ))}
+            {summary.unavailable.map(domain => {
+              const display = getUnavailableDomainDisplayText(domain, t);
+              return (
+                <li key={domain.id} className="py-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="font-bold text-gray-950">{display.name}</h3>
+                    <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-700">
+                      {unavailableLabels(t)[domain.status]}
+                    </span>
+                  </div>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">
+                    {display.note}
+                  </p>
+                </li>
+              );
+            })}
             <li className="py-5">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-bold text-gray-950">

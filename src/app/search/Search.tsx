@@ -101,11 +101,159 @@ function resultKindLabel(kind: string, t: PageT) {
     'Finance Report': t('Finance Report'),
     'Project source': t('Project source'),
     'Site page': t('Site page'),
+    'Business Form': t('Business Form'),
+    'Service Reference Document': t('Service Reference Document'),
+    'Privacy Manual': t('Privacy Manual'),
+    'Privacy Notice': t('Privacy Notice'),
+    'Privacy Policy': t('Privacy Policy'),
   };
   return labels[kind] ?? kind;
 }
 
+// Display-only overrides for the curated site-hub "Site page" results: the
+// indexed title/description (searched against in English on every locale)
+// never changes — only what's shown here does. Keyed by the same stable
+// `href` the search index already uses as that document's identity.
+function siteDestinationDisplay(
+  href: string,
+  t: PageT
+): { title: string; description: string } | null {
+  switch (href) {
+    case '/services':
+      return {
+        title: t('Services'),
+        description: t('Browse City service guidance by need.'),
+      };
+    case '/projects':
+      return {
+        title: t('Projects'),
+        description: t('City infrastructure and public-works projects hub.'),
+      };
+    case '/government':
+      return {
+        title: t('Government'),
+        description: t('City Government offices, contacts, and legislation.'),
+      };
+    case '/barangays':
+      return {
+        title: t('Barangay directory'),
+        description: t('All 35 barangays with population and classification.'),
+      };
+    case '/legislation':
+      return {
+        title: t('Legislation'),
+        description: t('Executive Orders, Ordinances, and Resolutions hub.'),
+      };
+    case '/transparency':
+      return {
+        title: t('Transparency'),
+        description: t('Published-record inventory, sources, and methodology.'),
+      };
+    case '/statistics':
+      return {
+        title: t('Statistics'),
+        description: t(
+          'Population, project, procurement, and city-profile statistics.'
+        ),
+      };
+    case '/statistics/population':
+      return {
+        title: t('Population Statistics'),
+        description: t(
+          'PSA population baseline compared across all 35 barangays.'
+        ),
+      };
+    case '/statistics/demographics':
+      return {
+        title: t('Demographics'),
+        description: t(
+          'Household population, age/sex structure, and poverty estimates.'
+        ),
+      };
+    case '/statistics/project-spending':
+      return {
+        title: t('Project Cost & Utilization'),
+        description: t(
+          'Source-reported project cost-utilization observations.'
+        ),
+      };
+    case '/statistics/projects':
+      return {
+        title: t('Project Statistics'),
+        description: t(
+          'Descriptive snapshot of the published project collection.'
+        ),
+      };
+    case '/statistics/procurement':
+      return {
+        title: t('Procurement Statistics'),
+        description: t(
+          'Descriptive statistics for published procurement records.'
+        ),
+      };
+    case '/statistics/government':
+      return {
+        title: t('Government Statistics'),
+        description: t('Verified, partial City Government entity summary.'),
+      };
+    case '/transparency/finance':
+      return {
+        title: t('City Finances'),
+        description: t('Aggregate revenue, budget, and expenditure reports.'),
+      };
+    case '/transparency/sources':
+      return {
+        title: t('Transparency Sources'),
+        description: t(
+          "BetterSanFernando's published evidence and source inventory."
+        ),
+      };
+    case '/transparency/methodology':
+      return {
+        title: t('How We Publish Data'),
+        description: t('Verification standards and publication methodology.'),
+      };
+    default:
+      return null;
+  }
+}
+
+// Display-only overrides for fallback metadata/description text baked into
+// the search index for records missing their usual field (e.g. an office
+// without a recorded acronym). The indexed value itself is never changed —
+// only what's rendered is. The ordinance "<number> · <year> · <state>"
+// composite keeps its number/year verbatim and only swaps the trailing
+// state, reusing the same "Reference record only" term used elsewhere.
+function resultMetadataDisplay(metadata: string, t: PageT): string {
+  if (metadata === 'Published office record') {
+    return t('Published office record');
+  }
+  const fullTextSuffix = ' · Full text available';
+  const referenceOnlySuffix = ' · Reference only';
+  if (metadata.endsWith(fullTextSuffix)) {
+    return `${metadata.slice(0, -fullTextSuffix.length)} · ${t('Full text available')}`;
+  }
+  if (metadata.endsWith(referenceOnlySuffix)) {
+    return `${metadata.slice(0, -referenceOnlySuffix.length)} · ${t('Reference record only')}`;
+  }
+  return metadata;
+}
+
+function resultDescriptionDisplay(description: string, t: PageT): string {
+  if (description === 'Published office record.') {
+    return t('Published office record.');
+  }
+  return description;
+}
+
 function ResultRow({ result, t }: { result: CivicSearchResult; t: PageT }) {
+  const siteDisplay =
+    result.kind === 'Site page' ? siteDestinationDisplay(result.href, t) : null;
+  const displayTitle = siteDisplay?.title ?? result.title;
+  const displayDescription =
+    siteDisplay?.description ?? resultDescriptionDisplay(result.description, t);
+  const displayMetadata = resultMetadataDisplay(result.metadata, t);
+
   return (
     <li className="border-b border-gray-100 last:border-b-0">
       <Link
@@ -117,23 +265,23 @@ function ResultRow({ result, t }: { result: CivicSearchResult; t: PageT }) {
             <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#0066EB]">
               {resultKindLabel(result.kind, t)}
             </span>
-            {result.metadata && (
+            {displayMetadata && (
               <>
                 <span className="text-gray-300" aria-hidden="true">
                   •
                 </span>
                 <span className="font-mono text-[11px] text-gray-500">
-                  {result.metadata}
+                  {displayMetadata}
                 </span>
               </>
             )}
           </div>
           <h3 className="mt-1 text-sm font-bold text-gray-950 transition-colors group-hover:text-[#0066EB] sm:text-base">
-            {result.title}
+            {displayTitle}
           </h3>
-          {result.description && (
+          {displayDescription && (
             <p className="mt-1 max-w-3xl text-xs leading-relaxed text-gray-600 sm:text-sm">
-              {result.description}
+              {displayDescription}
             </p>
           )}
         </div>

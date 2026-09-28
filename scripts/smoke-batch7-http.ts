@@ -453,6 +453,63 @@ for (const [path, filipino, filipinoTitle] of [
   );
 }
 
+// Search data-layer display localization (Batch 3C): a curated "Site page"
+// result shows a translated title/description on /fil while the English
+// page keeps the untranslated authored copy — same href, same match, only
+// the rendered text differs. Office/project/legislation searches keep their
+// canonical, source-faithful titles on both locales.
+{
+  const englishSitePage = await (
+    await request('/search?q=Transparency')
+  ).text();
+  const filipinoSitePage = await (
+    await request('/fil/search?q=Transparency')
+  ).text();
+  assert.ok(
+    englishSitePage.includes('Published-record inventory'),
+    '/search must keep the English site-page description'
+  );
+  assert.ok(
+    !englishSitePage.includes('Inventory ng nailathalang talaan'),
+    '/search must not show the Filipino site-page description'
+  );
+  assert.ok(
+    filipinoSitePage.includes('Inventory ng nailathalang talaan'),
+    '/fil/search must show the localized site-page description'
+  );
+  assert.ok(
+    filipinoSitePage.includes('href="/fil/transparency"'),
+    '/fil/search must still link to the same destination as the English result'
+  );
+
+  const englishOffice = await (await request('/search?q=CHO')).text();
+  const filipinoOffice = await (await request('/fil/search?q=CHO')).text();
+  const officeNameMatch = englishOffice.match(/City Health Office[^<]*/)?.[0];
+  assert.ok(
+    officeNameMatch,
+    '/search?q=CHO must return the City Health Office by its canonical name'
+  );
+  assert.ok(
+    filipinoOffice.includes(officeNameMatch!),
+    '/fil/search must show the same canonical office name verbatim, untranslated'
+  );
+
+  const englishProject = await (
+    await request('/search?q=San Nicolas School')
+  ).text();
+  const filipinoProject = await (
+    await request('/fil/search?q=San Nicolas School')
+  ).text();
+  assert.ok(
+    englishProject.includes('proj-2025-san-nicolas-school'),
+    '/search must return a matching project result'
+  );
+  assert.ok(
+    filipinoProject.includes('proj-2025-san-nicolas-school'),
+    '/fil/search must return the same canonical project result'
+  );
+}
+
 // Homepage: Filipino copy and metadata on /fil, English untouched on /.
 {
   const english = await (await request('/')).text();

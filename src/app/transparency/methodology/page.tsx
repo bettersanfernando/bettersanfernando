@@ -132,7 +132,8 @@ const AUTHORITY_ROWS = (t: PageT) =>
   [
     {
       domain: t('Population and PSGC identity'),
-      authority: t('Philippine Statistics Authority'),
+      // Official organization name — rendered verbatim, never translated.
+      authority: 'Philippine Statistics Authority',
       role: t(
         'Supports the 2024 POPCEN population baseline, official names, codes, and classifications.'
       ),
