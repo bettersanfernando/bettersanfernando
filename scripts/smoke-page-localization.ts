@@ -146,6 +146,21 @@ const PAGES: Record<string, string[]> = {
     'src/app/legislation/ordinances/page.tsx',
   ],
   'legislation-resolutions': ['src/app/legislation/resolutions/page.tsx'],
+  services: [
+    'src/app/services/page.tsx',
+    'src/app/services/service-search.tsx',
+    'src/app/services/categories.ts',
+  ],
+  'services-category': [
+    'src/app/services/[category]/page.tsx',
+    'src/app/services/service-category-view.tsx',
+    'src/app/services/categories.ts',
+  ],
+  'services-detail': [
+    'src/app/services/[category]/[serviceSlug]/page.tsx',
+    'src/components/ui/EligibilityText.tsx',
+    'src/app/services/categories.ts',
+  ],
 };
 
 // Terms that intentionally read the same in Filipino: 'Home' is localized by
@@ -219,6 +234,7 @@ const FAMILIES = [
   'government',
   'legislation',
   'transparency',
+  'services',
 ] as const;
 const familyOf = (namespace: string) =>
   namespace.startsWith('statistics-')
@@ -234,7 +250,9 @@ const familyOf = (namespace: string) =>
             : namespace === 'transparency' ||
                 namespace.startsWith('transparency-')
               ? 'transparency'
-              : null;
+              : namespace === 'services' || namespace.startsWith('services-')
+                ? 'services'
+                : null;
 const familyShared = Object.fromEntries(
   FAMILIES.map(family => [
     family,

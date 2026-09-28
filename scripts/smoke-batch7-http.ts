@@ -510,6 +510,113 @@ for (const [path, filipino, filipinoTitle] of [
   );
 }
 
+// Services (Batch 4): authored hub/category/detail chrome is Filipino on
+// /fil, while canonical service-record content (titles, requirements,
+// steps, fees, processing times, office/contact details) stays verbatim —
+// the same English text on both locales, since no reviewed Filipino source
+// exists for it.
+{
+  const englishHub = await (await request('/services')).text();
+  const filipinoHub = await (await request('/fil/services')).text();
+  assert.ok(
+    englishHub.includes('Find the City service you need.'),
+    '/services must keep its English hero heading'
+  );
+  assert.ok(
+    filipinoHub.includes('Hanapin ang serbisyo ng Lungsod na kailangan mo.'),
+    '/fil/services must show the localized hero heading'
+  );
+  assert.ok(
+    filipinoHub.includes('href="/fil/services/civil-registry"'),
+    '/fil/services category links must keep /fil'
+  );
+
+  // Representative category: authored intro/coverage text is localized;
+  // the civil-registry category name comes from the shared nav vocabulary.
+  const englishCategory = await (
+    await request('/services/civil-registry')
+  ).text();
+  const filipinoCategory = await (
+    await request('/fil/services/civil-registry')
+  ).text();
+  assert.ok(
+    englishCategory.includes(
+      'publication-reviewed Citizen&#x27;s Charter services currently published from the City Civil Registry Office (CCRO).'
+    ),
+    '/services/civil-registry must keep its English category intro'
+  );
+  assert.ok(
+    filipinoCategory.includes('City Civil Registry Office (CCRO)'),
+    '/fil/services/civil-registry must still name the office verbatim inside the localized intro'
+  );
+  assert.ok(
+    !englishCategory.includes('Labinlimang publication-reviewed'),
+    '/services/civil-registry must not show Filipino text'
+  );
+  assert.ok(
+    englishCategory.includes('Civil Registry'),
+    '/services/civil-registry (English) must show the English category name'
+  );
+
+  // Representative detail pages, chosen to cover a stated fee, a stated
+  // processing time, multiple requirements/steps, forms, and variants.
+  for (const slug of [
+    'applying-for-a-marriage-license',
+    'various-maintenance-services',
+  ] as const) {
+    const category =
+      slug === 'various-maintenance-services'
+        ? 'utilities-water'
+        : 'civil-registry';
+    const path = `/services/${category}/${slug}`;
+    const englishResponse = await request(path);
+    assert.equal(englishResponse.status, 200, `${path} must return 200`);
+    const english = await englishResponse.text();
+    const filipino = await (await request(`/fil${path}`)).text();
+
+    // Canonical service title is byte-identical on both locales.
+    const titleMatch = english.match(/<h1[^>]*>([^<]*)<\/h1>/);
+    assert.ok(titleMatch, `${path} must render an <h1> service title`);
+    assert.ok(
+      filipino.includes(titleMatch![1]),
+      `${path}: the canonical service title must appear verbatim on /fil`
+    );
+
+    // Authored section headings are localized on /fil.
+    assert.ok(
+      filipino.includes('Mga Kinakailangan'),
+      `/fil${path} must localize the Requirements heading`
+    );
+    assert.ok(
+      filipino.includes('Paano mag-apply'),
+      `/fil${path} must localize the "How to apply" heading`
+    );
+    assert.ok(
+      !english.includes('Mga Kinakailangan'),
+      `${path} (English) must not show the Filipino Requirements heading`
+    );
+
+    // /fil never doubles the locale prefix.
+    assert.ok(
+      !filipino.includes('/fil/fil'),
+      `/fil${path} must not contain /fil/fil`
+    );
+  }
+
+  // Fee/no-fee and stated/unstated processing-time fallback text: the
+  // authored fallback sentence is localized, but "Not stated" must never be
+  // strengthened into a claim that the item is unavailable or not required.
+  const marriage = await (
+    await request(
+      '/fil/services/civil-registry/applying-for-a-marriage-license'
+    )
+  ).text();
+  assert.ok(
+    !marriage.includes('Not required') && !marriage.includes('Unavailable'),
+    '/fil service detail must never strengthen "not stated" into "not required"/"unavailable"'
+  );
+}
+
 // Homepage: Filipino copy and metadata on /fil, English untouched on /.
 {
   const english = await (await request('/')).text();
