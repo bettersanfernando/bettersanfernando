@@ -2,6 +2,8 @@
 // OAI-SearchBot, allowed in src/app/robots.ts). Deliberately short: states
 // identity, independence, and the main/provenance sections — not a route
 // dump. See docs/SITE-ARCHITECTURE.md for the full route hierarchy.
+export const dynamic = 'force-static';
+
 const LLMS_TXT = `# BetterSanFernando
 
 > Independent, community-run civic-information portal for the City of
