@@ -15,6 +15,8 @@ decisions for the public BetterSanFernando repository.
 
 ## Contributor resources
 
+- [VERCEL-DEPLOYMENT-FOOTPRINT.md](VERCEL-DEPLOYMENT-FOOTPRINT.md) records the
+  deployment audit, measured tradeoffs, and Vercel Ignored Build Step command.
 - [CONTRIBUTING.md](../CONTRIBUTING.md) explains how to contribute, validate
   changes, and submit civic-data corrections.
 - [SECURITY.md](../SECURITY.md) explains how to report security issues.

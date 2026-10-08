@@ -171,6 +171,12 @@ alias to `/government/contact`, not a canonical page. `/government/structure`
 remains deferred until a verified, frontend-safe organizational structure
 dataset supports it.
 
+`/llms.txt` is prerendered from constant text. HTML routes currently render at
+request time because the shared root layout reads the locale request header;
+enumerated civic route parameters do not remove that dependency. See
+[VERCEL-DEPLOYMENT-FOOTPRINT.md](VERCEL-DEPLOYMENT-FOOTPRINT.md) for the build
+classification, storage measurements, and static-rendering tradeoff.
+
 Routes in the hierarchy are architectural destinations, not promises of
 immediate publication. Pages without sufficient verified public data should
 remain deferred rather than being filled with generic, inferred, or
