@@ -53,7 +53,9 @@ assert.equal(getDemographicProfileRecords().length, 136);
 assert.equal(getSearchDocuments().length, 1795);
 assert.equal(plannedPages.length, 0);
 
-const staticPaths = (readdirSync('src/app', { recursive: true }) as string[])
+const staticPaths = (
+  readdirSync('src/app/[locale]', { recursive: true }) as string[]
+)
   .filter(
     file =>
       file.endsWith('page.tsx') &&
@@ -76,7 +78,7 @@ const canonicalPaths = [...staticPaths, ...dynamicPaths];
 // 41 = 39 (pre-Batch-9) + /sitemap + /accessibility (both added in Batch 9).
 // This filesystem scan counts every literal page.tsx, including /search —
 // unlike sitemap.ts's STATIC_ROUTES, which deliberately excludes /search
-// (noindex; see src/app/search/page.tsx) — so it stays at 41 even though
+// (noindex; see src/app/[locale]/search/page.tsx) — so it stays at 41 even though
 // the sitemap itself lists one fewer static route.
 assert.equal(staticPaths.length, 41);
 assert.equal(dynamicPaths.length, 540);
@@ -93,11 +95,15 @@ const queryRoutes = [
   '/legislation/executive-orders',
   '/legislation/ordinances',
   '/government/barangay-contacts',
+  '/government/offices',
+  '/government/links',
 ];
 for (const route of queryRoutes) {
-  const source = readFileSync(`src/app${route}/page.tsx`, 'utf8');
+  const source = readFileSync(`src/app/[locale]${route}/page.tsx`, 'utf8');
   assert.match(source, /export const dynamic = ['"]force-dynamic['"]/);
-  assert.match(source, /query string|search parameters/i);
+  if (route !== '/government/links') {
+    assert.match(source, /query string|search parameters/i);
+  }
 }
 
 const breadcrumbsSource = readFileSync(
@@ -112,17 +118,17 @@ for (const behavior of [
   /document\.addEventListener\('pointerdown'/,
   /event\.key !== 'Escape'/,
   /aria-expanded=/,
-  /i18n\.changeLanguage\(language\)/,
+  /window\.location\.assign\(localizeHref\(currentHref, language\)\)/,
 ]) {
   assert.match(navbarSource, behavior);
 }
 const serviceCategorySource = readFileSync(
-  'src/app/services/service-category-view.tsx',
+  'src/app/[locale]/services/service-category-view.tsx',
   'utf8'
 );
 assert.match(serviceCategorySource, /categoryServices\.filter/);
 assert.match(serviceCategorySource, /aria-live="polite"/);
 
 console.log(
-  'Batch 7 parity smoke passed: protected data and 581 routes, 9 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
+  'Batch 7 parity smoke passed: protected data and 581 routes, 11 justified force-dynamic pages, breadcrumb JSON-LD, navbar/mobile/keyboard/language behavior, and service filtering.'
 );

@@ -154,11 +154,11 @@ assert.equal(spendingDestinations[0]?.kind, 'real');
 
 // 8. Project-detail sections limited to exactly the 106 matched projects.
 const projectDetailSource = readFileSync(
-  'src/app/projects/[projectId]/page.tsx',
+  'src/app/[locale]/projects/[projectId]/page.tsx',
   'utf8'
 );
 const projectDetailViewPath =
-  'src/app/projects/[projectId]/ProjectDetailView.tsx';
+  'src/app/[locale]/projects/[projectId]/ProjectDetailView.tsx';
 const projectDetailViewSource = readFileSync(projectDetailViewPath, 'utf8');
 const projectDetailPresentationSource = `${projectDetailSource}\n${projectDetailViewSource}`;
 assert.match(
@@ -233,7 +233,7 @@ assert.equal(
 // 9. No affirmative actual-spending/payment/disbursement claims, and no PHP
 // currency formatting, across the data module, page, and detail integration.
 const pageSource = `${readNextRoute('/statistics/project-spending')}\n${readFileSync(
-  'src/app/statistics/project-spending/ProjectSpendingStatistics.tsx',
+  'src/app/[locale]/statistics/project-spending/ProjectSpendingStatistics.tsx',
   'utf8'
 )}`;
 for (const source of [pageSource, projectDetailPresentationSource]) {

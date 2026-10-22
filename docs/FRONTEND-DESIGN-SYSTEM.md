@@ -44,7 +44,7 @@ technical process details and caveats where they help interpretation.
 
 ### Home and identity moments
 
-The current [homepage](../src/app/page.tsx) is the reference for a genuine
+The current [homepage](../src/app/[locale]/page.tsx) is the reference for a genuine
 landing and identity moment. Its deep civic-blue hero, centered hierarchy,
 brand treatment, geographic linework, central search, quick actions, and
 civic metrics work together to orient residents and begin a useful task.
@@ -180,8 +180,8 @@ background pattern.
 ## Search
 
 Search is a primary resident action, not a decorative panel. The homepage
-[`HomeSearchForm`](../src/app/home-search-form.tsx) and
-[`/search`](../src/app/search/Search.tsx) are the current references.
+[`HomeSearchForm`](../src/app/[locale]/home-search-form.tsx) and
+[`/search`](../src/app/[locale]/search/Search.tsx) are the current references.
 
 - Keep homepage autocomplete as an overlay so suggestions do not reflow the
   hero beneath it.
@@ -292,14 +292,14 @@ feel generic:
 
 ## Current reference implementations
 
-| Reference                                                                                                | Demonstrates                                                                                                                       |
-| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [Homepage](../src/app/page.tsx)                                                                          | Deep-blue identity hero, real geographic linework, central search, quick actions, metrics, and reduced-motion-aware landing motion |
-| [Navbar](../src/components/layout/Navbar.tsx)                                                            | Global hierarchy, desktop mega-menu behavior, mobile drawer, disclosure state, and keyboard/focus handling                         |
-| [Footer](../src/components/layout/Footer.tsx)                                                            | Global closing navigation, contribution actions, independent-project context, and external-link treatment                          |
-| [Search](../src/app/search/Search.tsx)                                                                   | Editorial search introduction, filters, result rows, empty states, and responsive pagination                                       |
-| [Transparency](../src/app/transparency/page.tsx)                                                         | Editorial data, provenance, coverage, and divider-led composition                                                                  |
-| [Statistics](../src/app/statistics/page.tsx) and [population](../src/app/statistics/population/page.tsx) | Data hierarchy, genuine comparative graphics, responsive data composition, and source context                                      |
+| Reference                                                                                                                  | Demonstrates                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [Homepage](../src/app/[locale]/page.tsx)                                                                                   | Deep-blue identity hero, real geographic linework, central search, quick actions, metrics, and reduced-motion-aware landing motion |
+| [Navbar](../src/components/layout/Navbar.tsx)                                                                              | Global hierarchy, desktop mega-menu behavior, mobile drawer, disclosure state, and keyboard/focus handling                         |
+| [Footer](../src/components/layout/Footer.tsx)                                                                              | Global closing navigation, contribution actions, independent-project context, and external-link treatment                          |
+| [Search](../src/app/[locale]/search/Search.tsx)                                                                            | Editorial search introduction, filters, result rows, empty states, and responsive pagination                                       |
+| [Transparency](../src/app/[locale]/transparency/page.tsx)                                                                  | Editorial data, provenance, coverage, and divider-led composition                                                                  |
+| [Statistics](../src/app/[locale]/statistics/page.tsx) and [population](../src/app/[locale]/statistics/population/page.tsx) | Data hierarchy, genuine comparative graphics, responsive data composition, and source context                                      |
 
 No single route is the universal reference implementation. Use the relevant
 archetype and component behavior rather than copying an entire page.

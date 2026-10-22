@@ -7,8 +7,8 @@ import { readFileSync } from 'node:fs';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 
-const layoutSource = readFileSync('src/app/layout.tsx', 'utf8');
-const providersSource = readFileSync('src/app/providers.tsx', 'utf8');
+const layoutSource = readFileSync('src/app/[locale]/layout.tsx', 'utf8');
+const providersSource = readFileSync('src/app/[locale]/providers.tsx', 'utf8');
 // The i18next options (resources, lng) live in src/i18n/config.ts, shared by
 // src/i18n.ts (client) and src/i18n/server.ts.
 const i18nSource =
@@ -25,12 +25,12 @@ const scrollToTopSource = readFileSync(
 // client boundary is pushed down into Providers instead.
 assert.ok(
   !/^\s*['"]use client['"]/m.test(layoutSource),
-  'src/app/layout.tsx must not be a Client Component'
+  'src/app/[locale]/layout.tsx must not be a Client Component'
 );
 assert.match(
   providersSource,
   /^\s*['"]use client['"]/m,
-  'src/app/providers.tsx must be the Client Component boundary'
+  'src/app/[locale]/providers.tsx must be the Client Component boundary'
 );
 
 // The root layout renders the shell components in order: Navbar,
@@ -42,17 +42,17 @@ assert.match(
 );
 assert.match(
   layoutSource,
-  /from '\.\.\/components\/layout\/Navbar'/,
+  /from '\.\.\/\.\.\/components\/layout\/Navbar'/,
   'root layout must use Navbar'
 );
 assert.match(
   layoutSource,
-  /from '\.\.\/components\/layout\/Footer'/,
+  /from '\.\.\/\.\.\/components\/layout\/Footer'/,
   'root layout must use Footer'
 );
 assert.match(
   layoutSource,
-  /from '\.\.\/components\/ui\/ScrollToTop'/,
+  /from '\.\.\/\.\.\/components\/ui\/ScrollToTop'/,
   'root layout must use ScrollToTop'
 );
 
@@ -152,8 +152,8 @@ assert.match(
 
 // suppressHydrationWarning must never be used to paper over a mismatch.
 for (const [name, source] of [
-  ['src/app/layout.tsx', layoutSource],
-  ['src/app/providers.tsx', providersSource],
+  ['src/app/[locale]/layout.tsx', layoutSource],
+  ['src/app/[locale]/providers.tsx', providersSource],
   ['src/i18n.ts', i18nSource],
 ] as const) {
   assert.ok(

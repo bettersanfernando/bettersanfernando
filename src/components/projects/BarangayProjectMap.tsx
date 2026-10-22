@@ -17,12 +17,12 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import type { BarangayFeature, CityFeature } from '../../data/civic/geography';
 import type { BarangayProjectSummary } from '../../data/civic/projectMap';
 import type { ProjectLifecycleStatus } from '../../data/civic/projects';
-import { enumLabel } from '../../app/statistics/enum-labels';
+import { enumLabel } from '../../app/[locale]/statistics/enum-labels';
 import { usePageT } from '../i18n/PageMessages';
 import type { PageT } from '../../i18n/page-t';
 
 // Next.js port of BarangayProjectMap.tsx. Rendered only via a client-only
-// dynamic import (see ../../app/projects/map/project-map-view.tsx) so
+// dynamic import (see ../../app/[locale]/projects/map/project-map-view.tsx) so
 // this file — and the maplibre-gl bundle it pulls in — never loads on any
 // other route.
 //

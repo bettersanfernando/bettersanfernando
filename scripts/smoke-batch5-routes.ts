@@ -20,52 +20,52 @@ const routes: Record<
   { dir: string; component: string; queryParams: string[] }
 > = {
   '/search': {
-    dir: 'src/app/search',
+    dir: 'src/app/[locale]/search',
     component: 'Search',
     queryParams: ['q', 'domain'],
   },
   '/projects/city-projects': {
-    dir: 'src/app/projects/city-projects',
+    dir: 'src/app/[locale]/projects/city-projects',
     component: 'Projects',
     queryParams: ['q', 'status', 'barangay', 'category'],
   },
   '/projects/map': {
-    dir: 'src/app/projects/map',
+    dir: 'src/app/[locale]/projects/map',
     component: '',
     queryParams: [],
   },
   '/projects/sources': {
-    dir: 'src/app/projects/sources',
+    dir: 'src/app/[locale]/projects/sources',
     component: 'ProjectSources',
     queryParams: ['q', 'stage', 'authority', 'project', 'sort'],
   },
   '/barangays': {
-    dir: 'src/app/barangays',
+    dir: 'src/app/[locale]/barangays',
     component: 'Barangays',
     queryParams: ['q', 'type', 'sort'],
   },
   '/procurement/bid-results': {
-    dir: 'src/app/procurement/bid-results',
+    dir: 'src/app/[locale]/procurement/bid-results',
     component: 'BidResults',
     queryParams: ['q', 'year', 'abc', 'sort'],
   },
   '/procurement/contracts': {
-    dir: 'src/app/procurement/contracts',
+    dir: 'src/app/[locale]/procurement/contracts',
     component: 'Contracts',
     queryParams: ['q', 'lifecycle', 'year', 'number', 'amount', 'sort'],
   },
   '/legislation/executive-orders': {
-    dir: 'src/app/legislation/executive-orders',
+    dir: 'src/app/[locale]/legislation/executive-orders',
     component: 'ExecutiveOrders',
     queryParams: ['q', 'sort'],
   },
   '/legislation/ordinances': {
-    dir: 'src/app/legislation/ordinances',
+    dir: 'src/app/[locale]/legislation/ordinances',
     component: 'Ordinances',
     queryParams: ['q', 'availability', 'sort'],
   },
   '/government/barangay-contacts': {
-    dir: 'src/app/government/barangay-contacts',
+    dir: 'src/app/[locale]/government/barangay-contacts',
     component: 'GovernmentBarangayContacts',
     queryParams: ['q', 'barangay'],
   },
@@ -153,17 +153,20 @@ for (const component of ['ProjectSources', 'BidResults', 'Contracts']) {
 // 6. Project-map: the MapLibre component is client-only, dynamically
 //    imported with ssr:false from within a Client Component (never from
 //    the Server Component route entry), and never invents coordinates.
-const mapPageSource = readFileSync('src/app/projects/map/page.tsx', 'utf8');
+const mapPageSource = readFileSync(
+  'src/app/[locale]/projects/map/page.tsx',
+  'utf8'
+);
 assert.ok(
   !/^\s*['"]use client['"]/m.test(mapPageSource),
-  'src/app/projects/map/page.tsx must remain a Server Component'
+  'src/app/[locale]/projects/map/page.tsx must remain a Server Component'
 );
 assert.ok(
   !/window\.|document\./.test(mapPageSource),
   'the map route entry (Server Component) must never touch window/document'
 );
 const mapViewSource = readFileSync(
-  'src/app/projects/map/project-map-view.tsx',
+  'src/app/[locale]/projects/map/project-map-view.tsx',
   'utf8'
 );
 assert.match(

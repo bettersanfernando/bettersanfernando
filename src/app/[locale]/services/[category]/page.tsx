@@ -1,0 +1,94 @@
+import { notFound, permanentRedirect } from 'next/navigation';
+import {
+  getServiceBySlug,
+  getServiceCategory,
+  getServiceHref,
+  getServices,
+  type PublishedServiceCategory,
+} from '../../../../data/civic/services';
+import { getCategoryDisplay } from '../categories';
+import { PageMessages } from '../../../../components/i18n/PageMessages';
+import { localizeHref } from '../../../../i18n/locale';
+import { getLocale, getPageT } from '../../../../i18n/server';
+import { buildPageMetadata } from '../../../../lib/metadata';
+import ServiceCategoryView from '../service-category-view';
+
+// Single dynamic segment handling BOTH real categories and legacy one-
+// segment service-slug URLs — see docs/NEXTJS-MIGRATION-SPEC.md §5. A
+// sibling [slug] folder at this same position is invalid: Next.js treats
+// same-position dynamic segments as one route regardless of param name.
+//
+// Derived directly from the civic accessor (not a hardcoded list), so this
+// always matches whatever the synced dataset actually publishes.
+const validCategories = new Set<string>(
+  getServices().map(service => getServiceCategory(service))
+);
+
+function isValidCategory(value: string): value is PublishedServiceCategory {
+  return validCategories.has(value);
+}
+
+export function generateStaticParams() {
+  return [...validCategories].map(category => ({ category }));
+}
+
+// Only the 16 real-category case gets real metadata — a legacy-slug or
+// unknown segment redirects/404s before this would ever matter for a real
+// response, and notFound()'s own metadata (noindex) takes over instead.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const { category: segment } = await params;
+  // Guards against an unexpected render path ever inheriting the
+  // indexable root metadata with no canonical of its own — the real
+  // legacy-slug/unknown-segment responses redirect/404 before this would
+  // matter, and notFound()'s own metadata (noindex) takes over then.
+  if (!isValidCategory(segment)) return { robots: { index: false } };
+
+  const { t, locale } = await getPageT('services-category');
+  const display = getCategoryDisplay(segment, t);
+  // Category descriptions are their own sentence ("Reviewed local
+  // civil-registration and certification procedures."). Strip the trailing
+  // period before folding it into this wrapper sentence, or the result
+  // reads as two sentence fragments stitched together mid-clause.
+  const description = display.description.replace(/\.+$/, '');
+  return buildPageMetadata({
+    title: display.name,
+    description: t('Browse {{description}} published by BetterSanFernando.', {
+      description: description.charAt(0).toLowerCase() + description.slice(1),
+    }),
+    path: `/services/${segment}`,
+    locale,
+  });
+}
+
+export default async function ServiceCategoryOrLegacySlugPage({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const { category: segment } = await params;
+
+  // 1. Category match takes precedence — verified collision-free against
+  //    every service slug (see docs/NEXTJS-MIGRATION-SPEC.md §5).
+  if (isValidCategory(segment)) {
+    const { messages } = await getPageT('services-category');
+    return (
+      <PageMessages messages={messages}>
+        <ServiceCategoryView category={segment} />
+      </PageMessages>
+    );
+  }
+
+  // 2. Legacy one-segment service-slug URL: redirect to the canonical
+  //    category-qualified page. Never rendered as its own indexable page.
+  const service = getServiceBySlug(segment);
+  if (service) {
+    permanentRedirect(localizeHref(getServiceHref(service), await getLocale()));
+  }
+
+  // 3. Neither a category nor a known service slug.
+  notFound();
+}

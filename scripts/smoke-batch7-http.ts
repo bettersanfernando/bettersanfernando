@@ -176,6 +176,23 @@ for (const [source, destination] of aliases) {
   assert.equal(response.status, 308, `${source} must return 308`);
   const location = redirectLocation(response);
   assert.equal(`${location.pathname}${location.hash}`, destination);
+  const localized = await request(`/fil${source}`);
+  assert.equal(localized.status, 308);
+  const localizedLocation = redirectLocation(localized);
+  assert.equal(
+    `${localizedLocation.pathname}${localizedLocation.hash}`,
+    `/fil${destination}`
+  );
+}
+
+for (const [source, destination] of [
+  ['/en', '/'],
+  ['/en/about?test=1', '/about?test=1'],
+]) {
+  const response = await request(source);
+  assert.equal(response.status, 308);
+  const location = redirectLocation(response);
+  assert.equal(`${location.pathname}${location.search}`, destination);
 }
 
 const services = getServices();
@@ -184,6 +201,20 @@ for (const service of [services[0], services[88], services.at(-1)!]) {
   assert.equal(response.status, 308);
   const location = redirectLocation(response);
   assert.equal(location.pathname, getServiceHref(service));
+  const localized = await request(`/fil/services/${service.slug}`);
+  assert.equal(localized.status, 308);
+  assert.equal(
+    redirectLocation(localized).pathname,
+    `/fil${getServiceHref(service)}`
+  );
+  const mismatched = await request(
+    `/fil/services/wrong-category/${service.slug}`
+  );
+  assert.equal(mismatched.status, 308);
+  assert.equal(
+    redirectLocation(mismatched).pathname,
+    `/fil${getServiceHref(service)}`
+  );
 }
 
 for (const path of [
@@ -197,6 +228,23 @@ for (const path of [
   const response = await request(path);
   assert.equal(response.status, 404, `${path} must return 404`);
   assert.match(await response.text(), /<meta name="robots" content="noindex"/);
+  const localized = await request(`/fil${path}`);
+  assert.equal(localized.status, 404);
+  const localizedHtml = await localized.text();
+  if (
+    [
+      '/definitely-not-a-route',
+      '/government/definitely-not-a-category',
+    ].includes(path)
+  ) {
+    assert.match(localizedHtml, /<html lang="fil"/);
+    assert.match(localizedHtml, /<header[ >]/);
+    assert.match(
+      localizedHtml,
+      /<h1[^>]*>Hindi namin makita ang pahinang iyon\./
+    );
+  }
+  assert.match(localizedHtml, /Hindi namin makita ang pahinang iyon\./);
 }
 
 for (const [path, expectedValue] of [
@@ -707,6 +755,15 @@ assert.ok(
     'Hindi namin makita ang pahinang iyon.'
   )
 );
+
+const malformedLocale404 = await fetch(
+  new URL('/definitely-not-a-route', baseUrl),
+  { headers: { 'x-bsf-locale': 'unsupported' } }
+);
+assert.equal(malformedLocale404.status, 404);
+const malformedLocaleHtml = await malformedLocale404.text();
+assert.ok(malformedLocaleHtml.includes('<html lang="en"'));
+assert.ok(malformedLocaleHtml.includes('<header'));
 
 const robotsResponse = await request('/robots.txt');
 assert.equal(robotsResponse.status, 200);

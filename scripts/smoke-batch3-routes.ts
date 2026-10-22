@@ -12,36 +12,41 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
 // route -> [App Router path segments under src/app, without page.tsx]
 const batch3Routes: Record<string, string> = {
-  '/': 'src/app/page.tsx',
-  '/about': 'src/app/about/page.tsx',
-  '/services': 'src/app/services/page.tsx',
-  '/government': 'src/app/government/page.tsx',
-  '/government/offices': 'src/app/government/offices/page.tsx',
-  '/government/contact': 'src/app/government/contact/page.tsx',
-  '/government/hotlines': 'src/app/government/hotlines/page.tsx',
-  '/government/links': 'src/app/government/links/page.tsx',
-  '/procurement': 'src/app/procurement/page.tsx',
-  '/projects/methodology': 'src/app/projects/methodology/page.tsx',
-  '/statistics': 'src/app/statistics/page.tsx',
-  '/statistics/projects': 'src/app/statistics/projects/page.tsx',
-  '/statistics/procurement': 'src/app/statistics/procurement/page.tsx',
+  '/': 'src/app/[locale]/page.tsx',
+  '/about': 'src/app/[locale]/about/page.tsx',
+  '/services': 'src/app/[locale]/services/page.tsx',
+  '/government': 'src/app/[locale]/government/page.tsx',
+  '/government/offices': 'src/app/[locale]/government/offices/page.tsx',
+  '/government/contact': 'src/app/[locale]/government/contact/page.tsx',
+  '/government/hotlines': 'src/app/[locale]/government/hotlines/page.tsx',
+  '/government/links': 'src/app/[locale]/government/links/page.tsx',
+  '/procurement': 'src/app/[locale]/procurement/page.tsx',
+  '/projects/methodology': 'src/app/[locale]/projects/methodology/page.tsx',
+  '/statistics': 'src/app/[locale]/statistics/page.tsx',
+  '/statistics/projects': 'src/app/[locale]/statistics/projects/page.tsx',
+  '/statistics/procurement': 'src/app/[locale]/statistics/procurement/page.tsx',
   '/statistics/project-spending':
-    'src/app/statistics/project-spending/page.tsx',
-  '/statistics/population': 'src/app/statistics/population/page.tsx',
-  '/statistics/demographics': 'src/app/statistics/demographics/page.tsx',
-  '/statistics/government': 'src/app/statistics/government/page.tsx',
-  '/statistics/legislation': 'src/app/statistics/legislation/page.tsx',
-  '/statistics/public-records': 'src/app/statistics/public-records/page.tsx',
-  '/statistics/city-profile': 'src/app/statistics/city-profile/page.tsx',
-  '/legislation': 'src/app/legislation/page.tsx',
-  '/legislation/resolutions': 'src/app/legislation/resolutions/page.tsx',
-  '/transparency': 'src/app/transparency/page.tsx',
-  '/transparency/sources': 'src/app/transparency/sources/page.tsx',
-  '/transparency/methodology': 'src/app/transparency/methodology/page.tsx',
-  '/transparency/documents': 'src/app/transparency/documents/page.tsx',
+    'src/app/[locale]/statistics/project-spending/page.tsx',
+  '/statistics/population': 'src/app/[locale]/statistics/population/page.tsx',
+  '/statistics/demographics':
+    'src/app/[locale]/statistics/demographics/page.tsx',
+  '/statistics/government': 'src/app/[locale]/statistics/government/page.tsx',
+  '/statistics/legislation': 'src/app/[locale]/statistics/legislation/page.tsx',
+  '/statistics/public-records':
+    'src/app/[locale]/statistics/public-records/page.tsx',
+  '/statistics/city-profile':
+    'src/app/[locale]/statistics/city-profile/page.tsx',
+  '/legislation': 'src/app/[locale]/legislation/page.tsx',
+  '/legislation/resolutions':
+    'src/app/[locale]/legislation/resolutions/page.tsx',
+  '/transparency': 'src/app/[locale]/transparency/page.tsx',
+  '/transparency/sources': 'src/app/[locale]/transparency/sources/page.tsx',
+  '/transparency/methodology':
+    'src/app/[locale]/transparency/methodology/page.tsx',
+  '/transparency/documents': 'src/app/[locale]/transparency/documents/page.tsx',
   '/transparency/full-disclosure':
-    'src/app/transparency/full-disclosure/page.tsx',
-  '/transparency/finance': 'src/app/transparency/finance/page.tsx',
+    'src/app/[locale]/transparency/full-disclosure/page.tsx',
+  '/transparency/finance': 'src/app/[locale]/transparency/finance/page.tsx',
 };
 
 const expectedRouteCount = 28;
@@ -77,7 +82,7 @@ for (const [route, filePath] of routeEntries) {
 const homeSource = readFileSync(batch3Routes['/'], 'utf8');
 assert.ok(
   !/Next\.js migration foundation/.test(homeSource),
-  'src/app/page.tsx must no longer be the Batch 1 placeholder — it must be the real home page'
+  'src/app/[locale]/page.tsx must no longer be the Batch 1 placeholder — it must be the real home page'
 );
 assert.match(
   homeSource,
@@ -108,10 +113,10 @@ assert.ok(
 // 5. The root layout stays a Server Component (already the authoritative
 //    check in smoke-next-shell.ts; re-asserted here since real page content
 //    now renders inside it).
-const layoutSource = readFileSync('src/app/layout.tsx', 'utf8');
+const layoutSource = readFileSync('src/app/[locale]/layout.tsx', 'utf8');
 assert.ok(
   !/^\s*['"]use client['"]/m.test(layoutSource),
-  'src/app/layout.tsx must remain a Server Component'
+  'src/app/[locale]/layout.tsx must remain a Server Component'
 );
 
 // 6. Migrated pages must use the shared civic-data modules, not copied data.
@@ -125,19 +130,19 @@ const civicDataImportsByRoute: Record<
 > = {
   '/': {
     file: batch3Routes['/'],
-    pattern: /from '\.\.\/data\/civic\/homeSummary'/,
+    pattern: /from '\.\.\/\.\.\/data\/civic\/homeSummary'/,
   },
   '/government/offices': {
-    file: 'src/app/government/offices/GovernmentOffices.tsx',
-    pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/government'/,
+    file: 'src/app/[locale]/government/offices/GovernmentOffices.tsx',
+    pattern: /from '\.\.\/\.\.\/\.\.\/\.\.\/data\/civic\/government'/,
   },
   '/statistics/projects': {
     file: batch3Routes['/statistics/projects'],
-    pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/projectStatistics'/,
+    pattern: /from '\.\.\/\.\.\/\.\.\/\.\.\/data\/civic\/projectStatistics'/,
   },
   '/transparency/finance': {
-    file: 'src/app/transparency/finance/CityFinances.tsx',
-    pattern: /from '\.\.\/\.\.\/\.\.\/data\/civic\/finance'/,
+    file: 'src/app/[locale]/transparency/finance/CityFinances.tsx',
+    pattern: /from '\.\.\/\.\.\/\.\.\/\.\.\/data\/civic\/finance'/,
   },
 };
 for (const [route, { file, pattern }] of Object.entries(
