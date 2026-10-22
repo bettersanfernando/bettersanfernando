@@ -171,11 +171,25 @@ alias to `/government/contact`, not a canonical page. `/government/structure`
 remains deferred until a verified, frontend-safe organizational structure
 dataset supports it.
 
-`/llms.txt` is prerendered from constant text. HTML routes currently render at
-request time because the shared root layout reads the locale request header;
-enumerated civic route parameters do not remove that dependency. See
+`/llms.txt` is prerendered from constant text. HTML implementations share
+`src/app/[locale]/`, whose root layout enumerates English and Filipino. Server
+translation helpers read `next/root-params`, so informational pages and known
+civic-record URLs are prerendered in both languages. Configuration rewrites
+map unprefixed English URLs to internal `/en/...` output; `/en/...` requests
+redirect to their unprefixed public URLs. Filipino URLs remain `/fil/...`.
+Ordinary page rendering has no request-header dependency. A Filipino-only
+Proxy supplies the locale to the global unmatched 404, which has no route
+parameters; it does not rewrite or render valid pages.
+
+Eleven filter/search directories retain query-specific server rendering;
+`/projects` also retains its legacy query redirect. Record-family fallbacks
+preserve legacy service redirects and localized missing-record responses,
+and Next's global not-found page preserves genuine localized 404s with the
+existing server-rendered shell. Static literal
+pages disable unsupported-parameter fallbacks at the page level, so they do
+not require runtime functions. See
 [VERCEL-DEPLOYMENT-FOOTPRINT.md](VERCEL-DEPLOYMENT-FOOTPRINT.md) for the build
-classification, storage measurements, and static-rendering tradeoff.
+classification, compute/storage measurements, and validation results.
 
 Routes in the hierarchy are architectural destinations, not promises of
 immediate publication. Pages without sufficient verified public data should

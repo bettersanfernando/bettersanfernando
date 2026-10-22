@@ -64,6 +64,18 @@ const PROJECT_ID_REDIRECTS: ReadonlyArray<{
 }> = projectIdRedirectsJson.redirects;
 
 const nextConfig: NextConfig = {
+  experimental: { globalNotFound: true },
+  async rewrites() {
+    return {
+      // Public files and discovery routes resolve before this English rewrite.
+      afterFiles: [
+        {
+          source: '/:path((?!fil(?:/|$)|en(?:/|$)).*)',
+          destination: '/en/:path',
+        },
+      ],
+    };
+  },
   async redirects() {
     const legacy = LEGACY_ALIASES.map(({ source, destination }) => ({
       source,
@@ -77,7 +89,16 @@ const nextConfig: NextConfig = {
         permanent: true, // HTTP 308
       })
     );
-    return [...legacy, ...projectIdMerges];
+    const aliases = [...legacy, ...projectIdMerges];
+    return [
+      { source: '/en/:path*', destination: '/:path*', permanent: true },
+      ...aliases,
+      ...aliases.map(alias => ({
+        ...alias,
+        source: `/fil${alias.source}`,
+        destination: `/fil${alias.destination}`,
+      })),
+    ];
   },
 };
 

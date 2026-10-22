@@ -14,10 +14,12 @@ export function localeFromPathname(pathname: string): LanguageType {
 }
 
 export function withoutLocalePrefix(pathname: string): string {
-  if (pathname === FILIPINO_PREFIX) return '/';
-  return pathname.startsWith(`${FILIPINO_PREFIX}/`)
-    ? pathname.slice(FILIPINO_PREFIX.length)
-    : pathname;
+  // Static English HTML uses /en internally; hydration sees the public URL.
+  for (const prefix of ['/en', FILIPINO_PREFIX]) {
+    if (pathname === prefix) return '/';
+    if (pathname.startsWith(`${prefix}/`)) return pathname.slice(prefix.length);
+  }
+  return pathname;
 }
 
 export function withLocalePrefix(

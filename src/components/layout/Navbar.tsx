@@ -40,7 +40,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import {
   getActiveNavigationId,
@@ -206,8 +206,7 @@ export default function Navbar() {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suppressFocusOpenRef = useRef<NavigationId | null>(null);
   const pathname = usePathname() ?? '/';
-  const router = useRouter();
-  const { t, i18n } = useTranslation('common');
+  const { t } = useTranslation('common');
   const currentLanguage = localeFromPathname(pathname);
   const activeNavigationId = getActiveNavigationId(
     withoutLocalePrefix(pathname)
@@ -316,24 +315,12 @@ export default function Navbar() {
   }, [isMobileOpen]);
 
   const changeLanguage = (language: LanguageType) => {
-    void i18n.changeLanguage(language);
     // pathname (from usePathname()) never carries the query string or hash,
     // so switching locale on e.g. /search?q=x must read those from the
     // browser location directly or the query gets silently dropped.
     const currentHref =
-      pathname + window.location.search + window.location.hash;
-    router.push(localizeHref(currentHref, language));
-    // Locale is conveyed only via the x-bsf-locale header the proxy sets on
-    // a path-prefix rewrite (see src/proxy.ts) — not by the URL Next's
-    // Router Cache actually keys on post-rewrite, and not by any React
-    // props/state. Without this, router.push() alone can leave Server
-    // Component output (e.g. the homepage hero, rendered through
-    // getPageT()) showing the previous locale until a hard refresh, even
-    // though client-only i18next consumers (useTranslation) update at
-    // once. router.refresh() forces Next to discard that cached render and
-    // re-fetch the RSC payload for the current segment under the new
-    // locale header.
-    router.refresh();
+      window.location.pathname + window.location.search + window.location.hash;
+    window.location.assign(localizeHref(currentHref, language));
   };
 
   return (

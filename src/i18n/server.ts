@@ -1,4 +1,6 @@
 import i18next from 'i18next';
+import { locale as routeLocale } from 'next/root-params';
+import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 import type { LanguageType } from '../types';
 import { getI18nOptions } from './config';
@@ -6,8 +8,13 @@ import { isLanguage } from './locale';
 import { createPageT, type PageT } from './page-t';
 
 export async function getLocale(): Promise<LanguageType> {
-  const locale = (await headers()).get('x-bsf-locale') ?? undefined;
-  return isLanguage(locale) ? locale : 'en';
+  // Global unmatched 404s have no route params; ordinary pages never read headers.
+  const locale = await routeLocale();
+  if (locale === undefined) {
+    return (await headers()).get('x-bsf-locale') === 'fil' ? 'fil' : 'en';
+  }
+  if (!isLanguage(locale)) notFound();
+  return locale;
 }
 
 /** Server-component counterpart of useTranslation('common'). */
