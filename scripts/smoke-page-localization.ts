@@ -13,6 +13,11 @@ const STATISTICS = 'src/app/[locale]/statistics/';
 const PAGES: Record<string, string[]> = {
   about: ['src/app/[locale]/about/page.tsx'],
   accessibility: ['src/app/[locale]/accessibility/page.tsx'],
+  barangays: [
+    'src/app/[locale]/barangays/page.tsx',
+    'src/app/[locale]/barangays/Barangays.tsx',
+    'src/app/[locale]/barangays/BarangayDirectorySections.tsx',
+  ],
   sitemap: ['src/app/[locale]/sitemap/page.tsx'],
   'not-found': ['src/app/[locale]/not-found.tsx'],
   government: ['src/app/[locale]/government/page.tsx'],

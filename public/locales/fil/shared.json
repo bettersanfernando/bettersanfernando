@@ -253,5 +253,11 @@
   "View directory": "Tingnan ang direktoryo",
   "Last verified: {{lastVerified}}": "Huling naberipika: {{lastVerified}}",
   "SOURCE AND COVERAGE": "SOURCE AT SAKLAW",
-  "What is verified": "Ano ang beripikado"
+  "What is verified": "Ano ang beripikado",
+  "Barangay: A–Z": "Barangay: A–Z",
+  "Barangay: Z–A": "Barangay: Z–A",
+  "No matching barangays": "Walang tugmang barangay",
+  "PROVENANCE": "PINAGMULAN",
+  "View city profile": "Tingnan ang profile ng lungsod",
+  "Browse Projects": "Tingnan ang mga Proyekto"
 }

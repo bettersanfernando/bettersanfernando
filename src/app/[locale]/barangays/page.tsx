@@ -1,13 +1,20 @@
 import BarangaysView from './Barangays';
 
 import { buildPageMetadata } from '../../../lib/metadata';
+import { PageMessages } from '../../../components/i18n/PageMessages';
+import { getPageT } from '../../../i18n/server';
 
-export const metadata = buildPageMetadata({
-  title: 'Barangay directory',
-  description:
-    'Browse all 35 barangays in San Fernando, Pampanga with verified PSGC identity, PSA 2024 POPCEN population, and urban or rural classification.',
-  path: '/barangays',
-});
+export async function generateMetadata() {
+  const { t, locale } = await getPageT('barangays');
+  return buildPageMetadata({
+    title: t('Barangay Directory'),
+    description: t(
+      'Browse all 35 barangays in San Fernando, Pampanga with verified PSGC identity, PSA 2024 POPCEN population, and urban or rural classification.'
+    ),
+    path: '/barangays',
+    locale,
+  });
+}
 
 // This page's entire content depends on the request's own query string
 // (filters/sort/pagination), so it is rendered per request rather than
@@ -19,6 +26,11 @@ export const metadata = buildPageMetadata({
 // static-generation CSR-bailout path).
 export const dynamic = 'force-dynamic';
 
-export default function BarangaysPage() {
-  return <BarangaysView />;
+export default async function BarangaysPage() {
+  const { messages } = await getPageT('barangays');
+  return (
+    <PageMessages messages={messages}>
+      <BarangaysView />
+    </PageMessages>
+  );
 }

@@ -277,6 +277,64 @@ assert.ok(
   'the CDRRMO alias ("disaster") must surface a CDRRMO-related record'
 );
 
+// Regression: CASSO is the City Assessor's Office and CAVO is the City
+// Agriculture and Veterinary Office in San Fernando, Pampanga.
+const assessorGovResults = searchCivicRecords('city assessor', 'government');
+assert.ok(
+  assessorGovResults.some(
+    result => /Assessor/i.test(result.title) || /CASSO/i.test(result.metadata)
+  ),
+  '"city assessor" must surface the City Assessor\'s Office (CASSO)'
+);
+assert.ok(
+  !assessorGovResults.some(result => /Veterinary|CAVO/i.test(result.title)),
+  '"city assessor" must not misroute to CAVO'
+);
+
+const veterinaryGovResults = searchCivicRecords(
+  'veterinary office',
+  'government'
+);
+assert.ok(
+  veterinaryGovResults.some(
+    result => /Veterinary/i.test(result.title) || /CAVO/i.test(result.metadata)
+  ),
+  '"veterinary office" must surface the City Agriculture and Veterinary Office (CAVO)'
+);
+assert.ok(
+  !veterinaryGovResults.some(result => /Assessor|CASSO/i.test(result.title)),
+  '"veterinary office" must not misroute to CASSO'
+);
+
+assert.ok(
+  searchCivicRecords('anti-rabies', 'services').some(
+    result => /CAVO/i.test(result.metadata) || /rabies/i.test(result.title)
+  ),
+  '"anti-rabies" must surface CAVO veterinary services'
+);
+
+// Composite office acronym ("CIPPESO / CPESO") must resolve on bare "cpeso".
+assert.ok(
+  searchCivicRecords('cpeso', 'government').some(
+    result =>
+      /CPESO|Employment/i.test(result.title) || /CPESO/i.test(result.metadata)
+  ),
+  '"cpeso" must match the CIPPESO / CPESO office record'
+);
+
+// Local resident tax/certificate terms ("cedula", "sedula") must surface CTO.
+for (const term of ['cedula', 'sedula']) {
+  assert.ok(
+    searchCivicRecords(term).some(
+      result =>
+        /Treasurer|CTO/i.test(result.title) ||
+        /CTO/i.test(result.metadata) ||
+        /Property Taxes/i.test(result.category)
+    ),
+    `"${term}" must surface City Treasurer / property-tax records`
+  );
+}
+
 // 2b. Natural multi-word / conversational-phrasing queries (stop-word
 // normalization). Every fixture is real, current data — see the audit
 // report for how each result class was actually caused before the fix.
@@ -326,6 +384,29 @@ assert.equal(
   searchCivicRecords('please find CHO')[0]?.id,
   `office:${cho!.office_id}`,
   '"please find CHO" must still rank City Health Office first'
+);
+assert.equal(
+  searchCivicRecords('saan ang CHO')[0]?.id,
+  `office:${cho!.office_id}`,
+  '"saan ang CHO" must strip Filipino interrogative filler and rank CHO first'
+);
+assert.equal(
+  searchCivicRecords('nukarin ing CHO')[0]?.id,
+  `office:${cho!.office_id}`,
+  '"nukarin ing CHO" must strip Kapampangan interrogative filler and rank CHO first'
+);
+assert.ok(
+  searchCivicRecords('danum', 'services').some(
+    result =>
+      /CSFWD|water/i.test(result.title) || /CSFWD/i.test(result.metadata)
+  ),
+  'Kapampangan alias "danum" must surface CSFWD water services'
+);
+assert.ok(
+  searchCivicRecords("paano kumuha ng mayor's permit", 'services').some(
+    result => /permit for business/i.test(result.title)
+  ),
+  '"paano kumuha ng mayor\'s permit" must strip conversational filler and surface BLPD business-permit services'
 );
 
 // Regression: a natural three-word query combining a topic, the domain

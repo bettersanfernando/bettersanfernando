@@ -21,7 +21,9 @@ export function filterAndSortBarangays(
   const query = options.query.trim().toLocaleLowerCase('en-PH');
   const filtered = barangays.filter(
     barangay =>
-      (!query || barangay.name.toLocaleLowerCase('en-PH').includes(query)) &&
+      (!query ||
+        barangay.name.toLocaleLowerCase('en-PH').includes(query) ||
+        barangay.psgc_code.toLocaleLowerCase('en-PH').includes(query)) &&
       (options.classification === 'All' ||
         barangay.classification === options.classification)
   );

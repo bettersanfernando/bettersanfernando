@@ -102,6 +102,16 @@ assert.deepEqual(
   ['Santo Niño', 'Santo Rosario']
 );
 
+const psgcMatches = filterAndSortBarangays(statistics.rankedBarangays, {
+  ...defaultOptions,
+  query: largestFirst[0]!.psgc_code,
+});
+assert.deepEqual(
+  psgcMatches.map(barangay => barangay.name),
+  ['Calulut'],
+  'PSGC code search must match the corresponding barangay'
+);
+
 console.log('[smoke-barangays] OK');
 console.log('  35 unique PSGC records, population 377534');
 console.log('  34 Urban, 1 Rural (Lourdes)');

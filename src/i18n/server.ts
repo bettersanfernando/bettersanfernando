@@ -28,6 +28,7 @@ export async function getServerT() {
 export type PageNamespace =
   | 'about'
   | 'accessibility'
+  | 'barangays'
   | 'sitemap'
   | 'not-found'
   | 'government'
