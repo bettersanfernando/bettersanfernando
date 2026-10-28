@@ -75,6 +75,15 @@ const STOP_WORDS: ReadonlySet<string> = new Set([
   'ano',
   'kumuha',
   'magkano',
+  'nukarin',
+  'makananu',
+  'nanu',
+  'magkanu',
+  'kumua',
+  'ing',
+  'reng',
+  'king',
+  'keng',
 ]);
 
 /**

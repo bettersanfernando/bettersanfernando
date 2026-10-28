@@ -390,6 +390,18 @@ assert.equal(
   `office:${cho!.office_id}`,
   '"saan ang CHO" must strip Filipino interrogative filler and rank CHO first'
 );
+assert.equal(
+  searchCivicRecords('nukarin ing CHO')[0]?.id,
+  `office:${cho!.office_id}`,
+  '"nukarin ing CHO" must strip Kapampangan interrogative filler and rank CHO first'
+);
+assert.ok(
+  searchCivicRecords('danum', 'services').some(
+    result =>
+      /CSFWD|water/i.test(result.title) || /CSFWD/i.test(result.metadata)
+  ),
+  'Kapampangan alias "danum" must surface CSFWD water services'
+);
 assert.ok(
   searchCivicRecords("paano kumuha ng mayor's permit", 'services').some(
     result => /permit for business/i.test(result.title)

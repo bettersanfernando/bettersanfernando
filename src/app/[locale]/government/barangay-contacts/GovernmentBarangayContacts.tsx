@@ -789,6 +789,29 @@ export default function GovernmentBarangayContacts() {
                                 )}
                               </p>
                             )}
+
+                          <div className="flex flex-wrap items-center gap-4 border-t border-gray-200/80 pt-4 text-xs sm:text-sm">
+                            <Link
+                              href={`/barangays?q=${encodeURIComponent(group.barangayPsgc)}`}
+                              className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC]"
+                            >
+                              <span>{t('Barangay Directory')}</span>
+                              <ArrowRight
+                                className="h-3.5 w-3.5"
+                                aria-hidden="true"
+                              />
+                            </Link>
+                            <Link
+                              href={`/projects/city-projects?barangay=${encodeURIComponent(group.barangayPsgc)}`}
+                              className="inline-flex items-center gap-1 font-semibold text-[#0066EB] hover:text-[#0052BC]"
+                            >
+                              <span>{t('Browse Projects')}</span>
+                              <ArrowRight
+                                className="h-3.5 w-3.5"
+                                aria-hidden="true"
+                              />
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     )}

@@ -28,6 +28,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'rescue',
     'safru',
     'sakuna',
+    'kalamidad',
     'emerhensiya',
   ],
   cswdo: [
@@ -36,6 +37,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'solo parent',
     'aics',
     'tulong panlipunan',
+    'saup',
   ],
   cho: [
     'city health office',
@@ -45,6 +47,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'sanitary permit',
     'bakuna',
     'kalusugan',
+    'panulu',
   ],
   cippeso: [
     'employment office',
@@ -53,6 +56,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'job referral',
     'peso',
     'trabaho',
+    'obra',
   ],
   cpeso: [
     'employment office',
@@ -61,6 +65,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'job referral',
     'peso',
     'trabaho',
+    'obra',
   ],
   cavo: [
     'agriculture office',
@@ -121,6 +126,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'water connection',
     'water reconnection',
     'tubig',
+    'danum',
   ],
   casso: [
     'city assessor',
@@ -137,13 +143,14 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     "treasurer's office",
     'real property tax',
     'tax payment',
+    'bayad buwis',
     'cedula',
     'sedula',
     'community tax certificate',
     'amilyar',
   ],
   ctipo: ['tourism office', 'investment promotion', 'city tourism', 'turismo'],
-  cmo: ['mayor', "mayor's office", 'city mayor', 'alkalde'],
+  cmo: ['mayor', "mayor's office", 'city mayor', 'alkalde', 'munisipyu'],
   ocvm: ['vice mayor', "vice mayor's office", 'bise alkalde'],
   osp: [
     'sangguniang panlungsod',
@@ -280,6 +287,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'water connection',
     'csfwd',
     'tubig',
+    'danum',
     'bayarin sa tubig',
   ],
   'infrastructure-public-works': [
@@ -287,6 +295,8 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'roads',
     'drainage',
     'kalsada',
+    'dalan',
+    'tete',
     'kanal',
   ],
   'housing-land-use': [
