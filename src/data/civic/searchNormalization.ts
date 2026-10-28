@@ -50,6 +50,10 @@ const STOP_WORDS: ReadonlySet<string> = new Set([
   'looking',
   'search',
   'searching',
+  'how',
+  'where',
+  'what',
+  'when',
   'ang',
   'mga',
   'ng',
@@ -66,6 +70,11 @@ const STOP_WORDS: ReadonlySet<string> = new Set([
   'ipakita',
   'kailangan',
   'gusto',
+  'paano',
+  'saan',
+  'ano',
+  'kumuha',
+  'magkano',
 ]);
 
 /**
