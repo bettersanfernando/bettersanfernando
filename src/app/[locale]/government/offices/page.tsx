@@ -1,16 +1,32 @@
 import { buildPageMetadata } from '../../../../lib/metadata';
 import { PageMessages } from '../../../../components/i18n/PageMessages';
 import { getPageT } from '../../../../i18n/server';
+import { getCityOffices } from '../../../../data/civic/government';
+import {
+  cleanPaginationPage,
+  type PageSearchParams,
+} from '../../../../lib/pagination';
 import GovernmentOfficesView from './GovernmentOffices';
 
-export async function generateMetadata() {
+const PAGE_SIZE = 10;
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<PageSearchParams>;
+}) {
   const { t, locale } = await getPageT('government-offices');
+  const page = cleanPaginationPage(
+    await searchParams,
+    Math.ceil(getCityOffices().length / PAGE_SIZE)
+  );
   return buildPageMetadata({
     title: t('City Offices'),
     description: t(
       'Browse verified City Government office locations and available institutional contact information in San Fernando, Pampanga.'
     ),
     path: '/government/offices',
+    page,
     locale,
   });
 }

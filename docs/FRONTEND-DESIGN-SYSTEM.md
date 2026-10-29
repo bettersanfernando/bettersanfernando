@@ -171,6 +171,11 @@ focus management, and a focus trap while open. Keep new mobile navigation
 work consistent with those behaviors; essential destinations must not depend
 on hover.
 
+Directory pagination and locale selection use real links with public,
+locale-preserving hrefs. Direct requests to a pagination URL render that page's
+records in the initial HTML. Disabled pagination boundaries remain
+non-interactive, and the active page/language is identified accessibly.
+
 The [footer](../src/components/layout/Footer.tsx) is the reference for the
 global closing treatment: grouped navigation, contribution and correction
 actions, independence context, and accessible external links. Its existing

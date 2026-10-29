@@ -174,7 +174,7 @@ dataset supports it.
 `/llms.txt` is prerendered from constant text. HTML implementations share
 `src/app/[locale]/`, whose root layout enumerates English and Filipino. Server
 translation helpers read `next/root-params`, so informational pages and known
-civic-record URLs are prerendered in both languages. Configuration rewrites
+civic-record detail URLs are prerendered in both languages. Configuration rewrites
 map unprefixed English URLs to internal `/en/...` output; `/en/...` requests
 redirect to their unprefixed public URLs. Filipino URLs remain `/fil/...`.
 Ordinary page rendering has no request-header dependency. A Filipino-only
@@ -182,7 +182,8 @@ Proxy supplies the locale to the global unmatched 404, which has no route
 parameters; it does not rewrite or render valid pages.
 
 Eleven filter/search directories retain query-specific server rendering;
-`/projects` also retains its legacy query redirect. Record-family fallbacks
+service-category directories also render per request to expose addressable
+pagination. `/projects` retains its legacy query redirect. Record-family fallbacks
 preserve legacy service redirects and localized missing-record responses,
 and Next's global not-found page preserves genuine localized 404s with the
 existing server-rendered shell. Static literal
@@ -427,6 +428,15 @@ MiniSearch index is provided through `src/data/civic/search.ts` and indexes
 only published, verified content and canonical destinations. Redirect aliases,
 planned placeholders, and withdrawn legacy content should not appear as
 independent results.
+
+Office, service-category, and City Projects directories expose their default
+inventory through server-rendered pagination links. Page one uses the clean
+directory canonical; later default pages use `?page=N` self-canonicals and
+matching EN/FIL alternates. Search, filter, and non-default sort variants keep
+the clean directory canonical. Pagination URLs are not added to the XML sitemap.
+The locale selector links to the corresponding public EN/FIL path and preserves
+the query string. Project records link to the Barangay Directory only when the
+published record supplies a barangay PSGC association.
 
 ## Projects, Procurement, Transparency, and Statistics
 

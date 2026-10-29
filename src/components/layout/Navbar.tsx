@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Accessibility,
   Archive,
@@ -40,7 +40,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import {
   getActiveNavigationId,
@@ -191,6 +191,31 @@ function DestinationLink({
   );
 }
 
+function getLanguageHrefs(pathname: string, search = '') {
+  const href = `${pathname}${search ? `?${search}` : ''}`;
+  return {
+    en: localizeHref(href, 'en'),
+    fil: localizeHref(href, 'fil'),
+  };
+}
+
+function QueryAwareCivicUtilityBar({
+  currentLanguage,
+  pathname,
+}: {
+  currentLanguage: LanguageType;
+  pathname: string;
+}) {
+  const searchParams = useSearchParams();
+
+  return (
+    <CivicUtilityBar
+      currentLanguage={currentLanguage}
+      languageHrefs={getLanguageHrefs(pathname, searchParams.toString())}
+    />
+  );
+}
+
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDesktopMenu, setOpenDesktopMenu] = useState<NavigationId | null>(
@@ -314,22 +339,22 @@ export default function Navbar() {
     };
   }, [isMobileOpen]);
 
-  const changeLanguage = (language: LanguageType) => {
-    // pathname (from usePathname()) never carries the query string or hash,
-    // so switching locale on e.g. /search?q=x must read those from the
-    // browser location directly or the query gets silently dropped.
-    const currentHref =
-      window.location.pathname + window.location.search + window.location.hash;
-    window.location.assign(localizeHref(currentHref, language));
-  };
-
   return (
     <header ref={headerRef} className="sticky top-0 z-50 bg-white shadow-sm">
       <EmergencyStrip />
-      <CivicUtilityBar
-        currentLanguage={currentLanguage}
-        onChangeLanguage={changeLanguage}
-      />
+      <Suspense
+        fallback={
+          <CivicUtilityBar
+            currentLanguage={currentLanguage}
+            languageHrefs={getLanguageHrefs(pathname)}
+          />
+        }
+      >
+        <QueryAwareCivicUtilityBar
+          currentLanguage={currentLanguage}
+          pathname={pathname}
+        />
+      </Suspense>
 
       <nav
         aria-label={t('navigation.accessibility.primary')}

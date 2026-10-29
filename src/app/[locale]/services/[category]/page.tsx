@@ -11,7 +11,13 @@ import { PageMessages } from '../../../../components/i18n/PageMessages';
 import { localizeHref } from '../../../../i18n/locale';
 import { getLocale, getPageT } from '../../../../i18n/server';
 import { buildPageMetadata } from '../../../../lib/metadata';
+import {
+  cleanPaginationPage,
+  type PageSearchParams,
+} from '../../../../lib/pagination';
 import ServiceCategoryView from '../service-category-view';
+
+const SERVICES_PER_PAGE = 10;
 
 // Single dynamic segment handling BOTH real categories and legacy one-
 // segment service-slug URLs — see docs/NEXTJS-MIGRATION-SPEC.md §5. A
@@ -37,8 +43,10 @@ export function generateStaticParams() {
 // response, and notFound()'s own metadata (noindex) takes over instead.
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ category: string }>;
+  searchParams: Promise<PageSearchParams>;
 }) {
   const { category: segment } = await params;
   // Guards against an unexpected render path ever inheriting the
@@ -54,15 +62,25 @@ export async function generateMetadata({
   // period before folding it into this wrapper sentence, or the result
   // reads as two sentence fragments stitched together mid-clause.
   const description = display.description.replace(/\.+$/, '');
+  const page = cleanPaginationPage(
+    await searchParams,
+    Math.ceil(
+      getServices().filter(service => getServiceCategory(service) === segment)
+        .length / SERVICES_PER_PAGE
+    )
+  );
   return buildPageMetadata({
     title: display.name,
     description: t('Browse {{description}} published by BetterSanFernando.', {
       description: description.charAt(0).toLowerCase() + description.slice(1),
     }),
     path: `/services/${segment}`,
+    page,
     locale,
   });
 }
+
+export const dynamic = 'force-dynamic';
 
 export default async function ServiceCategoryOrLegacySlugPage({
   params,

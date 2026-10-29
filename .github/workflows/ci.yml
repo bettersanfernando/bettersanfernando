@@ -26,3 +26,15 @@ jobs:
       - run: pnpm format:check
       - run: pnpm civic:verify
       - run: pnpm next-shell:smoke
+      - name: Verify crawl discovery in production HTML
+        run: |
+          pnpm start --hostname 127.0.0.1 --port 32626 > "$RUNNER_TEMP/crawl-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:32626/robots.txt > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          pnpm crawl-discovery:smoke

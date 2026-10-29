@@ -34,10 +34,10 @@ function weatherIconFor(code: number) {
 
 export default function CivicUtilityBar({
   currentLanguage,
-  onChangeLanguage,
+  languageHrefs,
 }: {
   currentLanguage: LanguageType;
-  onChangeLanguage: (language: LanguageType) => void;
+  languageHrefs: Record<LanguageType, string>;
 }) {
   const { t } = useTranslation('common');
   // Server and client first render must produce identical HTML: `new Date()`
@@ -180,11 +180,17 @@ export default function CivicUtilityBar({
               aria-label={t('navigation.language')}
             >
               {(['en', 'fil'] as const).map(language => (
-                <button
+                <a
                   key={language}
-                  type="button"
-                  onClick={() => onChangeLanguage(language)}
-                  aria-pressed={currentLanguage === language}
+                  href={languageHrefs[language]}
+                  data-locale-link
+                  onClick={event => {
+                    // Fragments aren't sent to the server; retain the current section.
+                    event.currentTarget.hash = window.location.hash;
+                  }}
+                  aria-current={
+                    currentLanguage === language ? 'page' : undefined
+                  }
                   className={`rounded-full px-2 py-0.5 font-medium transition-colors ${
                     currentLanguage === language
                       ? 'bg-slate-100 text-primary-800'
@@ -192,7 +198,7 @@ export default function CivicUtilityBar({
                   } ${focusStyles}`}
                 >
                   {t(`languages.${language}.short`)}
-                </button>
+                </a>
               ))}
             </div>
             <span className="rounded-full border border-slate-200 bg-white px-2 py-1 font-medium text-primary-800 sm:hidden">

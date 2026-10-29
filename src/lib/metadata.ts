@@ -115,12 +115,15 @@ export function buildPageMetadata({
   title: titleText,
   description: descriptionText = DEFAULT_DESCRIPTION,
   path,
+  page,
   locale = 'en',
 }: {
   /** Omit only for the home page, so the root template's default title applies. */
   title?: LocalizedText;
   description?: LocalizedText;
   path: string;
+  /** Clean listing pagination only; interactive query variants stay canonical to `path`. */
+  page?: number;
   locale?: LanguageType;
 }): Metadata {
   const title = resolveText(titleText, locale);
@@ -128,9 +131,11 @@ export function buildPageMetadata({
   // Page metadata is relative to the locale-specific root metadataBase. That
   // keeps English canonical URLs at their existing paths while /fil pages
   // emit their own canonical URLs without duplicating every route module.
-  const canonical = path === '/' ? './' : path.replace(/^\//, '');
-  const english = absoluteUrl(path);
-  const filipino = absoluteUrl(withLocalePrefix(path, 'fil'));
+  const paginatedPath = page && page > 1 ? `${path}?page=${page}` : path;
+  const canonical =
+    paginatedPath === '/' ? './' : paginatedPath.replace(/^\//, '');
+  const english = absoluteUrl(paginatedPath);
+  const filipino = absoluteUrl(withLocalePrefix(paginatedPath, 'fil'));
   return {
     title,
     description,

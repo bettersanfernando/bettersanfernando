@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Link from '../../../../components/i18n/LocaleLink';
-import { useQueryState, parseAsInteger } from 'nuqs';
+import { useQueryState } from 'nuqs';
 import {
   Search as SearchIcon,
   SlidersHorizontal,
@@ -25,6 +25,7 @@ import { enumLabel } from '../../statistics/enum-labels';
 import type { PageT } from '../../../../i18n/page-t';
 import { usePageT } from '../../../../components/i18n/PageMessages';
 import { useLocale } from '../../../../components/i18n/useLocale';
+import { pageQueryParser, paginationHref } from '../../../../lib/pagination';
 
 const PAGE_SIZE = 10;
 const UNATTRIBUTED_BARANGAY = 'unattributed';
@@ -211,7 +212,7 @@ export default function Projects() {
   const [sort, setSort] = useQueryState('sort', {
     defaultValue: DEFAULT_SORT as string,
   });
-  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
+  const [page, setPage] = useQueryState('page', pageQueryParser.withDefault(1));
 
   const [moreFiltersOpen, setMoreFiltersOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -309,6 +310,7 @@ export default function Projects() {
     funding ||
     procurement
   );
+  const cleanInventory = !hasFilters && activeSort === DEFAULT_SORT;
   const activeFilterCount = [
     lifecycle,
     barangayPsgc,
@@ -792,15 +794,28 @@ export default function Projects() {
             aria-label={t('Project pages')}
             className="mt-6 flex items-center justify-between gap-4"
           >
-            <button
-              type="button"
-              disabled={currentPage === 1}
-              onClick={() => setPage(currentPage - 1)}
-              className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
-            >
-              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-              {t('Previous')}
-            </button>
+            {cleanInventory && currentPage > 1 ? (
+              <Link
+                href={paginationHref(
+                  '/projects/city-projects',
+                  currentPage - 1
+                )}
+                className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 hover:border-[#0066EB] hover:bg-[#F3F6FB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+              >
+                <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                {t('Previous')}
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled={currentPage === 1}
+                onClick={() => setPage(currentPage - 1)}
+                className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+              >
+                <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                {t('Previous')}
+              </button>
+            )}
 
             <div className="hidden items-center gap-1.5 sm:flex">
               {getPageWindow(currentPage, totalPages).map((item, index) =>
@@ -812,6 +827,15 @@ export default function Projects() {
                   >
                     …
                   </span>
+                ) : cleanInventory && item !== currentPage ? (
+                  <Link
+                    key={item}
+                    href={paginationHref('/projects/city-projects', item)}
+                    aria-label={t('Page {{pageNumber}}', { pageNumber: item })}
+                    className="inline-flex h-9 min-w-9 items-center justify-center rounded-sm border border-gray-300 bg-white px-2 text-sm font-medium text-gray-900 hover:border-gray-400 hover:bg-[#F3F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                  >
+                    {item}
+                  </Link>
                 ) : (
                   <button
                     key={item}
@@ -837,15 +861,28 @@ export default function Projects() {
               })}
             </p>
 
-            <button
-              type="button"
-              disabled={currentPage === totalPages}
-              onClick={() => setPage(currentPage + 1)}
-              className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
-            >
-              {t('Next')}
-              <ChevronRight className="h-4 w-4" aria-hidden="true" />
-            </button>
+            {cleanInventory && currentPage < totalPages ? (
+              <Link
+                href={paginationHref(
+                  '/projects/city-projects',
+                  currentPage + 1
+                )}
+                className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 hover:border-[#0066EB] hover:bg-[#F3F6FB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+              >
+                {t('Next')}
+                <ChevronRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled={currentPage === totalPages}
+                onClick={() => setPage(currentPage + 1)}
+                className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+              >
+                {t('Next')}
+                <ChevronRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+            )}
           </nav>
         )}
       </div>

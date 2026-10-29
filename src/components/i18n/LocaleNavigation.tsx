@@ -26,6 +26,7 @@ export default function LocaleNavigation() {
 
       const anchor = (event.target as Element | null)?.closest('a[href]');
       if (!(anchor instanceof HTMLAnchorElement)) return;
+      if (anchor.hasAttribute('data-locale-link')) return;
       if (anchor.target || anchor.hasAttribute('download')) return;
 
       const href = anchor.getAttribute('href');

@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import Link from '../../../../components/i18n/LocaleLink';
-import { useQueryState, parseAsInteger } from 'nuqs';
+import { useQueryState } from 'nuqs';
 import {
   ArrowUpRight,
   ChevronLeft,
@@ -29,6 +29,7 @@ import { useLocale } from '../../../../components/i18n/useLocale';
 import { INTL_LOCALES } from '../../../../i18n/locale';
 import type { LanguageType } from '../../../../types';
 import { withSlots } from '../../../../components/i18n/rich';
+import { pageQueryParser, paginationHref } from '../../../../lib/pagination';
 
 type ContactFilter = 'all' | 'phone' | 'email' | 'hotline';
 type RelationshipFilter = 'all' | 'standalone' | 'subunit';
@@ -172,7 +173,7 @@ export default function GovernmentOffices() {
   const [sort, setSort] = useQueryState('sort', {
     defaultValue: 'name-asc',
   });
-  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
+  const [page, setPage] = useQueryState('page', pageQueryParser.withDefault(1));
 
   // Derived high-level directory metrics
   const totalOffices = allOffices.length;
@@ -288,6 +289,7 @@ export default function GovernmentOffices() {
     officialPageFilter !== 'all' ||
     sort !== 'name-asc'
   );
+  const cleanInventory = !hasActiveFilters;
 
   const clearFilters = () => {
     setQuery('');
@@ -816,15 +818,25 @@ export default function GovernmentOffices() {
               aria-label={t('Office directory pagination')}
               className="mt-6 flex items-center justify-between gap-4 border-t border-gray-200 pt-5"
             >
-              <button
-                type="button"
-                disabled={currentPage === 1}
-                onClick={() => setPage(currentPage - 1)}
-                className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
-              >
-                <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                {t('Previous')}
-              </button>
+              {cleanInventory && currentPage > 1 ? (
+                <Link
+                  href={paginationHref('/government/offices', currentPage - 1)}
+                  className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 hover:border-[#0066EB] hover:bg-[#F3F6FB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                  {t('Previous')}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  disabled={currentPage === 1}
+                  onClick={() => setPage(currentPage - 1)}
+                  className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                  {t('Previous')}
+                </button>
+              )}
 
               {/* Desktop Page Window */}
               <div className="hidden items-center gap-1.5 sm:flex">
@@ -837,6 +849,17 @@ export default function GovernmentOffices() {
                     >
                       …
                     </span>
+                  ) : cleanInventory && item !== currentPage ? (
+                    <Link
+                      key={item}
+                      href={paginationHref('/government/offices', item)}
+                      aria-label={t('Page {{pageNumber}}', {
+                        pageNumber: item,
+                      })}
+                      className="inline-flex h-9 min-w-9 items-center justify-center rounded-sm border border-gray-300 bg-white px-2 text-sm font-medium text-gray-900 hover:border-gray-400 hover:bg-[#F3F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                    >
+                      {item}
+                    </Link>
                   ) : (
                     <button
                       key={item}
@@ -863,15 +886,25 @@ export default function GovernmentOffices() {
                 })}
               </p>
 
-              <button
-                type="button"
-                disabled={currentPage === totalPages}
-                onClick={() => setPage(currentPage + 1)}
-                className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
-              >
-                {t('Next')}
-                <ChevronRight className="h-4 w-4" aria-hidden="true" />
-              </button>
+              {cleanInventory && currentPage < totalPages ? (
+                <Link
+                  href={paginationHref('/government/offices', currentPage + 1)}
+                  className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 hover:border-[#0066EB] hover:bg-[#F3F6FB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                >
+                  {t('Next')}
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setPage(currentPage + 1)}
+                  className="inline-flex h-9 items-center gap-1 rounded-sm border border-gray-300 bg-white px-3 text-sm font-medium text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:text-gray-400 enabled:cursor-pointer enabled:hover:border-[#0066EB] enabled:hover:bg-[#F3F6FB] enabled:hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                >
+                  {t('Next')}
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              )}
             </nav>
           )}
         </section>

@@ -160,12 +160,11 @@ assert.match(
   'root metadata must set metadataBase from the centralized site URL'
 );
 
-// 8. Canonical construction: buildPageMetadata always derives `alternates.canonical`
-// from absoluteUrl(path), never a hardcoded/query-string URL.
+// 8. Canonical construction remains centralized, including clean pagination.
 assert.match(
   metadataLibSource,
-  /const canonical = path === '\/' \? '\.\/' : path\.replace[\s\S]*?alternates:\s*\{\s*canonical,/,
-  'buildPageMetadata must set alternates.canonical from absoluteUrl(path)'
+  /const canonical =\s*paginatedPath === '\/' \? '\.\/' : paginatedPath\.replace[\s\S]*?alternates:\s*\{\s*canonical,/,
+  'buildPageMetadata must derive the canonical from its own locale-relative path'
 );
 
 // 9. Dynamic metadata: all four dynamic route families define

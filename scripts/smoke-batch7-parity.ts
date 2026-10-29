@@ -118,10 +118,20 @@ for (const behavior of [
   /document\.addEventListener\('pointerdown'/,
   /event\.key !== 'Escape'/,
   /aria-expanded=/,
-  /window\.location\.assign\(localizeHref\(currentHref, language\)\)/,
+  /localizeHref\(href, 'fil'\)/,
 ]) {
   assert.match(navbarSource, behavior);
 }
+const utilityBarSource = readFileSync(
+  'src/components/layout/CivicUtilityBar.tsx',
+  'utf8'
+);
+assert.match(utilityBarSource, /<a[\s\S]*?href=\{languageHrefs\[language\]\}/);
+assert.match(utilityBarSource, /data-locale-link/);
+assert.match(
+  readFileSync('src/components/i18n/LocaleNavigation.tsx', 'utf8'),
+  /anchor\.hasAttribute\('data-locale-link'\)/
+);
 const serviceCategorySource = readFileSync(
   'src/app/[locale]/services/service-category-view.tsx',
   'utf8'
