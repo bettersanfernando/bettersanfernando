@@ -409,6 +409,41 @@ assert.ok(
   '"paano kumuha ng mayor\'s permit" must strip conversational filler and surface BLPD business-permit services'
 );
 
+// 2024–2026 CSFP civic entities & vernacular queries
+assert.ok(
+  searchCivicRecords('boss', 'services').some(result =>
+    /permit/i.test(result.title)
+  ),
+  '"boss" must surface BLPD business-permit services'
+);
+assert.ok(
+  searchCivicRecords('business one stop shop', 'services').some(result =>
+    /permit/i.test(result.title)
+  ),
+  '"business one stop shop" must surface BLPD business-permit services'
+);
+assert.ok(
+  searchCivicRecords('hemodialysis', 'services').some(result =>
+    /hemodialysis|dialysis/i.test(result.title)
+  ),
+  '"hemodialysis" must surface dialysis and medical certification services'
+);
+assert.equal(
+  searchCivicRecords('super health center')[0]?.id,
+  'office:san-fernando-super-health-center',
+  '"super health center" must rank RHU VI – Super Health Center first'
+);
+assert.equal(
+  searchCivicRecords('rhu 5')[0]?.id,
+  'office:rhu-v-northville-calulut',
+  '"rhu 5" must rank RHU V – Northville / Calulut first'
+);
+assert.equal(
+  searchCivicRecords('atin super health center')[0]?.id,
+  'office:san-fernando-super-health-center',
+  '"atin super health center" must strip Kapampangan particle "atin" and rank Super Health Center first'
+);
+
 // Regression: a natural three-word query combining a topic, the domain
 // word "project", and a location must find the real matching projects —
 // this previously broke because every "Project source" (evidence) record

@@ -84,6 +84,16 @@ const STOP_WORDS: ReadonlySet<string> = new Set([
   'reng',
   'king',
   'keng',
+  'ala',
+  'atin',
+  'ninu',
+  'kapilan',
+  'bakit',
+  'obhetu',
+  'bisa',
+  'buri',
+  'kanu',
+  'ot',
 ]);
 
 /**
