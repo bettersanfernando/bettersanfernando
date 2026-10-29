@@ -11,6 +11,10 @@ import { getCityOffices } from '../src/data/civic/government.ts';
 const baseUrl = process.env.BATCH7_BASE_URL ?? 'http://127.0.0.1:3000';
 const productionOrigin = 'https://bettersanfernando.example';
 
+// Locale options deliberately cross languages; ordinary navigation stays local.
+const withoutLocaleOptions = (html: string) =>
+  html.replace(/<a\b(?=[^>]*\bdata-locale-link\b)[^>]*>/g, '');
+
 async function request(path: string) {
   return fetch(new URL(path, baseUrl), { redirect: 'manual' });
 }
@@ -457,8 +461,13 @@ for (const [path, filipino, filipinoTitle] of [
     ),
     `/fil${path} needs its Filipino title`
   );
-  assert.ok(!/href="\/fil/.test(english), `${path} must not link into /fil`);
-  const unprefixed = [...filipinoPage.matchAll(/ href="(\/[^"]*)"/g)]
+  assert.ok(
+    !/href="\/fil/.test(withoutLocaleOptions(english)),
+    `${path} ordinary navigation must stay English`
+  );
+  const unprefixed = [
+    ...withoutLocaleOptions(filipinoPage).matchAll(/ href="(\/[^"]*)"/g),
+  ]
     .map(match => match[1])
     .filter(
       href =>
@@ -696,7 +705,9 @@ for (const [path, filipino, filipinoTitle] of [
   );
   assert.ok(filipino.includes('<meta property="og:locale" content="fil_PH"'));
   assert.ok(!filipino.includes('/fil/fil'));
-  const unprefixed = [...filipino.matchAll(/ href="(\/[^"]*)"/g)]
+  const unprefixed = [
+    ...withoutLocaleOptions(filipino).matchAll(/ href="(\/[^"]*)"/g),
+  ]
     .map(match => match[1])
     .filter(
       href =>

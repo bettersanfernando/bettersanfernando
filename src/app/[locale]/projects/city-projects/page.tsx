@@ -3,15 +3,31 @@ import ProjectsView from './Projects';
 import { buildPageMetadata } from '../../../../lib/metadata';
 import { PageMessages } from '../../../../components/i18n/PageMessages';
 import { getPageT } from '../../../../i18n/server';
+import { getProjects } from '../../../../data/civic/projects';
+import {
+  cleanPaginationPage,
+  type PageSearchParams,
+} from '../../../../lib/pagination';
 
-export async function generateMetadata() {
+const PAGE_SIZE = 10;
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<PageSearchParams>;
+}) {
   const { t, locale } = await getPageT('projects-city-projects');
+  const page = cleanPaginationPage(
+    await searchParams,
+    Math.ceil(getProjects().length / PAGE_SIZE)
+  );
   return buildPageMetadata({
     title: t('City Projects'),
     description: t(
       'Browse the full list of infrastructure and procurement projects of the City of San Fernando, Pampanga, with sourced evidence for every fact.'
     ),
     path: '/projects/city-projects',
+    page,
     locale,
   });
 }

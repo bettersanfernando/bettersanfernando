@@ -641,7 +641,16 @@ export default async function ProjectDetailView({
                   {t('Barangay')}
                 </dt>
                 <dd className="mt-1.5 text-sm leading-6 text-gray-900">
-                  {project.barangay ?? t('Not available')}
+                  {project.barangay_psgc && project.barangay ? (
+                    <Link
+                      href={`/barangays?q=${encodeURIComponent(project.barangay_psgc)}`}
+                      className="text-[#0066EB] underline underline-offset-4 hover:text-[#0052BC]"
+                    >
+                      {project.barangay}
+                    </Link>
+                  ) : (
+                    (project.barangay ?? t('Not available'))
+                  )}
                 </dd>
               </div>
               <div>

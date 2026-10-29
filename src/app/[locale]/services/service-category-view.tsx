@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useQueryState } from 'nuqs';
 import {
   ArrowUpRight,
   Building2,
@@ -26,6 +27,7 @@ import {
 } from '../../../data/civic/services';
 import { getUtilitiesWaterResources } from '../../../data/civic/utilitiesWaterResources';
 import { getCategoryDisplay } from './categories';
+import { pageQueryParser, paginationHref } from '../../../lib/pagination';
 
 // Client-side search/filter island for a single service category — the
 // genuinely interactive part of src/pages/Services.tsx's ServiceCategory
@@ -268,7 +270,7 @@ export default function ServiceCategoryView({
 }) {
   const t = usePageT();
   const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useQueryState('page', pageQueryParser.withDefault(1));
   const display = getCategoryDisplay(category, t);
   const categoryServices = useMemo(
     () => services.filter(service => getServiceCategory(service) === category),
@@ -332,6 +334,8 @@ export default function ServiceCategoryView({
               : '{{count}} services',
             { count: filteredServices.length }
           );
+  const cleanInventory = !query.trim();
+  const categoryPath = `/services/${category}`;
 
   return (
     <>
@@ -691,19 +695,41 @@ export default function ServiceCategoryView({
               className="mt-6 flex flex-wrap items-center justify-center gap-2"
               aria-label={t('Service results pagination')}
             >
-              <button
-                type="button"
-                onClick={() => setPage(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="cursor-pointer rounded-sm border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
-                aria-label={t('Previous page')}
-              >
-                {t('Previous')}
-              </button>
+              {cleanInventory && currentPage > 1 ? (
+                <Link
+                  href={paginationHref(categoryPath, currentPage - 1)}
+                  className="rounded-sm border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                  aria-label={t('Previous page')}
+                >
+                  {t('Previous')}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="cursor-pointer rounded-sm border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                  aria-label={t('Previous page')}
+                >
+                  {t('Previous')}
+                </button>
+              )}
               <div className="flex items-center gap-1" aria-label={t('Pages')}>
                 {Array.from({ length: totalPages }, (_, index) => {
                   const pageNumber = index + 1;
                   const active = pageNumber === currentPage;
+                  if (cleanInventory && !active) {
+                    return (
+                      <Link
+                        key={pageNumber}
+                        href={paginationHref(categoryPath, pageNumber)}
+                        aria-label={t('Page {{pageNumber}}', { pageNumber })}
+                        className="inline-flex h-9 min-w-9 items-center justify-center rounded-sm border border-gray-300 px-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                      >
+                        {pageNumber}
+                      </Link>
+                    );
+                  }
                   return (
                     <button
                       key={pageNumber}
@@ -718,15 +744,25 @@ export default function ServiceCategoryView({
                   );
                 })}
               </div>
-              <button
-                type="button"
-                onClick={() => setPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="cursor-pointer rounded-sm border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
-                aria-label={t('Next page')}
-              >
-                {t('Next')}
-              </button>
+              {cleanInventory && currentPage < totalPages ? (
+                <Link
+                  href={paginationHref(categoryPath, currentPage + 1)}
+                  className="rounded-sm border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                  aria-label={t('Next page')}
+                >
+                  {t('Next')}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="cursor-pointer rounded-sm border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-[#0066EB] hover:text-[#0066EB] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066EB]"
+                  aria-label={t('Next page')}
+                >
+                  {t('Next')}
+                </button>
+              )}
             </nav>
           )}
         </section>

@@ -52,11 +52,13 @@ const literalRoutes = readdirSync('src/app/[locale]', { recursive: true })
   .filter(file => file.endsWith('page.tsx') && !file.includes('['))
   .map(file => `/${file.replace(/\/?page\.tsx$/, '')}`);
 const services = getServices();
-const paths = [
-  ...literalRoutes.filter(route => !queryRoutes.includes(route)),
+const serviceCategoryPaths = [
   ...new Set(
     services.map(service => `/services/${getServiceCategory(service)}`)
   ),
+];
+const paths = [
+  ...literalRoutes.filter(route => !queryRoutes.includes(route)),
   ...services.map(getServiceHref),
   ...getProjects().map(project => `/projects/${project.id}`),
   ...getCityOffices().map(office => `/government/offices/${office.office_id}`),
@@ -88,6 +90,12 @@ for (const locale of ['en', 'fil']) {
       `${path} must retain query SSR`
     );
   }
+  for (const path of serviceCategoryPaths) {
+    assert.ok(
+      !manifest.routes[`/${locale}${path}`],
+      `${path} must retain query SSR for crawlable pagination`
+    );
+  }
 }
 for (const family of [
   '/services/[category]',
@@ -110,7 +118,7 @@ assert.deepEqual(
   ),
   ['/fil/:path*']
 );
-assert.equal(paths.length, 569);
+assert.equal(paths.length, 553);
 console.log(
-  `Static locale smoke passed: ${paths.length * 2} public HTML paths prerendered; ${queryRoutes.length} query-dependent families retained.`
+  `Static locale smoke passed: ${paths.length * 2} public HTML paths prerendered; ${queryRoutes.length + serviceCategoryPaths.length} query-dependent families retained.`
 );

@@ -1,5 +1,15 @@
 # Vercel deployment footprint
 
+## Crawl-discovery follow-up — 2026-10-29
+
+Service-category directories now render per request so `?page=N` URLs return
+the selected records in the initial HTML. The 16 categories per locale are no
+longer prerendered: 1,106 public HTML paths remain static (553 per locale),
+while office and project detail pages retain their existing static output.
+The locale selector isolates query-string access behind a Suspense boundary,
+preserving the static shell on informational and record-detail pages. The
+historical measurements below describe the earlier deployment.
+
 ## Ignored Build Step
 
 In Vercel Project Settings → Git → Ignored Build Step, configure:
