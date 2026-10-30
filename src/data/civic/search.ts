@@ -322,7 +322,7 @@ function composeSearchDocuments(): CivicSearchDocument[] {
         ' '
       ),
       identifiers: [office.office_id, office.acronym].filter(Boolean).join(' '),
-      aliases: aliasesFor(office.acronym),
+      aliases: aliasesFor(office.acronym, office.office_id),
       category: 'Government office',
       descriptionText: 'government city office institutional directory',
       location: office.physical_address ?? '',
@@ -342,7 +342,7 @@ function composeSearchDocuments(): CivicSearchDocument[] {
         .filter(Boolean)
         .join(' '),
       identifiers: [hotline.id, hotline.number].join(' '),
-      aliases: aliasesFor(hotline.organization),
+      aliases: aliasesFor(hotline.organization, hotline.id),
       category: titleCase(hotline.classification),
       descriptionText: [hotline.public_purpose, hotline.organization].join(' '),
       location: hotline.address ?? '',
