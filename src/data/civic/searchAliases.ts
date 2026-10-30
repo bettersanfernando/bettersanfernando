@@ -17,12 +17,8 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'business license',
     "mayor's permit",
     'mayors permit',
-    'working permit',
     'permit sa negosyo',
     'lisensya sa negosyo',
-    'boss',
-    'business one stop shop',
-    'ebpls',
   ],
   cdrrmo: [
     'disaster',
@@ -33,11 +29,6 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'sakuna',
     'kalamidad',
     'emerhensiya',
-    '961-help',
-    'pumping station',
-    'baha',
-    'albug',
-    'flood',
   ],
   cswdo: [
     'social welfare',
@@ -51,17 +42,8 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'city health office',
     'health office',
     'health services',
-    'health certificate',
-    'sanitary permit',
-    'bakuna',
     'kalusugan',
     'panulu',
-    'super health center',
-    'dialysis',
-    'hemodialysis',
-    'civic health',
-    'infirmary',
-    'gamot',
   ],
   cippeso: [
     'employment office',
@@ -86,15 +68,12 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'veterinary office',
     'agriculture and veterinary',
     'agriculture and fisheries',
-    'animal bite',
-    'anti-rabies',
-    'rabies vaccination',
     'livestock',
     'seedlings',
     'pagsasaka',
     'beterinaryo',
   ],
-  ccsfp: ['city college', 'scholarship', 'college admission', 'kolehiyo'],
+  ccsfp: ['city college', 'college admission', 'kolehiyo'],
   cenro: [
     'environment office',
     'environment and natural resources',
@@ -116,7 +95,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'sertipiko ng kasal',
     'sertipiko ng kamatayan',
   ],
-  osca: [
+  'office-for-senior-citizens-affairs': [
     'senior citizen affairs',
     'senior citizens',
     'senior citizen id',
@@ -131,7 +110,7 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'building permit office',
     'occupancy permit',
     'electrical permit',
-    'housing office',
+    'pagpapatayo',
   ],
   csfwd: [
     'water district',
@@ -150,7 +129,6 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'property assessment',
     'real property assessment',
     'tax map',
-    'amilyar',
   ],
   cto: [
     'treasurer',
@@ -158,12 +136,86 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'real property tax',
     'tax payment',
     'bayad buwis',
-    'cedula',
-    'sedula',
-    'community tax certificate',
     'amilyar',
   ],
   ctipo: ['tourism office', 'investment promotion', 'city tourism', 'turismo'],
+  'city-treasurers-office': ['cedula', 'sedula', 'community tax certificate'],
+  'business-license-permit-division': [
+    'boss',
+    'business one stop shop',
+    'ebpls',
+  ],
+  'city-health-office': ['health certificate', 'sanitary permit', 'bakuna'],
+  'city-agriculture-veterinary': [
+    'animal bite',
+    'anti-rabies',
+    'rabies vaccination',
+  ],
+  'securing-community-tax-certificate-individual': [
+    'cedula',
+    'sedula',
+    'community tax certificate',
+  ],
+  'request-for-animal-vaccination-and-treatment': [
+    'animal bite',
+    'anti-rabies',
+    'rabies vaccination',
+    'bakuna',
+  ],
+  'basic-immunization-services': ['bakuna', 'vaccination'],
+  'availment-of-post-exposure-prophylaxis-anti-rabies-vaccine': ['bakuna'],
+  'mayors-permit-for-business-new-business': [
+    'boss',
+    'business one stop shop',
+    'ebpls',
+    'permit sa negosyo',
+    'lisensya sa negosyo',
+  ],
+  'mayors-permit-for-business-renewal': [
+    'boss',
+    'business one stop shop',
+    'ebpls',
+    'permit sa negosyo',
+    'lisensya sa negosyo',
+  ],
+  'mayors-permit-for-business-special-permit': [
+    'permit sa negosyo',
+    'lisensya sa negosyo',
+  ],
+  'permit-to-operate-temporary-permit': [
+    'permit sa negosyo',
+    'lisensya sa negosyo',
+  ],
+  'availment-of-medicines': ['gamot'],
+  'receiving-of-emergency-call': ['baha', 'albug', 'flood', 'emerhensiya'],
+  'response-for-emergency-call': [
+    'baha',
+    'albug',
+    'flood',
+    'emerhensiya',
+    'safru',
+  ],
+  'respond-to-emergency-cases': ['emerhensiya'],
+  'requesting-certified-copy-of-birth-death-marriage-and-other-civil-registry-documents':
+    [
+      'birth certificate',
+      'marriage certificate',
+      'death certificate',
+      'sertipiko ng kapanganakan',
+      'sertipiko ng kasal',
+      'sertipiko ng kamatayan',
+    ],
+  'registration-of-live-birth-for-marital-legitimate-and-non-marital-illegitimate-child-delayed':
+    ['late registration'],
+  'acceptance-of-water-bill-payments': ['water billing', 'bayarin sa tubig'],
+  'new-service-application': ['water connection'],
+  'reconnection-of-accounts-disconnected-within-twenty-four-24-hours': [
+    'water reconnection',
+  ],
+  'reconnection-of-accounts-disconnected-after-twenty-four-24-hours': [
+    'water reconnection',
+  ],
+  'payment-of-real-property-tax-or-amilyar': ['buwis sa ari-arian'],
   cmo: ['mayor', "mayor's office", 'city mayor', 'alkalde', 'munisipyu'],
   ocvm: ['vice mayor', "vice mayor's office", 'bise alkalde'],
   osp: [
@@ -306,27 +358,13 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
   ],
 
   // Published service-category slugs (see src/app/[locale]/services/categories.ts)
-  'civil-registry': [
-    'birth certificate',
-    'marriage certificate',
-    'death certificate',
-    'civil registrar',
-  ],
+  'civil-registry': ['civil registry', 'civil registrar'],
   'health-services': [
     'city health office',
-    'rural health unit',
-    'medical consultation',
-    'vaccination',
-    'dental',
-    'laboratory',
-    'bakuna',
+    'health office',
+    'health services',
     'kalusugan',
-    'super health center',
-    'dialysis',
-    'hemodialysis',
-    'civic health',
-    'infirmary',
-    'gamot',
+    'panulu',
   ],
   'pwd-services': [
     'persons with disability',
@@ -336,9 +374,11 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
   ],
   'senior-citizens': [
     'senior citizen',
+    'senior citizen id',
     'osca id',
     'elderly services',
     'serbisyo para sa nakatatanda',
+    'nakatatanda',
   ],
   'social-welfare': [
     'welfare assistance',
@@ -349,80 +389,33 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
   'assistance-programs': [
     'financial assistance',
     'aid programs',
-    'aics',
-    'medical assistance',
-    'burial assistance',
     'tulong pinansyal',
   ],
-  'property-taxes': [
-    'real property tax',
-    'amilyar',
-    'tax declaration',
-    'city assessor',
-    'cedula',
-    'sedula',
-    'buwis sa ari-arian',
-  ],
-  business: [
-    'business permit',
-    "mayor's permit",
-    'business license',
-    'working permit',
-    'permit sa negosyo',
-    'boss',
-    'business one stop shop',
-    'ebpls',
-    'negosyo',
-  ],
+  business: ['negosyo'],
   employment: [
-    'job referral',
     'public employment',
     'peso',
     'cpeso',
     'cippeso',
     'career',
     'trabaho',
+    'jobs',
+    'obra',
   ],
-  education: [
-    'scholarship',
-    'educational assistance',
-    'city college',
-    'ccsfp',
-    'edukasyon',
-  ],
+  education: ['city college', 'ccsfp', 'edukasyon', 'kolehiyo'],
   'agriculture-fisheries': [
     'agriculture office',
     'veterinary office',
     'cavo',
-    'seedlings',
-    'livestock',
-    'anti-rabies',
-    'animal bite',
     'pagsasaka',
   ],
-  'disaster-preparedness': [
-    'disaster',
-    'emergency',
-    'rescue',
-    'cdrrmo',
-    'safru',
-    'sakuna',
-    'flood control',
-    'drainage',
-    'baha',
-    'albug',
-    'idrr-cca',
-    'pumping station',
-    'hems',
-  ],
+  'disaster-preparedness': ['disaster', 'cdrrmo', 'sakuna', 'kalamidad'],
   'utilities-water': [
     'water district',
-    'water billing',
-    'water connection',
+    'water utility',
     'csfwd',
     'tubig',
     'danum',
-    'bayarin sa tubig',
   ],
   'infrastructure-public-works': [
     'public works',
@@ -432,44 +425,25 @@ const ALIAS_TABLE: Readonly<Record<string, readonly string[]>> = {
     'dalan',
     'tete',
     'kanal',
-    'nscr',
-    'pnr',
-    'railway',
-    'train station',
-    'capital town',
-    'rainwater park',
-    'retention basin',
-    'jasa',
-    'lazatin flyover',
-    'dolores flyover',
-    'bypass',
     'tulay',
-  ],
-  'housing-land-use': [
-    'zoning',
-    'building permit',
-    'occupancy permit',
-    'land use',
-    'pagpapatayo',
   ],
   environment: [
     'cenro',
     'solid waste',
     'waste management',
-    'tree cutting',
     'compost',
     'basura',
     'kapaligiran',
-    'rainwater park',
-    'retention basin',
   ],
 } satisfies Record<string, readonly string[]>;
 
 /**
  * Collects every alias phrase matching any of the given anchors (case-
  * insensitive), de-duplicated and space-joined for indexing. An anchor is
- * typically an office acronym or a service-category slug; composite slash-
- * separated acronyms (e.g. "CIPPESO / CPESO") also resolve each part.
+ * typically an office acronym, service-category slug, or stable record ID;
+ * composite slash-separated acronyms (e.g. "CIPPESO / CPESO") also resolve
+ * each part. CTO is ambiguous in the Tourism composite and must not inherit
+ * the Treasurer's aliases.
  */
 export function aliasesFor(
   ...anchors: readonly (string | undefined)[]
@@ -478,15 +452,18 @@ export function aliasesFor(
   for (const anchor of anchors) {
     if (!anchor) continue;
     const normalized = anchor.trim().toLocaleLowerCase('en-PH');
-    const candidates = normalized.includes('/')
-      ? [
-          normalized,
-          ...normalized
-            .split('/')
-            .map(part => part.trim())
-            .filter(Boolean),
-        ]
-      : [normalized];
+    const candidates =
+      normalized === 'cto / ctipo'
+        ? ['ctipo']
+        : normalized.includes('/')
+          ? [
+              normalized,
+              ...normalized
+                .split('/')
+                .map(part => part.trim())
+                .filter(Boolean),
+            ]
+          : [normalized];
     for (const key of candidates) {
       const aliases = ALIAS_TABLE[key];
       if (aliases) for (const alias of aliases) matches.add(alias);

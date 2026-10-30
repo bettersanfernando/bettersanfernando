@@ -429,6 +429,22 @@ only published, verified content and canonical destinations. Redirect aliases,
 planned placeholders, and withdrawn legacy content should not appear as
 independent results.
 
+An entity relationship does not establish search relevance for every child
+record. Office aliases identify the responsible office; services receive only
+category and service-slug aliases. Office acronyms and names remain searchable
+through service identifiers and native text. A category alias must reasonably
+describe every published service in that category for the resident's intent.
+
+Check canonical records and provenance in the data repository first, then the
+publication-reviewed export. Prefer native titles, descriptions, and identifiers
+when they already match. Use a stable office/facility ID, service slug, project
+ID, or hotline ID for narrower intent, and verify both the intended ranking and
+unrelated sibling records. An office may be a useful destination when its
+specific transaction is not published; never use a held record as a public
+target or alias a different transaction merely to avoid empty results. Named
+projects without matching published records are not aliases for general service
+intake.
+
 Office, service-category, and City Projects directories expose their default
 inventory through server-rendered pagination links. Page one uses the clean
 directory canonical; later default pages use `?page=N` self-canonicals and
