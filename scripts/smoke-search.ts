@@ -25,6 +25,7 @@ import {
   searchCivicRecordsDetailed,
   type CivicSearchDomain,
 } from '../src/data/civic/search.ts';
+import { stripStopWords } from '../src/data/civic/searchNormalization.ts';
 import { mainNavigation } from '../src/data/navigation.ts';
 import { plannedPages } from '../src/data/plannedPages.ts';
 
@@ -306,32 +307,143 @@ assert.ok(
   '"veterinary office" must not misroute to CASSO'
 );
 
-assert.ok(
-  searchCivicRecords('anti-rabies', 'services').some(
-    result => /CAVO/i.test(result.metadata) || /rabies/i.test(result.title)
-  ),
-  '"anti-rabies" must surface CAVO veterinary services'
-);
+const communityTaxCertificateId =
+  'service:charter-2026-2e-city-treasurers-office-external-15';
+const cavoAnimalVaccinationId =
+  'service:charter-2026-2e-city-agriculture-and-veterinary-office-external-04';
+const humanAntiRabiesId =
+  'service:charter-2026-2e-city-health-office-external-10';
+const burialPermitId = 'service:charter-2026-2e-city-health-office-external-17';
+const cippesoOfficeId = 'office:cippeso-cpeso';
+const tourismOfficeId = 'office:city-tourism-investment-promotion';
 
-// Composite office acronym ("CIPPESO / CPESO") must resolve on bare "cpeso".
 assert.ok(
-  searchCivicRecords('cpeso', 'government').some(
+  !searchCivicRecords('city assessor', 'services', getServices().length).some(
     result =>
-      /CPESO|Employment/i.test(result.title) || /CPESO/i.test(result.metadata)
+      result.id.startsWith('service:charter-2026-2e-city-treasurers-office-')
   ),
-  '"cpeso" must match the CIPPESO / CPESO office record'
+  '"city assessor" must not match unrelated Treasurer services through their category'
 );
 
-// Local resident tax/certificate terms ("cedula", "sedula") must surface CTO.
-for (const term of ['cedula', 'sedula']) {
+for (const term of ['cedula', 'sedula', 'community tax certificate']) {
+  const results = searchCivicRecords(term, 'services', getServices().length);
+  assert.equal(
+    results[0]?.id,
+    communityTaxCertificateId,
+    `"${term}" must rank the Community Tax Certificate service first`
+  );
   assert.ok(
-    searchCivicRecords(term).some(
-      result =>
-        /Treasurer|CTO/i.test(result.title) ||
-        /CTO/i.test(result.metadata) ||
-        /Property Taxes/i.test(result.category)
+    !results.some(result => result.id.includes('city-assessors-office')),
+    `"${term}" must not match City Assessor services`
+  );
+}
+
+for (const term of [
+  'treasurer',
+  'cedula',
+  'sedula',
+  'tax payment',
+  'community tax certificate',
+  'amilyar',
+  'bayad buwis',
+]) {
+  assert.ok(
+    !searchCivicRecords(term, 'government', documents.length).some(
+      result => result.id === tourismOfficeId
     ),
-    `"${term}" must surface City Treasurer / property-tax records`
+    `Tourism must not inherit Treasurer aliases for "${term}"`
+  );
+}
+
+assert.equal(
+  searchCivicRecords('treasurer')[0]?.id,
+  'office:city-treasurers-office',
+  '"treasurer" must rank the City Treasurer\'s Office first'
+);
+
+assert.equal(
+  searchCivicRecords('cpeso', 'government')[0]?.id,
+  cippesoOfficeId,
+  '"cpeso" must rank the CIPPESO / CPESO office first'
+);
+assert.equal(
+  searchCivicRecords('obra', 'government')[0]?.id,
+  cippesoOfficeId,
+  '"obra" must resolve through the CIPPESO / CPESO composite alias'
+);
+
+const workingPermitResults = searchCivicRecords(
+  'working permit',
+  'services',
+  getServices().length
+);
+assert.equal(
+  workingPermitResults[0]?.id,
+  'service:charter-2026-2e-city-investment-promotions-and-public-employment-services-office-external-05',
+  '"working permit" must rank its CIPPESO service first'
+);
+assert.ok(
+  !workingPermitResults.some(result =>
+    /Business License/i.test(result.metadata)
+  ),
+  '"working permit" must not match BLPD services'
+);
+
+const antiRabiesResults = searchCivicRecords(
+  'anti-rabies',
+  'services',
+  getServices().length
+);
+assert.deepEqual(
+  antiRabiesResults.map(result => result.id),
+  [humanAntiRabiesId, cavoAnimalVaccinationId],
+  '"anti-rabies" must rank the human and CAVO animal services without unrelated CAVO matches'
+);
+
+const dentalResults = searchCivicRecords(
+  'dental',
+  'services',
+  getServices().length
+);
+assert.equal(
+  dentalResults[0]?.id,
+  'service:charter-2026-2e-city-college-of-san-fernando-pampanga-external-07',
+  '"dental" must rank the exact dental service first'
+);
+assert.ok(
+  dentalResults.some(result =>
+    result.id.includes('city-health-office-external-02')
+  ),
+  '"dental" must retain the City Health Office dental service'
+);
+assert.ok(
+  !dentalResults.some(result => result.id === burialPermitId),
+  '"dental" must not match an unrelated burial permit'
+);
+
+const healthQueries = [
+  [
+    'medical consultation',
+    'service:charter-2026-2e-city-college-of-san-fernando-pampanga-external-14',
+  ],
+  ['vaccination', 'service:charter-2026-2e-city-health-office-external-16'],
+  ['laboratory', 'service:charter-2026-2e-city-health-office-external-01'],
+  ['bakuna', 'service:charter-2026-2e-city-health-office-external-16'],
+  [
+    'health certificate',
+    'service:charter-2026-2e-city-health-office-external-26',
+  ],
+  ['sanitary permit', 'service:charter-2026-2e-city-health-office-external-48'],
+] as const;
+for (const [query, expectedId] of healthQueries) {
+  const results = searchCivicRecords(query, 'services', getServices().length);
+  assert.ok(
+    results.some(result => result.id === expectedId),
+    `"${query}" must retain its relevant health service`
+  );
+  assert.ok(
+    !results.some(result => result.id === burialPermitId),
+    `"${query}" must not match the unrelated burial permit`
   );
 }
 
@@ -409,39 +521,323 @@ assert.ok(
   '"paano kumuha ng mayor\'s permit" must strip conversational filler and surface BLPD business-permit services'
 );
 
-// 2024–2026 CSFP civic entities & vernacular queries
-assert.ok(
-  searchCivicRecords('boss', 'services').some(result =>
-    /permit/i.test(result.title)
-  ),
-  '"boss" must surface BLPD business-permit services'
+// 2024–2026 CSFP civic entities & vernacular queries. Facility and program
+// aliases are scoped to their actual records, rather than every service in an
+// office or category.
+const mayorPermitIds = new Set([
+  'service:charter-2026-2e-business-license-and-permit-division-external-05',
+  'service:charter-2026-2e-business-license-and-permit-division-external-06',
+]);
+for (const query of ['boss', 'business one stop shop', 'ebpls']) {
+  const results = searchCivicRecords(query, 'services', getServices().length);
+  assert.ok(mayorPermitIds.has(results[0]?.id ?? ''));
+  assert.ok(
+    results.every(result => mayorPermitIds.has(result.id)),
+    `"${query}" must not match unrelated BLPD services`
+  );
+  assert.deepEqual(
+    new Set(results.map(result => result.id)),
+    mayorPermitIds,
+    `"${query}" must retain both published Mayor's Permit services`
+  );
+}
+
+const preHemodialysisId =
+  'service:charter-2026-2e-city-health-office-external-32';
+for (const query of ['dialysis', 'hemodialysis']) {
+  assert.deepEqual(
+    searchCivicRecords(query, 'services', getServices().length).map(
+      result => result.id
+    ),
+    [preHemodialysisId],
+    `"${query}" must only match the published pre-hemodialysis service`
+  );
+}
+assert.equal(
+  searchCivicRecords('gamot', 'services')[0]?.id,
+  'service:charter-2026-2e-city-health-office-external-09',
+  '"gamot" must rank the medicines service first'
 );
-assert.ok(
-  searchCivicRecords('business one stop shop', 'services').some(result =>
-    /permit/i.test(result.title)
-  ),
-  '"business one stop shop" must surface BLPD business-permit services'
-);
-assert.ok(
-  searchCivicRecords('hemodialysis', 'services').some(result =>
-    /hemodialysis|dialysis/i.test(result.title)
-  ),
-  '"hemodialysis" must surface dialysis and medical certification services'
-);
+for (const query of ['super health center', 'civic health', 'infirmary']) {
+  assert.ok(
+    !documents.some(
+      document =>
+        document.id.startsWith('service:') &&
+        document.id !== preHemodialysisId &&
+        document.aliases.includes(query)
+    ),
+    `"${query}" must not be an alias for unrelated CHO services`
+  );
+}
 assert.equal(
   searchCivicRecords('super health center')[0]?.id,
   'office:san-fernando-super-health-center',
   '"super health center" must rank RHU VI – Super Health Center first'
 );
-assert.equal(
-  searchCivicRecords('rhu 5')[0]?.id,
-  'office:rhu-v-northville-calulut',
-  '"rhu 5" must rank RHU V – Northville / Calulut first'
-);
+for (const [query, officeId] of [
+  ['rhu 1', 'rhu-i-dolores'],
+  ['rhu 2', 'rhu-ii-sindalan'],
+  ['rhu 3', 'rhu-iii-san-nicolas'],
+  ['rhu 4', 'rhu-iv-san-agustin'],
+  ['rhu 5', 'rhu-v-northville-calulut'],
+  ['rhu 6', 'san-fernando-super-health-center'],
+] as const) {
+  assert.equal(searchCivicRecords(query)[0]?.id, `office:${officeId}`);
+}
 assert.equal(
   searchCivicRecords('atin super health center')[0]?.id,
   'office:san-fernando-super-health-center',
   '"atin super health center" must strip Kapampangan particle "atin" and rank Super Health Center first'
+);
+
+assert.equal(
+  searchCivicRecords('961-help')[0]?.id,
+  'hotline:cdrrmo-command-center-help-line',
+  '"961-help" must resolve through the published HELP hotline data'
+);
+for (const query of ['baha', 'albug', 'flood']) {
+  const results = searchCivicRecords(query, 'services', getServices().length);
+  assert.ok(
+    /Receiving of Emergency Call|Response for Emergency Call/.test(
+      results[0]?.title ?? ''
+    ),
+    `"${query}" must rank an emergency-call service first`
+  );
+  assert.ok(
+    results.some(result =>
+      /Receiving of Emergency Call|Response for Emergency Call/.test(
+        result.title
+      )
+    ),
+    `"${query}" must surface emergency-call services`
+  );
+  assert.ok(
+    !results.some(result => /CCTV|Thesis/.test(result.title)),
+    `"${query}" must not match unrelated CDRRMO services`
+  );
+}
+assert.ok(
+  !searchCivicRecords('hems', 'services', getServices().length).some(result =>
+    /City Disaster Risk Reduction/.test(result.metadata)
+  ),
+  '"hems" must not match CDRRMO services'
+);
+assert.ok(searchCivicRecords('drainage', 'services').length > 0);
+assert.ok(searchCivicRecords('tulay', 'services').length > 0);
+for (const query of ['rainwater park', 'retention basin']) {
+  assert.ok(
+    !searchCivicRecords(query, 'services').some(result =>
+      /Compost Fertilizer/.test(result.title)
+    ),
+    `"${query}" must not match compost sales`
+  );
+}
+for (const query of [
+  'pumping station',
+  'flood control',
+  'idrr-cca',
+  'nscr',
+  'rainwater park',
+  'lazatin flyover',
+]) {
+  assert.ok(
+    !searchCivicRecords(query, 'services').some(result =>
+      /Processing of Complaints/.test(result.title)
+    ),
+    `"${query}" must not resolve to the generic CAdminO complaints service`
+  );
+}
+
+for (const word of [
+  'ala',
+  'atin',
+  'ninu',
+  'kapilan',
+  'bakit',
+  'obhetu',
+  'bisa',
+  'buri',
+  'kanu',
+  'ot',
+]) {
+  assert.equal(stripStopWords(`${word} CHO`), 'CHO');
+  assert.equal(stripStopWords(word), word);
+}
+assert.equal(stripStopWords('atin-CHO'), 'atin-CHO');
+
+// Legacy aliases that name a single published transaction stay scoped to that
+// record; native title/description matches continue to cover related intent.
+const aicsResults = searchCivicRecords(
+  'aics',
+  'services',
+  getServices().length
+);
+assert.ok(
+  aicsResults.length > 0 &&
+    aicsResults.every(result => /E-AICS Social Case Study/.test(result.title)),
+  '"aics" must not inherit onto unrelated social-welfare services'
+);
+assert.equal(
+  searchCivicRecords('seedlings', 'services', getServices().length)[0]?.id,
+  'service:charter-2026-2e-city-agriculture-and-veterinary-office-external-03',
+  '"seedlings" must rank its published CAVO request service first'
+);
+assert.ok(
+  (() => {
+    const results = searchCivicRecords(
+      'scholarship',
+      'services',
+      getServices().length
+    );
+    return (
+      results.length > 0 &&
+      results.every(result =>
+        /Social Case Study|Certificate of Indigency/.test(result.title)
+      )
+    );
+  })(),
+  '"scholarship" must not make unrelated City College services match'
+);
+assert.ok(
+  (() => {
+    const results = searchCivicRecords(
+      'college admission',
+      'services',
+      getServices().length
+    );
+    return (
+      results.length > 0 &&
+      results.every(result => /Admission|Entrance Test/.test(result.title))
+    );
+  })(),
+  '"college admission" must retain its native City College matches'
+);
+assert.equal(
+  searchCivicRecords('tree cutting', 'services').length,
+  0,
+  '"tree cutting" must not be inherited by the compost service'
+);
+assert.equal(
+  searchCivicRecords('tree cutting')[0]?.id,
+  'office:cenro',
+  '"tree cutting" must still route to CENRO'
+);
+
+const civilCertificateResults = searchCivicRecords(
+  'sertipiko ng kapanganakan',
+  'services',
+  getServices().length
+);
+assert.equal(
+  civilCertificateResults[0]?.id,
+  'service:charter-2026-2e-city-civil-registry-office-external-19',
+  'a Filipino certificate query must rank the certified-copy service first'
+);
+const englishCivilCertificateResults = searchCivicRecords(
+  'birth certificate',
+  'services',
+  getServices().length
+);
+assert.ok(
+  englishCivilCertificateResults
+    .slice(0, 3)
+    .some(
+      result =>
+        result.id ===
+        'service:charter-2026-2e-city-civil-registry-office-external-19'
+    ),
+  'an English certificate query must keep the certified-copy service prominent'
+);
+assert.deepEqual(
+  documents
+    .filter(
+      document =>
+        document.domain === 'services' &&
+        document.aliases.includes('birth certificate')
+    )
+    .map(document => document.id),
+  ['service:charter-2026-2e-city-civil-registry-office-external-19'],
+  'only the certified-copy service may receive the exact birth-certificate alias'
+);
+assert.equal(
+  searchCivicRecords('late registration', 'services')[0]?.id,
+  'service:charter-2026-2e-city-civil-registry-office-external-12',
+  '"late registration" must target the published delayed-live-birth service'
+);
+assert.equal(
+  searchCivicRecords('senior citizen id', 'services', getServices().length)
+    .length,
+  2,
+  '"senior citizen id" must return the two published issuance/replacement services'
+);
+
+assert.equal(
+  searchCivicRecords('water billing', 'services')[0]?.id,
+  'service:csfwd-charter-2025-1e-external-01',
+  '"water billing" must rank bill payment first'
+);
+const waterReconnectionIds = new Set([
+  'service:csfwd-charter-2025-1e-external-04',
+  'service:csfwd-charter-2025-1e-external-05',
+]);
+assert.ok(
+  (() => {
+    const topResults = searchCivicRecords(
+      'water reconnection',
+      'services'
+    ).slice(0, 2);
+    return (
+      topResults.length === 2 &&
+      topResults.every(result => waterReconnectionIds.has(result.id))
+    );
+  })(),
+  '"water reconnection" must prioritize the two reconnection services'
+);
+assert.ok(
+  (() => {
+    const results = searchCivicRecords(
+      'tax map',
+      'services',
+      getServices().length
+    );
+    return (
+      results.length > 0 &&
+      results.every(result => /Tax Map|Tax Mapping/.test(result.title))
+    );
+  })(),
+  '"tax map" must not inherit onto unrelated property-tax services'
+);
+assert.equal(
+  searchCivicRecords('amilyar', 'services')[0]?.id,
+  'service:charter-2026-2e-city-treasurers-office-external-10',
+  '"amilyar" must rank real-property-tax payment first'
+);
+for (const query of ['building permit', 'occupancy permit']) {
+  assert.equal(
+    searchCivicRecords(query)[0]?.id,
+    'office:office-of-the-city-building-official',
+    `"${query}" must route to OCBO rather than unrelated published services`
+  );
+}
+assert.equal(
+  searchCivicRecords('cswdo', 'services', getServices().length).length,
+  39
+);
+assert.equal(
+  searchCivicRecords('ccro', 'services', getServices().length).length,
+  15
+);
+assert.equal(
+  searchCivicRecords('water district', 'services', getServices().length).length,
+  9
+);
+assert.equal(
+  searchCivicRecords('solo parent', 'services', getServices().length).length,
+  14
+);
+assert.equal(
+  searchCivicRecords('compost', 'services')[0]?.id,
+  'service:charter-2026-2e-city-environment-and-natural-resources-office-external-03'
 );
 
 // Regression: a natural three-word query combining a topic, the domain

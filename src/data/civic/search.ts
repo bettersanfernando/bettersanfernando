@@ -246,7 +246,7 @@ function composeSearchDocuments(): CivicSearchDocument[] {
       metadata: service.office.name,
       titleText: service.title,
       identifiers: [service.id, service.office.acronym].join(' '),
-      aliases: aliasesFor(service.office.acronym, category),
+      aliases: aliasesFor(category, service.slug),
       category,
       descriptionText: [
         service.description,
@@ -342,7 +342,7 @@ function composeSearchDocuments(): CivicSearchDocument[] {
         .filter(Boolean)
         .join(' '),
       identifiers: [hotline.id, hotline.number].join(' '),
-      aliases: aliasesFor(hotline.organization, hotline.id),
+      aliases: aliasesFor(hotline.organization),
       category: titleCase(hotline.classification),
       descriptionText: [hotline.public_purpose, hotline.organization].join(' '),
       location: hotline.address ?? '',
