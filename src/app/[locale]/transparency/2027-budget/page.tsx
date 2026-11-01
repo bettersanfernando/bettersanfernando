@@ -9,7 +9,7 @@ export async function generateMetadata() {
   return buildPageMetadata({
     title: t('2027 National Budget'),
     description: t(
-      'Verified FY2027 proposed national-budget project lines associated with the City of San Fernando, Pampanga, comparing the National Expenditure Program and House Bill 10858. Proposed allocations, not City spending.'
+      'Compare verified FY2027 national-budget project lines associated with the City of San Fernando, Pampanga across the National Expenditure Program and House Bill No. 10858. Proposed national appropriations, not City spending.'
     ),
     path: '/transparency/2027-budget',
     locale,
