@@ -34,7 +34,7 @@ const manifest = JSON.parse(
   readFileSync('src/data/generated/civic/manifest.json', 'utf8')
 ) as { datasets: Record<string, { record_count: number }> };
 
-assert.equal(Object.keys(manifest.datasets).length, 23);
+assert.equal(Object.keys(manifest.datasets).length, 24);
 assert.equal(getProjects().length, 303);
 assert.equal(getAllProjectEvidence().length, 617);
 assert.equal(getProjectCostUtilizationObservations().length, 298);
@@ -50,7 +50,7 @@ assert.equal(getResolutions().length, 2);
 assert.equal(getFinanceReports().length, 53);
 assert.equal(getFinanceObservations().length, 121);
 assert.equal(getDemographicProfileRecords().length, 136);
-assert.equal(getSearchDocuments().length, 1795);
+assert.equal(getSearchDocuments().length, 1796);
 assert.equal(plannedPages.length, 0);
 
 const staticPaths = (
@@ -75,15 +75,16 @@ const dynamicPaths = [
   ...getCityOffices().map(office => `/government/offices/${office.office_id}`),
 ];
 const canonicalPaths = [...staticPaths, ...dynamicPaths];
-// 41 = 39 (pre-Batch-9) + /sitemap + /accessibility (both added in Batch 9).
+// 42 = 39 (pre-Batch-9) + /sitemap + /accessibility (both added in Batch 9)
+// + /transparency/2027-budget.
 // This filesystem scan counts every literal page.tsx, including /search —
 // unlike sitemap.ts's STATIC_ROUTES, which deliberately excludes /search
-// (noindex; see src/app/[locale]/search/page.tsx) — so it stays at 41 even though
+// (noindex; see src/app/[locale]/search/page.tsx) — so it stays at 42 even though
 // the sitemap itself lists one fewer static route.
-assert.equal(staticPaths.length, 41);
+assert.equal(staticPaths.length, 42);
 assert.equal(dynamicPaths.length, 540);
-assert.equal(canonicalPaths.length, 581);
-assert.equal(new Set(canonicalPaths).size, 581);
+assert.equal(canonicalPaths.length, 582);
+assert.equal(new Set(canonicalPaths).size, 582);
 
 const queryRoutes = [
   '/search',

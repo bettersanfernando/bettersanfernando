@@ -1,0 +1,196 @@
+{
+  "attribution": {
+    "api_url": "https://budget.bettergov.ph/api/v1/hgab/2027",
+    "bettergov_notice": "Independent and unofficial. This comparison is our own reading of the published documents, not an official record of the budget department, the agencies or the House. Figures are the amounts published in the documents, not spending. No allegations. An insertion, deletion, or amount-change candidate describes a provisional comparison between identified sources. That classification alone does not establish irregularity or wrongdoing by any office or official and should not be represented as such. Absence from an API snapshot likewise does not establish absence from the published NEP or concealment. Read the full notice: https://budget.bettergov.ph/hgab/2027/methodology#disclaimer.",
+    "disclaimer_url": "https://budget.bettergov.ph/hgab/2027/methodology#disclaimer",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "text": "Comparison data: BetterGov.ph Budget API (budget.bettergov.ph), FY2027 House bill section, licensed CC BY 4.0, derived from the DBM FY2027 National Expenditure Program and House Bill No. 10858 and BetterGov's analysis repository (csiiiv/DPWH-NEP-HB-2027-ANALYSIS). Independent and unofficial. Changes: filtered and re-verified for the City of San Fernando, Pampanga."
+  },
+  "comparison_status_breakdown": {
+    "HOUSE_BILL_ONLY_CANDIDATE": 4,
+    "SAME_AMOUNT_IN_BOTH": 2
+  },
+  "dataset": "national-budget-fy2027",
+  "documents": {
+    "hb10858-3r-vol-ic": {
+      "label": "House Bill No. 10858 (FY2027 General Appropriations Bill), third reading, Volume I-C",
+      "pdf_url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf"
+    },
+    "nep2027-vol-iib": {
+      "label": "FY2027 National Expenditure Program, Volume II-B",
+      "pdf_url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf"
+    }
+  },
+  "fiscal_year": 2027,
+  "jurisdiction_psgc": "0305416000",
+  "last_verified": "2026-11-01",
+  "overall_public_limitation": "Not a complete list of national projects in San Fernando. BetterGov has no structured municipality/PSGC field, so lines were found by place and barangay names in titles and checked by hand; a line whose title does not name the City or one of its barangays may be missing. \"House bill only\" and \"NEP only\" are candidates for comparison, not confirmed insertions or deletions. Independent and unofficial; not an official record of DBM, the House of Representatives or any agency.",
+  "publication_status": "PUBLICATION_REVIEW_COMPLETE",
+  "record_count": 6,
+  "records": [
+    {
+      "agency": "Department of Public Works and Highways",
+      "bettergov_record_id": "house-reading:7757",
+      "bettergov_source_url": "https://budget.bettergov.ph/hgab/2027/dpwh/p/house-reading%3A7757",
+      "bettergov_status_label": "House bill only",
+      "comparison_status": "HOUSE_BILL_ONLY_CANDIDATE",
+      "fiscal_year": 2027,
+      "house_amount_php": 59246000,
+      "house_source": {
+        "document": "hb10858-3r-vol-ic",
+        "page": 421,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=421"
+      },
+      "id": "nb2027-dpwh-7757",
+      "implementing_office": "Central Office",
+      "location_evidence": "Source title names \"City of San Fernando, Pampanga\" and the barangays Del Carmen, Bulaon and Calulut, all among the 35 canonical City barangays.",
+      "nep_amount_php": null,
+      "nep_source": null,
+      "program": "Convergence and Special Support Program",
+      "program_line": "BIP - Access Roads and/or Bridges from the National Roads leading to Major/ Strategic Public Buildings/ Facilities",
+      "title": "Construction/Rehabilitation of Del Carmen-Bulaon-Calulut Road, City of San Fernando, Pampanga Sta. 0+000 - Sta. 2+054",
+      "unconfirmed_match": false,
+      "verified_at": "2026-11-01"
+    },
+    {
+      "agency": "Department of Public Works and Highways",
+      "bettergov_record_id": "house-reading:12396",
+      "bettergov_source_url": "https://budget.bettergov.ph/hgab/2027/dpwh/p/house-reading%3A12396",
+      "bettergov_status_label": "House bill only",
+      "comparison_status": "HOUSE_BILL_ONLY_CANDIDATE",
+      "fiscal_year": 2027,
+      "house_amount_php": 150000000,
+      "house_source": {
+        "document": "hb10858-3r-vol-ic",
+        "page": 638,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=638"
+      },
+      "id": "nb2027-dpwh-12396",
+      "implementing_office": "Central Office",
+      "location_evidence": "Source title names \"City of San Fernando, Pampanga\"; the document coordinates 15.086378, 120.657827 fall inside the City boundary (data/geography/san-fernando-city.geojson).",
+      "nep_amount_php": null,
+      "nep_source": null,
+      "program": "Convergence and Special Support Program",
+      "program_line": "BIP - Multi-Purpose Buildings/ Facilities to support Social Services",
+      "title": "Construction/Completion of Multi-Purpose Building, City of San Fernando, Pampanga, 15.086378, 120.657827",
+      "unconfirmed_match": false,
+      "verified_at": "2026-11-01"
+    },
+    {
+      "agency": "Department of Public Works and Highways",
+      "bettergov_record_id": "house-reading:12422",
+      "bettergov_source_url": "https://budget.bettergov.ph/hgab/2027/dpwh/p/house-reading%3A12422",
+      "bettergov_status_label": "Same amount in both",
+      "comparison_status": "SAME_AMOUNT_IN_BOTH",
+      "fiscal_year": 2027,
+      "house_amount_php": 57000000,
+      "house_source": {
+        "document": "hb10858-3r-vol-ic",
+        "page": 637,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=637"
+      },
+      "id": "nb2027-dpwh-12422",
+      "implementing_office": "Central Office",
+      "location_evidence": "Source title names Barangay Lourdes (a canonical City barangay) and \"City of San Fernando, Pampanga\"; the NEP and House titles are identical.",
+      "nep_amount_php": 57000000,
+      "nep_source": {
+        "document": "nep2027-vol-iib",
+        "page": 565,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=565"
+      },
+      "program": "Convergence and Special Support Program",
+      "program_line": "BIP - Multi-Purpose Buildings/ Facilities to support Social Services",
+      "title": "Construction of Multi-Purpose Building, Barangay Lourdes, City of San Fernando, Pampanga",
+      "unconfirmed_match": false,
+      "verified_at": "2026-11-01"
+    },
+    {
+      "agency": "Department of Public Works and Highways",
+      "bettergov_record_id": "house-reading:8004",
+      "bettergov_source_url": "https://budget.bettergov.ph/hgab/2027/dpwh/p/house-reading%3A8004",
+      "bettergov_status_label": "House bill only",
+      "comparison_status": "HOUSE_BILL_ONLY_CANDIDATE",
+      "fiscal_year": 2027,
+      "house_amount_php": 25000000,
+      "house_source": {
+        "document": "hb10858-3r-vol-ic",
+        "page": 525,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=525"
+      },
+      "id": "nb2027-dpwh-8004",
+      "implementing_office": "Pampanga 1st District Engineering Office",
+      "location_evidence": "Source title names Barangay Alasas (a canonical City barangay) and \"City of San Fernando, Pampanga\"; listed under DPWH Pampanga 1st District Engineering Office.",
+      "nep_amount_php": null,
+      "nep_source": null,
+      "program": "Convergence and Special Support Program",
+      "program_line": "BIP - Access Roads and/or Bridges from the National Roads leading to Major/ Strategic Public Buildings/ Facilities",
+      "title": "Construction of Roads including Drainage System, 1st and 4th Street, Alasas Village, Barangay Alasas, City of San Fernando, Pampanga",
+      "unconfirmed_match": false,
+      "verified_at": "2026-11-01"
+    },
+    {
+      "agency": "Department of Public Works and Highways",
+      "bettergov_record_id": "house-reading:7959",
+      "bettergov_source_url": "https://budget.bettergov.ph/hgab/2027/dpwh/p/house-reading%3A7959",
+      "bettergov_status_label": "House bill only",
+      "comparison_status": "HOUSE_BILL_ONLY_CANDIDATE",
+      "fiscal_year": 2027,
+      "house_amount_php": 15000000,
+      "house_source": {
+        "document": "hb10858-3r-vol-ic",
+        "page": 526,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=526"
+      },
+      "id": "nb2027-dpwh-7959",
+      "implementing_office": "Pampanga 1st District Engineering Office",
+      "location_evidence": "Source title names Barangay San Felipe (a canonical City barangay) and \"City of San Fernando, Pampanga\"; listed under DPWH Pampanga 1st District Engineering Office.",
+      "nep_amount_php": null,
+      "nep_source": null,
+      "program": "Convergence and Special Support Program",
+      "program_line": "BIP - Access Roads and/or Bridges from the National Roads leading to Major/ Strategic Public Buildings/ Facilities",
+      "title": "Concreting of Road including Lined Canal, Barangay San Felipe, City of San Fernando, Pampanga",
+      "unconfirmed_match": false,
+      "verified_at": "2026-11-01"
+    },
+    {
+      "agency": "Department of Public Works and Highways",
+      "bettergov_record_id": "house-reading:16225",
+      "bettergov_source_url": "https://budget.bettergov.ph/hgab/2027/dpwh/p/house-reading%3A16225",
+      "bettergov_status_label": "Same amount in both",
+      "comparison_status": "SAME_AMOUNT_IN_BOTH",
+      "fiscal_year": 2027,
+      "house_amount_php": 10000000,
+      "house_source": {
+        "document": "hb10858-3r-vol-ic",
+        "page": 935,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=935"
+      },
+      "id": "nb2027-dpwh-16225",
+      "implementing_office": "Pampanga 1st District Engineering Office",
+      "location_evidence": "Source title names Sindalan (a canonical City barangay) and \"City of San Fernando, Pampanga\"; the document coordinates 15.080596, 120.634261 fall inside the City boundary; listed under DPWH Pampanga 1st District Engineering Office.",
+      "nep_amount_php": 10000000,
+      "nep_source": {
+        "document": "nep2027-vol-iib",
+        "page": 684,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=684"
+      },
+      "program": "Local Program",
+      "program_line": "Buildings And Other Structures",
+      "title": "Construction (Completion) of Multi-Purpose Building (Motorpool) at DPWH Pampanga 1st DEO, Sindalan, City of San Fernando, Pampanga, 15.080596, 120.634261",
+      "unconfirmed_match": false,
+      "verified_at": "2026-11-01"
+    }
+  ],
+  "route": "/transparency/2027-budget",
+  "schema_version": 1,
+  "scope_note": "Curated FY2027 national-budget project lines verified as associated with the City of San Fernando, Pampanga. These are proposed national appropriations and are not City spending, procurement awards, contracts, or proof of project implementation. NEP and House Bill amounts are alternative versions of one budget and are compared, never added.",
+  "source_snapshot": {
+    "api_endpoint": "/api/v1/hgab/2027/datasets/{dpwh|nia}/projects",
+    "built_at": "2026-10-26T08:46:14.383Z",
+    "house_version": "House Bill No. 10858, third reading (DPWH)",
+    "retrieved_at": "2026-11-01",
+    "source_commit": "a0caa778442cdae5583f5a006ea7401dab00e5ac",
+    "source_repo": "https://github.com/csiiiv/DPWH-NEP-HB-2027-ANALYSIS"
+  }
+}

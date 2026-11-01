@@ -276,6 +276,13 @@ const GROUPS = (t: PageT): readonly SiteGroup[] => [
           'Aggregate revenue, budget allocations, and expenditures.'
         ),
       },
+      {
+        href: '/transparency/2027-budget',
+        label: t('2027 National Budget'),
+        description: t(
+          'Verified proposed FY2027 national-budget project lines for San Fernando.'
+        ),
+      },
     ],
   },
   {

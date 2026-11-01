@@ -118,7 +118,7 @@ assert.deepEqual(
   ),
   ['/fil/:path*']
 );
-assert.equal(paths.length, 553);
+assert.equal(paths.length, 554);
 console.log(
   `Static locale smoke passed: ${paths.length * 2} public HTML paths prerendered; ${queryRoutes.length + serviceCategoryPaths.length} query-dependent families retained.`
 );

@@ -52,6 +52,7 @@
     "executive-orders:smoke": "node --experimental-strip-types scripts/smoke-executive-orders.ts",
     "resolutions:smoke": "node --experimental-strip-types scripts/smoke-resolutions.ts",
     "finance:smoke": "node --experimental-strip-types scripts/smoke-finance.ts",
+    "national-budget:smoke": "node --experimental-strip-types scripts/smoke-national-budget.ts",
     "legislation-statistics:smoke": "node --experimental-strip-types scripts/smoke-legislation-statistics.ts",
     "public-records-statistics:smoke": "node --experimental-strip-types scripts/smoke-public-records-statistics.ts",
     "procurement:smoke": "node --experimental-strip-types scripts/smoke-procurement.ts",

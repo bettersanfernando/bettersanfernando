@@ -220,6 +220,14 @@ const SITE_DESTINATIONS: readonly {
     keywords: 'finance budget revenue expenditure',
   },
   {
+    href: '/transparency/2027-budget',
+    title: '2027 National Budget',
+    description:
+      'Verified proposed FY2027 national-budget project lines associated with San Fernando: NEP versus House Bill 10858.',
+    keywords:
+      'national budget 2027 NEP House Bill 10858 DPWH proposed appropriations GAB',
+  },
+  {
     href: '/transparency/sources',
     title: 'Transparency Sources',
     description: "BetterSanFernando's published evidence and source inventory.",

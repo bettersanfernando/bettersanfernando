@@ -247,7 +247,7 @@ const sitemapUrls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(
 assert.equal(
   sitemapUrls.length,
   2 *
-    (40 +
+    (41 +
       categories.length +
       offices.length +
       services.length +

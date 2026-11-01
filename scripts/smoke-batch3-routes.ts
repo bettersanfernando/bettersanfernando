@@ -47,9 +47,11 @@ const batch3Routes: Record<string, string> = {
   '/transparency/full-disclosure':
     'src/app/[locale]/transparency/full-disclosure/page.tsx',
   '/transparency/finance': 'src/app/[locale]/transparency/finance/page.tsx',
+  '/transparency/2027-budget':
+    'src/app/[locale]/transparency/2027-budget/page.tsx',
 };
 
-const expectedRouteCount = 28;
+const expectedRouteCount = 29;
 const routeEntries = Object.entries(batch3Routes);
 assert.equal(
   routeEntries.length,

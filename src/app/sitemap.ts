@@ -44,6 +44,7 @@ const STATIC_ROUTES: readonly string[] = [
   '/transparency/documents',
   '/transparency/full-disclosure',
   '/transparency/finance',
+  '/transparency/2027-budget',
   // Batch 5 (9; /search excluded — see note above)
   '/projects',
   '/projects/city-projects',

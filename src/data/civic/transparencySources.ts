@@ -24,6 +24,10 @@ import {
   getFinanceOverallPublicLimitationDisplay,
   getFinanceReports,
 } from './finance.ts';
+import {
+  getNationalBudgetLimitationDisplay,
+  getNationalBudgetMetadata,
+} from './nationalBudget.ts';
 
 const DatasetPath = z.enum([
   'demographics/barangays.json',
@@ -48,6 +52,7 @@ const DatasetPath = z.enum([
   'services/utilities-water-resources.json',
   'statistics/public-records-coverage.json',
   'transparency/full-disclosure.json',
+  'transparency/national-budget-fy2027.json',
   'transparency/official-documents.json',
 ]);
 
@@ -149,6 +154,7 @@ export type PublishedSourceDomain = Readonly<{
     | 'finance'
     | 'full-disclosure'
     | 'official-documents'
+    | 'national-budget-fy2027'
     | 'project-cost-utilization';
   name: string;
   description: string;
@@ -493,6 +499,27 @@ export function getTransparencySourceInventory() {
       ],
       coverageNote: officialDocuments.overallPublicLimitation,
     },
+    {
+      id: 'national-budget-fy2027',
+      name: 'FY2027 national budget project lines',
+      description:
+        'Curated proposed national-budget project lines (NEP and House Bill 10858) verified as associated with the City of San Fernando, Pampanga. Proposed appropriations, not City spending.',
+      authority:
+        'DBM National Expenditure Program and House Bill 10858, via the BetterGov.ph Budget API',
+      referencePeriod: 'Fiscal year 2027',
+      lastVerified: getNationalBudgetMetadata().lastVerified,
+      recordCount: recordCount('transparency/national-budget-fy2027.json'),
+      recordLabel: 'project lines',
+      datasetPaths: ['transparency/national-budget-fy2027.json'],
+      links: [
+        {
+          label: 'Browse the 2027 National Budget',
+          url: '/transparency/2027-budget',
+          type: 'internal',
+        },
+      ],
+      coverageNote: getNationalBudgetMetadata().overallPublicLimitation,
+    },
   ];
 
   if (projects.length !== publishedDomains[0].recordCount) {
@@ -675,6 +702,15 @@ export function getPublishedDomainDisplayText(
         coverageNote: getOfficialDocumentsOverallPublicLimitationDisplay(t),
         recordLabel: t('official documents'),
       };
+    case 'national-budget-fy2027':
+      return {
+        name: t('FY2027 national budget project lines'),
+        description: t(
+          'Curated proposed national-budget project lines (NEP and House Bill 10858) verified as associated with the City of San Fernando, Pampanga. Proposed appropriations, not City spending.'
+        ),
+        coverageNote: getNationalBudgetLimitationDisplay(t),
+        recordLabel: t('project lines'),
+      };
   }
 }
 
@@ -755,6 +791,8 @@ export function getSourceLinkLabel(label: string, t: PageT): string {
       return t('Browse Full Disclosure Reports');
     case 'Browse Official Documents':
       return t('Browse Official Documents');
+    case 'Browse the 2027 National Budget':
+      return t('Browse the 2027 National Budget');
     default:
       return label;
   }
