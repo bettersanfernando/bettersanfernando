@@ -39,11 +39,11 @@ const englishSitemapUrls = sitemapUrls.filter(
 const filipinoSitemapUrls = sitemapUrls.filter(url =>
   isFilipino(new URL(url).pathname)
 );
-// Every dataset-backed route is listed: 40 static routes plus one per service
+// Every dataset-backed route is listed: 41 static routes plus one per service
 // category, service, project and office (kept in step with smoke-batch6-seo).
 assert.equal(
   englishSitemapUrls.length,
-  40 +
+  41 +
     new Set(getServices().map(getServiceCategory)).size +
     getServices().length +
     getProjects().length +

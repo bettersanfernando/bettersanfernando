@@ -111,6 +111,11 @@
       "schema_version": 1,
       "sha256": "e3003ab526ace81a895317d41b61ae2d7aad29182f0f8a65adc8e7cc9c88b011"
     },
+    "transparency/national-budget-fy2027.json": {
+      "record_count": 6,
+      "schema_version": 1,
+      "sha256": "d1c705e5c0b2778f3918c0a3ab608f137e5f7fb644e2774ddda0eaf6a03cb8bd"
+    },
     "transparency/official-documents.json": {
       "record_count": 9,
       "schema_version": 1,
@@ -176,6 +181,7 @@
     "data/transparency/official-documents-inventory.json",
     "data/transparency/official-documents-publication-review.json",
     "data/transparency/official-documents-source-manifest.json",
+    "data/transparency/national-budget-fy2027.json",
     "data/finance/nta-utilization-project-extraction.json",
     "data/finance/city-finance-extraction.json",
     "data/finance/city-finance-publication-review.json",
@@ -214,7 +220,7 @@
     "pdf/**",
     "xlsx/**"
   ],
-  "source_commit": "e40fe349bf45afd3457b283bbe8b9cc1759df59c",
+  "source_commit": "c8f42103b5292babb8d13fc7e06d1e1d55fa73e8",
   "source_data_version": "v0.1.1",
   "sources": [
     {

@@ -207,7 +207,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-300">
-                {`${t('footerCopy.builtFor')} ₱435.39`}
+                {`${t('footerCopy.builtFor')} ₱605.05`}
               </span>
               <Link
                 href={withLocalePrefix('/sitemap', locale)}

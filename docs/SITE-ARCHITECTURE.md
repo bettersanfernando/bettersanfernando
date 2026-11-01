@@ -145,6 +145,7 @@ support that purpose.
 │   ├── full-disclosure
 │   ├── documents
 │   ├── finance
+│   ├── 2027-budget
 │   ├── sources
 │   └── methodology
 ├── statistics
@@ -307,6 +308,7 @@ incomplete. It owns:
 - full-disclosure document discovery;
 - cross-domain official documents;
 - City Finances (`/transparency/finance`);
+- the FY2027 national budget comparison (`/transparency/2027-budget`);
 - the site-wide source inventory;
 - site-wide verification methodology and limitations; and
 - the Statistics content area.
@@ -319,6 +321,13 @@ publication-reviewed nine-record export. It groups Citizen’s Charters,
 business forms, and privacy documents while linking laws, Full Disclosure,
 procurement, projects, and services to their existing canonical datasets.
 The collection is partial; held and excluded documents remain unpublished.
+
+`/transparency/2027-budget` is published under the public title "2027 National
+Budget": six verified FY2027 proposed national-budget project lines associated
+with the City of San Fernando, Pampanga, comparing the National Expenditure
+Program with House Bill 10858. They are proposed national appropriations, not
+City spending; the page is a curated partial list and is kept separate from
+local projects, procurement, and finance.
 
 `/transparency/finance` is published under the public title "City Finances":
 53 owner-approved official aggregate finance reports and 121 non-additive

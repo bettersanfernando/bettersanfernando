@@ -207,6 +207,7 @@ const activeRouteCases = [
   ['/legislation', 'government'],
   ['/transparency/full-disclosure', 'transparency'],
   ['/transparency/finance', 'transparency'],
+  ['/transparency/2027-budget', 'transparency'],
   ['/statistics', 'transparency'],
   ['/statistics/population', 'transparency'],
   ['/statistics/demographics', 'transparency'],
@@ -284,6 +285,7 @@ const knownRealDestinations = new Set([
   '/transparency/full-disclosure',
   '/transparency/documents',
   '/transparency/finance',
+  '/transparency/2027-budget',
   '/legislation/executive-orders',
   '/legislation/ordinances',
   '/legislation/resolutions',
@@ -369,8 +371,8 @@ assert.deepEqual(menuSectionHeadingKeys('government'), [
 
 assert.deepEqual(
   menuSectionCounts('transparency'),
-  [5, 5, 5],
-  'Transparency mega menu must be balanced 5/5/5 now that the duplicate Projects & Procurement section has been removed'
+  [6, 5, 5],
+  'Transparency mega menu is 6/5/5: the first section also lists the 2027 National Budget after City Finances'
 );
 assert.deepEqual(menuSectionHeadingKeys('transparency'), [
   'navigation.sections.publicRecordsFinance',

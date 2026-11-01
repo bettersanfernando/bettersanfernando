@@ -1227,6 +1227,35 @@ export default async function Home() {
             </p>
           </div>
 
+          {/* Temporary launch notice for the FY2027 national budget page. Delete this block to remove it; the page and navigation do not depend on it. */}
+          <Link
+            href="/transparency/2027-budget"
+            className="group mt-6 flex flex-col gap-3 rounded-sm border border-[#0066EB]/30 bg-[#F8FAFC] p-4 transition-colors hover:border-[#0066EB] sm:flex-row sm:items-center sm:justify-between sm:p-5"
+          >
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
+              <span className="inline-flex w-fit items-center rounded-xs bg-[#EBF3FC] px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#0066EB]">
+                {t('New')}
+              </span>
+              <div>
+                <p className="text-sm font-bold text-gray-950">
+                  {t('2027 National Budget')}
+                </p>
+                <p className="mt-1 max-w-2xl text-xs leading-relaxed text-gray-600 sm:text-sm">
+                  {t(
+                    'Explore verified proposed national-budget project lines associated with San Fernando and compare the NEP and House Bill versions.'
+                  )}
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[#0066EB] group-hover:text-[#0052BC]">
+              {t('Explore the 2027 budget')}
+              <ArrowRight
+                className="h-4 w-4 transition group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </span>
+          </Link>
+
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* Gateway 1: City Finances */}
             <div className="flex flex-col justify-between rounded-sm border border-gray-200 p-5 sm:p-6 transition-colors hover:border-[#0066EB]">

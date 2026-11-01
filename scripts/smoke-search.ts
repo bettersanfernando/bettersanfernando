@@ -885,7 +885,7 @@ for (const document of documents) {
   }
   assert.match(
     document.href,
-    /^\/projects\/[^/?#]+$|^\/barangays\?q=|^\/government\/offices\/[^/?#]+$|^\/government\/hotlines$|^\/legislation\/(?:executive-orders|ordinances)\?q=|^\/legislation\/resolutions$|^\/projects\/sources\?project=|^\/procurement\/(?:bid-results|contracts)\?q=|^\/transparency\/(?:full-disclosure|documents|finance)$|^\/services\/[^/?#]+\/[^/?#]+$|^\/(?:services|projects|government|barangays|legislation|transparency|statistics)(?:\/[a-z-]+)*$/
+    /^\/projects\/[^/?#]+$|^\/barangays\?q=|^\/government\/offices\/[^/?#]+$|^\/government\/hotlines$|^\/legislation\/(?:executive-orders|ordinances)\?q=|^\/legislation\/resolutions$|^\/projects\/sources\?project=|^\/procurement\/(?:bid-results|contracts)\?q=|^\/transparency\/(?:full-disclosure|documents|finance|2027-budget)$|^\/services\/[^/?#]+\/[^/?#]+$|^\/(?:services|projects|government|barangays|legislation|transparency|statistics)(?:\/[a-z-]+)*$/
   );
 }
 

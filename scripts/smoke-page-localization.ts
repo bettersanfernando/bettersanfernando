@@ -29,6 +29,7 @@ const PAGES: Record<string, string[]> = {
     'src/data/civic/transparencySources.ts',
     'src/data/civic/finance.ts',
     'src/data/civic/fullDisclosure.ts',
+    'src/data/civic/nationalBudget.ts',
     'src/data/civic/officialDocuments.ts',
     'src/data/civic/projectCostUtilization.ts',
   ],
@@ -37,6 +38,7 @@ const PAGES: Record<string, string[]> = {
     'src/data/civic/transparencySources.ts',
     'src/data/civic/finance.ts',
     'src/data/civic/fullDisclosure.ts',
+    'src/data/civic/nationalBudget.ts',
     'src/data/civic/officialDocuments.ts',
     'src/data/civic/projectCostUtilization.ts',
   ],
@@ -57,6 +59,11 @@ const PAGES: Record<string, string[]> = {
     'src/app/[locale]/transparency/finance/CityFinances.tsx',
     'src/app/[locale]/transparency/finance/page.tsx',
     'src/data/civic/finance.ts',
+  ],
+  'transparency-2027-budget': [
+    'src/app/[locale]/transparency/2027-budget/NationalBudget.tsx',
+    'src/app/[locale]/transparency/2027-budget/page.tsx',
+    'src/data/civic/nationalBudget.ts',
   ],
   search: [
     'src/app/[locale]/search/page.tsx',

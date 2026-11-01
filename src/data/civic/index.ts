@@ -26,6 +26,7 @@ export * from './fullDisclosure.ts';
 export * from './officialDocuments.ts';
 export * from './projectCostUtilization.ts';
 export * from './finance.ts';
+export * from './nationalBudget.ts';
 export * from './publicRecordsCoverage.ts';
 export * from './legislation.ts';
 export * from './legislationSummary.ts';

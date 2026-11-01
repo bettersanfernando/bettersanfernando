@@ -218,7 +218,8 @@ const expectedStaticRouteCount =
   10 /* Batch 5 (historical label) */ +
   1 /* /projects/city-projects — City Projects listing split from the /projects hub */ -
   1 /* /search removed in Batch 9 — noindex, thin query-only surface */ +
-  2; /* Batch 9: /sitemap, /accessibility */
+  2 /* Batch 9: /sitemap, /accessibility */ +
+  1; /* /transparency/2027-budget (FY2027 national budget page) */
 const expectedTotal =
   expectedStaticRouteCount +
   categoryCount +

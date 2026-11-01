@@ -48,6 +48,7 @@ const destinationPresentation = {
   officialGovernmentLinks: ['external-link', 'officialGovernmentLinks'],
   fullDisclosureReports: ['file-check', 'fullDisclosureReports'],
   financialTransparency: ['wallet', 'financialTransparency'],
+  nationalBudget2027: ['landmark', 'nationalBudget2027'],
   dataSources: ['database', 'dataSources'],
   methodology: ['file-text', 'methodology'],
   howWeVerify: ['shield-check', 'howWeVerify'],
@@ -376,6 +377,11 @@ const navigationStructure = [
           {
             labelKey: 'navigation.items.financialTransparency',
             href: '/transparency/finance',
+            kind: 'real',
+          },
+          {
+            labelKey: 'navigation.items.nationalBudget2027',
+            href: '/transparency/2027-budget',
             kind: 'real',
           },
           {

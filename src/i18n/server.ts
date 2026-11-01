@@ -41,6 +41,7 @@ export type PageNamespace =
   | 'transparency-documents'
   | 'transparency-full-disclosure'
   | 'transparency-finance'
+  | 'transparency-2027-budget'
   | 'search'
   | 'legislation'
   | 'home'
