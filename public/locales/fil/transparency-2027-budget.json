@@ -45,7 +45,6 @@
   "Volume II-B": "Volume II-B",
   "{{label}} (opens in a new tab)": "{{label}} (magbubukas sa bagong tab)",
   "{{count}} FY2027 national-budget project lines were verified as associated with the City of San Fernando, Pampanga. These are proposed national appropriations, not City spending or proof of implementation.": "Naberipika ang {{count}} linya ng proyekto sa pambansang badyet ng FY2027 bilang iniuugnay sa Lungsod ng San Fernando, Pampanga. Mga iminumungkahing pambansang apropriasyon ang mga ito, hindi paggastos ng Lungsod o patunay ng pagpapatupad.",
-  "Comparison data built": "Binuo ang datos ng paghahambing",
   "Data retrieved": "Kinuha ang datos",
   "Data comparison": "Paghahambing ng datos",
   "Government source documents": "Mga dokumentong source ng pamahalaan",
@@ -55,7 +54,6 @@
   "Based in part on the public FY2027 NEP–House Bill analysis repository.": "Batay sa bahagi sa pampublikong repository ng pagsusuri ng NEP at House Bill para sa FY2027.",
   "FY2027 analysis repository": "Repository ng pagsusuri ng FY2027",
   "Read BetterGov’s full methodology and disclaimer": "Basahin ang buong metodolohiya at disclaimer ng BetterGov",
-  "Date last verified": "Petsa ng huling beripikasyon",
   "Third Reading": "Ikatlong Pagbasa",
   "House Bill-only candidates": "Mga kandidatong House Bill lamang",
   "NEP-only candidates": "Mga kandidatong NEP lamang",
@@ -72,6 +70,7 @@
   "{{count}} verified project lines": "{{count}} beripikadong linya ng proyekto",
   "Sources and attribution": "Mga source at attribution",
   "Data and attribution": "Datos at attribution",
-  "Compared budget documents": "Mga dokumento ng badyet na inihambing",
-  "Official budget documents": "Mga opisyal na dokumento ng badyet"
+  "Official budget documents": "Mga opisyal na dokumento ng badyet",
+  "Source snapshot": "Snapshot ng source",
+  "Comparison built": "Binuo ang paghahambing"
 }

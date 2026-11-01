@@ -253,7 +253,7 @@ export default async function NationalBudgetView() {
             ]}
           />
 
-          <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[52fr_48fr] lg:items-stretch lg:gap-12">
+          <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-[54fr_46fr] lg:items-center lg:gap-12">
             <div className="flex flex-col">
               <p
                 className="text-eyebrow text-[#0066EB]"
@@ -261,10 +261,10 @@ export default async function NationalBudgetView() {
               >
                 {t('TRANSPARENCY · FY2027 NATIONAL BUDGET')}
               </p>
-              <h1 className="mt-2 text-4xl font-bold tracking-[-0.03em] text-gray-950 sm:text-5xl lg:text-6xl">
+              <h1 className="mt-1.5 text-4xl font-bold tracking-[-0.03em] text-gray-950 sm:text-5xl lg:text-6xl">
                 {t('2027 National Budget')}
               </h1>
-              <p className="mt-4 mb-8 max-w-xl text-base leading-relaxed text-gray-700 sm:text-lg sm:leading-8">
+              <p className="mt-3 mb-6 max-w-xl text-base leading-relaxed text-gray-700 sm:text-lg sm:leading-8">
                 {t(
                   'Verified FY2027 proposed national-government budget project lines associated with the City of San Fernando, Pampanga, comparing the National Expenditure Program (NEP) with House Bill 10858.'
                 )}
@@ -288,45 +288,42 @@ export default async function NationalBudgetView() {
               </div>
             </div>
 
-            <div className="flex flex-col rounded-sm bg-[#0B2E6B] p-6 text-white sm:p-7">
+            <div className="rounded-sm border border-[#0066EB]/25 bg-[#F3F8FE] p-5 sm:p-6">
               <p
-                className="mb-4 text-eyebrow text-blue-200"
+                className="text-eyebrow text-[#0052BC]"
                 style={eyebrowTracking}
               >
                 {t('FY2027 BUDGET COMPARISON')}
               </p>
 
-              <div className="my-auto grid grid-cols-1 border-y border-white/20 sm:grid-cols-2 sm:divide-x sm:divide-white/20">
+              <div className="mt-4 grid grid-cols-1 border-t border-[#0066EB]/20 sm:grid-cols-2 sm:divide-x sm:divide-[#0066EB]/20">
                 <div className="py-5 sm:pr-6">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-blue-200">
+                  <p className="text-xs font-semibold uppercase leading-snug tracking-wider text-gray-600">
                     {t('National Expenditure Program')}
                   </p>
-                  <p className="mt-2 text-3xl font-bold leading-none tracking-[-0.02em] xl:text-[2rem]">
+                  <p className="mt-2 text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-950">
                     {t('NEP')}
                   </p>
-                  <p className="mt-2 text-sm text-blue-100">{t('FY2027')}</p>
+                  <p className="mt-1 text-sm text-gray-600">{t('FY2027')}</p>
                 </div>
-                <div className="border-t border-white/20 py-5 sm:border-t-0 sm:pl-6">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-blue-200">
+                <div className="border-t border-[#0066EB]/20 py-5 sm:border-t-0 sm:pl-6">
+                  <p className="text-xs font-semibold uppercase leading-snug tracking-wider text-gray-600">
                     {t('House Bill No. 10858')}
                   </p>
-                  <p className="mt-2 text-3xl font-bold leading-none tracking-[-0.02em] xl:text-[2rem]">
+                  <p className="mt-2 text-3xl font-bold leading-tight tracking-[-0.02em] text-gray-950">
                     {t('Third Reading')}
                   </p>
-                  <p className="mt-2 text-sm text-blue-100">{t('FY2027')}</p>
+                  <p className="mt-1 text-sm text-gray-600">{t('FY2027')}</p>
                 </div>
               </div>
 
-              <div className="pt-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-blue-200">
-                  {t('Compared budget documents')}
-                </p>
-                <p className="mt-2 text-sm font-semibold">
+              <div className="border-t border-[#0066EB]/20 pt-4">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#0052BC]">
                   {t('{{count}} verified project lines', {
                     count: metadata.recordCount,
                   })}
                 </p>
-                <p className="text-sm text-blue-100">
+                <p className="mt-0.5 text-sm text-gray-700">
                   {t('City of San Fernando, Pampanga')}
                 </p>
               </div>
@@ -491,7 +488,7 @@ export default async function NationalBudgetView() {
         </section>
 
         <section aria-labelledby="about-heading">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16">
+          <div>
             <div>
               <p
                 className="text-eyebrow text-[#0066EB]"
@@ -512,20 +509,6 @@ export default async function NationalBudgetView() {
                 )}
               </p>
             </div>
-            <dl className="grid grid-cols-[auto_auto] justify-between gap-x-8 gap-y-1.5 rounded-sm bg-[#F3F6FB] p-4 text-sm lg:min-w-[19rem]">
-              <dt className="text-gray-500">{t('Comparison data built')}</dt>
-              <dd className="text-right font-semibold text-gray-900">
-                {formatDate(metadata.sourceSnapshot.built_at.slice(0, 10))}
-              </dd>
-              <dt className="text-gray-500">{t('Data retrieved')}</dt>
-              <dd className="text-right font-semibold text-gray-900">
-                {formatDate(metadata.sourceSnapshot.retrieved_at)}
-              </dd>
-              <dt className="text-gray-500">{t('Date last verified')}</dt>
-              <dd className="text-right font-semibold text-gray-900">
-                {formatDate(metadata.lastVerified)}
-              </dd>
-            </dl>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -601,6 +584,27 @@ export default async function NationalBudgetView() {
                     );
                   })}
                 </ul>
+                <div className="mt-5 border-t border-gray-200 pt-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    {t('Source snapshot')}
+                  </h4>
+                  <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-sm">
+                    <dt className="text-gray-500">{t('Comparison built')}</dt>
+                    <dd className="text-right font-semibold text-gray-900">
+                      {formatDate(
+                        metadata.sourceSnapshot.built_at.slice(0, 10)
+                      )}
+                    </dd>
+                    <dt className="text-gray-500">{t('Data retrieved')}</dt>
+                    <dd className="text-right font-semibold text-gray-900">
+                      {formatDate(metadata.sourceSnapshot.retrieved_at)}
+                    </dd>
+                    <dt className="text-gray-500">{t('Last verified')}</dt>
+                    <dd className="text-right font-semibold text-gray-900">
+                      {formatDate(metadata.lastVerified)}
+                    </dd>
+                  </dl>
+                </div>
               </section>
 
               <section
