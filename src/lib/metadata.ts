@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { HOME_TITLE, HOME_TITLE_FIL } from './detailTitles';
+export { HOME_TITLE, HOME_TITLE_FIL } from './detailTitles';
 import { absoluteUrl, getSiteUrl } from './site-url';
 import { OPEN_GRAPH_LOCALES, withLocalePrefix } from '../i18n/locale';
 import type { LanguageType } from '../types';
@@ -15,8 +17,6 @@ export const SITE_ALTERNATE_NAME = 'Better San Fernando';
 // template's brand suffix for every other page (`%s | BetterSanFernando`).
 // A bare brand token gives search engines nothing to bind the brand to a
 // place or subject, so the homepage states both explicitly.
-export const HOME_TITLE =
-  'BetterSanFernando — Civic Information for San Fernando, Pampanga';
 
 // Truthful identity, repeated verbatim everywhere the portal describes
 // itself: independent and community-run, never implying it is the official
@@ -34,9 +34,6 @@ export const DEFAULT_OG_IMAGE = {
 
 export const DEFAULT_DESCRIPTION_FIL =
   'Ang BetterSanFernando ay isang malaya at pinatatakbo-ng-komunidad na portal ng impormasyong pampubliko para sa Lungsod ng San Fernando, Pampanga. Hindi ito ang opisyal na website ng Pamahalaang Lungsod.';
-
-export const HOME_TITLE_FIL =
-  'BetterSanFernando — Impormasyong Pampubliko para sa San Fernando, Pampanga';
 
 // Absolute on purpose: under the /fil metadataBase a root-relative image path
 // would resolve to /fil/og-default.png, which does not exist.

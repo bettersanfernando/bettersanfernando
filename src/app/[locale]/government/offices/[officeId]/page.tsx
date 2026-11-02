@@ -19,6 +19,10 @@ import {
   getParentOffice,
 } from '../../../../../data/civic/government';
 import { buildPageMetadata } from '../../../../../lib/metadata';
+import {
+  finalDetailTitle,
+  officeSeoTitle,
+} from '../../../../../lib/detailTitles';
 import { getPageT } from '../../../../../i18n/server';
 import { INTL_LOCALES } from '../../../../../i18n/locale';
 import type { LanguageType } from '../../../../../types';
@@ -53,8 +57,9 @@ export async function generateMetadata({
   if (!office) return {};
 
   const { t, locale } = await getPageT('government-offices-detail');
-  return buildPageMetadata({
-    title: office.office_name,
+  const seoTitle = officeSeoTitle(office);
+  const metadata = buildPageMetadata({
+    title: seoTitle,
     description: t(
       'Published office directory record for {{name}} in the City of San Fernando, Pampanga.',
       { name: office.office_name }
@@ -62,6 +67,9 @@ export async function generateMetadata({
     path: `/government/offices/${office.office_id}`,
     locale,
   });
+  return finalDetailTitle(seoTitle) === seoTitle
+    ? { ...metadata, title: { absolute: seoTitle } }
+    : metadata;
 }
 
 export default async function GovernmentOfficeDetailPage({

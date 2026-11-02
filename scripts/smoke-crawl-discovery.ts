@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { getCityOffices } from '../src/data/civic/government.ts';
 import { getProjects } from '../src/data/civic/projects.ts';
 import {
@@ -7,6 +8,14 @@ import {
   getServiceHref,
 } from '../src/data/civic/services.ts';
 import { localizeHref } from '../src/i18n/locale.ts';
+import { createPageT } from '../src/i18n/page-t.ts';
+import { getCategoryDisplay } from '../src/app/[locale]/services/categories.ts';
+import {
+  finalDetailTitle,
+  officeSeoTitle,
+  projectSeoTitle,
+  serviceSeoTitle,
+} from '../src/lib/detailTitles.ts';
 
 // Run against `pnpm start` after a production build. Only real HTML anchors
 // advance the listing crawl; knowing a record exists is not discovery evidence.
@@ -108,6 +117,26 @@ const families = [
 ];
 
 for (const locale of ['en', 'fil'] as const) {
+  const messages = (names: string[]) =>
+    createPageT(
+      locale === 'fil'
+        ? Object.assign(
+            {},
+            ...names.map(name =>
+              JSON.parse(
+                readFileSync(`public/locales/fil/${name}.json`, 'utf8')
+              )
+            )
+          )
+        : {}
+    );
+  const projectT = messages(['shared', 'projects-shared', 'projects-detail']);
+  const serviceT = messages(['shared', 'services-shared', 'services-detail']);
+  const projectType = projectT(
+    projects[0].project_type
+      .toLowerCase()
+      .replace(/(^|_)\w/g, match => match.replace('_', ' ').toUpperCase())
+  );
   const homePath = localizeHref('/', locale);
   const home = await request(homePath);
   assertLocaleLinks(home, homePath);
@@ -203,11 +232,27 @@ for (const locale of ['en', 'fil'] as const) {
     }
   }
 
-  for (const [path, heading] of [
-    ['/about', null],
-    [`/government/offices/${offices[0].office_id}`, offices[0].office_name],
-    [getServiceHref(services[0]), services[0].title],
-    [`/projects/${projects[0].id}`, projects[0].project_name],
+  for (const [path, heading, expectedTitle] of [
+    ['/about', null, null],
+    [
+      `/government/offices/${offices[0].office_id}`,
+      offices[0].office_name,
+      officeSeoTitle(offices[0]),
+    ],
+    [
+      getServiceHref(services[0]),
+      services[0].title,
+      serviceSeoTitle(
+        services[0],
+        services,
+        getCategoryDisplay(getServiceCategory(services[0]), serviceT).name
+      ),
+    ],
+    [
+      `/projects/${projects[0].id}`,
+      projects[0].project_name,
+      projectSeoTitle(projects[0], projects, projectType, projectT),
+    ],
   ] as const) {
     const localized = localizeHref(path, locale);
     const html = await request(localized);
@@ -218,8 +263,9 @@ for (const locale of ['en', 'fil'] as const) {
     assert.ok(h1, `${localized} needs its H1`);
     if (heading) {
       assert.equal(decode(h1[1].replace(/<[^>]+>/g, '')), heading);
-      assert.ok(
-        decode(html.match(/<title>(.*?)<\/title>/)![1]).includes(heading)
+      assert.equal(
+        decode(html.match(/<title>(.*?)<\/title>/)![1]),
+        finalDetailTitle(expectedTitle!)
       );
     }
   }
