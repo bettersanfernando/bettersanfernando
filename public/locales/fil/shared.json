@@ -107,6 +107,7 @@
   "{{count}} published project record": "{{count}} nailathalang talaan ng proyekto",
   "{{count}} published project records": "{{count}} nailathalang talaan ng proyekto",
   "Interactive barangay project distribution map": "Interactive na mapa ng distribusyon ng proyekto ayon sa barangay",
+  "The interactive map cannot be displayed because your browser graphics support is unavailable.": "Hindi maipakita ang interactive na mapa dahil hindi available ang graphics support ng browser mo.",
   "Planned": "Planado",
   "Awarded": "Na-award",
   "Contracted": "Nakontrata",

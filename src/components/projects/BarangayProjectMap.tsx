@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   FullscreenControl,
   GeoJSONSource,
+  GPUInitializationError,
   LngLatBounds,
   Map as MapLibreMap,
   NavigationControl,
@@ -134,8 +135,12 @@ export default function BarangayProjectMap({
   lockedView = false,
   className,
 }: BarangayProjectMapProps) {
+  const mapClassName =
+    className ??
+    'h-[26rem] w-full bg-gray-100 sm:h-[32rem] lg:h-full lg:min-h-[36rem]';
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
+  const [mapUnavailable, setMapUnavailable] = useState(false);
   const t = usePageT();
   const tRef = useRef(t);
   const onSelectRef = useRef(onSelect);
@@ -163,32 +168,41 @@ export default function BarangayProjectMap({
     const initialWidth = containerRef.current.clientWidth || 800;
     const initialPadding = getFitPadding(initialWidth, lockedView);
 
-    const map = new MapLibreMap({
-      container: containerRef.current,
-      style: {
-        version: 8,
-        sources: {},
-        layers: [
-          {
-            id: 'background',
-            type: 'background',
-            paint: { 'background-color': '#f1f3f5' },
-          },
-        ],
-      },
-      bounds: cityBounds,
-      fitBoundsOptions: { padding: initialPadding },
-      attributionControl: false,
-      dragRotate: false,
-      pitchWithRotate: false,
-      maxPitch: 0,
-      dragPan: !lockedView,
-      scrollZoom: !lockedView,
-      boxZoom: !lockedView,
-      doubleClickZoom: !lockedView,
-      touchZoomRotate: !lockedView,
-      keyboard: !lockedView,
-    });
+    let map: MapLibreMap;
+    try {
+      map = new MapLibreMap({
+        container: containerRef.current,
+        style: {
+          version: 8,
+          sources: {},
+          layers: [
+            {
+              id: 'background',
+              type: 'background',
+              paint: { 'background-color': '#f1f3f5' },
+            },
+          ],
+        },
+        bounds: cityBounds,
+        fitBoundsOptions: { padding: initialPadding },
+        attributionControl: false,
+        dragRotate: false,
+        pitchWithRotate: false,
+        maxPitch: 0,
+        dragPan: !lockedView,
+        scrollZoom: !lockedView,
+        boxZoom: !lockedView,
+        doubleClickZoom: !lockedView,
+        touchZoomRotate: !lockedView,
+        keyboard: !lockedView,
+      });
+    } catch (error) {
+      if (error instanceof GPUInitializationError) {
+        queueMicrotask(() => setMapUnavailable(true));
+        return;
+      }
+      throw error;
+    }
 
     if (!lockedView) {
       map.addControl(new NavigationControl({ showCompass: false }));
@@ -407,13 +421,23 @@ export default function BarangayProjectMap({
     }
   }, [selectedPsgc, boundaries, cityBoundary, lockedView]);
 
+  if (mapUnavailable) {
+    return (
+      <div
+        className={`${mapClassName} flex items-center justify-center px-4 text-center text-sm text-gray-600`}
+        role="status"
+      >
+        {t(
+          'The interactive map cannot be displayed because your browser graphics support is unavailable.'
+        )}
+      </div>
+    );
+  }
+
   return (
     <div
       ref={containerRef}
-      className={
-        className ??
-        'h-[26rem] w-full bg-gray-100 sm:h-[32rem] lg:h-full lg:min-h-[36rem]'
-      }
+      className={mapClassName}
       aria-label={t('Interactive barangay project distribution map')}
     />
   );

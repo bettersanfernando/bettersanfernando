@@ -61,11 +61,15 @@ export const metadata = {
 export default async function Home() {
   const { t, locale, messages } = await getPageT('home');
   // HomeProjectMapSection always renders the map with lifecycleFilter={null},
-  // so BarangayProjectMap only ever needs these three keys here — passing the
+  // so BarangayProjectMap only ever needs these four keys here — passing the
   // full home bundle would leak every other English key into the fil HTML.
   const mapMessages = {
     'Interactive barangay project distribution map':
       messages['Interactive barangay project distribution map'],
+    'The interactive map cannot be displayed because your browser graphics support is unavailable.':
+      messages[
+        'The interactive map cannot be displayed because your browser graphics support is unavailable.'
+      ],
     '{{count}} published project record':
       messages['{{count}} published project record'],
     '{{count}} published project records':
