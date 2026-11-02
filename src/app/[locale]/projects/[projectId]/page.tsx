@@ -9,6 +9,10 @@ import { getObservationsForProject } from '../../../../data/civic/projectCostUti
 import { getPageT } from '../../../../i18n/server';
 import { enumLabel } from '../../statistics/enum-labels';
 import { buildPageMetadata } from '../../../../lib/metadata';
+import {
+  finalDetailTitle,
+  projectSeoTitle,
+} from '../../../../lib/detailTitles';
 
 // Unknown IDs call notFound() (a real HTTP 404).
 //
@@ -37,6 +41,12 @@ export async function generateMetadata({
   )
     ? `${project.project_name} (${project.id})`
     : project.project_name;
+  const seoTitle = projectSeoTitle(
+    project,
+    getProjects(),
+    enumLabel(t, project.project_type),
+    t
+  );
 
   const status = enumLabel(t, project.lifecycle_status);
   // Leads with the page's own (guaranteed-unique) title: type/barangay/
@@ -44,8 +54,8 @@ export async function generateMetadata({
   // type+barangay+status tuple with at least one other project), so every
   // page's meta description must include something that actually
   // distinguishes it — the project's own name does that naturally.
-  return buildPageMetadata({
-    title,
+  const metadata = buildPageMetadata({
+    title: seoTitle,
     // Only the wrapper is authored; the title, barangay and labels come from the record.
     description: t(
       '{{title}} — a {{type}} project in {{barangay}}, currently {{status}}.',
@@ -59,6 +69,9 @@ export async function generateMetadata({
     path: `/projects/${project.id}`,
     locale,
   });
+  return finalDetailTitle(seoTitle) === seoTitle
+    ? { ...metadata, title: { absolute: seoTitle } }
+    : metadata;
 }
 
 export default async function ProjectDetailPage({

@@ -27,6 +27,10 @@ import { localizeHref } from '../../../../../i18n/locale';
 import { getLocale, getPageT } from '../../../../../i18n/server';
 import type { PageT } from '../../../../../i18n/page-t';
 import { buildPageMetadata } from '../../../../../lib/metadata';
+import {
+  finalDetailTitle,
+  serviceSeoTitle,
+} from '../../../../../lib/detailTitles';
 
 // Canonical service-detail route.
 // The legacy one-segment /services/{slug} shape is handled entirely by the
@@ -225,9 +229,14 @@ export async function generateMetadata({
     ? `${service.title} (${service.id})`
     : service.title;
 
-  const { locale } = await getPageT('services-detail');
-  return buildPageMetadata({
-    title,
+  const { t, locale } = await getPageT('services-detail');
+  const seoTitle = serviceSeoTitle(
+    service,
+    getServices(),
+    getCategoryDisplay(category, t).name
+  );
+  const metadata = buildPageMetadata({
+    title: seoTitle,
     // Leads with the page's own (guaranteed-unique) title: several distinct
     // service records share identical `description` text (e.g. multiple
     // Solo Parent ID circumstances issued by the same office under the same
@@ -239,6 +248,9 @@ export async function generateMetadata({
     path: getServiceHref(service),
     locale,
   });
+  return finalDetailTitle(seoTitle) === seoTitle
+    ? { ...metadata, title: { absolute: seoTitle } }
+    : metadata;
 }
 
 export default async function ServiceDetailPage({
