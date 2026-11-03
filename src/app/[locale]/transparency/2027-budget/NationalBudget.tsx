@@ -488,10 +488,13 @@ export default async function NationalBudgetView() {
             ))}
           </ul>
 
-          <div className="mt-8 rounded-sm bg-[#F3F6FB] p-5 sm:p-6">
-            <p className="max-w-3xl text-sm leading-relaxed text-gray-700">
+          <div className="mt-8 max-w-2xl rounded-sm bg-[#F3F6FB] p-5">
+            <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+              {t('INTERACTIVE BUDGET EXPLORER')}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
               {t(
-                'This page is the curated, manually verified FY2027 explanation. The dedicated budget portal adds an interactive BetterGov-powered explorer and broader budget context.'
+                'Explore the same FY2027 San Fernando budget projects in an interactive view, with office, district, and broader budget context.'
               )}
             </p>
             <p className="mt-3 text-sm">

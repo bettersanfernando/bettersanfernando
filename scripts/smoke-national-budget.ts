@@ -125,10 +125,12 @@ const filBudget = JSON.parse(
     'utf8'
   )
 ) as Record<string, string>;
-assert.ok(
-  filBudget['Explore the full budget portal'],
-  'Filipino translation for the budget portal CTA'
-);
+for (const key of [
+  'INTERACTIVE BUDGET EXPLORER',
+  'Explore the full budget portal',
+]) {
+  assert.ok(filBudget[key], `Filipino translation for portal CTA: ${key}`);
+}
 
 // 8. Navigation: permanent item directly after City Finances, no badge.
 const transparency = mainNavigation.find(item => item.id === 'transparency');
