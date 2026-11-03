@@ -111,6 +111,27 @@ assert.ok(
   'view must not add or subtract NEP and House amounts'
 );
 
+// 7b. Budget portal CTA is present and localized in Filipino.
+assert.ok(
+  view.includes("'https://budget.bettersanfernando.org'"),
+  'view links to the budget portal'
+);
+const filBudget = JSON.parse(
+  readFileSync(
+    new URL(
+      '../public/locales/fil/transparency-2027-budget.json',
+      import.meta.url
+    ),
+    'utf8'
+  )
+) as Record<string, string>;
+for (const key of [
+  'INTERACTIVE BUDGET EXPLORER',
+  'Explore the full budget portal',
+]) {
+  assert.ok(filBudget[key], `Filipino translation for portal CTA: ${key}`);
+}
+
 // 8. Navigation: permanent item directly after City Finances, no badge.
 const transparency = mainNavigation.find(item => item.id === 'transparency');
 const items = transparency?.sections?.[0]?.items ?? [];

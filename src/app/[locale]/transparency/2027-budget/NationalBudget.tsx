@@ -16,6 +16,8 @@ import { formatIsoDate } from '../../../../lib/utils';
 
 const eyebrowTracking = { letterSpacing: '0.08em' };
 
+const BUDGET_PORTAL_URL = 'https://budget.bettersanfernando.org';
+
 const STATUS_PILL_CLASS: Record<NationalBudgetStatusValue, string> = {
   SAME_AMOUNT_IN_BOTH: 'bg-[#EBF3FC] text-[#0052BC]',
   HOUSE_BILL_ONLY_CANDIDATE: 'bg-gray-100 text-gray-800',
@@ -485,6 +487,24 @@ export default async function NationalBudgetView() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-8 max-w-2xl rounded-sm bg-[#F3F6FB] p-5">
+            <p className="text-eyebrow text-[#0066EB]" style={eyebrowTracking}>
+              {t('INTERACTIVE BUDGET EXPLORER')}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              {t(
+                'Explore these FY2027 national-budget projects associated with San Fernando in an interactive view, with office, district, and broader budget context.'
+              )}
+            </p>
+            <p className="mt-3 text-sm">
+              <ExternalAnchor
+                href={BUDGET_PORTAL_URL}
+                label={t('Explore the full budget portal')}
+                t={t}
+              />
+            </p>
+          </div>
         </section>
 
         <section aria-labelledby="about-heading">
