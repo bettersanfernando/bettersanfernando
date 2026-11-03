@@ -494,7 +494,7 @@ export default async function NationalBudgetView() {
             </p>
             <p className="mt-2 text-sm leading-relaxed text-gray-700">
               {t(
-                'Explore the same FY2027 San Fernando budget projects in an interactive view, with office, district, and broader budget context.'
+                'Explore these FY2027 national-budget projects associated with San Fernando in an interactive view, with office, district, and broader budget context.'
               )}
             </p>
             <p className="mt-3 text-sm">
