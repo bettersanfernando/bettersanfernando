@@ -94,7 +94,7 @@
     "services/services.json": {
       "record_count": 177,
       "schema_version": 1,
-      "sha256": "2c30cd8b23b17406e185dd8d6357427b4da4b8490ac7e9e549b515f5e4b98b5e"
+      "sha256": "c8cd908082d6e7a67bd784f1eefce98c08615316fd54889c8210edf7ccb1268e"
     },
     "services/utilities-water-resources.json": {
       "record_count": 2,
@@ -221,7 +221,7 @@
     "xlsx/**"
   ],
   "source_data_version": "v0.1.1",
-  "source_revision_sha256": "ad11d82d4fff818356af5016edf006467d655a45c55174f7a35614a68425a569",
+  "source_revision_sha256": "138d781fd09c8bed7fd69a77184b4341924612e54ca718d7159bc2073f2d2bab",
   "sources": [
     {
       "applies_to": [
