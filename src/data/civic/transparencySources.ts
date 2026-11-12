@@ -79,7 +79,7 @@ export const ManifestSchema = z
       })
       .strict(),
     not_exported_in_this_release: z.array(z.string()),
-    source_commit: z.string(),
+    source_revision_sha256: z.string(),
     source_data_version: z.string(),
     sources: z.array(
       z

@@ -3625,15 +3625,17 @@
       "online_channels": [],
       "processing_time": {
         "status": "as_stated_in_charter",
-        "text": "7 days and 40 minutes"
+        "text": "7 working days and 1 hour and 15 minutes"
       },
-      "public_notes": [],
+      "public_notes": [
+        "Updated from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11): the processing time is 7 working days and 1 hour and 15 minutes; the Duly Accomplished Form is secured from the City Persons With Disability Affairs Office (CPDAO); the photo is on a white background (the 2nd Edition said white or red); and a Medical Certificate or a Certificate of Disability is accepted. The 3rd Edition lists this service under CPDAO. The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
+      ],
       "requirements": [
         {
           "condition": null,
           "ordinal": "1",
           "text": "Duly Accomplished Form",
-          "where_to_secure": "City Social Welfare and Development Office"
+          "where_to_secure": "City Persons With Disability Affairs Office"
         },
         {
           "condition": null,
@@ -3656,13 +3658,13 @@
         {
           "condition": "If the client has an apparent disability, a 3R whole-body picture must also be attached",
           "ordinal": "5",
-          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "text": "Original colored 1x1 picture, white background (2 pcs)",
           "where_to_secure": "Requesting client"
         },
         {
           "condition": null,
           "ordinal": "6",
-          "text": "Medical Certificate (1 original, 1 photocopy) indicating the disability",
+          "text": "Medical Certificate or Certificate of Disability (1 original or 1 photocopy) indicating the disability",
           "where_to_secure": "Referral to City Medical Doctor, Rural Health Physician, and/or a specialist on the disability"
         }
       ],
@@ -3729,17 +3731,18 @@
       "online_channels": [],
       "processing_time": {
         "status": "as_stated_in_charter",
-        "text": "7 days and 40 minutes"
+        "text": "7 working days and 1 hour and 15 minutes"
       },
       "public_notes": [
-        "National guidance distinguishes documentary requirements for apparent versus non-apparent disability (a Certificate of Disability is generally not required for apparent disability); the local Charter checklist does not draw this distinction explicitly. This publication preserves the Charter checklist without a City-issued update."
+        "National guidance distinguishes documentary requirements for apparent versus non-apparent disability (a Certificate of Disability is generally not required for apparent disability); the local Charter checklist does not draw this distinction explicitly. This publication preserves the Charter checklist without a City-issued update.",
+        "Updated from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11): the processing time is 7 working days and 1 hour and 15 minutes; the Duly Accomplished Form is secured from the City Persons With Disability Affairs Office (CPDAO); the photo is on a white background (the 2nd Edition said white or red); and a Medical Certificate or a Certificate of Disability is accepted. The 3rd Edition lists this service under CPDAO. The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
       ],
       "requirements": [
         {
           "condition": null,
           "ordinal": "1",
           "text": "Duly Accomplished Form",
-          "where_to_secure": "City Social Welfare and Development Office"
+          "where_to_secure": "City Persons With Disability Affairs Office"
         },
         {
           "condition": null,
@@ -3756,13 +3759,13 @@
         {
           "condition": "If the client has an apparent disability, a 3R whole-body picture must also be attached",
           "ordinal": "4",
-          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "text": "Original colored 1x1 picture, white background (2 pcs)",
           "where_to_secure": "Requesting client"
         },
         {
           "condition": null,
           "ordinal": "5",
-          "text": "Medical Certificate (1 original, 1 photocopy) indicating the disability",
+          "text": "Medical Certificate or Certificate of Disability (1 original or 1 photocopy) indicating the disability",
           "where_to_secure": "Referral to City Medical Doctor, Rural Health Physician, and/or a specialist on the disability"
         }
       ],
@@ -3829,17 +3832,18 @@
       "online_channels": [],
       "processing_time": {
         "status": "as_stated_in_charter",
-        "text": "7 days and 40 minutes"
+        "text": "7 working days and 1 hour and 15 minutes"
       },
       "public_notes": [
-        "National guidance describes a narrower renewal document set for an existing PRPWD registrant (a renewal application and the expired PWD ID); the local Charter checklist requests a broader set. This publication preserves the Charter checklist without a City-issued update."
+        "National guidance describes a narrower renewal document set for an existing PRPWD registrant (a renewal application and the expired PWD ID); the local Charter checklist requests a broader set. This publication preserves the Charter checklist without a City-issued update.",
+        "Updated from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11): the processing time is 7 working days and 1 hour and 15 minutes; the Duly Accomplished Form is secured from the City Persons With Disability Affairs Office (CPDAO); the photo is on a white background (the 2nd Edition said white or red); and a Medical Certificate or a Certificate of Disability is accepted. The 3rd Edition lists this service under CPDAO. The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
       ],
       "requirements": [
         {
           "condition": null,
           "ordinal": "1",
           "text": "Duly Accomplished Form",
-          "where_to_secure": "City Social Welfare and Development Office"
+          "where_to_secure": "City Persons With Disability Affairs Office"
         },
         {
           "condition": null,
@@ -3856,13 +3860,13 @@
         {
           "condition": "If the client has an apparent disability, a 3R whole-body picture must also be attached",
           "ordinal": "4",
-          "text": "Original colored 1x1 picture, white or red background (2 pcs)",
+          "text": "Original colored 1x1 picture, white background (2 pcs)",
           "where_to_secure": "Requesting client"
         },
         {
           "condition": null,
           "ordinal": "5",
-          "text": "Medical Certificate (1 original, 1 photocopy) indicating the disability",
+          "text": "Medical Certificate or Certificate of Disability (1 original or 1 photocopy) indicating the disability",
           "where_to_secure": "Referral to City Medical Doctor, Rural Health Physician, and/or a specialist on the disability"
         }
       ],
@@ -3925,10 +3929,11 @@
       "online_channels": [],
       "processing_time": {
         "status": "as_stated_in_charter",
-        "text": "3 days and 40 minutes"
+        "text": "3 working days and 15 minutes"
       },
       "public_notes": [
-        "This publication reflects the 2026 Citizen's Charter procedure only; no additional current City information was independently verified for this service."
+        "This publication reflects the 2026 Citizen's Charter procedure only; no additional current City information was independently verified for this service.",
+        "Processing time updated to \"3 working days and 15 minutes\" from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11; the 3rd Edition lists this service under the City Persons With Disability Affairs Office, CPDAO). The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
       ],
       "requirements": [
         {
@@ -4105,9 +4110,11 @@
       "online_channels": [],
       "processing_time": {
         "status": "as_stated_in_charter",
-        "text": "3 days and 40 minutes"
+        "text": "3 days and 10 minutes"
       },
-      "public_notes": [],
+      "public_notes": [
+        "Processing time updated to \"3 days and 10 minutes\" from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11; the 3rd Edition lists this service under the City Persons With Disability Affairs Office, CPDAO). The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
+      ],
       "requirements": [
         {
           "condition": null,
@@ -6012,7 +6019,8 @@
         "text": "1 hour, 30 minutes to 3 working days"
       },
       "public_notes": [
-        "The total processing time of 1 hour, 30 minutes to 3 working days depends on which laboratory test(s) are ordered; most tests take about 4 hours, while a small number (e.g. TB testing) take up to 3 working days, per the Charter's per-test processing-time listing."
+        "The total processing time of 1 hour, 30 minutes to 3 working days depends on which laboratory test(s) are ordered; most tests take about 4 hours, while a small number (e.g. TB testing) take up to 3 working days, per the Charter's per-test processing-time listing.",
+        "Where to secure requirement 2 (Senior Citizen's Card) was updated from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11), which now lists the Heroes Hall (the 2nd Edition said City Hall). The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
       ],
       "requirements": [
         {
@@ -6025,7 +6033,7 @@
           "condition": null,
           "ordinal": "2",
           "text": "Senior Citizen's Card (1 original), for patients 60 years old and above",
-          "where_to_secure": "Office for Senior Citizens Affairs (OSCA), City Hall"
+          "where_to_secure": "Office for Senior Citizens Affairs (OSCA), Heroes Hall"
         },
         {
           "condition": null,
@@ -6879,19 +6887,21 @@
         "status": "as_stated_in_charter",
         "text": "13 minutes"
       },
-      "public_notes": [],
+      "public_notes": [
+        "Where to secure requirements 1 (Voter's ID or Certification) and 2 (Senior Citizen ID) was updated from the 2026 Citizen's Charter 3rd Edition (checked 2026-11-11), which now lists the Heroes Hall (the 2nd Edition said City Hall and the City Hall lobby). The other details on this page come from the 2nd Edition and have not yet been re-verified against the 3rd Edition. Confirm the current office, contacts and requirements with the City before applying."
+      ],
       "requirements": [
         {
           "condition": "One of the following proof-of-residency/identification documents is required",
           "ordinal": "1",
           "text": "Voter's ID or Voter's Certification (original or photocopy)",
-          "where_to_secure": "Commission on Elections (COMELEC), City Hall"
+          "where_to_secure": "Commission on Elections (COMELEC), Heroes Hall"
         },
         {
           "condition": null,
           "ordinal": "2",
           "text": "Senior Citizen ID",
-          "where_to_secure": "Office of the Senior Citizens Affairs, City Hall lobby"
+          "where_to_secure": "Office of the Senior Citizens Affairs, Heroes Hall"
         },
         {
           "condition": null,
